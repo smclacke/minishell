@@ -6,17 +6,20 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/06/25 00:47:13 by smclacke      ########   odam.nl          #
+#    Updated: 2023/06/25 01:40:47 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= minishell
-DJOY		= djoyke
-SAAR		= sarah
+## compile first minishell with make to compile libft, then compile ./djoyke or ./sarah
+## can add libft to our name rules but I'm having Makefile trauma issues and just... can't
 
-CFLAGS		= -Wall -Wextra -Werror
-CC			= cc
-INCLUDES	= -Iinclude -Iinclude/libft/src
+NAME			= minishell
+DJOY			= djoyke
+SAAR			= sarah
+
+CFLAGS			= -Wall -Wextra -Werror
+CC				= cc
+INCLUDES		= -Iinclude -Iinclude/libft/src
 
 ## MINISHELL ##
 
@@ -44,7 +47,8 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 
 ## SARAH ##
 
-SRCS_SAAR		= main_saar.c
+SRCS_SAAR		= main_saar.c	\
+					utils_saar.c
 
 SAAR_DIR		= src_saar
 SRC_SAAR		= $(addprefix $(SAAR_DIR)/, $(SRCS_SAAR))
@@ -52,10 +56,6 @@ SRC_SAAR		= $(addprefix $(SAAR_DIR)/, $(SRCS_SAAR))
 OBJ_SAAR_DIR	= obj_saar
 OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 
-
-## LIBFT ##
-
-LIBFT_DIR		= include/libft
 
 ## Colours ##
 RESET		:= \033[0m
@@ -68,31 +68,33 @@ CYAN		:= \033[1;96m
 WHITE		:= \033[1;97m
 BLACK		:= \033[1;90m
 
-all			: libft $(NAME)
 
-djoyke		: $(DJOY)
+all				: libft $(NAME)
 
-sarah		: $(SAAR)
+djoy			: libft $(DJOY)
+
+saar			: libft $(SAAR)
 
 libft	:
 	@ make -C include/libft
 
 
-$(NAME)	:	$(OBJ)
-	@ echo "${WHITE} >>> Minishell compiling...${RESET}"
+## EXECUTABLES
+
+$(NAME)			:	$(OBJ)
 	@ $(CC) $^ $(CFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
-	@ echo "${RED} ---> Minishell Made!${RESET}"
+	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 
-$(DJOY)	:	$(OBJ_DJOY)
-	@ echo "${CYAN} >>> DJOYKE <3${RESET}"
+$(DJOY)			:	$(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(INCLUDES) -o $(DJOY)
-	@ echo "${RED} ---> Djoyke Made!${RESET}"
+	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 
-$(SAAR)	:	$(OBJ_SAAR)
-	@ echo "${PURPLE} >>> SARAH  :D${RESET}"
+$(SAAR)			:	$(OBJ_SAAR)
 	@ $(CC) $^ $(CFLAGS) $(INCLUDES) -o $(SAAR)
-	@ echo "${RED} ---> Sarah Made!${RESET}"
+	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 
+
+## OBJECTS
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@ mkdir -p $(OBJ_DIR)
@@ -105,6 +107,7 @@ $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
 
 clean		:
 	@make -C include/libft clean
@@ -120,7 +123,7 @@ fclean		:
 	@rm -rf $(NAME)
 	@rm -rf $(DJOY)
 	@rm -rf $(SAAR)
-	@ echo "${BLUE} // Minishell fCleaned!${RESET}"
+	@echo "${YELLOW} // Minishell fCleaned!${RESET}"
 
 re			: fclean all
 
