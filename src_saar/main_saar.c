@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
+/*   main_saar.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/24 22:18:48 by smclacke      ########   odam.nl         */
+/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/06/25 00:44:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../include/minishell.h"
 
-#include "libft/src/libft.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+int	main()
+{
+	printf("I'm Sarah's dummy main\n");
+}
 
 
-#endif
