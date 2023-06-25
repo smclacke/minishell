@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/25 19:26:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/25 21:30:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <signal.h>
+#include <sys/stat.h>
 
 
 
