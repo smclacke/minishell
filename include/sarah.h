@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   sarah.h                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/26 14:13:49 by smclacke      ########   odam.nl         */
+/*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/06/26 14:13:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-// use struct as global?
+#include "libft/src/libft.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <signal.h>
+#include <sys/stat.h>
 
-// only use ./djoyke and ./sarah for the start, get used to branches, 
-// then only focus on ./minishell, use these spaces for comments and tests
+void	ran(void);
 
-// write test script (!)
-
-int	main()
-{
-	printf("I'm Sarah's dummy main\n");
-	ran();
-}
+#endif
