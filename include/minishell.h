@@ -6,14 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/26 13:38:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/26 13:41:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-// testing 1 2
 
 #include "libft/src/libft.h"
 #include <unistd.h>
