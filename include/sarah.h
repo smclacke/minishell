@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/26 14:13:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/26 20:19:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 #include <readline/history.h>
 #include <signal.h>
 #include <sys/stat.h>
+
+// not in main but should be //
+#include <sys/ioctl.h>
 
 void	ran(void);
 
