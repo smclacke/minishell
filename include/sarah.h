@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/27 13:46:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/27 13:54:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
-# define PROMPT YELLOW".~❃~."PURPLE".~⚘~."CYAN".~✿~."RESET
+# define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
+
+
+
+
+
+
 
 // Colours
 # define RESET "\033[0m"
@@ -35,5 +41,23 @@
 # define CYAN "\033[1;96m"
 # define WHITE "\033[1;97m"
 # define BLACK "\033[1;90m"
+// Bold
+# define B_BLACK "\e[1;30m"
+# define B_RED "\e[1;31m"
+# define B_GREEN "\e[1;32m"
+# define B_YELLOW "\e[1;33m"
+# define B_BLUE "\e[1;34m"
+# define B_PURPLE "\e[1;35m"
+# define B_CYAN "\e[1;36m"
+# define B_WHITE "\e[1;37m"
+// Bold high intensity
+# define BI_BLACK "\e[1;90m"
+# define BI_RED "\e[1;91m"
+# define BI_GREEN "\e[1;92m"
+# define BI_YELLOW "\e[1;93m"
+# define BI_BLUE "\e[1;94m"
+# define BI_PURPLE "\e[1;95m"
+# define BI_CYAN "\e[1;96m"
+# define BI_WHITE "\e[1;97m"
 
 #endif
