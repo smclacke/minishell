@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/27 11:29:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/27 11:52:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
-# define PROMPT "hey there"
+# define PROMPT "hey Djoyke $"
 
 
 #endif

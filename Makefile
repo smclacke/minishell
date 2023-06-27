@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/06/27 11:28:45 by smclacke      ########   odam.nl          #
+#    Updated: 2023/06/27 11:46:03 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,12 @@ NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
 
-CFLAGS			= -Wall -Wextra -Werror
-LFLAGS			= lreadline
+CFLAGS			= -Wall -Wextra
+# LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
-INCLUDES		= -Iinclude -Iinclude/libft/src
+INCLUDES		= -Iinclude -Iinclude/libft/src -lreadline
+# INCLUDE			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
+# add -werror back
 
 ## MINISHELL ##
 
@@ -99,15 +101,15 @@ $(SAAR)			:	$(OBJ_SAAR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@ mkdir -p $(OBJ_DIR)
-	@ $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(LFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)
-	@ $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(LFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)
-	@ $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(LFLAGS) $(INCLUDES) -c $< -o $@
 
 
 clean		:

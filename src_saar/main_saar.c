@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/27 11:26:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/27 11:51:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,19 @@
 
 // write test script (!)
 
+void	ft_prompt(void)
+{
+	printf(PROMPT);
+}
+
 int	main()
 {
-	char	*name;
-	
-	name = readline(PROMPT);
-	printf("I'm Sarah's dummy main\n");
+	char	*input;
+
+	while(1)
+	{
+		ft_prompt();
+		input = readline(NULL);
+	}
+	// printf("I'm Sarah's dummy main\n");
 }
