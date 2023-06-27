@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/06/25 16:38:26 by smclacke      ########   odam.nl          #
+#    Updated: 2023/06/27 11:28:45 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ DJOY			= djoyke
 SAAR			= sarah
 
 CFLAGS			= -Wall -Wextra -Werror
+LFLAGS			= lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/src
 

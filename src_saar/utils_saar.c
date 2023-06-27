@@ -6,13 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/26 14:13:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/27 11:30:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sarah.h"
 
-void	ran(void)
-{
-	printf("something\n");
-}
+// is whitespace
+// is quote
+// quote is open
+// is token (?)
+

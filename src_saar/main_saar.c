@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/26 14:13:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/27 11:26:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 int	main()
 {
+	char	*name;
+	
+	name = readline(PROMPT);
 	printf("I'm Sarah's dummy main\n");
-	ran();
 }
