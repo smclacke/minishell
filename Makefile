@@ -6,20 +6,20 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/06/25 16:38:26 by smclacke      ########   odam.nl          #
+#    Updated: 2023/06/27 11:57:28 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
-## compile first minishell with make to compile libft, then compile ./djoyke or ./sarah
-## can add libft to our name rules but I'm having Makefile trauma issues and just... can't
 
 NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
 
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra
+# -Werror
+# LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
-INCLUDES		= -Iinclude -Iinclude/libft/src
+INCLUDES		= -Iinclude -Iinclude/libft/src -lreadline
+# IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 ## MINISHELL ##
 
@@ -82,15 +82,15 @@ libft			:
 ## EXECUTABLES
 
 $(NAME)			:	$(OBJ)
-	@ $(CC) $^ $(CFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 
 $(DJOY)			:	$(OBJ_DJOY)
-	@ $(CC) $^ $(CFLAGS) $(INCLUDES) -o $(DJOY)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 
 $(SAAR)			:	$(OBJ_SAAR)
-	@ $(CC) $^ $(CFLAGS) $(INCLUDES) -o $(SAAR)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 
 
@@ -98,15 +98,15 @@ $(SAAR)			:	$(OBJ_SAAR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@ mkdir -p $(OBJ_DIR)
-	@ $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)
-	@ $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)
-	@ $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 
 clean		:

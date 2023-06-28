@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/25 20:17:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/27 11:58:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/sarah.h"
 
 // use struct as global?
 
@@ -19,7 +19,18 @@
 
 // write test script (!)
 
+void	ft_prompt(void)
+{
+	printf(PROMPT);
+}
+
 int	main()
 {
-	printf("I'm Sarah's dummy main\n");
+	char	*input;
+
+	while(1)
+	{
+		ft_prompt();
+		input = readline(NULL);
+	}
 }
