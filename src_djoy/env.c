@@ -6,11 +6,25 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/06/28 13:37:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/28 13:44:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/* error message with perror */
+void	error(char *string, int error)
+{
+	perror(string);
+	exit(error);
+}
+
+void	list_env(char **envp)
+{
+	int i;
+	if (envp == NULL)
+		perror("env", errno);
+}
 
 /*
 
