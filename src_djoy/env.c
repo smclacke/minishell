@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/06/28 13:44:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/28 14:16:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/djoyke.h"
 
 /* error message with perror */
 void	error(char *string, int error)
@@ -19,12 +19,19 @@ void	error(char *string, int error)
 	exit(error);
 }
 
-void	list_env(char **envp)
+void	list_env(char **envp, t_env *env)
 {
-	int i;
+	int	i;
+
 	if (envp == NULL)
 		perror("env", errno);
+	while (envp[i] != NULL)
+	{
+		ft_lstnew(envp[i]);
+		ft_lstadd_back()
+	}
 }
+
 
 /*
 
