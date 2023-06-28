@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/27 19:35:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/28 11:54:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int	main(void)
 	printf("I'm Djoyke's dummy main\n");
 	printf("There are some new things, let's see how this goes\n");
 }
+/*
+
+expanding??
+
+*/
+
 
 	/* parent process
 
