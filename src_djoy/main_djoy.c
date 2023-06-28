@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/26 13:29:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/28 14:05:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/djoyke.h"
 
 // hey djoyke, here's a main just for you :*
 
