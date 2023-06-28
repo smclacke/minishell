@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/06/28 14:16:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/28 18:13:07 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ void	error(char *string, int error)
 	exit(error);
 }
 
-void	list_env(char **envp, t_env *env)
+/* function that puts env in a linked list */ 
+void	list_env(char **envp, t_env *env)//?? declare i parameters or in function?
 {
 	int	i;
-
-	if (envp == NULL)
+	
+	i = 0;
+	if (env == NULL)
 		perror("env", errno);
-	while (envp[i] != NULL)
+	while (env[i] != NULL)
 	{
-		ft_lstnew(envp[i]);
-		ft_lstadd_back()
+		ft_lstnew(env[i]);
+		ft_lstadd_back(node to list);
+		i++;
 	}
 }
 
