@@ -6,12 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/06/28 14:17:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/28 15:22:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef DJOYKE_H
+# define DJOYKE_H
 
 # include "libft/src/libft.h"
 # include <unistd.h>
@@ -30,8 +30,10 @@
 
 typedef struct s_env
 {
-	char		*env_node;
-	s_env		*next;
+	char				*string;
+	struct s_env		*next;
+	struct s_env		*previous;
 }							t_env;
+
 
 #endif

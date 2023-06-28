@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/28 14:16:32 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/28 15:23:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_env *env;
-	
+	t_env	*env;
+
 	(void)argc;
 	(void)argv;
 	printf("I'm Djoyke's dummy main\n");
