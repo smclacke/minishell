@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/06/28 16:55:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/29 16:35:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/stat.h>
 # include <sys/ioctl.h>
 # include <stdbool.h>
+# include <errno.h>
 
 # define PROMPT "hey Djoyke $"
 # define READ 0
