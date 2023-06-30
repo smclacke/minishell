@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/27 14:11:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/30 12:06:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_prompt(void)
 	printf(PROMPT);
 }
 
-int	main()
+int	main(int argc, char **argv, char *envp)
 {
 	char	*input;
 
