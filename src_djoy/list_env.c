@@ -1,16 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env.c                                              :+:    :+:            */
+/*   list_env.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/06/30 11:02:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/30 13:11:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
+
+/* makes a new node from content passed to this function */
+t_env	*mini_lstnew(void *content)
+{
+	t_env	*new;
+
+	new = (t_env *)malloc(sizeof(*new));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}
+
+/* loops to list to go to last position */
+t_env	*mini_lstlast(t_env *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+/* adds new node to the back */
+void	mini_lstadd_back(t_env **lst, t_env *new)
+{
+	t_env	*last;
+
+	if (*lst)
+	{
+		last = mini_lstlast(*lst);
+		last->next = new;
+	}
+	else
+		*lst = new;
+}
 
 /* error message with perror */
 void	error(char *string, int error)
@@ -20,35 +57,27 @@ void	error(char *string, int error)
 }
 
 /* function that puts env in a linked list */
-void	list_env(char **envp, t_env *env)
+void	list_env(char **envp, t_env **env)
 {
-	int	i;
+	int		i;
+	t_env	*new;
 
 	i = 0;
 	if (envp == NULL)
 		error("env", errno);
 	while (envp[i] != NULL)
 	{
-		ft_lstnew(envp[i]);
-		ft_lstadd_back(env, envp);
+		new = mini_lstnew(envp[i]);
+		mini_lstadd_back(env, new);
 		i++;
 	}
 }
 
-void	print_list(t_env *env)
-{
-	while (env->next != NULL)
-	{
-		printf("%s\n", env);
-	}
-}
-
-/*
-
-	ft_split the envp
-	then loop through the 2d array and make linked list from it?
-
-	or loop through the env
-	and per index make linked list from it?
-
-*/
+// void	print_list(t_env *env)
+// {
+// 	while (env != NULL)
+// 	{
+// 		printf("%s\n", env->content);
+// 		env = env->next;
+// 	}
+// }
