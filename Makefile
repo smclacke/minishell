@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/06/27 11:57:28 by smclacke      ########   odam.nl          #
+#    Updated: 2023/06/30 11:27:47 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		= main_djoy.c
+SRCS_DJOY		=	main_djoy.c	\
+					env.c \
 
 DJOY_DIR		= src_djoy
 SRC_DJOY		= $(addprefix $(DJOY_DIR)/, $(SRCS_DJOY))
@@ -86,7 +87,7 @@ $(NAME)			:	$(OBJ)
 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 
 $(DJOY)			:	$(OBJ_DJOY)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) -o $(DJOY)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 
 $(SAAR)			:	$(OBJ_SAAR)

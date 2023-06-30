@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/06/30 10:51:32 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/30 11:02:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void	list_env(char **envp, t_env *env)
 		ft_lstnew(envp[i]);
 		ft_lstadd_back(env, envp);
 		i++;
+	}
+}
+
+void	print_list(t_env *env)
+{
+	while (env->next != NULL)
+	{
+		printf("%s\n", env);
 	}
 }
 

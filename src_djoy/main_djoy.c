@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/28 15:23:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/06/30 11:04:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
 
+	env = NULL;
 	(void)argc;
 	(void)argv;
 	printf("I'm Djoyke's dummy main\n");
 	printf("There are some new things, let's see how this goes\n");
-
+	list_env(envp, env);
+	print_list(env);
 }
 /*
 	env in linked list wordt mn echte env.
