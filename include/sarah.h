@@ -6,12 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/27 14:10:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/30 12:02:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
 
 #include "libft/src/libft.h"
 #include <unistd.h>
@@ -22,13 +24,40 @@
 #include <signal.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <stdbool.h>
 
-# define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
+# define OPEN_QUOTE = 1
+# define CLOSED_QUOTE = 0
 
-// typedef struct s_shell 
-// {
-// }	t_shell;
+// exitcodes
+typedef enum e_exitcode
+{
+	E_USAGE = 0,
+	E_GENERAL = 1,
+	E_BUILTIN = 2,
+	E_EXEC = 126,
+	E_COMMAND_NOT_FOUND = 127,
+	E_EXIT_INVALID_ARG = 128,
+	E_FATAL_SIGNAL = 128,
+	E_CTRL_C = 130,
+	E_UNKNOWN = 225
+}					t_exitcode;
 
+
+// lexer struct
+typedef	struct s_lexer
+{
+	char	*input_lex;
+	char	*token;
+}	t_lexer
+
+
+// parser struct
+typedef struct s_parser 
+{
+	char	*input_pars;
+	char	**cmd;
+}	t_parser;
 
 
 // Colours

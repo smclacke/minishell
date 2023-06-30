@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/14 13:22:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/14 13:24:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/30 12:05:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	ft_isquote(char c)
 {
-	return (c == '\'');
+	return ((c == '\'') || (c = '\"'));
 }
