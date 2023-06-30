@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 11:52:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/30 12:03:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/30 12:36:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/sarah.h"
 
 void	error_no_cmd(void)
 {

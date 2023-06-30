@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/30 12:02:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/06/30 12:42:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include "libft/src/libft.h"
 #include <unistd.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -29,7 +30,7 @@
 # define OPEN_QUOTE = 1
 # define CLOSED_QUOTE = 0
 
-// exitcodes
+// EXITCODES
 typedef enum e_exitcode
 {
 	E_USAGE = 0,
@@ -43,24 +44,33 @@ typedef enum e_exitcode
 	E_UNKNOWN = 225
 }					t_exitcode;
 
-
-// lexer struct
+// LEXER STRUCT
 typedef	struct s_lexer
 {
 	char	*input_lex;
 	char	*token;
-}	t_lexer
+}	t_lexer;
 
 
-// parser struct
+// PARSER STRUCT
 typedef struct s_parser 
 {
 	char	*input_pars;
 	char	**cmd;
 }	t_parser;
 
+// PROTOTYPES
+// --------- Lexer --------- //
 
-// Colours
+// --------- Parser --------- //
+char		*check_empty(char *cmd);
+
+// --------- Errors -------- //
+void		error_no_cmd(void);
+void		error_space(char *cmd);
+
+
+// COLOURS
 # define RESET "\033[0m"
 # define RED "\033[1;91m"
 # define GREEN "\033[1;92m"
@@ -70,7 +80,7 @@ typedef struct s_parser
 # define CYAN "\033[1;96m"
 # define WHITE "\033[1;97m"
 # define BLACK "\033[1;90m"
-// Bold
+// COLOURS BOLD
 # define B_BLACK "\e[1;30m"
 # define B_RED "\e[1;31m"
 # define B_GREEN "\e[1;32m"
@@ -79,7 +89,7 @@ typedef struct s_parser
 # define B_PURPLE "\e[1;35m"
 # define B_CYAN "\e[1;36m"
 # define B_WHITE "\e[1;37m"
-// Bold high intensity
+// COLOURS BOLD HIGH INTENSITY
 # define BI_BLACK "\e[1;90m"
 # define BI_RED "\e[1;91m"
 # define BI_GREEN "\e[1;92m"

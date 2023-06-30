@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/06/30 11:57:20 by smclacke      ########   odam.nl          #
+#    Updated: 2023/06/30 12:46:16 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,10 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 ## SARAH ##
 
 SRCS_SAAR		= main_saar.c	\
-					utils_saar.c	\
-					error_saar.c
+					parser/parser.c	\
+					parser/parser_utils.c	\
+					lexer/lexer.c		\
+					utils/error.c
 
 SAAR_DIR		= src_saar
 SRC_SAAR		= $(addprefix $(SAAR_DIR)/, $(SRCS_SAAR))
@@ -91,7 +93,7 @@ $(DJOY)			:	$(OBJ_DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 
 $(SAAR)			:	$(OBJ_SAAR)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) -o $(SAAR)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 
 
