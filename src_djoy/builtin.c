@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/01 15:41:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 17:58:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/01 19:13:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	function that checks for the corresponding built-in
 	maybe needs to be a bool?
 */
-void	check_for_builtin(char *argv[1], int argc)
+void	check_for_builtin(char *argv[1])
 {
 	if (ft_strcmp(argv[1], "echo") == 0)
 		ft_echo(&argv[1]);
@@ -44,16 +44,28 @@ void	check_for_builtin(char *argv[1], int argc)
 	-n TBA that eliminates the endline char in output 
 	The echo utility exits 0 on success, and >0 if an error occurs.
 */
-void	*ft_echo(char **argv)
+void	*ft_echo(char **argv)//for now index 1
 {
 	int	i;
+	int	is_flag;
 
 	i = 1;
+	is_flag = 0;
 	while (argv[i] != NULL)
 	{
-		printf("%s", argv[i]);
-		i++;
+		if (ft_strcmp(argv[i], "-n") == 0)
+		{
+			i++;
+			++is_flag;
+		}
+		else
+		{
+			printf("%s", argv[i]);
+			i++;
+		}
 	}
+	if (is_flag > 0)
+		printf("\n");
 	exit(EXIT_SUCCESS);
 }
 
