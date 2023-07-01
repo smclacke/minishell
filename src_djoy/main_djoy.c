@@ -6,26 +6,28 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/01 17:43:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/01 17:54:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
-
-// hey djoyke, here's a main just for you :*
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
 
 	env = NULL;
+	if (argc <= 1)//needs to give prompt back
+		exit(EXIT_FAILURE);//only for testing purpose
 	list_env(envp, &env);
 	// print_list(env);
 	check_for_builtin(argv, argc);
 }
 /*
-
-	expanding??
+	expanding:
+	executing:
+	built-in: 	compare the string to built-in name
+				make function that does the same as built-in
 -----------------------------------------------------------------------------
 
 	will get the structs and based on how many I need to fork.
