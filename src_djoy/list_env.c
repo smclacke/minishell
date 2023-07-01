@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/06/30 13:11:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/01 15:22:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ void	list_env(char **envp, t_env **env)
 	}
 }
 
-// void	print_list(t_env *env)
-// {
-// 	while (env != NULL)
-// 	{
-// 		printf("%s\n", env->content);
-// 		env = env->next;
-// 	}
-// }
+void	print_list(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s\n", env->content);
+		env = env->next;
+	}
+}
