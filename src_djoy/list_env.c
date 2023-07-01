@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 15:22:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/01 17:43:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	mini_lstadd_back(t_env **lst, t_env *new)
 }
 
 /* error message with perror */
-void	error(char *string, int error)
+void	mini_error(char *string, int error)
 {
 	perror(string);
 	exit(error);
@@ -64,7 +64,7 @@ void	list_env(char **envp, t_env **env)
 
 	i = 0;
 	if (envp == NULL)
-		error("env", errno);
+		mini_error("env", errno);
 	while (envp[i] != NULL)
 	{
 		new = mini_lstnew(envp[i]);
@@ -73,11 +73,11 @@ void	list_env(char **envp, t_env **env)
 	}
 }
 
-void	print_list(t_env *env)
-{
-	while (env != NULL)
-	{
-		printf("%s\n", env->content);
-		env = env->next;
-	}
-}
+// void	print_list(t_env *env)
+// {
+// 	while (env != NULL)
+// 	{
+// 		printf("%s\n", env->content);
+// 		env = env->next;
+// 	}
+// }

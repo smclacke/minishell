@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 17:30:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/01 17:41:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ t_env	*mini_lstlast(t_env *lst);
 t_env	*mini_lstnew(void *content);
 void	list_env(char **envp, t_env **env);
 void	print_list(t_env *env);
-void	error(char *string, int error);
+void	mini_error(char *string, int error);
 
 /* built-in utils */
 int		ft_strcmp(const char *s1, const char *s2);
 void	*ft_echo(char **argv);
-void	check_for_builtin(char *argv[1]);
+void	check_for_builtin(char *argv[1], int argc);
 
 #endif

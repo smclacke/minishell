@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/01 15:41:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 17:35:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/01 17:44:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 /* function that checks for the corresponding built-in
 maybe needs to be a bool? */
-void	check_for_builtin(char *argv[1])
+void	check_for_builtin(char *argv[1], int argc)
 {
+	if (argc <= 1)
+		exit(EXIT_FAILURE); // should give prompt back
 	if (ft_strcmp(argv[1], "echo") == 0)
 		ft_echo(&argv[1]);
 	else
-		exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);//not really necesairy?
 }
 
 void	*ft_echo(char **argv)
