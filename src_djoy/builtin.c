@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/01 15:41:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 17:54:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/01 17:58:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_for_builtin(char *argv[1], int argc)
 	if (ft_strcmp(argv[1], "echo") == 0)
 		ft_echo(&argv[1]);
 	else
-		exit(EXIT_FAILURE);//not really necesairy
+		exit(EXIT_FAILURE);//not really necesary
 }
 
 /* 	
@@ -51,7 +51,7 @@ void	*ft_echo(char **argv)
 	i = 1;
 	while (argv[i] != NULL)
 	{
-		printf("%s\n", argv[i]);
+		printf("%s", argv[i]);
 		i++;
 	}
 	exit(EXIT_SUCCESS);
