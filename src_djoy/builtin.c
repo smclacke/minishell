@@ -6,11 +6,34 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/01 15:41:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 16:00:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/01 17:11:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
+
+/* compares 2 strings */
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
+			return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
+		i++;
+	}
+	return (0);
+}
+
+/* function that checks for the corresponding built-in
+maybe needs to be a bool? */
+void	check_for_builtin(char *str)
+{
+	if (ft_strcmp(str, "echo"))
+		ft_echo(str);
+}
 
 /*
 
