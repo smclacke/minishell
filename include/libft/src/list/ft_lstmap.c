@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   ft_lstmap.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:43:57 by SarahLouise   ########   odam.nl         */
+/*   Created: 2022/11/02 14:21:43 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/02 15:04:12 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/libft.h"
 
-void	ft_prompt(void)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	printf(PROMPT);
-}
+	void	*tmp;
+	t_list	*link;
+	t_list	*list;
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void) argc;
-	// (void) argv;
-	(void) envp;
-	
-	char	*input;
-
-	while(1)
+	if (!f || !del || !lst)
+		return (0);
+	list = 0;
+	while (lst)
 	{
-		ft_prompt();
-		input = readline(NULL);
-		check_empty(&argv[1][1]);
+		tmp = f(lst->content);
+		link = ft_lstnew(tmp);
+		if (!link)
+		{
+			ft_lstclear(&link, (del));
+			del(tmp);
+			return (0);
+		}
+		lst = lst->next;
+		ft_lstadd_back(&list, link);
 	}
+	return (list);
 }

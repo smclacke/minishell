@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   ft_upper_str.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:43:57 by SarahLouise   ########   odam.nl         */
+/*   Created: 2023/04/22 22:13:52 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/02 15:02:40 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/libft.h"
 
-void	ft_prompt(void)
+char	*ft_upper_str(char *str)
 {
-	printf(PROMPT);
-}
+	int		len;
+	int		i;
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void) argc;
-	// (void) argv;
-	(void) envp;
-	
-	char	*input;
-
-	while(1)
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len)
 	{
-		ft_prompt();
-		input = readline(NULL);
-		check_empty(&argv[1][1]);
+		str[i] = ft_toupper(str[i]);
+		i++;
 	}
+	return (str);
 }

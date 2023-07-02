@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/02 09:32:45 by SarahLouise   ########   odam.nl          #
+#    Updated: 2023/07/02 15:44:03 by SarahLouise   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS			= -Wall -Wextra
 # -Werror
 # LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
-INCLUDES		= -Iinclude -Iinclude/libft/src -lreadline
+INCLUDES		= -Iinclude -Iinclude/libft/include -lreadline
 # IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 ## MINISHELL ##

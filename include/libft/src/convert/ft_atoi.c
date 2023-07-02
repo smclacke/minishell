@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   ft_atoi.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:43:57 by SarahLouise   ########   odam.nl         */
+/*   Created: 2022/11/24 15:39:55 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/02 15:02:29 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/libft.h"
 
-void	ft_prompt(void)
+int	ft_atoi(const char *str)
 {
-	printf(PROMPT);
-}
+	long	neg;
+	long	num;
+	long	i;
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void) argc;
-	// (void) argv;
-	(void) envp;
-	
-	char	*input;
-
-	while(1)
+	i = 0;
+	neg = 1;
+	num = 0;
+	while ((ft_isspace(str[i])))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		ft_prompt();
-		input = readline(NULL);
-		check_empty(&argv[1][1]);
+		if (str[i] == '-')
+			neg *= -1;
+		i++;
 	}
+	while (ft_isdigit(str[i]))
+	{
+		num = num * 10 + (str[i] - 48);
+		i++;
+	}
+	if ((num * neg) > INT_MAX || (num * neg) < INT_MIN)
+		ft_error("Error");
+	return (num * neg);
 }

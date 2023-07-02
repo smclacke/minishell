@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:20:01 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/02 15:46:08 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,19 @@
 // parse space
 void	parse_space(const char **input)
 {
-	while (ft_ispace(**input))
+	while (ft_isspace(**input))
 		(*input)++;
+}
+
+// find next quotation
+int	second_quote(const char *input, char c)
+{
+	int	i;
+
+	i = 1;
+	while (input[i] != c && input[i])
+		i++;
+	return (i);
 }
 
 // check if |, >, <, >>, <<, return correct index to token_len
@@ -37,16 +48,6 @@ int	is_token(const char *str)
 	return (0);
 }
 
-// find next quotation
-int	second_quote(const char *input, char c)
-{
-	int	i;
-
-	i = 1;
-	while (input[i] != c && input[i])
-		i++;
-	return (i);
-}
 
 int		token_len(const char *input)
 {
@@ -59,7 +60,7 @@ int		token_len(const char *input)
 	// while !spaces, there is input and input is not already a token
 	// if is_quote
 	// find next quote + add index (second_quote)
-	// return index
+	return (i);
 }
 
 char	*make_token(const char **input)
@@ -68,16 +69,18 @@ char	*make_token(const char **input)
 	int		len;
 
 	// get size of token
+	len = token_len(*input);
 	// create substring of input, 0, len == type
+	type = ft_substr(*input, 0, len);
 	// add token length on to input
-	// return type 
+	return (type);
 }
 
 t_list	*lexer(const char *input)
 {
-	char	*input_token;
+	// char	*input_token;
 	t_list	*token;
-	t_list	*node;
+	// t_list	*node;
 	
 	token = NULL;
 	while (*input)
@@ -102,5 +105,4 @@ less than
 <<
 >>
 */
-/*
 

@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   ft_putendl_fd.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:43:57 by SarahLouise   ########   odam.nl         */
+/*   Created: 2022/10/19 14:07:29 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/02 15:04:52 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/libft.h"
 
-void	ft_prompt(void)
+void	ft_putendl_fd(char *s, int fd)
 {
-	printf(PROMPT);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	(void) argc;
-	// (void) argv;
-	(void) envp;
-	
-	char	*input;
-
-	while(1)
-	{
-		ft_prompt();
-		input = readline(NULL);
-		check_empty(&argv[1][1]);
-	}
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }
