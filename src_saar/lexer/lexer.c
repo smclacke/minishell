@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 10:26:20 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/02 10:28:28 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 // space, tab, \n, ;, comma, <, >, |, &
-// tokens = words, keywords, In / Out redirectors, semicolons
+// words, keywords, In / Out redirectors, semicolons
 // delimiters ;, |, &
 
 // parse space
