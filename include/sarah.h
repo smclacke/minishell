@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/06/30 12:42:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/02 10:23:40 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define OPEN_QUOTE = 1
 # define CLOSED_QUOTE = 0
 
+# define SUCCESS 0
+# define ERROR -1
+
 // EXITCODES
 typedef enum e_exitcode
 {
@@ -47,8 +50,9 @@ typedef enum e_exitcode
 // LEXER STRUCT
 typedef	struct s_lexer
 {
-	char	*input_lex;
-	char	*token;
+	char		*input;
+	t_list		*token;
+	t_exitcode	exit_sataus;
 }	t_lexer;
 
 
@@ -61,6 +65,26 @@ typedef struct s_parser
 
 // PROTOTYPES
 // --------- Lexer --------- //
+void	parse_space(const char **input);
+int		is_token(const char *str);
+int		second_quote(const char *input, char c);
+int		token_len(const char *input);
+char	*make_token(const char **input);
+t_list	*lexer(const char *input);
+
+/*
+GOING IN LIBFT
+*/
+bool	is_single_q(int c);
+bool	is_double_q(int c);
+bool	is_pipe(int c);
+bool	is_dollar(int c);
+bool	is_more(int c);
+bool	is_less(int c);
+bool	is_amper(int c);
+bool	is_semi_c(int c);
+bool	is_new_line(int c);
+
 
 // --------- Parser --------- //
 char		*check_empty(char *cmd);
