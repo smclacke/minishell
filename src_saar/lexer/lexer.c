@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 10:28:28 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/02 15:20:01 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,49 +103,4 @@ less than
 >>
 */
 /*
-            put all in libft
-*/
-bool	is_single_q(int c)
-{
-	return (c == '\'');
-}
 
-bool	is_double_q(int c)
-{
-	return (c == '\"');
-}
-
-bool	is_pipe(int c)
-{
-	return (c == '|');
-}
-
-bool	is_dollar(int c)
-{
-	return (c == '$');
-}
-
-bool	is_more(int c)
-{
-	return (c == '>');
-}
-
-bool	is_less(int c)
-{
-	return (c == '<');
-}
-
-bool	is_amper(int c)
-{
-	return (c == '&');
-}
-
-bool	is_semi_c(int c)
-{
-	return (c == ';');
-}
-
-bool	is_new_line(int c)
-{
-	return (c == '\n');
-}

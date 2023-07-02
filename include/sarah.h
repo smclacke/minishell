@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 10:23:40 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/02 15:20:15 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,6 @@ int		second_quote(const char *input, char c);
 int		token_len(const char *input);
 char	*make_token(const char **input);
 t_list	*lexer(const char *input);
-
-/*
-GOING IN LIBFT
-*/
-bool	is_single_q(int c);
-bool	is_double_q(int c);
-bool	is_pipe(int c);
-bool	is_dollar(int c);
-bool	is_more(int c);
-bool	is_less(int c);
-bool	is_amper(int c);
-bool	is_semi_c(int c);
-bool	is_new_line(int c);
 
 
 // --------- Parser --------- //
