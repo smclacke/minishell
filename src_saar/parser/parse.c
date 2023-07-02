@@ -1,18 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_isalpha.c                                       :+:    :+:            */
+/*   parser_saar.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/11/24 15:40:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/03/04 17:11:13 by smclacke      ########   odam.nl         */
+/*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/06/30 12:37:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/sarah.h"
 
-int	ft_isalpha(int c)
-{
-	return ((c >= 65 && c <= 90) || (c >= 97 && c <= 122));
-}
