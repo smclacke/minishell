@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   ft_striteri.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:43:57 by SarahLouise   ########   odam.nl         */
+/*   Created: 2022/10/19 15:26:10 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/02 15:06:21 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/libft.h"
 
-void	ft_prompt(void)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	printf(PROMPT);
-}
+	unsigned int	i;
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void) argc;
-	// (void) argv;
-	(void) envp;
-	
-	char	*input;
-
-	while(1)
+	i = 0;
+	while (*s)
 	{
-		ft_prompt();
-		input = readline(NULL);
-		check_empty(&argv[1][1]);
+		f(i, s);
+		i++;
+		s++;
 	}
 }

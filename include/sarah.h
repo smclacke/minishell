@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:20:15 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/02 15:41:23 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
 
-#include "libft/src/libft.h"
+#include "libft/include/libft.h"
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
