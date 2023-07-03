@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 15:42:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/03 18:03:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,32 @@ typedef struct s_parser
 
 
 // PROTOTYPES
+// LEXER
 // --------- Lexer --------- //
-t_lexer		*ft_print_tokens(t_lexer *token);
-void		parse_space(char **input);
-int			is_token(char *str);
-int			token_len(char *input);
-char		*make_token(char *input);
+char 		*find_tokens(char *input);
+char		*parsing_token(char *input);
+char		*make_token(char *parsed_token);
 t_lexer		*lexer(char *input);
 
-// -------- Lexer Utils --------//
+// --------- Tokens --------- //
+void		parse_space(char **input);
+char		*find_quotes(char *input);
 int			second_quote(char *input, char c);
+char 		*find_redirect(char *input);
+char		*find_delimiter(char *input);
 
+// -------- Lexer Utils --------//
+t_lexer		*ft_print_tokens(t_lexer *token);
+int			token_len(char *parsed_token);
+
+
+// PARSER
 // --------- Parser --------- //
 
 // ------- Parser Utils ------- //
 char		*check_empty(char *cmd);
 
-
+// UTILS
 // --------- UTILS -------- //
 // --------- Errors -------- //
 void		error_no_cmd(void);
