@@ -70,6 +70,7 @@ Organised in directories:
 				ft_ishex
 				ft_isspace
 				ft_strcmp
+				ft_strcpy.c
 				ft_lower_str
 				ft_upper_str
 				ft_putendl
