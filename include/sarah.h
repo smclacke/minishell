@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:49:21 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/03 18:03:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ typedef enum e_exitcode
 // LEXER STRUCT
 typedef	struct s_lexer
 {
-	char		*input;
-	t_list		*token;
-	t_exitcode	exit_sataus;
+	char				*input;
+	struct s_lexer		*next;
 }	t_lexer;
 
 
@@ -65,18 +64,33 @@ typedef struct s_parser
 
 
 // PROTOTYPES
+// LEXER
 // --------- Lexer --------- //
-void	parse_space(const char **input);
-int		is_token(const char *str);
-int		second_quote(const char *input, char c);
-int		token_len(const char *input);
-char	*make_token(const char **input);
-t_list	*lexer(const char *input);
+char 		*find_tokens(char *input);
+char		*parsing_token(char *input);
+char		*make_token(char *parsed_token);
+t_lexer		*lexer(char *input);
+
+// --------- Tokens --------- //
+void		parse_space(char **input);
+char		*find_quotes(char *input);
+int			second_quote(char *input, char c);
+char 		*find_redirect(char *input);
+char		*find_delimiter(char *input);
+
+// -------- Lexer Utils --------//
+t_lexer		*ft_print_tokens(t_lexer *token);
+int			token_len(char *parsed_token);
 
 
+// PARSER
 // --------- Parser --------- //
+
+// ------- Parser Utils ------- //
 char		*check_empty(char *cmd);
 
+// UTILS
+// --------- UTILS -------- //
 // --------- Errors -------- //
 void		error_no_cmd(void);
 void		error_space(char *cmd);

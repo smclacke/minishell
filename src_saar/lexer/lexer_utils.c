@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   lexer_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 15:25:36 by smclacke      ########   odam.nl         */
+/*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/03 17:46:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/sarah.h"
 
-void	ft_prompt(void)
+// print tokens
+t_lexer	*ft_print_tokens(t_lexer *token)
 {
-	printf(PROMPT);
+	t_lexer	*list;
+
+	list = token;
+	while (list)
+	{
+		printf("token: %s\n", list->input);
+		list = list->next;
+	}
+	return (token);
 }
 
-int	main(int argc, char **argv, char **envp)
+// get length to return to make_token() in order to create substring of parsed token into new substred token
+int		token_len(char *parsed_token)
 {
-	(void) argc;
-	// (void) argv;
-	(void) envp;
-	// char	*input;
-	t_lexer	*token;
-	int	i = 1;
+	int	i;
 
-	// while(1)
-	// {
-	// 	ft_prompt();
-	// 	input = readline(NULL);
-	while (argv[i])
-	{
-		token = lexer(argv[i]);
-		ft_print_tokens(token);
+	i = 0;
+	while (parsed_token[i])
 		i++;
-	}
-	// }
+	return (i);
 }
