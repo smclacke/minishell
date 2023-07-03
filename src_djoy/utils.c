@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 16:52:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 17:26:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ int	ft_strcmp(const char *s1, const char *s2)
 void	check_for_builtin(char **argv)
 {
 	if (ft_strcmp(argv[1], "echo") == 0)// isnt [1] when I use the prompt
-		ft_echo(*argv);
+		ft_echo(argv);
 	if (ft_strcmp(argv[1], "cd") == 0)//same same
 		ft_cd(argv[2]);//is going to be what's parsed
+	if (ft_strcmp(argv[1], "pwd") == 0)
+		ft_pwd(*argv);
 	else
 		exit(EXIT_FAILURE);//not really necesary
 }

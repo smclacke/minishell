@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/03 12:24:42 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/03 17:19:28 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ SRCS_DJOY		=	main_djoy.c	\
 					utils.c \
 					ft_echo.c \
 					ft_cd.c \
+					ft_pwd.c \
+					
 
 DJOY_DIR		= src_djoy
 SRC_DJOY		= $(addprefix $(DJOY_DIR)/, $(SRCS_DJOY))
