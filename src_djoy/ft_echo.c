@@ -6,13 +6,16 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 10:37:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 15:01:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
-/* compares 2 strings */
+/* 
+	compares 2 strings 
+	replace by the libft version without -n
+*/
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 11:08:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 14:39:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,29 @@ int	main(int argc, char **argv, char **envp)
 ◦ echo with option -n
 ◦ cd with only a relative or absolute path
 ◦ pwd with no options
+	char	*cwd;
+
+	cwd = argv[2];
+	cwd = getcwd(cwd, );
+	if (cwd != NULL)
+		printf("current working directory: [%s]\n", cwd);
+	else
+		mini_error("getcwd()", errno);
+
+	//		{
+//     char cwd[256];  // Buffer to hold the current working directory
+
+//     if (getcwd(cwd, sizeof(cwd)) != NULL) {
+//         printf("Current working directory: %s\\n", cwd);
+//     } else {
+//         perror("getcwd() error");
+//         return 1;
+//     }
+
+//     // Rest of the program...
+
+//     return 0;
+// }
 ◦ export with no options
 ◦ unset with no options
 ◦ env with no options or arguments

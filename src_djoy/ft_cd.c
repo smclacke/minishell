@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 12:54:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 15:19:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,25 @@
 
 /*
 	cd with only a relative or absolute path
-*/
-void	ft_cd(char **argv)
-{
+	relative: cd src
+	absolute: cd src/bin/pannekoek/whatever
+	cd alone gives prompt back
+	cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
 	
+*/
+void	ft_cd(char *argv)
+{
+	char	*home_dir;
+	char	cwd[256];
+
+	if (argv != NULL)
+	{
+		home_dir = getenv("HOME");
+		printf("%s\n", getcwd(cwd, sizeof(cwd)));
+		if (home_dir == NULL)
+			mini_error("getenv", errno);//custom message?
+		else
+			chdir(argv); //needs to be one when i use prompt
+		printf("%s\n", getcwd(cwd, sizeof(cwd)));
+	}
 }
-
-//		{
-//     char cwd[256];  // Buffer to hold the current working directory
-
-//     if (getcwd(cwd, sizeof(cwd)) != NULL) {
-//         printf("Current working directory: %s\\n", cwd);
-//     } else {
-//         perror("getcwd() error");
-//         return 1;
-//     }
-
-//     // Rest of the program...
-
-//     return 0;
-// }
-
-// {
-//     const char *path = "/home/user/documents";  
-		// Replace with the desired directory path
-
-//     // Change the current working directory to the specified path
-//     int result = chdir(path);
-
-//     if (result == 0) {
-//         printf("Directory changed successfully.\\n");
-//     } else {
-//         perror("Directory change failed");
-//     }
-
-//     // Rest of the program...
-
-//     return 0;
-// }
