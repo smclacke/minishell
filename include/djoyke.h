@@ -6,14 +6,14 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 10:16:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 10:27:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DJOYKE_H
 # define DJOYKE_H
 
-# include "../include/libft/src/libft.h"
+# include "libft/include/libft.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
