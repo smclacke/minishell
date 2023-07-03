@@ -6,7 +6,7 @@
 /*   By: SarahLouise <SarahLouise@student.42.fr>      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 19:21:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:14:56 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/02 18:20:16 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,5 +194,7 @@ bool	ft_isless(int c);
 bool	ft_isamper(int c);
 
 bool	ft_issemi_c(int c);
+
+char	*ft_strcpy(char *dest, char *src);
 
 #endif
