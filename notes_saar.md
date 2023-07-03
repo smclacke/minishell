@@ -28,3 +28,6 @@ so since quotes and spaces are meta in linux shell, just tokenise metas...
 !!!! remember Djoyke needs to handle absolute paths, and relatives
 !!!! specify if double or single quotes by, maybe, token for single, token for double.. or is that 
 part of the parsing tree?
+
+
+get lexer (so far working) then add in prompt, getting that working, then start seeing if it works correctly with all symbols, flags, quotes etc etc etc etc etccccccccc
