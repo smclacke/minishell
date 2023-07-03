@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 18:05:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/03 18:24:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,16 @@ char *find_tokens(char *input)
 */
 char	*parsing_token(char *input)
 {
-	int	i;
-
-	i = 0;
 	parse_spaces(&input);
-	while (input[i])
-	{
-		if (find_quotes(&input))
-			return (input);
-		if (find_redirects(&input))
-			return (input);
-		if (find_delimiter(&input))
-			return (input);
+	if (find_quotes(&input))
+		return (input);
+	else if (find_redirects(&input))
+		return (input);
+	else if (find_delimiter(&input))
+		return (input);
+	else
 		if (find_tokens(&input))
 			return (input);
-	}
 	return (0);
 }
 
