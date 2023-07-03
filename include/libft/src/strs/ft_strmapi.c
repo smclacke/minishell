@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   ft_strmapi.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:43:57 by SarahLouise   ########   odam.nl         */
+/*   Created: 2022/10/19 15:57:58 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/02 15:06:33 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/libft.h"
 
-void	ft_prompt(void)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	printf(PROMPT);
-}
+	char			*str;
+	unsigned int	i;
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void) argc;
-	// (void) argv;
-	(void) envp;
-	
-	char	*input;
-
-	while(1)
+	str = malloc(sizeof(*s) * (ft_strlen(s) + 1));
+	i = 0;
+	if (!str)
+		return (0);
+	while (*s)
 	{
-		ft_prompt();
-		input = readline(NULL);
-		check_empty(&argv[1][1]);
+		str[i] = f(i, *s);
+		i++;
+		s++;
 	}
+	str[i] = '\0';
+	return (str);
 }

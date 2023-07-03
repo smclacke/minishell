@@ -6,7 +6,11 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
+<<<<<<< HEAD
 #    Updated: 2023/07/03 10:15:15 by dreijans      ########   odam.nl          #
+=======
+#    Updated: 2023/07/02 15:46:59 by SarahLouise   ########   odam.nl          #
+>>>>>>> 36a91976761d9e814cf8d28fe01fbc8ea887e2ae
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +22,7 @@ CFLAGS			= -Wall -Wextra
 # -Werror
 # LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
-INCLUDES		= -Iinclude -Iinclude/libft/src -lreadline
+INCLUDES		= -Iinclude -Iinclude/libft/include -lreadline
 # IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 ## MINISHELL ##
@@ -52,12 +56,16 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 ## SARAH ##
 
 SRCS_SAAR		= main_saar.c	\
-					utils_saar.c
+					parser/parse.c	\
+					parser/parser_utils.c	\
+					lexer/lexer.c		\
+					utils/error.c
 
 SAAR_DIR		= src_saar
 SRC_SAAR		= $(addprefix $(SAAR_DIR)/, $(SRCS_SAAR))
 
 OBJ_SAAR_DIR	= obj_saar
+OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 
 
@@ -94,7 +102,7 @@ $(DJOY)			:	$(OBJ_DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 
 $(SAAR)			:	$(OBJ_SAAR)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) -o $(SAAR)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 
 
@@ -110,6 +118,9 @@ $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)
+	@ mkdir -p $(OBJ_SAAR_DIR)/parser
+	@ mkdir -p $(OBJ_SAAR_DIR)/lexer
+	@ mkdir -p $(OBJ_SAAR_DIR)/utils
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 
