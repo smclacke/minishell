@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 15:00:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/03 15:11:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ typedef enum e_exitcode
 // LEXER STRUCT
 typedef	struct s_lexer
 {
-	int					var;
 	char				*input;
-	// char				*token;
 	struct s_lexer		*next;
 }	t_lexer;
 

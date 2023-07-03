@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 15:05:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/03 15:11:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_lexer	*ft_print_tokens(t_lexer *token)
 	list = token;
 	while (list)
 	{
-		printf("token: %d\n", list->var);
+		printf("token: %s\n", list->input);
 		list = list->next;
 	}
 	return (token);
@@ -92,12 +92,13 @@ t_lexer	*lexer(const char *input)
 	
 	token = NULL;
 	node = NULL;
-	while (*input)
-	{
+	// while (*input)
+	// {
+		printf("we are ehre right?\n");
 		parse_space(&input);							// remove spaces from input
 		input_token = make_token(&input);				// make token out of input
 		token = (t_lexer *)ft_lstnew(input_token); 		// create node in list with newly created token
 		ft_lstadd_back((t_list **)&token, (t_list *)node); 					// add node to lstadd_back
-	}
+	// }
 	return (token);
 }
