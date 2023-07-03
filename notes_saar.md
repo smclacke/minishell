@@ -23,3 +23,8 @@ dollar, backquote, backslash, single quote, double quote, newline, space and tab
 tokenise based on quotes, spaces and meta characters
 
 so since quotes and spaces are meta in linux shell, just tokenise metas...
+
+
+!!!! remember Djoyke needs to handle absolute paths, and relatives
+!!!! specify if double or single quotes by, maybe, token for single, token for double.. or is that 
+part of the parsing tree?

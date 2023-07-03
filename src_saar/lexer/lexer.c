@@ -6,17 +6,25 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 13:53:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/03 15:05:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-// SPLIT BY SPACES AND META CHARACTERS... and quotes (specify if double or single quote)
+// print tokens for testing
+t_lexer	*ft_print_tokens(t_lexer *token)
+{
+	t_lexer	*list;
 
-// space, tab, \n, ;, comma, <, >, |, &
-// words, keywords, In / Out redirectors, semicolons
-// delimiters ;, |, &
+	list = token;
+	while (list)
+	{
+		printf("token: %d\n", list->var);
+		list = list->next;
+	}
+	return (token);
+}
 
 // parse space
 void	parse_space(const char **input)
@@ -57,8 +65,7 @@ int		token_len(const char *input)
 	int	i;
 	
 	i = 0;
-	// if input is is_token, return
-	if (is_token(&input[i]))
+	if (is_token(&input[i]))					// if input is is_token, return
 		return (is_token(&input[i]));
 	// while !spaces, there is input and input is not already a token
 	// if is_quote
@@ -71,28 +78,26 @@ char	*make_token(const char **input)
 	char	*type;
 	int		len;
 
-	// get size of token
-	len = token_len(*input);
-	// create substring of input, 0, len == type
-	type = ft_substr(*input, 0, len);
-	// add token length on to input (?)
+	len = token_len(*input);					// get size of token
+	type = ft_substr(*input, 0, len);			// create substring of input, 0, len == type
+												// add token length on to input (?)
 	return (type);
 }
 
-t_list	*lexer(const char *input)
+t_lexer	*lexer(const char *input)
 {
-	// char	*input_token;
-	t_list	*token;
-	// t_list	*node;
+	char	*input_token;
+	t_lexer	*token;
+	t_lexer	*node;
 	
 	token = NULL;
+	node = NULL;
 	while (*input)
 	{
-		// remove spaces from input
-		// token = make_token out of input
-		// create node in list with newly created token
-		// add node to lstadd_back (&token, node)
+		parse_space(&input);							// remove spaces from input
+		input_token = make_token(&input);				// make token out of input
+		token = (t_lexer *)ft_lstnew(input_token); 		// create node in list with newly created token
+		ft_lstadd_back((t_list **)&token, (t_list *)node); 					// add node to lstadd_back
 	}
 	return (token);
 }
-
