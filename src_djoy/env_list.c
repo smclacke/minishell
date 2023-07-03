@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   list_env.c                                         :+:    :+:            */
+/*   env_list.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 17:43:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 10:14:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	mini_error(char *string, int error)
 }
 
 /* function that puts env in a linked list */
-void	list_env(char **envp, t_env **env)
+void	env_list(char **envp, t_env **env)
 {
 	int		i;
 	t_env	*new;

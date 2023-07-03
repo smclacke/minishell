@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   builtin.c                                          :+:    :+:            */
+/*   ft_echo.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/01 15:41:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 19:13:23 by dreijans      ########   odam.nl         */
+/*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/07/03 10:13:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,10 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-/* 
-	function that checks for the corresponding built-in
-	maybe needs to be a bool?
-*/
-void	check_for_builtin(char *argv[1])
-{
-	if (ft_strcmp(argv[1], "echo") == 0)
-		ft_echo(&argv[1]);
-	else
-		exit(EXIT_FAILURE);//not really necesary
-}
-
 /* 	
 	writes argv after command on standart output followed by /n char
 	-n TBA that eliminates the endline char in output 
-	The echo utility exits 0 on success, and >0 if an error occurs.
+	The echo utility exits 0 on success, and > 0 if an error occurs.
 */
 void	*ft_echo(char **argv)//for now index 1
 {
@@ -64,7 +52,7 @@ void	*ft_echo(char **argv)//for now index 1
 			i++;
 		}
 	}
-	if (is_flag > 0)
+	if (is_flag != 0)
 		printf("\n");
 	exit(EXIT_SUCCESS);
 }

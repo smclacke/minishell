@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/01 19:12:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 10:16:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ typedef struct s_env
 void	mini_lstadd_back(t_env **lst, t_env *new);
 t_env	*mini_lstlast(t_env *lst);
 t_env	*mini_lstnew(void *content);
-void	list_env(char **envp, t_env **env);
+void	env_list(char **envp, t_env **env);
 void	print_list(t_env *env);
 void	mini_error(char *string, int error);
 
-/* built-in utils */
+/* built-in utils and fucntions */
 int		ft_strcmp(const char *s1, const char *s2);
 void	*ft_echo(char **argv);
+
+/* utils */
 void	check_for_builtin(char *argv[1]);//for now index 1
 
 #endif

@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/01 15:42:24 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/03 10:15:15 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,10 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 ## DJOYKE ##
 
 SRCS_DJOY		=	main_djoy.c	\
-					list_env.c \
-					builtin.c \
+					env_list.c \
+					utils.c \
+					ft_echo.c \
+					ft_cd.c \
 
 DJOY_DIR		= src_djoy
 SRC_DJOY		= $(addprefix $(DJOY_DIR)/, $(SRCS_DJOY))
