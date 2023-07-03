@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main_saar.c                                        :+:    :+:            */
+/*   lexer_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 15:25:36 by smclacke      ########   odam.nl         */
+/*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/03 15:40:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/sarah.h"
+#include "../../include/sarah.h"
 
-void	ft_prompt(void)
+// find next quotation
+int	second_quote(char *input, char c)
 {
-	printf(PROMPT);
-}
+	int	i;
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void) argc;
-	// (void) argv;
-	(void) envp;
-	// char	*input;
-	t_lexer	*token;
-	int	i = 1;
-
-	// while(1)
-	// {
-	// 	ft_prompt();
-	// 	input = readline(NULL);
-	while (argv[i])
-	{
-		token = lexer(argv[i]);
-		ft_print_tokens(token);
+	i = 1;
+	while (input[i] != c && input[i])
 		i++;
-	}
-	// }
+	return (i);
 }
