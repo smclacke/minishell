@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 15:57:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 16:52:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ void	ft_cd(char *argv)
 {
 	char	*home_dir;
 	// char	cwd[256];
-
 	if (argv != NULL)
 	{
 		home_dir = getenv("HOME");
 		// printf("%s\n", getcwd(cwd, sizeof(cwd)));
 		if (home_dir == NULL)
 			mini_error("getenv", errno);//custom message?
-		// else
 		if (access(argv, F_OK) == 0)
 			chdir(argv);
 		else
