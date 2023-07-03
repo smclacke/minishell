@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 15:19:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 15:54:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	mini_error(char *string, int error);
 
 /* built-in utils and fucntions */
 int		ft_strcmp(const char *s1, const char *s2);
-void	*ft_echo(char *argv);
+void	*ft_echo(char **argv);
 void	ft_cd(char *argv);
 
 /* utils */
