@@ -6,10 +6,9 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/03 10:21:36 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/03 12:11:55 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME			= minishell
 DJOY			= djoyke
