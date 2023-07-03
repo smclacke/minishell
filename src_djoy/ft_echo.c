@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 10:13:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 10:37:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,3 @@ void	*ft_echo(char **argv)//for now index 1
 		printf("\n");
 	exit(EXIT_SUCCESS);
 }
-
-/*
-
-• Your shell must implement the following builtins:
-◦ echo with option -n
-◦ cd with only a relative or absolute path
-◦ pwd with no options
-◦ export with no options
-◦ unset with no options
-◦ env with no options or arguments
-◦ exit with no options
-
-*/

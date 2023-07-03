@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 10:14:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 11:08:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	mini_lstadd_back(t_env **lst, t_env *new)
 	{
 		last = mini_lstlast(*lst);
 		last->next = new;
+		//if using previous change it here too
 	}
 	else
 		*lst = new;

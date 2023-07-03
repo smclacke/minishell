@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 10:17:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/03 11:08:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,20 @@ int	main(int argc, char **argv, char **envp)
 	// print_list(env);
 	check_for_builtin(argv);
 }
+
+/*
+
+• Your shell must implement the following builtins:
+◦ echo with option -n
+◦ cd with only a relative or absolute path
+◦ pwd with no options
+◦ export with no options
+◦ unset with no options
+◦ env with no options or arguments
+◦ exit with no options
+
+*/
+
 /*
 	expanding:
 	executing:
