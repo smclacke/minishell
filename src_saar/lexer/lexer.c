@@ -6,11 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:46:08 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/03 13:53:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
+
+// SPLIT BY SPACES AND META CHARACTERS... and quotes (specify if double or single quote)
 
 // space, tab, \n, ;, comma, <, >, |, &
 // words, keywords, In / Out redirectors, semicolons
@@ -35,6 +37,7 @@ int	second_quote(const char *input, char c)
 }
 
 // check if |, >, <, >>, <<, return correct index to token_len
+// is redirct, i.e. token itself
 int	is_token(const char *str)
 {
 	if (*str == '<' || *str == '>')
@@ -72,7 +75,7 @@ char	*make_token(const char **input)
 	len = token_len(*input);
 	// create substring of input, 0, len == type
 	type = ft_substr(*input, 0, len);
-	// add token length on to input
+	// add token length on to input (?)
 	return (type);
 }
 
@@ -92,17 +95,4 @@ t_list	*lexer(const char *input)
 	}
 	return (token);
 }
-
-
-// check type of symbol
-/*
-single quote
-double quote
-pipe
-dollar
-more than
-less than
-<<
->>
-*/
 
