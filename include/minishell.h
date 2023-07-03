@@ -6,9 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:47:35 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/03 12:14:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -29,10 +30,6 @@
 # define PROMPT "hey Djoyke $"
 # define READ 0
 # define WRITE 1
-
-
-
-
 
 // Colours
 # define RESET "\033[0m"

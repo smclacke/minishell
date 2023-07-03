@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:41:23 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/02 15:49:21 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_parser
 	char	*input_pars;
 	char	**cmd;
 }	t_parser;
+
 
 // PROTOTYPES
 // --------- Lexer --------- //
