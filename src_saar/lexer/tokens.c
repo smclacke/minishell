@@ -6,17 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 17:45:04 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/10 14:12:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/10 17:32:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 // parse space
-void	parse_space(char **input)
+void	parse_space(char *input)
 {
-	while (ft_isspace(**input))
-		(*input)++;
+	while (ft_isspace(*input))
+		input++;
 }
 
 // check if there are any quotes

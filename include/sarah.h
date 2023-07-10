@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/10 16:48:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/10 17:33:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ typedef struct s_parser
 char 		*find_tokens(char *input);
 char		*parsing_token(char *input);
 char		*make_token(char *parsed_token);
-t_list		*lexer(char *input);
+t_lexer		*lexer(char *input);
 
 // --------- Tokens --------- //
-void		parse_space(char **input);
+void		parse_space(char *input);
 char		*find_quotes(char *input);
 int			second_quote(char *input, char c);
 char 		*find_redirect(char *input);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/10 14:53:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/10 17:46:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@
 */
 char	*parsing_token(char *input)
 {
-	printf("input received in parsing_toekn(): %s\n", input);
-	parse_space(&input);
-	printf("input after parse_spaces in parsing_toekn(): %s\n", input);
+	// printf("input received in parsing_toekn(): %s\n", input);
+	parse_space(input);
+	return (input);
+	// printf("input after parse_spaces in parsing_toekn(): %s\n", input);
 	// if (find_quotes(&input))
 	// 	return (input);
 	// else if (find_redirects(&input))
@@ -43,7 +44,7 @@ char	*parsing_token(char *input)
 	// else
 	// 	if (find_tokens(&input))
 	// 		return (input);
-	return (0);
+	// return (0);
 }
 
 /*
@@ -76,13 +77,13 @@ char	*make_token(char *parsed_token)
 	the parser...
 */
 
-t_list	*lexer(char *input)
+t_lexer	*lexer(char *input)
 {
 	char		*new_token;
-	char		*parsed_token;
+	char		*parsed_token = NULL;
 	int			i;
 	t_list		*token;
-	t_list		**token_list  = NULL;
+	t_list		*token_list = NULL;
 
 	i  = 0;
 	while (input[i])
@@ -96,11 +97,19 @@ t_list	*lexer(char *input)
 		token = ft_lstnew(new_token);
 		if (!token)
 			return (0); //!
-		ft_lstadd_back(token_list, token);
-		return (token);
+		ft_lstadd_back(&token_list, token);
+		// return ((t_lexer *)token);
 		i++;
 	}
-	return (0); //!
+	return ((t_lexer *)token); //!
 }
 
+/*
+	lis
+	lexer
+*/
+
+
+
+// STOOOOOOOOOOPID :) :) :) :)
 // WHEN HOW WHAT ERROR HANDLING.... ERRRM don't just return 0 :')
