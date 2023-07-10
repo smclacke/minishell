@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/10 14:57:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/10 15:03:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ void	ft_prompt(void)
 int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
-	// (void) argv;
+	(void) argv;
 	(void) envp;
-	// char	*input;
-	t_lexer	*token;
+	char	*input;
+	// t_lexer	*token;
 	int	i = 1;
 
-	// while(1)
-	// {
-	// 	ft_prompt();
-	// 	input = readline(NULL);
-	while (argv[i])
+	while(1)
 	{
-		token = (t_lexer *)lexer(argv[i]);
-		ft_print_tokens(token);
-		i++;
-	}
+		ft_prompt();
+		input = readline(NULL);
+	// while (argv[i])
+	// {
+	// 	token = lexer(argv[i]);
+	// 	ft_print_tokens(token);
+	// 	i++;
 	// }
+	}
 }
