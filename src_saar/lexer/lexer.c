@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 18:24:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/10 14:53:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 	dollar and word
 	whole flag
 */
-char *find_tokens(char *input)
-{
+// char *find_tokens(char *input)
+// {
 	
-}
+// }
 
 /*
 	parse spaces, finds quoted tokens, words, redirects, symbols...
@@ -31,16 +31,18 @@ char *find_tokens(char *input)
 */
 char	*parsing_token(char *input)
 {
-	parse_spaces(&input);
-	if (find_quotes(&input))
-		return (input);
-	else if (find_redirects(&input))
-		return (input);
-	else if (find_delimiter(&input))
-		return (input);
-	else
-		if (find_tokens(&input))
-			return (input);
+	printf("input received in parsing_toekn(): %s\n", input);
+	parse_space(&input);
+	printf("input after parse_spaces in parsing_toekn(): %s\n", input);
+	// if (find_quotes(&input))
+	// 	return (input);
+	// else if (find_redirects(&input))
+	// 	return (input);
+	// else if (find_delimiter(&input))
+	// 	return (input);
+	// else
+	// 	if (find_tokens(&input))
+	// 		return (input);
 	return (0);
 }
 
@@ -64,36 +66,37 @@ char	*make_token(char *parsed_token)
 	create new node in list for the newly made token
 	add node to end of list
 	///
-	pass new listed token to parser, with quotes attached so that the parser can differentiate between double and single
+	pass new tokens to parser, with quotes attached so that the parser can differentiate between double and single
 	also, if dollar, take word after too as token, if flag, take whole thing... anymore things to think about.... (?)
 	///
 	!!! take argv[i], keep parsing till NULL because argv[i] could contain multiple tokens
 	!!! return made token but need to keep parsing rest of argv[i] in lexer...
-	!!! do I even need to return, if a list of tokens is created....
+	~~~ if the list has been made, do I still need to return each token?
+	~~~ I think if the list is made and stored, I can just take that and run it through
+	the parser...
 */
 
-t_lexer	*lexer(char *input)
+t_list	*lexer(char *input)
 {
 	char		*new_token;
 	char		*parsed_token;
-	t_lexer		*token;
-	t_lexer		*node;
 	int			i;
+	t_list		*token;
+	t_list		**token_list  = NULL;
 
 	i  = 0;
 	while (input[i])
 	{
-		node = NULL;
-		parsed_token = parsing_token(&input);
+		parsed_token = parsing_token(input);
 		if (!parsed_token)
 			return (0); //!
 		new_token = make_token(parsed_token);
 		if (!new_token)
 			return (0); //!
-		token = (t_lexer *)ft_lstnew(new_token);
+		token = ft_lstnew(new_token);
 		if (!token)
 			return (0); //!
-		ft_lstadd_back((t_list **)&token, (t_list *)node);
+		ft_lstadd_back(token_list, token);
 		return (token);
 		i++;
 	}

@@ -6,14 +6,22 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 18:03:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/10 14:55:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
+// # define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
+
+#define	PROMPT BI_PURPLE"\
+     A.,.A\n\
+     (u u )\\-=-__---===-.          \\\n\
+     `.^,,'  ,     (    \\`-.      /  `.-~~--..--~~~-.\n\
+   /~/~~~~~ /...;/~~~~~  (`\\`.   <__                 `.\n\
+   \"\"\"\"~~~~~~~~~~\"\"~~~~~~~,','~~~~~~~~~~~~~~~~.~~~~,','\n\
+                          `\"                  `.~~_,'\n"
 
 #include "libft/include/libft.h"
 #include <unistd.h>
@@ -51,6 +59,7 @@ typedef enum e_exitcode
 typedef	struct s_lexer
 {
 	char				*input;
+	t_list				*token;
 	struct s_lexer		*next;
 }	t_lexer;
 
@@ -69,7 +78,7 @@ typedef struct s_parser
 char 		*find_tokens(char *input);
 char		*parsing_token(char *input);
 char		*make_token(char *parsed_token);
-t_lexer		*lexer(char *input);
+t_list		*lexer(char *input);
 
 // --------- Tokens --------- //
 void		parse_space(char **input);
