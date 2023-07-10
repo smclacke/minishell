@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/03 18:07:38 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/10 20:15:03 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
 
-CFLAGS			= -Wall -Wextra
+CFLAGS			= -Wall -Wextra -fsanitize=address -g
 # -Werror
 # LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
@@ -45,6 +45,7 @@ SRCS_DJOY		=	main_djoy.c	\
 					ft_echo.c \
 					ft_cd.c \
 					ft_pwd.c \
+					ft_export.c \
 					
 
 DJOY_DIR		= src_djoy
@@ -85,9 +86,9 @@ BLACK		:= \033[1;90m
 
 all				: libft $(NAME)
 
-djoy			: $(DJOY)
+djoy			: libft $(DJOY)
 
-saar			: $(SAAR)
+saar			: libft $(SAAR)
 
 libft			:
 	@ make -C include/libft

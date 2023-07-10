@@ -6,22 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 17:27:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/10 19:51:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
+/* checking the edge cases for this one */
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
 
-	env = NULL;
 	if (argc <= 1)//needs to give prompt back
 		exit(EXIT_FAILURE);//only for testing purpose
-	env_list(envp, &env);
-	// print_list(env);
-	check_for_builtin(argv);
+	env = env_list(envp);
+	print_list(env);
+	check_for_builtin(argv, env);
 }
 
 /*

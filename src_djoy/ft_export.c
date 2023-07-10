@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_pwd.c                                           :+:    :+:            */
+/*   ft_export.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/04 17:11:01 by dreijans      ########   odam.nl         */
+/*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/07/10 17:31:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
-/* 
-	get's current working directory 
-	research pwd behavior when given NULL
-*/
-void	ft_pwd(char *path)
+void	ft_export(char **argv, t_env env)
 {
-	path = getcwd(path, sizeof(NULL));
-	if (path != NULL)
-		printf("Current working directory: %s\n", path);
-	else
-		mini_error("getcwd()", errno);
+	(void) env;
+	if (ft_strcmp(argv[1], "=") != 0)
+		mini_error("strcmp", errno);
+	
 }

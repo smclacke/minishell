@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 17:07:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/04 16:52:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 	relative: cd src
 	absolute: cd src/bin/pannekoek/whatever
 	cd alone gives prompt back
-	cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
-	
+	cd jfhjvhs gives: cd: no such file or directory: jfhjvhs	
 */
 void	ft_cd(char *argv)
 {

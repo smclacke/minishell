@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/03 17:25:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/10 20:27:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 /* struct for the env, prepped to be doubly, for now singularly linked*/
 typedef struct s_env
 {
-	char				*content;//envp content
+	char				*key;
+	char				*value;
 	struct s_env		*next;
 	struct s_env		*previous;
 }							t_env;
@@ -41,18 +42,18 @@ typedef struct s_env
 /* list making functions*/
 void	mini_lstadd_back(t_env **lst, t_env *new);
 t_env	*mini_lstlast(t_env *lst);
-t_env	*mini_lstnew(void *content);
-void	env_list(char **envp, t_env **env);
+t_env	*env_list(char **envp);
 
 /* built-in utils and fucntions */
 void	*ft_echo(char **argv);
 void	ft_cd(char *argv);
 void	ft_pwd(char *path);
+void	ft_export(char **argv, t_env env);
 
 /* utils */
 void	print_list(t_env *env);
 int		ft_strcmp(const char *s1, const char *s2);
 void	mini_error(char *string, int error);
-void	check_for_builtin(char **argv);//for now index 1
+void	check_for_builtin(char **argv, t_env *env);//for now index 1
 
 #endif
