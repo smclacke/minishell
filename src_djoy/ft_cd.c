@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/04 16:52:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/11 14:59:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,27 @@
 void	ft_cd(char *argv)
 {
 	char	*home_dir;
-	// char	cwd[256];
+	char	*error;
+	// char	*cwd;
+
+	// cwd = NULL;
 	if (argv != NULL)
 	{
 		home_dir = getenv("HOME");
-		// printf("%s\n", getcwd(cwd, sizeof(cwd)));
 		if (home_dir == NULL)
-			mini_error("getenv", errno);//custom message?
+			mini_error("getenv", errno);
+		// printf("%s\n", getcwd(cwd, sizeof(cwd)));
 		if (access(argv, F_OK) == 0)
+		{
+			// getcwd()..?
 			chdir(argv);
+		}
 		else
-			mini_error("dir", errno);// change into custom
+		{
+			error = ft_strjoin("minishell: cd: ", argv);
+			mini_error(error, errno);
+		}
 		// printf("%s\n", getcwd(cwd, sizeof(cwd)));
 	}
+	// printf("%s\n", getcwd(cwd, sizeof(cwd)));
 }

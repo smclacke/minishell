@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/10 20:27:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/11 15:30:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_env	*env_list(char **envp);
 void	*ft_echo(char **argv);
 void	ft_cd(char *argv);
 void	ft_pwd(char *path);
-void	ft_export(char **argv, t_env env);
+void	ft_export(char **argv, t_env *env);
 
 /* utils */
 void	print_list(t_env *env);

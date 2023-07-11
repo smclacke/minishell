@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/04 17:11:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/11 11:33:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 /* 
 	get's current working directory 
 	research pwd behavior when given NULL
+	OLDPWD=/Users/dreijans/Documents/Rang 3/Minishell
+	also print the old one
+	needs exit status
 */
 void	ft_pwd(char *path)
 {
@@ -24,3 +27,4 @@ void	ft_pwd(char *path)
 	else
 		mini_error("getcwd()", errno);
 }
+

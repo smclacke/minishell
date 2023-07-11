@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/10 20:28:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/11 15:30:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-/* 
-	function that checks for the corresponding built-in
-	maybe needs to be a bool?
-	needs to be scalable, now only works with argv[1]
+/**
+ * @param argv string to compare
+ * @param env string or char to compare with
+ * @brief checks arguments to find built-ins: 
+ * echo, cd, pwd, export, unset, env and exit
+ * @return EXIT_FAILURE if no built-in was found
 */
-void	check_for_builtin(char **argv, t_env *env)
+void	check_for_builtin(char **argv, t_env *env)//needs to be passed tho haha
 {
 	(void) env;
 	if (ft_strcmp(argv[1], "echo") == 0)// isnt [1] when I use the prompt
@@ -46,8 +48,8 @@ void	check_for_builtin(char **argv, t_env *env)
 		ft_cd(argv[2]);//is going to be what's parsed
 	if (ft_strcmp(argv[1], "pwd") == 0)
 		ft_pwd(NULL);
-	// if (ft_strcmp(argv[1], "export") == 0)
-	// 	ft_export(argv, env);
+	if (ft_strcmp(argv[1], "export") == 0)
+		ft_export(argv, *env);
 	else
 		exit(EXIT_FAILURE);//not really necesary
 }
@@ -64,6 +66,10 @@ void	mini_error(char *string, int error)
 }
 
 
+/**
+ * @param env argument given to perror
+ * @brief prints linked list containing env key or value
+*/
 void	print_list(t_env *env)
 {
 	// while (env != NULL)

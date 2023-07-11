@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/10 19:51:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/11 11:36:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc <= 1)//needs to give prompt back
 		exit(EXIT_FAILURE);//only for testing purpose
 	env = env_list(envp);
-	print_list(env);
+	// print_list(env);
 	check_for_builtin(argv, env);
 }
 
@@ -70,3 +70,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	
 */
+
+//pointer refreshing knowledge
+//make exit staus at every built in
+//make own error messages
