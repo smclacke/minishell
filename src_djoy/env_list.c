@@ -6,13 +6,21 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/10 20:30:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/11 15:49:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
-/* makes a new node from content passed to this function */
+/**
+ * @param key data passed from environment before = sign
+ * @param value data passed from environment after = sign
+ * @brief malloc's and init node for linked list containing: 
+ * key, value and next
+ * @return node made
+ * @todo 
+ * 1) needs to add previous in case of doubly linked list
+*/
 t_env	*mini_lstnew(void *key, void *value)
 {
 	t_env	*new;
@@ -26,7 +34,14 @@ t_env	*mini_lstnew(void *key, void *value)
 	return (new);
 }
 
-// index of = , before is key after is value, substring it
+/**
+ * @param str string to be divided by = sign
+ * @param key pointer to the address of a pointer 
+ * containing a string substringed from str before = sign
+ * @param value pointer to the address of a pointer 
+ * containing a string substringed from str after = sign
+ * @brief substrings key and value from str
+*/
 void	get_key_value(char *str, char **key, char **value)
 {
 	int		i;
@@ -41,7 +56,10 @@ void	get_key_value(char *str, char **key, char **value)
 	}
 }
 
-/* loops to list to go to last position */
+/**
+ * @param lst linked list to loop through
+ * @brief loops to list to go to last position
+*/
 t_env	*mini_lstlast(t_env *lst)
 {
 	if (!lst)
@@ -51,9 +69,12 @@ t_env	*mini_lstlast(t_env *lst)
 	return (lst);
 }
 
-/* adds new node to the back 
- if the lst has no nodes, sets new node as the start of lst
- */
+/**
+ * @param lst linked list
+ * @param new new node to be added to linked list 
+ * @brief loops through list to add the new node to the back
+ * @todo adding previous in case of doubly linked list
+*/
 void	mini_lstadd_back(t_env **lst, t_env *new)
 {
 	t_env	*last;
@@ -62,13 +83,19 @@ void	mini_lstadd_back(t_env **lst, t_env *new)
 	{
 		last = mini_lstlast(*lst);
 		last->next = new;
-		//if using previous change it here too
 	}
 	else
 		*lst = new;
 }
 
-/* function that puts env in a linked list */
+/**
+ * @param i integer to iterate through environmental pointer
+ * @param key char string to be receiving value of env key
+ * @param value char string to be receiving value of env value
+ * @param env linked list containing key and env
+ * @brief putting the envp content into a linked list seperated by key and value
+ * @return linked list 
+*/
 t_env	*env_list(char **envp)
 {
 	int		i;
