@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/11 15:30:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/11 15:35:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,24 @@ int	ft_strcmp(const char *s1, const char *s2)
  * @brief checks arguments to find built-ins: 
  * echo, cd, pwd, export, unset, env and exit
  * @return EXIT_FAILURE if no built-in was found
+ * @todo 
+ * 1) needs to be passed to actual process,
+ * 2) all [i] indexes need to be replaced by actual parsed data
+ * 3) exit(EXIT_FAILURE) is it really neccesary?
 */
-void	check_for_builtin(char **argv, t_env *env)//needs to be passed tho haha
+void	check_for_builtin(char **argv, t_env *env)
 {
 	(void) env;
-	if (ft_strcmp(argv[1], "echo") == 0)// isnt [1] when I use the prompt
+	if (ft_strcmp(argv[1], "echo") == 0)
 		ft_echo(argv);
-	if (ft_strcmp(argv[1], "cd") == 0)//same same
-		ft_cd(argv[2]);//is going to be what's parsed
+	if (ft_strcmp(argv[1], "cd") == 0)
+		ft_cd(argv[2]);
 	if (ft_strcmp(argv[1], "pwd") == 0)
 		ft_pwd(NULL);
-	if (ft_strcmp(argv[1], "export") == 0)
-		ft_export(argv, *env);
+	// if (ft_strcmp(argv[1], "export") == 0)
+	// 	ft_export(argv, *env);
 	else
-		exit(EXIT_FAILURE);//not really necesary
+		exit(EXIT_FAILURE);
 }
 
 /**
@@ -72,16 +76,9 @@ void	mini_error(char *string, int error)
 */
 void	print_list(t_env *env)
 {
-	// while (env != NULL)
-	// {
-	// 	printf("%s\n", env->key);
-	// 	env = env->next;
-	// }
 	while (env != NULL)
 	{
-		printf("%s\n", env->value);
+		printf("%s=%s\n", env->key, env->value);
 		env = env->next;
 	}
 }
-
-//& gives * and &bla[1] gives **..... wellll

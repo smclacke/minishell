@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 11:36:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/11 15:34:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,5 @@ int	main(int argc, char **argv, char **envp)
 //pointer refreshing knowledge
 //make exit staus at every built in
 //make own error messages
+
+//& gives * and &bla[1] gives **..... wellll
