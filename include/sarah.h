@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/10 17:33:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 19:46:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char		*find_delimiter(char *input);
 
 // -------- Lexer Utils --------//
 t_lexer		*ft_print_tokens(t_lexer *token);
-int			token_len(char *parsed_token);
+// int			token_len(char *parsed_token);
 
 
 // PARSER

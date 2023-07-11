@@ -31,3 +31,4 @@ part of the parsing tree?
 
 
 get lexer (so far working) then add in prompt, getting that working, then start seeing if it works correctly with all symbols, flags, quotes etc etc etc etc etccccccccc
+
