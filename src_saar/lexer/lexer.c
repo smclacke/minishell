@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 21:22:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 22:47:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@
 char	*parsing_token(char *input)
 {
 	parse_space(input);
-	if (find_quotes(input))
-		return (input);
-	else if (find_redirects(input))
-		return (input);
-	else if (find_delimiter(input))
-		return (input);
-	else
-		if (find_tokens(input))
-			return (input);
-	return (0);
+		return (input); // just for testing
+	// if (find_quotes(input))
+	// 	return (input);
+	// else if (find_redirects(input))
+	// 	return (input);
+	// else if (find_delimiter(input))
+	// 	return (input);
+	// else
+	// 	if (find_tokens(input))
+	// 		return (input);
+	// return (0);
 }
 
 /**
  *	get size of string, create substring to pass backto lexer as newly made token
 */
-
 char	*make_token(char *parsed_token)
 {
 	char	*token;
@@ -70,7 +70,6 @@ char	*make_token(char *parsed_token)
  *	create new node in list for the newly made token
  *	add node to end of list
 */
-
 t_list *lexer(char *input)
 {
 	char		*new_token;
