@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/11 21:26:35 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/11 21:32:08 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,11 +95,11 @@ libft			:
 ## EXECUTABLES
 
 $(NAME)			:	$(OBJ)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 
 $(DJOY)			:	$(OBJ_DJOY)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 
 $(SAAR)			:	$(OBJ_SAAR)
