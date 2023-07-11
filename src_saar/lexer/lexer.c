@@ -6,18 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 21:03:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 21:15:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- * after spaces are parsed, quotes / redirects are found, find words and symbols
- * - dollar and word or dollar + ?
- * - buildins + flag
- * - cd, cd . , cd .., cd ../+folder
- * - input
+ * after:
+ * spaces are parsed
+ * quotes are found
+ * redirects are found
+ * dollar and word or dollar + ? are found
+ * buildins + flags are found
+ * FIND ALL OTHER INPUT input
  */
 // char *find_tokens(char *input)
 // {

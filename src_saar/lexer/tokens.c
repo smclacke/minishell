@@ -6,25 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 17:45:04 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 20:57:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 21:21:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-// parse space
-void	parse_space(char *input)
-{
-	while (ft_isspace(*input))
-		input++;
-}
-
-/*
- *	check if there are any quotes
- *	IF DOLLAR IN DOUBLE QUOTE, STILL HANDLE AS META DOLLAR
- *	if unclosed quotes, throw error
+/**
+ * find quotes
+ * check for dollar in double quotes!!
+ * if unclosed, throw error
 */
-// char	*find_quotes(char *input)
+// char	*find_quote(char *input)
 // {
 // 	// if ive found a quote, 
 // 	if (!second_quote(input, ft_isquote(intput[i]))) // isquote returns either single or double which can be passed into second_quote()
@@ -34,24 +27,17 @@ void	parse_space(char *input)
 // 		// return specific part of input with quotes attached
 // }
 
-/**
- *	find next quotation
- *	if unclosed, throw error
+/***
+ * find dollars ( + $?)
 */
-// int	second_quote(char *input, char c)
+// char	*find_dollar(char *input)
 // {
-// 	int	i;
-
-// 	i = 1;
-// 	while (input[i] != c && input[i])
-// 		i++;
-// 	if (!input[i])
-// 		return (0);
-// 	return (i);
+	
 // }
 
-/*
- *	redirect = << >>, < >, and pipe
+/**
+ * find redirects
+ * redirect = << >>, < >, and pipe
 */
 // char	*find_redirect(char *input)
 // {
@@ -59,15 +45,26 @@ void	parse_space(char *input)
 // }
 
 /**
- * = whatever is after <<, for HERE_DOC
+ * find delimiters
+ * whatever is after <<, for HERE_DOC
 */
 // char	*find_delimiter(char *input)
 // {
 	
 // }
 
-/*
- *	find builtins 
- *∫	
+/**
+ * built ins
+ * cd + next argument (relative + abso paths)
+ * echo + -n (can also be nnnnnnn and nnnndnnnnn) - they behave differently
+ * pwd
+ * export
+ * unset
+ * env
+ * exit
 */
+// char	*find_built_ins(char *input)
+// {
+	
+// }
 
