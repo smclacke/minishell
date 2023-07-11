@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 17:45:04 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/10 17:32:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 20:57:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	parse_space(char *input)
 		input++;
 }
 
-// check if there are any quotes
+/*
+ *	check if there are any quotes
+ *	IF DOLLAR IN DOUBLE QUOTE, STILL HANDLE AS META DOLLAR
+ *	if unclosed quotes, throw error
+*/
 // char	*find_quotes(char *input)
 // {
 // 	// if ive found a quote, 
@@ -29,7 +33,11 @@ void	parse_space(char *input)
 // 		// split quoted part from rest
 // 		// return specific part of input with quotes attached
 // }
-// // find next quotation
+
+/**
+ *	find next quotation
+ *	if unclosed, throw error
+*/
 // int	second_quote(char *input, char c)
 // {
 // 	int	i;
@@ -42,14 +50,24 @@ void	parse_space(char *input)
 // 	return (i);
 // }
 
-// // need to be separate tokens, > < >> <<
+/*
+ *	redirect = << >>, < >, and pipe
+*/
 // char	*find_redirect(char *input)
 // {
 
 // }
 
-// // need to be separate tokens, ; | &
+/**
+ * = whatever is after <<, for HERE_DOC
+*/
 // char	*find_delimiter(char *input)
 // {
 	
 // }
+
+/*
+ *	find builtins 
+ *∫	
+*/
+
