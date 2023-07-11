@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 19:48:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 19:51:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*make_token(char *parsed_token)
 	the parser...
 */
 
-t_lexer	*lexer(char *input)
+t_list *lexer(char *input)
 {
 	char		*new_token;
 	char		*parsed_token = NULL;
@@ -132,8 +132,10 @@ t_lexer	*lexer(char *input)
 		ft_lstadd_back(&token_list, token);
 		i++;
 	}
-	return ((t_lexer *)token);
+	return (token);
 }
+
+// return ((t_lexer *)token) and giving that to print_tokens() aint it....
 
 /*
 	list

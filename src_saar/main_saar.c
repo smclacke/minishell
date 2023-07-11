@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 19:48:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 19:51:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) envp;
 	char	*input;
-	t_lexer	*token;
+	t_list	*token;
 	int		i;
 
 	while(1)
@@ -31,7 +31,7 @@ int	main(int argc, char **argv, char **envp)
 		while (argv[i])
 		{
 			token = lexer(argv[i]);
-			// ft_print_tokens(token);
+			ft_print_tokens(token);
 			i++;
 		}
 	}
