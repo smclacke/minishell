@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 21:15:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 21:22:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- * after:
+ * after: (token.c)
  * spaces are parsed
  * quotes are found
  * redirects are found
