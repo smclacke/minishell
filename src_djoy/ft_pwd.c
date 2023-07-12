@@ -6,18 +6,18 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/11 11:33:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/12 15:09:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
-/* 
-	get's current working directory 
-	research pwd behavior when given NULL
-	OLDPWD=/Users/dreijans/Documents/Rang 3/Minishell
-	also print the old one
-	needs exit status
+/**
+ * @param path string passed as NULL that needs to be filled in this function
+ * @brief get's current working firectory
+ * @return node made
+ * @todo also print the old one OLDPWD=/Users/dreijans/Documents/Rang 3/Minishell
+ * needs exit status
 */
 void	ft_pwd(char *path)
 {
@@ -27,4 +27,3 @@ void	ft_pwd(char *path)
 	else
 		mini_error("getcwd()", errno);
 }
-

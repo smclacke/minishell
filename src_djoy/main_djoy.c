@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 15:34:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/12 15:59:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	main(int argc, char **argv, char **envp)
 	if (argc <= 1)//needs to give prompt back
 		exit(EXIT_FAILURE);//only for testing purpose
 	env = env_list(envp);
-	// print_list(env);
 	check_for_builtin(argv, env);
+	print_list(env);
 }
 
 /*

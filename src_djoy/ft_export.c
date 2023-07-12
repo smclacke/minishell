@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/11 15:29:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/12 16:06:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 void	ft_export(char **argv, t_env *env)
 {
-	(void) env;
-	if (ft_strcmp(argv[1], "=") != 0)
-		mini_error("strcmp", errno);
+	int		i;
+	char	*new_key;
+	char	*new_value;
+	t_env	*new_node;
+
+	i = 0;
+	if (ft_strchr(argv[2], '=') == 0)
+		mini_error("strchr", errno);
+	get_key_value(argv[2], &new_key, &new_value);
+	new_node = mini_lstnew(new_key, new_value);
+	mini_lstadd_back(&env, new_node);
 }
