@@ -1,8 +1,95 @@
 <br/><br/>
 
-## (03/07)
+**WHAT THE SHELL?**
 
 <br/>
+
+**delimiter:**  whatever is after <<
+try delimiter with and without quotes!!! (ole note)
+<< + DELIMITER
+
+**redirects:** 
+ - < > more-than/less-than 
+ - << >> double more-than/less-than
+ - pipe | 
+
+**handle:** 
+ - dollars (environment variables) 
+ - $?
+ - ctrl-C 
+ - ctrl-D 
+ - ctrl-\
+
+**tokenize the builtins** 
+ - echo ( + -n) 
+ - cd (relative/abso path)
+ - pwd 
+ - export
+ - unset
+ - env
+ - exit
+
+**quotes:**
+• Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence
+
+• Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign)
+
+<br/>
+
+**TO DO**
+
+ - figure out best way to write parse_tokens
+	- in input check, use input[i] and i++, to find chars rather than checking whole thing each time. EXCEPT FOR: spaces and quotes, check everything first for these
+	- if dollar is found, take everything after it up to a space//quote + flags
+
+ - quotes
+	- understand differences with single and double quotes
+	- idea: fine first, then go from end of string and cehck for second up to first, just take everything adn then use parser to figure out what it actually is BUT "something" wc "something" so maybe do a quote number check and then different things based on how many quotes there are?
+	- check if quotes are closed..
+
+ - write all the other redirect, build and delimiter funcs
+
+<br/>
+
+**FROM SUBJECT PDF**
+
+• Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.
+• Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
+5
+Minishell As beautiful as a shell
+• Implement redirections:
+◦ < should redirect input.
+◦ > should redirect output.
+◦ << should be given a delimiter, then read the input until a line containing the
+delimiter is seen. However, it doesn’t have to update the history!
+◦ >> should redirect output in append mode.
+• Implement pipes (| character). The output of each command in the pipeline is
+connected to the input of the next command via a pipe.
+• Handle environment variables ($ followed by a sequence of characters) which
+should expand to their values.
+• Handle $? which should expand to the exit status of the most recently executed
+foreground pipeline.
+• Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
+• In interactive mode:
+◦ ctrl-C displays a new prompt on a new line.
+◦ ctrl-D exits the shell.
+◦ ctrl-\ does nothing.
+• Your shell must implement the following builtins:
+◦ echo with option -n
+◦ cd with only a relative or absolute path
+◦ pwd with no options
+◦ export with no options
+◦ unset with no options
+◦ env with no options or arguments
+◦ exit with no options
+
+<br/>
+
+**OTHER RANDOM NOTES**
+
+!!!! remember Djoyke needs to handle absolute paths, and relatives
+!!!! specify if double or single quotes by, maybe, token for single, token for double.. or is that 
+part of the parsing tree?
 
 ### **lexer:** takes *cmd arugments, separates into tokens, puts into linked list
 
@@ -12,34 +99,3 @@
 
 **metas:** pipe, ampersand, semicolon, less-than, more-than, left parenthesis, right parenthesis, <br/>
 dollar, backquote, backslash, single quote, double quote, newline, space and tab
-
-**delimiter:**  whatever is after <<
-try delimiter with and without quotes!!! (ole note)
-
-<< + DELIMITER
-
-**redirects:** more-than/less-than and pipe, double more-than/less-than
-
-** handle: ** dollars, $?, ctrl-C, ctrl-D, ctrl-\
-
-** tokenize the builtins ** echo ( + -n), cd (relative/abso path), pwd, export, unset, env, exit
-
-• Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence
-
-• Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign)
-
-
-<br/>
-
-tokenise based on quotes, spaces and meta characters
-
-so since quotes and spaces are meta in linux shell, just tokenise metas...
-
-
-!!!! remember Djoyke needs to handle absolute paths, and relatives
-!!!! specify if double or single quotes by, maybe, token for single, token for double.. or is that 
-part of the parsing tree?
-
-
-get lexer (so far working) then add in prompt, getting that working, then start seeing if it works correctly with all symbols, flags, quotes etc etc etc etc etccccccccc
-

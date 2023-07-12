@@ -6,47 +6,53 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 22:47:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 13:20:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- * after: (token.c)
+ * after:
  * spaces are parsed
  * quotes are found
  * redirects are found
- * dollar and word or dollar + ? are found
- * buildins + flags are found
+ * delimiters are found
+ * 
+ * FIND dollar and word or dollar + ?
+ * FIND buildins + flags are found
  * FIND ALL OTHER INPUT input
  */
-// char *find_tokens(char *input)
-// {
-	
-// }
+char *find_tokens(char *input)
+{
+	if (find_dollar(input))
+		return (input);
+	//find build ins
+	//find strings
+	return (0);
+}
 
 /**
- * parse spaces, finds quoted tokens, words, redirects, symbols...
- * - if redirect is found, return to lexer (< > |)
- * - if quote + contents + closing quote found, return to lexer...
- * - else find word, flag or symbol from find_tokens,
- * pass it back to lexer to create new token node in list
+ * parse spaces, finds quoted tokens, redirects, and delimiters
+ * then parse rest to find dollars, built in, string input...
+ * 
 */
-char	*parsing_token(char *input)
+char	*parse_token(char *input)
 {
 	parse_space(input);
-		return (input); // just for testing
 	// if (find_quotes(input))
 	// 	return (input);
 	// else if (find_redirects(input))
 	// 	return (input);
 	// else if (find_delimiter(input))
 	// 	return (input);
-	// else
-	// 	if (find_tokens(input))
-	// 		return (input);
-	// return (0);
+	if (find_tokens(input))
+	{
+		printf("parse_token: %s\n", input);	
+		return (input);
+	}
+	// return (input);
+	return (0);
 }
 
 /**
@@ -81,7 +87,7 @@ t_list *lexer(char *input)
 	i  = 0;
 	while (input[i])
 	{
-		parsed_token = parsing_token(input);
+		parsed_token = parse_token(input);
 		if (!parsed_token)
 			return (0);
 		new_token = make_token(parsed_token);

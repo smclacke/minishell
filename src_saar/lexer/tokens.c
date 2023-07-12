@@ -6,13 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 17:45:04 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 21:21:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 13:21:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
+ * NEW FILE SPECIAL FOR QUOTES maybe create new file for quotes cause this gunna be messyyyy
  * find quotes
  * check for dollar in double quotes!!
  * if unclosed, throw error
@@ -27,13 +28,6 @@
 // 		// return specific part of input with quotes attached
 // }
 
-/***
- * find dollars ( + $?)
-*/
-// char	*find_dollar(char *input)
-// {
-	
-// }
 
 /**
  * find redirects
@@ -53,6 +47,60 @@
 	
 // }
 
+
+/***
+ * find dollars ( + $?)
+ * 
+ * bash-3.2$ echo $"USER"
+ * USER
+ * bash-3.2$ echo $USER
+ * smclacke
+ * ////////////
+ * WHAT THE SHELL?!echo $ hello
+ * token: echo
+ * $
+ * token: $
+ * token: hello
+ * WHAT THE SHELL?!echo $hello
+ * token: echo
+ * token: $hello
+ * WHAT THE SHELL?!echo sdf$hello
+ * token: echo
+ * token: sdf$hello
+ * WHAT THE SHELL?!echo sdf $hello
+ * token: echo
+ * token: sdf
+ * token: $hello
+*/
+char	*find_dollar(char *input)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = 0;
+	printf("find_dollar: %s\n", input);
+	while (input[i])
+	{
+		printf("HERE: %s\n", input);
+		if (ft_strcmp(input, "$") == 0)
+		{
+			printf("HERE22: %s\n", input);
+			if (ft_isspace(input[i + 1]))
+				return (input);
+			while (input)
+			{	
+				i++;
+				return (input);
+			}
+			return (input);
+		}
+		i++;
+	}
+	return (0);
+	
+}
+
 /**
  * built ins
  * cd + next argument (relative + abso paths)
@@ -67,4 +115,8 @@
 // {
 	
 // }
+
+/**
+ * find strings... need a func for that?
+*/
 
