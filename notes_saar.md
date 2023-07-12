@@ -51,6 +51,23 @@ try delimiter with and without quotes!!! (ole note)
 
 <br/>
 
+**BELANGRIJK** 
+	MUST KNOW WHERE + HOW MANY SPACES
+	SO IF SPLIT TO MAKE TOKENS, EITHER REMEMBER OR TOKENIZE THE SPACES TOO 
+
+**HOW, WHAT, WHY, TOKENS**
+
+- what to tokenize?
+	acs$acs									- >acs
+	"something$something some things" 		- MESSY UNDEFINED BEHAVIOUR
+	echo "abc$abc"							- >abc
+	echo "abc$USER"							- >abcsmclacke
+	echo 'abc$USER'							- >abc$USER
+	echo 'abc$USER$'						- >abc$USER$
+	echo "abc$USER$"						- >abcsmclacke$
+
+<br/>
+
 **FROM SUBJECT PDF**
 
 • Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.
@@ -82,6 +99,8 @@ foreground pipeline.
 ◦ unset with no options
 ◦ env with no options or arguments
 ◦ exit with no options
+
+
 
 <br/>
 

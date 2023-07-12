@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 15:44:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 17:24:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,15 @@ char		*make_token(char *parsed_token);
 t_list 		*lexer(char *input);
 
 // --------- Tokens --------- //
-char		*find_quote(char *input);
 char		*find_dollar(char *input);
 char 		*find_redirect(char *input);
 char		*find_delimiter(char *input);
 char		*find_built_ins(char *input);
+
+// -------- Quotes --------//
+int			closed_quotes(char *input);
+char		*find_quote(char *input);
+
 
 // -------- Lexer Utils --------//
 int			second_quote(char *input, char c);

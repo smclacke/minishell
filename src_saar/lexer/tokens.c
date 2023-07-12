@@ -6,28 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 17:45:04 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 15:45:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 17:11:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-/**
- * NEW FILE SPECIAL FOR QUOTES maybe create new file for quotes cause this gunna be messyyyy
- * find quotes
- * check for dollar in double quotes!!
- * if unclosed, throw error
-*/
-// char	*find_quote(char *input)
-// {
-// 	// if ive found a quote, 
-// 	if (!second_quote(input, ft_isquote(intput[i]))) // isquote returns either single or double which can be passed into second_quote()
-// 		return (0);
-// 	else 
-// 		// split quoted part from rest
-// 		// return specific part of input with quotes attached
-// }
 
+// REDRIECTS
+//////////////////////////////////////////
 
 /**
  * find redirects
@@ -47,6 +34,9 @@
 	
 // }
 
+
+// DOLLARS
+//////////////////////////////////////////
 
 /***
  * find dollars ( + $?)
@@ -72,29 +62,33 @@
  * token: sdf
  * token: $hello
 */
-char	*find_dollar(char *input)
-{
-	int		i;
+// char	*find_dollar(char *input)
+// {
+// 	int		i;
 
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] == '$')
-			return (&input[i]);
-		// 	printf("input: %s\n", &input[i]);
-		// 	// i++;
-		// 	// if (ft_isspace(input[i + 1]))
-		// 	// 	return (&input[i]);
-		// 	// while (input[i] && !ft_isspace(input[i]))
-		// 	// 	i++;
-		// 	return (&input[i]);
-		// }
-		// else
-		// 	return (78);
-		i++;
-	}
-	return (input);
-}
+// 	i = 0;
+// 	while (input[i])
+// 	{
+// 		if (input[i] == '$')
+// 			return (&input[i]);
+// 		// 	printf("input: %s\n", &input[i]);
+// 		// 	// i++;
+// 		// 	// if (ft_isspace(input[i + 1]))
+// 		// 	// 	return (&input[i]);
+// 		// 	// while (input[i] && !ft_isspace(input[i]))
+// 		// 	// 	i++;
+// 		// 	return (&input[i]);
+// 		// }
+// 		// else
+// 		// 	return (78);
+// 		i++;
+// 	}
+// 	return (input);
+// }
+
+
+// BUILT-INS
+//////////////////////////////////////////
 
 /**
  * built ins
