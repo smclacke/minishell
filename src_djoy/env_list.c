@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/11 15:49:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/12 14:58:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_env	*mini_lstnew(void *key, void *value)
  * containing a string substringed from str before = sign
  * @param value pointer to the address of a pointer 
  * containing a string substringed from str after = sign
- * @brief substrings key and value from str
+ * @brief substrings key and value from str without the '=' sign
 */
 void	get_key_value(char *str, char **key, char **value)
 {
@@ -51,7 +51,7 @@ void	get_key_value(char *str, char **key, char **value)
 		i++;
 	if (str[i] == '=')
 	{
-		*key = ft_substr(str, 0, (i - 1));// without '='
+		*key = ft_substr(str, 0, (i - 1));
 		*value = ft_substr(str, i + 1, (ft_strlen(str) - i));
 	}
 }

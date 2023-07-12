@@ -6,19 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/04 16:51:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/12 15:05:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
-/* 	
-	writes argv after command on standart output followed by /n char
-	-n TBA that eliminates the endline char in output 
-	The echo utility exits 0 on success, and > 0 if an error occurs.
-	wat als meerder -n :( -nnnnnnnnnnnnnnnnn etc -nnnnnnnnna whyyyyyyyy
-	➜  Minishell git:(main) ✗ ./djoyke echo -n-n-n-n-n-n-n-n- haha
-	echo-n-n-n-n-n-n-n-n-haha%
+/**
+ * @param argv string to echo
+ * @brief writes argv after command on standart output followed by /n char
+ * -n TBA that eliminates the endline char in output 
+ * @return The echo utility exits 0 on success, and > 0 if an error occurs.
 */
 void	*ft_echo(char **argv)//for now index 1
 {
