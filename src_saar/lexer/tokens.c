@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 17:45:04 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 14:49:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 15:45:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,23 @@
 */
 char	*find_dollar(char *input)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (input[i])
 	{
 		if (input[i] == '$')
-		{
-			if (ft_isspace(input[i + 1]))
-				return (&input[i]);
-			while (input[i] && !ft_isspace(input[i]))
-				i++;
-			return (input);
-		}
+			return (&input[i]);
+		// 	printf("input: %s\n", &input[i]);
+		// 	// i++;
+		// 	// if (ft_isspace(input[i + 1]))
+		// 	// 	return (&input[i]);
+		// 	// while (input[i] && !ft_isspace(input[i]))
+		// 	// 	i++;
+		// 	return (&input[i]);
+		// }
+		// else
+		// 	return (78);
 		i++;
 	}
 	return (input);

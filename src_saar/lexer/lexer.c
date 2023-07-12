@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 14:46:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 15:49:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,27 @@
  */
 char *find_tokens(char *input)
 {
-	if (find_dollar(input))
-		return (input);
-	//find build ins
-	//find strings
+	int		i;
+	char	*dollar;
+
+	i = 0;
+	dollar = NULL;
+	while (input[i])
+	{	
+		// while !quote, !pipes, !dollars, !arrows, !flags...
+		// then find, else ill loose the string before these finds and cut the find away from the rest of the string
+		if (ft_isdollar(input[i]))
+		{
+			dollar = find_dollar(&input[i]);
+			printf("dollar: %s\n", dollar);
+			if (!dollar)
+				return (0);
+			return (dollar);
+		}
+		//find build ins
+		//find strings
+		i++;
+	}
 	return (0);
 }
 
@@ -39,16 +56,25 @@ char *find_tokens(char *input)
 */
 char	*parse_token(char *input)
 {
+	int	i;
+
+	i = 0;
 	parse_space(input);
-	// if (find_quotes(input))
-	// 	return (input);
-	// else if (find_redirects(input))
-	// 	return (input);
-	// else if (find_delimiter(input))
-	// 	return (input);
-	if (find_tokens(input))
-		return (input);
-	// return (input);
+	while (input[i])
+	{	
+		// if (find_quotes(input))
+		// 	return (input);
+		// else if (find_redirects(input))
+		// 	return (input);
+		// else if (find_delimiter(input))
+		// 	return (input);
+		if (find_tokens(&input[i]))
+		{
+			printf("parse_token input: %s\n", &input[i]);
+			return (&input[i]);
+		}
+		// return (input);
+	}
 	return (0);
 }
 
