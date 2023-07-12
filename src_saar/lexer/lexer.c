@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 13:20:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 14:46:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ char	*parse_token(char *input)
 	// else if (find_delimiter(input))
 	// 	return (input);
 	if (find_tokens(input))
-	{
-		printf("parse_token: %s\n", input);	
 		return (input);
-	}
 	// return (input);
 	return (0);
 }

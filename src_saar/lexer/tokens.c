@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 17:45:04 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 13:21:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 14:49:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,30 +75,21 @@
 char	*find_dollar(char *input)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	len = 0;
-	printf("find_dollar: %s\n", input);
 	while (input[i])
 	{
-		printf("HERE: %s\n", input);
-		if (ft_strcmp(input, "$") == 0)
+		if (input[i] == '$')
 		{
-			printf("HERE22: %s\n", input);
 			if (ft_isspace(input[i + 1]))
-				return (input);
-			while (input)
-			{	
+				return (&input[i]);
+			while (input[i] && !ft_isspace(input[i]))
 				i++;
-				return (input);
-			}
 			return (input);
 		}
 		i++;
 	}
-	return (0);
-	
+	return (input);
 }
 
 /**
