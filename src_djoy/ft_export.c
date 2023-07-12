@@ -6,12 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/12 16:06:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/12 16:28:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
+/**
+ * @param argv argument given in the form of a string
+ * @param env pointer to linked list
+ * @brief export with no options
+*/
 void	ft_export(char **argv, t_env *env)
 {
 	int		i;
