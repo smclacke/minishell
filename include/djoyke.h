@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/11 15:30:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/12 15:43:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ typedef struct s_env
 /* list making functions*/
 void	mini_lstadd_back(t_env **lst, t_env *new);
 t_env	*mini_lstlast(t_env *lst);
+t_env	*mini_lstnew(void *key, void *value);
 t_env	*env_list(char **envp);
+void	get_key_value(char *str, char **key, char **value);
 
 /* built-in utils and fucntions */
 void	*ft_echo(char **argv);

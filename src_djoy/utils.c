@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/12 15:03:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/12 15:48:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	check_for_builtin(char **argv, t_env *env)
 		ft_cd(argv[2]);
 	if (ft_strcmp(argv[1], "pwd") == 0)
 		ft_pwd(NULL);
-	// if (ft_strcmp(argv[1], "export") == 0)
-	// 	ft_export(argv, *env);
+	if (ft_strcmp(argv[1], "export") == 0)
+		ft_export(argv, env);
 	else
 		exit(EXIT_FAILURE);
 }
@@ -68,7 +68,6 @@ void	mini_error(char *string, int error)
 	perror(string);
 	exit(error);
 }
-
 
 /**
  * @param env argument given to perror
