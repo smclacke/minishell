@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 19:48:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 20:05:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,8 @@ int	main(int argc, char **argv, char **envp)
  * then split via spaces and make tokens
  * if quotes found, make tokens out of them
 */
+
+// ORRRRRRR
+// split in the lexer, after quote splitting in lexer....
 
 

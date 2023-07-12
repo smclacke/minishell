@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 18:43:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 20:11:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	*make_token(char *parsed_token)
  *	create new node in list for the newly made token
  *	add node to end of list
 */
-t_list *lexer(char *input)
+t_list *lexer(char *argv)
 {
 	char		*new_token;
 	char		*parsed_token = NULL;
@@ -110,6 +110,11 @@ t_list *lexer(char *input)
 	t_list		*token;
 	t_list		*token_list = NULL;
 
+	// find quotes
+	// tokenize quotes
+	// split input on space
+	// tokenize rest after parsing
+	// 		separate words and redirects, leave delimiters!!
 	i  = 0;
 	while (input[i])
 	{
