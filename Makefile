@@ -6,22 +6,20 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/10 20:15:03 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/11 21:32:08 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
 
-CFLAGS			= -Wall -Wextra -fsanitize=address -g
+CFLAGS			= -Wall -Wextra -g -fsanitize=address
 # -Werror
-# LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
+LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
-INCLUDES		= -Iinclude -Iinclude/libft/include -lreadline
-# IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
+INCLUDES		= -Iinclude -Iinclude/libft/include
+IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 ## MINISHELL ##
 
@@ -97,15 +95,15 @@ libft			:
 ## EXECUTABLES
 
 $(NAME)			:	$(OBJ)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 
 $(DJOY)			:	$(OBJ_DJOY)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 
 $(SAAR)			:	$(OBJ_SAAR)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR) && ./sarah
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 
 
