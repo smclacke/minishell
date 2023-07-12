@@ -6,17 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 18:09:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 19:46:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
-/**
- * IF QUOTES ARE NOT CLOSED, THROW AN ERROR AND DON'T TOKENIZE ANYTHING
- * SHOULD NOT BE HANDLED
- * !!!!!!!!!! hello, this is an array, if "some thing", it's checking "some and then thing" and fails....
- * hmmmmmmmmm......
-*/
 
 /**
  * closed_quotes()
@@ -47,8 +41,13 @@ int	closed_quotes(char *input)
 	}
 	if ((count_double % 2) != 0 || (count_single % 2) != 0)
 		return (0);
-	return (1);
+	return (i);
 }
+
+/**
+ * PROBLEMS : what about the order of the tokens?
+ * if i separately tokenize quotes, the order is fucked
+*/
 
 /**
  * check_quotes()
@@ -57,7 +56,9 @@ int	closed_quotes(char *input)
 */
 char	*check_quotes(char *input)
 {
-	int	i;
+	int		i;
+	// int		quote_i = 0;
+	t_list	*quote_token = 0;
 
 	i = 0;
 	while (input[i])
@@ -66,8 +67,16 @@ char	*check_quotes(char *input)
 		{
 			if (!closed_quotes(input))
 				return (0);
+			else
+			{
+				quote_token = lexer(input);
+				ft_print_tokens(quote_token);
+			}
 		}
 		i++;
 	}
-	return (input);
+	return (input); // INPUT WITHOUT QUOTE PART (works?)
 }
+
+// MAKE QUOTE TOKEN, RETURN FULL INPUT, SPLIT INPUT AND IGNORE QUOTES+ EVERYTHING IN QUOTES
+// TO MAKE THE OTHER TOKENS... ??

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 17:55:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 18:43:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ char	*parse_token(char *input)
 
 	i = 0;
 	count = 0;
-	if (!check_quotes(input))
-		return (0);
 	parse_space(input);
 	// while (input[i])
 	// {	
