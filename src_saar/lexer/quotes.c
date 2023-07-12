@@ -6,49 +6,68 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 17:27:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 18:09:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
+/**
+ * IF QUOTES ARE NOT CLOSED, THROW AN ERROR AND DON'T TOKENIZE ANYTHING
+ * SHOULD NOT BE HANDLED
+ * !!!!!!!!!! hello, this is an array, if "some thing", it's checking "some and then thing" and fails....
+ * hmmmmmmmmm......
+*/
 
 /**
- * RIGHT NOW: does not tokenize if not closed based on spaces
- * check if all quotes are closed or not
- * if this fails, throw an ERRROROROROR
- * NEED TO CHECK WHICH QUOTES AND IF THEY MATCH
- * right now, 1x double and 1x single still tokenizes. 
+ * closed_quotes()
+ * check if double or single, count amount for each, check if divisable by 2 (thus closed)
+ * separate check for double and single since 1x double + 1x single must throw an error
 */
 int	closed_quotes(char *input)
 {
 	int	i;
-	int	count;
+	int	count_double;
+	int	count_single;
 
 	i = 0;
-	count = 0;
+	count_double = 0;
+	count_single = 0;
 	while (input[i])
 	{
-		if (ft_isquote(input[i]))
-			count++;
+		if (ft_isdouble_q(input[i]))
+			count_double++;
 		i++;
 	}
-	if ((count % 2))
+	i = 0;
+	while (input[i])
+	{
+		if (ft_issingle_q(input[i]))
+			count_single++;
+		i++;
+	}
+	if ((count_double % 2) != 0 || (count_single % 2) != 0)
 		return (0);
 	return (1);
 }
 
-
 /**
+ * check_quotes()
  * find quotes
- * check for dollar in double quotes!!
  * if unclosed, throw error
 */
-// char	*find_quote(char *input)
-// {
-// 	// if ive found a quote, 
-// 	if (!second_quote(input, ft_isquote(intput[i]))) // isquote returns either single or double which can be passed into second_quote()
-// 		return (0);
-// 	else 
-// 		// split quoted part from rest
-// 		// return specific part of input with quotes attached
-// }
+char	*check_quotes(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (ft_isquote(input[i]))
+		{
+			if (!closed_quotes(input))
+				return (0);
+		}
+		i++;
+	}
+	return (input);
+}

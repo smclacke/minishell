@@ -6,13 +6,13 @@
 /*   By: SarahLouise <SarahLouise@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/02 14:55:01 by SarahLouise   #+#    #+#                 */
-/*   Updated: 2023/07/02 15:12:20 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/07/12 17:46:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-bool	ft_ismore(int c)
+int	ft_ismore(int c)
 {
 	return (c == '>');
 }

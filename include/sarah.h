@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 17:24:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 17:52:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char		*find_delimiter(char *input);
 char		*find_built_ins(char *input);
 
 // -------- Quotes --------//
+char		*check_quotes(char *input);
 int			closed_quotes(char *input);
 char		*find_quote(char *input);
 

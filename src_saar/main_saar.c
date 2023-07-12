@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 17:21:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 18:08:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **envp)
 		i = 0;
 		input = readline(PROMPT);
 		add_history(input);
-		argv = ft_split(input, ' ');
+		// argv = ft_split(input, ' ');
 		if (!argv)
 			return (EXIT_FAILURE);
 		while (argv[i])
