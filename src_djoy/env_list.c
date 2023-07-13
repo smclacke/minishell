@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/12 15:59:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/13 13:05:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_env	*mini_lstnew(void *key, void *value)
 {
 	t_env	*new;
 
-	new = (t_env *)malloc(sizeof(t_env)); //of *new?
+	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
 		return (NULL);
 	new->key = key;
