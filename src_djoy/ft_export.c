@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/12 16:28:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/13 18:13:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * @param argv argument given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options
+ * @todo check if varaible already exists, overwrite it.
 */
 void	ft_export(char **argv, t_env *env)
 {
