@@ -6,51 +6,50 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 18:05:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 21:22:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-/*
-	after spaces are parsed, no quotes or redirects are found, find words and symbols
-	dollar and word
-	whole flag
-*/
-char *find_tokens(char *input)
-{
+/**
+ * after: (token.c)
+ * spaces are parsed
+ * quotes are found
+ * redirects are found
+ * dollar and word or dollar + ? are found
+ * buildins + flags are found
+ * FIND ALL OTHER INPUT input
+ */
+// char *find_tokens(char *input)
+// {
 	
-}
+// }
 
-/*
-	parse spaces, finds quoted tokens, words, redirects, symbols...
-	- if redirect is found, return to lexer
-	- if quote + contents + closing quote found, return to lexer...
-	- else find word, flag or symbol from find_tokens,
-	pass it back to lexer to create new token node in list
+/**
+ * parse spaces, finds quoted tokens, words, redirects, symbols...
+ * - if redirect is found, return to lexer (< > |)
+ * - if quote + contents + closing quote found, return to lexer...
+ * - else find word, flag or symbol from find_tokens,
+ * pass it back to lexer to create new token node in list
 */
 char	*parsing_token(char *input)
 {
-	int	i;
-
-	i = 0;
-	parse_spaces(&input);
-	while (input[i])
-	{
-		if (find_quotes(&input))
+	parse_space(input);
+	if (find_quotes(input))
+		return (input);
+	else if (find_redirects(input))
+		return (input);
+	else if (find_delimiter(input))
+		return (input);
+	else
+		if (find_tokens(input))
 			return (input);
-		if (find_redirects(&input))
-			return (input);
-		if (find_delimiter(&input))
-			return (input);
-		if (find_tokens(&input))
-			return (input);
-	}
 	return (0);
 }
 
-/*
-	get size of string, create substring to pass backto lexer as newly made token
+/**
+ *	get size of string, create substring to pass backto lexer as newly made token
 */
 
 char	*make_token(char *parsed_token)
@@ -58,51 +57,45 @@ char	*make_token(char *parsed_token)
 	char	*token;
 	int		len;
 
-	len = token_len(parsed_token);	
+	len = ft_strlen(parsed_token);	
 	token = ft_substr(parsed_token, 0, len);
+	if (!token)
+		return (0);
 	return (token);
 }
 
 /*
-	take input, parse through spaces, quotes, redirects, words and symbols
-	find thing to tokenise, pass to make_token() to create a substr of it with the correct length
-	create new node in list for the newly made token
-	add node to end of list
-	///
-	pass new listed token to parser, with quotes attached so that the parser can differentiate between double and single
-	also, if dollar, take word after too as token, if flag, take whole thing... anymore things to think about.... (?)
-	///
-	!!! take argv[i], keep parsing till NULL because argv[i] could contain multiple tokens
-	!!! return made token but need to keep parsing rest of argv[i] in lexer...
-	!!! do I even need to return, if a list of tokens is created....
+ *	take input, parse through spaces, quotes, redirects, words and symbols
+ *	find thing to tokenise, pass to make_token() to create a substr of it with the correct length
+ *	create new node in list for the newly made token
+ *	add node to end of list
 */
 
-t_lexer	*lexer(char *input)
+t_list *lexer(char *input)
 {
 	char		*new_token;
-	char		*parsed_token;
-	t_lexer		*token;
-	t_lexer		*node;
+	char		*parsed_token = NULL;
 	int			i;
+	t_list		*token;
+	t_list		*token_list = NULL;
 
 	i  = 0;
 	while (input[i])
 	{
-		node = NULL;
-		parsed_token = parsing_token(&input);
+		parsed_token = parsing_token(input);
 		if (!parsed_token)
-			return (0); //!
+			return (0);
 		new_token = make_token(parsed_token);
 		if (!new_token)
-			return (0); //!
-		token = (t_lexer *)ft_lstnew(new_token);
+			return (0);
+		token = ft_lstnew(new_token);
 		if (!token)
-			return (0); //!
-		ft_lstadd_back((t_list **)&token, (t_list *)node);
-		return (token);
+			return (0);
+		ft_lstadd_back(&token_list, token);
 		i++;
 	}
-	return (0); //!
+	return (token);
 }
 
+// STOOOOOOOOOOPID :) :) :) :)
 // WHEN HOW WHAT ERROR HANDLING.... ERRRM don't just return 0 :')

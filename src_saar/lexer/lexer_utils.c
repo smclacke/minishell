@@ -6,33 +6,45 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 17:46:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/11 21:21:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-// print tokens
-t_lexer	*ft_print_tokens(t_lexer *token)
+// parse space
+void	parse_space(char *input)
 {
-	t_lexer	*list;
+	while (ft_isspace(*input))
+		input++;
+}
 
+/**
+ * find next quotation
+ * if unclosed, throw error
+*/
+// int	second_quote(char *input, char c)
+// {
+// 	int	i;
+
+// 	i = 1;
+// 	while (input[i] != c && input[i])
+// 		i++;
+// 	if (!input[i])
+// 		return (0);
+// 	return (i);
+// }
+
+// print tokens
+t_list	*ft_print_tokens(t_list *token)
+{
+	t_list	*list;
+	
 	list = token;
 	while (list)
 	{
-		printf("token: %s\n", list->input);
+		printf("token: %s\n", list->content);
 		list = list->next;
 	}
 	return (token);
-}
-
-// get length to return to make_token() in order to create substring of parsed token into new substred token
-int		token_len(char *parsed_token)
-{
-	int	i;
-
-	i = 0;
-	while (parsed_token[i])
-		i++;
-	return (i);
 }
