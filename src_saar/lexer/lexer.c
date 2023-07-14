@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 20:11:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/14 12:48:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /**
  * after:
- * spaces are parsed
  * quotes are found
+ * spaces are parsed
  * redirects are found
  * delimiters are found
  * 
@@ -23,7 +23,7 @@
  * FIND buildins + flags are found
  * FIND ALL OTHER INPUT input
  */
-// char *find_tokens(char *input)
+// char *find_rest(char *input)
 // {
 // 	int		i;
 // 	char	*dollar;
@@ -50,11 +50,11 @@
 // }
 
 /**
- * parse spaces, finds quoted tokens, redirects, and delimiters
+ * parse spaces, find quoted tokens, redirects, and delimiters
  * then parse rest to find dollars, built in, string input...
  * 
 */
-char	*parse_token(char *input)
+char	*parse_token(char **input)
 {
 	int	i;
 	int	count;
@@ -70,7 +70,7 @@ char	*parse_token(char *input)
 	// // 	// 	return (input);
 	// // 	// else if (find_delimiter(input))
 	// // 	// 	return (input);
-	// // 	if (find_tokens(&input[i]))
+	// // 	if (find_rest(&input[i]))
 	// // 	{
 	// // 		printf("parse_token input: %s\n", &input[i]);
 	// // 		return (&input[i]);
@@ -84,7 +84,7 @@ char	*parse_token(char *input)
 /**
  *	get size of string, create substring to pass backto lexer as newly made token
 */
-char	*make_token(char *parsed_token)
+char	*make_token(char **parsed_token)
 {
 	char	*token;
 	int		len;
@@ -102,7 +102,7 @@ char	*make_token(char *parsed_token)
  *	create new node in list for the newly made token
  *	add node to end of list
 */
-t_list *lexer(char *argv)
+t_list *lexer(char **input)
 {
 	char		*new_token;
 	char		*parsed_token = NULL;
@@ -110,11 +110,6 @@ t_list *lexer(char *argv)
 	t_list		*token;
 	t_list		*token_list = NULL;
 
-	// find quotes
-	// tokenize quotes
-	// split input on space
-	// tokenize rest after parsing
-	// 		separate words and redirects, leave delimiters!!
 	i  = 0;
 	while (input[i])
 	{
