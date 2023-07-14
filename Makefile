@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/10 20:15:03 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/14 17:50:16 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS_DJOY		=	main_djoy.c	\
 					ft_cd.c \
 					ft_pwd.c \
 					ft_export.c \
+					ft_unset.c \
 					
 
 DJOY_DIR		= src_djoy
