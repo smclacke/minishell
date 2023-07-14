@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/13 18:09:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/14 17:18:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	check_for_builtin(char **argv, t_env *env)
 		ft_pwd(NULL);
 	if (ft_strcmp(argv[1], "export") == 0)
 		ft_export(argv, env);
+	if (ft_strcmp(argv[1], "unset") == 0)
+		ft_unset(argv[1], env);
 	else
 		exit(EXIT_FAILURE);
 }
