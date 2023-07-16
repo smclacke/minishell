@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 16:20:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 16:41:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv, char **envp)
 		argv = parse_input(input);
 		while (argv[i])
 		{
-			printf("argv: %s\n", argv[i]);
 			tokens = lexer(argv[i]);
 			ft_print_tokens(tokens);
 			i++;
