@@ -6,18 +6,32 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/14 12:48:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 15:37:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sarah.h"
 
+char	**parse_input(char *input)
+{
+	char	**array;
+	// split spaces unless we encounter a quote, keep parsing from quote till last found quote
+	// quotes not closed, ret error
+	// send these strings to lexer
+	// if quotes, tokenize whole thing
+	// if redirect, tokenize that
+	// make tokens, send back to main
+	array = ft_split(input, ' ');
+	return (array);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	(void) argc;
-	(void) envp;
+	(void)	argc;
+	// (void)	argv;
+	(void)	envp;
 	char	*input;
-	t_list	*tokens;
+	t_lexer	*tokens;
 	int		i;
 
 	while(1)
@@ -25,6 +39,7 @@ int	main(int argc, char **argv, char **envp)
 		i = 0;
 		input = readline(PROMPT);
 		add_history(input);
+		argv = parse_input(input);
 		while (argv[i])
 		{
 			tokens = lexer(argv[i]);
@@ -35,26 +50,3 @@ int	main(int argc, char **argv, char **envp)
 		// return the AST to the expander
 	}
 }
-
-// old main:
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	(void) argc;
-// 	// (void) argv;
-// 	(void) envp;
-// 	char	*input;
-// 	t_lexer	*token = NULL;
-// 	int	i = 0;
-
-// 	while(1)
-// 	{
-// 		input = readline(PROMPT);
-// 		argv = ft_split(input, ' ');
-// 		while (argv[i])
-// 		{
-// 			token = lexer(argv[i]);
-// 			ft_print_tokens(token);
-// 			i++;
-// 		}
-// 	}
-// }

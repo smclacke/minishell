@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/14 12:49:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 15:42:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,17 @@
 
 
 // LEXER STRUCT
-// for tokens (i hope) it is ok to just have a t_list
-// for parser, need a beefier struct :):)
 typedef	struct s_lexer
 {
-	char				*input;
-	t_list				*token;
+	void				*input;
+	struct s_lexer		*token;
+	struct s_lexer		*next;
 }	t_lexer;
 
 // PARSER STRUCT
 typedef struct s_parser 
 {
-	char	*input_pars;
-	char	**cmd;
+	struct t_lexer		*tokens;
 }	t_parser;
 
 
@@ -58,10 +56,9 @@ typedef struct s_parser
 
 // LEXER
 // --------- Lexer --------- //
-char 		*find_tokens(char *input);
-char		*parse_token(char **input);
-char		*make_token(char **parsed_token);
-t_list 		*lexer(char **input);
+char		*parse_token(char *input);
+char		*make_token(char *parsed_token);
+t_lexer 	*lexer(char *input);
 
 // --------- Tokens --------- //
 char		*find_dollar(char *input);
@@ -70,13 +67,15 @@ char		*find_delimiter(char *input);
 char		*find_built_ins(char *input);
 
 // -------- Quotes --------//
-int			second_quote(char *input, char c);
 int			closed_quotes(char *input);
 char		*check_quotes(char *input);
 
 // -------- Lexer Utils --------//
-void		parse_space(char **input);
-t_list		*ft_print_tokens(t_list *token);
+t_lexer		*list_last(t_lexer *list);
+void		listadd_back(t_lexer **list, t_lexer *new);
+t_lexer		*list_new(void *input);
+void		parse_space(char *input);
+t_lexer		*ft_print_tokens(t_lexer *token);
 
 
 // PARSER

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/14 12:48:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 15:41:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,17 @@
  * then parse rest to find dollars, built in, string input...
  * 
 */
-char	*parse_token(char **input)
+char	*parse_token(char *input)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
+	// are there quotes? check_quote()
+	//	if yes, return that part of input to lexer()
+	// are there redirects?
+	//	if yes, return that part of input to lexer()
 	parse_space(input);
 	// while (input[i])
 	// {	
@@ -84,7 +88,7 @@ char	*parse_token(char **input)
 /**
  *	get size of string, create substring to pass backto lexer as newly made token
 */
-char	*make_token(char **parsed_token)
+char	*make_token(char *parsed_token)
 {
 	char	*token;
 	int		len;
@@ -102,13 +106,13 @@ char	*make_token(char **parsed_token)
  *	create new node in list for the newly made token
  *	add node to end of list
 */
-t_list *lexer(char **input)
+t_lexer *lexer(char *input)
 {
 	char		*new_token;
 	char		*parsed_token = NULL;
 	int			i;
-	t_list		*token;
-	t_list		*token_list = NULL;
+	t_lexer		*token;
+	t_lexer		*token_list = NULL;
 
 	i  = 0;
 	while (input[i])
@@ -119,10 +123,10 @@ t_list *lexer(char **input)
 		new_token = make_token(parsed_token);
 		if (!new_token)
 			return (0);
-		token = ft_lstnew(new_token);
+		token = list_new(new_token);
 		if (!token)
 			return (0);
-		ft_lstadd_back(&token_list, token);
+		listadd_back(&token_list, token);
 		i++;
 	}
 	return (token);

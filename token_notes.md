@@ -9,24 +9,22 @@
 
 **TO DO**
 
-- clear function set up
----- SIMPLY WHAT I ALREADY HAVE, JUST PARSE SPACE AND RETURN THAT LIST, GET IT
-		WORKING WITH 2D ARRAY, RIGHT NOW I JUST SEGFAULT... THEN WORK ON PARSE_TOKEN()
-
--- parse_token() is the main function for all of this!
-- order of tokens ~!~
-- how to properly handle quotes? ~!~
-- quote tokenizing ~!~
-- space spliting
-- tokenizing the rest
-- write the find_ funcs
-- pass list back (made in lexer, passed back to main)
-- testing
+- write parse_input()
+- write parse_token()
+- create symbol check funcs
+- test
+- parser
 
 <br/><br/>
 
 **HOW, WHAT, WHY, TOKENS**
 
+--- new solution ---
+
+~!~ 
+
+--------------------------------------------
+Old confusion...
  ~!~ - start with a clear set up...
 
 !!--- what about the order?? 
