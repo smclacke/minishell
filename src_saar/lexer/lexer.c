@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 16:49:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 18:22:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ t_lexer *lexer(char *input)
 char	**parse_input(char *input)
 {
 	char	**array;
+	char	*temp_quote;
+	char	*temp_redir;
 	int		i;
 
 	i = 0;
@@ -70,13 +72,20 @@ char	**parse_input(char *input)
 	// check for redirects, create separate string to add to array
 	// for checking for quotes and symbols, I need to keep the correct index!
 	array = NULL;
-	while (input[i] && !ft_isquote(input[i]))
+	while (input[i] && !ft_isquote(input[i])) // && is not redir/delimit
 	{
 		array = ft_split(input, ' ');
 		i++;
 	}
 	if (ft_isquote(input[i]))
-		array[i] = check_quotes(&input[i]);
+	{
+		temp_quote = check_quotes(&input[i]);
+		if (!temp_quote)
+			return (0);
+	}
+	// strjoin temp_quote to array at correct index
+	// check for redirs + delimiters
+	// strjoin those new string to array at correct index 
 	// check everything other than inside quotes for symbols, they need to be separate tokens
 	return (array);
 }

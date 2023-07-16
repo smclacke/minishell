@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 16:41:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 18:20:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		add_history(input);
 		argv = parse_input(input);
+		if (!argv)
+			return (0);
 		while (argv[i])
 		{
 			tokens = lexer(argv[i]);
