@@ -10,8 +10,6 @@
 **TO DO**
 
 - write parse_input()
-- write parse_token()
-- create symbol check funcs
 - test
 - parser
 
@@ -21,7 +19,24 @@
 
 --- new solution ---
 
-~!~ 
+~!~ give input to parse_input() which returns array, split via spaces except for when there
+	are quotes, then everything inside the quotes (till the last found quote) is given as a string in
+	the array. need to parser through these tokens properly but do it in the parser. 
+	e.g.
+		some "input" | given in command line
+	returned array:
+		- some
+		- "input"
+		- | 
+		- given
+		- in
+		- command
+		- line
+~!~	parse through argv[i] (argv = parse_input(input))
+	tokens = lexer
+	these strings are given to the lexer, and a token list is returned
+
+~!~ token list is passed to parser. 
 
 --------------------------------------------
 Old confusion...

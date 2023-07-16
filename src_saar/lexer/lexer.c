@@ -6,84 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 15:41:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 16:39:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
-
-/**
- * after:
- * quotes are found
- * spaces are parsed
- * redirects are found
- * delimiters are found
- * 
- * FIND dollar and word or dollar + ?
- * FIND buildins + flags are found
- * FIND ALL OTHER INPUT input
- */
-// char *find_rest(char *input)
-// {
-// 	int		i;
-// 	char	*dollar;
-
-// 	i = 0;
-// 	dollar = NULL;
-// 	// while (input[i])
-// 	// {	
-// 	// 	while !quote, !pipes, !dollars, !arrows, !flags...
-// 	// 	then find, else ill loose the string before these finds and cut the find away from the rest of the string
-// 	// 	if (ft_isdollar(input[i]))
-// 	// 	{
-// 	// 		dollar = find_dollar(&input[i]);
-// 	// 		printf("dollar: %s\n", dollar);
-// 	// 		if (!dollar)
-// 	// 			return (0);
-// 	// 		return (dollar);
-// 	// 	}
-// 	// 	find build ins
-// 	// 	find strings
-// 	// 	i++;
-// 	// }
-// 	return (0);
-// }
-
-/**
- * parse spaces, find quoted tokens, redirects, and delimiters
- * then parse rest to find dollars, built in, string input...
- * 
-*/
-char	*parse_token(char *input)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	// are there quotes? check_quote()
-	//	if yes, return that part of input to lexer()
-	// are there redirects?
-	//	if yes, return that part of input to lexer()
-	parse_space(input);
-	// while (input[i])
-	// {	
-	// 	// if (find_quotes(input))
-	// 	// 	return (input);
-	// // 	// else if (find_redirects(input))
-	// // 	// 	return (input);
-	// // 	// else if (find_delimiter(input))
-	// // 	// 	return (input);
-	// // 	if (find_rest(&input[i]))
-	// // 	{
-	// // 		printf("parse_token input: %s\n", &input[i]);
-	// // 		return (&input[i]);
-	// // 	}
-	// 	i++;
-	// }
-	// return (0);
-	return (input);
-}
 
 /**
  *	get size of string, create substring to pass backto lexer as newly made token
@@ -109,7 +36,6 @@ char	*make_token(char *parsed_token)
 t_lexer *lexer(char *input)
 {
 	char		*new_token;
-	char		*parsed_token = NULL;
 	int			i;
 	t_lexer		*token;
 	t_lexer		*token_list = NULL;
@@ -117,10 +43,7 @@ t_lexer *lexer(char *input)
 	i  = 0;
 	while (input[i])
 	{
-		parsed_token = parse_token(input);
-		if (!parsed_token)
-			return (0);
-		new_token = make_token(parsed_token);
+		new_token = make_token(input);
 		if (!new_token)
 			return (0);
 		token = list_new(new_token);
@@ -131,6 +54,32 @@ t_lexer *lexer(char *input)
 	}
 	return (token);
 }
+
+/**
+ * make a 2D array of the input, split anything in quotes into one string and everything else
+ * via spaces into separate strings, give to the lexer to make tokens and pass token list back to main
+*/
+char	**parse_input(char *input)
+{
+	char	**array;
+	int		i;
+
+	i = 0;
+
+	// quote: handle and create substring, add to final array
+	// check for redirects, create separate string to add to array
+	// for checking for quotes and symbols, I need to keep the correct index!
+	array = NULL;
+	while (input[i] && !ft_isquote(input[i]))
+	{
+		array = ft_split(input, ' ');
+		i++;
+	}
+	if (ft_isquote(input[i]))
+		array[i] = check_quotes(&input[i]);
+	return (array);
+}
+
 
 // STOOOOOOOOOOPID :) :) :) :)
 // WHEN HOW WHAT ERROR HANDLING.... ERRRM don't just return 0 :')

@@ -1,16 +1,94 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tokens.c                                           :+:    :+:            */
+/*   old_shit.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/03 17:45:04 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/12 17:11:07 by smclacke      ########   odam.nl         */
+/*   Created: 2023/07/16 16:23:39 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/16 16:25:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sarah.h"
+/**
+ * old stuff to refer to if necessary until my new solution works...
+ * 
+*/
+
+
+/**
+ * after:
+ * quotes are found
+ * spaces are parsed
+ * redirects are found
+ * delimiters are found
+ * 
+ * FIND dollar and word or dollar + ?
+ * FIND buildins + flags are found
+ * FIND ALL OTHER INPUT input
+ */
+// char *find_rest(char *input)
+// {
+// 	int		i;
+// 	char	*dollar;
+
+// 	i = 0;
+// 	dollar = NULL;
+// 	// while (input[i])
+// 	// {	
+// 	// 	while !quote, !pipes, !dollars, !arrows, !flags...
+// 	// 	then find, else ill loose the string before these finds and cut the find away from the rest of the string
+// 	// 	if (ft_isdollar(input[i]))
+// 	// 	{
+// 	// 		dollar = find_dollar(&input[i]);
+// 	// 		printf("dollar: %s\n", dollar);
+// 	// 		if (!dollar)
+// 	// 			return (0);
+// 	// 		return (dollar);
+// 	// 	}
+// 	// 	find build ins
+// 	// 	find strings
+// 	// 	i++;
+// 	// }
+// 	return (0);
+// }
+
+/**
+ * parse spaces, find quoted tokens, redirects, and delimiters
+ * then parse rest to find dollars, built in, string input...
+ * 
+*/
+// char	*parse_token(char *input)
+// {
+// 	int	i;
+// 	int	count;
+
+// 	i = 0;
+// 	count = 0;
+// 	// are there quotes? check_quote()
+// 	//	if yes, return that part of input to lexer()
+// 	// are there redirects?
+// 	//	if yes, return that part of input to lexer()
+// 	parse_space(input);
+// 	// while (input[i])
+// 	// {	
+// 	// 	// if (find_quotes(input))
+// 	// 	// 	return (input);
+// 	// // 	// else if (find_redirects(input))
+// 	// // 	// 	return (input);
+// 	// // 	// else if (find_delimiter(input))
+// 	// // 	// 	return (input);
+// 	// // 	if (find_rest(&input[i]))
+// 	// // 	{
+// 	// // 		printf("parse_token input: %s\n", &input[i]);
+// 	// // 		return (&input[i]);
+// 	// // 	}
+// 	// 	i++;
+// 	// }
+// 	// return (0);
+// 	return (input);
+// }
+
 
 
 // REDRIECTS

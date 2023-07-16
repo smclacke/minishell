@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 15:42:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 16:37:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #include <sys/ioctl.h>
 #include <stdbool.h>
 
-# define OPEN_QUOTE = 1
-# define CLOSED_QUOTE = 0
+# define OPEN_QUOTE = 0
+# define CLOSED_QUOTE = 1
 
 # define SUCCESS 0
 # define ERROR -1
@@ -56,15 +56,9 @@ typedef struct s_parser
 
 // LEXER
 // --------- Lexer --------- //
-char		*parse_token(char *input);
 char		*make_token(char *parsed_token);
 t_lexer 	*lexer(char *input);
-
-// --------- Tokens --------- //
-char		*find_dollar(char *input);
-char 		*find_redirect(char *input);
-char		*find_delimiter(char *input);
-char		*find_built_ins(char *input);
+char		**parse_input(char *input);
 
 // -------- Quotes --------//
 int			closed_quotes(char *input);
@@ -80,13 +74,11 @@ t_lexer		*ft_print_tokens(t_lexer *token);
 
 // PARSER
 // --------- Parser --------- //
-
 // ------- Parser Utils ------- //
-char		*check_empty(char *cmd);
+// char		*check_empty(char *cmd);
 
 // UTILS
-// --------- UTILS -------- //
-// --------- Errors -------- //
+// --------- Error -------- //
 void		error_no_cmd(void);
 void		error_space(char *cmd);
 
