@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 16:39:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/16 16:49:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	**parse_input(char *input)
 	}
 	if (ft_isquote(input[i]))
 		array[i] = check_quotes(&input[i]);
+	// check everything other than inside quotes for symbols, they need to be separate tokens
 	return (array);
 }
 
