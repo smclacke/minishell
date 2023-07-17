@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/14 18:16:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/17 14:57:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,8 @@ void	print_list(t_env *env);
 int		ft_strcmp(const char *s1, const char *s2);
 void	mini_error(char *string, int error);
 void	check_for_builtin(char **argv, t_env *env);//for now index 1
+
+/* execute */
+void	ft_execute(int argc, char **argv);
 
 #endif
