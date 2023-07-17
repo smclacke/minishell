@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/17 14:57:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/17 18:51:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define READ 0
 # define WRITE 1
 
-/* struct for the env, prepped to be doubly, for now singularly linked*/
+/* struct for the env, prepped to be doubly, for now singularly linked */
 typedef struct s_env
 {
 	char				*key;
@@ -39,7 +39,14 @@ typedef struct s_env
 	struct s_env		*previous;
 }							t_env;
 
-/* list making functions*/
+typedef struct s_command
+{
+	int		pipe_fd[2];
+	char	*command;
+	char	*full_path;
+}			t_command;
+
+/* list making functions */
 void	mini_lstadd_back(t_env **lst, t_env *new);
 t_env	*mini_lstlast(t_env *lst);
 t_env	*mini_lstnew(void *key, void *value);
