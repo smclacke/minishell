@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/17 18:10:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/18 13:04:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env;
 
+	// (void) argv;
 	if (argc <= 1)//needs to give prompt back
 		exit(EXIT_FAILURE);//only for testing purpose
 	env = env_list(envp);
-	// check_for_builtin(argv, env);
-	ft_execute(argc, argv, envp);
-	// print_list(env);
+	check_for_builtin(argv, env);
+	// ft_execute(argc, argv, envp);
+	print_list(env);
+	// print_list_key(env);
+	// print_list_value(env);
 }
 
 /*

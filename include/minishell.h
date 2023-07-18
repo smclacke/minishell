@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 13:27:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 13:31:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
+// # define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
+
+# define PROMPT "hey Djoyke $"
 # define READ 0
 # define WRITE 1
 

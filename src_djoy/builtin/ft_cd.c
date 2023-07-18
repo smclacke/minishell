@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/12 15:02:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/18 12:23:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param argv terminal given arguments (for now)

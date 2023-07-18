@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/13 13:20:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/18 12:23:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param path string passed as NULL that needs to be filled in this function

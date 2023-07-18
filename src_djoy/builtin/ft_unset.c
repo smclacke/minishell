@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_env.c                                           :+:    :+:            */
+/*   ft_unset.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/14 18:12:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/14 18:16:31 by dreijans      ########   odam.nl         */
+/*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/07/18 13:04:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+#include "../../include/djoyke.h"
 
 /**
- * @param env environment stored in linked list
- * @brief prints linked list containing env key and value
+ * @param argv terminal given arguments (for now)
+ * @param env pointer to environment
+ * @brief unset values by deleting nodes in env linked list
 */
-void	ft_env(t_env *env)
+void	ft_unset(char *argv, t_env *env)
 {
-	while (env != NULL)
+	t_env *temp;
+
+	temp = NULL;
+	while (env->next != NULL)
 	{
-		printf("%s=%s\n", env->key, env->value);
+		if (ft_strcmp(env->next->key, argv) == 0)
+		{
+			temp = env->next;
+			env->next = env->next->next;
+			free(temp);
+		}
 		env = env->next;
 	}
+	print_list(env);
 }
