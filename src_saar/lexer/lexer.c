@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 18:22:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 13:08:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	**parse_input(char *input)
 {
 	char	**array;
 	char	*temp_quote;
-	char	*temp_redir;
+	// char	*temp_redir;
 	int		i;
 
 	i = 0;
