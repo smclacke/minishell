@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 21:21:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 12:24:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_space(char *input)
 t_list	*ft_print_tokens(t_list *token)
 {
 	t_list	*list;
-	
+
 	list = token;
 	while (list)
 	{

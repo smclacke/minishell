@@ -6,10 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/03 14:22:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 13:26:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -25,7 +24,6 @@
 #include <sys/ioctl.h>
 
 // # define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
-
 
 # define PROMPT "hey Djoyke $"
 # define READ 0

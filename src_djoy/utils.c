@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/14 18:15:32 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/18 13:00:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	check_for_builtin(char **argv, t_env *env)
 		ft_pwd(NULL);
 	if (ft_strcmp(argv[1], "export") == 0)
 		ft_export(argv, env);
-	if (ft_strcmp(argv[1], "unset") == 0)
+	if (ft_strcmp(argv[1], "unset") == 0)//gives pwd not the entire path after unsetting
 		ft_unset(argv[2], env);
 	if (ft_strcmp(argv[1], "env") == 0)
 		ft_env(env);
@@ -82,6 +82,32 @@ void	print_list(t_env *env)
 	while (env != NULL)
 	{
 		printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	print_list_key(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s\n", env->key);
+		env = env->next;
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	print_list_value(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s\n", env->value);
 		env = env->next;
 	}
 }

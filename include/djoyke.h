@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/17 18:51:09 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/18 13:27:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ typedef struct s_env
 	struct s_env		*previous;
 }							t_env;
 
-typedef struct s_command
-{
-	int		pipe_fd[2];
-	char	*command;
-	char	*full_path;
-}			t_command;
+// typedef struct s_command
+// {
+// 	int		pipe_fd[2];
+// 	char	*command;
+// 	char	*full_path;
+// }			t_command;
 
 /* list making functions */
 void	mini_lstadd_back(t_env **lst, t_env *new);
@@ -53,7 +53,7 @@ t_env	*mini_lstnew(void *key, void *value);
 t_env	*env_list(char **envp);
 void	get_key_value(char *str, char **key, char **value);
 
-/* built-in utils and fucntions */
+/* built-in utils and functions */
 void	*ft_echo(char **argv);
 void	ft_cd(char *argv);
 void	ft_pwd(char *path);
@@ -63,11 +63,13 @@ void	ft_env(t_env *env);
 
 /* utils */
 void	print_list(t_env *env);
+void	print_list_key(t_env *env);
+void	print_list_value(t_env *env);
 int		ft_strcmp(const char *s1, const char *s2);
 void	mini_error(char *string, int error);
 void	check_for_builtin(char **argv, t_env *env);//for now index 1
 
 /* execute */
-void	ft_execute(int argc, char **argv);
+// void	ft_execute(int argc, char **argv, char **envp);
 
 #endif

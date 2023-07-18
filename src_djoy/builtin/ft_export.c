@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/13 18:13:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/18 12:41:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param argv argument given in the form of a string

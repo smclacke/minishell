@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/17 14:44:47 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/18 12:27:54 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,16 +38,16 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		=	main_djoy.c	\
-					env_list.c \
-					utils.c \
-					ft_echo.c \
-					ft_cd.c \
-					ft_pwd.c \
-					ft_export.c \
-					ft_unset.c \
-					ft_env.c \
-					ft_execute.c \
+SRCS_DJOY		=	main_djoy.c			\
+					env_list.c			\
+					utils.c				\
+					builtin/ft_echo.c	\
+					builtin/ft_cd.c 	\
+					builtin/ft_pwd.c 	\
+					builtin/ft_export.c \
+					builtin/ft_unset.c 	\
+					builtin/ft_env.c 	\
+					ft_execute.c 
 					
 
 DJOY_DIR		= src_djoy
@@ -119,6 +119,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)
+	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
