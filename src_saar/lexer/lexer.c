@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 17:22:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 17:47:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_lexer *lexer(char *input)
 	}
 	return (token);
 }
+
+// NO MORE 2D ARRAY, JUST PARSE, TOKENIZE, IN LIST, DONE...
 
 /**
  * make a 2D array of the input, split anything in quotes into one string and everything else
