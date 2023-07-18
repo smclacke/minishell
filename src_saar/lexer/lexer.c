@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 17:47:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 18:46:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*make_token(char *parsed_token)
  *	create new node in list for the newly made token
  *	add node to end of list
 */
-t_lexer *lexer(char *input)
+t_lexer	*lexer(char *input)
 {
 	char		*new_token;
 	int			i;
@@ -55,50 +55,32 @@ t_lexer *lexer(char *input)
 	return (token);
 }
 
-// NO MORE 2D ARRAY, JUST PARSE, TOKENIZE, IN LIST, DONE...
-
 /**
  * make a 2D array of the input, split anything in quotes into one string and everything else
  * via spaces into separate strings, give to the lexer to make tokens and pass token list back to main
 */
+char	**split_input(char *input)
+{
+	char	**array;
+
+	array = NULL;
+
+	// hit space/redirects/quote...
+	// handle quotes, ensure they are closed, add as part of array (at that index)
+
+	return (array);
+}
+/**
+ * just spaces for when nothing goes right and i need to just see some tokens
+ * for mental health :)
+*/
 char	**parse_input(char *input)
 {
 	char	**array;
-	char	*quotes;
-	// char	*temp_redir;
-	int		i;
-	int		len;
 
-	i = 0;
-	// quote: handle and create substring, add to final array
-	// check for redirects, create separate string to add to array
-	// for checking for quotes and symbols, I need to keep the correct index!
-	array = NULL;
-	while (input[i]) // && is not redir/delimit
-	{
-		// take full string, check for quotes, create substrings of quote parts, 
-		// then parse rest on space creating more strings
-		// put all into **array
-		if (ft_isquote(input[i]))
-		{
-			quotes = check_quotes(&input[i]);
-			if (!quotes)
-				return (0);
-		}
-		i++;
-	}
-		array = ft_split(input, ' ');
-	// strjoin temp_quote to array at correct index
-	// check for redirs + delimiters
-	// strjoin those new string to array at correct index 
-	// check everything other than inside quotes for symbols, they need to be separate tokens
+	array = ft_split(input, ' ');
 	return (array);
 }
 
-
-			// temp_quote = check_quotes(&input[i]);
-			// printf("temp_quote/ret:%s\n", temp_quote);
-			// if (!temp_quote)
-			// 	return (0);
 // STOOOOOOOOOOPID :) :) :) :)
 // WHEN HOW WHAT ERROR HANDLING.... ERRRM don't just return 0 :')

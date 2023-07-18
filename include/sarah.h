@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 16:44:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 18:44:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ typedef struct s_parser
 // LEXER
 // --------- Lexer --------- //
 char		*make_token(char *parsed_token);
-t_lexer 	*lexer(char *input);
+t_lexer		*lexer(char *input);
+char		**split_input(char *input);
 char		**parse_input(char *input);
 
 // -------- Quotes --------//
