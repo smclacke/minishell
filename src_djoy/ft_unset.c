@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_pwd.c                                           :+:    :+:            */
+/*   ft_unset.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/13 13:20:18 by dreijans      ########   odam.nl         */
+/*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/07/14 18:10:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
 /**
- * @param path string passed as NULL that needs to be filled in this function
- * @brief get's current working firectory
- * @return node made
- * @todo also print the old one OLDPWD=/Users/dreijans/Documents/Rang 3/Minishell
- * needs exit status
+ * @param argv terminal given arguments (for now)
+ * @param env pointer to environment
+ * @brief unset values by deleting nodes in env linked list
 */
-void	ft_pwd(char *path)
+void	ft_unset(char *argv, t_env *env)
 {
-	path = getcwd(path, sizeof(NULL));
-	if (path != NULL)
-		printf("Current working directory: %s\n", path);
-	else
-		mini_error("getcwd()", errno);
+	t_env *temp;
+
+	temp = NULL;
+	while (env->next != NULL)
+	{
+		if (ft_strcmp(env->next->key, argv) == 0)
+		{
+			temp = env->next;
+			env->next = env->next->next;
+			free(temp);
+		}
+		env = env->next;
+	}
 }

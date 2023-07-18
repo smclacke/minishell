@@ -6,9 +6,10 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/11 21:32:08 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/17 14:44:47 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME			= minishell
 DJOY			= djoyke
@@ -44,6 +45,9 @@ SRCS_DJOY		=	main_djoy.c	\
 					ft_cd.c \
 					ft_pwd.c \
 					ft_export.c \
+					ft_unset.c \
+					ft_env.c \
+					ft_execute.c \
 					
 
 DJOY_DIR		= src_djoy

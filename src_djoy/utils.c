@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/11 15:35:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/14 18:15:32 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ void	check_for_builtin(char **argv, t_env *env)
 		ft_cd(argv[2]);
 	if (ft_strcmp(argv[1], "pwd") == 0)
 		ft_pwd(NULL);
-	// if (ft_strcmp(argv[1], "export") == 0)
-	// 	ft_export(argv, *env);
+	if (ft_strcmp(argv[1], "export") == 0)
+		ft_export(argv, env);
+	if (ft_strcmp(argv[1], "unset") == 0)
+		ft_unset(argv[2], env);
+	if (ft_strcmp(argv[1], "env") == 0)
+		ft_env(env);
 	else
 		exit(EXIT_FAILURE);
 }
@@ -69,9 +73,8 @@ void	mini_error(char *string, int error)
 	exit(error);
 }
 
-
 /**
- * @param env argument given to perror
+ * @param env environment stored in linked list
  * @brief prints linked list containing env key or value
 */
 void	print_list(t_env *env)
