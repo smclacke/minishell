@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 13:27:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/18 18:31:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft/include/libft.h"
 // # include "../include/minishell.h"
+# include "colour.h"
+# include "prompt.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -26,7 +28,6 @@
 # include <stdbool.h>
 # include <errno.h>
 
-# define PROMPT "hey Djoyke $"
 # define READ 0
 # define WRITE 1
 
@@ -39,12 +40,6 @@ typedef struct s_env
 	struct s_env		*previous;
 }							t_env;
 
-// typedef struct s_command
-// {
-// 	int		pipe_fd[2];
-// 	char	*command;
-// 	char	*full_path;
-// }			t_command;
 
 /* list making functions */
 void	mini_lstadd_back(t_env **lst, t_env *new);

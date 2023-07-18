@@ -6,13 +6,10 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-<<<<<<< HEAD
-#    Updated: 2023/07/18 12:27:54 by dreijans      ########   odam.nl          #
-=======
-#    Updated: 2023/07/18 13:30:12 by smclacke      ########   odam.nl          #
->>>>>>> 14d6cd01162695da7e46a7e9f20f6591e7c9585f
+#    Updated: 2023/07/18 15:10:43 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
 
 
 
@@ -108,7 +105,7 @@ $(NAME)			:	$(OBJ)
 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 
 $(DJOY)			:	$(OBJ_DJOY)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY) && ./djoyke
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 
 $(SAAR)			:	$(OBJ_SAAR)
