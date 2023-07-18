@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 16:39:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 17:20:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,19 @@ int	closed_quotes(char *input)
 char	*check_quotes(char *input)
 {
 	int		i;
+	int		len;
+	char	*ret;
 
 	i = 0;
-	while (input[i])
+	len = ft_strlen(input);
+	while (len > 0)
 	{
-		if (ft_isquote(input[i]))
+		if (ft_isquote(input[len]))
 		{
-			if (!closed_quotes(input))
-				return (0);
+			ret = ft_substr(input, i, len + 1);
+			return (ret);
 		}
-		i++;
+		--len;
 	}
-	return (input);
+	return (0);
 }

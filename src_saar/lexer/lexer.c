@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 13:08:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 17:22:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- *	get size of string, create substring to pass backto lexer as newly made token
+ *	get size of string, create substring to pass back to lexer as newly made token
 */
 char	*make_token(char *parsed_token)
 {
@@ -62,27 +62,30 @@ t_lexer *lexer(char *input)
 char	**parse_input(char *input)
 {
 	char	**array;
-	char	*temp_quote;
+	char	*quotes;
 	// char	*temp_redir;
 	int		i;
+	int		len;
 
 	i = 0;
-
 	// quote: handle and create substring, add to final array
 	// check for redirects, create separate string to add to array
 	// for checking for quotes and symbols, I need to keep the correct index!
 	array = NULL;
-	while (input[i] && !ft_isquote(input[i])) // && is not redir/delimit
+	while (input[i]) // && is not redir/delimit
 	{
-		array = ft_split(input, ' ');
+		// take full string, check for quotes, create substrings of quote parts, 
+		// then parse rest on space creating more strings
+		// put all into **array
+		if (ft_isquote(input[i]))
+		{
+			quotes = check_quotes(&input[i]);
+			if (!quotes)
+				return (0);
+		}
 		i++;
 	}
-	if (ft_isquote(input[i]))
-	{
-		temp_quote = check_quotes(&input[i]);
-		if (!temp_quote)
-			return (0);
-	}
+		array = ft_split(input, ' ');
 	// strjoin temp_quote to array at correct index
 	// check for redirs + delimiters
 	// strjoin those new string to array at correct index 
@@ -91,5 +94,9 @@ char	**parse_input(char *input)
 }
 
 
+			// temp_quote = check_quotes(&input[i]);
+			// printf("temp_quote/ret:%s\n", temp_quote);
+			// if (!temp_quote)
+			// 	return (0);
 // STOOOOOOOOOOPID :) :) :) :)
 // WHEN HOW WHAT ERROR HANDLING.... ERRRM don't just return 0 :')
