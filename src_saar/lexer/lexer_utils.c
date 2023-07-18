@@ -6,13 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/07/18 12:24:20 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/07/16 16:29:14 by smclacke      ########   odam.nl         */
->>>>>>> 14d6cd01162695da7e46a7e9f20f6591e7c9585f
+/*   Updated: 2023/07/18 15:35:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/sarah.h"
 
@@ -63,13 +60,8 @@ void	parse_space(char *input)
 // print tokens
 t_lexer	*ft_print_tokens(t_lexer *token)
 {
-<<<<<<< HEAD
-	t_list	*list;
-
-=======
 	t_lexer	*list;
 	
->>>>>>> 14d6cd01162695da7e46a7e9f20f6591e7c9585f
 	list = token;
 	while (list)
 	{
