@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 21:31:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 13:29:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 #include <sys/ioctl.h>
 #include <stdbool.h>
 
-# define OPEN_QUOTE = 1
-# define CLOSED_QUOTE = 0
+# define OPEN_QUOTE = 0
+# define CLOSED_QUOTE = 1
 
 # define SUCCESS 0
 # define ERROR -1
@@ -38,19 +38,17 @@
 
 
 // LEXER STRUCT
-// for tokens (i hope) it is ok to just have a t_list
-// for parser, need a beefier struct :):)
 typedef	struct s_lexer
 {
-	char				*input;
-	t_list				*token;
+	void				*input;
+	struct s_lexer		*token;
+	struct s_lexer		*next;
 }	t_lexer;
 
 // PARSER STRUCT
 typedef struct s_parser 
 {
-	char	*input_pars;
-	char	**cmd;
+	struct t_lexer		*tokens;
 }	t_parser;
 
 
@@ -58,33 +56,29 @@ typedef struct s_parser
 
 // LEXER
 // --------- Lexer --------- //
-char 		*find_tokens(char *input);
-char		*parsing_token(char *input);
 char		*make_token(char *parsed_token);
-t_list 		*lexer(char *input);
+t_lexer 	*lexer(char *input);
+char		**parse_input(char *input);
 
-// --------- Tokens --------- //
-char		*find_quote(char *input);
-char		*find_dollar(char *input);
-char 		*find_redirect(char *input);
-char		*find_delimiter(char *input);
-char		*find_built_ins(char *input);
+// -------- Quotes --------//
+int			closed_quotes(char *input);
+char		*check_quotes(char *input);
 
 // -------- Lexer Utils --------//
-int			second_quote(char *input, char c);
+t_lexer		*list_last(t_lexer *list);
+void		listadd_back(t_lexer **list, t_lexer *new);
+t_lexer		*list_new(void *input);
 void		parse_space(char *input);
-t_list		*ft_print_tokens(t_list *token);
+t_lexer		*ft_print_tokens(t_lexer *token);
 
 
 // PARSER
 // --------- Parser --------- //
-
 // ------- Parser Utils ------- //
-char		*check_empty(char *cmd);
+// char		*check_empty(char *cmd);
 
 // UTILS
-// --------- UTILS -------- //
-// --------- Errors -------- //
+// --------- Error -------- //
 void		error_no_cmd(void);
 void		error_space(char *cmd);
 

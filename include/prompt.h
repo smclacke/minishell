@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 16:40:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/10 17:11:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/12 12:21:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROMPT_H
 # define PROMPT_H
 
-# define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
+// # define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
 
 /*#define	PROMPT BI_PURPLE"\
      A.,.A\n\
@@ -45,5 +45,7 @@
 //                 _) )    `. \\ /\n\
 //                (__/       ) )\n\
 //                          (_/\n"
+
+# define PROMPT BI_GREEN"WHAT THE"BI_RED" SHELL?!"RESET
 
 #endif

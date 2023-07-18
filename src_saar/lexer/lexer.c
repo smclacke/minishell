@@ -6,52 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/11 21:22:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/18 13:08:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- * after: (token.c)
- * spaces are parsed
- * quotes are found
- * redirects are found
- * dollar and word or dollar + ? are found
- * buildins + flags are found
- * FIND ALL OTHER INPUT input
- */
-// char *find_tokens(char *input)
-// {
-	
-// }
-
-/**
- * parse spaces, finds quoted tokens, words, redirects, symbols...
- * - if redirect is found, return to lexer (< > |)
- * - if quote + contents + closing quote found, return to lexer...
- * - else find word, flag or symbol from find_tokens,
- * pass it back to lexer to create new token node in list
-*/
-char	*parsing_token(char *input)
-{
-	parse_space(input);
-	if (find_quotes(input))
-		return (input);
-	else if (find_redirects(input))
-		return (input);
-	else if (find_delimiter(input))
-		return (input);
-	else
-		if (find_tokens(input))
-			return (input);
-	return (0);
-}
-
-/**
  *	get size of string, create substring to pass backto lexer as newly made token
 */
-
 char	*make_token(char *parsed_token)
 {
 	char	*token;
@@ -70,32 +33,63 @@ char	*make_token(char *parsed_token)
  *	create new node in list for the newly made token
  *	add node to end of list
 */
-
-t_list *lexer(char *input)
+t_lexer *lexer(char *input)
 {
 	char		*new_token;
-	char		*parsed_token = NULL;
 	int			i;
-	t_list		*token;
-	t_list		*token_list = NULL;
+	t_lexer		*token;
+	t_lexer		*token_list = NULL;
 
 	i  = 0;
 	while (input[i])
 	{
-		parsed_token = parsing_token(input);
-		if (!parsed_token)
-			return (0);
-		new_token = make_token(parsed_token);
+		new_token = make_token(input);
 		if (!new_token)
 			return (0);
-		token = ft_lstnew(new_token);
+		token = list_new(new_token);
 		if (!token)
 			return (0);
-		ft_lstadd_back(&token_list, token);
+		listadd_back(&token_list, token);
 		i++;
 	}
 	return (token);
 }
+
+/**
+ * make a 2D array of the input, split anything in quotes into one string and everything else
+ * via spaces into separate strings, give to the lexer to make tokens and pass token list back to main
+*/
+char	**parse_input(char *input)
+{
+	char	**array;
+	char	*temp_quote;
+	// char	*temp_redir;
+	int		i;
+
+	i = 0;
+
+	// quote: handle and create substring, add to final array
+	// check for redirects, create separate string to add to array
+	// for checking for quotes and symbols, I need to keep the correct index!
+	array = NULL;
+	while (input[i] && !ft_isquote(input[i])) // && is not redir/delimit
+	{
+		array = ft_split(input, ' ');
+		i++;
+	}
+	if (ft_isquote(input[i]))
+	{
+		temp_quote = check_quotes(&input[i]);
+		if (!temp_quote)
+			return (0);
+	}
+	// strjoin temp_quote to array at correct index
+	// check for redirs + delimiters
+	// strjoin those new string to array at correct index 
+	// check everything other than inside quotes for symbols, they need to be separate tokens
+	return (array);
+}
+
 
 // STOOOOOOOOOOPID :) :) :) :)
 // WHEN HOW WHAT ERROR HANDLING.... ERRRM don't just return 0 :')
