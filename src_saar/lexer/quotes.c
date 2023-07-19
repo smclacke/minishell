@@ -6,15 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 17:20:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/19 16:19:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
-
-/**
- * are there quotes? are there matching quotes? are they closed? cool, take everything and tokenize it
-*/
 
 /**
  * closed_quotes()
@@ -50,7 +46,8 @@ int	closed_quotes(char *input)
 
 /**
  * check_quotes()
- * find quotes
+ * find quotes, return the string from first to last quote (not necessary the actual closing quote...
+ * but I'll do that in the parser)
  * if unclosed, throw error
 */
 char	*check_quotes(char *input)

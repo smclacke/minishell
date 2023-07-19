@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 15:35:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/19 16:23:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_lexer	*list_new(void *input)
 	return (new);
 }
 
-// parse space I DONT THINK I NEED THIS ANYMORE SINCE IM USING SPLIT BUT KEEP FOR LATER
+// parse space I DONT THINK I NEED THIS ANYMORE BUT KEEP FOR LATER
 void	parse_space(char *input)
 {
 	while (ft_isspace(*input))

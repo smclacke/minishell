@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 18:44:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/19 16:26:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,44 +27,37 @@
 #include <sys/ioctl.h>
 #include <stdbool.h>
 
-# define OPEN_QUOTE = 0
-# define CLOSED_QUOTE = 1
-
 # define SUCCESS 0
 # define ERROR -1
 
-# define FOUND 1
-# define NOPE 0
+typedef enum	e_signs
+{
+	DQUOTE = 1,
+	SQUOTE = 2,
+	DOLLAR = 3,
+	MORE = 4,
+	MOREMORE = 5,
+	LESS = 6,
+	LESSLESS = 7,
+	PIPE = 8
+}		t_signs;
 
-// enum e_parser
-// {
-// 	PIPE = 0
-	
-// }
 
-// LEXER STRUCT
+// LEXER
 typedef	struct s_lexer
 {
 	void				*input;
 	void				*token;
+	t_signs				sign[8]; // do we need this and if so what do we do with it?
 	struct s_lexer		*next;
 }	t_lexer;
 
-// PARSER STRUCT
-typedef struct s_parser 
-{
-	struct t_lexer		*tokens;
-}	t_parser;
-
-
-// PROTOTYPES
-
-// LEXER
 // --------- Lexer --------- //
-char		*make_token(char *parsed_token);
 t_lexer		*lexer(char *input);
+char		**parse_input(char *input); // get rid of this when things sort of start to work
+
+// --------- Split_input --------- //
 char		**split_input(char *input);
-char		**parse_input(char *input);
 
 // -------- Quotes --------//
 int			closed_quotes(char *input);
@@ -74,11 +67,17 @@ char		*check_quotes(char *input);
 t_lexer		*list_last(t_lexer *list);
 void		listadd_back(t_lexer **list, t_lexer *new);
 t_lexer		*list_new(void *input);
-void		parse_space(char *input);
+void		parse_space(char *input);		// don't need this or at least not in lexer
 t_lexer		*ft_print_tokens(t_lexer *token);
 
 
-// PARSER
+
+// PARSER 
+typedef struct s_parser 
+{
+	struct t_lexer		*tokens;
+}	t_parser;
+
 // --------- Parser --------- //
 // ------- Parser Utils ------- //
 // char		*check_empty(char *cmd);
@@ -87,6 +86,7 @@ t_lexer		*ft_print_tokens(t_lexer *token);
 // --------- Error -------- //
 void		error_no_cmd(void);
 void		error_space(char *cmd);
+
 
 // EXITCODES
 typedef enum e_exitcode

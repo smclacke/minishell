@@ -11,7 +11,7 @@
 
 KEEP IT SIMPLE, STUPID :)
 
-- write parse_input()
+- split the input accordingly, find way to not hard code it too much
 - test
 - parser
 
