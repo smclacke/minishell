@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 16:19:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/19 16:27:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/19 18:54:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ static int	what_to_split(char *input)
 	{
 		if (input[i] == '\"' && closed_quotes(input))
 			return (DQUOTE);
+		else if (input[i] == '\"' && !closed_quotes(input))
+			return (127); // need syntax error here
+		else if (input[i] == '\'' && close_quotes(input))
+			return (SQUOTE);
+		else if (input[i] == '\'' && !closed_quotes(input))
+			return (127); // need syntax error here
+		else if (input[i] == '$')
+			return (DOLLAR);
+		else if (input[i] == '>')
+			return (MORE);
+		else if (input[i] == '<')
+			return (LESS);
+		else if (input[i] == '>' && input[i + 1] == '>')
+			return (MOREMORE);
+		else if (input[i] == '<' && input[i + 1] == '<')
+			return (LESSLESS);
+		else if (input[i] == '|')
+			return (PIPE);
 	}
 	return (0);
 }
@@ -38,21 +56,39 @@ char	**split_input(char *input)
 	char	*quote_str;
 	int		words = 0;
 	int		i = 0;
+	int		count = 0;
 	
 	while (input[i])
 	{
-		if (what_to_split(input[i]) == DQUOTE || what_to_split(input[i]) == SQUOTE)
-		{
-			quote_str = check_quotes(input);
-			if (!quote_str)
-				return (0);
-			else
-			{	
-				array[words] = quote_str;
-				words++;
+		while (!what_to_split(input[i]))
+		{	
+			array[words] = ft_split(input, ' ');
+			if (what_to_split(input[i]) == DQUOTE || what_to_split(input[i]) == SQUOTE)
+			{
+				quote_str = check_quotes(input);
+				if (!quote_str)
+					return (0);
+				else
+				{	
+					array[words] = quote_str;
+					words++;
+				}
 			}
+			if (what_to_split(input[i] == DOLLAR))
+			{
+				while (input[i + 1] && !ft_isspace(input[i + 1]))
+				{
+					i++;
+					count++;
+				}
+				count -= i;
+				array[words] = input[count - 1];
+				worrds++;
+			}
+		// if dollar... etc finding all signs BUT ORDER???, save the indexs so I'm 
+		// tokenizing in order they appear, FIND A BETTER WAY OF DOING THIS
+			words++;
 		}
-		// if dollar... but this is gunna be a long function, HOW TO WRITE THIS IS IN A NOT STUPID WAY
 		i++;
 	}
 	return (array);
