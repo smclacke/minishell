@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/19 19:35:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/20 21:56:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static char	*make_token(char *parsed_token)
 t_lexer	*lexer(char *input)
 {
 	char		*new_token;
-	int			i;
 	t_lexer		*token;
 	t_lexer		*token_list = NULL;
+	int			i;
 
 	i  = 0;
 	while (input[i])
