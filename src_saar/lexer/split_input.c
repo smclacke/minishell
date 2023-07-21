@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 16:19:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/20 22:27:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/21 13:56:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ int	sign_tokens(char *input)
 
 	while (input[i])
 	{
-		if (input[i] == '$')
+		if (ft_strcmp(&input[i], "$") == 0)
 			return (DOLLAR);
-		if (input[i] == '>' && input[i + 1] == '>')
+		else if (ft_strcmp(&input[i], ">>") == 0)	
 			return (MOREMORE);
-		else if (input[i] == '>')
+		else if (ft_strcmp(&input[i], ">") == 0)
 			return (MORE);
-		if (input[i] == '<' && input[i + 1] == '<')
+		else if (ft_strcmp(&input[i], "<<") == 0)
 			return (LESSLESS);
-		else if (input[i] == '<')
+		else if (ft_strcmp(&input[i], "<") == 0)
 			return (LESS);
-		if (input[i] == '|')
+		else if (ft_strcmp(&input[i], "|") == 0)
 			return (PIPE); 
 		i++;
 	}
