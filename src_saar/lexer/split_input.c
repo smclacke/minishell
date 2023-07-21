@@ -6,27 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 16:19:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/21 13:56:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/21 14:13:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- * returns correct int to make tokens from the signs, but...
- * >> 
- * token: >>
- * token: >
+ * bleh
 */
 int	sign_tokens(char *input)
 {
-	int	i = 0;
-
+	int		i = 0;
 	while (input[i])
 	{
 		if (ft_strcmp(&input[i], "$") == 0)
 			return (DOLLAR);
-		else if (ft_strcmp(&input[i], ">>") == 0)	
+		else if (ft_strcmp(&input[i], ">>") == 0)
 			return (MOREMORE);
 		else if (ft_strcmp(&input[i], ">") == 0)
 			return (MORE);
@@ -77,9 +73,19 @@ char	**split_input(char *input)
 	while (input[i])
 	{
 		if (sign_tokens(&input[i]))
+		{
+			if ((sign_tokens(&input[i]) == MOREMORE) || (sign_tokens(&input[i]) == LESSLESS))
+			{
+				array[i] = &input[i];
+				i++;
+			}
 			array[i] = &input[i];
+		}
 		if (ft_isquote(input[i]))
+		{
 			quotes = quote_tokens(&input[i]);
+			// array[i] = quotes...
+		}
 		// rest ... make_words, then add everything to array
 		i++;
 	}

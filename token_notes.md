@@ -7,6 +7,41 @@
 
 <br/><br/>
 
+**CURRENT PROBLEMS :)**
+
+WHAT THE SHELL?!>>>>>>>>>>>>>>>>>>
+token: >>>>>>>>>>>>>>>>>>
+token: >>>>>>>>>>>>>>>>>
+token: >>>>>>>>>>>>>>>>
+token: >>>>>>>>>>>>>>>
+token: >>>>>>>>>>>>>>
+token: >>>>>>>>>>>>>
+token: >>>>>>>>>>>>
+token: >>>>>>>>>>>
+token: >>>>>>>>>>
+token: >>>>>>>>>
+token: >>>>>>>>
+token: >>>>>>>
+token: >>>>>>
+token: >>>>>
+token: >>>>
+token: >>>
+token: >>
+token: >
+
+WHAT THE SHELL?!|||||
+token: |||||
+token: ||||
+token: |||
+token: ||
+token: |
+
+WHAT THE SHELL?!>>
+token: >>
+token: >
+
+<br/><br/>
+
 **TO DO**
 
 KEEP IT SIMPLE, STUPID :)
