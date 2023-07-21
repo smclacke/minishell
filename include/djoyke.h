@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 18:31:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/21 17:34:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # include <sys/ioctl.h>
 # include <stdbool.h>
 # include <errno.h>
+# include <stddef.h>
+
+# define __null 0
 
 # define READ 0
 # define WRITE 1
@@ -40,6 +43,13 @@ typedef struct s_env
 	struct s_env		*previous;
 }							t_env;
 
+/* struct for the commands, prepped to be doubly, for now singularly linked */
+typedef struct s_command
+{
+	char					**arg;
+	struct s_command		*next;
+	struct s_command		*previous;
+}							t_command;
 
 /* list making functions */
 void	mini_lstadd_back(t_env **lst, t_env *new);
@@ -63,6 +73,13 @@ void	print_list_value(t_env *env);
 int		ft_strcmp(const char *s1, const char *s2);
 void	mini_error(char *string, int error);
 void	check_for_builtin(char **argv, t_env *env);//for now index 1
+
+/* fake input */
+t_command	*command_lstnew(char **command);
+t_command	*command_lstlast(t_command *lst);
+void		command_lstadd_back(t_command **lst, t_command *new);
+t_command	*init_command(void);
+void		print_list_command(t_command *list);
 
 /* execute */
 // void	ft_execute(int argc, char **argv, char **envp);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 18:35:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/21 17:27:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_env	*env;
-	char	*input;
-	char	**test = {"unset"}, {"PATH"};
+	t_env		*env;
+	t_command	*fake_command;
+	char		*input;
 
 	(void) argv;
 	(void) argc;
@@ -27,8 +27,9 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		add_history(input);
 		env = env_list(envp);
-		check_for_builtin(test, env);
-		// // ft_execute(argc, argv, envp);
+		fake_command = init_command();
+		print_list_command(fake_command);
+		// check_for_builtin(test, env);
 		// print_list(env);
 	}
 }

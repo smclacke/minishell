@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/18 18:38:05 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/21 17:21:39 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,7 @@ NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
 
-CFLAGS			= -Wall -Wextra -g -fsanitize=address
-# -Werror
+CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include
@@ -50,7 +49,8 @@ SRCS_DJOY		=	main_djoy.c			\
 					builtin/ft_export.c \
 					builtin/ft_unset.c 	\
 					builtin/ft_env.c 	\
-					ft_execute.c 
+					ft_execute.c		\
+					test/fake_input.c	
 					
 
 DJOY_DIR		= src_djoy
@@ -106,8 +106,9 @@ $(NAME)			:	$(OBJ)
 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 
 $(DJOY)			:	$(OBJ_DJOY)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY) && ./djoyke
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
+	@ ./djoyke
 
 $(SAAR)			:	$(OBJ_SAAR)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR) && ./sarah
@@ -123,6 +124,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
+	@ mkdir -p $(OBJ_DJOY_DIR)/test
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c

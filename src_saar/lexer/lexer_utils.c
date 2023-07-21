@@ -6,13 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/07/18 12:24:20 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/07/16 16:29:14 by smclacke      ########   odam.nl         */
->>>>>>> 14d6cd01162695da7e46a7e9f20f6591e7c9585f
+/*   Updated: 2023/07/21 13:48:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/sarah.h"
 
