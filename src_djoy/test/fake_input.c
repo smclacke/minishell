@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 18:13:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/21 17:42:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/21 18:52:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ void	command_lstadd_back(t_command **lst, t_command *new)
 
 t_command	*init_command(void)
 {
-	t_command	*list;
-	t_command	*new_node;
-	int			i;
-	char		*argv0[3] = {"unset", "PATH", NULL};
-	char		*argv1[3] = {"cd", "src_djoy", NULL};
-	char		*argv2[2] = {"pwd", NULL};
-	char		*argv3[3] = {"echo", "hellowww", NULL};
-	char		*argv4[2] = {"env", NULL};
-	char		*argv5[3] = {"export", "djoyke=gek", NULL};
-	char		**argvs[7] = {argv0, argv1, argv2, argv3, argv4, argv5, NULL};
+	t_command		*list;
+	t_command		*new_node;
+	int				i;
+	static char		*argv0[3] = {"unset", "PATH", NULL};
+	static char		*argv1[3] = {"cd", "src_djoy", NULL};
+	static char		*argv2[2] = {"pwd", NULL};
+	static char		*argv3[3] = {"echo", "hellowww", NULL};
+	static char		*argv4[2] = {"env", NULL};
+	static char		*argv5[3] = {"export", "djoyke=gek", NULL};
+	static char		**argvs[7] = {argv0, argv1, argv2, argv3, argv4, argv5, NULL};
 
 	i = 0;
 	list = NULL;
@@ -84,7 +84,6 @@ t_command	*init_command(void)
 		command_lstadd_back(&list, new_node);
 		i++;
 	}
-	// print_list_command(list);
 	return (list);
 }
 
@@ -95,18 +94,15 @@ t_command	*init_command(void)
 void	print_list_command(t_command *list)
 {
 	int			i;
-	// t_command	*start;
 
-	// start = list;
 	while (list != NULL)
 	{
 		i = 0;
-		while (list->arg[i])
+		while (list->arg && list->arg[i])
 		{
 			printf("%s\n", list->arg[i]);
 			i++;
 		}
-		printf("heh\n");
 		list = list->next;
 	}
 }
