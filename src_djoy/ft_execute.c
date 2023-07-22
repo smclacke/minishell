@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/17 14:38:11 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 13:03:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 17:01:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,11 @@
 //list input will look like:
 //[cat(1 part in node)] -> [ls + la (2 parts in node)] -> outfile
 
-void	ft_execute(int argc, char **argv, char **envp)
+void	ft_execute(t_command *command)
 {
-	int	count;
 	int	fork_pid;
-	int	i;
 
-	count = argc -1;
-	i = 0;
-	(void) envp;
-	(void) argv;
-	while (count != 0)
+	while (command)
 	{
 		fork_pid = 0;
 		if (fork_pid < 0)
@@ -35,10 +29,8 @@ void	ft_execute(int argc, char **argv, char **envp)
 		if (fork_pid == 0)
 		{
 			printf("children made\n");
-			// child(argv, envp);
 		}
-		count --;
-		i++;
+		command = command->next;
 	}
 }
 
@@ -51,6 +43,5 @@ void	ft_execute(int argc, char **argv, char **envp)
 // 		mini_error("dup2", errno);
 // 	while
 // 	{
-		
 // 	}
 // }

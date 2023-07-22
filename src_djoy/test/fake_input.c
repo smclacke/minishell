@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 18:13:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/22 16:42:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 16:55:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,16 @@ t_command	*init_command(void)
 	t_command		*list;
 	t_command		*new_node;
 	int				i;
-	static char		*argv0[3] = {"unset", "PATH", NULL};
-	// static char		*argv1[3] = {"cd", "src_djoy", NULL};
-	// static char		*argv2[2] = {"pwd", NULL};
-	// static char		*argv3[3] = {"echo", "hellowww", NULL};
-	// static char		*argv4[5] = {"unset", "PWD", "&&", "env", NULL};
-	// static char		*argv4[2] = {"env", NULL};
-	// static char		*argv5[3] = {"export", "djoyke=gek", NULL};
-	// static char		**argvs[7] = {argv0, argv1, argv2, argv3, argv4, argv5, NULL};
-	static char		**argvs[2] = {argv0, NULL};
 
+	static char		*argv0[3] = {"unset", "PATH", NULL};
+	static char		*argv1[3] = {"cd", "src_djoy", NULL};
+	static char		*argv2[2] = {"pwd", NULL};
+	static char		*argv3[3] = {"echo", "hellowww", NULL};
+	// static char		*argv4[5] = {"unset", "PWD", "&&", "env", NULL};
+	static char		*argv4[2] = {"env", NULL};
+	static char		*argv5[3] = {"export", "djoyke=gek", NULL};
+	static char		**argvs[7] = {argv0, argv1, argv2, argv3, argv4, argv5, NULL};
+	// static char		**argvs[2] = {argv0, NULL};
 	i = 0;
 	list = NULL;
 	while (argvs[i])

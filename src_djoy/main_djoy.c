@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 16:42:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 17:00:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	main(int argc, char **argv, char **envp)
 		env = env_list(envp);
 		fake_command = init_command();
 		print_command(fake_command);
-		print_list_command(fake_command);
+		ft_execute(fake_command);
+		// print_list_command(fake_command);
 		// check_for_builtin(test, env);
 		// print_list(env);
 	}
