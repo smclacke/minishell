@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 12:09:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:14:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	mini_listadd_back(t_lexer **list, t_lexer *new)
 
 	if (*list)
 	{
-		last = list_last(*list);
+		last = mini_listlast(*list);
 		last->next = new;
 	}
 	else

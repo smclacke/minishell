@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 12:08:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:14:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ t_lexer	*lexer(char *input)
 		new_token = make_token(input);
 		if (!new_token)
 			return (0);
-		token = list_new(new_token);
+		token = mini_listnew(new_token);
 		if (!token)
 			return (0);
-		listadd_back(&token_list, token);
+		mini_listadd_back(&token_list, token);
 		i++;
 	}
 	return (token);
