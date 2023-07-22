@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 16:19:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 12:12:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:25:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*quote_tokens(char *input)
 char	**split_input(char *input)
 {
 	char	**array = NULL;
-	char	*quotes;
+	// char	*quotes;
 	int		i = 0;
 	
 	array = (char **)malloc(sizeof(char *) * (ft_strlen(input) + 1));
@@ -72,20 +72,20 @@ char	**split_input(char *input)
 		return (0);
 	while (input[i])
 	{
-		if (sign_tokens(&input[i]))
-		{
-			if ((sign_tokens(&input[i]) == MOREMORE) || (sign_tokens(&input[i]) == LESSLESS))
-			{
-				array[i] = &input[i];
-				i++;
-			}
+		if (sign_tokens(&input[i]) == MOREMORE || sign_tokens(&input[i]) == LESSLESS)
+			i += 1;
+		if ((sign_tokens(&input[i])))
+		{	
+			// if ((sign_tokens(&input[i]) == MOREMORE) || (sign_tokens(&input[i]) == LESSLESS))
+			// 	i += 1;
 			array[i] = &input[i];
+			printf("why?\n");
 		}
-		if (ft_isquote(input[i]))
-		{
-			quotes = quote_tokens(&input[i]);
-			// array[i] = quotes...
-		}
+		// if (ft_isquote(input[i]))
+		// {
+		// 	quotes = quote_tokens(&input[i]);
+		// 	// array[i] = quotes...
+		// }
 		// rest ... make_words, then add everything to array
 		i++;
 	}
