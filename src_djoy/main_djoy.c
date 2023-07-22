@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 17:00:09 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 17:47:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,4 @@ int	main(int argc, char **argv, char **envp)
 
 //& gives * and &bla[1] gives **..... wellll
 
-//ctrl d exits everything (shell), when the INPUT = NULL you exit
-//just an if statement no signals please not neccerairy
+//ctrl d exits where it's in

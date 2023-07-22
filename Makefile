@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/21 18:27:33 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/22 18:25:25 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRCS_DJOY		=	main_djoy.c			\
 					builtin/ft_export.c \
 					builtin/ft_unset.c 	\
 					builtin/ft_env.c 	\
-					ft_execute.c		\
+					test/pipes_forks.c	\
 					test/fake_input.c	
 					
 
