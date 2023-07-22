@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/19 16:26:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:09:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef	struct s_lexer
 
 // --------- Lexer --------- //
 t_lexer		*lexer(char *input);
-char		**parse_input(char *input); // get rid of this when things sort of start to work
 
 // --------- Split_input --------- //
 char		**split_input(char *input);
@@ -64,10 +63,9 @@ int			closed_quotes(char *input);
 char		*check_quotes(char *input);
 
 // -------- Lexer Utils --------//
-t_lexer		*list_last(t_lexer *list);
-void		listadd_back(t_lexer **list, t_lexer *new);
-t_lexer		*list_new(void *input);
-void		parse_space(char *input);		// don't need this or at least not in lexer
+t_lexer		*mini_listlast(t_lexer *list);
+void		mini_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer		*mini_listnew(void *input);
 t_lexer		*ft_print_tokens(t_lexer *token);
 
 
@@ -82,11 +80,16 @@ typedef struct s_parser
 // ------- Parser Utils ------- //
 // char		*check_empty(char *cmd);
 
+
 // UTILS
 // --------- Error -------- //
+
+// OTHER FUNCTIONS
+// ------------ Other ---------// // not sure if necessary, just keeping for now
+char		**parse_input(char *input);
+void		parse_space(char *input);
 void		error_no_cmd(void);
 void		error_space(char *cmd);
-
 
 // EXITCODES
 typedef enum e_exitcode

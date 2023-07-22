@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/16 16:23:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 16:25:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:01:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,3 +187,57 @@
  * find strings... need a func for that?
 */
 
+// **HOW, WHAT, WHY, TOKENS**
+
+// --- new solution ---
+
+// ~!~ give input to parse_input() which returns array, split via spaces except for when there
+// 	are quotes, then everything inside the quotes (till the last found quote) is given as a string in
+// 	the array, also, check for symbols and send as single strings 
+	
+// 	(will need to parser through quotation tokens properly but do it in the parser).
+// 	e.g.
+// 		some "input" | given in command line
+// 	returned array:
+// 		- some
+// 		- "input"
+// 		- | 
+// 		- given
+// 		- in
+// 		- command
+// 		- line
+
+// ~!~	parse through argv[i] (argv = parse_input(input))
+// 	tokens = lexer
+// 	these strings are given to the lexer, and a token list is returned
+
+// ~!~ token list is passed to parser. 
+
+// --------------------------------------------
+// Old confusion...
+//  ~!~ - start with a clear set up...
+
+// !!--- what about the order?? 
+// -- HOW DO I KEEP THE ORDER CORRECT???
+
+//  ---- the lexer now takes the double array argv and returns the tokens
+//  ---- NO MORE SPLITING IN MAIN
+//  ---- tokens are given to the parser
+//  ---- AST passed to expander
+//  ---- WORK IN PARSE_TOKEN, LEAVE THE REST AS IT IS
+
+//  ~!~ - do as little as possible in main, create main lexer func, start there with quotes, make those tokens, then
+// 	ft_split, then find symbols etc.. then make those tokens, return the list 
+
+//  ~!~ - Separate quotes
+// 	- if there is a space before first quote and after last quote, tokenize it
+// 	!! - check when tokenizing quotes, if there's a built in
+// 	!! - handling redirects and delimiters in quotes???
+// 	!! - how to handle quotes in quotes: "something "some" things" ??? I dont want to tokenize "something "
+// 		but if: echo "wc -l" | hello "something", I don't want to tokenize everything...
+
+//  ~!~ - split via spaces (outside of any quotations)
+// 	- just like I had before with ft_split but now after parsing the quotations
+// 	- in cases like "ec'h'o" and "abc$abc", just pass whole thing as token, can parse in parser and expand in expander
+
+//  ~!~ - tokenize: (<< delimiters), redirects, built-ins and words

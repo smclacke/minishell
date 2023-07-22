@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 16:19:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/21 14:13:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:12:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	sign_tokens(char *input)
 }
 
 /**
- * get full quoted string
+ * get full quoted string from first to last quotations in whole input
 */
 char	*quote_tokens(char *input)
 {

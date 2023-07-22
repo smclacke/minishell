@@ -6,16 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/20 22:14:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:11:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- * closed_quotes()
  * check if double or single, count amount for each, check if divisable by 2 (thus closed)
- * separate check for double and single since 1x double + 1x single must throw an error
 */
 int	closed_quotes(char *input)
 {
@@ -40,14 +38,13 @@ int	closed_quotes(char *input)
 		i++;
 	}
 	if ((count_double % 2) != 0 || (count_single % 2) != 0)
-		return (0); // ERROR HERE and quit 
+		return (0); // ERROR HERE ...  and quit (?)
 	return (i);
 }
 
 /**
- * check_quotes()
- * find quotes, return the string from first to last quote (not necessary the actual closing quote...
- * but I'll do that in the parser)
+ * find quotes, return substring from first quote to last quote in the input (not necessarily 
+ * the pair of quotes, will handle this properly in parser)
  * if unclosed, throw error
 */
 char	*check_quotes(char *input)
@@ -69,5 +66,5 @@ char	*check_quotes(char *input)
 		}
 		--len;
 	}
-	return (0);
+	return (0); // ERROR HERE ...  and quit (?)
 }

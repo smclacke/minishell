@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/20 21:56:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:08:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,6 @@ t_lexer	*lexer(char *input)
 		i++;
 	}
 	return (token);
-}
-
-/**
- * just spaces for when nothing goes right and i need to just see some tokens
- * for mental health :)
-*/
-char	**parse_input(char *input)
-{
-	char			**array;
-
-	array = ft_split(input, ' ');
-	return (array);
 }
 
 // STOOOOOOOOOOPID :) :) :) :)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/19 16:23:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:09:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../include/sarah.h"
 
 // t_lexer version
-t_lexer		*list_last(t_lexer *list)
+t_lexer		*mini_listlast(t_lexer *list)
 {
 	if (!list)
 		return (0);
@@ -24,7 +24,7 @@ t_lexer		*list_last(t_lexer *list)
 }
 
 // t_lexer version
-void	listadd_back(t_lexer **list, t_lexer *new)
+void	mini_listadd_back(t_lexer **list, t_lexer *new)
 {
 	t_lexer	*last;
 
@@ -38,7 +38,7 @@ void	listadd_back(t_lexer **list, t_lexer *new)
 }
 
 // t_lexer version
-t_lexer	*list_new(void *input)
+t_lexer	*mini_listnew(void *input)
 {
 	t_lexer	*new;
 
@@ -48,13 +48,6 @@ t_lexer	*list_new(void *input)
 	new->input = input;
 	new->next = 0;
 	return (new);
-}
-
-// parse space I DONT THINK I NEED THIS ANYMORE BUT KEEP FOR LATER
-void	parse_space(char *input)
-{
-	while (ft_isspace(*input))
-		input++;
 }
 
 // print tokens
