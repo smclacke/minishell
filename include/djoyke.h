@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/22 18:32:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 18:39:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		print_list_command(t_command *list);
 void		print_command(t_command *list);
 
 /* execute */
-void	set_pipes(t_command *command, t_env *env);
-void	set_forks(t_command *command, t_env *env);
+void	set_pipes(t_command *input, t_env *env);
+void	set_forks(t_command *input, t_env *env);
 
 #endif
