@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 16:19:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 12:25:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/22 12:26:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**split_input(char *input)
 		// 	quotes = quote_tokens(&input[i]);
 		// 	// array[i] = quotes...
 		// }
-		// rest ... make_words, then add everything to array
+		// rest ... make_words, then add everything to
 		i++;
 	}
 	array[i] = 0;
