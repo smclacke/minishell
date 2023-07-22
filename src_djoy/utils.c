@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/21 18:54:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 15:16:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ int	ft_strcmp(const char *s1, const char *s2)
 void	check_for_builtin(char **argv, t_env *env)
 {
 	(void) env;
-	if (ft_strcmp(argv[1], "echo") == 0)
-		ft_echo(argv);
-	if (ft_strcmp(argv[1], "cd") == 0)
-		ft_cd(argv[2]);
-	if (ft_strcmp(argv[1], "pwd") == 0)
-		ft_pwd(NULL);
-	if (ft_strcmp(argv[1], "export") == 0)
-		ft_export(argv, env);
+	// if (ft_strcmp(argv[1], "echo") == 0)
+	// 	ft_echo(argv);
+	// if (ft_strcmp(argv[1], "cd") == 0)
+	// 	ft_cd(argv[2]);
+	// if (ft_strcmp(argv[1], "pwd") == 0)
+	// 	ft_pwd(NULL);
+	// if (ft_strcmp(argv[1], "export") == 0)
+	// 	ft_export(argv, env);
 	if (ft_strcmp(argv[0], "unset") == 0)//gives pwd not the entire path after unsetting
 		ft_unset(argv[1], env);
-	if (ft_strcmp(argv[1], "env") == 0)
-		ft_env(env);
+	// if (ft_strcmp(argv[1], "env") == 0)
+	// 	ft_env(env);
 	else
 		exit(EXIT_FAILURE);
 }

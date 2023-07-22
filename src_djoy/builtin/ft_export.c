@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 12:41:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 14:56:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,6 @@ void	ft_export(char **argv, t_env *env)
 	new_node = mini_lstnew(new_key, new_value);
 	mini_lstadd_back(&env, new_node);
 }
+
+//first character cannot have a number but everything else can have
+//check export edge cases

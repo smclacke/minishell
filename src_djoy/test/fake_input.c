@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 18:13:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/21 18:52:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 16:23:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,20 @@
 */
 t_command	*command_lstnew(char **commands)
 {
+	int			i;
 	t_command	*new;
 
+	i = 0;
 	new = (t_command *)malloc(sizeof(t_command));
 	if (!new)
 		return (NULL);
-	new->arg = commands;
-	new->next = NULL;
+	while (commands[i] != NULL)
+	{
+		new->command = commands[0];
+		i++;
+		new->arg = commands;
+		new->next = NULL;
+	}
 	return (new);
 }
 
@@ -63,18 +70,24 @@ void	command_lstadd_back(t_command **lst, t_command *new)
 		*lst = new;
 }
 
+/**
+ * @param void everything will be initialised in this function
+ * @brief initialises fake input in linked list with each node contaiing multiple strings.
+*/
 t_command	*init_command(void)
 {
 	t_command		*list;
 	t_command		*new_node;
 	int				i;
 	static char		*argv0[3] = {"unset", "PATH", NULL};
-	static char		*argv1[3] = {"cd", "src_djoy", NULL};
-	static char		*argv2[2] = {"pwd", NULL};
-	static char		*argv3[3] = {"echo", "hellowww", NULL};
-	static char		*argv4[2] = {"env", NULL};
-	static char		*argv5[3] = {"export", "djoyke=gek", NULL};
-	static char		**argvs[7] = {argv0, argv1, argv2, argv3, argv4, argv5, NULL};
+	// static char		*argv1[3] = {"cd", "src_djoy", NULL};
+	// static char		*argv2[2] = {"pwd", NULL};
+	// static char		*argv3[3] = {"echo", "hellowww", NULL};
+	// static char		*argv4[5] = {"unset", "PWD", "&&", "env", NULL};
+	// static char		*argv4[2] = {"env", NULL};
+	// static char		*argv5[3] = {"export", "djoyke=gek", NULL};
+	// static char		**argvs[7] = {argv0, argv1, argv2, argv3, argv4, argv5, NULL};
+	static char		**argvs[2] = {argv0, NULL};
 
 	i = 0;
 	list = NULL;
@@ -89,7 +102,7 @@ t_command	*init_command(void)
 
 /**
  * @param env environment stored in linked list
- * @brief prints linked list containing env key or value
+ * @brief prints linked list containing arguments
 */
 void	print_list_command(t_command *list)
 {
@@ -103,6 +116,19 @@ void	print_list_command(t_command *list)
 			printf("%s\n", list->arg[i]);
 			i++;
 		}
+		list = list->next;
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing just the commands
+*/
+void	print_command(t_command *list)
+{
+	while (list != NULL)
+	{
+		printf("%s\n", list->command);
 		list = list->next;
 	}
 }

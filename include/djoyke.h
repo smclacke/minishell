@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/21 17:34:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 16:23:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_env
 typedef struct s_command
 {
 	char					**arg;
+	char					*command;
 	struct s_command		*next;
 	struct s_command		*previous;
 }							t_command;
@@ -80,6 +81,7 @@ t_command	*command_lstlast(t_command *lst);
 void		command_lstadd_back(t_command **lst, t_command *new);
 t_command	*init_command(void);
 void		print_list_command(t_command *list);
+void	print_command(t_command *list);
 
 /* execute */
 // void	ft_execute(int argc, char **argv, char **envp);
