@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 18:13:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/22 16:23:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 16:42:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ t_command	*command_lstnew(char **commands)
 	int			i;
 	t_command	*new;
 
-	i = 0;
+	i = 1;
 	new = (t_command *)malloc(sizeof(t_command));
 	if (!new)
 		return (NULL);
+	new->command = commands[0];
 	while (commands[i] != NULL)
 	{
-		new->command = commands[0];
-		i++;
-		new->arg = commands;
+		new->arg = &commands[i];
 		new->next = NULL;
+		i++;
 	}
 	return (new);
 }
