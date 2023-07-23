@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 16:19:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 12:26:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/23 19:00:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,15 @@ char	**split_input(char *input)
 		return (0);
 	while (input[i])
 	{
-		if (sign_tokens(&input[i]) == MOREMORE || sign_tokens(&input[i]) == LESSLESS)
-			i += 1;
-		if ((sign_tokens(&input[i])))
+		if (!sign_tokens(&input[i]) && !ft_isspace(input[i]))
+			array[i] = &input[i];
+			
+		// if (sign_tokens(&input[i]) == MOREMORE || sign_tokens(&input[i]) == LESSLESS)
+		// 	i += 1;
+		// if ((sign_tokens(&input[i])))
 		{	
 			// if ((sign_tokens(&input[i]) == MOREMORE) || (sign_tokens(&input[i]) == LESSLESS))
 			// 	i += 1;
-			array[i] = &input[i];
-			printf("why?\n");
 		}
 		// if (ft_isquote(input[i]))
 		// {
