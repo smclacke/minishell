@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/19 16:19:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/23 19:00:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/24 00:29:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,40 +56,56 @@ char	*quote_tokens(char *input)
 	return (quote_strs);
 }
 
+void	split_input(char *input)
+{
+	int	i = 0;
+	
+	while (input[i])
+	{
+		if (sign_tokens(&input[i]))
+		{	
+			printf("please say you get here\n");
+			lexer(&input[i]);
+		}
+		i++;
+	}
+}
+
+//	OLD VERSION
 /**
  * make a 2D array of the input, split anything in quotes into one string, redirects and delimiters
  * into tokens and everything else via spaces into separate strings, give to the lexer to make 
  * tokens and pass token list back to main
 */
-char	**split_input(char *input)
-{
-	char	**array = NULL;
-	// char	*quotes;
-	int		i = 0;
+// char	**split_input(char *input)
+// {
+// 	char	**array = NULL;
+// 	// char	*quotes;
+// 	int		i = 0;
 	
-	array = (char **)malloc(sizeof(char *) * (ft_strlen(input) + 1));
-	if (!array)
-		return (0);
-	while (input[i])
-	{
-		if (!sign_tokens(&input[i]) && !ft_isspace(input[i]))
-			array[i] = &input[i];
+// 	array = (char **)malloc(sizeof(char *) * (ft_strlen(input) + 1));
+// 	if (!array)
+// 		return (0);
+// 	while (input[i])
+// 	{
+// 		if (!sign_tokens(&input[i]) && !ft_isspace(input[i]))
+// 			array[i] = &input[i];
 			
-		// if (sign_tokens(&input[i]) == MOREMORE || sign_tokens(&input[i]) == LESSLESS)
-		// 	i += 1;
-		// if ((sign_tokens(&input[i])))
-		{	
-			// if ((sign_tokens(&input[i]) == MOREMORE) || (sign_tokens(&input[i]) == LESSLESS))
-			// 	i += 1;
-		}
-		// if (ft_isquote(input[i]))
-		// {
-		// 	quotes = quote_tokens(&input[i]);
-		// 	// array[i] = quotes...
-		// }
-		// rest ... make_words, then add everything to
-		i++;
-	}
-	array[i] = 0;
-	return (array);
-}
+// 		// if (sign_tokens(&input[i]) == MOREMORE || sign_tokens(&input[i]) == LESSLESS)
+// 		// 	i += 1;
+// 		// if ((sign_tokens(&input[i])))
+// 		{	
+// 			// if ((sign_tokens(&input[i]) == MOREMORE) || (sign_tokens(&input[i]) == LESSLESS))
+// 			// 	i += 1;
+// 		}
+// 		// if (ft_isquote(input[i]))
+// 		// {
+// 		// 	quotes = quote_tokens(&input[i]);
+// 		// 	// array[i] = quotes...
+// 		// }
+// 		// rest ... make_words, then add everything to
+// 		i++;
+// 	}
+// 	array[i] = 0;
+// 	return (array);
+// }

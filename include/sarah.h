@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 12:09:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/24 00:21:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef	struct s_lexer
 t_lexer		*lexer(char *input);
 
 // --------- Split_input --------- //
-char		**split_input(char *input);
+void		split_input(char *input);
+// char		**split_input(char *input);
 
 // -------- Quotes --------//
 int			closed_quotes(char *input);
