@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/22 18:25:02 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/24 14:48:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/24 16:19:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,62 @@ void	set_forks(t_command *input, t_env *env, int fd_in, int *pipe_fd)
 		mini_error("dup2", errno);
 	close(fd_in);
 	close(pipe_fd[WRITE]);
+}
+
+bool	absolute_check(t_command *in)
+{
+	if (!ft_strncmp(in->command, "/", 1) && access(in->command, F_OK) == 0)
+		return (true);
+	if (!ft_strncmp(in->command, "./", 2) && access(in->command, F_OK) == 0)
+		return (true);
+	if (!ft_strncmp(in->command, "../", 3) && access(in->command, F_OK) == 0)
+		return (true);
+	return (false);
+}
+
+void	find_path(t_env *env, t_command *input)
+{
+	char	*command;
+	char	*ok_path;
+	int		i;
+
+	i = 0;
+	if (!absolute_check(input))
+	{
+		while (input->path && input->path[i] != NULL)
+		{
+			command = ft_strjoin("/", input->command);
+			if (ft_strjoin("/", input->command) == F_OK)
+				ok_path = ft_strjoin(input->path[i], command);
+		}
+	}
+}
+
+/* finds the PATH and stores it in a struct as a 2D array*/
+bool	parse_path(t_env *env, t_command *command)
+{
+	int		i;
+	char	*temp_path;	
+
+	i = 0;
+	while (env->key[i] != NULL)
+	{
+		if (ft_strncmp(env->key[i], "PATH=", 5) == 0)
+		{
+			temp_path = ft_substr(env->value[i], 0, ft_strlen(env->value[i]));
+			if (temp_path == NULL)
+				mini_error ("malloc", errno);
+			command->path = ft_split(temp_path, ':');
+			if (command->path == NULL)
+				mini_error ("malloc", errno);
+			free (temp_path);
+			if (command->path == NULL)
+				mini_error ("malloc", errno);
+			return (true);
+		}
+		i++;
+	}
+	return (false);
 }
 
 //[cat(1 part in node)] -> [ls + la (2 parts in node)] -> outfile
