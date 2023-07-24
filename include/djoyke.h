@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/22 18:48:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/24 13:43:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 # include <stdbool.h>
 # include <errno.h>
 # include <stddef.h>
-
-# define __null 0
 
 # define READ 0
 # define WRITE 1
