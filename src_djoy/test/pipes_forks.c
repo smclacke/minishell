@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/22 18:25:02 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/22 18:56:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/24 14:48:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	set_pipes(t_command *input, t_env *env)
 	int	pipe_fd[2];
 	int	fd_in;
 
+	fd_in = 0;
 	if (dup2(STDIN_FILENO, fd_in) == -1)//dupes standard input to fd_in (WHY NEED TO DO THIS?)
 		mini_error("dup2", errno);
 	while (input->command)//loops through command part of t_command struct
@@ -32,7 +33,7 @@ void	set_pipes(t_command *input, t_env *env)
 		if (dup2(pipe_fd[READ], fd_in) == -1)//dupes read to fd_in
 			mini_error("dup2", errno);
 		close(pipe_fd[READ]);//closes what I dont use
-		input->command = input->command->next;
+		input = input->next;
 	}
 }
 
@@ -41,10 +42,13 @@ void	set_pipes(t_command *input, t_env *env)
  * @param env linked list containing environment
  * @brief makes child process and executes in it
 */
-void	set_forks(t_command *input, t_env *env, int fd_in, int pipe_fd)
+void	set_forks(t_command *input, t_env *env, int fd_in, int *pipe_fd)
 {
 	int	fork_pid;
 
+	(void) pipe_fd;
+	(void) input;
+	(void) env;
 	fork_pid = fork();
 	if (fork_pid == -1)
 		mini_error("fork", errno);
