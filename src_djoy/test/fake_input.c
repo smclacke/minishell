@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/18 18:13:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/22 17:02:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/24 18:23:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_command	*command_lstnew(char **commands)
 	while (commands[i] != NULL)
 	{
 		new->arg = &commands[i];
+		new->path = NULL;
 		new->next = NULL;
 		i++;
 	}
@@ -91,9 +92,11 @@ t_command	*init_command(void)
 	// static char		**argvs[2] = {argv0, NULL};
 	i = 0;
 	list = NULL;
-	while (argvs[i])
+	while (argvs[i] != NULL)
 	{
 		new_node = command_lstnew(argvs[i]);
+		if (new_node == NULL)
+			mini_error("malloc", errno);
 		command_lstadd_back(&list, new_node);
 		i++;
 	}

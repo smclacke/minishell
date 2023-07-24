@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/22 18:25:25 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/24 18:18:08 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,7 @@ NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
 
-CFLAGS			= -Wall -Wextra -Werror -g
-# -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include
