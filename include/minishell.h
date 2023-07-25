@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 12:15:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 13:39:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define READ 0
 # define WRITE 1
 
+typedef	struct	s_mini
+{
+	struct	t_parser	tokens;
+	struct	t__env		environ;
+}	t_mini;
+
 
 //------------Minishell-----------//
 
@@ -38,6 +44,14 @@
 //----Lexer----//
 
 //----Parser----//
+typedef struct s_parser 
+{
+	char				*word;
+	char				*cmd;
+	char				*redirect;
+	struct t_lexer		*tokens;
+}	t_parser;
+
 
 //----Expander----//
 
