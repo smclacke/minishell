@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 19:03:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 23:16:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static t_lexer	*micro_make_token_list(char **parsed_token)
 	return (token_list);
 }
 
-t_lexer	*ft_micro_lexer(char *input)
+t_lexer	*micro_lexer(char *input)
 {
 	t_lexer		*token_list;
 	char		**parsed_input;

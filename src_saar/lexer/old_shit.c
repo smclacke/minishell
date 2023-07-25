@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/16 16:23:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/22 12:01:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 23:20:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,155 @@
  * old stuff to refer to if necessary until my new solution works...
  * 
 */
+
+// 25-07-23
+
+// // I think I should call split_input, from there if token, lexer it. dont send back to main
+// // and don't make 2d array, theyll be in the list and i think that is ok
+
+// void	lexing(char **args, t_lexer *data)
+// {
+// 	char	*input;
+// 	int		i;
+
+// 	i = 0;
+// 	while (1)
+// 	{
+// 		input = readline(PROMPT);
+// 		add_history(input);
+// 		split_input(input);
+// 		if (!args)
+// 			exit(EXIT_FAILURE);
+// 		ft_print_tokens(data->token);
+// 	}
+// }
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	(void) 		argc;
+// 	(void) 		argv;
+// 	(void) 		envp;
+// 	char	*input;
+	
+
+// 	while (1)
+// 	{
+// 		input = readline(PROMPT);
+// 	}
+// }
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	(void) 		argc;
+// 	(void) 		envp;
+// 	t_lexer		data;
+
+// 	lexing(argv, &data);
+// 	// parser
+// 	// return AST to expander
+// }
+
+
+//	OLD VERSION	
+// void	lexing(char **args)
+// {
+// 	t_lexer	*tokens;
+// 	char	*input;
+// 	int		i;
+
+// 	i = 0;
+// 	while (1)
+// 	{
+// 		input = readline(PROMPT);
+// 		add_history(input);
+// 		args = split_input(input);
+// 		if(!args)
+// 			exit(EXIT_FAILURE);
+// 		while (args[i])
+// 		{
+// 			tokens = lexer(args[i]);
+// 			ft_print_tokens(tokens);
+// 			i++;
+// 		}
+// 	}
+// }
+
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	(void)	argc;
+// 	// (void)	argv;
+// 	(void)	envp;
+
+// 	lexing(argv);
+// 		// parser the tokens... 
+// 		// return the AST to the expander
+// 	// }
+// }
+
+
+
+
+// void	split_input(char *input)
+// {
+// 	int	i = 0;
+	
+// 	while (input[i])
+// 	{
+// 		if (sign_tokens(&input[i]))
+// 		{	
+// 			printf("please say you get here\n");
+// 			lexer(&input[i]);
+// 		}
+// 		i++;
+// 	}
+// }
+
+// //	OLD VERSION
+// /**
+//  * make a 2D array of the input, split anything in quotes into one string, redirects and delimiters
+//  * into tokens and everything else via spaces into separate strings, give to the lexer to make 
+//  * tokens and pass token list back to main
+// */
+// // char	**split_input(char *input)
+// // {
+// // 	char	**array = NULL;
+// // 	// char	*quotes;
+// // 	int		i = 0;
+	
+// // 	array = (char **)malloc(sizeof(char *) * (ft_strlen(input) + 1));
+// // 	if (!array)
+// // 		return (0);
+// // 	while (input[i])
+// // 	{
+// // 		if (!sign_tokens(&input[i]) && !ft_isspace(input[i]))
+// // 			array[i] = &input[i];
+			
+// // 		// if (sign_tokens(&input[i]) == MOREMORE || sign_tokens(&input[i]) == LESSLESS)
+// // 		// 	i += 1;
+// // 		// if ((sign_tokens(&input[i])))
+// // 		{	
+// // 			// if ((sign_tokens(&input[i]) == MOREMORE) || (sign_tokens(&input[i]) == LESSLESS))
+// // 			// 	i += 1;
+// // 		}
+// // 		// if (ft_isquote(input[i]))
+// // 		// {
+// // 		// 	quotes = quote_tokens(&input[i]);
+// // 		// 	// array[i] = quotes...
+// // 		// }
+// // 		// rest ... make_words, then add everything to
+// // 		i++;
+// // 	}
+// // 	array[i] = 0;
+// // 	return (array);
+// // }
+
+
+// 25-07-23
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// ADD DATES NEXT TIME TO MAKE LIFE A LITTLE MORE LIVABLE
 
 
 /**

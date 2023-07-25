@@ -6,12 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 14:40:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 23:25:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef SARAH_H
+# define SARAH_H
 
 #include "libft/include/libft.h"
 #include "prompt.h"
@@ -27,6 +27,8 @@
 #include <sys/ioctl.h>
 #include <stdbool.h>
 
+# define READ 0
+# define WRITE 1
 # define SUCCESS 0
 # define ERROR -1
 
@@ -47,18 +49,16 @@ typedef	struct s_lexer
 {
 	void				*input;
 	void				*token;
-	t_signs				sign[8]; // do we need this and if so what do we do with it?
 	struct s_lexer		*next;
+	t_signs				sign[8]; // do we need this and if so what do we do with it?
 }	t_lexer;
 
 // --------- Lexer --------- //
 t_lexer		*lexer(char *input);
 
-// --------- Split_input --------- //
-void		split_input(char *input);
-// char		**split_input(char *input);
-
 // -------- Quotes --------//
+int			sign_tokens(char *input);
+char		*quote_tokens(char *input);
 int			closed_quotes(char *input);
 char		*check_quotes(char *input);
 
@@ -67,6 +67,8 @@ t_lexer		*lexer_listlast(t_lexer *list);
 void		lexer_listadd_back(t_lexer **list, t_lexer *new);
 t_lexer		*lexer_listnew(void *input);
 t_lexer		*ft_print_tokens(t_lexer *token);
+
+
 
 // PARSER 
 typedef struct s_parser 
@@ -88,7 +90,6 @@ typedef struct s_parser
 
 // OTHER FUNCTIONS
 // ------------ Other ---------// // not sure if necessary, just keeping for now
-char		**parse_input(char *input);
 void		parse_space(char *input);
 void		error_no_cmd(void);
 void		error_space(char *cmd);
