@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 12:18:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 13:50:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../include/sarah.h"
 
 // t_lexer version
-t_lexer		*mini_listlast(t_lexer *list)
+t_lexer		*lexer_listlast(t_lexer *list)
 {
 	if (!list)
 		return (0);
@@ -24,7 +24,7 @@ t_lexer		*mini_listlast(t_lexer *list)
 }
 
 // t_lexer version
-void	mini_listadd_back(t_lexer **list, t_lexer *new)
+void	lexer_listadd_back(t_lexer **list, t_lexer *new)
 {
 	t_lexer	*last;
 
@@ -38,7 +38,7 @@ void	mini_listadd_back(t_lexer **list, t_lexer *new)
 }
 
 // t_lexer version
-t_lexer	*mini_listnew(void *input)
+t_lexer	*lexer_listnew(void *input)
 {
 	t_lexer	*new;
 
