@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/25 12:13:25 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/25 13:11:28 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -148,6 +148,20 @@ $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)/expander
 	@ mkdir -p $(OBJ_MICRO_DIR)/executor
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
+
+debug:
+	$(MAKE) DEBUG=1
+.PHONY: debug
+
+rebug: fclean debug
+.PHONY: rebug
+
+fsan:
+	$(MAKE) DEBUG=1 FSAN=1
+.PHONY: fsan
+
+resan: fclean fsan
+.PHONY: resan
 
 clean		:
 	@make -C include/libft clean
