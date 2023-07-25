@@ -6,10 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 13:31:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/25 12:15:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -29,5 +28,19 @@
 # define PROMPT "hey Djoyke $"
 # define READ 0
 # define WRITE 1
+
+
+//------------Minishell-----------//
+
+
+
+//------------MICRO_SHELL----------//
+//----Lexer----//
+
+//----Parser----//
+
+//----Expander----//
+
+//----Executor----//
 
 #endif

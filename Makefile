@@ -6,9 +6,10 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/25 12:18:55 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/25 12:20:08 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
 
 
 
@@ -16,6 +17,7 @@
 NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
+MICRO_SHELL		= micro
 
 CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
@@ -82,8 +84,16 @@ SRC_SAAR		= $(addprefix $(SAAR_DIR)/, $(SRCS_SAAR))
 
 OBJ_SAAR_DIR	= obj_saar
 OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
-OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 
+## MICRO_SHELL ##
+
+SRCS_MICRO		= main.c
+
+MICRO_DIR		= micro_shell
+SRC_MICRO		= $(addprefix $(MICRO_DIR)/, $(SRCS_MICRO))
+
+OBJ_MICRO_DIR	= obj_micro
+OBJ_MICRO		= $(addprefix $(OBJ_MICRO_DIR)/, $(SRCS_MICRO:%.c=%.o))
 
 ## Colours ##
 RESET		:= \033[0m
@@ -122,6 +132,9 @@ $(SAAR)			:	$(OBJ_SAAR)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR) && ./sarah
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 
+$(MICRO_SHELL)	:	$(OBJ_MICRO)
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL) && ./micro
+	@ echo "${WHITE}our micro mini shell${RESET}"
 
 ## OBJECTS
 
@@ -142,6 +155,7 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)/utils
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
+<<<<<<< HEAD
 debug:
 	$(MAKE) DEBUG=1
 .PHONY: debug
@@ -155,12 +169,22 @@ fsan:
 
 resan: fclean fsan
 .PHONY: resan
+=======
+$(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
+	@ mkdir -p $(OBJ_MICRO_DIR)
+	@ mkdir -p $(OBJ_MICRO_DIR)/parser
+	@ mkdir -p $(OBJ_MICRO_DIR)/lexer
+	@ mkdir -p $(OBJ_MICRO_DIR)/expander
+	@ mkdir -p $(OBJ_MICRO_DIR)/executor
+	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
+>>>>>>> micro_shell
 
 clean		:
 	@make -C include/libft clean
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(OBJ_DJOY_DIR)
 	@rm -rf $(OBJ_SAAR_DIR)
+	@rm -rf $(OBJ_MICRO_DIR)
 
 fclean		:
 	@make -C include/libft fclean
@@ -170,8 +194,9 @@ fclean		:
 	@rm -rf $(NAME)
 	@rm -rf $(DJOY)
 	@rm -rf $(SAAR)
+	@rm -rf $(MICRO_SHELL)
 	@echo "${YELLOW} // Minishell fCleaned!${RESET}"
 
 re			: fclean all
 
-.PHONY: all clean fclean re libft sarah djoyke
+.PHONY: all clean fclean re libft sarah djoyke micro_shell
