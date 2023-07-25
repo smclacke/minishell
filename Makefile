@@ -6,21 +6,30 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/25 13:11:28 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/25 13:13:31 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
+
 
 NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
 MICRO_SHELL		= micro
 
-CFLAGS			= -Wall -Wextra -g -fsanitize=address
-# -Werror
+CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include
 IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
+
+ifdef DEBUG
+CFLAGS += -g
+endif
+
+ifdef
+CFLAGS += -fsanitize=address,undefined
+endif
 
 ## MINISHELL ##
 
@@ -30,7 +39,7 @@ SRCS		=	main.c			\
 				lexer.c			\
 				parser.c
 
-SRC_DIR			= src
+SRC_DIR			= mini_src
 SRC				= $(addprefix $(SRC_DIR)/, $(SRCS))
 
 OBJ_DIR			= obj
@@ -47,7 +56,8 @@ SRCS_DJOY		=	main_djoy.c			\
 					builtin/ft_export.c \
 					builtin/ft_unset.c 	\
 					builtin/ft_env.c 	\
-					ft_execute.c 
+					test/pipes_forks.c	\
+					test/fake_input.c	
 					
 
 DJOY_DIR		= src_djoy
@@ -114,6 +124,7 @@ $(NAME)			:	$(OBJ)
 $(DJOY)			:	$(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
+	@ ./djoyke
 
 $(SAAR)			:	$(OBJ_SAAR)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR) && ./sarah
@@ -132,6 +143,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
+	@ mkdir -p $(OBJ_DJOY_DIR)/test
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c

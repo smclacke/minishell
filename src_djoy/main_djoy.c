@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/18 13:04:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/24 13:58:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,24 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_env	*env;
+	t_env		*env;
+	t_command	*fake_command;
+	char		*input;
 
-	// (void) argv;
-	if (argc <= 1)//needs to give prompt back
-		exit(EXIT_FAILURE);//only for testing purpose
-	env = env_list(envp);
-	check_for_builtin(argv, env);
-	// ft_execute(argc, argv, envp);
-	print_list(env);
-	// print_list_key(env);
-	// print_list_value(env);
+	(void) argv;
+	(void) argc;
+	while (1)
+	{
+		input = readline(PROMPT);
+		add_history(input);
+		env = env_list(envp);
+		fake_command = init_command();
+		print_command(fake_command);
+		set_pipes(fake_command, env);
+		// print_list_command(fake_command);
+		// check_for_builtin(test, env);
+		// print_list(env);
+	}
 }
 
 /*
@@ -80,3 +87,5 @@ int	main(int argc, char **argv, char **envp)
 //make own error messages
 
 //& gives * and &bla[1] gives **..... wellll
+
+//ctrl d exits where it's in
