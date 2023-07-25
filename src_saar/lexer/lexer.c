@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 23:23:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 23:28:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	**parse_input(char *input)
 {
 	char	**array = NULL;
 	
-	// split on spaces unless quote is found, take first to last quote, 
+	// split on spaces unless quote is found, IF QUOTE IS SURROUNDED BY SPACES, take first to last quote, 
 	// substr, add to array, then check if end of array or not,
 	// if not, keep splitting on spaces
 	array = ft_split(input, ' ');
