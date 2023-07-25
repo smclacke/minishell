@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/24 00:21:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 13:36:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef enum	e_signs
 	PIPE = 8
 }		t_signs;
 
-
 // LEXER
 typedef	struct s_lexer
 {
@@ -69,11 +68,13 @@ void		mini_listadd_back(t_lexer **list, t_lexer *new);
 t_lexer		*mini_listnew(void *input);
 t_lexer		*ft_print_tokens(t_lexer *token);
 
-
-
 // PARSER 
 typedef struct s_parser 
 {
+	// what = parse->cmd = list cmd 
+	// is = parser->redirect
+	// this
+	cahr	*cmd;
 	struct t_lexer		*tokens;
 }	t_parser;
 
