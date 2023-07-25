@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/24 17:47:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/25 13:50:58 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ typedef struct s_command
 }							t_command;
 
 /* list making functions */
-void	mini_lstadd_back(t_env **lst, t_env *new);
-t_env	*mini_lstlast(t_env *lst);
-t_env	*mini_lstnew(void *key, void *value);
+void	env_lstadd_back(t_env **lst, t_env *new);
+t_env	*env_lstlast(t_env *lst);
+t_env	*env_lstnew(void *key, void *value);
 t_env	*env_list(char **envp);
 void	get_key_value(char *str, char **key, char **value);
 

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 12:56:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/25 13:50:36 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @todo 
  * 1) needs to add previous in case of doubly linked list
 */
-t_env	*mini_lstnew(void *key, void *value)
+t_env	*env_lstnew(void *key, void *value)
 {
 	t_env	*new;
 
@@ -60,7 +60,7 @@ void	get_key_value(char *str, char **key, char **value)
  * @param lst linked list to loop through
  * @brief loops to list to go to last position
 */
-t_env	*mini_lstlast(t_env *lst)
+t_env	*env_lstlast(t_env *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -75,7 +75,7 @@ t_env	*mini_lstlast(t_env *lst)
  * @brief loops through list to add the new node to the back
  * @todo adding previous in case of doubly linked list
 */
-void	mini_lstadd_back(t_env **lst, t_env *new)
+void	env_lstadd_back(t_env **lst, t_env *new)
 {
 	t_env	*last;
 
