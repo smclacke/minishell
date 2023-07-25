@@ -6,11 +6,9 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/25 15:40:37 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/25 18:07:40 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 NAME			= minishell
 DJOY			= djoyke
@@ -97,18 +95,6 @@ SRC_MICRO		= $(addprefix $(MICRO_DIR)/, $(SRCS_MICRO))
 OBJ_MICRO_DIR	= obj_micro
 OBJ_MICRO		= $(addprefix $(OBJ_MICRO_DIR)/, $(SRCS_MICRO:%.c=%.o))
 
-## Colours ##
-RESET		:= \033[0m
-RED			:= \033[1;91m
-GREEN		:= \033[1;92m
-YELLOW		:= \033[1;93m
-BLUE		:= \033[1;94m
-PURPLE		:= \033[1;95m
-CYAN		:= \033[1;96m
-WHITE		:= \033[1;97m
-BLACK		:= \033[1;90m
-
-
 all				: libft $(NAME)
 
 djoy			: libft $(DJOY)
@@ -124,6 +110,7 @@ libft			:
 $(NAME)			:	$(OBJ)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
+	@ ./minishell
 
 $(DJOY)			:	$(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
@@ -180,6 +167,18 @@ $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 
 # resan: fclean fsan
 # .PHONY: resan
+
+
+## Colours ##
+RESET		:= \033[0m
+RED			:= \033[1;91m
+GREEN		:= \033[1;92m
+YELLOW		:= \033[1;93m
+BLUE		:= \033[1;94m
+PURPLE		:= \033[1;95m
+CYAN		:= \033[1;96m
+WHITE		:= \033[1;97m
+BLACK		:= \033[1;90m
 
 clean		:
 	@make -C include/libft clean
