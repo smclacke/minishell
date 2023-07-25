@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 18:12:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 12:23:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/22 15:14:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 */
 void	ft_env(t_env *env)
 {
+	printf("what the shell env");
 	while (env != NULL)
 	{
 		printf("%s=%s\n", env->key, env->value);
