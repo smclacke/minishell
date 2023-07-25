@@ -6,12 +6,9 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/25 12:20:08 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/25 12:23:42 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
-
-
-
 
 
 NAME			= minishell
@@ -41,7 +38,7 @@ SRCS		=	main.c			\
 				lexer.c			\
 				parser.c
 
-SRC_DIR			= src
+SRC_DIR			= mini_src
 SRC				= $(addprefix $(SRC_DIR)/, $(SRCS))
 
 OBJ_DIR			= obj
@@ -155,7 +152,14 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)/utils
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
-<<<<<<< HEAD
+$(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
+	@ mkdir -p $(OBJ_MICRO_DIR)
+	@ mkdir -p $(OBJ_MICRO_DIR)/parser
+	@ mkdir -p $(OBJ_MICRO_DIR)/lexer
+	@ mkdir -p $(OBJ_MICRO_DIR)/expander
+	@ mkdir -p $(OBJ_MICRO_DIR)/executor
+	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
+
 debug:
 	$(MAKE) DEBUG=1
 .PHONY: debug
@@ -169,15 +173,6 @@ fsan:
 
 resan: fclean fsan
 .PHONY: resan
-=======
-$(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
-	@ mkdir -p $(OBJ_MICRO_DIR)
-	@ mkdir -p $(OBJ_MICRO_DIR)/parser
-	@ mkdir -p $(OBJ_MICRO_DIR)/lexer
-	@ mkdir -p $(OBJ_MICRO_DIR)/expander
-	@ mkdir -p $(OBJ_MICRO_DIR)/executor
-	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
->>>>>>> micro_shell
 
 clean		:
 	@make -C include/libft clean
