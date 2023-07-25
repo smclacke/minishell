@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 16:39:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 19:03:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,17 @@ int	micro_sign_tokens(char *input)
 // check_quote - single quotes inside characters = remove them
 
 // parse func
+	// we can still split on space BUT, check first for quotes, handle
+	// 	them differently, with a quote split func maybe?
+	// leave the meta_char check for the parser?
 static char	**micro_parse_input(char *input)
 {
 	char	**array = NULL;
 	// int		i = 0;
 
-
-	// we can still split on space BUT, check first for quotes, handle
-	// 	them differently, with a quote split func maybe?
-	// leave the meta_char check for the parser?
+	// handle quotes
+	// add quotes to array (IN ORDER)
+	// ... that's it :) send the sign_token type in parser
 	array = ft_split(input, ' ');
 	// while (input[i])
 	// {
@@ -69,11 +71,9 @@ static t_lexer	*micro_make_token_list(char **parsed_token)
 	while (parsed_token[i])
 	{
 		len = ft_strlen(parsed_token[i]);
-		printf("length: %i\n", len);
 		token_str = ft_substr(parsed_token[i], 0, len + 1);
 		if (!token_str)
 			return (0);
-		printf("token_str: %s\n", token_str);
 		token = micro_lexer_listnew(token_str);
 		if (!token)
 			return (0);
@@ -98,11 +98,6 @@ t_lexer	*ft_micro_lexer(char *input)
 		i++;
 	}
 	i = 0;
-	while (parsed_input[i])
-	{
-		printf("parsed input: %s\n", parsed_input[i]);
-		i++;
-	}
 	token_list = micro_make_token_list(parsed_input);
 	if (!token_list)
 		return (0);
