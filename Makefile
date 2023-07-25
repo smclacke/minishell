@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/25 15:12:10 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/25 15:40:37 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ DJOY			= djoyke
 SAAR			= sarah
 MICRO_SHELL		= micro
 
-CFLAGS			= -Wall -Wextra 
+CFLAGS			= -Wall -Wextra -g -fsanitize=address
+
 # -Werror 
-# -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include

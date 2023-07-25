@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 15:15:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 16:27:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef	struct s_lexer
 {
 	void				*input;
 	void				*token;
-	t_signs				sign[8]; // do we need this and if so what do we do with it?
 	struct s_lexer		*next;
+	t_signs				sign[8]; // do we need this and if so what do we do with it?
 }	t_lexer;
 
 t_lexer			*ft_micro_lexer(char *input);
@@ -58,6 +58,7 @@ t_lexer			*micro_lexer_listlast(t_lexer *list);
 void			micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
 t_lexer			*micro_lexer_listnew(void *input);
 t_lexer			*micro_ft_print_tokens(t_lexer *token);
+int				micro_sign_tokens(char *input);
 
 //----Parser----//
 typedef struct s_parser 

@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 15:15:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 16:39:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 // check_meta - return the enum for which char it is
-static int	micro_sign_tokens(char *input)
+int	micro_sign_tokens(char *input)
 {
 	int		i = 0;
 	while (input[i])
@@ -35,40 +35,58 @@ static int	micro_sign_tokens(char *input)
 	return (0);
 }
 
-// check_quote - single quotes, inside characters, remove them
+
+// check_quote - single quotes inside characters = remove them
 
 // parse func
-static char	*micro_parse_input(char *input)
+static char	**micro_parse_input(char *input)
 {
-	int		i = 0;
-	
-	while (input[i])
-	{
-		if (micro_sign_tokens(&input[i]))
-			return (&input[i]);
-		i++;
-	}
-	return (0);
+	char	**array = NULL;
+	// int		i = 0;
+
+
+	// we can still split on space BUT, check first for quotes, handle
+	// 	them differently, with a quote split func maybe?
+	// leave the meta_char check for the parser?
+	array = ft_split(input, ' ');
+	// while (input[i])
+	// {
+	// 	if (micro_sign_tokens(&input[i]))
+	// 		return (&input[i]);
+	// 	i++;
+	// }
+	return (array);
 }
 
-static char	*micro_make_token(char *parsed_token)
+static t_lexer	*micro_make_token_list(char **parsed_token)
 {
-	char	*token;
-	int		len;
+	t_lexer		*token_list = NULL;
+	t_lexer		*token;
+	char		*token_str;
+	int			i = 0;
+	int			len = 0;
 
-	len = ft_strlen(parsed_token);
-	token = ft_substr(parsed_token, 0, len);
-	if (!token)
-		return (0);
-	return (token);
+	while (parsed_token[i])
+	{
+		len = ft_strlen(parsed_token[i]);
+		printf("length: %i\n", len);
+		token_str = ft_substr(parsed_token[i], 0, len + 1);
+		if (!token_str)
+			return (0);
+		printf("token_str: %s\n", token_str);
+		token = micro_lexer_listnew(token_str);
+		if (!token)
+			return (0);
+		micro_lexer_listadd_back(&token_list, token);
+		i++;
+	}
+	return (token_list);
 }
 
 t_lexer	*ft_micro_lexer(char *input)
 {
-	char		*new_token;
-	char		*parsed_input;
-	t_lexer		*token;
-	t_lexer		*token_list = NULL;
+	t_lexer		*token_list;
+	char		**parsed_input;
 	int			i;
 
 	i  = 0;
@@ -77,18 +95,16 @@ t_lexer	*ft_micro_lexer(char *input)
 		parsed_input = micro_parse_input(input);
 		if (!parsed_input)
 			return (0);
-		new_token = micro_make_token(parsed_input);
-		if (!new_token)
-			return (0);
-		token = micro_lexer_listnew(new_token);
-		if (!token)
-			return (0);
-		micro_lexer_listadd_back(&token_list, token);
 		i++;
 	}
-	return (token);
+	i = 0;
+	while (parsed_input[i])
+	{
+		printf("parsed input: %s\n", parsed_input[i]);
+		i++;
+	}
+	token_list = micro_make_token_list(parsed_input);
+	if (!token_list)
+		return (0);
+	return (token_list);
 }
-
-
-
-
