@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 13:36:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 14:40:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int			closed_quotes(char *input);
 char		*check_quotes(char *input);
 
 // -------- Lexer Utils --------//
-t_lexer		*mini_listlast(t_lexer *list);
-void		mini_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer		*mini_listnew(void *input);
+t_lexer		*lexer_listlast(t_lexer *list);
+void		lexer_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer		*lexer_listnew(void *input);
 t_lexer		*ft_print_tokens(t_lexer *token);
 
 // PARSER 
@@ -74,7 +74,7 @@ typedef struct s_parser
 	// what = parse->cmd = list cmd 
 	// is = parser->redirect
 	// this
-	cahr	*cmd;
+	char	*cmd;
 	struct t_lexer		*tokens;
 }	t_parser;
 

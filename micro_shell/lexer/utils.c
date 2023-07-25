@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lexer_utils.c                                      :+:    :+:            */
+/*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 14:40:47 by smclacke      ########   odam.nl         */
+/*   Created: 2023/07/25 15:05:10 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/07/25 15:14:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../../include/sarah.h"
+#include "../../include/minishell.h"
 
 // t_lexer version
-t_lexer		*lexer_listlast(t_lexer *list)
+t_lexer		*micro_lexer_listlast(t_lexer *list)
 {
 	if (!list)
 		return (0);
@@ -24,13 +23,13 @@ t_lexer		*lexer_listlast(t_lexer *list)
 }
 
 // t_lexer version
-void	lexer_listadd_back(t_lexer **list, t_lexer *new)
+void	micro_lexer_listadd_back(t_lexer **list, t_lexer *new)
 {
 	t_lexer	*last;
 
 	if (*list)
 	{
-		last = lexer_listlast(*list);
+		last = micro_lexer_listlast(*list);
 		last->next = new;
 	}
 	else
@@ -38,7 +37,7 @@ void	lexer_listadd_back(t_lexer **list, t_lexer *new)
 }
 
 // t_lexer version
-t_lexer	*lexer_listnew(void *input)
+t_lexer	*micro_lexer_listnew(void *input)
 {
 	t_lexer	*new;
 
@@ -51,7 +50,7 @@ t_lexer	*lexer_listnew(void *input)
 }
 
 // print tokens
-t_lexer	*ft_print_tokens(t_lexer *token)
+t_lexer	*micro_ft_print_tokens(t_lexer *token)
 {
 	t_lexer	*list;
 	

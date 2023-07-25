@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 13:55:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 15:15:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 #include "libft/include/libft.h"
+#include "prompt.h"
+#include "colour.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,16 +25,39 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
-// # define PROMPT BI_YELLOW".~❃~."BI_PURPLE".~⚘~."BI_CYAN".~✿~."RESET
-
-# define PROMPT "hey Djoyke $"
 # define READ 0
 # define WRITE 1
-
+# define SUCCESS 0
+# define ERROR -1
 
 
 //------------MICRO_SHELL----------//
 //----Lexer----//
+typedef enum	e_signs
+{
+	DQUOTE = 1,
+	SQUOTE = 2,
+	DOLLAR = 3,
+	MORE = 4,
+	MOREMORE = 5,
+	LESS = 6,
+	LESSLESS = 7,
+	PIPE = 8
+}		t_signs;
+
+typedef	struct s_lexer
+{
+	void				*input;
+	void				*token;
+	t_signs				sign[8]; // do we need this and if so what do we do with it?
+	struct s_lexer		*next;
+}	t_lexer;
+
+t_lexer			*ft_micro_lexer(char *input);
+t_lexer			*micro_lexer_listlast(t_lexer *list);
+void			micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer			*micro_lexer_listnew(void *input);
+t_lexer			*micro_ft_print_tokens(t_lexer *token);
 
 //----Parser----//
 typedef struct s_parser 
@@ -55,6 +80,9 @@ typedef struct s_env
 	struct s_env		*next;
 	struct s_env		*previous;
 }							t_env;
+
+//----Utils----//
+void		micro_mini_error(char *string, int error);
 
 
 //------------Minishell-----------//

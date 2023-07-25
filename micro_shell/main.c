@@ -6,14 +6,57 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 12:14:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 15:15:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main()
+// INPUT: e'ch'o abc$abc 
+// OUTPUT: abc
+
+/**
+ * @param string argument given to perror
+ * @param error int errno given to exit
+ * @brief provides correct error message and exits
+*/
+// void	micro_mini_error(char *string, int error)
+// {
+// 	perror(string);
+// 	exit(error);
+// }
+
+/**
+ * need to do extensive error handling in the future
+*/
+
+int	main(int argc, char **argv, char **envp)
 {
-	printf("dummy main\n");
+	(void) argc;
+	(void) argv;
+	(void) envp;
+	char	*input;
+	t_lexer	*tokens = NULL;
+	int		i = 0;
+	
+	while (1)
+	{
+		input = readline(PROMPT);
+		add_history(input);
+		tokens = ft_micro_lexer(input);
+		if (!tokens)
+			return (0);
+		while (tokens)
+		{
+			micro_ft_print_tokens(&tokens[i]);
+			i++;
+		}
+		// parser(tokens)
+		// expand(mini->tokens) // tokens from s_parser struct, 
+		//	check built-in, check meta char, check quotes.
+		// execution // make env_list, create child processes, execve
+		// free input (readline needs to be fred at end)	
+	}
+	return (0);
 }
 

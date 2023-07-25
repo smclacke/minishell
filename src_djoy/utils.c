@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:13:16 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/22 16:53:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/25 14:22:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	ft_strcmp(const char *s1, const char *s2)
  * 1) needs to be passed to actual process,
  * 2) all [i] indexes need to be replaced by actual parsed data
  * 3) exit(EXIT_FAILURE) is it really neccesary?
+ * 4) MAYBE MAKE IT A BOOL?
 */
 void	check_for_builtin(char **argv, t_env *env)
 {

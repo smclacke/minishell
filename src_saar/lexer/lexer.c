@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 13:50:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/25 14:47:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*make_token(char *parsed_token)
 	char	*token;
 	int		len;
 
-	len = ft_strlen(parsed_token);	
+	len = ft_strlen(parsed_token);
 	token = ft_substr(parsed_token, 0, len);
 	if (!token)
 		return (0);

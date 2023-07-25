@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/25 13:13:31 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/25 15:12:10 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,19 +17,21 @@ DJOY			= djoyke
 SAAR			= sarah
 MICRO_SHELL		= micro
 
-CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS			= -Wall -Wextra 
+# -Werror 
+# -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include
 IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
-ifdef DEBUG
-CFLAGS += -g
-endif
+# ifdef DEBUG
+# CFLAGS += -g
+# endif
 
-ifdef
-CFLAGS += -fsanitize=address,undefined
-endif
+# ifdef
+# CFLAGS += -fsanitize=address,undefined
+# endif
 
 ## MINISHELL ##
 
@@ -85,7 +87,9 @@ OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 
 ## MICRO_SHELL ##
 
-SRCS_MICRO		= main.c
+SRCS_MICRO		= main.c				\
+					lexer/lexer.c		\
+					lexer/utils.c
 
 MICRO_DIR		= micro_shell
 SRC_MICRO		= $(addprefix $(MICRO_DIR)/, $(SRCS_MICRO))
@@ -127,12 +131,14 @@ $(DJOY)			:	$(OBJ_DJOY)
 	@ ./djoyke
 
 $(SAAR)			:	$(OBJ_SAAR)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR) && ./sarah
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
+	@ ./sarah
 
 $(MICRO_SHELL)	:	$(OBJ_MICRO)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL) && ./micro
+	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL)
 	@ echo "${WHITE}our micro mini shell${RESET}"
+	@ ./micro
 
 ## OBJECTS
 
@@ -161,19 +167,19 @@ $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)/executor
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
-debug:
-	$(MAKE) DEBUG=1
-.PHONY: debug
+# debug:
+# 	$(MAKE) DEBUG=1
+# .PHONY: debug
 
-rebug: fclean debug
-.PHONY: rebug
+# rebug: fclean debug
+# .PHONY: rebug
 
-fsan:
-	$(MAKE) DEBUG=1 FSAN=1
-.PHONY: fsan
+# fsan:
+# 	$(MAKE) DEBUG=1 FSAN=1
+# .PHONY: fsan
 
-resan: fclean fsan
-.PHONY: resan
+# resan: fclean fsan
+# .PHONY: resan
 
 clean		:
 	@make -C include/libft clean
