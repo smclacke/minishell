@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:49:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 15:54:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,18 @@ int	micro_strcmp(const char *s1, const char *s2)
 }
 
 /**
- * @param argv string to compare
+ * @param node linked list
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins: 
  * echo, cd, pwd, export, unset, env and exit
  * @return EXIT_FAILURE if no built-in was found
  * @todo 
  * 1) needs to be passed to actual process,
- * 2) all [i] indexes need to be replaced by actual parsed data
- * 3) exit(EXIT_FAILURE) is it really neccesary?
- * 4) MAYBE MAKE IT A BOOL?
+ * 2) exit(EXIT_FAILURE) is it really neccesary?
+ * 3) MAYBE MAKE IT A BOOL?
 */
 void	micro_check_for_builtin(t_parser *node, t_env *env)
 {
-	(void) env;
 	if (ft_strcmp(node->cmd, "echo") == 0)
 		ft_echo(node->cmd);
 	if (ft_strcmp(node->cmd, "cd") == 0)

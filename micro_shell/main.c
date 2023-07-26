@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:51:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:18:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void) 		argc;
-	(void) 		argv;
-	(void) 		envp;
 	char		*input;
-	t_lexer		*tokens = NULL;
-	t_parser	*par_tokens = NULL;
-	
+	t_lexer		*tokens;
+	t_parser	*par_tokens;
+
+	(void) argc;
+	(void) argv;
+	(void) envp;
+	tokens = NULL;
+	par_tokens = NULL;
 	while (1)
 	{
 		input = readline(PROMPT);
@@ -36,7 +38,6 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			return (0);
 		micro_ft_print_tokens(tokens);
-
 		par_tokens = micro_parser(tokens);
 		// parser(tokens)
 		// expand(mini->tokens) // tokens from s_parser struct, 
