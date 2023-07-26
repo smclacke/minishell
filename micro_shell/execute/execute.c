@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:37:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:41:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,11 @@ bool	micro_parse_path(t_env *env, t_parser *node)
 			temp_path = ft_substr(&env->value[i], 0, ft_strlen(&env->value[i]));
 			if (temp_path == NULL)
 				mini_error ("malloc", errno);
-			command->path = ft_split(temp_path, ':');
-			if (command->path == NULL)
+			node->path = ft_split(temp_path, ':');
+			if (node->path == NULL)
 				mini_error ("malloc", errno);
 			free (temp_path);
-			if (command->path == NULL)
+			if (node->path == NULL)
 				mini_error ("malloc", errno);
 			return (true);
 		}
@@ -119,12 +119,12 @@ char	*micro_find_path(t_env *env, t_parser *node)
 	i = 0;
 	if (!absolute_check(node->cmd) && parse_path(env, node))
 	{
-		while (input->path && input->path[i] != NULL)
+		while (node->path && node->path[i] != NULL)
 		{
-			command = ft_strjoin("/", input->command);
+			command = ft_strjoin("/", node->cmd);
 			if (command == NULL)
 				mini_error("strjoin", errno);
-			ok_path = ft_strjoin(input->path[i], command);
+			ok_path = ft_strjoin(node->path[i], cmd);
 			if (ok_path == NULL)
 				mini_error("strjoin", errno);
 			free(command);
@@ -134,5 +134,5 @@ char	*micro_find_path(t_env *env, t_parser *node)
 			i++;
 		}
 	}
-	return (input->command);
+	return (node->cmd);
 }
