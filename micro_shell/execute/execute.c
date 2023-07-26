@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:41:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:42:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	*micro_find_path(t_env *env, t_parser *node)
 			command = ft_strjoin("/", node->cmd);
 			if (command == NULL)
 				mini_error("strjoin", errno);
-			ok_path = ft_strjoin(node->path[i], cmd);
+			ok_path = ft_strjoin(node->path[i], command);
 			if (ok_path == NULL)
 				mini_error("strjoin", errno);
 			free(command);
