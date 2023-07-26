@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 16:40:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 14:43:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 23:12:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 
 // # define PROMPT BI_GREEN"WHAT THE"BI_RED" SHELL?!"RESET
 
-# define PROMPT BI_PURPLE"MICRO-SHELLY $"RESET
+// # define PROMPT BI_PURPLE"MICRO-SHELLY $"RESET
+
+# define PROMPT BI_YELLOW"Gutentag Fräulein Shelly, wie geht's?"RESET
 
 #endif

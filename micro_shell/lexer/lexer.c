@@ -6,30 +6,30 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 21:04:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 23:23:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static char	**micro_parse_input(char *input)
+char	**micro_parse_input(char *input)
 {
 	char	**array = NULL;
-	int		i = 0;
+	// int		i = 0;
 
-	while (input[i])
-	{
+	// while (input[i])
+	// {
 		// while (input not quote)
-		array = ft_split(input, ' ');
+	array = ft_split(input, ' ');
 		// if input quote
 		// 	do something about it
-		i++;
-	}
+	// 	i++;
+	// }
 
 	return (array);
 }
 
-static t_lexer	*micro_make_token_list(char **parsed_token)
+t_lexer	*micro_make_token_list(char **parsed_input)
 {
 	t_lexer		*token_list = NULL;
 	t_lexer		*token;
@@ -37,10 +37,10 @@ static t_lexer	*micro_make_token_list(char **parsed_token)
 	int			i = 0;
 	int			len = 0;
 
-	while (parsed_token[i])
+	while (parsed_input[i])
 	{
-		len = ft_strlen(parsed_token[i]);
-		token_str = ft_substr(parsed_token[i], 0, len + 1);
+		len = ft_strlen(parsed_input[i]);
+		token_str = ft_substr(parsed_input[i], 0, len + 1);
 		if (!token_str)
 			return (0);
 		token = micro_lexer_listnew(token_str);

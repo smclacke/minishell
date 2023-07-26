@@ -1,5 +1,7 @@
-**SARAH, SHIT TO DO AFER MICRO SHELLY, DONT FORGETTTTTTTTTT**
+**SARAH, SHIT TO DO AFTER MICRO SHELLY, DONT FORGETTTTTTTTTT**
 
+gutentag frau Shelly, wie geht's?
+dein computer, kein computer
 
 ~~~ Lexer ~~~
 
@@ -22,4 +24,7 @@ ERRORS :)
 
 I think what i need to do now is, check the rest of the input for metas and important shit, 
 give those correctly in struct form (hooooeeee???) then give it to djoyke... after shelly, 
-handle all edges and the very many problems 
+handle all edges and the very many problems +++ errors godver
+
+
+
