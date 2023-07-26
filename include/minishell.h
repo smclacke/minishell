@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:44:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:47:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/stat.h>
 # include <sys/ioctl.h>
 # include <errno.h>
+# include <stdbool.h>
 
 # define READ 0
 # define WRITE 1
@@ -63,12 +64,12 @@ void			micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
 t_lexer			*micro_lexer_listnew(void *input);
 t_lexer			*micro_ft_print_tokens(t_lexer *token);
 
-
 //---- Parser ----//
 typedef struct s_parser 
 {
 	char				*str;
 	char				*cmd;
+	char				**path;
 	char				*redirect;
 	char				*here_doc;
 	struct s_lexer		*tokens;
@@ -93,12 +94,27 @@ typedef struct s_env
 {
 	char				*key;
 	char				*value;
-	// char				full;
 	struct s_env		*next;
 	struct s_env		*previous;
 }							t_env;
 
-void	micro_set_pipes(s_parser *node, t_env *env)
+/*execution*/
+void		micro_build_process(t_parser *node, t_env *env);
+void		micro_execute(char **envp, t_parser *node);
+void		micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
+bool		micro_absolute_check(t_parser *node);
+bool		micro_parse_path(t_env *env, t_parser *node);
+char		*micro_find_path(t_env *env, t_parser *node);
+
+/*environment*/
+t_env		*micro_env_list(char **envp);
+void		micro_env_lstadd_back(t_env **lst, t_env *new);
+t_env		*micro_env_lstlast(t_env *lst);
+void		micro_get_key_value(char *str, char **key, char **value);
+t_env		*micro_env_lstnew(void *key, void *value);
+void		micro_print_list(t_env *env);
+void		micro_print_list(t_env *env);
+void		micro_print_list_key(t_env *env);
 
 //---- Utils ----//
 void		micro_mini_error(char *string, int error);
@@ -109,10 +125,11 @@ void		micro_mini_error(char *string, int error);
  * everything that we share
  * add our structs that hold the info that we need to share/for minishell as a whole 
 */
-typedef	struct s_mini
+
+typedef struct s_mini
 {
-	struct	s_parser	tokens;
-	struct	s_env		environ;
+	struct s_parser		tokens;
+	struct s_env		environ;
 }	t_mini;
 
 #endif
