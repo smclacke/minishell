@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:31:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:34:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,14 @@ typedef struct s_env
 {
 	char				*key;
 	char				*value;
-	// char				full;
 	struct s_env		*next;
 	struct s_env		*previous;
 }							t_env;
 
-void	micro_set_pipes(s_parser *node, t_env *env)
+void			micro_build_process(t_parser *node, t_env *env);
 
 //----Utils----//
-void		micro_mini_error(char *string, int error);
+void			micro_mini_error(char *string, int error);
 
 //------------Minishell-----------//
 
@@ -95,10 +94,11 @@ void		micro_mini_error(char *string, int error);
  * everything that we share
  * add our structs that hold the info that we need to share/for minishell as a whole 
 */
-typedef	struct s_mini
+
+typedef struct s_mini
 {
-	struct	s_parser	tokens;
-	struct	s_env		environ;
+	struct s_parser		tokens;
+	struct s_env		environ;
 }	t_mini;
 
 #endif
