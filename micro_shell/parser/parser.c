@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:50:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 15:53:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@
  * use this quotes.c?
 */
 
-
 /**
  * compare the first token to only the input that is valid, bool func for first token
  * make it so I can use it in check valid and define tokens
 */
+bool	micro_cmp(t_lexer *tokens)
+{
+	
+}
 
 /**
  * get first token, valid or not? bool
