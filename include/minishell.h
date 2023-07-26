@@ -6,34 +6,34 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 23:17:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 15:26:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "libft/include/libft.h"
-#include "prompt.h"
-#include "colour.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <signal.h>
-#include <sys/stat.h>
-#include <sys/ioctl.h>
+# include "libft/include/libft.h"
+# include "prompt.h"
+# include "colour.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
+# include <sys/stat.h>
+# include <sys/ioctl.h>
+# include <errno.h>
 
 # define READ 0
 # define WRITE 1
 # define SUCCESS 0
 # define ERROR -1
 
-
 //------------MICRO_SHELL----------//
 //----Lexer----//
-typedef enum	e_signs
+typedef enum e_signs
 {
 	DQUOTE = 1,
 	SQUOTE = 2,
@@ -69,7 +69,6 @@ typedef struct s_parser
 	struct s_lexer		*tokens;
 }	t_parser;
 
-
 //----Expander----//
 
 //----Executor----//
@@ -82,9 +81,10 @@ typedef struct s_env
 	struct s_env		*previous;
 }							t_env;
 
+void	micro_set_pipes(s_parser *node, t_env *env)
+
 //----Utils----//
 void		micro_mini_error(char *string, int error);
-
 
 //------------Minishell-----------//
 
@@ -92,11 +92,10 @@ void		micro_mini_error(char *string, int error);
  * everything that we share
  * add our structs that hold the info that we need to share/for minishell as a whole 
 */
-typedef	struct	s_mini
+typedef	struct s_mini
 {
 	struct	s_parser	tokens;
 	struct	s_env		environ;
 }	t_mini;
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/22 18:25:02 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/24 18:07:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 15:00:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void	set_forks(t_command *input, t_env *env, int fd_in, int *pipe_fd)
 		mini_error("dup2", errno);
 	if (dup2(pipe_fd[WRITE], STDOUT_FILENO) == -1)
 		mini_error("dup2", errno);
+	// check_for_builtin //bool funct?
+	// check_for_heredoc //bool
+	// check_meta_char //bool
 	find_path(env, input);
 	close(fd_in);
 	close(pipe_fd[WRITE]);
