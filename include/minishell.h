@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:34:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:36:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ typedef	struct s_lexer
 	struct s_lexer		*next;
 }	t_lexer;
 
-t_lexer			*micro_lexer(char *input);
-t_lexer			*micro_lexer_listlast(t_lexer *list);
-void			micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer			*micro_lexer_listnew(void *input);
-t_lexer			*micro_ft_print_tokens(t_lexer *token);
-int				micro_sign_tokens(char *input);
+t_lexer		*micro_lexer(char *input);
+t_lexer		*micro_lexer_listlast(t_lexer *list);
+void		micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer		*micro_lexer_listnew(void *input);
+t_lexer		*micro_ft_print_tokens(t_lexer *token);
+int			micro_sign_tokens(char *input);
 
 //----Parser----//
 typedef struct s_parser 
@@ -83,10 +83,13 @@ typedef struct s_env
 	struct s_env		*previous;
 }							t_env;
 
-void			micro_build_process(t_parser *node, t_env *env);
+void		micro_build_process(t_parser *node, t_env *env);
+void		micro_execute(char **envp, t_parser *node);
+void		micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
+
 
 //----Utils----//
-void			micro_mini_error(char *string, int error);
+void		micro_mini_error(char *string, int error);
 
 //------------Minishell-----------//
 

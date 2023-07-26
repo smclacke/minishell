@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:31:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:35:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	micro_build_process(t_parser *node, t_env *env)
 	{
 		if (pipe(pipe_fd) == -1)
 			micro_error("pipe", errno);
-		micro_set_forks(node, env, fd_in, pipe_fd);
+		micro_forks(node, env, fd_in, pipe_fd);
 		if (dup2(pipe_fd[READ], fd_in) == -1)
 			micro_error("dup2", errno);
 		close(pipe_fd[READ]);
@@ -51,7 +51,7 @@ void	micro_build_process(t_parser *node, t_env *env)
  * @param env linked list containing environment
  * @brief makes child process and executes in it
 */
-void	micro_set_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd)
+void	micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd)
 {
 	int	fork_pid;
 
