@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:51:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 17:19:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,18 @@
  * if good, define what it is within struct, will need to do most parsing here
  * return parsed tokens to main for expander (t_parser *par_tokens)
 */
-t_parser	*micro_parser(t_lexer *tokens)
+int	micro_parser(t_lexer *tokens)
 {
 	// t_parser	*par_tokens = NULL;
 	// int	i = 0;
 
-
-	if (!micro_first_token(&tokens[0]))
+	if (micro_first_token(&tokens[0]))
 		return (0);
 	else
-		printf("valid first token: %s\n", tokens[0]);
+	{
+		printf("valid first token: ");
+		micro_ft_print_tokens(&tokens[0]);
+	}
 	// else
 	// {
 	// 	while (tokens[i])

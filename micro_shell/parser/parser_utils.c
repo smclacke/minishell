@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:39:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 17:16:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,32 @@
 */
 bool	micro_cmp_builtins(t_lexer *tokens)
 {
-	if (ft_strcmp(tokens, "echo") == 0)
+	int	i = 0;
+
+	if (ft_strcmp((char *)&tokens[i], "echo") == 0)
 		return (true);
-	if (ft_strcmp(tokens, "cd") == 0)
+	else if (ft_strcmp((char *)&tokens[i], "cd") == 0)
 		return (true);
-	if (ft_strcmp(tokens, "pwd") == 0)
+	else if (ft_strcmp((char *)&tokens[i], "pwd") == 0)
 		return (true);
-	if (ft_strcmp(tokens, "export") == 0)
+	else if (ft_strcmp((char *)&tokens[i], "export") == 0)
 		return (true);
-	if (ft_strcmp(tokens, "unset") == 0)
+	else if (ft_strcmp((char *)&tokens[i], "unset") == 0)
 		return (true);
-	if (ft_strcmp(tokens, "env") == 0)
+	else if (ft_strcmp((char *)&tokens[i], "env") == 0)
 		return (true);
 	return (false);
 }
 
 bool	micro_cmp_signs(t_lexer *tokens)
 {
-	if (ft_strcmp(tokens, ">>") == 0 || ft_strcmp(tokens, "<<") == 0)
+	int	i = 0;
+
+	if (ft_strcmp((char *)&tokens[i], ">>") == 0 || ft_strcmp((char *)&tokens[i], "<<") == 0)
 			return (true);
-	if (ft_strcmp(tokens, ">") == 0 || ft_strcmp(tokens, "<") == 0)
+	else if (ft_strcmp((char *)&tokens[i], ">") == 0 || ft_strcmp((char *)&tokens[i], "<") == 0)
 		return (true);
-	if (ft_strcmp(tokens, "$") == 0)
+	else if (ft_strcmp((char *)&tokens[i], "$") == 0)
 		return (true);
 	return (false);
 }
@@ -49,9 +53,11 @@ bool	micro_cmp_signs(t_lexer *tokens)
 */
 bool	micro_first_token(t_lexer *tokens)
 {
-	if (micro_cmp_signs(tokens))
+	int	i = 0;
+
+	if (micro_cmp_signs(&tokens[i]))
 		return (true);
-	if (micro_cmp_builtins(tokens))
+	else if (micro_cmp_builtins(&tokens[i]))
 		return (true);
 	return (false);
 }
