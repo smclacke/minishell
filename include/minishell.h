@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/07/26 15:26:06 by dreijans      ########   odam.nl         */
+=======
+/*   Updated: 2023/07/26 15:23:02 by smclacke      ########   odam.nl         */
+>>>>>>> 75d24479e1e20c5f862e95b74c574e8b1b6559d7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +49,12 @@ typedef enum e_signs
 	PIPE = 8
 }		t_signs;
 
+	// t_signs				sign[8]; // do we need this and if so what do we do with it?
 typedef	struct s_lexer
 {
 	void				*input;
 	void				*token;
 	struct s_lexer		*next;
-	t_signs				sign[8]; // do we need this and if so what do we do with it?
 }	t_lexer;
 
 t_lexer			*micro_lexer(char *input);
@@ -66,7 +70,9 @@ typedef struct s_parser
 	char				*word;
 	char				*cmd;
 	char				*redirect;
+	char				*here_doc;
 	struct s_lexer		*tokens;
+	struct s_parser		*par_tokens;
 }	t_parser;
 
 //----Expander----//
