@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 18:40:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 20:54:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,31 @@
 */
 bool	micro_cmp_builtins(t_lexer *tokens)
 {
-	int	i = 0;
+	t_lexer	*tmp;
 
-	if (ft_strcmp((char *)&tokens[i], "echo") == 0)
+	tmp = tokens;
+	if (ft_strcmp(tokens->input, "echo") == 0)
 		return (true);
-	else if (ft_strcmp((char *)&tokens[i], "cd") == 0)
+	else if (ft_strcmp(tokens->input, "cd") == 0)
 		return (true);
-	else if (ft_strcmp((char *)&tokens[i], "pwd") == 0)
+	else if (ft_strcmp(tokens->input, "pwd") == 0)
 		return (true);
-	else if (ft_strcmp((char *)&tokens[i], "export") == 0)
+	else if (ft_strcmp(tokens->input, "export") == 0)
 		return (true);
-	else if (ft_strcmp((char *)&tokens[i], "unset") == 0)
+	else if (ft_strcmp(tokens->input, "unset") == 0)
 		return (true);
-	else if (ft_strcmp((char *)&tokens[i], "env") == 0)
+	else if (ft_strcmp(tokens->input, "env") == 0)
 		return (true);
 	return (false);
 }
 
 bool	micro_cmp_signs(t_lexer *tokens)
 {
-	int	i = 0;
-
-	if (ft_strcmp((char *)&tokens[i], ">>") == 0 || ft_strcmp((char *)&tokens[i], "<<") == 0)
-			return (true);
-	else if (ft_strcmp((char *)&tokens[i], ">") == 0 || ft_strcmp((char *)&tokens[i], "<") == 0)
+	if ((ft_strcmp(tokens->input, ">>") == 0) || (ft_strcmp(tokens->input, "<<") == 0))
 		return (true);
-	else if (ft_strcmp((char *)&tokens[i], "$") == 0)
+	else if ((ft_strcmp(tokens->input, ">") == 0) || (ft_strcmp(tokens->input, "<") == 0))
+		return (true);
+	else if ((ft_strcmp(tokens->input, "$") == 0))
 		return (true);
 	return (false);
 }
@@ -61,4 +60,18 @@ bool	micro_first_token(t_lexer *tokens)
 	else if (micro_cmp_builtins(&tokens[i]))
 		return (true);
 	return (false);
+}
+
+// print parsed list
+t_parser	*micro_print_par_list(t_parser *par_tokens)
+{
+	t_parser	*list;
+
+	list = par_tokens;
+	while (list)
+	{
+		printf("\t\t~: %s\n", list->input);
+		list = list->next;
+	}
+	return (par_tokens);
 }
