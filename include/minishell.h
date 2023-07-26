@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:54:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:31:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/stat.h>
 # include <sys/ioctl.h>
 # include <errno.h>
+# include <stdbool.h>
 
 # define READ 0
 # define WRITE 1
