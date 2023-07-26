@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:36:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 15:41:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-

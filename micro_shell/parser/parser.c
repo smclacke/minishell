@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:36:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 15:50:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,20 @@
 
 
 /**
+ * compare the first token to only the input that is valid, bool func for first token
+ * make it so I can use it in check valid and define tokens
+*/
+
+/**
  * get first token, valid or not? bool
  * if not, we can immediately error and not check the rest
 */
-bool	micro_first_token(t_lexer *tokens);
+bool	micro_first_token(t_lexer *tokens)
+{
+	if (micro_cmp_first(tokens))
+		return (true);
+	return (false);
+}
 
 /**
  * check validity of all the tokens
@@ -39,8 +49,15 @@ bool	micro_check_valid(t_lexer *tokens);
 
 /**
  * add correct parts of token to defined vars in struct, parse parse parse :DD
+ * e.g. export something
+ * if export, attach stirng that comes after
+ * par_tokens->cmd->word
+ * t_parser	par_tokens->cmd = token[i];
+ * token[i] = cat
 */
 t_parser	*micro_define_tokens(t_lexer *tokens);
+
+
 
 /**
  * main parser function
