@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:35:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:37:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ bool	micro_absolute_check(t_parser *node)
 }
 
 /* finds the PATH and stores it in a struct as a 2D array*/
-bool	parse_path(t_env *env, t_command *command)
+bool	micro_parse_path(t_env *env, t_parser *node)
 {
 	int		i;
 	char	*temp_path;	

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:36:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:39:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_parser
 {
 	char				*str;
 	char				*cmd;
+	char				**path;
 	char				*redirect;
 	char				*here_doc;
 	struct s_lexer		*tokens;
@@ -86,7 +87,8 @@ typedef struct s_env
 void		micro_build_process(t_parser *node, t_env *env);
 void		micro_execute(char **envp, t_parser *node);
 void		micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
-
+bool		micro_absolute_check(t_parser *node);
+bool		micro_parse_path(t_env *env, t_parser *node);
 
 //----Utils----//
 void		micro_mini_error(char *string, int error);
