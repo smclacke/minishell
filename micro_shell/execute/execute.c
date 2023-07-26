@@ -6,18 +6,20 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:38:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:24:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	micro_execute(char **envp)
+void	micro_execute(char **envp, t_parser *node)
 {
-	env = micro_env_list(char **envp);
-	micro_set_pipes(node, env);
-}
+	t_env	*env;
 
+	env = micro_env_list(envp);
+	micro_check_for_builtins(node, env);
+	micro_build_process(node, env);
+}
 
 /**
  * @param node linked list containing commands and atributes
@@ -25,7 +27,7 @@ void	micro_execute(char **envp)
  * @brief sets pipe to be reused in every child process
  * @todo change name into something else its not just setting pipes
 */
-void	micro_set_pipes(t_parser *node, t_env *env)
+void	micro_build_process(t_parser *node, t_env *env)
 {
 	int	pipe_fd[2];
 	int	fd_in;

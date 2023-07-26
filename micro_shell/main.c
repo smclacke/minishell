@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:18:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:21:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
 	tokens = NULL;
 	par_tokens = NULL;
 	while (1)
@@ -42,6 +41,7 @@ int	main(int argc, char **argv, char **envp)
 		// parser(tokens)
 		// expand(mini->tokens) // tokens from s_parser struct, 
 		//	check built-in, check meta char, check quotes.
+		micro_execute(envp, par_tokens);
 		// execution // make env_list, create child processes, execve
 		// free input (readline needs to be fred at end)	
 	}
