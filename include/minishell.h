@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:47:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:48:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@
 # define SUCCESS 0
 # define ERROR -1
 
-//------------MICRO_SHELL----------//
-//----Lexer----//
+//------------ MICRO_SHELL ----------//
+
+//---- Lexer ----//
 typedef enum e_signs
 {
 	DQUOTE = 1,
@@ -46,7 +47,7 @@ typedef enum e_signs
 	PIPE = 8
 }		t_signs;
 
-	// t_signs				sign[8]; // do we need this and if so what do we do with it?
+// t_signs				sign[8]; // do we need this and if so what do we do with it?
 typedef	struct s_lexer
 {
 	void				*input;
@@ -54,14 +55,16 @@ typedef	struct s_lexer
 	struct s_lexer		*next;
 }	t_lexer;
 
-t_lexer		*micro_lexer(char *input);
-t_lexer		*micro_lexer_listlast(t_lexer *list);
-void		micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer		*micro_lexer_listnew(void *input);
-t_lexer		*micro_ft_print_tokens(t_lexer *token);
-int			micro_sign_tokens(char *input);
+//----- lexer.c -----//
+t_lexer			*micro_lexer(char *input);
 
-//----Parser----//
+//----- lexer_utils.c -----//
+t_lexer			*micro_lexer_listlast(t_lexer *list);
+void			micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer			*micro_lexer_listnew(void *input);
+t_lexer			*micro_ft_print_tokens(t_lexer *token);
+
+//---- Parser ----//
 typedef struct s_parser 
 {
 	char				*str;
@@ -73,9 +76,20 @@ typedef struct s_parser
 	struct s_parser		*par_tokens;
 }	t_parser;
 
-//----Expander----//
+//---- parser.c ----//
+// bool			micro_check_valid(t_lexer *tokens);
+// t_parser		*micro_define_tokens(t_lexer *tokens);
+t_parser		*micro_parser(t_lexer *tokens);
 
-//----Executor----//
+//---- parser_utils.c ----//
+bool			micro_cmp_builtins(t_lexer *tokens);
+bool			micro_cmp_signs(t_lexer *tokens);
+bool			micro_first_token(t_lexer *tokens);
+
+
+//---- Expander ----//
+
+//---- Executor ----//
 typedef struct s_env
 {
 	char				*key;
@@ -103,11 +117,9 @@ void		micro_print_list(t_env *env);
 void		micro_print_list_key(t_env *env);
 
 //----Utils----//
-void		micro_error(char *string, int error);
-int			micro_strcmp(const char *s1, const char *s2);
-void		micro_check_for_builtin(t_parser *node, t_env *env);
+void		micro_mini_error(char *string, int error);
 
-//------------Minishell-----------//
+//------------ Minishell -----------//
 
 /**
  * everything that we share
