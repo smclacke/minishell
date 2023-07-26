@@ -6,36 +6,36 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:50:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 17:19:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/minishell.h"
 
 /**
- * @param argv string to echo
- * @brief writes argv after command on standart output followed by /n char
+ * @param node string to echo
+ * @brief writes node after command on standart output followed by /n char
  * -n TBA that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
 */
-void	*micro_echo(char **argv)//for now index 1
+void	*micro_echo(t_parser **node)//for now index 1
 {
 	int	i;
 	int	is_flag;
 
 	i = 1;
 	is_flag = 0;
-	while (argv[i] != NULL)
+	while (node->str != NULL)
 	{
-		if (ft_strcmp(argv[i], "-n") == 0)
+		if (ft_strcmp(node->str, "-n") == 0)
 		{
-			i++;
+			node = node->next;
 			++is_flag;
 		}
 		else
 		{
-			printf("%s", argv[i]);
-			i++;
+			printf("%s", node->str);
+			node = node->next;
 		}
 	}
 	if (is_flag != 0)

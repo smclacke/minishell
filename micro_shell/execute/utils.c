@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:54:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 17:17:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	micro_strcmp(const char *s1, const char *s2)
 void	micro_check_for_builtin(t_parser *node, t_env *env)
 {
 	if (ft_strcmp(node->cmd, "echo") == 0)
-		ft_echo(node->cmd);
+		ft_echo(node);
 	if (ft_strcmp(node->cmd, "cd") == 0)
-		ft_cd(node->cmd);
+		micro_cd(node->cmd);
 	if (ft_strcmp(node->cmd, "pwd") == 0)
 		ft_pwd(NULL);
 	if (ft_strcmp(node->cmd, "export") == 0)

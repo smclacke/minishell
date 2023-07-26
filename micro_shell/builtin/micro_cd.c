@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_cd.c                                            :+:    :+:            */
+/*   micro_cd.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:49:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 17:14:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/minishell.h"
 
 /**
  * @param argv terminal given arguments (for now)
@@ -20,27 +20,27 @@
  * cd alone gives prompt back
  * cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
 */
-void	micro_cd(char *argv)//list instead argv
+void	micro_cd(t_parser *node)//list instead argv
 {
 	char	*home_dir;
 	char	*error;
 	char	*cwd;
 
 	cwd = NULL;
-	if (argv != NULL)//list->input
+	if (node)
 	{
 		home_dir = getenv("HOME");
 		if (home_dir == NULL)
 			mini_error("getenv", errno);
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
-		if (access(argv, F_OK) == 0)
+		if (access(node->str, F_OK) == 0)
 		{
 			// getcwd()..?
-			chdir(argv);//list->input
+			chdir(node->str);
 		}
 		else
 		{
-			error = ft_strjoin("minishell: cd: ", argv);
+			error = ft_strjoin("minishell: cd: ", node->str);
 			mini_error(error, errno);
 		}
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
