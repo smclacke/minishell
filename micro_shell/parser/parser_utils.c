@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 17:16:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 18:40:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ bool	micro_cmp_signs(t_lexer *tokens)
 /**
  * get first token, valid or not? bool
  * if not, we can immediately error and not check the rest
+ * !! GOT TO HANDLE WHEN THERE ARE QUOTES IN CMDS, SINGLE AND DOUBLE
 */
 bool	micro_first_token(t_lexer *tokens)
 {
