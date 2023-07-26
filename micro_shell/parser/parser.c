@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:44:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:51:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.c"
+#include "../../include/minishell.h"
 
 /**
  * take tokens
@@ -52,14 +52,14 @@
 */
 t_parser	*micro_parser(t_lexer *tokens)
 {
-	t_parser	*par_tokens;
-	int	i = 0;
+	// t_parser	*par_tokens = NULL;
+	// int	i = 0;
 
 
-	if (!micro_first_token(tokens[0]))
+	if (!micro_first_token(&tokens[0]))
 		return (0);
 	else
-		printf("valid first token: %s\n", (char)tokens[0]);
+		printf("valid first token: %s\n", tokens[0]);
 	// else
 	// {
 	// 	while (tokens[i])
@@ -71,6 +71,7 @@ t_parser	*micro_parser(t_lexer *tokens)
 	// 	}
 	// 	i++;
 	// }
-	return (par_tokens);
+	// return (par_tokens);
+	return (0);
 }
 
