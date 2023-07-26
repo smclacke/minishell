@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:53:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:44:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,11 @@
  * use this quotes.c?
 */
 
-/**
- * compare the first token to only the input that is valid, bool func for first token
- * make it so I can use it in check valid and define tokens
-*/
-bool	micro_cmp(t_lexer *tokens)
-{
-	
-}
-
-/**
- * get first token, valid or not? bool
- * if not, we can immediately error and not check the rest
-*/
-bool	micro_first_token(t_lexer *tokens)
-{
-	if (micro_cmp_first(tokens))
-		return (true);
-	return (false);
-}
 
 /**
  * check validity of all the tokens
 */
-bool	micro_check_valid(t_lexer *tokens);
+// bool	micro_check_valid(t_lexer *tokens);
 
 /**
  * add correct parts of token to defined vars in struct, parse parse parse :DD
@@ -58,7 +39,7 @@ bool	micro_check_valid(t_lexer *tokens);
  * t_parser	par_tokens->cmd = token[i];
  * token[i] = cat
 */
-t_parser	*micro_define_tokens(t_lexer *tokens);
+// t_parser	*micro_define_tokens(t_lexer *tokens);
 
 
 
@@ -78,16 +59,18 @@ t_parser	*micro_parser(t_lexer *tokens)
 	if (!micro_first_token(tokens[0]))
 		return (0);
 	else
-	{
-		while (tokens[i])
-		{
-			if (!micro_check_token(token[i]))
-				return (0);
-			else
-				par_tokens = micro_define_tokens(tokens[i]);
-		}
-		i++;
-	}
+		printf("valid first token: %s\n", (char)tokens[0]);
+	// else
+	// {
+	// 	while (tokens[i])
+	// 	{
+	// 		if (!micro_check_valid(token[i]))
+	// 			return (0);
+	// 		else
+	// 			par_tokens = micro_define_tokens(tokens[i]);
+	// 	}
+	// 	i++;
+	// }
 	return (par_tokens);
 }
 

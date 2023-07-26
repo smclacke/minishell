@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/25 18:07:40 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/26 16:46:16 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,9 +85,11 @@ OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 
 ## MICRO_SHELL ##
 
-SRCS_MICRO		= main.c				\
-					lexer/lexer.c		\
-					lexer/utils.c
+SRCS_MICRO		= main.c					\
+					lexer/lexer.c			\
+					lexer/lexer_utils.c		\
+					parser/parser.c			\
+					parser/parser_utils.c
 
 MICRO_DIR		= micro_shell
 SRC_MICRO		= $(addprefix $(MICRO_DIR)/, $(SRCS_MICRO))
