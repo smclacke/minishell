@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:48:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 16:52:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void		micro_print_list(t_env *env);
 void		micro_print_list_key(t_env *env);
 
 //----Utils----//
-void		micro_mini_error(char *string, int error);
+void		micro_error(char *string, int error);
 
 //------------ Minishell -----------//
 
