@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 20:58:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 21:08:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_parser	*micro_parser(t_lexer *tokens)
 	// {
 	// 	while (tokens[i])
 	// 	{
-	// 		if (!micro_check_valid(token[i]))
+	// 		if (!micro_check_valid(token[i])) // valid for the rest of the input is expanding?
 	// 			return (0);
 	// 		else
 	// 			par_tokens = micro_define_tokens(tokens[i]);

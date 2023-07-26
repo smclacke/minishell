@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 20:54:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 21:10:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 // INPUT: e'ch'o abc$abc 
 // OUTPUT: abc
 
-/**
- * need to do extensive error handling in the future
-*/
+// Djoyke, when checking vadility of the rest of the input, after first peice of input, i can send
+// to you what is what and then you expand it, if its not good in expanding process, then error thrown
+// sarah: try explain this so it makes sense....
 
 int	main(int argc, char **argv, char **envp)
 {

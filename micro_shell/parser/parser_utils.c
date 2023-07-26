@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 20:59:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 21:10:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ bool	micro_cmp_signs(t_lexer *tokens)
 }
 
 /**
- * get first token, valid or not? bool
- * if not, we can immediately error and not check the rest
  * compare the first token to cmds and valid signs, else throw error
- * THIS WONT WORK WITH <<LIMITER OR <INPUT ECT, FIX IT LATER BUT DONT FORGET
- * !! GOT TO HANDLE WHEN THERE ARE QUOTES IN CMDS, SINGLE AND DOUBLE
 */
 bool	micro_first_token(t_lexer *tokens)
 {
