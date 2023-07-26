@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 14:01:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 14:57:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
  * cd alone gives prompt back
  * cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
 */
-void	ft_cd(char *argv)
+void	ft_cd(char *argv)//list instead argv
 {
 	char	*home_dir;
 	char	*error;
 	char	*cwd;
 
 	cwd = NULL;
-	if (argv != NULL)
+	if (argv != NULL)//list->input
 	{
 		home_dir = getenv("HOME");
 		if (home_dir == NULL)
@@ -36,7 +36,7 @@ void	ft_cd(char *argv)
 		if (access(argv, F_OK) == 0)
 		{
 			// getcwd()..?
-			chdir(argv);
+			chdir(argv);//list->input
 		}
 		else
 		{

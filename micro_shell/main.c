@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:41:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 15:51:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 
 // INPUT: e'ch'o abc$abc 
 // OUTPUT: abc
-
-/**
- * @param string argument given to perror
- * @param error int errno given to exit
- * @brief provides correct error message and exits
-*/
-// void	micro_mini_error(char *string, int error)
-// {
-// 	perror(string);
-// 	exit(error);
-// }
 
 /**
  * need to do extensive error handling in the future

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env_list.c                                         :+:    :+:            */
+/*   env.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:35:33 by dreijans      ########   odam.nl         */
+/*   Created: 2023/07/26 15:22:10 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/07/26 15:36:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+#include "../../include/minishell.h"
 
 /**
  * @param key data passed from environment before = sign
@@ -21,7 +21,7 @@
  * @todo 
  * 1) needs to add previous in case of doubly linked list
 */
-t_env	*env_lstnew(void *key, void *value)
+t_env	*micro_env_lstnew(void *key, void *value)
 {
 	t_env	*new;
 
@@ -42,7 +42,7 @@ t_env	*env_lstnew(void *key, void *value)
  * containing a string substringed from str after = sign
  * @brief substrings key and value from str without the '=' sign
 */
-void	get_key_value(char *str, char **key, char **value)
+void	micro_get_key_value(char *str, char **key, char **value)
 {
 	int		i;
 
@@ -60,7 +60,7 @@ void	get_key_value(char *str, char **key, char **value)
  * @param lst linked list to loop through
  * @brief loops to list to go to last position
 */
-t_env	*env_lstlast(t_env *lst)
+t_env	*micro_env_lstlast(t_env *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -75,13 +75,13 @@ t_env	*env_lstlast(t_env *lst)
  * @brief loops through list to add the new node to the back
  * @todo adding previous in case of doubly linked list
 */
-void	env_lstadd_back(t_env **lst, t_env *new)
+void	micro_env_lstadd_back(t_env **lst, t_env *new)
 {
 	t_env	*last;
 
 	if (*lst)
 	{
-		last = mini_lstlast(*lst);
+		last = micro_env_lstlast(*lst);
 		last->next = new;
 	}
 	else
@@ -96,7 +96,7 @@ void	env_lstadd_back(t_env **lst, t_env *new)
  * @brief putting the envp content into a linked list seperated by key and value
  * @return linked list 
 */
-t_env	*env_list(char **envp)
+t_env	*micro_env_list(char **envp)
 {
 	int		i;
 	char	*key;
@@ -106,12 +106,51 @@ t_env	*env_list(char **envp)
 	i = 0;
 	env = NULL;
 	if (envp[i] == NULL)
-		mini_error("env", errno);
+		micro_error("env", errno);
 	while (envp[i] != NULL)
 	{
-		get_key_value(envp[i], &key, &value);
-		mini_lstadd_back(&env, mini_lstnew(key, value));
+		micro_get_key_value(envp[i], &key, &value);
+		micro_env_lstadd_back(&env, micro_env_lstnew(key, value));
 		i++;
 	}
 	return (env);
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	micro_print_list(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	micro_print_list_key(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s\n", env->key);
+		env = env->next;
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	micro_print_list_value(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s\n", env->value);
+		env = env->next;
+	}
 }
