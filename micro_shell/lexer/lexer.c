@@ -6,34 +6,26 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:42:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 21:04:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// check_quote - single quotes inside characters = remove them
-// while loop for quotes, while: split spaces... while quote: find last quote, then return to 
-// space while loop
-// parse func
-	// we can still split on space BUT, check first for quotes, handle
-	// 	them differently, with a quote split func maybe?
-	// leave the meta_char check for the parser?
 static char	**micro_parse_input(char *input)
 {
 	char	**array = NULL;
-	// int		i = 0;
+	int		i = 0;
 
-	// handle quotes
-	// add quotes to array (IN ORDER)
-	// ... that's it :) send the sign_token type in parser
-	array = ft_split(input, ' ');
-	// while (input[i])
-	// {
-	// 	if (micro_sign_tokens(&input[i]))
-	// 		return (&input[i]);
-	// 	i++;
-	// }
+	while (input[i])
+	{
+		// while (input not quote)
+		array = ft_split(input, ' ');
+		// if input quote
+		// 	do something about it
+		i++;
+	}
+
 	return (array);
 }
 
