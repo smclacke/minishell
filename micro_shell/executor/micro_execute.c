@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   execute.c                                          :+:    :+:            */
+/*   micro_execute.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 14:45:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 15:22:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	micro_execute(char **envp, t_parser *node)
 	t_env	*env;
 
 	env = micro_env_list(envp);
-	// micro_build_process(node, env);
+	micro_build_process(node, env);
 }
 
 /**
@@ -64,7 +64,7 @@ void	micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd)
 		micro_error("dup2", errno);
 	if (dup2(pipe_fd[WRITE], STDOUT_FILENO) == -1)
 		micro_error("dup2", errno);
-	micro_check_for_builtins(node, env);//bool?
+	micro_check_for_builtin(node, env);//bool?
 	// check_for_heredoc //bool
 	// check_meta_char //bool
 	micro_find_path(env, node);
@@ -96,13 +96,13 @@ bool	micro_parse_path(t_env *env, t_parser *node)
 		{
 			temp_path = ft_substr(&env->value[i], 0, ft_strlen(&env->value[i]));
 			if (temp_path == NULL)
-				mini_error ("malloc", errno);
+				micro_error ("malloc", errno);
 			node->path = ft_split(temp_path, ':');
 			if (node->path == NULL)
-				mini_error ("malloc", errno);
+				micro_error ("malloc", errno);
 			free (temp_path);
 			if (node->path == NULL)
-				mini_error ("malloc", errno);
+				micro_error ("malloc", errno);
 			return (true);
 		}
 		i++;
@@ -117,16 +117,16 @@ char	*micro_find_path(t_env *env, t_parser *node)
 	int		i;
 
 	i = 0;
-	if (!absolute_check(node->cmd) && parse_path(env, node))
+	if (!micro_absolute_check(node) && micro_parse_path(env, node))
 	{
 		while (node->path && node->path[i] != NULL)
 		{
 			command = ft_strjoin("/", node->cmd);
 			if (command == NULL)
-				mini_error("strjoin", errno);
+				micro_error("strjoin", errno);
 			ok_path = ft_strjoin(node->path[i], command);
 			if (ok_path == NULL)
-				mini_error("strjoin", errno);
+				micro_error("strjoin", errno);
 			free(command);
 			if (access(ok_path, F_OK))
 				return (ok_path);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
+/*   micro_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 17:17:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 15:24:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ int	micro_strcmp(const char *s1, const char *s2)
 void	micro_check_for_builtin(t_parser *node, t_env *env)
 {
 	if (ft_strcmp(node->cmd, "echo") == 0)
-		ft_echo(node);
+		micro_echo(node);
 	if (ft_strcmp(node->cmd, "cd") == 0)
-		micro_cd(node->cmd);
+		micro_cd(node, env);
 	if (ft_strcmp(node->cmd, "pwd") == 0)
-		ft_pwd(NULL);
+		micro_pwd(NULL, env);
 	if (ft_strcmp(node->cmd, "export") == 0)
-		ft_export(node->str, env);
+		micro_export(node, env);
 	if (ft_strcmp(node->cmd, "unset") == 0)//gives pwd not the entire path after unsetting
-		ft_unset(node->str, env);
+		micro_unset(node, env);
 	if (ft_strcmp(node->cmd, "env") == 0)
-		ft_env(env);
+		micro_env(env);
 	else
 		exit(EXIT_FAILURE);
 }
