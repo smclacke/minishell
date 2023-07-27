@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/24 13:58:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:27:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argv;
 	(void) argc;
-	while (1)
-	{
-		input = readline(PROMPT);
-		add_history(input);
+	// while (1)
+	// {
+	// 	input = readline(PROMPT);
+	// 	add_history(input);
 		env = env_list(envp);
-		fake_command = init_command();
-		print_command(fake_command);
-		set_pipes(fake_command, env);
+		// fake_command = init_command();
+		// print_command(fake_command);
+		// set_pipes(fake_command, env);
 		// print_list_command(fake_command);
 		// check_for_builtin(test, env);
 		// print_list(env);
-	}
+	// }
 }
 
 /*
