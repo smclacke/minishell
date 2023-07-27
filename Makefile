@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/27 14:41:08 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/27 15:18:49 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,17 @@ SRCS_MICRO		= main.c					\
 					lexer/lexer.c			\
 					lexer/lexer_utils.c		\
 					parser/parser.c			\
-					parser/parser_utils.c
+					parser/parser_utils.c	\
+					builtin/micro_cd.c		\
+					builtin/micro_echo.c	\
+					builtin/micro_env.c		\
+					builtin/micro_export.c	\
+					builtin/micro_pwd.c		\
+					builtin/micro_unset.c	\
+					executor/micro_env.c 	\
+					executor/micro_execute.c	\
+					executor/micto_utils.c	
+					
 
 MICRO_DIR		= micro_shell
 SRC_MICRO		= $(addprefix $(MICRO_DIR)/, $(SRCS_MICRO))
@@ -154,6 +164,7 @@ $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)/lexer
 	@ mkdir -p $(OBJ_MICRO_DIR)/expander
 	@ mkdir -p $(OBJ_MICRO_DIR)/executor
+	@ mkdir -p $(OBJ_MICRO_DIR)/builtin
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 # debug:
