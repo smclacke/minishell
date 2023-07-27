@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 15:10:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 16:30:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	micro_cd(t_parser *node, t_env *env)//list instead argv
 			// {
 			// 	if (ft_strncmp ("OLDPWD=", env->key, 6)
 			// 	{
-					
+			// 		micro_unset
 			// 	}
 			// 	env = env->next;
 			// }
