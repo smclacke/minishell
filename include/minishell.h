@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/27 14:42:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:54:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,16 @@ typedef struct s_env
 	struct s_env		*previous;
 }							t_env;
 
+/*environment*/
+t_env		*micro_env_list(char **envp);
+t_env		*micro_env_lstnew(void *key, void *value);
+void		micro_get_key_value(char *str, char **key, char **value);
+t_env		*micro_env_lstlast(t_env *lst);
+void		micro_env_lstadd_back(t_env **lst, t_env *new);
+void		micro_print_list(t_env *env);
+void		micro_print_list_key(t_env *env);
+void		micro_print_list_value(t_env *env);
+
 //---- Built-in ----//
 void		micro_cd(t_parser *node);
 void		*micro_echo(t_parser **node);
@@ -129,16 +139,6 @@ void		micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
 bool		micro_absolute_check(t_parser *node);
 bool		micro_parse_path(t_env *env, t_parser *node);
 char		*micro_find_path(t_env *env, t_parser *node);
-
-/*environment*/
-t_env		*micro_env_lstnew(void *key, void *value);
-void		micro_get_key_value(char *str, char **key, char **value);
-t_env		*micro_env_lstlast(t_env *lst);
-void		micro_env_lstadd_back(t_env **lst, t_env *new);
-t_env		*micro_env_list(char **envp);
-void		micro_print_list(t_env *env);
-void		micro_print_list_key(t_env *env);
-void		micro_print_list_value(t_env *env);
 
 //----Utils----//
 void		micro_error(char *string, int error);
