@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/27 15:30:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 16:36:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char **argv, char **envp)
 		// par_tokens = micro_parser(tokens);
 		// printf("list after parser -> \n");
 		// micro_print_par_list(par_tokens);
-		// expand(mini->tokens) // tokens from s_parser struct, 
+		// expand(mini->tokens) // tokens from s_parser struct,
 		//	check built-in, check meta char, check quotes.
 		// micro_execute(envp, par_tokens);
 		// execution // make env_list, create child processes, execve
