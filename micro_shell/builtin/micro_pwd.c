@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:51:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:22:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/minishell.h"
 
 /**
  * @param path string passed as NULL that needs to be filled in this function
@@ -19,7 +19,7 @@
  * @todo also print the old one OLDPWD=/Users/dreijans/Documents/Rang 3/Minishell
  * needs exit status
 */
-void	micro_pwd(char *path)
+void	micro_pwd(char *path, t_env *env)
 {
 	path = getcwd(path, sizeof(NULL));
 	if (path != NULL)
