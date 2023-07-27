@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:51:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/26 23:13:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * next token... what is it, can I work with it?
  * 
  * 
- * use this quotes.c?
+ * use quotes.c?
 */
 
 
@@ -52,26 +52,29 @@
 */
 t_parser	*micro_parser(t_lexer *tokens)
 {
-	// t_parser	*par_tokens = NULL;
+	t_parser	*par_tokens = NULL;
 	// int	i = 0;
 
+	// micro_ft_print_tokens(tokens);
 
 	if (!micro_first_token(&tokens[0]))
 		return (0);
 	else
-		printf("valid first token: %s\n", tokens[0]);
+	{	
+		printf("valid first -> ");
+		micro_print_tokens(&tokens[0]); // for testing 
+	}
 	// else
 	// {
 	// 	while (tokens[i])
 	// 	{
-	// 		if (!micro_check_valid(token[i]))
+	// 		if (!micro_check_valid(token[i])) // valid for the rest of the input is expanding?
 	// 			return (0);
 	// 		else
 	// 			par_tokens = micro_define_tokens(tokens[i]);
 	// 	}
 	// 	i++;
 	// }
-	// return (par_tokens);
-	return (0);
+	return (par_tokens);
 }
 

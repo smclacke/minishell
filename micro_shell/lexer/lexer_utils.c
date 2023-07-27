@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
+/*   lexer_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 15:05:10 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:26:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/26 20:51:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ t_lexer	*micro_lexer_listnew(void *input)
 }
 
 // print tokens
-t_lexer	*micro_ft_print_tokens(t_lexer *token)
+t_lexer	*micro_print_tokens(t_lexer *token)
 {
 	t_lexer	*list;
 
 	list = token;
 	while (list)
 	{
-		printf("token: %s\n", list->input);
+		printf("\t\t~: %s\n", list->input);
 		list = list->next;
 	}
 	return (token);
