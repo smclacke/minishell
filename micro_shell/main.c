@@ -6,13 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/07/27 14:30:29 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/07/26 23:31:23 by smclacke      ########   odam.nl         */
->>>>>>> 87db1c9f7f110c0613a6c167b9829f98b05fa931
+/*   Updated: 2023/07/27 14:37:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/minishell.h"
 
@@ -40,28 +37,18 @@ int	main(int argc, char **argv, char **envp)
 	{
 		input = readline(PROMPT);
 		add_history(input);
-		tokens = micro_lexer(input);
-		if (!tokens)
-			return (0);
-<<<<<<< HEAD
-		micro_ft_print_tokens(tokens);
-		par_tokens = micro_parser(tokens);
+		// tokens = micro_lexer(input);
+		// if (!tokens)
+		// 	return (0);
+		// micro_ft_print_tokens(tokens);
+		// par_tokens = micro_parser(tokens);
 		env = micro_env_list(envp);
 		// parser(tokens)
-=======
-		printf("tokens after lexer -> \n");
-		micro_print_tokens(tokens);
-			
-	
+		// printf("tokens after lexer -> \n");
+		// micro_print_tokens(tokens);
 		// par_tokens = micro_parser(tokens);
 		// printf("list after parser -> \n");
 		// micro_print_par_list(par_tokens);
-		
-
-
-
-
->>>>>>> 87db1c9f7f110c0613a6c167b9829f98b05fa931
 		// expand(mini->tokens) // tokens from s_parser struct, 
 		//	check built-in, check meta char, check quotes.
 		// micro_execute(envp, par_tokens);
