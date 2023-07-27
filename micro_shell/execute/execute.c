@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:42:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:45:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	micro_execute(char **envp, t_parser *node)
 	t_env	*env;
 
 	env = micro_env_list(envp);
-	micro_build_process(node, env);
+	// micro_build_process(node, env);
 }
 
 /**

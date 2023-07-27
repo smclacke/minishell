@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/26 23:31:51 by smclacke      ########   odam.nl          #
+#    Updated: 2023/07/27 14:41:08 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRCS_SAAR		= main_saar.c				\
 					lexer/lexer.c			\
 					lexer/lexer_utils.c		\
 					lexer/quotes.c			\
+					lexer/split_input.c		\
 					parser/parse.c			\
 					parser/parser_utils.c	\
 					utils/error.c
