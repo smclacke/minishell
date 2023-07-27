@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/27 15:25:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 16:50:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,8 @@ typedef	struct s_lexer
 //----- lexer.c -----//
 t_lexer		*micro_lexer(char *input);
 
-//----- lexer_utils.c -----//
-t_lexer		*micro_lexer_listlast(t_lexer *list);
-void		micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer		*micro_lexer_listnew(void *input);
-t_lexer		*micro_ft_print_tokens(t_lexer *token);
+
+//----- lexer.c -----//
 char			**micro_parse_input(char *input);
 t_lexer			*micro_make_token_list(char **parsed_input);
 t_lexer			*micro_lexer(char *input);
