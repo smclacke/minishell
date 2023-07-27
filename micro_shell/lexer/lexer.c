@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 23:23:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/27 18:51:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**micro_parse_input(char *input)
+static char	**micro_parse_input(char *input)
 {
 	char	**array = NULL;
 	// int		i = 0;
@@ -21,24 +21,31 @@ char	**micro_parse_input(char *input)
 	// {
 		// while (input not quote)
 	array = ft_split(input, ' ');
+	if (!array)
+		return (0);
 		// if input quote
 		// 	do something about it
 	// 	i++;
 	// }
-
 	return (array);
 }
 
-t_lexer	*micro_make_token_list(char **parsed_input)
+static t_lexer	*micro_make_token_list(char **parsed_input)
 {
 	t_lexer		*token_list = NULL;
 	t_lexer		*token;
 	char		*token_str;
+	int			len;
 	int			i = 0;
-	int			len = 0;
 
-	while (parsed_input[i])
+	while (&parsed_input[i])
 	{
+		printf("parsed_input: %s\n", parsed_input[i]);
+		i++;
+	}
+	while (parsed_input[i] && parsed_input)
+	{
+		printf("are you ok?\n");
 		len = ft_strlen(parsed_input[i]);
 		token_str = ft_substr(parsed_input[i], 0, len + 1);
 		if (!token_str)
