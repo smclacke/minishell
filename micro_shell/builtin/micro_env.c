@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 18:12:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:51:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:07:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/minishell.h"
 
 /**
  * @param env environment stored in linked list
