@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/27 18:51:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/28 13:35:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,8 @@ static t_lexer	*micro_make_token_list(char **parsed_input)
 	int			len;
 	int			i = 0;
 
-	while (&parsed_input[i])
+	while (parsed_input[i])
 	{
-		printf("parsed_input: %s\n", parsed_input[i]);
-		i++;
-	}
-	while (parsed_input[i] && parsed_input)
-	{
-		printf("are you ok?\n");
 		len = ft_strlen(parsed_input[i]);
 		token_str = ft_substr(parsed_input[i], 0, len + 1);
 		if (!token_str)
@@ -62,18 +56,18 @@ static t_lexer	*micro_make_token_list(char **parsed_input)
 t_lexer	*micro_lexer(char *input)
 {
 	t_lexer		*token_list;
-	char		**parsed_input;
+	char		**parsed_input = NULL;
 	int			i;
 
 	i  = 0;
 	while (input[i])
 	{
 		parsed_input = micro_parse_input(input);
-		if (!parsed_input)
-			return (0);
 		i++;
 	}
 	i = 0;
+	if (!parsed_input)
+		return (0);
 	token_list = micro_make_token_list(parsed_input);
 	if (!token_list)
 		return (0);
