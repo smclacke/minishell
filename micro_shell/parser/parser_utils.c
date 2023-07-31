@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 21:10:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 14:29:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ bool	micro_first_token(t_lexer *tokens)
 	int	i = 0;
 
 	if (micro_cmp_signs(&tokens[i]))
-		return (true);
+		return (false);
 	else if (micro_cmp_builtins(&tokens[i]))
-		return (true);
-	return (false);
+		return (false);
+	return (true);
 }
 
 // print parsed list
