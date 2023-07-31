@@ -42,6 +42,28 @@ KEEP IT SIMPLE, STUPID :)
 	TOKENIZE REDIRECTS, TOKENIZE DELIMITERS + ALL SURROUNDING CHARACTERS (ABC$ABC)
 	THEN TOKENIZE EVERYTHING LEFT OVER
 
+
+!!!!!!!!!! absolute paths are valid first inputs :))))):))
+	doesn't do anything though of course....
+	bash-3.2$ which cd
+	/usr/bin/cd
+	bash-3.2$ /usr/bin/cd
+	bash-3.2$ /usr/bin/cd desktop
+	/usr/bin/cd: line 4: cd: desktop: No such file or directory
+	bash-3.2$ /usr/bin/cd //
+	bash-3.2$ /usr/bin/cd ..
+	bash-3.2$ pwd
+	/Users/smclacke/Desktop/minishell
+	bash-3.2$ /usr/bin/cd ..
+	bash-3.2$ pwd
+	/Users/smclacke/Desktop/minishell
+	bash-3.2$ /usr/bin/cd ..
+	bash-3.2$ pwd
+	/Users/smclacke/Desktop/minishell
+	bash-3.2$ /usr/bin/cd src_saar
+	bash-3.2$ pwd
+	/Users/smclacke/Des
+
 <br/>
 
 **EXAMPLES TO KEEP IN MIND...**

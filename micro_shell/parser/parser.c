@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 15:11:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:03:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
  * t_parser	par_tokens->cmd = token[i];
  * token[i] = cat
 */
-t_parser	*micro_define_tokens(t_lexer *tokens);
+// t_parser	*micro_define_tokens(t_lexer *tokens);
 
 
 
@@ -52,22 +52,16 @@ t_parser	*micro_define_tokens(t_lexer *tokens);
 */
 t_parser	*micro_parser(t_lexer *tokens)
 {
-	t_parser	*par_tokens;
+	t_parser	*parser_struct;
 	// int	i = 0;
 
 	// micro_ft_print_tokens(tokens);
 
-	par_tokens = (t_parser *)malloc(sizeof(t_parser));
-	if (micro_first_token(&tokens[0]))
-		par_tokens->cmd = tokens->input;
-	printf("cmd: %s\n", par_tokens->cmd);
-	if (!par_tokens->cmd)
+	parser_struct = (t_parser *)malloc(sizeof(t_parser));
+	if (!parser_struct)
 		return (0);
-	else
-	{	
-		printf("valid first -> ");
-		micro_print_tokens(&tokens[0]); // for testing 
-	}
+	if (!micro_first_token(&tokens[0], parser_struct))
+		return (0);
 	// else
 	// {	
 	// 	while (tokens[i])
@@ -75,10 +69,10 @@ t_parser	*micro_parser(t_lexer *tokens)
 	// 		// if (!micro_check_valid(token[i]))
 	// 		// 	return (0);
 	// 		// else
-	// 			par_tokens = micro_define_tokens(tokens[i]);
+	// 			parser_struct = micro_define_tokens(tokens[i]);
 	// 	}
 	// 	i++;
 	// }
-	return (par_tokens);
+	return (parser_struct);
 }
 

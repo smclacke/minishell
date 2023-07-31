@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 15:08:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:31:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 bool	micro_cmp_builtins(t_lexer *tokens)
 {
 	t_lexer		*tmp;
-	// t_parser	*par_tokens = NULL;
 
 	tmp = tokens;
 	if (ft_strcmp(tokens->input, "echo") == 0)
-	{
-		// par_tokens->cmd = tokens->input;
-		// printf("->cmd: %s\n", par_tokens->cmd);
 		return (true);
-	}
 	else if (ft_strcmp(tokens->input, "cd") == 0)
 		return (true);
 	else if (ft_strcmp(tokens->input, "pwd") == 0)
@@ -50,27 +45,35 @@ bool	micro_cmp_signs(t_lexer *tokens)
 /**
  * compare the first token to cmds and valid signs, else throw error
 */
-bool	micro_first_token(t_lexer *tokens)
+bool	micro_first_token(t_lexer *tokens, t_parser *parser_struct)
 {
 	int	i = 0;
 
 	if (micro_cmp_signs(&tokens[i]))
+	{
+		parser_struct->sign = tokens->input;
+		printf("sign: %s\n", parser_struct->sign);
 		return (true);
+	}
 	else if (micro_cmp_builtins(&tokens[i]))
+	{	
+		parser_struct->cmd = tokens->input;
+		printf("cmd: %s\n", parser_struct->cmd);
 		return (true);
+	}
 	return (false);
 }
 
 // print parsed list
-t_parser	*micro_print_par_list(t_parser *par_tokens)
-{
-	t_parser	*list;
+// t_parser	*micro_print_parser(t_parser *parser_struct)
+// {
+// 	t_parser	*list;
 
-	list = par_tokens;
-	while (list)
-	{
-		printf("\t\t~: %s\n", list->input);
-		list = list->next;
-	}
-	return (par_tokens);
-}
+// 	list = parser_struct;
+// 	while (list)
+// 	{
+// 		printf("parser: \t\t~: %s\n", list->cmd);
+// 		// list = list->next;
+// 	}
+// 	return (parser_struct);
+// }

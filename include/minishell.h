@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 15:00:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:23:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_lexer			*micro_lexer(char *input);
 t_lexer			*micro_lexer_listlast(t_lexer *list);
 void			micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
 t_lexer			*micro_lexer_listnew(void *input);
-t_lexer			*micro_print_tokens(t_lexer *token);
+t_lexer			*micro_print_lexer(t_lexer *token);
 
 //---- Parser ----//
 typedef struct s_parser 
@@ -74,24 +74,25 @@ typedef struct s_parser
 	void				*input;
 	char				*str;
 	char				*cmd;
-	char				**path;
-	char				*redirect;
+	char				*sign;
+	// char				**path;
+	// char				*redirect;
 	char				*here_doc;
 	struct s_lexer		*tokens;
 	struct s_parser		*next;
-	struct s_lexer		*par_tokens; // pass this as struct to you
+	struct s_lexer		*par_tokens;
 }	t_parser;
 
 //---- parser.c ----//
 // bool			micro_check_valid(t_lexer *tokens);
 // t_parser		*micro_define_tokens(t_lexer *tokens);
-t_parser	*micro_parser(t_lexer *tokens);
+t_parser		*micro_parser(t_lexer *tokens);
 
 //---- parser_utils.c ----//
 bool			micro_cmp_builtins(t_lexer *tokens);
 bool			micro_cmp_signs(t_lexer *tokens);
-bool			micro_first_token(t_lexer *tokens);
-t_parser		*micro_print_par_list(t_parser *par_tokens);
+bool			micro_first_token(t_lexer *tokens, t_parser *parser_struct);
+t_parser		*micro_print_parser(t_parser *parser_struct);
 
 //---- Expander ----//
 
