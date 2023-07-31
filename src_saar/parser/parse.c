@@ -6,38 +6,16 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:58:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 22:04:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- * take tokens
- * take first token
- * is it cmd or << >> < >
- * yes, good, no bad
- * compare, is it buildin/redirect/here_doc?
- * t_parser->token->buildin->cmd (i.e. cat) || t_parser->token->redirect->arrow (i.e. >)
- * next token... what is it, can I work with it?
- * 
- * 
- * use quotes.c?
-*/
-
-
-/**
- * check validity of all the tokens
-*/
-// bool	parser_check_valid(t_lexer *tokens);
-
-/**
- * add correct parts of token to defined vars in struct, parse parse parse :DD
- * e.g. export something
- * if export, attach stirng that comes after
- * par_tokens->cmd->word
- * t_parser	par_tokens->cmd = token[i];
- * token[i] = cat
+ * puts each token into parser struct as:  
+ * sign, pipe, builtin, abso or just str
+ * printing each for testing purposes
 */
 static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 {
@@ -68,7 +46,6 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 	}
 	return (0);
 }
-
 
 /**
  * main parser function
