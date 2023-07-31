@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 23:25:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 21:23:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 /**
- * bleh, probably use this in parser instead of lexer
+ * bleh, probably use this in parser instead of lexer, miss toch nodig, geen idee..
 */
 int	sign_tokens(char *input)
 {

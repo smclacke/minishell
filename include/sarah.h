@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 23:25:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 21:28:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@
 
 # define READ 0
 # define WRITE 1
+
 # define SUCCESS 0
 # define ERROR -1
+
+# define TRUE 1
+# define FALSE 0
 
 typedef enum	e_signs
 {
@@ -50,11 +54,16 @@ typedef	struct s_lexer
 	void				*input;
 	void				*token;
 	struct s_lexer		*next;
-	t_signs				sign[8]; // do we need this and if so what do we do with it?
 }	t_lexer;
 
-// --------- Lexer --------- //
-t_lexer		*lexer(char *input);
+//----- lexer.c -----//
+t_lexer			*lexer(char *input);
+
+//----- lexer_utils.c -----//
+t_lexer			*lexer_listlast(t_lexer *list);
+void			lexer_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer			*lexer_listnew(void *input);
+t_lexer			*print_lexer(t_lexer *token);
 
 // -------- Quotes --------//
 int			sign_tokens(char *input);
@@ -62,27 +71,28 @@ char		*quote_tokens(char *input);
 int			closed_quotes(char *input);
 char		*check_quotes(char *input);
 
-// -------- Lexer Utils --------//
-t_lexer		*lexer_listlast(t_lexer *list);
-void		lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer		*lexer_listnew(void *input);
-t_lexer		*ft_print_tokens(t_lexer *token);
-
-
-
-// PARSER 
+// PARSER
 typedef struct s_parser 
 {
-	// what = parse->cmd = list cmd 
-	// is = parser->redirect
-	// this
-	char	*cmd;
-	struct t_lexer		*tokens;
+	void				*input;
+	char				*str;
+	char				*cmd;
+	char				*sign;
+	char				**path; // need to handle abso paths, doesnt do anything (:
+	// char				*redirect; sign->redirect ? be specific or nah?
+	char				*here_doc;
+	struct s_lexer		*tokens;
+	struct s_parser		*next;
+	struct s_lexer		*par_tokens;
 }	t_parser;
 
-// --------- Parser --------- //
-// ------- Parser Utils ------- //
-// char		*check_empty(char *cmd);
+//---- parser.c ----//
+t_parser		*parser(t_lexer *tokens);
+
+//---- parser_utils.c ----//
+bool			parser_cmp_builtins(t_lexer *tokens);
+bool			parser_cmp_signs(t_lexer *tokens);
+bool			parser_first_token(t_lexer *tokens, t_parser *parser_struct);
 
 
 // UTILS

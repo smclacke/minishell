@@ -6,11 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 17:15:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 21:24:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
 bool	micro_cmp_builtins(t_lexer *tokens)
 {
 	if (ft_strcmp(tokens->input, "echo") == 0)
