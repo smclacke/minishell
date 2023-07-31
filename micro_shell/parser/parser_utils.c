@@ -6,18 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 14:29:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 15:08:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 bool	micro_cmp_builtins(t_lexer *tokens)
 {
-	t_lexer	*tmp;
+	t_lexer		*tmp;
+	// t_parser	*par_tokens = NULL;
 
 	tmp = tokens;
 	if (ft_strcmp(tokens->input, "echo") == 0)
+	{
+		// par_tokens->cmd = tokens->input;
+		// printf("->cmd: %s\n", par_tokens->cmd);
 		return (true);
+	}
 	else if (ft_strcmp(tokens->input, "cd") == 0)
 		return (true);
 	else if (ft_strcmp(tokens->input, "pwd") == 0)
@@ -50,10 +55,10 @@ bool	micro_first_token(t_lexer *tokens)
 	int	i = 0;
 
 	if (micro_cmp_signs(&tokens[i]))
-		return (false);
+		return (true);
 	else if (micro_cmp_builtins(&tokens[i]))
-		return (false);
-	return (true);
+		return (true);
+	return (false);
 }
 
 // print parsed list

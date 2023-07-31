@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/27 18:40:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 15:00:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_parser
 	char				*here_doc;
 	struct s_lexer		*tokens;
 	struct s_parser		*next;
-	struct s_parser		*par_tokens;
+	struct s_lexer		*par_tokens; // pass this as struct to you
 }	t_parser;
 
 //---- parser.c ----//
