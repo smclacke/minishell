@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 19:47:09 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/31 21:23:19 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_expand
 {
 	char				*sign;
 	char				*str;
-	char				*built-in;
+	char				*builtin;
 	struct s_expand		*next;
 	struct s_expand		*previous;
 }						t_expand;
