@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 17:05:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 17:07:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,18 @@ static void	*micro_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 	if (micro_cmp_signs(tokens))
 	{
 		parser_struct->sign = tokens->input;
-		printf("second sign: %s\n", parser_struct->sign);
+		printf("second->sign: %s\n", parser_struct->sign);
 	}
-	else if (mciro_cmp_builtins(tokens[i]))
+	else if (mciro_cmp_builtins(tokens))
+	{
+		parser_struct->cmd = tokens->input;
+		printf("second->cmd: %s\n", parser_struct->cmd);
+	}
+	else
+	{
+		parser_struct->str = tokens->input;
+		printf("second->str: %s\n", parser_struct->str);
+	}
 	return (0);
 }
 
