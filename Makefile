@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/27 16:29:20 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/27 17:15:16 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,8 @@ SRCS_MICRO		= main.c					\
 					builtin/micro_unset.c	\
 					executor/micro_env.c 	\
 					executor/micro_execute.c	\
-					executor/micro_utils.c	
+					executor/micro_utils.c	\
+					expander/micro_expand.c 
 					
 
 MICRO_DIR		= micro_shell

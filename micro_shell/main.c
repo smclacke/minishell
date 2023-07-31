@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/27 16:36:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 17:18:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,29 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
-	// t_lexer		*tokens;
-	// t_parser	*par_tokens;
+	t_lexer		*tokens;
+	t_parser	*par_tokens;
 	t_env		*env;
 
 	(void) argc;
 	(void) argv;
 	// (void) envp;
 	// int		i = 0;
-	// tokens = NULL;
-	// par_tokens = NULL;
+	tokens = NULL;
+	par_tokens = NULL;
 	while (1)
 	{
 		input = readline(PROMPT);
 		add_history(input);
-	// 	tokens = micro_lexer(input);
-	// 	// if (!tokens)
-	// 	// 	return (0);
-	// 	// micro_ft_print_tokens(tokens);
-	// 	// par_tokens = micro_parser(tokens);
+		tokens = micro_lexer(input);
+		if (!tokens)
+			return (0);
+		// micro_ft_print_tokens(tokens);
+		par_tokens = micro_parser(tokens);
 		env = micro_env_list(envp);
-		micro_env(env);
+		// micro_env(env);
+		micro_cd(par_tokens, env);
+		// micro_env(env);
 		// parser(tokens)
 		// printf("tokens after lexer -> \n");
 		// micro_print_tokens(tokens);
