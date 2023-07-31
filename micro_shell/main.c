@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:37:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:44:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 		micro_print_lexer(tokens);
+		
 
 		parser_struct = micro_parser(tokens);
 		if (!parser_struct)
