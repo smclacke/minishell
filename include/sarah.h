@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:58:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 23:38:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ t_parser		*parser(t_lexer *tokens);
 bool			parser_cmp_builtins(t_lexer *tokens);
 bool			parser_cmp_signs(t_lexer *tokens);
 bool			parser_cmp_abso(t_lexer *tokens);
-bool			parser_first_token(t_lexer *tokens, t_parser *parser_struct);
+bool			parser_check_quotes(t_lexer *tokens);
+t_lexer			*remove_quotes(t_lexer *tokens);
 
 
 // UTILS

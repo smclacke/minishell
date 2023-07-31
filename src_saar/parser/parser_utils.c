@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:57:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 23:37:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,62 @@ bool	parser_cmp_signs(t_lexer *tokens)
 
 bool	parser_cmp_abso(t_lexer *tokens)
 {
-	if ((ft_strnstr(tokens->input, "/bin", ft_strlen(tokens->input))))
+	if (ft_strnstr(tokens->input, "/bin", ft_strlen(tokens->input)))
 		return (true);
-	else if ((ft_strnstr(tokens->input, "/usr", ft_strlen(tokens->input))))
+	else if (ft_strnstr(tokens->input, "/usr", ft_strlen(tokens->input)))
 		return (true);
 	return (false);
 }
 
-/**
- * compare the first token to cmds and valid signs, else throw error
-*/
-bool	parser_first_token(t_lexer *tokens, t_parser *parser_struct)
+bool	parser_check_quotes(t_lexer *tokens)
 {
-	if (parser_cmp_signs(tokens))
-	{
-		parser_struct->sign = tokens->input;
-		printf("first->sign: %s\n", parser_struct->sign);
+	if (ft_strnstr(tokens->input, "\'", ft_strlen(tokens->input)))
 		return (true);
-	}
-	else if (parser_cmp_builtins(tokens))
-	{	
-		parser_struct->cmd = tokens->input;
-		printf("first->cmd: %s\n", parser_struct->cmd);
+	else if (ft_strnstr(tokens->input, "\'", ft_strlen(tokens->input)))
 		return (true);
-	}
-	else if (parser_cmp_abso(tokens))
-	{
-		parser_struct->abso = tokens->input;
-		printf("first->abso: %s\n", parser_struct->abso);
-		return (true);	
-	}
 	return (false);
+}
+
+int		count_quotes(t_lexer *tokens)
+{
+	char	*tmp;
+	int		found = 0;
+	int		i = 0;
+
+	tmp = tokens->input;
+	while (tmp[i])
+	{
+		if (ft_strcmp(tmp, "\'") == 0)
+			found++;
+		if (ft_strcmp(tmp, "\"") == 0)
+			found++;
+		i++;
+	}
+	printf("found in count: %i\n", found);
+	return (found);
+}
+
+t_lexer	*remove_quotes(t_lexer *tokens)
+{
+	char	*tmp;
+	char	*removed;
+	int		quote_amount;
+	int		i = 0;
+
+	quote_amount = count_quotes(tokens);
+	printf("quote count: %i\n", count_quotes(tokens));
+	tmp = (char *)tokens->input;
+	removed = (char *)malloc(sizeof(ft_strlen(tmp - quote_amount + 1)));
+	while (tmp[i])
+	{	
+		while (tmp[i] && (!ft_strnstr(tmp, "\'", 1) || !ft_strnstr(tmp, "\"", 1)))
+		{
+			tmp[i] = removed[i];
+			if (ft_strnstr(tmp, "\'", 1) || ft_strnstr(tmp, "\"", 1))
+				i++;
+			i++;
+		}
+		i++;
+	}
+	return ((t_lexer *)removed);
 }
