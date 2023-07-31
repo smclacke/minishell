@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:33:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 21:57:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ bool	parser_cmp_signs(t_lexer *tokens)
 	return (false);
 }
 
+bool	parser_cmp_abso(t_lexer *tokens)
+{
+	if ((ft_strnstr(tokens->input, "/bin", ft_strlen(tokens->input))))
+		return (true);
+	else if ((ft_strnstr(tokens->input, "/usr", ft_strlen(tokens->input))))
+		return (true);
+	return (false);
+}
+
 /**
  * compare the first token to cmds and valid signs, else throw error
 */
@@ -56,6 +65,12 @@ bool	parser_first_token(t_lexer *tokens, t_parser *parser_struct)
 		parser_struct->cmd = tokens->input;
 		printf("first->cmd: %s\n", parser_struct->cmd);
 		return (true);
+	}
+	else if (parser_cmp_abso(tokens))
+	{
+		parser_struct->abso = tokens->input;
+		printf("first->abso: %s\n", parser_struct->abso);
+		return (true);	
 	}
 	return (false);
 }

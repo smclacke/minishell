@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:28:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 21:58:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ typedef struct s_parser
 	char				*str;
 	char				*cmd;
 	char				*sign;
-	char				**path; // need to handle abso paths, doesnt do anything (:
-	// char				*redirect; sign->redirect ? be specific or nah?
+	char				*abso;
 	char				*here_doc;
 	struct s_lexer		*tokens;
 	struct s_parser		*next;
@@ -92,6 +91,7 @@ t_parser		*parser(t_lexer *tokens);
 //---- parser_utils.c ----//
 bool			parser_cmp_builtins(t_lexer *tokens);
 bool			parser_cmp_signs(t_lexer *tokens);
+bool			parser_cmp_abso(t_lexer *tokens);
 bool			parser_first_token(t_lexer *tokens, t_parser *parser_struct);
 
 

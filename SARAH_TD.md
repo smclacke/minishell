@@ -16,18 +16,36 @@ dein computer, kein computer
 -> quotes inside cmds, remove this before validating in the parser...
 
 
-ERRORS :)
+ERRORS :
 
 
-!!!!!!!!!!! TALK TO DJOYKE ABOUT THIS:
+**TALK TO DJOYKE ABOUT THIS**
+
 Gutentag Fräulein Shelly, wie geht's?echo abc$abc
 lexer: 		~: echo
 lexer: 		~: abc$abc
 first->cmd: echo
 second->str: abc$abc
 
++++++++++++
 
-Do you then take the "parsed token" and check for the dollar or do i need to do something
-different cause right now it's seen as a string but that could actually
-be more helpful for you
+Gutentag Fräulein Shelly, wie geht's?/usr/bin/cd some thing
+lexer: 		~: /usr/bin/cd
+lexer: 		~: some
+lexer: 		~: thing
+first->abso: /usr/bin/cd
+second->str: some
+second->str: thing
+Gutentag Fräulein Shelly, wie geht's?/bin/echo some thing
+lexer: 		~: /bin/echo
+lexer: 		~: some
+lexer: 		~: thing
+first->abso: /bin/echo
+second->str: some
+second->str: thing
+
+IM GOING TO GIVE YOU AN ABSO PART OF THE STRUCT, STILL NEED TO CHECK IF ITS THE CORRECT 
+ABSO PATH, ECHO WORKS, CD DOESN'T, ETC ETC., USE EXECVE FOR THESE BECAUSE USING
+THE ENV PATH FOR THESE NOT OUR BUILDINS
+
 
