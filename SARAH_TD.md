@@ -25,7 +25,9 @@ Gutentag Fräulein Shelly, wie geht's?echo abc$abc
 lexer: 		~: echo
 lexer: 		~: abc$abc
 first->cmd: echo
-second->str: abc$abc
+second->str: abc$abc 
+
+// i could check the exact behaviour of this and parse it to remove the unnecessary bits
 
 +++++++++++
 
@@ -44,8 +46,9 @@ first->abso: /bin/echo
 second->str: some
 second->str: thing
 
-IM GOING TO GIVE YOU AN ABSO PART OF THE STRUCT, STILL NEED TO CHECK IF ITS THE CORRECT 
+IM GOING TO GIVE YOU AN ABSO PATH IN THE STRUCT, STILL NEED TO CHECK IF ITS THE CORRECT 
 ABSO PATH, ECHO WORKS, CD DOESN'T, ETC ETC., USE EXECVE FOR THESE BECAUSE USING
 THE ENV PATH FOR THESE NOT OUR BUILDINS
+// I COULD CHECK THESE PATHS AND ONLY GIVE YOU VALID ONES
 
 
