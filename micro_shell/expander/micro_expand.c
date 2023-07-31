@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:32:22 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/07/31 21:34:25 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ just execute or even redirect input output.*/
 
 t_parser	*micro_expand(char **envp, t_parser *node)
 {
-	t_env	*env;
+	t_env	    *env;
+    t_expand    *expand;
 
 	env = micro_env_list(envp);
 	while (node)
 	{
         init_expand_list(NULL);
-		micro_check_for_builtin(node, env);
+		// micro_check_for_builtin(node, env);
 		micro_check_for_meta(node, env);
+        printf("sign; %s\n", expand->sign);
 	}
 	return (node);
 }
