@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:37:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 17:01:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,16 @@
  * t_parser	par_tokens->cmd = token[i];
  * token[i] = cat
 */
-// t_parser	*micro_define_tokens(t_lexer *tokens, t_parser *parser_struct)
-// {
-// 	int	i = 0;
-// 	if (micro_cmp_signs())
-// }
-
+static void	*micro_define_tokens(t_lexer *tokens, t_parser *parser_struct)
+{
+	if (micro_cmp_signs(tokens))
+	{
+		parser_struct->sign = tokens->input;
+		printf("second sign: %s\n", parser_struct->sign);
+	}
+	// else if (mciro_cmp_builtins(tokens[i]))
+	return (0);
+}
 
 
 /**
@@ -57,24 +61,23 @@
 t_parser	*micro_parser(t_lexer *tokens)
 {
 	t_parser	*parser_struct;
-	// int			i = 0;
 
 	parser_struct = (t_parser *)malloc(sizeof(t_parser));
 	if (!parser_struct)
 		return (0);
 	if (!micro_first_token(&tokens[0], parser_struct))
 		return (0);
-	// else
-	// {	
-	// 	while (tokens[i])
-	// 	{
-	// 		// if (!micro_check_valid(token[i]))
-	// 		// 	return (0);
-	// 		// else
-	// 		micro_define_tokens(tokens[i], parser_struct);
-	// 		i++;
-	// 	}
-	// }
+	else
+	{	
+		while (tokens)
+		{
+			// if (!micro_check_valid(token[i]))
+			// 	return (0);
+			// else
+			micro_define_tokens(tokens, parser_struct);
+			tokens = tokens->next;
+		}
+	}
 	return (parser_struct);
 }
 
