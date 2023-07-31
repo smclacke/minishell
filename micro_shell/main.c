@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:43:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:45:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 		printf("list after parser -> \n");
 		micro_print_par_list(par_tokens);
 		micro_print_lexer(tokens);
+		
 
 		parser_struct = micro_parser(tokens);
 		if (!parser_struct)
