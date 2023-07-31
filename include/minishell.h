@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:23:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:32:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ t_parser		*micro_parser(t_lexer *tokens);
 bool			micro_cmp_builtins(t_lexer *tokens);
 bool			micro_cmp_signs(t_lexer *tokens);
 bool			micro_first_token(t_lexer *tokens, t_parser *parser_struct);
-t_parser		*micro_print_parser(t_parser *parser_struct);
 
 //---- Expander ----//
 

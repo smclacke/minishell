@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:03:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:33:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@
 t_parser	*micro_parser(t_lexer *tokens)
 {
 	t_parser	*parser_struct;
-	// int	i = 0;
-
-	// micro_ft_print_tokens(tokens);
+	int			i = 0;
 
 	parser_struct = (t_parser *)malloc(sizeof(t_parser));
 	if (!parser_struct)

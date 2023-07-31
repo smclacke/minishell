@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:30:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:33:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	(void) envp;
-	// int		i = 0;
 
 	tokens = NULL;
 	parser_struct = NULL;
@@ -48,8 +47,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!parser_struct)
 			continue ;
 		
-		
-
+	
 
 
 

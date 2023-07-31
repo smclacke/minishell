@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:31:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:32:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,3 @@ bool	micro_first_token(t_lexer *tokens, t_parser *parser_struct)
 	}
 	return (false);
 }
-
-// print parsed list
-// t_parser	*micro_print_parser(t_parser *parser_struct)
-// {
-// 	t_parser	*list;
-
-// 	list = parser_struct;
-// 	while (list)
-// 	{
-// 		printf("parser: \t\t~: %s\n", list->cmd);
-// 		// list = list->next;
-// 	}
-// 	return (parser_struct);
-// }
