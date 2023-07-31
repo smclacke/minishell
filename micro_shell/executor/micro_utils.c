@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 15:24:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/31 19:04:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,4 @@ void	micro_check_for_builtin(t_parser *node, t_env *env)
 		micro_unset(node, env);
 	if (ft_strcmp(node->cmd, "env") == 0)
 		micro_env(env);
-	else
-		exit(EXIT_FAILURE);
 }

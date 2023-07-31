@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 18:07:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/31 19:26:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,15 @@ int	main(int argc, char **argv, char **envp)
 		
 
 		parser_struct = micro_parser(tokens);
-		if (!parser_struct)
-			continue ;
+		// if (!parser_struct)
+		// 	continue ;
 		
 
 
 
 
 		//-- Djoyke --//
-		// env = micro_env_list(envp);
-		// expand(mini->tokens) // tokens from s_parser struct, 
-		//	check built-in, check meta char, check quotes.
-		micro_execute(envp, parser_struct);
+		micro_expand(envp, parser_struct);
 		// if (micro_execute(envp, parser_struct))
 		// 	continue ;
 		// micro_echo(parser_struct);
