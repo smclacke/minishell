@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 17:04:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 18:04:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,9 @@ void		micro_export(t_parser *node, t_env *env);
 void		micro_unset(t_parser *node, t_env *env);
 
 /*execution*/
-void		micro_execute(char **envp, t_parser *node);
-void		micro_build_process(t_parser *node, t_env *env);
-void		micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
+t_parser	*micro_execute(char **envp, t_parser *node);
+t_parser	*micro_build_process(t_parser *node, t_env *env);
+t_parser	*micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
 bool		micro_absolute_check(t_parser *node);
 bool		micro_parse_path(t_env *env, t_parser *node);
 char		*micro_find_path(t_env *env, t_parser *node);

@@ -6,18 +6,19 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 15:22:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/31 18:03:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	micro_execute(char **envp, t_parser *node)
+t_parser	*micro_execute(char **envp, t_parser *node)
 {
 	t_env	*env;
 
 	env = micro_env_list(envp);
 	micro_build_process(node, env);
+	return (node);
 }
 
 /**
@@ -26,7 +27,7 @@ void	micro_execute(char **envp, t_parser *node)
  * @brief sets pipe to be reused in every child process
  * @todo change name into something else its not just setting pipes
 */
-void	micro_build_process(t_parser *node, t_env *env)
+t_parser	*micro_build_process(t_parser *node, t_env *env)
 {
 	int	pipe_fd[2];
 	int	fd_in;
@@ -44,6 +45,7 @@ void	micro_build_process(t_parser *node, t_env *env)
 		close(pipe_fd[READ]);
 		node = node->next;
 	}
+	return (node);
 }
 
 /**
@@ -51,7 +53,7 @@ void	micro_build_process(t_parser *node, t_env *env)
  * @param env linked list containing environment
  * @brief makes child process and executes in it
 */
-void	micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd)
+t_parser	*micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd)
 {
 	int	fork_pid;
 
@@ -67,9 +69,10 @@ void	micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd)
 	micro_check_for_builtin(node, env);//bool?
 	// check_for_heredoc //bool
 	// check_meta_char //bool
-	micro_find_path(env, node);
+	// micro_find_path(env, node);
 	close(fd_in);
 	close(pipe_fd[WRITE]);
+	return (node);
 }
 
 bool	micro_absolute_check(t_parser *node)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:44:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 18:07:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ int	main(int argc, char **argv, char **envp)
 	char		*input;
 	t_lexer		*tokens;
 	t_parser	*parser_struct;
-	// t_env		*env;
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
-
 	tokens = NULL;
 	parser_struct = NULL;
 	while (1)
@@ -56,7 +53,10 @@ int	main(int argc, char **argv, char **envp)
 		// env = micro_env_list(envp);
 		// expand(mini->tokens) // tokens from s_parser struct, 
 		//	check built-in, check meta char, check quotes.
-		// micro_execute(envp, par_tokens);
+		micro_execute(envp, parser_struct);
+		// if (micro_execute(envp, parser_struct))
+		// 	continue ;
+		// micro_echo(parser_struct);
 		// execution // make env_list, create child processes, execve
 		// free input (readline needs to be fred at end)	
 	}
