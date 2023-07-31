@@ -6,9 +6,10 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/27 17:15:16 by dreijans      ########   odam.nl          #
+#    Updated: 2023/07/31 14:41:54 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME			= minishell
 DJOY			= djoyke
@@ -72,7 +73,6 @@ SRCS_SAAR		= main_saar.c				\
 					lexer/lexer.c			\
 					lexer/lexer_utils.c		\
 					lexer/quotes.c			\
-					lexer/split_input.c		\
 					parser/parse.c			\
 					parser/parser_utils.c	\
 					utils/error.c

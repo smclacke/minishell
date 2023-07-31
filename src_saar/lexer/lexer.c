@@ -6,14 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 23:28:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/27 18:43:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
 // write new uselful comments....
-
 
 static char	**parse_input(char *input)
 {

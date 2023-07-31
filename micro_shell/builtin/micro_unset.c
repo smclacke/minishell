@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 17:06:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 18:37:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	micro_unset(t_parser *node, t_env *env)
 	temp = NULL;
 	while (env->next != NULL)
 	{
-		if (ft_strcmp(env->next->key, node->str[0]) == 0)
+		if (ft_strcmp(env->next->key, &node->str[0]) == 0)
 		{
 			temp = env->next;
 			env->next = env->next->next;
