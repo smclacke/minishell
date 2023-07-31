@@ -6,9 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:54:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/31 17:09:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../include/minishell.h"
 
 // INPUT: e'ch'o abc$abc 
 // OUTPUT: abc
