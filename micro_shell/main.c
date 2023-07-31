@@ -6,9 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 14:42:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:37:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../include/minishell.h"
 
@@ -23,15 +24,16 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_lexer		*tokens;
-	t_parser	*par_tokens;
+	t_parser	*parser_struct;
 	// t_env		*env;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
 	// int		i = 0;
+
 	tokens = NULL;
-	par_tokens = NULL;
+	parser_struct = NULL;
 	while (1)
 	{
 		input = readline(PROMPT);
@@ -41,13 +43,18 @@ int	main(int argc, char **argv, char **envp)
 		tokens = micro_lexer(input);
 		if (!tokens)
 			continue ;
-		printf("tokens after lexer -> \n");
 		micro_print_tokens(tokens);
 
 		par_tokens = micro_parser(tokens);
 		printf("list after parser -> \n");
 		micro_print_par_list(par_tokens);
+		micro_print_lexer(tokens);
 
+		parser_struct = micro_parser(tokens);
+		if (!parser_struct)
+			continue ;
+		
+	
 
 
 

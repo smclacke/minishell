@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 23:13:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:33:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,25 @@
 */
 t_parser	*micro_parser(t_lexer *tokens)
 {
-	t_parser	*par_tokens = NULL;
-	// int	i = 0;
+	t_parser	*parser_struct;
+	int			i = 0;
 
-	// micro_ft_print_tokens(tokens);
-
-	if (!micro_first_token(&tokens[0]))
+	parser_struct = (t_parser *)malloc(sizeof(t_parser));
+	if (!parser_struct)
 		return (0);
-	else
-	{	
-		printf("valid first -> ");
-		micro_print_tokens(&tokens[0]); // for testing 
-	}
+	if (!micro_first_token(&tokens[0], parser_struct))
+		return (0);
 	// else
-	// {
+	// {	
 	// 	while (tokens[i])
 	// 	{
-	// 		if (!micro_check_valid(token[i])) // valid for the rest of the input is expanding?
-	// 			return (0);
-	// 		else
-	// 			par_tokens = micro_define_tokens(tokens[i]);
+	// 		// if (!micro_check_valid(token[i]))
+	// 		// 	return (0);
+	// 		// else
+	// 			parser_struct = micro_define_tokens(tokens[i]);
 	// 	}
 	// 	i++;
 	// }
-	return (par_tokens);
+	return (parser_struct);
 }
 
