@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 23:38:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 00:48:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ static bool	parser_first_token(t_lexer *tokens, t_parser *parser_struct)
 {
 	if (parser_check_quotes(tokens))
 	{
-		printf("first token: %s\n", tokens->input);
 		tokens->input = remove_quotes(tokens);
-		// then check if builtin, if not builtin, put them back? this may work
-		// 		for cmds, but could fuck other first args up... 
+		if (!tokens->input)
+			return (0);
 	}
 	if (parser_cmp_signs(tokens))
 	{

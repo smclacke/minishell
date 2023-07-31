@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 00:03:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 00:47:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,28 +74,30 @@ int		count_quotes(t_lexer *tokens)
 	return (found);
 }
 
-t_lexer	*remove_quotes(t_lexer *tokens)
+char	*remove_quotes(t_lexer *tokens)
 {
-	// char	*tmp;
-	// char	*removed;
+	char	*tmp;
+	char	*removed;
 	int		quote_amount;
-	// int		i = 0;
+	int		without;
+	int		i = 0;
+	int		j = 0;
 
 	quote_amount = count_quotes(tokens);
-	printf("quote count: %i\n", count_quotes(tokens));
-	// tmp = (char *)tokens->input;
-	// removed = (char *)malloc(sizeof(ft_strlen(tmp - quote_amount + 1)));
-	// while (tmp[i])
-	// {	
-	// 	while (tmp[i] && (!ft_strnstr(tmp, "\'", 1) || !ft_strnstr(tmp, "\"", 1)))
-	// 	{
-	// 		tmp[i] = removed[i];
-	// 		if (ft_strnstr(tmp, "\'", 1) || ft_strnstr(tmp, "\"", 1))
-	// 			i++;
-	// 		i++;
-	// 	}
-	// 	i++;
-	// }
-	// return ((t_lexer *)removed);
-	return (tokens);
+	tmp = (char *)tokens->input;
+	without = (ft_strlen(tmp) - quote_amount);
+	removed = malloc(sizeof(char) * (without + 1));
+	if (!removed)
+		return (0);
+	while (tmp[i])
+	{
+		if (tmp[i] && !ft_isquote(tmp[i]))
+		{	
+			removed[j] = tmp[i];
+			j++;
+		}
+		i++;
+	}
+	removed[j] = '\0';
+	return (removed);
 }
