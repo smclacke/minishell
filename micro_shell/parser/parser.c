@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 17:08:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 17:18:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,22 @@ static void	*micro_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 t_parser	*micro_parser(t_lexer *tokens)
 {
 	t_parser	*parser_struct;
+	t_lexer		*list;
 
 	parser_struct = (t_parser *)malloc(sizeof(t_parser));
 	if (!parser_struct)
 		return (0);
 	if (!micro_first_token(&tokens[0], parser_struct))
 		return (0);
-	else
-	{	
-		while (tokens)
-		{
-			// if (!micro_check_valid(token[i]))
-			// 	return (0);
-			// else
-			micro_define_tokens(tokens, parser_struct);
-			tokens = tokens->next;
-		}
+	tokens = tokens->next;
+	list = tokens;
+	while (list)
+	{
+		// if (!micro_check_valid(token[i]))
+		// 	return (0);
+		// else
+		micro_define_tokens(tokens, parser_struct);
+		list = list->next;
 	}
 	return (parser_struct);
 }
