@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:33:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:37:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@
  * t_parser	par_tokens->cmd = token[i];
  * token[i] = cat
 */
-// t_parser	*micro_define_tokens(t_lexer *tokens);
+// t_parser	*micro_define_tokens(t_lexer *tokens, t_parser *parser_struct)
+// {
+// 	int	i = 0;
+// 	if (micro_cmp_signs())
+// }
 
 
 
@@ -53,7 +57,7 @@
 t_parser	*micro_parser(t_lexer *tokens)
 {
 	t_parser	*parser_struct;
-	int			i = 0;
+	// int			i = 0;
 
 	parser_struct = (t_parser *)malloc(sizeof(t_parser));
 	if (!parser_struct)
@@ -67,9 +71,9 @@ t_parser	*micro_parser(t_lexer *tokens)
 	// 		// if (!micro_check_valid(token[i]))
 	// 		// 	return (0);
 	// 		// else
-	// 			parser_struct = micro_define_tokens(tokens[i]);
+	// 		micro_define_tokens(tokens[i], parser_struct);
+	// 		i++;
 	// 	}
-	// 	i++;
 	// }
 	return (parser_struct);
 }
