@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:28:09 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/07/31 21:32:22 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,22 @@ t_parser	*micro_expand(char **envp, t_parser *node)
 void	micro_check_for_meta(t_parser *node, t_env *env)
 {
 	if (ft_strnstr(node->sign, "$", ft_strlen(node->sign)) == 0)
-		which_sign(node, env);
-	if (ft_strnstr(node->sign, ">>", ft_strlen(node->sign)) || ft_strnstr(node->sign, "<<", ft_strlen(node->sign)) == 0)
-		which_sign(node, env);
-	if (ft_strnstr(node->sign, ">", ft_strlen(node->sign)) || ft_strnstr(node->sign, "<", ft_strlen(node->sign)) == 0)
-		which_sign(node, env);
+		which_sign(node, "$");
+	if (ft_strnstr(node->sign, ">>" ft_strlen(node->sign)) == 0)
+		which_sign(node, ">>");
+    if (ft_strnstr(node->sign, "<<", ft_strlen(node->sign)) == 0)
+        which_sign(node, "<<");
+	if (ft_strnstr(node->sign, ">", ft_strlen(node->sign)) == 0)
+		which_sign(node ">");
+    if (ft_strnstr(node->sign, "<", ft_strlen(node->sign)) == 0)
+        which_sign(node "<");
 	if (ft_strnstr(node->sign, "|", ft_strlen(node->sign)) == 0)
-		which_sign(node, env);
+		which_sign(node, "|");
 }
 
-void	which_sign(t_parser *node, t_env *env)
+void	which_sign(t_parser *node, char *str)
 {
-	
+	node->sign = str;
 }
 
 t_expand *init_expand_list(void *content)
