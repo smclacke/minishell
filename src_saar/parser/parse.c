@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:33:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 21:47:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 		parser_struct->sign = tokens->input;
 		printf("second->sign: %s\n", parser_struct->sign);
 	}
+	else if (ft_strcmp(tokens->input, "|") == 0)
+	{
+		parser_struct->sign = tokens->input;
+		printf("second->sign: %s\n", parser_struct->sign);
+	}
 	else if (parser_cmp_builtins(tokens))
 	{
 		parser_struct->cmd = tokens->input;
@@ -81,10 +86,7 @@ t_parser	*parser(t_lexer *tokens)
 	list = tokens;
 	while (list)
 	{
-		// if (!micro_check_valid(token[i]))
-		// 	return (0);
-		// else
-		parser_define_tokens(tokens, parser_struct);
+		parser_define_tokens(list, parser_struct);
 		list = list->next;
 	}
 	return (parser_struct);
