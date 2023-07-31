@@ -6,10 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 16:41:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/31 16:51:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minishell.h"
 
@@ -44,11 +43,13 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 		micro_print_tokens(tokens);
+		
 
 		par_tokens = micro_parser(tokens);
 		printf("list after parser -> \n");
 		micro_print_par_list(par_tokens);
 		micro_print_lexer(tokens);
+		
 
 		parser_struct = micro_parser(tokens);
 		if (!parser_struct)
