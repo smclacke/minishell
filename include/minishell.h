@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 17:01:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/07/31 17:04:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_parser
 	char				*str;
 	char				*cmd;
 	char				*sign;
-	// char				**path; // need to handle abso paths, doesnt do anything (:
+	char				**path; // need to handle abso paths, doesnt do anything (:
 	// char				*redirect; sign->redirect ? be specific or nah?
 	char				*here_doc;
 	struct s_lexer		*tokens;
