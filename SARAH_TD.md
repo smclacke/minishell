@@ -19,12 +19,15 @@ dein computer, kein computer
 ERRORS :)
 
 
+!!!!!!!!!!! TALK TO DJOYKE ABOUT THIS:
+Gutentag Fräulein Shelly, wie geht's?echo abc$abc
+lexer: 		~: echo
+lexer: 		~: abc$abc
+first->cmd: echo
+second->str: abc$abc
 
 
-
-I think what i need to do now is, check the rest of the input for metas and important shit, 
-give those correctly in struct form (hooooeeee???) then give it to djoyke... after shelly, 
-handle all edges and the very many problems +++ errors godver
-
-
+Do you then take the "parsed token" and check for the dollar or do i need to do something
+different cause right now it's seen as a string but that could actually
+be more helpful for you
 
