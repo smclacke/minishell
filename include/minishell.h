@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:23:19 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 11:23:05 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ typedef struct s_expand
 }						t_expand;
 
 t_parser	*micro_expand(char **envp, t_parser *node);
+t_expand 	*init_expand_list(t_parser *node);
+char		*micro_check_for_meta(t_parser *node);
 
 //---- Executor ----//
 typedef struct s_env

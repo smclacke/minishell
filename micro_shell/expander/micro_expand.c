@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:34:25 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 11:26:18 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ just execute or even redirect input output.*/
 
 t_parser	*micro_expand(char **envp, t_parser *node)
 {
-	t_env	    *env;
+	// t_env	    *env;
     t_expand    *expand;
 
-	env = micro_env_list(envp);
+    (void) envp;
+	// env = micro_env_list(envp);
 	while (node)
 	{
-        init_expand_list(NULL);
+        expand = init_expand_list(node);
 		// micro_check_for_builtin(node, env);
-		micro_check_for_meta(node, env);
-        printf("sign; %s\n", expand->sign);
+        // printf("expand sign is; %s\n", expand->sign);
 	}
 	return (node);
 }
@@ -37,44 +37,41 @@ t_parser	*micro_expand(char **envp, t_parser *node)
 /**
  * @param node linked list
  * @param env string or char to compare with
- * @brief checks arguments to find built-ins: 
- * echo, cd, pwd, export, unset, env and exit
- * @return EXIT_FAILURE if no built-in was found
+ * @brief checks arguments to find meta_chars: 
+ * $, >>, <<, >, <, |
  * @todo 
  * 1) needs to be passed to actual process,
- * 2) exit(EXIT_FAILURE) is it really neccesary?
- * 3) MAYBE MAKE IT A BOOL?
+ * 2) MAYBE MAKE IT A BOOL?
 */
-void	micro_check_for_meta(t_parser *node, t_env *env)
+char	*micro_check_for_meta(t_parser *node)
 {
 	if (ft_strnstr(node->sign, "$", ft_strlen(node->sign)) == 0)
-		which_sign(node, "$");
-	if (ft_strnstr(node->sign, ">>" ft_strlen(node->sign)) == 0)
-		which_sign(node, ">>");
+		return("$");
+	if (ft_strnstr(node->sign, ">>", ft_strlen(node->sign)) == 0)
+		return(">>");
     if (ft_strnstr(node->sign, "<<", ft_strlen(node->sign)) == 0)
-        which_sign(node, "<<");
+        return("<<");
 	if (ft_strnstr(node->sign, ">", ft_strlen(node->sign)) == 0)
-		which_sign(node ">");
+		return(">");
     if (ft_strnstr(node->sign, "<", ft_strlen(node->sign)) == 0)
-        which_sign(node "<");
+        return("<");
 	if (ft_strnstr(node->sign, "|", ft_strlen(node->sign)) == 0)
-		which_sign(node, "|");
+		return("|");
+	else
+		return (NULL);
 }
 
-void	which_sign(t_parser *node, char *str)
-{
-	node->sign = str;
-}
-
-t_expand *init_expand_list(void *content)
+t_expand *init_expand_list(t_parser *node)
 {
     t_expand *new;
 
-    new = (t_expand *)malloc(sizeof(* new);
+    new = (t_expand *)malloc(sizeof(* new));
     if (!new)
         micro_error("malloc", errno);
-    new->sign = NULL;
+    new->sign = micro_check_for_meta(node);
     new->str = NULL;
     new->builtin = NULL;
     new->next = NULL;
+	printf("expand sign is; %s\n", new->sign);
+	return (new);
 }
