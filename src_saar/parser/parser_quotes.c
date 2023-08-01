@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 01:14:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 01:24:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 16:09:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 bool	parser_check_quotes(t_lexer *tokens)
 {
-	if (ft_strnstr(tokens->input, "\'", ft_strlen(tokens->input)))
-		return (true);
-	else if (ft_strnstr(tokens->input, "\'", ft_strlen(tokens->input)))
-		return (true);
+	char	*tmp;
+	int		i = 0;
+	
+	tmp = (char *)tokens->input;
+	while (tmp[i])
+	{
+		if (ft_isquote(tmp[i]))
+			return (true);
+		i++;
+	}
 	return (false);
 }
 

@@ -6,43 +6,44 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 01:28:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 16:08:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-static bool	parser_cmp(t_lexer *tokens, t_parser  *parser_struct)
-{
-	if (parser_cmp_signs(tokens)) // still need to check if there are chars before/ after that are invalid...
-	{	// why does   bc$USR fail and $USR succeed? this is good but why??
-		parser_struct->sign = tokens->input;
-		printf("first->sign: %s\n", parser_struct->sign);
-		return (true);
-	}
-	else if (parser_cmp_builtins(tokens))
-	{
-		parser_struct->cmd = tokens->input;
-		printf("first->cmd: %s\n", parser_struct->cmd);
-		return (true);
-	}
-	else if (parser_cmp_abso(tokens))
-	{
-		parser_struct->abso = tokens->input; // will at some point need to validate the paths...
-		printf("first->abso: %s\n", parser_struct->abso);
-		return (true);	
-	}
-	return (false);
-}
+// static bool	parser_cmp(t_lexer *tokens, t_parser  *parser_struct)
+// {
+// 	if (parser_cmp_signs(tokens)) // still need to check if there are chars before/ after that are invalid...
+// 	{	// why does   bc$USR fail and $USR succeed? this is good but why??
+// 		parser_struct->sign = tokens->input;
+// 		printf("first->sign: %s\n", parser_struct->sign);
+// 		return (true);
+// 	}
+// 	else if (parser_cmp_builtins(tokens))
+// 	{
+// 		parser_struct->cmd = tokens->input;
+// 		printf("first->cmd: %s\n", parser_struct->cmd);
+// 		return (true);
+// 	}
+// 	else if (parser_cmp_abso(tokens))
+// 	{
+// 		parser_struct->abso = tokens->input; // will at some point need to validate the paths...
+// 		printf("first->abso: %s\n", parser_struct->abso);
+// 		return (true);	
+// 	}
+// 	return (false);
+// }
 
 /**
  * compare the first token to cmds and valid signs
 */
 static bool	parser_first_token(t_lexer *tokens, t_parser *parser_struct)
 {
-	t_lexer	*tmp;
+	char	*tmp;
 
-	tmp = tokens;
+	tmp = tokens->input;
+	ft_lower_str(tmp);
 	if (parser_check_quotes(tmp))
 	{
 		tmp->input = remove_quotes(tmp);
