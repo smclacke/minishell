@@ -6,31 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/01 13:48:24 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 13:52:08 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/* check for built ins, meta's pipes? to see if i need to fork, 
-just execute or even redirect input output.*/
-		// expand(mini->tokens) // tokens from s_parser struct, 
-		//	check built-in, check meta char, check quotes.
-
-t_expand	*micro_expand(char **envp, t_parser *node)
-{
-	// t_env	    *env;
-    t_expand    *expand;
-
-    (void) envp;
-	expand = NULL;
-	// env = micro_env_list(envp);
-	while (node)
-	{
-        shelly_expand_lstadd_back(&expand, init_expand_list(node));
-	}
-	return (expand);
-}
 
 
 /**
@@ -131,4 +112,24 @@ t_expand	*shelly_expand_lstlast(t_expand *lst)
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
+}
+
+/* check for built ins, meta's pipes? to see if i need to fork, 
+just execute or even redirect input output.*/
+		// expand(mini->tokens) // tokens from s_parser struct, 
+		//	check built-in, check meta char, check quotes.
+
+t_expand	*micro_expand(char **envp, t_parser *node)
+{
+	// t_env	    *env;
+    t_expand    *expand;
+
+    (void) envp;
+	expand = NULL;
+	// env = micro_env_list(envp);
+	while (node)
+	{
+        shelly_expand_lstadd_back(&expand, init_expand_list(node));
+	}
+	return (expand);
 }
