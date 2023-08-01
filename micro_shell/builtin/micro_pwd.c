@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 14:22:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/31 17:51:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 */
 void	micro_pwd(char *path, t_env *env)
 {
+	(void) env;
 	path = getcwd(path, sizeof(NULL));
 	if (path != NULL)
 		printf("Current working directory: %s\n", path);

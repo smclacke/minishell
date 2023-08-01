@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 17:04:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 13:36:10 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,21 @@ bool			micro_cmp_signs(t_lexer *tokens);
 bool			micro_first_token(t_lexer *tokens, t_parser *parser_struct);
 
 //---- Expander ----//
+typedef struct s_expand
+{
+	char				*sign;
+	char				*str;
+	char				*builtin;
+	struct s_expand		*next;
+	struct s_expand		*previous;
+}						t_expand;
+
+t_expand	*micro_expand(char **envp, t_parser *node);
+t_expand 	*init_expand_list(t_parser *node);
+char		*micro_check_for_meta(t_parser *node);
+char		*shelly_check_for_builtin(t_parser *node);
+void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
+t_expand	*shelly_expand_lstlast(t_expand *lst);
 
 //---- Executor ----//
 typedef struct s_env
@@ -114,19 +129,19 @@ void		micro_print_list_value(t_env *env);
 
 //---- Built-in ----//
 void		micro_cd(t_parser *node, t_env *env);
-void		*micro_echo(t_parser *node);
+void		micro_echo(t_parser *node);
 void		micro_env(t_env *env);
 void		micro_pwd(char *path, t_env *env);
 void		micro_export(t_parser *node, t_env *env);
 void		micro_unset(t_parser *node, t_env *env);
 
 /*execution*/
-void		micro_execute(char **envp, t_parser *node);
-void		micro_build_process(t_parser *node, t_env *env);
-void		micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
+t_parser	*micro_build_process(t_parser *node, t_env *env);
+t_parser	*micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
 bool		micro_absolute_check(t_parser *node);
 bool		micro_parse_path(t_env *env, t_parser *node);
 char		*micro_find_path(t_env *env, t_parser *node);
+void		micro_build(t_parser *node, t_env *env);
 
 //----Utils----//
 void		micro_error(char *string, int error);

@@ -6,9 +6,10 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/08/01 01:14:52 by smclacke      ########   odam.nl          #
+#    Updated: 2023/08/01 15:16:59 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME			= minishell
 DJOY			= djoyke
@@ -98,7 +99,8 @@ SRCS_MICRO		= main.c					\
 					builtin/micro_unset.c	\
 					executor/micro_env.c 	\
 					executor/micro_execute.c	\
-					executor/micro_utils.c	
+					executor/micro_utils.c	\
+					expander/micro_expand.c 
 					
 
 MICRO_DIR		= micro_shell
