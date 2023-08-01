@@ -6,12 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:32:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 21:41:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
+/**
+ * @brief	takes the input string from the command line, iterates through it. While there
+ * 			are no quotations, the string is split on spaces. If a quotation is encountered, 
+ * 			the last quotation in the string is found and that segment is made into a separate
+ * 			part of the array. 
+ * @param	input input from the command line
+ * @return	2D array of separated strings made from the input, ready to be tokenized
+*/
 static char	**parse_input(char *input)
 {
 	char	**array = NULL;
@@ -30,6 +38,14 @@ static char	**parse_input(char *input)
 	return (array);
 }
 
+/**
+ * @brief	once input has been parsed, quoted segments separated and spaces removed from the rest
+ * 			of the input, iterate through the array creating substrings to put into token_str variable.
+ * 			Node in a t_lexer list are created and added to the token_list which is returned to the parser
+ * 			function to be passed to the parser.  
+ * @param	parsed_input an array created but separating the input string into tokenizable bites
+ * @return	newly made t_lexer token_list
+*/
 static t_lexer	*make_token_list(char **parsed_input)
 {
 	t_lexer		*token_list = NULL;
@@ -53,6 +69,15 @@ static t_lexer	*make_token_list(char **parsed_input)
 	return (token_list);
 }
 
+/**
+ * @brief	takes the command line input, parses through the spaces outside quotations and creates
+ * 			t_lexer tokens to pass to the parser. In the case of quotations, spaces must be kept and checked
+ * 			for their validity, so if a quotation is encountered, take the end of the string and iterate
+ * 			through to find the last quotation, all of this input is tokenized and then separated and validated
+ * 			in the parser. 
+ * @param	input from the commandline
+ * @return	t_lexer token_list to pass to the parser
+*/
 t_lexer	*lexer(char *input)
 {
 	t_lexer		*token_list;
@@ -73,6 +98,3 @@ t_lexer	*lexer(char *input)
 		return (0);
 	return (token_list);
 }
-
-// STOOOOOOOOOOPID :) :) :) :)
-// WHEN HOW WHAT ERROR HANDLING.... ERRRM don't just return 0 :')

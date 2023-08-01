@@ -6,14 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/31 21:31:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 21:41:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/sarah.h"
 
-// lexer list func
 t_lexer		*lexer_listlast(t_lexer *list)
 {
 	if (!list)
@@ -23,7 +22,6 @@ t_lexer		*lexer_listlast(t_lexer *list)
 	return (list);
 }
 
-// lexer list func
 void	lexer_listadd_back(t_lexer **list, t_lexer *new)
 {
 	t_lexer	*last;
@@ -37,7 +35,6 @@ void	lexer_listadd_back(t_lexer **list, t_lexer *new)
 		*list = new;
 }
 
-// lexer list func
 t_lexer	*lexer_listnew(void *input)
 {
 	t_lexer	*new;
@@ -50,7 +47,7 @@ t_lexer	*lexer_listnew(void *input)
 	return (new);
 }
 
-// print lexer tokens
+// print the tokens for testing purposes
 t_lexer	*print_lexer(t_lexer *token)
 {
 	t_lexer	*list;

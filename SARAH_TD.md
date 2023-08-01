@@ -9,13 +9,16 @@ dein computer, kein computer
 	> pretty simple while loopidyloop
 	> don't forget to check either side of the quotes for chars
 
+-> lexer_quotes.c needs a lot of work... 
+-> parse_input function to add quotes
+
 ~~~ Parser ~~~
 
 -> some<<something
 -> <<something
 
 -> for first token, it could be a cmd from bash (not builtin), how to handle this??
-
+-> quoted tokens (:)
 
 ERRORS :!!!
 
