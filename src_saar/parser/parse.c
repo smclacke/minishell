@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 20:23:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 21:53:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
+
+/**
+ * I need a, this is a string with quotes check and then like thousands of functions to handle that
+*/
 
 /**
  * @brief	Checking whether the first arg token is valid:

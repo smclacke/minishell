@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 21:41:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 21:58:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,23 @@
 static char	**parse_input(char *input)
 {
 	char	**array = NULL;
-	// int		i = 0;
+	int		i = 0;
 
-	// while (input[i])
-	// {
-		// while (input not quote)
-	array = ft_split(input, ' ');
-	if (!array)
-		return (0);
-		// if input quote
-		// 	do something about it
-	// 	i++;
-	// }
+	while (input[i])
+	{
+		while (!ft_isquote(input[i]))
+			array = ft_split(input, ' ');
+		if (ft_isquote(input[i]))
+		{
+			input[i] = "something";
+			while (input[i])
+			{
+				array = input[i];
+				i++;
+			}
+		}
+		i++;
+	}
 	return (array);
 }
 
