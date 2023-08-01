@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 17:53:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 20:23:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 }
 
 /**
- * put input into tmp, remove quotes and make lowercase, test against builtins, if yes, return tmp since valid
- * 	else return original
  * @brief	take all tokens, put input into a temp, remove the quotes and make lowercase
  * 			test if it's a buildin, if yes, return the temp as this is valid
  * 			else, return the original input to test against signs etc
