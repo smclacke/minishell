@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/01 14:25:21 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 15:56:43 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@
  * 1) needs to be passed to actual process,
  * 2) MAYBE MAKE IT A BOOL?
 */
-char	*micro_check_for_meta(t_parser *node)
+bool	micro_check_for_meta(t_parser *node)
 {
-	if (ft_strnstr(node->sign, "$", ft_strlen(node->sign)) == 0)
-		return(node->sign);
-	if (ft_strnstr(node->sign, ">>", ft_strlen(node->sign)) == 0)
-		return(node->sign);
-    if (ft_strnstr(node->sign, "<<", ft_strlen(node->sign)) == 0)
-        return(node->sign);
-	if (ft_strnstr(node->sign, ">", ft_strlen(node->sign)) == 0)
-		return(node->sign);
-    if (ft_strnstr(node->sign, "<", ft_strlen(node->sign)) == 0)
-        return(node->sign);
-	if (ft_strnstr(node->sign, "|", ft_strlen(node->sign)) == 0)
-		return(node->sign);
+	if (micro_strcmp(node->sign, "$") == 0)
+		return(true);
+	if (micro_strcmp(node->sign, ">>") == 0)
+		return(true);
+    if (micro_strcmp(node->sign, "<<") == 0)
+        return(true);
+	if (micro_strcmp(node->sign, ">") == 0)
+		return(true);
+    if (micro_strcmp(node->sign, "<") == 0)
+        return(true);
+	if (micro_strcmp(node->sign, "|") == 0)
+		return(true);
 	else
-		return (NULL);
+		return (false);
 }
 
 /**
@@ -45,24 +45,24 @@ char	*micro_check_for_meta(t_parser *node)
  * @brief checks arguments to find built-ins: 
  * echo, cd, pwd, export, unset, env and exit
 */
-char	*shelly_check_for_builtin(t_parser *node)
+bool	shelly_check_for_builtin(t_parser *node)
 {
-	if (ft_strcmp(node->cmd, "echo") == 0)
-		return (node->cmd);
-	if (ft_strcmp(node->cmd, "cd") == 0)
-		return (node->cmd);
-	if (ft_strcmp(node->cmd, "pwd") == 0)
-		return (node->cmd);
-	if (ft_strcmp(node->cmd, "export") == 0)
-		return (node->cmd);
-	if (ft_strcmp(node->cmd, "unset") == 0)
-		return (node->cmd);
-	if (ft_strcmp(node->cmd, "env") == 0)
-		return (node->cmd);
-	if (ft_strcmp(node->cmd, "exit") == 0)
-		return (node->cmd);
+	if (micro_strcmp(node->cmd, "echo") == 0)
+		return (true);
+	if (micro_strcmp(node->cmd, "cd") == 0)
+		return (true);
+	if (micro_strcmp(node->cmd, "pwd") == 0)
+		return (true);
+	if (micro_strcmp(node->cmd, "export") == 0)
+		return (true);
+	if (micro_strcmp(node->cmd, "unset") == 0)
+		return (true);
+	if (micro_strcmp(node->cmd, "env") == 0)
+		return (true);
+	if (micro_strcmp(node->cmd, "exit") == 0)
+		return (true);
 	else
-		return (NULL);
+		return (false);
 }
 
 t_expand *init_expand_list(t_parser *node)
@@ -72,13 +72,18 @@ t_expand *init_expand_list(t_parser *node)
     new = (t_expand *)malloc(sizeof(* new));
     if (!new)
         micro_error("malloc", errno);
-	new->sign = micro_check_for_meta(node);
+	if (micro_check_for_meta(node))
+		new->sign = node->sign;
+	if (!micro_check_for_meta(node))
+		new->sign = NULL;
 	printf("new->sign = [%s]\n", new->sign);
     new->str = node->str;
-    new->builtin = shelly_check_for_builtin(node);
+    if (shelly_check_for_builtin(node))
+		new->builtin = node->cmd;
+	if (!shelly_check_for_builtin(node))
+		new->builtin = NULL;
 	printf("new->builtin = [%s]\n", new->builtin);
     new->next = NULL;
-	// printf("expand sign is; %s\n", new->str);
 	return (new);
 }
 
@@ -127,7 +132,7 @@ t_expand	*micro_expand(char **envp, t_parser *node)
     (void) envp;
 	expand = NULL;
 	// env = micro_env_list(envp);
-	while (node)
+	while (node != NULL)
 	{
         shelly_expand_lstadd_back(&expand, init_expand_list(node));
 		node = node->next;

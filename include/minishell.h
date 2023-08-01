@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 13:36:10 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 15:55:50 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ typedef struct s_expand
 
 t_expand	*micro_expand(char **envp, t_parser *node);
 t_expand 	*init_expand_list(t_parser *node);
-char		*micro_check_for_meta(t_parser *node);
-char		*shelly_check_for_builtin(t_parser *node);
+bool		micro_check_for_meta(t_parser *node);
+bool		shelly_check_for_builtin(t_parser *node);
 void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
 t_expand	*shelly_expand_lstlast(t_expand *lst);
 
