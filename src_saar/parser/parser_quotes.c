@@ -6,18 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/01 01:14:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 16:42:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 17:47:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-bool	parser_check_quotes(t_lexer *tokens)
+bool	parser_check_quotes(char *tokens)
 {
 	char	*tmp;
 	int		i = 0;
 	
-	tmp = (char *)tokens->input;
+	tmp = tokens;
 	while (tmp[i])
 	{
 		if (ft_isquote(tmp[i]))
@@ -27,13 +27,13 @@ bool	parser_check_quotes(t_lexer *tokens)
 	return (false);
 }
 
-static int		count_quotes(t_lexer *tokens)
+static int		count_quotes(char *tokens)
 {
 	char	*tmp;
 	int		found = 0;
 	int		i = 0;
 
-	tmp = (char *)tokens->input;
+	tmp = tokens;
 	while (tmp[i])
 	{	
 		if (ft_isquote(tmp[i]))
@@ -43,7 +43,7 @@ static int		count_quotes(t_lexer *tokens)
 	return (found);
 }
 
-char	*remove_quotes(t_lexer *tokens) // double quotes failing???
+char	*remove_quotes(char *tokens)
 {
 	char	*tmp;
 	char	*removed;
@@ -53,7 +53,7 @@ char	*remove_quotes(t_lexer *tokens) // double quotes failing???
 	int		j = 0;
 
 	quote_amount = count_quotes(tokens);
-	tmp = (char *)tokens->input;
+	tmp = tokens;
 	without = (ft_strlen(tmp) - quote_amount);
 	removed = malloc(sizeof(char) * (without + 1));
 	if (!removed)

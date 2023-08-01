@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 17:43:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 17:53:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ static bool	parser_define_first_token(t_lexer *tokens, t_parser  *parser_struct)
 		printf("first->sign: %s\n", parser_struct->sign);
 		return (true);
 	}
-	// else if (parser_cmp_builtins(tokens))
-	// {
-	// 	parser_struct->cmd = tokens->input;
-	// 	printf("first->cmd: %s\n", parser_struct->cmd);
-	// 	return (true);
-	// }
 	else if (parser_cmp_abso(tokens))
 	{
 		parser_struct->abso = tokens->input; // will at some point need to validate the paths...
@@ -63,11 +57,6 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 		parser_struct->sign = tokens->input;
 		printf("second->sign: %s\n", parser_struct->sign);
 	}
-	// else if (parser_cmp_builtins(tokens))
-	// {
-	// 	parser_struct->cmd = tokens->input;
-	// 	printf("second->cmd: %s\n", parser_struct->cmd);
-	// }
 	else if (parser_cmp_abso(tokens))
 	{	
 		parser_struct->abso = tokens->input;
@@ -97,14 +86,14 @@ static bool	parser_format_check(t_lexer *tokens, t_parser *parser_struct)
 
 	tmp = tokens->input;
 	ft_lower_str(tmp);
-	if (parser_check_quotes(tokens))
+	if (parser_check_quotes(tokens->input))
 	{
-		tmp = remove_quotes(tokens);
+		tmp = remove_quotes(tokens->input);
 		if (!tmp)
 			return (0);
-		if (parser_cmp_builtins((t_lexer *)tmp)) // this will probably fail
+		if (parser_cmp_char_builtins(tmp))
 		{
-			parser_struct->cmd = tokens->input;
+			parser_struct->cmd = tmp;
 			printf("format_check->cmd: %s\n", parser_struct->cmd);
 			return (true);
 		}
@@ -129,14 +118,14 @@ t_parser	*parser(t_lexer *tokens)
 		return (0);
 	if (!parser_format_check(&tokens[0], parser_struct))
 	{
-		if (!parser_define_first_token(&token[0], parser_struct))
+		if (!parser_define_first_token(&tokens[0], parser_struct))
 			return (0); // first argument is not valid
 	}
 	tokens = tokens->next;
 	list = tokens;
 	while (list)
 	{
-		if (!parser_format_check(token, parser_struct))
+		if (!parser_format_check(tokens, parser_struct))
 			parser_define_tokens(list, parser_struct);
 		list = list->next;
 	}

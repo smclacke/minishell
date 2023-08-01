@@ -14,12 +14,6 @@ dein computer, kein computer
 -> some<<something
 -> <<something
 
--> take all input, put in temp, remove quotes and make lowercase
-	check if cmd, if yes, pass new format back, else continuing using original
-
--> remove the checking format shiz from first_token functions once this all works, 
-	dont need it twice
-
 -> for first token, it could be a cmd from bash (not builtin), how to handle this??
 
 

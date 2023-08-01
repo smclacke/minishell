@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 17:41:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/01 17:49:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 bool	parser_cmp_pipe(t_lexer *tokens)
 {
 	if (ft_strnstr(tokens->input, "|", 1) == 0)
+		return (true);
+	return (false);
+}
+
+bool	parser_cmp_char_builtins(char *tokens)
+{
+	if (ft_strcmp(tokens, "echo") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "cd") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "pwd") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "export") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "unset") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "env") == 0)
 		return (true);
 	return (false);
 }
@@ -60,7 +77,7 @@ bool	parser_cmp_abso(t_lexer *tokens)
 	return (false);
 }
 
-bool	parser_cmp(t_lexer *tokens, t_lexer *parser_struct)
+bool	parser_cmp(t_lexer *tokens) // im not even using this function...
 {
 	if (parser_cmp_abso(tokens))
 		return (true);
