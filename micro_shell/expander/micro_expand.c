@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/01 14:03:47 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 14:25:21 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,10 @@ t_expand *init_expand_list(t_parser *node)
     new = (t_expand *)malloc(sizeof(* new));
     if (!new)
         micro_error("malloc", errno);
-	if (micro_check_for_meta(node))
-		new->sign = micro_check_for_meta(node);
-	else 
-		new->sign = NULL;
+	new->sign = micro_check_for_meta(node);
 	printf("new->sign = [%s]\n", new->sign);
     new->str = node->str;
-	if (shelly_check_for_builtin(node))
-    	new->builtin = shelly_check_for_builtin(node);
-	else
-		new->builtin = NULL;
+    new->builtin = shelly_check_for_builtin(node);
 	printf("new->builtin = [%s]\n", new->builtin);
     new->next = NULL;
 	// printf("expand sign is; %s\n", new->str);
