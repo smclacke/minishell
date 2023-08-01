@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/01 15:56:43 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 15:59:42 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,6 @@ t_expand	*micro_expand(char **envp, t_parser *node)
     (void) envp;
 	expand = NULL;
 	// env = micro_env_list(envp);
-	while (node != NULL)
-	{
-        shelly_expand_lstadd_back(&expand, init_expand_list(node));
-		node = node->next;
-	}
+    shelly_expand_lstadd_back(&expand, init_expand_list(node));
 	return (expand);
 }
