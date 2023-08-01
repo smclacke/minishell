@@ -51,4 +51,27 @@ ABSO PATH, ECHO WORKS, CD DOESN'T, ETC ETC., USE EXECVE FOR THESE BECAUSE USING
 THE ENV PATH FOR THESE NOT OUR BUILDINS
 // I COULD CHECK THESE PATHS AND ONLY GIVE YOU VALID ONES
 
++++++++++++++++++++++
 
+djoyke... maybe use a static function once in a while.... please
+
++++++++++++++++++++++++++=
+
+
+t_expand	*micro_expand(char **envp, t_parser *node)
+{
+	// t_env	    *env;
+    t_expand    *expand;
+
+    (void) envp;
+	expand = NULL;
+	// env = micro_env_list(envp);
+	while (node)
+	{
+        shelly_expand_lstadd_back(&expand, init_expand_list(node));
+		node = node->next;
+	}
+	return (expand);
+}
+
+calling init_expand_list inside lstadd_back while iterating through the list is maybe not the best idea....

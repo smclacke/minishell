@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/01 14:25:21 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 15:52:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,18 @@ t_expand *init_expand_list(t_parser *node)
 	// printf("expand sign is; %s\n", new->str);
 	return (new);
 }
+/**
+ * @param lst linked list to loop through
+ * @brief loops to list to go to last position
+*/
+t_expand	*shelly_expand_lstlast(t_expand *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
 
 /**
  * @param lst linked list
@@ -101,18 +113,6 @@ void	shelly_expand_lstadd_back(t_expand **lst, t_expand *new)
 		*lst = new;
 }
 
-/**
- * @param lst linked list to loop through
- * @brief loops to list to go to last position
-*/
-t_expand	*shelly_expand_lstlast(t_expand *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
 
 /* check for built ins, meta's pipes? to see if i need to fork, 
 just execute or even redirect input output.*/
