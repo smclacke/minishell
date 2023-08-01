@@ -80,3 +80,38 @@ t_expand	*micro_expand(char **envp, t_parser *node)
 	}
 	return (expand);
 }
+
+
+
+--------------------------------------------------------------------------
+SAVING OLD SHIT JUST INCASE
+
+
+// UNNCESSARY CHECK ALL TOKENS WITH A SEPARATE FUNCTION IN PARSER() AND THEN JUST DEFINE WITH THE SPECIFIC TWO FUNCS IN PARSER()
+// /**
+//  * @brief	compare the first token to cmds and valid signs
+//  * 			// will also need to find a way to allow first token to be non-built in command...
+//  * @param	tokens first arg token passed from the lexer to the parser
+//  * @param	parser_struct  structure to assign each token to the correct type
+//  * @return	bool: true/false 1/0
+// */
+// static bool	parser_first_token(t_lexer *tokens, t_parser *parser_struct)
+// {
+// 	ft_lower_str(tokens->input);
+// 	if (parser_check_quotes(tokens))
+// 	{
+// 		tokens->input = remove_quotes(tokens);
+// 		if (!tokens->input)
+// 			return (0);
+// 		if (parser_cmp_builtins(tokens))
+// 		{
+// 			parser_struct->cmd = tokens->input;
+// 			printf("first->cmd: %s\n", parser_struct->cmd);
+// 			return (true);
+// 		}
+// 	}
+// 	else
+// 		if (parser_cmp(tokens, parser_struct))
+// 			return (true);
+// 	return (false);
+// }
