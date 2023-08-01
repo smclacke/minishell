@@ -6,13 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/01 13:52:08 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 14:03:47 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-
 
 /**
  * @param node linked list
@@ -74,11 +72,19 @@ t_expand *init_expand_list(t_parser *node)
     new = (t_expand *)malloc(sizeof(* new));
     if (!new)
         micro_error("malloc", errno);
-    new->sign = micro_check_for_meta(node);
+	if (micro_check_for_meta(node))
+		new->sign = micro_check_for_meta(node);
+	else 
+		new->sign = NULL;
+	printf("new->sign = [%s]\n", new->sign);
     new->str = node->str;
-    new->builtin = shelly_check_for_builtin(node);
+	if (shelly_check_for_builtin(node))
+    	new->builtin = shelly_check_for_builtin(node);
+	else
+		new->builtin = NULL;
+	printf("new->builtin = [%s]\n", new->builtin);
     new->next = NULL;
-	// printf("expand sign is; %s\n", new->sign);
+	// printf("expand sign is; %s\n", new->str);
 	return (new);
 }
 
@@ -130,6 +136,7 @@ t_expand	*micro_expand(char **envp, t_parser *node)
 	while (node)
 	{
         shelly_expand_lstadd_back(&expand, init_expand_list(node));
+		node = node->next;
 	}
 	return (expand);
 }
