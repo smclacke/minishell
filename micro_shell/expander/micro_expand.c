@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/01 13:40:42 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/01 13:48:24 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@ t_expand	*micro_expand(char **envp, t_parser *node)
 	while (node)
 	{
         shelly_expand_lstadd_back(&expand, init_expand_list(node));
-		
-		
-		// micro_check_for_builtin(node, env);
-        // printf("expand sign is; %s\n", expand->sign);
 	}
 	return (expand);
 }
@@ -49,17 +45,17 @@ t_expand	*micro_expand(char **envp, t_parser *node)
 char	*micro_check_for_meta(t_parser *node)
 {
 	if (ft_strnstr(node->sign, "$", ft_strlen(node->sign)) == 0)
-		return("$");
+		return(node->sign);
 	if (ft_strnstr(node->sign, ">>", ft_strlen(node->sign)) == 0)
-		return(">>");
+		return(node->sign);
     if (ft_strnstr(node->sign, "<<", ft_strlen(node->sign)) == 0)
-        return("<<");
+        return(node->sign);
 	if (ft_strnstr(node->sign, ">", ft_strlen(node->sign)) == 0)
-		return(">");
+		return(node->sign);
     if (ft_strnstr(node->sign, "<", ft_strlen(node->sign)) == 0)
-        return("<");
+        return(node->sign);
 	if (ft_strnstr(node->sign, "|", ft_strlen(node->sign)) == 0)
-		return("|");
+		return(node->sign);
 	else
 		return (NULL);
 }
@@ -73,21 +69,21 @@ char	*micro_check_for_meta(t_parser *node)
 char	*shelly_check_for_builtin(t_parser *node)
 {
 	if (ft_strcmp(node->cmd, "echo") == 0)
-		return ("echo");
+		return (node->cmd);
 	if (ft_strcmp(node->cmd, "cd") == 0)
-		return ("cd");
+		return (node->cmd);
 	if (ft_strcmp(node->cmd, "pwd") == 0)
-		return ("pwd");
+		return (node->cmd);
 	if (ft_strcmp(node->cmd, "export") == 0)
-		return ("export");
+		return (node->cmd);
 	if (ft_strcmp(node->cmd, "unset") == 0)
-		return ("unset");
+		return (node->cmd);
 	if (ft_strcmp(node->cmd, "env") == 0)
-		return ("env");
+		return (node->cmd);
 	if (ft_strcmp(node->cmd, "exit") == 0)
-		return ("exit");
+		return (node->cmd);
 	else
-		return(NULL);
+		return (NULL);
 }
 
 t_expand *init_expand_list(t_parser *node)
@@ -101,7 +97,7 @@ t_expand *init_expand_list(t_parser *node)
     new->str = node->str;
     new->builtin = shelly_check_for_builtin(node);
     new->next = NULL;
-	printf("expand sign is; %s\n", new->sign);
+	// printf("expand sign is; %s\n", new->sign);
 	return (new);
 }
 
@@ -113,7 +109,7 @@ t_expand *init_expand_list(t_parser *node)
 */
 void	shelly_expand_lstadd_back(t_expand **lst, t_expand *new)
 {
-	t_env	*last;
+	t_expand	*last;
 
 	if (*lst)
 	{
