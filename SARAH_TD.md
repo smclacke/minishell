@@ -1,4 +1,4 @@
-**SARAH, SHIT TO DO AFTER MICRO SHELLY, DONT FORGETTTTTTTTTT**
+**SARAH, SHIT TO DO AFTER MICRO SHELLY, DONT FORGETTTTTTTTTT, and during...**
 
 gutentag frau Shelly, wie geht's?
 dein computer, kein computer
@@ -11,14 +11,21 @@ dein computer, kein computer
 
 ~~~ Parser ~~~
 
--> when checking first token in parser if valid, <<LIMITER, <input, etc won't work cause extra shit after inside the token.... handle this!
+-> some<<something
+-> <<something
 
--> quotes inside cmds, remove this before validating in the parser...
+-> take all input, put in temp, remove quotes and make lowercase
+	check if cmd, if yes, pass new format back, else continuing using original
+
+-> remove the checking format shiz from first_token functions once this all works, 
+	dont need it twice
+
+-> for first token, it could be a cmd from bash (not builtin), how to handle this??
 
 
-ERRORS :
+ERRORS :!!!
 
-
+---------------------------------------------------------------------------------
 **TALK TO DJOYKE ABOUT THIS**
 
 Gutentag Fräulein Shelly, wie geht's?echo abc$abc
@@ -73,5 +80,3 @@ t_expand	*micro_expand(char **envp, t_parser *node)
 	}
 	return (expand);
 }
-
-calling init_expand_list inside lstadd_back while iterating through the list is maybe not the best idea....
