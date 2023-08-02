@@ -6,11 +6,22 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 22:25:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 12:48:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
+
+/**
+ * after splitting correctly on quotes and spaces, take quote tokens, parse them in lexer
+ * make new tokens out of them so they can be handled easier with my current parser system
+ * could already put them in lexer struct as token->quote str, token->quoted_cmd etc, and in parser
+ * just check if the token has any specification and if so, put that in parser struct
+*/
+
+/**
+ * need to check for flags somewhere!
+*/
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
