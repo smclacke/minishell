@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 13:50:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:32:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef enum e_signs
 	PIPE = 8
 }		t_signs;
 
-// t_signs				sign[8]; // do we need this and if so what do we do with it?
+// LEXER
 typedef	struct s_lexer
 {
 	void				*input;
@@ -61,36 +61,50 @@ typedef	struct s_lexer
 }	t_lexer;
 
 //----- lexer.c -----//
-t_lexer			*micro_lexer(char *input);
+void			init_lexer(t_lexer *token_list);
+t_lexer			*lexer(char *input);
 
 //----- lexer_utils.c -----//
-t_lexer			*micro_lexer_listlast(t_lexer *list);
-void			micro_lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer			*micro_lexer_listnew(void *input);
-t_lexer			*micro_print_lexer(t_lexer *token);
+t_lexer			*lexer_listlast(t_lexer *list);
+void			lexer_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer			*lexer_listnew(void *input);
+t_lexer			*print_lexer(t_lexer *token);
 
-//---- Parser ----//
+// -------- Quotes --------//
+int				sign_tokens(char *input);
+char			*quote_tokens(char *input);
+int				closed_quotes(char *input);
+char			*check_quotes(char *input);
+
+// PARSER
 typedef struct s_parser 
 {
-	void				*input;
+	void				*input; // do i need this?
 	char				*str;
 	char				*cmd;
 	char				*sign;
-	char				**path; // need to handle abso paths, doesnt do anything (:
-	// char				*redirect; sign->redirect ? be specific or nah?
+	char				*abso; // DECIDE WHAT WE ARE USING, SILLY SARAH...
+	char				*path;
 	char				*here_doc;
-	struct s_lexer		*tokens;
 	struct s_parser		*next;
+	struct s_lexer		*tokens;		// do i need both tokens and par_tokens
 	struct s_lexer		*par_tokens;
 }	t_parser;
 
 //---- parser.c ----//
-t_parser		*micro_parser(t_lexer *tokens);
+void			init_parser(t_parser *parser_struct);
+t_parser		*parser(t_lexer *tokens);
+
+//---- parser_quotes.c ----//
+bool			parser_check_quotes(char *tokens);
+char			*remove_quotes(char *tokens);
 
 //---- parser_utils.c ----//
-bool			micro_cmp_builtins(t_lexer *tokens);
-bool			micro_cmp_signs(t_lexer *tokens);
-bool			micro_first_token(t_lexer *tokens, t_parser *parser_struct);
+bool			parser_cmp_pipe(t_lexer *tokens);
+bool			parser_cmp_char_builtins(char *tokens);
+bool			parser_cmp_builtins(t_lexer *param);
+bool			parser_cmp_signs(t_lexer *tokens);
+bool			parser_cmp_abso(t_lexer *tokens);
 
 //---- Expander ----//
 typedef struct s_expand
