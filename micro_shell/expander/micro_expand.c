@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 13:26:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 13:48:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@
 bool	micro_check_for_meta(t_parser *node)
 {
 	if (micro_strcmp(node->sign, "$") == 0)
-		return(true);
-	if (micro_strcmp(node->sign, ">>") == 0)
-		return(true);
-    if (micro_strcmp(node->sign, "<<") == 0)
-        return(true);
-	if (micro_strcmp(node->sign, ">") == 0)
-		return(true);
-    if (micro_strcmp(node->sign, "<") == 0)
-        return(true);
-	if (micro_strcmp(node->sign, "|") == 0)
-		return(true);
+		return (true);
+	else if (micro_strcmp(node->sign, ">>") == 0)
+		return (true);
+	else if (micro_strcmp(node->sign, "<<") == 0)
+		return (true);
+	else if (micro_strcmp(node->sign, ">") == 0)
+		return (true);
+	else if (micro_strcmp(node->sign, "<") == 0)
+		return (true);
+	else if (micro_strcmp(node->sign, "|") == 0)
+		return (true);
 	else
 		return (false);
 }
@@ -49,41 +49,41 @@ bool	shelly_check_for_builtin(t_parser *node)
 {
 	if (micro_strcmp(node->cmd, "echo") == 0)
 		return (true);
-	if (micro_strcmp(node->cmd, "cd") == 0)
+	else if (micro_strcmp(node->cmd, "cd") == 0)
 		return (true);
-	if (micro_strcmp(node->cmd, "pwd") == 0)
+	else if (micro_strcmp(node->cmd, "pwd") == 0)
 		return (true);
-	if (micro_strcmp(node->cmd, "export") == 0)
+	else if (micro_strcmp(node->cmd, "export") == 0)
 		return (true);
-	if (micro_strcmp(node->cmd, "unset") == 0)
+	else if (micro_strcmp(node->cmd, "unset") == 0)
 		return (true);
-	if (micro_strcmp(node->cmd, "env") == 0)
+	else if (micro_strcmp(node->cmd, "env") == 0)
 		return (true);
-	if (micro_strcmp(node->cmd, "exit") == 0)
+	else if (micro_strcmp(node->cmd, "exit") == 0)
 		return (true);
 	else
 		return (false);
 }
 
-t_expand *init_expand_list(t_parser *node)
+t_expand	*init_expand_list(t_parser *node)
 {
-    t_expand *new;
+	t_expand	*new;
 
-    new = (t_expand *)malloc(sizeof(* new));
-    if (!new)
-        micro_error("malloc", errno);
+	new = (t_expand *)malloc(sizeof(*new));
+	if (!new)
+		micro_error("malloc", errno);
 	if (micro_check_for_meta(node))
 		new->sign = node->sign;
-	if (!micro_check_for_meta(node))
+	else if (!micro_check_for_meta(node))
 		new->sign = NULL;
 	printf("new->sign = [%s]\n", new->sign);
-    new->str = node->str;
-    if (shelly_check_for_builtin(node))
+	new->str = node->str;
+	if (shelly_check_for_builtin(node))
 		new->builtin = node->cmd;
-	if (!shelly_check_for_builtin(node))
+	else if (!shelly_check_for_builtin(node))
 		new->builtin = NULL;
 	printf("new->builtin = [%s]\n", new->builtin);
-    new->next = NULL;
+	new->next = NULL;
 	return (new);
 }
 
@@ -93,7 +93,7 @@ t_expand *init_expand_list(t_parser *node)
  * @brief loops through list to add the new node to the back
  * @todo adding previous in case of doubly linked list
 */
-static void	shelly_expand_lstadd_back(t_expand **lst, t_expand *new)
+void	shelly_expand_lstadd_back(t_expand **lst, t_expand *new)
 {
 	t_expand	*last;
 
@@ -110,7 +110,7 @@ static void	shelly_expand_lstadd_back(t_expand **lst, t_expand *new)
  * @param lst linked list to loop through
  * @brief loops to list to go to last position
 */
-static t_expand	*shelly_expand_lstlast(t_expand *lst)
+t_expand	*shelly_expand_lstlast(t_expand *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -127,11 +127,14 @@ just execute or even redirect input output.*/
 t_expand	*micro_expand(char **envp, t_parser *node)
 {
 	// t_env	    *env;
-    t_expand    *expand;
+	t_expand	*expand;
+	t_expand	**list;
 
-    (void) envp;
+	(void) envp;
 	expand = NULL;
+	list = NULL;
 	// env = micro_env_list(envp);
-    shelly_expand_lstadd_back(&expand, init_expand_list(node));
-	return (expand);
+	expand = init_expand_list(node);
+	shelly_expand_lstadd_back(list, expand);
+	return (*list);
 }

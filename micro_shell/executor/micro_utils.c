@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/31 19:04:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 13:43:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ void	micro_error(char *string, int error)
  * @brief compares 2 strings replace by the libft version without -n
  * @return difference if different or 0
 */
-int	micro_strcmp(const char *s1, const char *s2)
+int	micro_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 
 	i = 0;
+	printf("hiiiiiii\n");
+	printf("str1[%s]\n", s1);
+	printf("str2[%s]\n", s2);
 	while (s1[i] || s2[i])
 	{
 		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])

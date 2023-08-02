@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 13:27:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 13:49:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct s_expand
 t_expand	*micro_expand(char **envp, t_parser *node);
 bool		micro_check_for_meta(t_parser *node);
 bool		shelly_check_for_builtin(t_parser *node);
+t_expand	*shelly_expand_lstlast(t_expand *lst);
+void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
 
 //---- Executor ----//
 typedef struct s_env
@@ -142,7 +144,7 @@ void		micro_build(t_parser *node, t_env *env);
 
 //----Utils----//
 void		micro_error(char *string, int error);
-int			micro_strcmp(const char *s1, const char *s2);
+int			micro_strcmp(char *s1, char *s2);
 void		micro_check_for_builtin(t_parser *node, t_env *env);
 
 //------------ Minishell -----------//
