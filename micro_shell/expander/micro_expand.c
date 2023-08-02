@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/01 15:59:42 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/02 13:26:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_expand *init_expand_list(t_parser *node)
  * @brief loops through list to add the new node to the back
  * @todo adding previous in case of doubly linked list
 */
-void	shelly_expand_lstadd_back(t_expand **lst, t_expand *new)
+static void	shelly_expand_lstadd_back(t_expand **lst, t_expand *new)
 {
 	t_expand	*last;
 
@@ -110,7 +110,7 @@ void	shelly_expand_lstadd_back(t_expand **lst, t_expand *new)
  * @param lst linked list to loop through
  * @brief loops to list to go to last position
 */
-t_expand	*shelly_expand_lstlast(t_expand *lst)
+static t_expand	*shelly_expand_lstlast(t_expand *lst)
 {
 	if (!lst)
 		return (NULL);
