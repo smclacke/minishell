@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 01:35:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 01:45:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ t_parser	*parser(t_lexer *tokens)
 	list = tokens;
 	while (list)
 	{
-		if (!parser_format_check(tokens, parser_struct))
+		if (!parser_format_check(list, parser_struct))
 			parser_define_tokens(list, parser_struct);
 		list = list->next;
 	}

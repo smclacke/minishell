@@ -48,6 +48,8 @@ dein computer, kein computer
 **FIX ALL OF THIS**
 a load of things are being handled twice and incorrectly the second time....
 
+I guess im initalizing twice and not moving on from the token thats inited... 
+
 Gutentag Fräulein Shelly, wie geht's?echo hi hi hi | something $$ $ < >
 lexer: 		~: echo
 lexer: 		~: hi
