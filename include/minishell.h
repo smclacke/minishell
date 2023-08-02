@@ -6,9 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 15:41:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 13:50:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -102,11 +103,10 @@ typedef struct s_expand
 }						t_expand;
 
 t_expand	*micro_expand(char **envp, t_parser *node);
-t_expand 	*init_expand_list(t_parser *node);
-char		*micro_check_for_meta(t_parser *node);
-char		*shelly_check_for_builtin(t_parser *node);
-void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
+bool		micro_check_for_meta(t_parser *node);
+bool		shelly_check_for_builtin(t_parser *node);
 t_expand	*shelly_expand_lstlast(t_expand *lst);
+void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
 
 //---- Executor ----//
 typedef struct s_env
@@ -145,7 +145,7 @@ void		micro_build(t_parser *node, t_env *env);
 
 //----Utils----//
 void		micro_error(char *string, int error);
-int			micro_strcmp(const char *s1, const char *s2);
+int			micro_strcmp(char *s1, char *s2);
 void		micro_check_for_builtin(t_parser *node, t_env *env);
 
 //------------ Minishell -----------//
