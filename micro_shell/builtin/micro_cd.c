@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 15:10:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 19:51:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,42 @@
  * absolute: cd src/bin/pannekoek/whatever
  * cd alone gives prompt back
  * cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
+ * change pwd 
+ * change oldpwd
 */
-void	micro_cd(t_parser *node, t_env *env)//list instead argv
+void	micro_cd(t_expand *lst, t_env *env)
 {
-	char	*home_dir;
-	char	*error;
-	char	*cwd;
+	char		*home_dir;
+	char		*old_work_dir;
+	char		*error;
+	char		*cwd;
+	t_env		**head;
 
-	(void) env;
 	cwd = NULL;
-	if (node)
+	head = &env;
+	if (env)
 	{
 		home_dir = getenv("HOME");
 		if (home_dir == NULL)
 			micro_error("getenv", errno);
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
-		if (access(node->str, F_OK) == 0)
-		{
-			// getcwd()..?
-			// while (env)
-			// {
-			// 	if (ft_strncmp ("OLDPWD=", env->key, 6)
-			// 	{
-					
-			// 	}
-			// 	env = env->next;
-			// }
-			chdir(node->str);
-		}
+		old_work_dir = getcwd(cwd, sizeof(cwd));
+		if (access(lst->str, F_OK) == 0)
+			chdir(lst->str);
 		else
 		{
-			error = ft_strjoin("minishell: cd: ", node->str);
+			error = ft_strjoin("minishell: cd: ", lst->str);
 			micro_error(error, errno);
 		}
+		// if (!ft_strncmp ("OLDPWD=", env->key, 6))
+		// 	env = env->next;
+		// if (ft_strncmp ("OLDPWD=", env->key, 6))
+		// 	env->value = old_work_dir;
+		// env = *head;
+		// if (!ft_strncmp ("PWD=", env->key, 4))
+		// 	env = env->next;
+		// if (ft_strncmp ("PWD=", env->key, 4))
+		// 	env->value = getcwd(cwd, sizeof(cwd));
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
 	}
 	printf("%s\n", getcwd(cwd, sizeof(cwd)));

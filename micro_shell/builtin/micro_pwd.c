@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/31 17:51:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 19:09:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
  * @todo also print the old one OLDPWD=/Users/dreijans/Documents/Rang 3/Minishell
  * needs exit status
 */
-void	micro_pwd(char *path, t_env *env)
+void	micro_pwd(void)
 {
-	(void) env;
-	path = getcwd(path, sizeof(NULL));
+	char	*path;
+
+	path = getcwd(NULL, 0);
 	if (path != NULL)
 		printf("Current working directory: %s\n", path);
 	else

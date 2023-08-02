@@ -6,29 +6,72 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:46:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 18:58:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/minishell.h"
 
-// void	micro_build(t_parser *node, t_env *env)
-// {
-// 	t_parser	*temp_node;
-// 	int			fork_pid;
+void	micro_execute(char **envp, t_expand *lst)
+{
+	t_env	*env;
 
-// 	temp_node = node;
-// 	if (temp_node->cmd)
-// 	{
-// 		fork_pid = fork();
-// 		if (fork_pid == -1)
-// 			micro_error("fork", errno);
-// 		if (fork_pid == 0)
-// 			micro_check_for_builtin(node, env);
-// 	}
-// 	temp_node = temp_node->next;
-// }
+	env = micro_env_list(envp);
+	micro_build(lst, env);
+}
+
+void	micro_build(t_expand *lst, t_env *env)
+{
+	// int			fork_pid;
+	
+	printf("cmd = [%s]\n", lst->cmd);
+	printf("builtin = [%s]\n", lst->builtin);
+	printf("env before\n");
+	micro_print_list(env);
+	// if (lst->cmd != NULL)
+	// {
+	// 	fork_pid = fork();
+	// 	if (fork_pid == -1)
+	// 		micro_error("fork", errno);
+	// 	if (fork_pid == 0)
+	// 		printf("have to get a kindergarten\n");
+	// }
+	if (lst->builtin)
+		micro_check_for_builtin(lst, env);
+	// if (lst->sign)
+	// 	micro_check_for_meta(lst);
+	// lst = lst->next;
+	printf("env after\n");
+	micro_print_list(env);
+}
+
+/**
+ * @param lst linked list
+ * @param env string or char to compare with
+ * @brief checks arguments to find meta_chars: 
+ * $, >>, <<, >, <, |
+ * @todo 
+ * 1) needs to be passed to actual process,
+ * 2) MAYBE MAKE IT A BOOL?
+*/
+void	micro_check_for_meta(t_expand *lst)
+{
+	if (lst->sign == NULL)
+		micro_error("meta", errno);
+	if (micro_strcmp(lst->sign, "$") == 0)
+		printf("dolllaaaah\n");
+	else if (micro_strcmp(lst->sign, ">>") == 0)
+		printf("Output Append\n");
+	else if (micro_strcmp(lst->sign, "<<") == 0)
+		printf("here doc\n");
+	else if (micro_strcmp(lst->sign, ">") == 0)
+		printf("output Redirect\n");
+	else if (micro_strcmp(lst->sign, "<") == 0)
+		printf("Input Redirect\n");
+	else if (micro_strcmp(lst->sign, "|") == 0)
+		printf("pipe\n");
+}
 
 // /**
 //  * @param node linked list containing commands and atributes
@@ -40,7 +83,7 @@
 // {
 // 	int			pipe_fd[2];
 // 	int			fd_in;
-// 	t_parser	*temp_node;
+// 	t_parser	*node;
 
 // 	fd_in = 0;
 // 	temp_node = node;
