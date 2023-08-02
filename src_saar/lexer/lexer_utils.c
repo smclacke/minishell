@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 21:41:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 14:25:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_lexer	*lexer_listnew(void *input)
 	if (!new)
 		return (0);
 	new->input = input;
-	new->next = 0;
+	new->next = NULL;
 	return (new);
 }
 

@@ -27,6 +27,8 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
+-> init my structs...
+
 -> split on quotes and spaces correctly so initial list of tokens is good
 	> pretty simple while loopidyloop
 	> don't forget to check either side of the quotes for chars

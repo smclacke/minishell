@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/01 20:32:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 14:35:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ char			*check_quotes(char *input);
 // PARSER
 typedef struct s_parser 
 {
-	void				*input;
+	void				*input; // do i need this?
 	char				*str;
 	char				*cmd;
 	char				*sign;
 	char				*abso;
 	char				*here_doc;
-	struct s_lexer		*tokens;
 	struct s_parser		*next;
+	struct s_lexer		*tokens;		// do i need both tokens and par_tokens
 	struct s_lexer		*par_tokens;
 }	t_parser;
 

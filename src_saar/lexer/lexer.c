@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 13:10:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 14:32:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,49 +33,53 @@
 */
 static char	**parse_input(char *input)
 {
+	
 	char	**array = NULL;
-	int		i = 0;
-	// int		j = ft_strlen(input);
-	int		k = 0;
-
-string:
-
-some thing "quotes and shit" some more stuff
-
-	while (input[i])
-	{
-		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
-		{
-			if (ft_isspace(input[i]))
-			{
-				array[k] = input[i];
-				k++;
-				j--;
-			}
-				
-			i++;
-		}
-		// if (input[i] && !ft_isquote(input[i]))
-		// {
-			array = ft_split(input, ' ');
-		// }
-		// if (ft_isquote(input[i]))
-		// {
-		// 	printf("I found a quote\n");
-			// while (input[j] && i < j)
-			// {
-			// 	if (ft_isquote(input[j]))
-			// 	{
-			// 		while (input[j - i] && i < j)
-			// 		array[k] = &input[i];
-			// 		i++;
-			// 	}
-			// 	j--;
-			// }
-		}
-		i++;
-	}
+// 	int		i = 0;
+// 	// int		j = ft_strlen(input);
+// 	int		k = 0;
+	array = ft_split(input, ' ');
+	if (!array)
+		return (NULL);
 	return (array);
+// // string:
+
+// // some thing "quotes and shit" some more stuff
+
+// 	while (input[i])
+// 	{
+// 		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
+// 		{
+// 			if (ft_isspace(input[i]))
+// 			{
+// 				array[k] = input[i];
+// 				k++;
+// 				j--;
+// 			}
+				
+// 			i++;
+// 		}
+// 		// if (input[i] && !ft_isquote(input[i]))
+// 		// {
+// 			array = ft_split(input, ' ');
+// 		// }
+// 		// if (ft_isquote(input[i]))
+// 		// {
+// 		// 	printf("I found a quote\n");
+// 			// while (input[j] && i < j)
+// 			// {
+// 			// 	if (ft_isquote(input[j]))
+// 			// 	{
+// 			// 		while (input[j - i] && i < j)
+// 			// 		array[k] = &input[i];
+// 			// 		i++;
+// 			// 	}
+// 			// 	j--;
+// 			// }
+// 		}
+// 		i++;
+// 	}
+// 	return (array);
 }
 
 /**
@@ -89,8 +93,8 @@ some thing "quotes and shit" some more stuff
 static t_lexer	*make_token_list(char **parsed_input)
 {
 	t_lexer		*token_list = NULL;
-	t_lexer		*token;
-	char		*token_str;
+	t_lexer		*token = NULL;
+	char		*token_str = NULL;
 	int			len;
 	int			i = 0;
 
