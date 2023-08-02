@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 15:10:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 18:25:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * cd alone gives prompt back
  * cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
 */
-void	micro_cd(t_parser *node, t_env *env)//list instead argv
+void	micro_cd(t_expand *node, t_env *env)//list instead argv
 {
 	char	*home_dir;
 	char	*error;

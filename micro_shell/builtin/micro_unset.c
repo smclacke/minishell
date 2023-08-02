@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 18:37:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 18:26:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param env pointer to environment
  * @brief unset values by deleting nodes in env linked list
 */
-void	micro_unset(t_parser *node, t_env *env)
+void	micro_unset(t_expand *node, t_env *env)
 {
 	t_env	*temp;
 

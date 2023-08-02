@@ -6,29 +6,37 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:46:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 18:31:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/minishell.h"
 
-// void	micro_build(t_parser *node, t_env *env)
-// {
-// 	t_parser	*temp_node;
-// 	int			fork_pid;
+void	micro_execute(char **envp, t_expand *lst)
+{
+	t_env	*env;
 
-// 	temp_node = node;
-// 	if (temp_node->cmd)
-// 	{
-// 		fork_pid = fork();
-// 		if (fork_pid == -1)
-// 			micro_error("fork", errno);
-// 		if (fork_pid == 0)
-// 			micro_check_for_builtin(node, env);
-// 	}
-// 	temp_node = temp_node->next;
-// }
+	env = micro_env_list(envp);
+	micro_build(lst, env);
+}
+
+void	micro_build(t_expand *lst, t_env *env)
+{
+	// int			fork_pid;
+
+	// if (lst->cmd)
+	// {
+	// 	fork_pid = fork();
+	// 	if (fork_pid == -1)
+	// 		micro_error("fork", errno);
+	// 	if (fork_pid == 0)
+	// 		micro_check_for_builtin(lst, env);
+	// }
+	if (lst->builtin)
+		micro_check_for_builtin(lst, env);
+	lst = lst->next;
+}
 
 // /**
 //  * @param node linked list containing commands and atributes
@@ -40,7 +48,7 @@
 // {
 // 	int			pipe_fd[2];
 // 	int			fd_in;
-// 	t_parser	*temp_node;
+// 	t_parser	*node;
 
 // 	fd_in = 0;
 // 	temp_node = node;
