@@ -27,7 +27,9 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
--> init my structs...
+-> init my structs... DONE
+
+-> echo hi being weird, fix it!!!
 
 -> split on quotes and spaces correctly so initial list of tokens is good
 	> pretty simple while loopidyloop
