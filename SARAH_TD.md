@@ -43,6 +43,38 @@ dein computer, kein computer
 
 -> how will the parser handle quotes, need to add this
 
+---------------------------------------------------------------------------------
+
+**FIX ALL OF THIS**
+a load of things are being handled twice and incorrectly the second time....
+
+Gutentag Fräulein Shelly, wie geht's?echo hi hi hi | something $$ $ < >
+lexer: 		~: echo
+lexer: 		~: hi
+lexer: 		~: hi
+lexer: 		~: hi
+lexer: 		~: |
+lexer: 		~: something
+lexer: 		~: $$
+lexer: 		~: $
+lexer: 		~: <
+lexer: 		~: >
+first->cmd: echo
+second->str: hi
+second->str: hi
+second->str: hi
+second->sign: |
+second->str: |				// !! problem, why are you doing pipe twice?
+second->str: something
+second->sign: $$
+second->str: $$				// !! problem, why are you doing this twice?
+second->sign: $
+second->str: $				// !! problem, why are you doing this twice?
+second->sign: <
+second->str: <				// !! problem, why are you doing this twice?
+second->sign: >
+second->str: >				// !! problem, why are you doing this twice?
+
 
 ---------------------------------------------------------------------------------
 **TALK TO DJOYKE ABOUT THIS**

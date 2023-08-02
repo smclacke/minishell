@@ -6,17 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:21:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 01:35:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-bool	parser_cmp_pipe(t_lexer *tokens)
+bool	parser_cmp_pipe(t_lexer *tokens) // comparing only | because else weird behaviour.. fix this
 {
 	if (!tokens)
 		return (false);
-	if (ft_strnstr(tokens->input, "|", 1) == 0)
+	if (ft_strcmp(tokens->input, "|") == 0)
 		return (true);
 	return (false);
 }
