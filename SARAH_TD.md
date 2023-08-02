@@ -1,6 +1,6 @@
 **SARAH, SHIT TO DO AFTER MICRO SHELLY, DONT FORGETTTTTTTTTT, and during...**
 
-gutentag frau Shelly, wie geht's?
+Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
