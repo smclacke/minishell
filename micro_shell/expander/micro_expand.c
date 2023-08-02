@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 13:48:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 14:07:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 */
 bool	micro_check_for_meta(t_parser *node)
 {
+	if (node->sign == NULL)
+		return (false);
 	if (micro_strcmp(node->sign, "$") == 0)
 		return (true);
 	else if (micro_strcmp(node->sign, ">>") == 0)
@@ -47,6 +49,8 @@ bool	micro_check_for_meta(t_parser *node)
 */
 bool	shelly_check_for_builtin(t_parser *node)
 {
+	if (node->cmd == NULL)
+		return (false);
 	if (micro_strcmp(node->cmd, "echo") == 0)
 		return (true);
 	else if (micro_strcmp(node->cmd, "cd") == 0)
@@ -74,15 +78,15 @@ t_expand	*init_expand_list(t_parser *node)
 		micro_error("malloc", errno);
 	if (micro_check_for_meta(node))
 		new->sign = node->sign;
-	else if (!micro_check_for_meta(node))
+	else
 		new->sign = NULL;
-	printf("new->sign = [%s]\n", new->sign);
+	// printf("new->sign = [%s]\n", new->sign);
 	new->str = node->str;
 	if (shelly_check_for_builtin(node))
 		new->builtin = node->cmd;
-	else if (!shelly_check_for_builtin(node))
+	else
 		new->builtin = NULL;
-	printf("new->builtin = [%s]\n", new->builtin);
+	// printf("new->builtin = [%s]\n", new->builtin);
 	new->next = NULL;
 	return (new);
 }
@@ -124,17 +128,17 @@ just execute or even redirect input output.*/
 		// expand(mini->tokens) // tokens from s_parser struct, 
 		//	check built-in, check meta char, check quotes.
 
-t_expand	*micro_expand(char **envp, t_parser *node)
+t_expand	*micro_expand(char **envp, t_parser *list)
 {
 	// t_env	    *env;
-	t_expand	*expand;
-	t_expand	**list;
+	t_expand	*expand_node;
+	t_expand	*expand_head;
 
 	(void) envp;
-	expand = NULL;
-	list = NULL;
+	expand_node = NULL;
+	expand_head = NULL;
 	// env = micro_env_list(envp);
-	expand = init_expand_list(node);
-	shelly_expand_lstadd_back(list, expand);
-	return (*list);
+	expand_node = init_expand_list(list);
+	shelly_expand_lstadd_back(&expand_head, expand_node);
+	return (expand_head);
 }

@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/08/01 11:04:17 by djoyke        ########   odam.nl          #
+#    Updated: 2023/08/02 14:09:34 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,7 +137,7 @@ $(SAAR)			:	$(OBJ_SAAR)
 $(MICRO_SHELL)	:	$(OBJ_MICRO)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL)
 	@ echo "${WHITE}our micro mini shell${RESET}"
-	@ ./micro
+	# @ ./micro
 
 ## OBJECTS
 
