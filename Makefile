@@ -6,9 +6,11 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/08/02 14:09:34 by dreijans      ########   odam.nl          #
+#    Updated: 2023/08/02 15:29:32 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
+
 
 NAME			= minishell
 DJOY			= djoyke
@@ -71,9 +73,10 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 SRCS_SAAR		= main_saar.c				\
 					lexer/lexer.c			\
 					lexer/lexer_utils.c		\
-					lexer/quotes.c			\
+					lexer/lexer_quotes.c			\
 					parser/parse.c			\
 					parser/parser_utils.c	\
+					parser/parser_quotes.c	\
 					utils/error.c
 
 SAAR_DIR		= src_saar

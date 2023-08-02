@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/25 23:25:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 14:57:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@
 
 # define READ 0
 # define WRITE 1
+
 # define SUCCESS 0
 # define ERROR -1
+
+# define TRUE 1
+# define FALSE 0
 
 typedef enum	e_signs
 {
@@ -50,39 +54,52 @@ typedef	struct s_lexer
 	void				*input;
 	void				*token;
 	struct s_lexer		*next;
-	t_signs				sign[8]; // do we need this and if so what do we do with it?
 }	t_lexer;
 
-// --------- Lexer --------- //
-t_lexer		*lexer(char *input);
+//----- lexer.c -----//
+void			init_lexer(t_lexer *token_list);
+t_lexer			*lexer(char *input);
+
+//----- lexer_utils.c -----//
+t_lexer			*lexer_listlast(t_lexer *list);
+void			lexer_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer			*lexer_listnew(void *input);
+t_lexer			*print_lexer(t_lexer *token);
 
 // -------- Quotes --------//
-int			sign_tokens(char *input);
-char		*quote_tokens(char *input);
-int			closed_quotes(char *input);
-char		*check_quotes(char *input);
+int				sign_tokens(char *input);
+char			*quote_tokens(char *input);
+int				closed_quotes(char *input);
+char			*check_quotes(char *input);
 
-// -------- Lexer Utils --------//
-t_lexer		*lexer_listlast(t_lexer *list);
-void		lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer		*lexer_listnew(void *input);
-t_lexer		*ft_print_tokens(t_lexer *token);
-
-
-
-// PARSER 
+// PARSER
 typedef struct s_parser 
 {
-	// what = parse->cmd = list cmd 
-	// is = parser->redirect
-	// this
-	char	*cmd;
-	struct t_lexer		*tokens;
+	void				*input; // do i need this?
+	char				*str;
+	char				*cmd;
+	char				*sign;
+	char				*abso;
+	char				*here_doc;
+	struct s_parser		*next;
+	struct s_lexer		*tokens;		// do i need both tokens and par_tokens
+	struct s_lexer		*par_tokens;
 }	t_parser;
 
-// --------- Parser --------- //
-// ------- Parser Utils ------- //
-// char		*check_empty(char *cmd);
+//---- parser.c ----//
+void			init_parser(t_parser *parser_struct);
+t_parser		*parser(t_lexer *tokens);
+
+//---- parser_quotes.c ----//
+bool			parser_check_quotes(char *tokens);
+char			*remove_quotes(char *tokens);
+
+//---- parser_utils.c ----//
+bool			parser_cmp_pipe(t_lexer *tokens);
+bool			parser_cmp_char_builtins(char *tokens);
+bool			parser_cmp_builtins(t_lexer *param);
+bool			parser_cmp_signs(t_lexer *tokens);
+bool			parser_cmp_abso(t_lexer *tokens);
 
 
 // UTILS
