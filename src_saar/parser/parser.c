@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse.c                                            :+:    :+:            */
+/*   parser.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:54:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 01:19:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 	if (parser_cmp_signs(tokens))
 	{
 		parser_struct->sign = tokens->input;
+		printf("should not be here\n");
 		printf("second->sign: %s\n", parser_struct->sign);
 	}
 	if (parser_cmp_pipe(tokens))
