@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/31 19:20:06 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:29:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:52:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,14 @@ t_expand	*init_expand_list(t_parser *node)
 		new->sign = node->sign;
 	else
 		new->sign = NULL;
-	// printf("new->sign = [%s]\n", new->sign);
+	printf("new->sign = [%s]\n", new->sign);
 	new->str = node->str;
+	printf("new->str = [%s]\n", new->str);
 	if (shelly_check_for_builtin(node))
 		new->builtin = node->cmd;
 	else
 		new->builtin = NULL;
-	// printf("new->builtin = [%s]\n", new->builtin);
+	printf("new->builtin = [%s]\n", new->builtin);
 	new->next = NULL;
 	return (new);
 }
