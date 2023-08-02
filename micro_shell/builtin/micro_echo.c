@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/31 19:17:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 18:28:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
  * -n TBA that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
 */
-void	micro_echo(t_parser *node)
+void	micro_echo(t_expand *lst)
 {
 	// int	i;
 	// int	is_flag;
-	t_parser 	*temp_node;
+	// t_expand 	*temp_lst;
 
 	// i = 0;
 	// is_flag = 0;
-	temp_node = node;
+	// temp_lst = lst;
 	// if (!temp_node->str)
 	// 	micro_error("node->str", errno);
 	// while (node->str[i] != '\0')
@@ -39,7 +39,8 @@ void	micro_echo(t_parser *node)
 		// }
 		// else
 		// {
-		printf("%s", temp_node->str);
+		printf("echo prints\n");
+		printf("%s", lst->str);
 		// 	i++;
 		// }
 	// }

@@ -6,9 +6,10 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/08/01 15:18:02 by smclacke      ########   odam.nl          #
+#    Updated: 2023/08/02 15:38:22 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
+
 
 
 NAME			= minishell
@@ -73,7 +74,7 @@ SRCS_SAAR		= main_saar.c				\
 					lexer/lexer.c			\
 					lexer/lexer_utils.c		\
 					lexer/lexer_quotes.c			\
-					parser/parse.c			\
+					parser/parser.c			\
 					parser/parser_utils.c	\
 					parser/parser_quotes.c	\
 					utils/error.c
@@ -90,6 +91,7 @@ SRCS_MICRO		= main.c					\
 					lexer/lexer.c			\
 					lexer/lexer_utils.c		\
 					parser/parser.c			\
+					parser/parser_quotes.c	\
 					parser/parser_utils.c	\
 					builtin/micro_cd.c		\
 					builtin/micro_echo.c	\
@@ -139,7 +141,7 @@ $(SAAR)			:	$(OBJ_SAAR)
 $(MICRO_SHELL)	:	$(OBJ_MICRO)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL)
 	@ echo "${WHITE}our micro mini shell${RESET}"
-	@ ./micro
+	# @ ./micro
 
 ## OBJECTS
 
