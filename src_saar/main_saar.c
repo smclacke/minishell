@@ -6,19 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 14:38:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:06:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sarah.h"
-
-void	init_parser(t_parser *parser_struct)
-{
-	parser_struct->str = NULL;
-	parser_struct->cmd = NULL;
-	parser_struct->sign = NULL;
-	parser_struct->abso = NULL;
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -43,9 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 		print_lexer(tokens);
-		
 
-		init_parser(parser_struct);
 		parser_struct = parser(tokens);
 		if (!parser_struct)
 			continue ;

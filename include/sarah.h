@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 14:35:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 14:57:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef	struct s_lexer
 }	t_lexer;
 
 //----- lexer.c -----//
+void			init_lexer(t_lexer *token_list);
 t_lexer			*lexer(char *input);
 
 //----- lexer_utils.c -----//
@@ -86,6 +87,7 @@ typedef struct s_parser
 }	t_parser;
 
 //---- parser.c ----//
+void			init_parser(t_parser *parser_struct);
 t_parser		*parser(t_lexer *tokens);
 
 //---- parser_quotes.c ----//

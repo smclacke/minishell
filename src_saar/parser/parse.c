@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 14:37:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:24:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,18 @@
 */
 static bool	parser_define_first_token(t_lexer *tokens, t_parser  *parser_struct)
 {
+	if (!tokens)
+		return (false);
 	if (parser_cmp_signs(tokens))
 	{
 		parser_struct->sign = tokens->input;
 		printf("first->sign: %s\n", parser_struct->sign);
+		return (true);
+	}
+	else if (parser_cmp_builtins(tokens))
+	{	
+		parser_struct->cmd = tokens->input;
+		printf("first->cmd: %s\n", parser_struct->cmd);
 		return (true);
 	}
 	else if (parser_cmp_abso(tokens))
@@ -51,6 +59,8 @@ static bool	parser_define_first_token(t_lexer *tokens, t_parser  *parser_struct)
 */
 static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 {
+	if (!tokens)
+		return (false);
 	if (parser_cmp_signs(tokens))
 	{
 		parser_struct->sign = tokens->input;
@@ -60,6 +70,11 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 	{
 		parser_struct->sign = tokens->input;
 		printf("second->sign: %s\n", parser_struct->sign);
+	}
+	else if (parser_cmp_builtins(tokens))
+	{	
+		parser_struct->cmd = tokens->input;
+		printf("second->cmd: %s\n", parser_struct->cmd);
 	}
 	else if (parser_cmp_abso(tokens))
 	{	
@@ -103,6 +118,14 @@ static bool	parser_format_check(t_lexer *tokens, t_parser *parser_struct)
 	return (false);
 }
 
+void	init_parser(t_parser *parser_struct)
+{
+	parser_struct->str = NULL;
+	parser_struct->cmd = NULL;
+	parser_struct->sign = NULL;
+	parser_struct->abso = NULL;
+}
+
 /**
  * @brief	Main parser function: check vadility of first token
 			Check the rest of the tokens to see which member of the parser struct they need to be sorted into
@@ -118,6 +141,7 @@ t_parser	*parser(t_lexer *tokens)
 	parser_struct = (t_parser *)malloc(sizeof(t_parser));
 	if (!parser_struct)
 		return (0);
+	init_parser(parser_struct);
 	if (!parser_format_check(&tokens[0], parser_struct))
 	{
 		if (!parser_define_first_token(&tokens[0], parser_struct))

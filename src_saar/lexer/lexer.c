@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 14:32:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 15:25:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ static char	**parse_input(char *input)
 static t_lexer	*make_token_list(char **parsed_input)
 {
 	t_lexer		*token_list = NULL;
-	t_lexer		*token = NULL;
-	char		*token_str = NULL;
+	t_lexer		*token;
+	char		*token_str;
 	int			len;
 	int			i = 0;
 
@@ -113,6 +113,12 @@ static t_lexer	*make_token_list(char **parsed_input)
 	return (token_list);
 }
 
+void	init_lexer(t_lexer *token_list)
+{
+	token_list->input = NULL;
+	token_list->token = NULL;
+}
+
 /**
  * @brief	takes the command line input, parses through the spaces outside quotations and creates
  * 			t_lexer tokens to pass to the parser. In the case of quotations, spaces must be kept and checked
@@ -129,6 +135,10 @@ t_lexer	*lexer(char *input)
 	int			i;
 
 	i  = 0;
+	token_list = (t_lexer *)malloc(sizeof(t_lexer));
+	if (!token_list)
+		return (0);
+	init_lexer(token_list);
 	while (input[i])
 	{
 		parsed_input = parse_input(input);
