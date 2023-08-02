@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 18:16:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 19:08:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	micro_check_for_builtin(t_expand *lst, t_env *env)
 	if (ft_strcmp(lst->builtin, "cd") == 0)
 		micro_cd(lst, env);
 	if (ft_strcmp(lst->builtin, "pwd") == 0)
-		micro_pwd(NULL, env);
+		micro_pwd();
 	if (ft_strcmp(lst->builtin, "export") == 0)
 		micro_export(lst, env);
 	if (ft_strcmp(lst->builtin, "unset") == 0)//gives pwd not the entire path after unsetting

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 18:31:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/02 18:58:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,53 @@ void	micro_execute(char **envp, t_expand *lst)
 void	micro_build(t_expand *lst, t_env *env)
 {
 	// int			fork_pid;
-
-	// if (lst->cmd)
+	
+	printf("cmd = [%s]\n", lst->cmd);
+	printf("builtin = [%s]\n", lst->builtin);
+	printf("env before\n");
+	micro_print_list(env);
+	// if (lst->cmd != NULL)
 	// {
 	// 	fork_pid = fork();
 	// 	if (fork_pid == -1)
 	// 		micro_error("fork", errno);
 	// 	if (fork_pid == 0)
-	// 		micro_check_for_builtin(lst, env);
+	// 		printf("have to get a kindergarten\n");
 	// }
 	if (lst->builtin)
 		micro_check_for_builtin(lst, env);
-	lst = lst->next;
+	// if (lst->sign)
+	// 	micro_check_for_meta(lst);
+	// lst = lst->next;
+	printf("env after\n");
+	micro_print_list(env);
+}
+
+/**
+ * @param lst linked list
+ * @param env string or char to compare with
+ * @brief checks arguments to find meta_chars: 
+ * $, >>, <<, >, <, |
+ * @todo 
+ * 1) needs to be passed to actual process,
+ * 2) MAYBE MAKE IT A BOOL?
+*/
+void	micro_check_for_meta(t_expand *lst)
+{
+	if (lst->sign == NULL)
+		micro_error("meta", errno);
+	if (micro_strcmp(lst->sign, "$") == 0)
+		printf("dolllaaaah\n");
+	else if (micro_strcmp(lst->sign, ">>") == 0)
+		printf("Output Append\n");
+	else if (micro_strcmp(lst->sign, "<<") == 0)
+		printf("here doc\n");
+	else if (micro_strcmp(lst->sign, ">") == 0)
+		printf("output Redirect\n");
+	else if (micro_strcmp(lst->sign, "<") == 0)
+		printf("Input Redirect\n");
+	else if (micro_strcmp(lst->sign, "|") == 0)
+		printf("pipe\n");
 }
 
 // /**
