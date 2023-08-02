@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 12:48:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/02 13:10:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,32 @@ static char	**parse_input(char *input)
 	char	**array = NULL;
 	int		i = 0;
 	// int		j = ft_strlen(input);
-	// int		k = 0;
+	int		k = 0;
+
+string:
+
+some thing "quotes and shit" some more stuff
 
 	while (input[i])
 	{
-		if (input[i] && !ft_isquote(input[i]))
+		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
 		{
-			array = ft_split(input, ' ');
+			if (ft_isspace(input[i]))
+			{
+				array[k] = input[i];
+				k++;
+				j--;
+			}
+				
+			i++;
 		}
-		if (ft_isquote(input[i]))
-		{
-			printf("I found a quote\n");
+		// if (input[i] && !ft_isquote(input[i]))
+		// {
+			array = ft_split(input, ' ');
+		// }
+		// if (ft_isquote(input[i]))
+		// {
+		// 	printf("I found a quote\n");
 			// while (input[j] && i < j)
 			// {
 			// 	if (ft_isquote(input[j]))

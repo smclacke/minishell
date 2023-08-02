@@ -8,33 +8,37 @@ dein computer, kein computer
 
 *Lexer*
 
--> quotes in lexer: 
-	> pretty simple while loopidyloop
-	> don't forget to check either side of the quotes for chars
-
--> lexer_quotes.c needs a lot of work... 
--> parse_input function to add quotes
 
 *Parser*
 
--> some<<something
--> <<something
+-> some<<something 
+	<<something
 
 -> for first token, it could be a cmd from bash (not builtin), how to handle this??
--> quoted tokens (:)
+	> + implimentation for the rest of the input
+
+*Other*
+
+-> FLAGS: WHERE WHAT HOW WHY
 
 -> ERRORS :!!!
+
 
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
 -> split on quotes and spaces correctly so initial list of tokens is good
+	> pretty simple while loopidyloop
+	> don't forget to check either side of the quotes for chars
 
 -> take quoted tokens in lexer and break them up futher, what am i checking for?
+	> lexer_quotes.c, is whole file needs a lot of work, but keep what I have
+		because it could be useful either in lexer or parser
 
 -> send good tokens to parser
 
 -> how will the parser handle quotes, need to add this
+
 
 ---------------------------------------------------------------------------------
 **TALK TO DJOYKE ABOUT THIS**
