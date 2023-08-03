@@ -14,10 +14,9 @@ dein computer, kein computer
 -> some<<something 
 	<<something
 
--> for first token, it could be a cmd from bash (not builtin), how to handle this??
-	> + implimentation for the rest of the input
-
 *Other*
+
+-> handle cmds, builtins are ok but there are like all the other ones ...
 
 -> FLAGS: WHERE WHAT HOW WHY
 
@@ -27,16 +26,17 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
--> init my structs... DONE
+-> rather than putting all different metas in same struct member, put them in 
+	the correct one to be more specific
 
--> echo hi being weird, fix it!!! DONE
 
+~~QUOTES~~
 -> split on quotes and spaces correctly so initial list of tokens is good
 	> pretty simple while loopidyloop
 	> don't forget to check either side of the quotes for chars
 
 -> take quoted tokens in lexer and break them up futher, what am i checking for?
-	> lexer_quotes.c, is whole file needs a lot of work, but keep what I have
+	> lexer_quotes.c, whole file needs a lot of work, but keep what I have
 		because it could be useful either in lexer or parser
 
 -> send good tokens to parser

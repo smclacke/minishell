@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 13:37:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 14:27:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef enum	e_signs
+typedef enum	e_metas
 {
 	DQUOTE = 1,
 	SQUOTE = 2,
@@ -46,7 +46,7 @@ typedef enum	e_signs
 	LESS = 6,
 	LESSLESS = 7,
 	PIPE = 8
-}		t_signs;
+}		t_metas;
 
 // LEXER
 typedef	struct s_lexer
@@ -67,7 +67,7 @@ t_lexer			*lexer_listnew(void *input);
 t_lexer			*print_lexer(t_lexer *token);
 
 // -------- Quotes --------//
-int				sign_tokens(char *input);
+// int				sign_tokens(char *input);
 char			*quote_tokens(char *input);
 int				closed_quotes(char *input);
 char			*check_quotes(char *input);
@@ -75,15 +75,13 @@ char			*check_quotes(char *input);
 // PARSER
 typedef struct s_parser 
 {
-	void				*input; // do i need this?
 	char				*str;
 	char				*cmd;
-	char				*sign;
-	char				*abso; // i added path to struct in micro, djoy is using it... !!!!!!!
+	char				*meta; // probs won't use
+	char				*abso;
 	char				*here_doc;
+	struct s_lexer		*tokens;
 	struct s_parser		*next;
-	struct s_lexer		*tokens;		// do i need both tokens and par_tokens
-	struct s_lexer		*par_tokens;
 }	t_parser;
 
 //---- parser.c ----//
@@ -95,10 +93,10 @@ bool			parser_check_quotes(char *tokens);
 char			*remove_quotes(char *tokens);
 
 //---- parser_utils.c ----//
-bool			parser_cmp_pipe(t_lexer *tokens);
-bool			parser_cmp_char_builtins(char *tokens);
+// bool			parser_cmp_pipe(t_lexer *tokens);
+// bool			parser_cmp_char_builtins(char *tokens);
 bool			parser_cmp_builtins(t_lexer *param);
-bool			parser_cmp_signs(t_lexer *tokens);
+bool			parser_cmp_metas(t_lexer *tokens);
 bool			parser_cmp_abso(t_lexer *tokens);
 
 
