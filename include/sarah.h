@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 14:35:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 18:01:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ typedef struct s_parser
 {
 	char				*str;
 	char				*cmd;
-	char				*meta; // probs won't use
+	char				*meta;
 	char				*abso;
+	char				*squote;
+	char				*dquote;
 	char				*here_doc;
 	struct s_lexer		*tokens;
 	struct s_parser		*next;
@@ -93,6 +95,8 @@ bool			parser_check_quotes(char *tokens);
 char			*remove_quotes(char *tokens);
 
 //---- parser_utils.c ----//
+bool			parser_cmp_squote(t_lexer *param);
+bool			parser_cmp_dquote(t_lexer *param);
 bool			parser_cmp_builtins(t_lexer *param);
 bool			parser_cmp_metas(t_lexer *tokens);
 bool			parser_cmp_abso(t_lexer *tokens);

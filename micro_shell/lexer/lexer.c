@@ -6,11 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:34:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 17:56:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+// take first to last quote, then check if there is anything inbetween that is not in quotes
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
@@ -104,7 +106,7 @@ static t_lexer	*make_token_list(char **parsed_input)
 
 void	init_lexer(t_lexer *token_list)
 {
-	token_list->input = NULL;
+	// token_list->input = NULL;
 	token_list->token = NULL;
 }
 

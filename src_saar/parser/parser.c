@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:38:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 18:00:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief	assigns the tokens to a member in the parser struct:
- * 			meta, cmd, absolute path or anything else str
+ * 			meta, cmd, absolute path,  anything else str
  * @param	tokens passed from the lexer
  * @param	parser_struct  structure to assign each token to the correct member within parser struct
  * @return	assigns the token input to a member in the parser struct
@@ -38,6 +38,16 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 		parser_struct->abso = tokens->input;
 		printf("arg->abso: %s\n", parser_struct->abso);
 	}
+	else if (parser_cmp_squote(tokens))
+	{
+		parser_struct->squote = tokens->input;
+		printf("arg->squote: %s\n", parser_struct->squote);
+	}
+	else if (parser_cmp_dquote(tokens))
+	{
+		parser_struct->dquote = tokens->input;
+		printf("arg->dquote: %s\n", parser_struct->dquote);
+	}
 	else
 	{
 		parser_struct->str = tokens->input;
@@ -52,6 +62,9 @@ void	init_parser(t_parser *parser_struct)
 	parser_struct->cmd = NULL;
 	parser_struct->meta = NULL;
 	parser_struct->abso = NULL;
+	parser_struct->squote = NULL;
+	parser_struct->dquote = NULL;
+	parser_struct->here_doc = NULL;
 }
 
 /**
@@ -73,7 +86,6 @@ t_parser	*parser(t_lexer *tokens)
 	list = tokens;
 	while (list)
 	{
-		//if (token quote) parse that token separately (create a )
 		parser_define_tokens(list, parser_struct);
 		list = list->next;
 	}
