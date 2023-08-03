@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 01:45:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 13:39:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 		parser_struct->sign = tokens->input;
 		printf("second->sign: %s\n", parser_struct->sign);
 	}
-	if (parser_cmp_pipe(tokens))
+	else if (parser_cmp_pipe(tokens))
 	{
 		parser_struct->sign = tokens->input;
 		printf("second->sign: %s\n", parser_struct->sign);
 	}
-	if (parser_cmp_builtins(tokens))
+	else if (parser_cmp_builtins(tokens))
 	{	
 		parser_struct->cmd = tokens->input;
 		printf("second->cmd: %s\n", parser_struct->cmd);
 	}
-	if (parser_cmp_abso(tokens))
+	else if (parser_cmp_abso(tokens))
 	{	
 		parser_struct->abso = tokens->input;
 		printf("second->abso: %s\n", parser_struct->abso);
@@ -111,7 +111,6 @@ static bool	parser_format_check(t_lexer *tokens, t_parser *parser_struct)
 		if (parser_cmp_char_builtins(tmp))
 		{
 			parser_struct->cmd = tmp;
-			printf("format_check->cmd: %s\n", parser_struct->cmd);
 			return (true);
 		}
 	}
