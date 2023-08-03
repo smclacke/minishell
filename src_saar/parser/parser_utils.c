@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 13:37:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 13:42:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ bool	parser_cmp_signs(t_lexer *tokens)
 		return (true);
 	return (false);
 }
+
 // is this enough/going to work for all cases?
 bool	parser_cmp_abso(t_lexer *tokens)
 {
