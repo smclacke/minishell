@@ -6,13 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 14:34:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 17:38:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
-
-// DONT REMOVE CAPS OR QUOTES, JUST MAKE THE BEST TOKENS I CAN AND EXECVE AND PATH CMP WILL DO THE REST
 
 /**
  * @brief	assigns the tokens to a member in the parser struct:
@@ -75,6 +73,7 @@ t_parser	*parser(t_lexer *tokens)
 	list = tokens;
 	while (list)
 	{
+		//if (token quote) parse that token separately (create a )
 		parser_define_tokens(list, parser_struct);
 		list = list->next;
 	}
