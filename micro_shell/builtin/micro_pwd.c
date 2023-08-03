@@ -6,11 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/07/31 17:12:41 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/08/02 19:09:53 by dreijans      ########   odam.nl         */
->>>>>>> microshell
+/*   Updated: 2023/08/03 17:14:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +21,9 @@
 */
 void	micro_pwd(void)
 {
-<<<<<<< HEAD
-	(void) env;
-	path = getcwd(path, sizeof(NULL));
-=======
 	char	*path;
 
 	path = getcwd(NULL, 0);
->>>>>>> microshell
 	if (path != NULL)
 		printf("Current working directory: %s\n", path);
 	else

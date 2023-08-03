@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 16:17:39 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 17:18:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ bool			parser_cmp_abso(t_lexer *tokens);
 
 // void		*micro_expand(t_parser *node);
 // bool		micro_check_for_meta(t_parser *node);
-bool			shelly_check_for_builtin(t_parser *node);
+bool			check_for_builtin(t_parser *node);
 // t_expand	*shelly_expand_lstlast(t_expand *lst);
 // void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
 
@@ -127,14 +127,14 @@ typedef struct s_env
 }							t_env;
 
 /*environment*/
-t_env			*micro_env_list(char **envp);
-t_env			*micro_env_lstnew(void *key, void *value);
-void			micro_get_key_value(char *str, char **key, char **value);
-t_env			*micro_env_lstlast(t_env *lst);
-void			micro_env_lstadd_back(t_env **lst, t_env *new);
-void			micro_print_list(t_env *env);
-void			micro_print_list_key(t_env *env);
-void			micro_print_list_value(t_env *env);
+t_env			*env_list(char **envp);
+t_env			*env_lstnew(void *key, void *value);
+void			get_key_value(char *str, char **key, char **value);
+t_env			*env_lstlast(t_env *lst);
+void			env_lstadd_back(t_env **lst, t_env *new);
+void			print_list(t_env *env);
+void			print_list_key(t_env *env);
+void			print_list_value(t_env *env);
 
 //---- Built-in ----//
 void			ft_cd(t_parser *lst, t_env *env);
@@ -151,14 +151,14 @@ void			ft_unset(t_parser *lst, t_env *env);
 // bool		micro_parse_path(t_env *env, t_parser *node);
 // char		*micro_find_path(t_env *env, t_parser *node);
 // void		micro_build(t_parser *node, t_env *env);
-void			micro_execute(char **envp, t_parser *list);
-void			micro_build(t_parser *lst, t_env *env);
-void			micro_check_for_meta(t_parser *lst);
+void			ft_execute(char **envp, t_parser *list);
+void			build_process(t_parser *lst, t_env *env);
+void			check_for_meta(t_parser *lst);
 
 //----Utils----//
-void			micro_error(char *string, int error);
-int				micro_strcmp(char *s1, char *s2);
-void			micro_check_for_builtin(t_parser *lst, t_env *env);
+void			mini_error(char *string, int error);
+int				mini_strcmp(char *s1, char *s2);
+void			do_builtin(t_parser *lst, t_env *env);
 
 //------------ Minishell -----------//
 /**

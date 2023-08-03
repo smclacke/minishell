@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env_list.c                                         :+:    :+:            */
+/*   ft_make_env.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:35:33 by dreijans      ########   odam.nl         */
+/*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/08/03 17:08:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param key data passed from environment before = sign
@@ -81,7 +81,7 @@ void	env_lstadd_back(t_env **lst, t_env *new)
 
 	if (*lst)
 	{
-		last = mini_lstlast(*lst);
+		last = env_lstlast(*lst);
 		last->next = new;
 	}
 	else
@@ -110,8 +110,47 @@ t_env	*env_list(char **envp)
 	while (envp[i] != NULL)
 	{
 		get_key_value(envp[i], &key, &value);
-		mini_lstadd_back(&env, mini_lstnew(key, value));
+		env_lstadd_back(&env, env_lstnew(key, value));
 		i++;
 	}
 	return (env);
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	print_list(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	print_list_key(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s\n", env->key);
+		env = env->next;
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	print_list_value(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s\n", env->value);
+		env = env->next;
+	}
 }

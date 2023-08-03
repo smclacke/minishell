@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 16:10:32 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 16:52:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_cd(t_parser *lst, t_env *env)
 	{
 		home_dir = getenv("HOME");
 		if (home_dir == NULL)
-			micro_error("getenv", errno);
+			mini_error("getenv", errno);
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
 		old_work_dir = getcwd(cwd, sizeof(cwd));
 		if (access(lst->str, F_OK) == 0)
@@ -44,7 +44,7 @@ void	ft_cd(t_parser *lst, t_env *env)
 		else
 		{
 			error = ft_strjoin("minishell: cd: ", lst->str);
-			micro_error(error, errno);
+			mini_error(error, errno);
 		}
 		// if (!ft_strncmp ("OLDPWD=", env->key, 6))
 		// 	env = env->next;

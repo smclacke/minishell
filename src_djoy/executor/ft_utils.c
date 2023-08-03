@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   micro_utils.c                                      :+:    :+:            */
+/*   ft_utils.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 15:51:02 by smclacke      ########   odam.nl         */
+/*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/08/03 17:25:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param string argument given to perror
  * @param error int errno given to exit
  * @brief provides correct error message and exits
 */
-void	micro_error(char *string, int error)
+void	mini_error(char *string, int error)
 {
 	perror(string);
 	exit(error);
@@ -29,7 +29,7 @@ void	micro_error(char *string, int error)
  * @brief compares 2 strings replace by the libft version without -n
  * @return difference if different or 0
 */
-int	micro_strcmp(char *s1, char *s2)
+int	mini_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 
@@ -54,18 +54,18 @@ int	micro_strcmp(char *s1, char *s2)
  * 2) exit(EXIT_FAILURE) is it really neccesary?
  * 3) MAYBE MAKE IT A BOOL?
 */
-void	micro_check_for_builtin(t_parser *lst, t_env *env)
+void	do_builtin(t_parser *lst, t_env *env)
 {
-	if (ft_strcmp(lst->cmd, "echo") == 0)
-		micro_echo(lst);
-	if (ft_strcmp(lst->cmd, "cd") == 0)
-		micro_cd(lst, env);
-	if (ft_strcmp(lst->cmd, "pwd") == 0)
-		micro_pwd();
-	if (ft_strcmp(lst->cmd, "export") == 0)
-		micro_export(lst, env);
-	if (ft_strcmp(lst->cmd, "unset") == 0)//gives pwd not the entire path after unsetting
-		micro_unset(lst, env);
-	if (ft_strcmp(lst->cmd, "env") == 0)
-		micro_env(env);
+	if (mini_strcmp(lst->cmd, "echo") == 0)
+		ft_echo(lst);
+	if (mini_strcmp(lst->cmd, "cd") == 0)
+		ft_cd(lst, env);
+	if (mini_strcmp(lst->cmd, "pwd") == 0)
+		ft_pwd();
+	if (mini_strcmp(lst->cmd, "export") == 0)
+		ft_export(lst, env);
+	if (mini_strcmp(lst->cmd, "unset") == 0)//gives pwd not the entire path after unsetting
+		ft_unset(lst, env);
+	if (mini_strcmp(lst->cmd, "env") == 0)
+		ft_env(env);
 }

@@ -6,13 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/07/31 17:16:49 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/08/03 14:36:24 by dreijans      ########   odam.nl         */
->>>>>>> microshell
+/*   Updated: 2023/08/03 16:35:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include "../include/minishell.h"
@@ -33,11 +30,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-<<<<<<< HEAD
 	// (void) envp;
 
-=======
->>>>>>> microshell
 	tokens = NULL;
 	parser_struct = NULL;
 	while (1)
@@ -49,12 +43,9 @@ int	main(int argc, char **argv, char **envp)
 		tokens = lexer(input);
 		if (!tokens)
 			continue ;
-<<<<<<< HEAD
 		micro_print_lexer(tokens);
-=======
 		print_lexer(tokens);
 		
->>>>>>> microshell
 
 		parser_struct = parser(tokens);
 		if (!parser_struct)
@@ -65,11 +56,8 @@ int	main(int argc, char **argv, char **envp)
 
 
 		//-- Djoyke --//
-<<<<<<< HEAD
 		// env = micro_env_list(envp);
 		micro_execute(envp, parser_struct);
-=======
->>>>>>> microshell
 		// expand(mini->tokens) // tokens from s_parser struct, 
 		//	check built-in, check meta char, check quotes.
 		if (shelly_check_for_builtin(parser_struct))//will be a expand funct

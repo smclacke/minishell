@@ -6,11 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/07/31 17:15:39 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/08/03 16:13:31 by dreijans      ########   odam.nl         */
->>>>>>> microshell
+/*   Updated: 2023/08/03 17:14:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,35 +18,9 @@
  * -n TBA that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
 */
-<<<<<<< HEAD
-void	*micro_echo(t_parser *node)
-{
-	int	i;
-	int	is_flag;
-
-	i = 0;
-	is_flag = 0;
-	while (node->str[i] != '\0')
-	{
-		if (ft_strcmp(&node->str[i], "-n") == 0)
-		{
-			++is_flag;
-			i++;
-		}
-		else
-		{
-			printf("%s", node->str);
-			i++;
-		}
-	}
-	if (is_flag != 0)
-		printf("\n");
-	exit(EXIT_SUCCESS);
-=======
 void	micro_echo(t_parser *lst)
 {
 	printf("echo prints\n");
 	printf("%s", lst->str);
 	printf("\n");
->>>>>>> microshell
 }

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   micro_execute.c                                    :+:    :+:            */
+/*   ft_execute.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 15:50:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 17:23:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/djoyke.h"
 
-#include "../../include/minishell.h"
-
-void	micro_execute(char **envp, t_parser *lst)
+void	ft_execute(char **envp, t_parser *lst)
 {
 	t_env	*env;
 
-	env = micro_env_list(envp);
-	micro_build(lst, env);
+	env = env_list(envp);
+	build_process(lst, env);
 }
 
-void	micro_build(t_parser *lst, t_env *env)
+void	build_process(t_parser *lst, t_env *env)
 {
 	// int			fork_pid;
 	
@@ -38,7 +37,7 @@ void	micro_build(t_parser *lst, t_env *env)
 	// 		printf("have to get a kindergarten\n");
 	// }
 	if (lst->cmd)
-		micro_check_for_builtin(lst, env);
+		do_builtin(lst, env);
 	// if (lst->sign)
 	// 	micro_check_for_meta(lst);
 	// lst = lst->next;
@@ -55,21 +54,21 @@ void	micro_build(t_parser *lst, t_env *env)
  * 1) needs to be passed to actual process,
  * 2) MAYBE MAKE IT A BOOL?
 */
-void	micro_check_for_meta(t_parser *lst)
+void	check_for_meta(t_parser *lst)
 {
 	if (lst->meta == NULL)
-		micro_error("meta", errno);
-	if (micro_strcmp(lst->meta, "$") == 0)
+		mini_error("meta", errno);
+	if (mini_strcmp(lst->meta, "$") == 0)
 		printf("dolllaaaah\n");
-	else if (micro_strcmp(lst->meta, ">>") == 0)
+	else if (mini_strcmp(lst->meta, ">>") == 0)
 		printf("Output Append\n");
-	else if (micro_strcmp(lst->meta, "<<") == 0)
+	else if (mini_strcmp(lst->meta, "<<") == 0)
 		printf("here doc\n");
-	else if (micro_strcmp(lst->meta, ">") == 0)
+	else if (mini_strcmp(lst->meta, ">") == 0)
 		printf("output Redirect\n");
-	else if (micro_strcmp(lst->meta, "<") == 0)
+	else if (mini_strcmp(lst->meta, "<") == 0)
 		printf("Input Redirect\n");
-	else if (micro_strcmp(lst->meta, "|") == 0)
+	else if (mini_strcmp(lst->meta, "|") == 0)
 		printf("pipe\n");
 }
 

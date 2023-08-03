@@ -6,34 +6,44 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/27 14:27:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 17:22:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/djoyke.h"
 
 /* checking the edge cases for this one */
-
 int	main(int argc, char **argv, char **envp)
 {
-	t_env		*env;
-	t_command	*fake_command;
 	char		*input;
+	t_lexer		*tokens;
+	t_parser	*parser_struct;
 
-	(void) argv;
 	(void) argc;
-	// while (1)
-	// {
-	// 	input = readline(PROMPT);
-	// 	add_history(input);
-		env = env_list(envp);
-		// fake_command = init_command();
-		// print_command(fake_command);
-		// set_pipes(fake_command, env);
-		// print_list_command(fake_command);
-		// check_for_builtin(test, env);
-		// print_list(env);
-	// }
+	(void) argv;
+
+	tokens = NULL;
+	parser_struct = NULL;
+	while (1)
+	{
+		input = readline(PROMPT);
+		add_history(input);
+		tokens = lexer(input);
+		if (!tokens)
+			continue ;
+		print_lexer(tokens);
+		parser_struct = parser(tokens);
+		if (!parser_struct)
+			continue ;
+		// expand(mini->tokens) // tokens from s_parser struct, 
+		//	check built-in, check meta char, check quotes.
+		if (check_for_builtin(parser_struct))//will be a expand funct
+			printf("there's a builtin whoop\n");
+		// execution // make env_list, create child processes, execve
+		ft_execute(envp, parser_struct);
+		// free input (readline needs to be fred at end)	
+	}
+	return (0);
 }
 
 /*
@@ -89,3 +99,20 @@ int	main(int argc, char **argv, char **envp)
 //& gives * and &bla[1] gives **..... wellll
 
 //ctrl d exits where it's in
+
+
+//als 1 input heeft echo hi geen childprocess anders wel ofcourse haha
+
+
+// exit in de pipeline 
+
+// bash-3.2$ cd desktop | echo hi
+// hi
+// bash-3.2$ pwd
+// /Users/dreijans
+// bash-3.2$
+
+// cd word uitgevoerd maar 2nd child doet er niks mee dus alleen hi als output
+
+
+// maybe functie voor single command of pipeline. 
