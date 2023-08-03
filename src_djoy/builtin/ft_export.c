@@ -6,19 +6,19 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/22 14:56:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 16:15:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 
 /**
- * @param argv argument given in the form of a string
+ * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options
  * @todo check if varaible already exists, overwrite it.
 */
-void	ft_export(char **argv, t_env *env)
+void	ft_export(t_parser *node, t_env *env)
 {
 	int		i;
 	char	*new_key;
@@ -26,11 +26,11 @@ void	ft_export(char **argv, t_env *env)
 	t_env	*new_node;
 
 	i = 0;
-	if (ft_strchr(argv[2], '=') == 0)
-		mini_error("strchr", errno);
-	get_key_value(argv[2], &new_key, &new_value);
-	new_node = mini_lstnew(new_key, new_value);
-	mini_lstadd_back(&env, new_node);
+	if (ft_strchr(node->str, '=') == 0)
+		micro_error("strchr", errno);
+	micro_get_key_value(node->str, &new_key, &new_value);
+	new_node = micro_env_lstnew(new_key, new_value);
+	micro_env_lstadd_back(&env, new_node);
 }
 
 //first character cannot have a number but everything else can have

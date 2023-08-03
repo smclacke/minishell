@@ -6,38 +6,58 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/16 16:26:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 14:34:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-/**
- * taken from pipex, no idea if it's necessary
-*/
+bool	parser_cmp_builtins(t_lexer *tokens)
+{
+	if (!tokens)
+		return (false);
+	if (ft_strcmp(tokens->input, "echo") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "cd") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "pwd") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "export") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "unset") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "env") == 0)
+		return (true);
+	return (false);
+}
 
-// char	*check_empty(char *cmd)
-// {
-// 	int	i;
+bool	parser_cmp_metas(t_lexer *tokens)
+{
+	if (!tokens)
+		return (false);
+	if (ft_strnstr(tokens->input, ">>", 2))
+		return (true);
+	else if (ft_strnstr(tokens->input, "<<", 2))
+		return (true);
+	else if ((ft_strnstr(tokens->input, ">", 1)))
+		return (true);
+	else if (ft_strnstr(tokens->input, "<", 1))
+		return (true);
+	else if ((ft_strnstr(tokens->input, "$", 1)))
+		return (true);
+	else if ((ft_strnstr(tokens->input, "|", 1)))
+		return (true);
+	return (false);
+}
 
-// 	i = 0;
-// 	if (!cmd)
-// 		error_no_cmd();
-// 	while (cmd[i])
-// 	{
-// 		if (ft_isspace(cmd[0]))
-// 			error_space(cmd);
-// 		if (ft_isspace(cmd[i] && ft_isspace(cmd[i - 1])
-// 				&& ft_isspace(cmd[i + 1])))
-// 			error_space(cmd);
-// 		if (ft_isspace(cmd[i]) && (ft_isspace(cmd[i + 1])
-// 				|| cmd[i + 1] == '\0'))
-// 			error_space(cmd);
-// 		i++;
-// 	}
-// 	return (cmd);
-// }
-
-// space, tab, \n, ;, comma, <, >, |, &
-// tokens = words, keywords, In / Out redirectors, semicolons
-// delimiters ;, |, &
+// is this enough/going to work for all cases?... look in this
+bool	parser_cmp_abso(t_lexer *tokens)
+{
+	if (!tokens)
+		return (false);
+	if (ft_strnstr(tokens->input, "/bin", ft_strlen(tokens->input)))
+		return (true);
+	else if (ft_strnstr(tokens->input, "/usr", ft_strlen(tokens->input)))
+		return (true);
+	return (false);
+}

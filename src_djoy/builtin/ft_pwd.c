@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 12:23:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 16:16:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
  * @todo also print the old one OLDPWD=/Users/dreijans/Documents/Rang 3/Minishell
  * needs exit status
 */
-void	ft_pwd(char *path)
+void	ft_pwd(void)
 {
-	path = getcwd(path, sizeof(NULL));
+	char	*path;
+
+	path = getcwd(NULL, 0);
 	if (path != NULL)
 		printf("Current working directory: %s\n", path);
 	else
-		mini_error("getcwd()", errno);
+		micro_error("getcwd()", errno);
 }

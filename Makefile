@@ -6,11 +6,15 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/07/31 14:41:54 by dreijans      ########   odam.nl          #
+#    Updated: 2023/08/03 16:25:53 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> microshell
 NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
@@ -72,9 +76,10 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 SRCS_SAAR		= main_saar.c				\
 					lexer/lexer.c			\
 					lexer/lexer_utils.c		\
-					lexer/quotes.c			\
-					parser/parse.c			\
+					lexer/lexer_quotes.c			\
+					parser/parser.c			\
 					parser/parser_utils.c	\
+					parser/parser_quotes.c	\
 					utils/error.c
 
 SAAR_DIR		= src_saar
@@ -89,6 +94,7 @@ SRCS_MICRO		= main.c					\
 					lexer/lexer.c			\
 					lexer/lexer_utils.c		\
 					parser/parser.c			\
+					parser/parser_quotes.c	\
 					parser/parser_utils.c	\
 					builtin/micro_cd.c		\
 					builtin/micro_echo.c	\
@@ -138,7 +144,7 @@ $(SAAR)			:	$(OBJ_SAAR)
 $(MICRO_SHELL)	:	$(OBJ_MICRO)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL)
 	@ echo "${WHITE}our micro mini shell${RESET}"
-	@ ./micro
+	# @ ./micro
 
 ## OBJECTS
 

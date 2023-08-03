@@ -11,58 +11,13 @@
 
 well... many :)
 
-
-<br/><br/>
-
-**TO DO**
-
-KEEP IT SIMPLE, STUPID :)
-
-- fix >> tokens
-- write quote function
-- write rest tokens function
-- figure out index/order shizz
-- test test test
-- parser
-
 --------------------------------------------------------------------------------------------
 **NOTES**
 
 <br/><br/>
 
 **BELANGRIJK** 
-	MUST KNOW WHERE + HOW MANY SPACES IN QUOTATIONS
 
-	e'ch'o a		-> STILL WORKS, so remove both types of quotes from built-ins
-	ec'h'o a |		-> hangs in bash, JUST THROW ERROR
-
-	FIRST CHECK FOR QUOTES AND TOKENIZE THOSE
-	THEN
-	SPLIT ON SPACES BUT NOT IN QUOTES
-	TOKENIZE REDIRECTS, TOKENIZE DELIMITERS + ALL SURROUNDING CHARACTERS (ABC$ABC)
-	THEN TOKENIZE EVERYTHING LEFT OVER
-
-
-!!!!!!!!!! absolute paths are valid first inputs :))))):))
-	doesn't do anything though of course....
-	bash-3.2$ which cd
-	/usr/bin/cd
-	bash-3.2$ /usr/bin/cd
-	bash-3.2$ /usr/bin/cd desktop
-	/usr/bin/cd: line 4: cd: desktop: No such file or directory
-	bash-3.2$ /usr/bin/cd //
-	bash-3.2$ /usr/bin/cd ..
-	bash-3.2$ pwd
-	/Users/smclacke/Desktop/minishell
-	bash-3.2$ /usr/bin/cd ..
-	bash-3.2$ pwd
-	/Users/smclacke/Desktop/minishell
-	bash-3.2$ /usr/bin/cd ..
-	bash-3.2$ pwd
-	/Users/smclacke/Desktop/minishell
-	bash-3.2$ /usr/bin/cd src_saar
-	bash-3.2$ pwd
-	/Users/smclacke/Des
 
 <br/>
 
