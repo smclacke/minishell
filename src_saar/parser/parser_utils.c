@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 18:02:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 21:50:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	parser_cmp_abso(t_lexer *tokens)
 {
 	if (!tokens)
 		return (false);
-	if (ft_strnstr(tokens->input, "/bin", ft_strlen(tokens->input)))
+	if (ft_strnstr(tokens->input, "/", ft_strlen(tokens->input)))
 		return (true);
 	else if (ft_strnstr(tokens->input, "/usr", ft_strlen(tokens->input)))
 		return (true);
