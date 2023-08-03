@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 15:48:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 16:11:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,6 @@ void	micro_cd(t_parser *lst, t_env *env)
 			error = ft_strjoin("minishell: cd: ", lst->str);
 			micro_error(error, errno);
 		}
-		// if (!ft_strncmp ("OLDPWD=", env->key, 6))
-		// 	env = env->next;
-		// if (ft_strncmp ("OLDPWD=", env->key, 6))
-		// 	env->value = old_work_dir;
-		// env = *head;
-		// if (!ft_strncmp ("PWD=", env->key, 4))
-		// 	env = env->next;
-		// if (ft_strncmp ("PWD=", env->key, 4))
-		// 	env->value = getcwd(cwd, sizeof(cwd));
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
 	}
 	printf("%s\n", getcwd(cwd, sizeof(cwd)));
