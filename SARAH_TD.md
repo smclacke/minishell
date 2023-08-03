@@ -16,8 +16,6 @@ dein computer, kein computer
 
 *Other*
 
--> handle cmds, builtins are ok but there are like all the other ones ...
-
 -> FLAGS: WHERE WHAT HOW WHY
 
 -> ERRORS :!!!
@@ -26,14 +24,11 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
--> rather than putting all different metas in same struct member, put them in 
-	the correct one to be more specific
-
-
 ~~QUOTES~~
 -> split on quotes and spaces correctly so initial list of tokens is good
 	> pretty simple while loopidyloop
 	> don't forget to check either side of the quotes for chars
+	> dont do anything with the first token, it doesnt matter!!
 
 -> take quoted tokens in lexer and break them up futher, what am i checking for?
 	> lexer_quotes.c, whole file needs a lot of work, but keep what I have
