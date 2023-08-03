@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 18:28:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 15:49:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * -n TBA that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
 */
-void	micro_echo(t_expand *lst)
+void	micro_echo(t_parser *lst)
 {
 	// int	i;
 	// int	is_flag;

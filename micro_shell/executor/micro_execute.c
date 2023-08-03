@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 14:17:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 15:50:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,19 @@ void	micro_build(t_parser *lst, t_env *env)
 */
 void	micro_check_for_meta(t_parser *lst)
 {
-	if (lst->sign == NULL)
+	if (lst->meta == NULL)
 		micro_error("meta", errno);
-	if (micro_strcmp(lst->sign, "$") == 0)
+	if (micro_strcmp(lst->meta, "$") == 0)
 		printf("dolllaaaah\n");
-	else if (micro_strcmp(lst->sign, ">>") == 0)
+	else if (micro_strcmp(lst->meta, ">>") == 0)
 		printf("Output Append\n");
-	else if (micro_strcmp(lst->sign, "<<") == 0)
+	else if (micro_strcmp(lst->meta, "<<") == 0)
 		printf("here doc\n");
-	else if (micro_strcmp(lst->sign, ">") == 0)
+	else if (micro_strcmp(lst->meta, ">") == 0)
 		printf("output Redirect\n");
-	else if (micro_strcmp(lst->sign, "<") == 0)
+	else if (micro_strcmp(lst->meta, "<") == 0)
 		printf("Input Redirect\n");
-	else if (micro_strcmp(lst->sign, "|") == 0)
+	else if (micro_strcmp(lst->meta, "|") == 0)
 		printf("pipe\n");
 }
 

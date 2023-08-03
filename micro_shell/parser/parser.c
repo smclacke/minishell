@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 14:38:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 15:53:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 	if (parser_cmp_metas(tokens))
 	{
 		parser_struct->meta = tokens->input;
-		printf("arg->meta: %s\n", parser_struct->meta);
+		printf("arg->meta:	~: %s\n", parser_struct->meta);
 	}
 	else if (parser_cmp_builtins(tokens))
 	{	
 		parser_struct->cmd = tokens->input;
-		printf("arg->cmd: %s\n", parser_struct->cmd);
+		printf("arg->cmd:	~: %s\n", parser_struct->cmd);
 	}
 	else if (parser_cmp_abso(tokens))
 	{	
 		parser_struct->abso = tokens->input;
-		printf("arg->abso: %s\n", parser_struct->abso);
+		printf("arg->abso:	~: %s\n", parser_struct->abso);
 	}
 	else
 	{
 		parser_struct->str = tokens->input;
-		printf("arg->str: %s\n", parser_struct->str);
+		printf("arg->str:	~: %s\n", parser_struct->str);
 	}
 	return (0);
 }

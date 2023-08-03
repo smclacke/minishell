@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 14:40:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/03 15:50:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_parser
 {
 	char				*str;
 	char				*cmd;
-	char				*meta; // probs won't use
+	char				*meta;
 	char				*abso;
 	char				*here_doc;
 	struct s_lexer		*tokens;
