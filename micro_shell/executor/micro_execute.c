@@ -6,14 +6,14 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 18:58:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 14:17:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/minishell.h"
 
-void	micro_execute(char **envp, t_expand *lst)
+void	micro_execute(char **envp, t_parser *lst)
 {
 	t_env	*env;
 
@@ -21,14 +21,14 @@ void	micro_execute(char **envp, t_expand *lst)
 	micro_build(lst, env);
 }
 
-void	micro_build(t_expand *lst, t_env *env)
+void	micro_build(t_parser *lst, t_env *env)
 {
 	// int			fork_pid;
 	
 	printf("cmd = [%s]\n", lst->cmd);
-	printf("builtin = [%s]\n", lst->builtin);
-	printf("env before\n");
-	micro_print_list(env);
+	printf("builtin = [%s]\n", lst->cmd);
+	// printf("env before\n");
+	// micro_print_list(env);
 	// if (lst->cmd != NULL)
 	// {
 	// 	fork_pid = fork();
@@ -37,13 +37,13 @@ void	micro_build(t_expand *lst, t_env *env)
 	// 	if (fork_pid == 0)
 	// 		printf("have to get a kindergarten\n");
 	// }
-	if (lst->builtin)
+	if (lst->cmd)
 		micro_check_for_builtin(lst, env);
 	// if (lst->sign)
 	// 	micro_check_for_meta(lst);
 	// lst = lst->next;
-	printf("env after\n");
-	micro_print_list(env);
+	// printf("env after\n");
+	// micro_print_list(env);
 }
 
 /**
@@ -55,7 +55,7 @@ void	micro_build(t_expand *lst, t_env *env)
  * 1) needs to be passed to actual process,
  * 2) MAYBE MAKE IT A BOOL?
 */
-void	micro_check_for_meta(t_expand *lst)
+void	micro_check_for_meta(t_parser *lst)
 {
 	if (lst->sign == NULL)
 		micro_error("meta", errno);
