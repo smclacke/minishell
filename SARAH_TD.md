@@ -36,6 +36,11 @@ dein computer, kein computer
 
 -> send good tokens to parser
 
+-> take full quoted tokens, handle separately in parser to check if double or single 
+	and if spaces are ok
+	> handle as strings?
+
+
 -> how will the parser handle quotes, need to add this
 
 
