@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:52:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 15:55:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ static bool	parser_define_first_token(t_lexer *tokens, t_parser  *parser_struct)
 	if (parser_cmp_signs(tokens))
 	{
 		parser_struct->sign = tokens->input;
-		printf("first->sign: %s\n", parser_struct->sign);
+		printf("first->sign:	~: %s\n", parser_struct->sign);
 		return (true);
 	}
 	else if (parser_cmp_builtins(tokens))
 	{	
 		parser_struct->cmd = tokens->input;
-		printf("first->cmd: %s\n", parser_struct->cmd);
+		printf("first->cmd:		~: %s\n", parser_struct->cmd);
 		return (true);
 	}
 	else if (parser_cmp_abso(tokens))
 	{
 		parser_struct->abso = tokens->input; // will at some point need to validate the paths...
-		printf("first->abso: %s\n", parser_struct->abso);
+		printf("first->abso:	~: %s\n", parser_struct->abso);
 		return (true);	
 	}
 	return (false);
