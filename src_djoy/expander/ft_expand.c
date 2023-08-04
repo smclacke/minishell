@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:16:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/04 14:16:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,66 @@
 
 #include "../../include/djoyke.h"
 
-/* sarah parses the word i need to check if the word requires an action:
-"user" = user (word), "$user" = djoyke (action), '$user' = $user (word) */
-//>>
-//>
-// removing files int unlink(const char *pathname);
-// /**
-//  * @param node linked list
-//  * @param env string or char to compare with
-//  * @brief checks arguments to find meta_chars: 
-//  * $, >>, <<, >, <, |
-//  * @todo 
-//  * 1) needs to be passed to actual process,
-//  * 2) MAYBE MAKE IT A BOOL?
-// */
-// bool	micro_check_for_meta(t_parser *node)
-// {
-// 	if (node->sign == NULL)
-// 		return (false);
-// 	if (micro_strcmp(node->sign, "$") == 0)
-// 		return (true);
-// 	else if (micro_strcmp(node->sign, ">>") == 0)
-// 		return (true);
-// 	else if (micro_strcmp(node->sign, "<<") == 0)
-// 		return (true);
-// 	else if (micro_strcmp(node->sign, ">") == 0)
-// 		return (true);
-// 	else if (micro_strcmp(node->sign, "<") == 0)
-// 		return (true);
-// 	else if (micro_strcmp(node->sign, "|") == 0)
-// 		return (true);
-// 	else
-// 		return (false);
-// }
+// /* sarah parses the word i need to check if the word requires an action:
+// "user" = user (word), "$user" = djoyke (action), '$user' = $user (word) */
+// //>>
+// //>
+
+void	ft_expand(t_parser *lst)
+{
+	if (check_for_meta(lst))
+		printf("expander:		there's a meta whoop\n");
+	if (check_for_builtin(lst))
+		printf("expander: 		there's a builtin whoop\n");
+}
+
+// // removing files int unlink(const char *pathname);
+/**
+ * @param node linked list
+ * @param env string or char to compare with
+ * @brief checks arguments to find meta_chars: 
+ * $, >>, <<, >, <, |
+ * @todo 
+ * 1) needs to be passed to actual process,
+ * 2) MAYBE MAKE IT A BOOL?
+*/
+bool	check_for_meta(t_parser *lst)
+{
+	if (lst->meta == NULL)
+		return (false);
+	if (mini_strcmp(lst->meta, "$") == 0)
+	{
+		printf("expander:		dolllaaaah\n");
+		return (true);
+	}
+	else if (mini_strcmp(lst->meta, ">>") == 0)
+	{
+		printf("expander:		Output Append\n");
+		return (true);
+	}
+	else if (mini_strcmp(lst->meta, "<<") == 0)
+	{
+		printf("expander:		here doc\n");
+		return (true);
+	}
+	else if (mini_strcmp(lst->meta, ">") == 0)
+	{
+		printf("expander:		output Redirect\n");
+		return (true);
+	}
+	else if (mini_strcmp(lst->meta, "<") == 0)
+	{
+		printf("expander:		Input Redirect\n");
+		return (true);
+	}
+	else if (mini_strcmp(lst->meta, "|") == 0)
+	{
+		printf("expander:		pipe\n");
+		return (true);
+	}
+	else
+		return (false);
+}
 
 /**
  * @param node linked list

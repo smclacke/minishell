@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 16:39:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/04 14:01:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	ft_echo(t_parser *lst)
 		// }
 		// else
 		// {
-		printf("echo prints\n");
-		printf("%s", lst->str);
+		printf("builtin:		echo prints\n");
+		printf("builtin:		%s", lst->str);
 		// 	i++;
 		// }
 	// }

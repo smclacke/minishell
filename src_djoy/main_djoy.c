@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:22:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/04 13:39:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ int	main(int argc, char **argv, char **envp)
 		parser_struct = parser(tokens);
 		if (!parser_struct)
 			continue ;
+		ft_expand(parser_struct);
 		// expand(mini->tokens) // tokens from s_parser struct, 
 		//	check built-in, check meta char, check quotes.
-		if (check_for_builtin(parser_struct))//will be a expand funct
-			printf("there's a builtin whoop\n");
+		// if (check_for_builtin(parser_struct))//will be a expand funct
+		// 	printf("there's a builtin whoop\n");
 		// execution // make env_list, create child processes, execve
 		ft_execute(envp, parser_struct);
 		// free input (readline needs to be fred at end)	

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:18:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/04 14:36:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ bool			parser_cmp_abso(t_lexer *tokens);
 // 	struct s_expand		*previous;
 // }						t_expand;
 
-// void		*micro_expand(t_parser *node);
-// bool		micro_check_for_meta(t_parser *node);
-bool			check_for_builtin(t_parser *node);
+void			ft_expand(t_parser *lst);
+bool			check_for_meta(t_parser *lst);
+bool			check_for_builtin(t_parser *lst);
 // t_expand	*shelly_expand_lstlast(t_expand *lst);
 // void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
 
@@ -145,15 +145,12 @@ void			ft_export(t_parser *lst, t_env *env);
 void			ft_unset(t_parser *lst, t_env *env);
 
 /*execution*/
-// t_parser	*micro_build_process(t_parser *node, t_env *env);
-// t_parser	*micro_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
+t_parser		*mini_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
 // bool		micro_absolute_check(t_parser *node);
 // bool		micro_parse_path(t_env *env, t_parser *node);
 // char		*micro_find_path(t_env *env, t_parser *node);
-// void		micro_build(t_parser *node, t_env *env);
 void			ft_execute(char **envp, t_parser *list);
 void			build_process(t_parser *lst, t_env *env);
-void			check_for_meta(t_parser *lst);
 
 //----Utils----//
 void			mini_error(char *string, int error);
