@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/04 13:39:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/04 15:28:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		print_lexer(tokens);
 		parser_struct = parser(tokens);
+		print_parser_list(parser_struct);
 		if (!parser_struct)
 			continue ;
 		ft_expand(parser_struct);
