@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/04 15:32:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/04 16:01:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,22 @@ t_parser	*parser(t_lexer *tokens)
 	return (parser_struct);
 }
 
-/**
- * @param env environment stored in linked list
- * @brief prints linked list containing env key or value
-*/
-void	print_parser_list(t_parser *lst)
-{
-	int	i;
+// /**
+//  * @param env environment stored in linked list
+//  * @brief prints linked list containing env key or value
+// */
+// void	print_parser_list(t_parser *lst)
+// {
+// 	int	i;
 
-	i = 0;
-	while (lst != NULL)
-	{
-		printf("%s\n", lst->cmd);
-		printf("%s\n", lst->str);
-		lst = lst->next;
-		i++;
-		printf("iterations [%d]\n", i);
-	}
-}
-//make a lstaddback for myself hehe
+// 	i = 0;
+// 	while (lst != NULL)
+// 	{
+// 		printf("%s\n", lst->cmd);
+// 		printf("%s\n", lst->str);
+// 		lst = lst->next;
+// 		i++;
+// 		printf("iterations [%d]\n", i);
+// 	}
+// }
+// //make a lstaddback for myself hehe

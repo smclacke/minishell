@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/04 15:24:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/07 14:25:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_execute(char **envp, t_parser *lst)
 	t_env	*env;
 
 	env = env_list(envp);
+	// print_env_list(env);
 	build_process(lst, env);
 }
 

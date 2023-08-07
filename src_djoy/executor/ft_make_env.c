@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:08:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/04 16:00:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,22 @@ void	print_list_value(t_env *env)
 	{
 		printf("%s\n", env->value);
 		env = env->next;
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	print_env_list(t_env *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+		printf("iterations [%d]\n", i);
 	}
 }
