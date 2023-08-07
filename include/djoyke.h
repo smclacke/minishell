@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/04 14:36:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/07 14:58:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,13 @@ void			build_process(t_parser *lst, t_env *env);
 void			mini_error(char *string, int error);
 int				mini_strcmp(char *s1, char *s2);
 void			do_builtin(t_parser *lst, t_env *env);
+
+//----temporary----//
+// t_parser	*parser_listnew(void *input);
+void	parser_listadd_back(t_parser **list, t_parser *new);
+t_parser		*parser_listlast(t_parser *list);
+void	print_parser_list(t_parser *lst);
+t_parser	*parser_listnew(t_lexer *tokens);
 
 //------------ Minishell -----------//
 /**

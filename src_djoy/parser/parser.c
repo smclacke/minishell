@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/04 16:01:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/07 15:11:32 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 		printf("arg->meta:	~: %s\n", parser_struct->meta);
 	}
 	else if (parser_cmp_builtins(tokens))
-	{	
+	{
 		parser_struct->cmd = tokens->input;
 		printf("arg->cmd:	~: %s\n", parser_struct->cmd);
 	}
 	else if (parser_cmp_abso(tokens))
-	{	
+	{
 		parser_struct->abso = tokens->input;
 		printf("arg->abso:	~: %s\n", parser_struct->abso);
 	}
@@ -45,7 +45,7 @@ static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
 		parser_struct->str = tokens->input;
 		printf("arg->str:	~: %s\n", parser_struct->str);
 	}
-	return (0);
+	return (NULL);
 }
 
 void	init_parser(t_parser *parser_struct)
@@ -66,37 +66,82 @@ void	init_parser(t_parser *parser_struct)
 t_parser	*parser(t_lexer *tokens)
 {
 	t_parser	*parser_struct;
-	t_lexer		*list;
+	t_parser	*parser_node;
 
-	parser_struct = (t_parser *)malloc(sizeof(t_parser));
-	if (!parser_struct)
-		return (0);
-	init_parser(parser_struct);
-	list = tokens;
-	while (list)
+	parser_struct = NULL;
+	parser_node = NULL;
+	while (tokens)
 	{
-		parser_define_tokens(list, parser_struct);
-		list = list->next;
+		parser_node = parser_listnew(tokens);
+		parser_listadd_back(&parser_struct, parser_node);
+		tokens = tokens->next;
 	}
 	return (parser_struct);
 }
 
-// /**
-//  * @param env environment stored in linked list
-//  * @brief prints linked list containing env key or value
-// */
-// void	print_parser_list(t_parser *lst)
-// {
-// 	int	i;
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	print_parser_list(t_parser *lst)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (lst != NULL)
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+		printf("iterations [%d]\n", i);
+	}
+}
+//make a lstaddback for myself hehe
+
+t_parser		*parser_listlast(t_parser *list)
+{
+	if (!list)
+		return (0);
+	while (list->next)
+		list = list->next;
+	return (list);
+}
+
+void	parser_listadd_back(t_parser **list, t_parser *new)
+{
+	t_parser	*last;
+
+	if (*list)
+	{
+		last = parser_listlast(*list);
+		last->next = new;
+	}
+	else
+		*list = new;
+}
+
+t_parser	*parser_listnew(t_lexer *tokens)
+{
+	t_parser	*new;
+
+	new = (t_parser *)malloc(sizeof(*new));
+	if (!new)
+		return (0);
+	init_parser(new);
+	parser_define_tokens(tokens, new);
+	new->next = NULL;
+	return (new);
+}
+
+// // print the tokens for testing purposes
+// t_parser	*print_parser(t_parser *token)
+// {
+// 	t_parser	*list;
+
+// 	list = token;
+// 	while (list)
 // 	{
-// 		printf("%s\n", lst->cmd);
-// 		printf("%s\n", lst->str);
-// 		lst = lst->next;
-// 		i++;
-// 		printf("iterations [%d]\n", i);
+// 		printf("lexer: \t\t~: %s\n", list->input);
+// 		list = list->next;
 // 	}
+// 	return (token);
 // }
-// //make a lstaddback for myself hehe
