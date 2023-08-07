@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/07 14:58:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/07 17:20:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void			ft_export(t_parser *lst, t_env *env);
 void			ft_unset(t_parser *lst, t_env *env);
 
 /*execution*/
-t_parser		*mini_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd);
+t_parser		*mini_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd, int fork_pid);
 // bool		micro_absolute_check(t_parser *node);
 // bool		micro_parse_path(t_env *env, t_parser *node);
 // char		*micro_find_path(t_env *env, t_parser *node);

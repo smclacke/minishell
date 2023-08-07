@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/07 14:25:39 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/07 17:27:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ void	build_process(t_parser *lst, t_env *env)
 	int			fd_in;
 	int			pipe_fd[2];
 
-	// printf("execute:		cmd = [%s]\n", lst->cmd);
-	// printf("execute:		builtin = [%s]\n", lst->cmd);
-	// printf("execute:		meta = [%s]\n", lst->meta);
-	// printf("execute:		str = [%s]\n", lst->str);
 	fd_in = 0;
 	if (dup2(STDIN_FILENO, fd_in) == -1)
 		mini_error("dup2", errno);
@@ -48,17 +44,22 @@ void	build_process(t_parser *lst, t_env *env)
 				if (pipe(pipe_fd) == -1)
 					mini_error("pipe", errno);
 				printf("build_process:		have to get a kindergarten\n");
-				mini_forks(lst, env, fd_in, pipe_fd);
+				mini_forks(lst, env, fd_in, pipe_fd, fork_pid);
 				if (dup2(pipe_fd[READ], fd_in) == -1)
 				{
 					printf("build process:		you came back huh\n");
-					mini_error("dup2", errno);
+					mini_error("1.... dup2", errno);
 				}
-				close(pipe_fd[READ]);
-			}
+				// close(pipe_fd[READ]);
+				// close(pipe_fd[WRITE]);
+		}
+		else// Parent process - Wait for the child process to finish
+			waitpid(fork_pid, NULL, 0); // Properly wait for child process
 		}
 		lst = lst->next;
 	}
+	close(pipe_fd[READ]);
+	// close(pipe_fd[WRITE]);
 }
 
 /**
@@ -66,25 +67,18 @@ void	build_process(t_parser *lst, t_env *env)
  * @param env linked list containing environment
  * @brief makes child process and executes in it
 */
-t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd)
+t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd, int fork_pid)
 {
-	int			fork_pid;
-	t_parser	*temp_lst;
-
-	fork_pid = fork();
-	temp_lst = lst;
 	(void) env;
-	printf("mini_forks:			fork_pid[%d]\n", fork_pid);
-	if (fork_pid == -1)
-		mini_error("fork", errno);
 	if (fork_pid == 0)
 	{
 		printf("mini_forks:		children made\n");
 		if (dup2(pipe_fd[READ], fd_in) == -1)
-			mini_error("dup2", errno);
+			mini_error(" 2.... dup2", errno);
 		close(pipe_fd[READ]); //needs error check
-		if (dup2(STDOUT_FILENO, pipe_fd[WRITE]) == -1)
-			mini_error("dup2", errno);
+		if (dup2(pipe_fd[WRITE], STDOUT_FILENO) == -1)
+			mini_error(" 3..... dup2", errno);
+		close(pipe_fd[WRITE]);
 		// mini_find_path(env, lst);
 	}
 	close(fd_in);
