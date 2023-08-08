@@ -6,19 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 14:39:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 15:30:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/**
- * after splitting correctly on quotes and spaces, take quote tokens, parse them in lexer
- * make new tokens out of them so they can be handled easier with my current parser system
- * could already put them in lexer struct as token->quote str, token->quoted_cmd etc, and in parser
- * just check if the token has any specification and if so, put that in parser struct
-*/
-
+// take first to last quote, then check if there is anything inbetween that is not in quotes
 /**
  * need to check for flags somewhere!
 */
@@ -90,10 +84,10 @@ static char	**parse_input(char *input)
  * @param	parsed_input an array created but separating the input string into tokenizable bites
  * @return	newly made t_lexer token_list
 */
-static t_lexer	*make_token_list(char **parsed_input)
+static t_parser	*make_token_list(char **parsed_input)
 {
-	t_lexer		*token_list = NULL;
-	t_lexer		*token;
+	t_parser		*tokens = NULL;
+	t_parser		*token;
 	char		*token_str;
 	int			len;
 	int			i = 0;
@@ -107,16 +101,10 @@ static t_lexer	*make_token_list(char **parsed_input)
 		token = lexer_listnew(token_str);
 		if (!token)
 			return (0);
-		lexer_listadd_back(&token_list, token);
+		lexer_listadd_back(&tokens, token);
 		i++;
 	}
-	return (token_list);
-}
-
-void	init_lexer(t_lexer *token_list)
-{
-	token_list->input = NULL;
-	token_list->token = NULL;
+	return (tokens);
 }
 
 /**
@@ -128,17 +116,17 @@ void	init_lexer(t_lexer *token_list)
  * @param	input from the commandline
  * @return	t_lexer token_list to pass to the parser
 */
-t_lexer	*lexer(char *input)
+t_parser	*lexer(char *input)
 {
-	t_lexer		*token_list;
-	char		**parsed_input = NULL;
-	int			i;
+	t_parser		*tokens;
+	char			**parsed_input = NULL;
+	int				i;
 
 	i  = 0;
-	token_list = (t_lexer *)malloc(sizeof(t_lexer));
-	if (!token_list)
+	tokens = (t_parser *)malloc(sizeof(t_parser));
+	if (!tokens)
 		return (0);
-	init_lexer(token_list);
+	init_parser(tokens);
 	while (input[i])
 	{
 		parsed_input = parse_input(input);
@@ -147,9 +135,9 @@ t_lexer	*lexer(char *input)
 	i = 0;
 	if (!parsed_input)
 		return (0);
-	token_list = make_token_list(parsed_input);
-	if (!token_list)
+	tokens = make_token_list(parsed_input);
+	if (!tokens)
 		return (0);
-	return (token_list);
+	return (tokens);
 }
 
