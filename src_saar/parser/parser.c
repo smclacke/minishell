@@ -6,12 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:07:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 15:19:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
+// FLAGS FLAGS FLAGS
 /**
  * @brief	assigns the tokens to a member in the parser struct:
  * 			meta, cmd, absolute path,  anything else str
@@ -56,18 +57,6 @@ static void	*parser_define_tokens(t_parser *tokens)
 	return (0);
 }
 
-void	init_parser(t_parser *tokens)
-{
-	
-	tokens->str = NULL;
-	tokens->cmd = NULL;
-	tokens->meta = NULL;
-	tokens->abso = NULL;
-	tokens->squote = NULL;
-	tokens->dquote = NULL;
-	tokens->here_doc = NULL;
-}
-
 /**
  * @brief	Main parser function:
 			Check the tokens to see which member of the parser struct they need to be sorted into
@@ -79,10 +68,10 @@ t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*list;
 
-	init_parser(tokens);
 	list = tokens;
 	while (list)
 	{
+		// if quotes, handle separately..
 		parser_define_tokens(list);
 		list = list->next;
 	}

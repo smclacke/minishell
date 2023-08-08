@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 14:53:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 15:17:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	**parse_input(char *input)
 */
 static t_parser	*make_token_list(char **parsed_input)
 {
-	t_parser		*token_list = NULL;
+	t_parser		*tokens = NULL;
 	t_parser		*token;
 	char		*token_str;
 	int			len;
@@ -101,16 +101,10 @@ static t_parser	*make_token_list(char **parsed_input)
 		token = lexer_listnew(token_str);
 		if (!token)
 			return (0);
-		lexer_listadd_back(&token_list, token);
+		lexer_listadd_back(&tokens, token);
 		i++;
 	}
-	return (token_list);
-}
-
-void	init_lexer(t_parser *token_list)
-{
-	token_list->input = NULL;
-	token_list->tokens = NULL;
+	return (tokens);
 }
 
 /**
@@ -124,15 +118,15 @@ void	init_lexer(t_parser *token_list)
 */
 t_parser	*lexer(char *input)
 {
-	t_parser		*token_list;
+	t_parser		*tokens;
 	char			**parsed_input = NULL;
 	int				i;
 
 	i  = 0;
-	token_list = (t_parser *)malloc(sizeof(t_parser));
-	if (!token_list)
+	tokens = (t_parser *)malloc(sizeof(t_parser));
+	if (!tokens)
 		return (0);
-	init_lexer(token_list);
+	init_parser(tokens);
 	while (input[i])
 	{
 		parsed_input = parse_input(input);
@@ -141,8 +135,8 @@ t_parser	*lexer(char *input)
 	i = 0;
 	if (!parsed_input)
 		return (0);
-	token_list = make_token_list(parsed_input);
-	if (!token_list)
+	tokens = make_token_list(parsed_input);
+	if (!tokens)
 		return (0);
-	return (token_list);
+	return (tokens);
 }
