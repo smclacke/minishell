@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 18:01:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 14:45:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ static char	**parse_input(char *input)
  * @param	parsed_input an array created but separating the input string into tokenizable bites
  * @return	newly made t_lexer token_list
 */
-static t_lexer	*make_token_list(char **parsed_input)
+static t_parser	*make_token_list(char **parsed_input)
 {
-	t_lexer		*token_list = NULL;
-	t_lexer		*token;
+	t_parser		*token_list = NULL;
+	t_parser		*token;
 	char		*token_str;
 	int			len;
 	int			i = 0;
@@ -107,10 +107,10 @@ static t_lexer	*make_token_list(char **parsed_input)
 	return (token_list);
 }
 
-void	init_lexer(t_lexer *token_list)
+void	init_lexer(t_parser *token_list)
 {
 	token_list->input = NULL;
-	token_list->token = NULL;
+	token_list->tokens = NULL;
 }
 
 /**
@@ -122,14 +122,14 @@ void	init_lexer(t_lexer *token_list)
  * @param	input from the commandline
  * @return	t_lexer token_list to pass to the parser
 */
-t_lexer	*lexer(char *input)
+t_parser	*lexer(char *input)
 {
-	t_lexer		*token_list;
+	t_parser		*token_list;
 	char		**parsed_input = NULL;
 	int			i;
 
 	i  = 0;
-	token_list = (t_lexer *)malloc(sizeof(t_lexer));
+	token_list = (t_parser *)malloc(sizeof(t_parser));
 	if (!token_list)
 		return (0);
 	init_lexer(token_list);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:33:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 14:47:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
-	t_lexer		*tokens;
+	t_parser	*tokens;
 	t_parser	*parser_struct;
 	// t_env		*env;
 
@@ -39,6 +39,7 @@ int	main(int argc, char **argv, char **envp)
 		parser_struct = parser(tokens);
 		if (!parser_struct)
 			continue ;
+		print_lexer(parser_struct);
 		
 
 

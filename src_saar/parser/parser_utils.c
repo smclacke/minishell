@@ -6,27 +6,27 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 21:50:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 14:46:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-bool	parser_cmp_squote(t_lexer *tokens)
+bool	parser_cmp_squote(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
 	return (false);
 }
 
-bool	parser_cmp_dquote(t_lexer *tokens)
+bool	parser_cmp_dquote(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
 	return (false);
 }
 
-bool	parser_cmp_builtins(t_lexer *tokens)
+bool	parser_cmp_builtins(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
@@ -45,7 +45,7 @@ bool	parser_cmp_builtins(t_lexer *tokens)
 	return (false);
 }
 
-bool	parser_cmp_metas(t_lexer *tokens)
+bool	parser_cmp_metas(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
@@ -65,7 +65,7 @@ bool	parser_cmp_metas(t_lexer *tokens)
 }
 
 // is this enough/going to work for all cases?... look into this
-bool	parser_cmp_abso(t_lexer *tokens)
+bool	parser_cmp_abso(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);

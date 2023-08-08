@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 18:00:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 14:44:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param	parser_struct  structure to assign each token to the correct member within parser struct
  * @return	assigns the token input to a member in the parser struct
 */
-static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
+static void	*parser_define_tokens(t_parser *tokens, t_parser *parser_struct)
 {
 	if (!tokens)
 		return (false);
@@ -74,10 +74,10 @@ void	init_parser(t_parser *parser_struct)
  * @param	tokens t_lexer tokens passed from the lexer to be sorted by the parser
  * @return	parser_struct: all the tokens given by the lexer have been sorted into the parser struct. The first argument is checked for its validity
 */
-t_parser	*parser(t_lexer *tokens)
+t_parser	*parser(t_parser *tokens)
 {
 	t_parser	*parser_struct;
-	t_lexer		*list;
+	t_parser		*list;
 
 	parser_struct = (t_parser *)malloc(sizeof(t_parser));
 	if (!parser_struct)
