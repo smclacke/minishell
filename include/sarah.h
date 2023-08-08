@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:21:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 21:45:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
 // -------- Quotes --------//
-char				*quote_tokens(char *input);
-int					closed_quotes(char *input);
-char				*check_quotes(char *input);
+char				**ft_split_shelly(char *input);
+// char				*quote_tokens(char *input);
+// int					closed_quotes(char *input);
+// char				*check_quotes(char *input);
 
 // PARSER
 
@@ -83,8 +84,8 @@ char				*check_quotes(char *input);
 t_parser			*parser(t_parser *tokens);
 
 //---- parser_quotes.c ----//
-bool				parser_check_quotes(char *tokens);
-char				*remove_quotes(char *tokens);
+// bool				parser_check_quotes(char *tokens);
+// char				*remove_quotes(char *tokens);
 
 //---- parser_utils.c ----//
 bool				parser_cmp_squote(t_parser *param);
