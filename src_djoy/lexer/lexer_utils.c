@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 18:01:16 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/08 18:17:32 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_parser(t_parser *tokens)
 {
-	tokens->input = NULL;
+	// tokens->input = NULL;
 	tokens->str = NULL;
 	tokens->cmd = NULL;
 	tokens->meta = NULL;
