@@ -6,26 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 21:50:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 22:23:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
-
-// bool	parser_check_quotes(char *tokens) // no different than ft_isquote right?
-// {
-// 	char	*tmp;
-// 	int		i = 0;
-	
-// 	tmp = tokens;
-// 	while (tmp[i])
-// 	{
-// 		if (ft_isquote(tmp[i]))
-// 			return (true);
-// 		i++;
-// 	}
-// 	return (false);
-// }
 
 int	what_to_split(char c)
 {
@@ -77,6 +62,48 @@ char	*make_words(char *input)
 	return (words);
 }
 
+char	*handle_quotes(char *input)
+{
+	int		i = 0;
+	int		j = 0;
+	char	*without;
+
+	without = NULL;
+	while (input[i])
+	{
+		while (input[i] && what_to_split(input[i]) && !ft_isquote(input[i]))
+			i++;
+		if (ft_isquote(input[i]) && what_to_split(input[i - 1]))
+		{
+			while (input[i] && !what_to_split(input[i]))
+			{	
+				without[j] = input[i];
+				i++;
+			}
+			if (ft_isquote(input[i]) && what_to_split(input[i + 1]))
+				without[j] = input[i];
+		}
+		if (ft_isquote(input[i] && !what_to_split(input[i - 1])))
+		{
+			while (input[i] && !what_to_split(input[i]))
+				i--;
+			if (input[i] &&  what_to_split(input[i]))
+			{
+				i++;
+				while (input[i])
+				{
+					without[j] = input[i];
+					i++;
+				}
+				if (ft_isquote(input[i]) && what_to_split(input[i + 1]))
+					without[j] = input[i];
+			}
+		}
+		i++;
+	}
+	return (without);
+}
+
 /**
  * @brief	splitting on spaces but when quote is found, create substring from first to last quote
  * @param	input from readline to tokenise
@@ -104,7 +131,11 @@ char	**ft_split_shelly(char *input)
 		}
 		while (*input && !what_to_split(*input) && !ft_isquote(*input))
 			input++;
-		// if (*input && ft_isquote(*input))
+		if (*input && ft_isquote(*input))
+		{
+			array[i] = handle_quotes(input);
+			i++;
+		}
 	}
 	array[i] = 0;
 	return (array);
