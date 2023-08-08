@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 16:50:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 18:19:04 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ char	**ft_split_shelly(char *input, char c)
 
 	if (!input)
 		return (NULL);
-	array = (char **)ft_calloc((ft_words(input, c)))
+	// array = (char **)ft_calloc((ft_words(input, c)))
 }
