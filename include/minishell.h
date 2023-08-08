@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 15:50:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 15:29:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,54 +53,50 @@ typedef enum e_signs
 }		t_signs;
 
 // LEXER
-typedef	struct s_lexer
-{
-	void				*input;
-	void				*token;
-	struct s_lexer		*next;
-}	t_lexer;
-
-//----- lexer.c -----//
-void			init_lexer(t_lexer *token_list);
-t_lexer			*lexer(char *input);
-
-//----- lexer_utils.c -----//
-t_lexer			*lexer_listlast(t_lexer *list);
-void			lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer			*lexer_listnew(void *input);
-t_lexer			*print_lexer(t_lexer *token);
-
-// -------- Quotes --------//
-// int				sign_tokens(char *input);
-char			*quote_tokens(char *input);
-int				closed_quotes(char *input);
-char			*check_quotes(char *input);
-
-// PARSER
 typedef struct s_parser 
 {
+	void				*input;
+	void				*tokens;
 	char				*str;
 	char				*cmd;
 	char				*meta;
 	char				*abso;
+	char				*squote;
+	char				*dquote;
 	char				*here_doc;
-	struct s_lexer		*tokens;
 	struct s_parser		*next;
 }	t_parser;
 
+//----- lexer.c -----//
+void				init_parser(t_parser *token);
+t_parser			*lexer(char *input);
+
+//----- lexer_utils.c -----//
+t_parser			*lexer_listlast(t_parser *list);
+void				lexer_listadd_back(t_parser **list, t_parser *new);
+t_parser			*lexer_listnew(void *input);
+t_parser			*shelly_print_list(t_parser *token);
+
+// -------- Quotes --------//
+char				*quote_tokens(char *input);
+int					closed_quotes(char *input);
+char				*check_quotes(char *input);
+
+// PARSER
+
 //---- parser.c ----//
-void			init_parser(t_parser *parser_struct);
-t_parser		*parser(t_lexer *tokens);
+t_parser			*parser(t_parser *tokens);
 
 //---- parser_quotes.c ----//
-bool			parser_check_quotes(char *tokens);
-char			*remove_quotes(char *tokens);
+bool				parser_check_quotes(char *tokens);
+char				*remove_quotes(char *tokens);
 
 //---- parser_utils.c ----//
-bool			parser_cmp_builtins(t_lexer *param);
-bool			parser_cmp_metas(t_lexer *tokens);
-bool			parser_cmp_abso(t_lexer *tokens);
-
+bool				parser_cmp_squote(t_parser *param);
+bool				parser_cmp_dquote(t_parser *param);
+bool				parser_cmp_builtins(t_parser *param);
+bool				parser_cmp_metas(t_parser *tokens);
+bool				parser_cmp_abso(t_parser *tokens);
 
 
 //---- Expander ----//
