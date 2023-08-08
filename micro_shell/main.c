@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:29:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/08 15:37:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
-	t_lexer		*tokens;
-	t_parser	*parser_struct;
+	t_parser	*tokens;
+	// t_env		*env;
 
 	(void) argc;
 	(void) argv;
+	(void) envp;
+
 	tokens = NULL;
-	parser_struct = NULL;
 	while (1)
 	{
 		input = readline(PROMPT);
@@ -32,13 +33,24 @@ int	main(int argc, char **argv, char **envp)
 		tokens = lexer(input);
 		if (!tokens)
 			continue ;
-		print_lexer(tokens);
-		parser_struct = parser(tokens);
-		if (!parser_struct)
+		shelly_print_list(tokens);
+
+		tokens = parser(tokens);
+		if (!tokens)
 			continue ;
-		if (shelly_check_for_builtin(parser_struct))
+
+
+
+
+
+		//-- Djoyke --//
+		// expand(mini->tokens) // tokens from s_parser struct, 
+		//	check built-in, check meta char, check quotes.
+		if (shelly_check_for_builtin(tokens))//will be a expand funct
 			printf("there's a builtin whoop\n");
-		micro_execute(envp, parser_struct);
+		// execution // make env_list, create child processes, execve
+		micro_execute(envp, tokens);
+		// free input (readline needs to be fred at end)	
 	}
 	return (0);
 }
