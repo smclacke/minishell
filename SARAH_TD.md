@@ -11,6 +11,8 @@ dein computer, kein computer
 ----> handle quotes with spaces on either side (until when then? need to find the last quote)
 ----> then handle the letters on either side of the quotes
 
+----> i give without variable too much space... leaky
+
 !!!
 -> take quoted tokens from lexer and break them up futher in parser, what am i checking for? (how is the parser handling quoted tokens?)
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 23:41:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 23:44:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static char	*handle_quotes(char *input)
 				without[j] = input[i];
 				printf("here: [%s]\n", input);
 				printf("without: [%s]\n", without);
+				// if last quote is found, return without to split_shelly
 				if (input[i] && lq_what_to_split(input[i]) && !ft_isquote(input[i]))
 				{
 					// i NEED TO FIND THE LAST QUOTE HERE
