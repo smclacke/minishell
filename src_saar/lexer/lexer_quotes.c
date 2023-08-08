@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 23:44:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/09 00:00:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,24 @@ static char	*make_words(char *input)
 	return (words);
 }
 
+int	find_last_quote(char *input)
+{
+	int		i = 0;
+	int		len = 0;
+	int		size = ft_strlen(input);
+
+	while (input[i] && !ft_isquote(input[i]))
+		i++;
+	if (ft_isquote(input[i]))
+		
+	return (len);
+}
+
 static char	*handle_quotes(char *input)
 {
 	int			i = 0;
 	int			j = 0;
-	size_t		len = ft_strlen(input);
+	size_t		len = ft_strlen(input); // size from first to last quote
 	char		*without;
 
 	without = (char *)malloc(sizeof(char) * (len + 1));
