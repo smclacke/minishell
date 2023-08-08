@@ -6,16 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:17:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 16:46:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
-
-// take first to last quote, then check if there is anything inbetween that is not in quotes
-/**
- * need to check for flags somewhere!
-*/
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
@@ -27,53 +22,12 @@
 */
 static char	**parse_input(char *input)
 {
-	
 	char	**array = NULL;
-// 	int		i = 0;
-// 	// int		j = ft_strlen(input);
-// 	int		k = 0;
-	array = ft_split(input, ' ');
+
+	array = ft_split_shelly(input, ' ');
 	if (!array)
 		return (NULL);
 	return (array);
-// // string:
-
-// // some thing "quotes and shit" some more stuff
-
-// 	while (input[i])
-// 	{
-// 		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
-// 		{
-// 			if (ft_isspace(input[i]))
-// 			{
-// 				array[k] = input[i];
-// 				k++;
-// 				j--;
-// 			}
-				
-// 			i++;
-// 		}
-// 		// if (input[i] && !ft_isquote(input[i]))
-// 		// {
-// 			array = ft_split(input, ' ');
-// 		// }
-// 		// if (ft_isquote(input[i]))
-// 		// {
-// 		// 	printf("I found a quote\n");
-// 			// while (input[j] && i < j)
-// 			// {
-// 			// 	if (ft_isquote(input[j]))
-// 			// 	{
-// 			// 		while (input[j - i] && i < j)
-// 			// 		array[k] = &input[i];
-// 			// 		i++;
-// 			// 	}
-// 			// 	j--;
-// 			// }
-// 		}
-// 		i++;
-// 	}
-// 	return (array);
 }
 
 /**

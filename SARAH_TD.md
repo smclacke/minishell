@@ -15,11 +15,11 @@ dein computer, kein computer
 -> take quoted tokens from lexer and break them up futher in parser, what am i checking for? (how is the parser handling quoted tokens?)
 
 
-
 ~~FLAGS~~
 
--> echo -n
--> + if 'space' and '-' after something, check for flag validity
+-> echo -n, only built in
+-> + if 'space' and '-' after something, check for flag validity in comb with cmd
+
 
 ~~ERRORS~~
 
@@ -38,8 +38,20 @@ dein computer, kein computer
 
 *Parser*
 
--> some<<something 
-	<<something
+->	some<<something 
+->	<<something
+				bash-3.2$ some<<something
+				> something
+				bash: some: command not found
+				bash-3.2$ some<<something
+				> hello
+				> some
+				> something
+				bash: some: command not found
+				bash-3.2$ <<something
+				> some
+				> something
+				bash-3.2$
 
 *Other*
 

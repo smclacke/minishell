@@ -6,16 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:35:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 16:25:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-// take first to last quote, then check if there is anything inbetween that is not in quotes
-/**
- * need to check for flags somewhere!
-*/
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
