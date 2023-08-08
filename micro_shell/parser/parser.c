@@ -6,13 +6,57 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/08/03 15:53:57 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2023/08/03 15:55:25 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+<<<<<<< HEAD
 // DONT REMOVE CAPS OR QUOTES, JUST MAKE THE BEST TOKENS I CAN AND EXECVE AND PATH CMP WILL DO THE REST
+=======
+/**
+ * I need a, this is a string with quotes check and then like thousands of functions to handle that
+*/
+
+/**
+ * @brief	Checking whether the first arg token is valid:
+ * 			$, <<. >>, <, >, or absolute path. Builtin has been checked in format_check()
+ * 			~ Add check for other cmds somehow ~
+ * 			The rest of the arg tokens are checked in define_token
+ * @param	tokens first arg token passed from the lexer to the parser
+ * @param	parser_struct  structure to assign each token to the correct member within parser struct
+ * @return	bool: true/false 1/0
+*/
+static bool	parser_define_first_token(t_lexer *tokens, t_parser  *parser_struct)
+{
+	if (!tokens)
+		return (false);
+	if (parser_cmp_signs(tokens))
+	{
+		parser_struct->sign = tokens->input;
+		printf("first->sign:	~: %s\n", parser_struct->sign);
+		return (true);
+	}
+	else if (parser_cmp_builtins(tokens))
+	{	
+		parser_struct->cmd = tokens->input;
+		printf("first->cmd:		~: %s\n", parser_struct->cmd);
+		return (true);
+	}
+	else if (parser_cmp_abso(tokens))
+	{
+		parser_struct->abso = tokens->input; // will at some point need to validate the paths...
+		printf("first->abso:	~: %s\n", parser_struct->abso);
+		return (true);	
+	}
+	return (false);
+}
+>>>>>>> sarah
 
 /**
  * @brief	assigns the tokens to a member in the parser struct:
