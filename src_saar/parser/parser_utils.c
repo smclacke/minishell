@@ -6,19 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 14:46:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 15:07:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
+/**
+ * need to wrtie this function
+*/
 bool	parser_cmp_squote(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
 	return (false);
 }
-
+/**
+ * need to wrtie this function
+*/
 bool	parser_cmp_dquote(t_parser *tokens)
 {
 	if (!tokens)
@@ -64,14 +69,15 @@ bool	parser_cmp_metas(t_parser *tokens)
 	return (false);
 }
 
-// is this enough/going to work for all cases?... look into this
 bool	parser_cmp_abso(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
 	if (ft_strnstr(tokens->input, "/", ft_strlen(tokens->input)))
 		return (true);
-	else if (ft_strnstr(tokens->input, "/usr", ft_strlen(tokens->input)))
+	else if (ft_strnstr(tokens->input, "./", ft_strlen(tokens->input)))
+		return (true);
+	else if (ft_strnstr(tokens->input, "../", ft_strlen(tokens->input)))
 		return (true);
 	return (false);
 }

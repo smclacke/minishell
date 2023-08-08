@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 14:45:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 14:53:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ void	init_lexer(t_parser *token_list)
 t_parser	*lexer(char *input)
 {
 	t_parser		*token_list;
-	char		**parsed_input = NULL;
-	int			i;
+	char			**parsed_input = NULL;
+	int				i;
 
 	i  = 0;
 	token_list = (t_parser *)malloc(sizeof(t_parser));

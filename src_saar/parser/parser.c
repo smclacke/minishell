@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 14:44:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 15:07:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,52 +19,53 @@
  * @param	parser_struct  structure to assign each token to the correct member within parser struct
  * @return	assigns the token input to a member in the parser struct
 */
-static void	*parser_define_tokens(t_parser *tokens, t_parser *parser_struct)
+static void	*parser_define_tokens(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
 	if (parser_cmp_metas(tokens))
 	{
-		parser_struct->meta = tokens->input;
-		printf("arg->meta: %s\n", parser_struct->meta);
+		tokens->meta = tokens->input;
+		printf("arg->meta: %s\n", tokens->meta);
 	}
 	else if (parser_cmp_builtins(tokens))
 	{	
-		parser_struct->cmd = tokens->input;
-		printf("arg->cmd: %s\n", parser_struct->cmd);
+		tokens->cmd = tokens->input;
+		printf("arg->cmd: %s\n", tokens->cmd);
 	}
 	else if (parser_cmp_abso(tokens))
 	{	
-		parser_struct->abso = tokens->input;
-		printf("arg->abso: %s\n", parser_struct->abso);
+		tokens->abso = tokens->input;
+		printf("arg->abso: %s\n", tokens->abso);
 	}
 	else if (parser_cmp_squote(tokens))
 	{
-		parser_struct->squote = tokens->input;
-		printf("arg->squote: %s\n", parser_struct->squote);
+		tokens->squote = tokens->input;
+		printf("arg->squote: %s\n", tokens->squote);
 	}
 	else if (parser_cmp_dquote(tokens))
 	{
-		parser_struct->dquote = tokens->input;
-		printf("arg->dquote: %s\n", parser_struct->dquote);
+		tokens->dquote = tokens->input;
+		printf("arg->dquote: %s\n", tokens->dquote);
 	}
 	else
 	{
-		parser_struct->str = tokens->input;
-		printf("arg->str: %s\n", parser_struct->str);
+		tokens->str = tokens->input;
+		printf("arg->str: %s\n", tokens->str);
 	}
 	return (0);
 }
 
-void	init_parser(t_parser *parser_struct)
+void	init_parser(t_parser *tokens)
 {
-	parser_struct->str = NULL;
-	parser_struct->cmd = NULL;
-	parser_struct->meta = NULL;
-	parser_struct->abso = NULL;
-	parser_struct->squote = NULL;
-	parser_struct->dquote = NULL;
-	parser_struct->here_doc = NULL;
+	
+	tokens->str = NULL;
+	tokens->cmd = NULL;
+	tokens->meta = NULL;
+	tokens->abso = NULL;
+	tokens->squote = NULL;
+	tokens->dquote = NULL;
+	tokens->here_doc = NULL;
 }
 
 /**
@@ -76,18 +77,14 @@ void	init_parser(t_parser *parser_struct)
 */
 t_parser	*parser(t_parser *tokens)
 {
-	t_parser	*parser_struct;
 	t_parser		*list;
 
-	parser_struct = (t_parser *)malloc(sizeof(t_parser));
-	if (!parser_struct)
-		return (0);
-	init_parser(parser_struct);
+	init_parser(tokens);
 	list = tokens;
 	while (list)
 	{
-		parser_define_tokens(list, parser_struct);
+		parser_define_tokens(list);
 		list = list->next;
 	}
-	return (parser_struct);
+	return (tokens);
 }
