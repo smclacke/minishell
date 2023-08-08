@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 21:58:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 23:32:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,25 @@ typedef struct s_parser
 }	t_parser;
 
 //----- lexer.c -----//
-void				init_parser(t_parser *token);
+bool				closed_quotes(char *input);
+bool				shelly_check_quotes(char *tokens);
 t_parser			*lexer(char *input);
 
+// -------- Quotes --------//
+char				**ft_split_shelly(char *input);
+
+// --------Quote utils ------//
+int					lq_what_to_split(char c);
+int					lq_count_words(char *input);
+int					lq_word_length(char *input);
+
 //----- lexer_utils.c -----//
+void				init_parser(t_parser *token);
 t_parser			*lexer_listlast(t_parser *list);
 void				lexer_listadd_back(t_parser **list, t_parser *new);
 t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
-// -------- Quotes --------//
-char				**ft_split_shelly(char *input);
-// char				*quote_tokens(char *input);
-// int					closed_quotes(char *input);
-// char				*check_quotes(char *input);
 
 // PARSER
 

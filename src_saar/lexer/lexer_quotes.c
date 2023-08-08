@@ -6,52 +6,19 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 22:23:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 23:41:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-int	what_to_split(char c)
-{
-	if (c == 0 || c == 32 || c == 9 || c == 10)
-		return (1);
-	return (0);
-}
-
-int	count_words(char *input)
-{
-	int	i = 0;
-	int	count = 0;
-	
-	while (input[i])
-	{
-		while (input[i] && what_to_split(input[i]))
-			i++;
-		if (input[i])
-			count++;
-		while (input[i] && !what_to_split(input[i]))
-			i++;
-	}
-	return (count);
-}
-
-int	word_length(char *input)
-{
-	int	i = 0;
-
-	while (input[i] && !what_to_split(input[i]))
-		i++;
-	return (i);
-}
-
-char	*make_words(char *input)
+static char	*make_words(char *input)
 {
 	int	i = 0;
 	int	len;
 	char	*words;
 
-	len = word_length(input);
+	len = lq_word_length(input);
 	words = (char *)malloc(sizeof(char) * (len + 1));
 	while (i < len)
 	{
@@ -62,43 +29,56 @@ char	*make_words(char *input)
 	return (words);
 }
 
-char	*handle_quotes(char *input)
+static char	*handle_quotes(char *input)
 {
-	int		i = 0;
-	int		j = 0;
-	char	*without;
+	int			i = 0;
+	int			j = 0;
+	size_t		len = ft_strlen(input);
+	char		*without;
 
-	without = NULL;
+	without = (char *)malloc(sizeof(char) * (len + 1));
+	if (!without)
+		return (NULL);
 	while (input[i])
 	{
-		while (input[i] && what_to_split(input[i]) && !ft_isquote(input[i]))
+		while (input[i] && lq_what_to_split(input[i]))
 			i++;
-		if (ft_isquote(input[i]) && what_to_split(input[i - 1]))
+		if (ft_isquote(input[i]) && lq_what_to_split(input[i - 1]))
 		{
-			while (input[i] && !what_to_split(input[i]))
-			{	
-				without[j] = input[i];
-				i++;
-			}
-			if (ft_isquote(input[i]) && what_to_split(input[i + 1]))
-				without[j] = input[i];
-		}
-		if (ft_isquote(input[i] && !what_to_split(input[i - 1])))
-		{
-			while (input[i] && !what_to_split(input[i]))
-				i--;
-			if (input[i] &&  what_to_split(input[i]))
+			while (input[i])
 			{
-				i++;
-				while (input[i])
+				without[j] = input[i];
+				printf("here: [%s]\n", input);
+				printf("without: [%s]\n", without);
+				if (input[i] && lq_what_to_split(input[i]) && !ft_isquote(input[i]))
 				{
-					without[j] = input[i];
-					i++;
+					// i NEED TO FIND THE LAST QUOTE HERE
+					return (without);
+					// printf("i am here\n");
+					// exit(EXIT_FAILURE);
 				}
-				if (ft_isquote(input[i]) && what_to_split(input[i + 1]))
-					without[j] = input[i];
+				i++;
 			}
 		}
+		// 	if (ft_isquote(input[i]) && what_to_split(input[i + 1]))
+		// 		without[j] = input[i];
+		// }
+		// if (ft_isquote(input[i] && !what_to_split(input[i - 1])))
+		// {
+		// 	while (input[i] && !what_to_split(input[i]))
+		// 		i--;
+		// 	if (input[i] &&  what_to_split(input[i]))
+		// 	{
+		// 		i++;
+		// 		while (input[i])
+		// 		{
+		// 			without[j] = input[i];
+		// 			i++;
+		// 		}
+		// 		if (ft_isquote(input[i]) && what_to_split(input[i + 1]))
+		// 			without[j] = input[i];
+		// 	}
+		// }
 		i++;
 	}
 	return (without);
@@ -107,7 +87,6 @@ char	*handle_quotes(char *input)
 /**
  * @brief	splitting on spaces but when quote is found, create substring from first to last quote
  * @param	input from readline to tokenise
- * @param	c will be spaces, need to get rid of them all except for within quotes
  * @return	array of split up words with quotes handled separately including spaces within quotes
 */
 char	**ft_split_shelly(char *input)
@@ -115,27 +94,25 @@ char	**ft_split_shelly(char *input)
 	char	**array;
 	int		i = 0;
 
-	if (!input)
-		return (NULL);
-	array = (char **)malloc(sizeof(char *) * (count_words(input) + 1));
+	array = (char **)malloc(sizeof(char *) * (lq_count_words(input) + 1));
 	if (!array)
 		return (0);
 	while (*input)
 	{
-		while (*input && what_to_split(*input) && !ft_isquote(*input))
+		while (*input && lq_what_to_split(*input))
 			input++;
 		if (*input && !ft_isquote(*input))
 		{
 			array[i] = make_words(input);
 			i++;
 		}
-		while (*input && !what_to_split(*input) && !ft_isquote(*input))
-			input++;
-		if (*input && ft_isquote(*input))
+		if (ft_isquote(*input))
 		{
 			array[i] = handle_quotes(input);
 			i++;
 		}
+		while (*input && !lq_what_to_split(*input) && !ft_isquote(*input))
+			input++;
 	}
 	array[i] = 0;
 	return (array);

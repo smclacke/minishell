@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:19:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/08 22:42:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_parser	*lexer_listnew(void *input)
 	return (new);
 }
 
-// print the tokens for testing purposes
 t_parser	*shelly_print_list(t_parser *token)
 {
 	t_parser	*list;

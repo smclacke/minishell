@@ -8,10 +8,10 @@ dein computer, kein computer
 
 ~~QUOTES~~
 
--> split on quotes and spaces correctly so initial list of tokens is good
-	> pretty simple while loopidyloop
-	> don't forget to check either side of the quotes for chars
+----> handle quotes with spaces on either side (until when then? need to find the last quote)
+----> then handle the letters on either side of the quotes
 
+!!!
 -> take quoted tokens from lexer and break them up futher in parser, what am i checking for? (how is the parser handling quoted tokens?)
 
 
