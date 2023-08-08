@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/08/08 21:45:21 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2023/08/08 18:19:26 by djoyke        ########   odam.nl         */
+>>>>>>> 41e99174f89a0e74920bfafc2a90009ae90ec058
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +77,11 @@ t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
 // -------- Quotes --------//
+<<<<<<< HEAD
 char				**ft_split_shelly(char *input);
+=======
+char	**ft_split_shelly(char *input, char c);
+>>>>>>> 41e99174f89a0e74920bfafc2a90009ae90ec058
 // char				*quote_tokens(char *input);
 // int					closed_quotes(char *input);
 // char				*check_quotes(char *input);
