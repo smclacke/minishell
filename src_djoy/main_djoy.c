@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/07 16:50:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/08 18:12:55 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
-	t_lexer		*tokens;
-	t_parser	*parser_struct;
+	t_parser	*tokens;
+	// t_env		*env;
 
 	(void) argc;
 	(void) argv;
+	(void) envp;
+
 	tokens = NULL;
-	parser_struct = NULL;
 	while (1)
 	{
 		input = readline(PROMPT);
@@ -30,13 +31,13 @@ int	main(int argc, char **argv, char **envp)
 		tokens = lexer(input);
 		if (!tokens)
 			continue ;
-		print_lexer(tokens);
-		parser_struct = parser(tokens);
-		print_parser_list(parser_struct);
-		if (!parser_struct)
-			continue ;
-		ft_expand(parser_struct);
-		ft_execute(envp, parser_struct);
+		shelly_print_list(tokens);
+
+		tokens = parser(tokens);
+		if (!tokens)
+			continue ;	
+		ft_expand(tokens);
+		ft_execute(envp, tokens);
 		// free input (readline needs to be fred at end)	
 	}
 	return (0);

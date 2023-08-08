@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 16:52:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/08 18:08:23 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ void	ft_cd(t_parser *lst, t_env *env)
 	char		*old_work_dir;
 	char		*error;
 	char		*cwd;
-	t_env		**head;
+	// t_env		**head;
 
 	cwd = NULL;
-	head = &env;
+	old_work_dir = NULL;
+	// head = &env;
 	if (env)
 	{
 		home_dir = getenv("HOME");
