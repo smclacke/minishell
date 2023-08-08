@@ -4,9 +4,36 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
+**CURRENT TO DO'S:**
+
+~~QUOTES~~
+
+-> split on quotes and spaces correctly so initial list of tokens is good
+	> pretty simple while loopidyloop
+	> don't forget to check either side of the quotes for chars
+
+-> take quoted tokens from lexer and break them up futher in parser, what am i checking for? (how is the parser handling quoted tokens?)
+
+
+
+~~FLAGS~~
+
+-> echo -n
+-> + if 'space' and '-' after something, check for flag validity
+
+~~ERRORS~~
+
+-> cmd not found
+-> unclosed quotes
+-> pipe stuff
+
+
+---------------------------------------------------------------------------------
 **FUTURE TO DOS::**
 
 *Lexer*
+
+-> send good tokens to parser
 
 
 *Parser*
@@ -15,33 +42,6 @@ dein computer, kein computer
 	<<something
 
 *Other*
-
--> FLAGS: WHERE WHAT HOW WHY
-
--> ERRORS :!!!
-
-
----------------------------------------------------------------------------------
-**CURRENT TO DO'S:**
-
-~~QUOTES~~
--> split on quotes and spaces correctly so initial list of tokens is good
-	> pretty simple while loopidyloop
-	> don't forget to check either side of the quotes for chars
-	> dont do anything with the first token, it doesnt matter!!
-
--> take quoted tokens in lexer and break them up futher, what am i checking for?
-	> lexer_quotes.c, whole file needs a lot of work, but keep what I have
-		because it could be useful either in lexer or parser
-
--> send good tokens to parser
-
--> take full quoted tokens, handle separately in parser to check if double or single 
-	and if spaces are ok
-	> handle as strings?
-
-
--> how will the parser handle quotes, need to add this
 
 
 ---------------------------------------------------------------------------------
