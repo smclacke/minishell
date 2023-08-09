@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/08 23:30:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/09 23:14:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/09 23:55:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	lq_word_length(char *input)
 	return (i);
 }
 
+// dont take last quotation... take the following matching quotation, makes sense.. damn ole
 int	quote_length(char *input)
 {
 	int	start = 0;
