@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/08 23:30:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/09 22:37:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/09 23:14:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,17 @@ int	lq_word_length(char *input)
 
 int	quote_length(char *input)
 {
-	int	i = 0;
-	int	len = ft_strlen(input);
+	int	start = 0;
+	int	end = 0;
+	int	len;
 
-	while (*input && i < len) // *input maybe enough?
-		input++;
-	while (*input && !lq_isquote(*input))
-	{
-		len--;
-		input--;
-	}
+	while (input[start])
+		start++;
+	end = start;
+	while (!lq_isquote(input[end]))
+		end--;
+	start = 0;
+	len = (end - start) + 1;
 	return (len);
 }
 
