@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 23:32:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/09 16:41:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char				**ft_split_shelly(char *input);
 int					lq_what_to_split(char c);
 int					lq_count_words(char *input);
 int					lq_word_length(char *input);
+int					quote_length(char *input);
 
 //----- lexer_utils.c -----//
 void				init_parser(t_parser *token);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/09 00:00:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/09 16:43:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char	*make_words(char *input)
 {
-	int	i = 0;
-	int	len;
+	int		i = 0;
+	int		len;
 	char	*words;
 
 	len = lq_word_length(input);
@@ -29,73 +29,21 @@ static char	*make_words(char *input)
 	return (words);
 }
 
-int	find_last_quote(char *input)
+static char	*make_quotes(char *input)
 {
 	int		i = 0;
-	int		len = 0;
-	int		size = ft_strlen(input);
+	int		len;
+	char	*quotes;
 
-	while (input[i] && !ft_isquote(input[i]))
-		i++;
-	if (ft_isquote(input[i]))
-		
-	return (len);
-}
-
-static char	*handle_quotes(char *input)
-{
-	int			i = 0;
-	int			j = 0;
-	size_t		len = ft_strlen(input); // size from first to last quote
-	char		*without;
-
-	without = (char *)malloc(sizeof(char) * (len + 1));
-	if (!without)
-		return (NULL);
-	while (input[i])
+	len = quote_length(input);
+	quotes = (char *)malloc(sizeof(char) * (len + 1));
+	while (i < len)
 	{
-		while (input[i] && lq_what_to_split(input[i]))
-			i++;
-		if (ft_isquote(input[i]) && lq_what_to_split(input[i - 1]))
-		{
-			while (input[i])
-			{
-				without[j] = input[i];
-				printf("here: [%s]\n", input);
-				printf("without: [%s]\n", without);
-				// if last quote is found, return without to split_shelly
-				if (input[i] && lq_what_to_split(input[i]) && !ft_isquote(input[i]))
-				{
-					// i NEED TO FIND THE LAST QUOTE HERE
-					return (without);
-					// printf("i am here\n");
-					// exit(EXIT_FAILURE);
-				}
-				i++;
-			}
-		}
-		// 	if (ft_isquote(input[i]) && what_to_split(input[i + 1]))
-		// 		without[j] = input[i];
-		// }
-		// if (ft_isquote(input[i] && !what_to_split(input[i - 1])))
-		// {
-		// 	while (input[i] && !what_to_split(input[i]))
-		// 		i--;
-		// 	if (input[i] &&  what_to_split(input[i]))
-		// 	{
-		// 		i++;
-		// 		while (input[i])
-		// 		{
-		// 			without[j] = input[i];
-		// 			i++;
-		// 		}
-		// 		if (ft_isquote(input[i]) && what_to_split(input[i + 1]))
-		// 			without[j] = input[i];
-		// 	}
-		// }
+		quotes[i] = input[i];
 		i++;
 	}
-	return (without);
+	quotes[i] = '\0';
+	return (quotes);
 }
 
 /**
@@ -122,7 +70,7 @@ char	**ft_split_shelly(char *input)
 		}
 		if (ft_isquote(*input))
 		{
-			array[i] = handle_quotes(input);
+			array[i] = make_quotes(input);
 			i++;
 		}
 		while (*input && !lq_what_to_split(*input) && !ft_isquote(*input))
