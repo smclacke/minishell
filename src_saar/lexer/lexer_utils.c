@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/09 22:55:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/10 18:35:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_parser	*lexer_listnew(void *input)
 	new = (t_parser *)malloc(sizeof(*new));
 	if (!new)
 		return (0);
+	init_parser(new);
 	new->input = input;
 	new->next = NULL;
 	return (new);
