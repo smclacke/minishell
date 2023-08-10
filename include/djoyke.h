@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/10 17:04:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/10 17:37:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ t_parser			*shelly_print_list(t_parser *token);
 char				*quote_tokens(char *input);
 int					closed_quotes(char *input);
 char				*check_quotes(char *input);
-
-// PARSER
 
 //---- parser.c ----//
 t_parser			*parser(t_parser *tokens);
