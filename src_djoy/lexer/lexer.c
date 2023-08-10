@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 22:09:11 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/10 16:23:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ static char	**parse_input(char *input)
 */
 static t_parser	*make_token_list(char **parsed_input)
 {
-	t_parser		*tokens = NULL;
-	t_parser		*token;
+	t_parser	*tokens = NULL;
+	t_parser	*token;
 	char		*token_str;
 	int			len;
 	int			i = 0;
@@ -122,7 +122,7 @@ t_parser	*lexer(char *input)
 	char			**parsed_input = NULL;
 	int				i;
 
-	i  = 0;
+	i = 0;
 	tokens = (t_parser *)malloc(sizeof(t_parser));
 	if (!tokens)
 		return (0);
@@ -136,6 +136,7 @@ t_parser	*lexer(char *input)
 	if (!parsed_input)
 		return (0);
 	tokens = make_token_list(parsed_input);
+
 	if (!tokens)
 		return (0);
 	return (tokens);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:25:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/10 15:56:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,20 @@ int	mini_strcmp(char *s1, char *s2)
 	size_t	i;
 
 	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
-			return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	}
-	return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+
+	
+	// printf("s1[%s]\n", s1);
+	// printf("s2[%s]\n", s2);
+	// while (s1[i] && s2[i])
+	// {
+	// 	if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
+	// 		return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
+	// 	i++;
+	// }
+	// return (0);
 }
 
 /**

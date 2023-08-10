@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/08 18:14:56 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/10 17:04:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_env
 {
 	char				*key;
 	char				*value;
+	char				*path;
 	struct s_env		*next;
 	struct s_env		*previous;
 }							t_env;
