@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/10 17:36:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/10 17:55:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,12 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd, int for
 		if (dup2(pipe_fd[WRITE], STDOUT_FILENO) == -1)
 			mini_error(" 3..... dup2", errno);
 		close(pipe_fd[WRITE]);
-		executable = 
-		// mini_find_path(env, lst);
+		executable = check_access(env, lst);
+		if (access(executable, X_OK) == -1)
+			mini_error(executable, errno)
+		//need to change env into 2d array again yey me
+		if (execve(executable, &lst->str, env) == -1)
+			mini_error(lst->str, errno);
 	}
 	close(fd_in);
 	close(pipe_fd[WRITE]);
@@ -91,16 +95,18 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd, int for
 	return (lst);
 }
 
-// bool	micro_absolute_check(t_parser *node)
-// {
-// 	if (!ft_strncmp(node->cmd, "/", 1) && access(node->cmd, F_OK) == 0)
-// 		return (true);
-// 	if (!ft_strncmp(node->cmd, "./", 2) && access(node->cmd, F_OK) == 0)
-// 		return (true);
-// 	if (!ft_strncmp(node->cmd, "../", 3) && access(node->cmd, F_OK) == 0)
-// 		return (true);
-// 	return (false);
-// }
+bool	absolute_check(t_parser *node)
+{
+	if (!node->abso)
+		return (false);
+	if (!ft_strncmp(node->abso, "/", 1) && access(node->abso, F_OK) == 0)
+		return (true);
+	if (!ft_strncmp(node->abso, "./", 2) && access(node->abso, F_OK) == 0)
+		return (true);
+	if (!ft_strncmp(node->abso, "../", 3) && access(node->abso, F_OK) == 0)
+		return (true);
+	return (false);
+}
 
 /* finds the PATH and stores it in a struct as a 2D array*/
 bool	parse_path(t_env *env, t_parser *node)
@@ -108,6 +114,7 @@ bool	parse_path(t_env *env, t_parser *node)
 	int		i;
 	char	*temp_path;
 
+	(void)node;
 	i = 0;
 	while (env->key[i])
 	{
@@ -115,13 +122,13 @@ bool	parse_path(t_env *env, t_parser *node)
 		{
 			temp_path = ft_substr(&env->value[i], 0, ft_strlen(&env->value[i]));
 			if (temp_path == NULL)
-				micro_error ("malloc", errno);
+				mini_error ("malloc", errno);
 			env->path = ft_split(temp_path, ':');
 			if (env->path == NULL)
-				micro_error ("malloc", errno);
+				mini_error ("malloc", errno);
 			free (temp_path);
 			if (env->path == NULL)
-				micro_error ("malloc", errno);
+				mini_error ("malloc", errno);
 			return (true);
 		}
 		i++;
@@ -136,21 +143,21 @@ char	*find_path(t_env *env, t_parser *node)
 	int		i;
 
 	i = 0;
-	if (!micro_absolute_check(node) && micro_parse_path(env, node))
+	if (!absolute_check(node) && parse_path(env, node))
 	{
 		while (env->path && env->path[i] != NULL)
 		{
 			command = ft_strjoin("/", node->str);
 			if (command == NULL)
-				micro_error("strjoin", errno);
+				mini_error("strjoin", errno);
 			ok_path = ft_strjoin(env->path[i], command);
 			if (ok_path == NULL)
-				micro_error("strjoin", errno);
+				mini_error("strjoin", errno);
 			free(command);
 			if (access(ok_path, F_OK))
 				return (ok_path);//it's a command;
-			if (!acces(ok_path, F_OK))
-				return(node->str)//its just a string;
+			if (!access(ok_path, F_OK))
+				return(node->str);//its just a string;
 			free(ok_path);
 			i++;
 		}
@@ -166,23 +173,24 @@ char	*check_access(t_env *env, t_parser *node)
 	int		i;
 
 	i = 0;
-	if (!absolute_check(node->abso) && parse_path(env, node))
+	if (!absolute_check(node) && parse_path(env, node))
 	{
 		while (env->path && env->path[i] != NULL)
 		{
 			command = ft_strjoin("/", node->abso);
 			if (command == NULL)
-				ft_error("malloc", errno);
+				mini_error("malloc", errno);
 			ok_path = ft_strjoin(env->path[i], command);
 			if (command == NULL)
-				ft_error("malloc", errno);
+				mini_error("malloc", errno);
 			free(command);
 			if (access(ok_path, F_OK) == 0)
 				return (ok_path);
 			free(ok_path);
 			i++;
 		}
-		command_error(node->cmd, errno);//of node->str?
+		mini_error(node->cmd, errno);//of node->str?
+		// command_error(node->cmd, errno);//of node->str?
 	}
 	return (node->cmd);//of node->str?
 }

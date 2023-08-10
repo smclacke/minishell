@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/10 17:37:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/10 17:46:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_env
 {
 	char				*key;
 	char				*value;
-	char				*path;
+	char				**path;
 	struct s_env		*next;
 	struct s_env		*previous;
 }							t_env;
@@ -128,9 +128,10 @@ void			ft_unset(t_parser *lst, t_env *env);
 
 /*execution*/
 t_parser		*mini_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd, int fork_pid);
-// bool		micro_absolute_check(t_parser *node);
-// bool		micro_parse_path(t_env *env, t_parser *node);
-// char		*micro_find_path(t_env *env, t_parser *node);
+bool			absolute_check(t_parser *node);
+bool			parse_path(t_env *env, t_parser *node);
+char			*find_path(t_env *env, t_parser *node);
+char			*check_access(t_env *env, t_parser *node);
 void			ft_execute(char **envp, t_parser *list);
 void			build_process(t_parser *lst, t_env *env);
 

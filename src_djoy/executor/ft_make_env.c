@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/04 16:00:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/10 17:47:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_env	*env_lstnew(void *key, void *value)
 		return (NULL);
 	new->key = key;
 	new->value = value;
+	new->path = NULL;
 	new->next = NULL;
 	return (new);
 }
