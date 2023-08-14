@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/09 23:54:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/14 21:02:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static char	*make_words(char *input)
 
 	len = lq_word_length(input);
 	words = (char *)malloc(sizeof(char) * (len + 1));
+	if (!words)
+		return (0);
 	while (i < len)
 	{
 		words[i] = input[i];
@@ -35,9 +37,10 @@ static char	*make_quotes(char *input)
 	int		len;
 	char	*quotes;
 
-	len = quote_length(input);
-	// len = ft_strlen(input);
+	len = quote_len(input);
 	quotes = (char *)malloc(sizeof(char) * (len + 1));
+	if (!quotes)
+		return (0);
 	while (i < len)
 	{
 		quotes[i] = input[i];
@@ -45,19 +48,6 @@ static char	*make_quotes(char *input)
 	}
 	quotes[i] = '\0';
 	return (quotes);
-}
-
-bool	quotations_fs(char *input)
-{
-	int	i = 0;
-	
-	while (input[i])
-	{
-		if (ft_isquote(input[i]))
-			return (true);
-		i++;
-	}
-	return (false);
 }
 
 char	**ft_split_shelly(char *input)
@@ -72,9 +62,12 @@ char	**ft_split_shelly(char *input)
 	{
 		while (*input && lq_what_to_split(*input) && !lq_isquote(*input))
 			input++;
-		if (*input && quotations_fs(input))
-			printf("break\n");
-		else if (*input)
+		if (*input && lq_isquote(*input))
+		{
+			array[i] = make_quotes(input);
+			i++;
+		}
+		else if (*input && !lq_isquote(*input))
 		{
 			array[i] = make_words(input);
 			i++;
@@ -85,39 +78,3 @@ char	**ft_split_shelly(char *input)
 	array[i] = 0;
 	return (array);
 }
-
-// char	**ft_split_shelly(char *input)
-// {
-// 	char	**array;
-// 	int		i = 0;
-
-// 	array = (char **)malloc(sizeof(char *) * (lq_count_words(input) + 1));
-// 	if (!array)
-// 		return (0);
-// 	while (*input)
-// 	{
-// 		while (*input && lq_what_to_split(*input))
-// 			input++;
-// 		if (*input)
-// 		{
-// 			if (*input && !lq_isquote(*input))
-// 			{
-// 				array[i] = make_words(input);
-// 				i++;
-// 			}
-// 			if (lq_isquote(*input))
-// 			{
-// 				array[i] = make_quotes(input);
-// 				i++;
-// 				while (*input)
-// 					input++;
-// 			}
-// 		}
-// 		// while (*input && lq_isquote(*input))
-// 		// 	input++;
-// 		while (*input && !lq_what_to_split(*input)) //&& !lq_isquote(*input)
-// 			input++;
-// 	}
-// 	array[i] = 0;
-// 	return (array);
-// }
