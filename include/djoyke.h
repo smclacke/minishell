@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/10 17:46:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/15 18:27:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define FALSE 0
 
 //---- Lexer ----//
-typedef enum	e_metas
+typedef enum e_metas
 {
 	DQUOTE = 1,
 	SQUOTE = 2,
@@ -94,52 +94,55 @@ bool				parser_cmp_abso(t_parser *tokens);
 
 //---- Expander ----//
 
-void			ft_expand(t_parser *lst);
-bool			check_for_meta(t_parser *lst);
-bool			check_for_builtin(t_parser *lst);
+void				ft_expand(t_parser *lst);
+bool				check_for_meta(t_parser *lst);
+bool				check_for_builtin(t_parser *lst);
 
 //---- Executor ----//
 typedef struct s_env
 {
 	char				*key;
 	char				*value;
+	char				*full;
 	char				**path;
+	char				**env_array;
 	struct s_env		*next;
 	struct s_env		*previous;
 }							t_env;
 
 /*environment*/
-t_env			*env_list(char **envp);
-t_env			*env_lstnew(void *key, void *value);
-void			get_key_value(char *str, char **key, char **value);
-t_env			*env_lstlast(t_env *lst);
-void			env_lstadd_back(t_env **lst, t_env *new);
-void			print_list(t_env *env);
-void			print_list_key(t_env *env);
-void			print_list_value(t_env *env);
+t_env				*env_list(char **envp);
+t_env				*env_lstnew(void *key, void *value, char *full);
+void				get_key_value(char *str, char **key, char **value);
+t_env				*env_lstlast(t_env *lst);
+void				env_lstadd_back(t_env **lst, t_env *new);
+void				print_list(t_env *env);
+void				print_list_key(t_env *env);
+void				print_list_value(t_env *env);
+char				**list_to_string(t_env *env);
 
 //---- Built-in ----//
-void			ft_cd(t_parser *lst, t_env *env);
-void			ft_echo(t_parser *lst);
-void			ft_env(t_env *env);
-void			ft_pwd(void);
-void			ft_export(t_parser *lst, t_env *env);
-void			ft_unset(t_parser *lst, t_env *env);
+void				ft_cd(t_parser *lst, t_env *env);
+void				ft_echo(t_parser *lst);
+void				ft_env(t_env *env);
+void				ft_pwd(void);
+void				ft_export(t_parser *lst, t_env *env);
+void				ft_unset(t_parser *lst, t_env *env);
 
 /*execution*/
-t_parser		*mini_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd, int fork_pid);
-bool			absolute_check(t_parser *node);
-bool			parse_path(t_env *env, t_parser *node);
-char			*find_path(t_env *env, t_parser *node);
-char			*check_access(t_env *env, t_parser *node);
-void			ft_execute(char **envp, t_parser *list);
-void			build_process(t_parser *lst, t_env *env);
+t_parser			*mini_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd, int fork_pid, char **array_env);
+bool				absolute_check(t_parser *node);
+bool				parse_path(t_env *env, t_parser *node);
+char				*find_path(t_env *env, t_parser *node);
+char				*check_access(t_env *env, t_parser *node);
+void				ft_execute(char **envp, t_parser *list);
+void				build_process(t_parser *lst, t_env *env, char **array_env);
 
 //----Utils----//
-void			mini_error(char *string, int error);
-int				mini_strcmp(char *s1, char *s2);
-void			do_builtin(t_parser *lst, t_env *env);
-
+void				mini_error(char *string, int error);
+int					mini_strcmp(char *s1, char *s2);
+void				do_builtin(t_parser *lst, t_env *env);
+int					mini_lstsize(t_env *lst);
 
 //------------ Minishell -----------//
 /**

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/10 17:47:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/15 18:26:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @todo 
  * 1) needs to add previous in case of doubly linked list
 */
-t_env	*env_lstnew(void *key, void *value)
+t_env	*env_lstnew(void *key, void *value, char *full)
 {
 	t_env	*new;
 
@@ -30,6 +30,7 @@ t_env	*env_lstnew(void *key, void *value)
 		return (NULL);
 	new->key = key;
 	new->value = value;
+	new->full = full;
 	new->path = NULL;
 	new->next = NULL;
 	return (new);
@@ -55,6 +56,16 @@ void	get_key_value(char *str, char **key, char **value)
 		*key = ft_substr(str, 0, i);
 		*value = ft_substr(str, i + 1, (ft_strlen(str) - i));
 	}
+}
+
+char	*get_full(char *str)
+{
+	char	*new_str;
+
+	new_str = NULL;
+	if (str)
+		new_str = ft_substr(str, 0, ft_strlen(str));
+	return (new_str);
 }
 
 /**
@@ -102,6 +113,7 @@ t_env	*env_list(char **envp)
 	int		i;
 	char	*key;
 	char	*value;
+	char	*full;
 	t_env	*env;
 
 	i = 0;
@@ -111,10 +123,31 @@ t_env	*env_list(char **envp)
 	while (envp[i] != NULL)
 	{
 		get_key_value(envp[i], &key, &value);
-		env_lstadd_back(&env, env_lstnew(key, value));
+		full = get_full(envp[i]);
+		env_lstadd_back(&env, env_lstnew(key, value, full));
 		i++;
 	}
 	return (env);
+}
+
+char	**list_to_string(t_env *env)
+{
+	char	**env_array;
+	int		i;
+
+	i = 0;
+	// env_array = (char **)malloc(sizeof(mini_lstsize(env) + 1));
+	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
+	if (!env_array)
+		mini_error ("malloc", errno);//or need to return NULL?
+	while (env)
+	{
+		env_array[i] = env->full;
+		i++;
+		env = env->next;
+	}
+	env_array[i] = NULL;
+	return(env_array);
 }
 
 /**
@@ -170,5 +203,18 @@ void	print_env_list(t_env *lst)
 		lst = lst->next;
 		i++;
 		printf("iterations [%d]\n", i);
+	}
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env full
+*/
+void	print_list_full(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("%s\n", env->full);
+		env = env->next;
 	}
 }

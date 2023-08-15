@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/08 18:05:44 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/15 13:23:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_export(t_parser *node, t_env *env)
 	if (ft_strchr(node->str, '=') == 0)
 		mini_error("strchr", errno);
 	get_key_value(node->str, &new_key, &new_value);
-	new_node = env_lstnew(new_key, new_value);
+	new_node = env_lstnew(new_key, new_value, ft_strjoin(new_key, new_value));
 	env_lstadd_back(&env, new_node);
 }
 

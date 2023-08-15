@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/10 17:55:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/15 18:27:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,16 @@
 void	ft_execute(char **envp, t_parser *lst)
 {
 	t_env	*env;
+	char	**array_env;
 
 	env = env_list(envp);
+	array_env = list_to_string(env);
 	// print_env_list(env);
-	build_process(lst, env);
+	// print_list_full(env);
+	build_process(lst, env, array_env);
 }
 
-void	build_process(t_parser *lst, t_env *env)
+void	build_process(t_parser *lst, t_env *env, char **array_env)
 {
 	int			fork_pid;
 	int			fd_in;
@@ -44,7 +47,7 @@ void	build_process(t_parser *lst, t_env *env)
 				if (pipe(pipe_fd) == -1)
 					mini_error("pipe", errno);
 				printf("build_process:		have to get a kindergarten\n");
-				mini_forks(lst, env, fd_in, pipe_fd, fork_pid);
+				mini_forks(lst, env, fd_in, pipe_fd, fork_pid, array_env);
 				if (dup2(pipe_fd[READ], fd_in) == -1)
 				{
 					printf("build process:		you came back huh\n");
@@ -68,7 +71,7 @@ void	build_process(t_parser *lst, t_env *env)
  * @param env linked list containing environment
  * @brief makes child process and executes in it
 */
-t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd, int fork_pid)
+t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd, int fork_pid, char **array_env)
 {
 	char	*executable;
 
@@ -84,9 +87,8 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd, int for
 		close(pipe_fd[WRITE]);
 		executable = check_access(env, lst);
 		if (access(executable, X_OK) == -1)
-			mini_error(executable, errno)
-		//need to change env into 2d array again yey me
-		if (execve(executable, &lst->str, env) == -1)
+			mini_error(executable, errno);
+		if (execve(executable, &lst->str, array_env) == -1)
 			mini_error(lst->str, errno);
 	}
 	close(fd_in);
@@ -195,6 +197,7 @@ char	*check_access(t_env *env, t_parser *node)
 	return (node->cmd);//of node->str?
 }
 
-//1) check if str is a command or just a string by parsing path into env and checking if it's valid.
+//1) check if str is a command or just a string by parsing 
+// path into env and checking if it's valid.
 //2) if  it's not a command it needs to be treated as a string
 //2) feed that into execve

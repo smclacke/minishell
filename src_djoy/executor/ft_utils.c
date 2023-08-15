@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/10 15:56:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/15 13:08:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,17 @@ void	do_builtin(t_parser *lst, t_env *env)
 		ft_unset(lst, env);
 	if (mini_strcmp(lst->cmd, "env") == 0)
 		ft_env(env);
+}
+
+int	mini_lstsize(t_env *lst)
+{
+	size_t	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
