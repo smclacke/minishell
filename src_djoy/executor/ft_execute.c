@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/15 18:27:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/15 18:37:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,16 @@ void	ft_execute(char **envp, t_parser *lst)
 {
 	t_env	*env;
 	char	**array_env;
-
+	int i;
+	
+	i = 0;
 	env = env_list(envp);
 	array_env = list_to_string(env);
+	while (array_env[i] != NULL)
+	{
+		printf("array = [%s]\n", array_env[i]);
+		i++;
+	}
 	// print_env_list(env);
 	// print_list_full(env);
 	build_process(lst, env, array_env);
@@ -80,16 +87,28 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd, int for
 	{
 		printf("mini_forks:		children made\n");
 		if (dup2(pipe_fd[READ], fd_in) == -1)
+		{
+			printf("hier 1 ??\n");
 			mini_error(" 2.... dup2", errno);
+		}
 		close(pipe_fd[READ]); //needs error check
 		if (dup2(pipe_fd[WRITE], STDOUT_FILENO) == -1)
+		{
+			printf("hier 2??\n");
 			mini_error(" 3..... dup2", errno);
+		}
 		close(pipe_fd[WRITE]);
 		executable = check_access(env, lst);
 		if (access(executable, X_OK) == -1)
+		{
+			printf("hier 3??\n");
 			mini_error(executable, errno);
+		}
 		if (execve(executable, &lst->str, array_env) == -1)
+		{
+			printf("of hier?\n");
 			mini_error(lst->str, errno);
+		}
 	}
 	close(fd_in);
 	close(pipe_fd[WRITE]);

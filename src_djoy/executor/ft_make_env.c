@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/15 18:26:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/15 18:33:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ char	**list_to_string(t_env *env)
 	while (env)
 	{
 		env_array[i] = env->full;
+		// printf("array = [%s]\n", env_array[i]);
 		i++;
 		env = env->next;
 	}
