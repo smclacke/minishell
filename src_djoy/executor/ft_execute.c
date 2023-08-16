@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/16 17:16:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 17:19:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ bool	parse_path(t_env *env)
 			printf("temp_path = %s\n", temp_path);
 			if (temp_path == NULL)
 				mini_error ("malloc", errno);
-			env->path = ft_split(temp_path, ':');
+			env->path = ft_split(temp_path, ':'); //change env_path into 2d array, not a part of the list
 			if (env->path == NULL)
 				mini_error ("malloc", errno);
 			free (temp_path);
