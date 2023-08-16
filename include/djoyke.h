@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/15 18:27:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 15:08:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,39 +64,39 @@ typedef struct s_parser
 }	t_parser;
 
 //----- lexer.c -----//
-void				init_parser(t_parser *token);
-t_parser			*lexer(char *input);
+void		init_parser(t_parser *token);
+t_parser	*lexer(char *input);
 
 //----- lexer_utils.c -----//
-t_parser			*lexer_listlast(t_parser *list);
-void				lexer_listadd_back(t_parser **list, t_parser *new);
-t_parser			*lexer_listnew(void *input);
-t_parser			*shelly_print_list(t_parser *token);
+t_parser	*lexer_listlast(t_parser *list);
+void		lexer_listadd_back(t_parser **list, t_parser *new);
+t_parser	*lexer_listnew(void *input);
+t_parser	*shelly_print_list(t_parser *token);
 
 // -------- Quotes --------//
-char				*quote_tokens(char *input);
-int					closed_quotes(char *input);
-char				*check_quotes(char *input);
+char		*quote_tokens(char *input);
+int			closed_quotes(char *input);
+char		*check_quotes(char *input);
 
 //---- parser.c ----//
-t_parser			*parser(t_parser *tokens);
+t_parser	*parser(t_parser *tokens);
 
 //---- parser_quotes.c ----//
-bool				parser_check_quotes(char *tokens);
-char				*remove_quotes(char *tokens);
+bool		parser_check_quotes(char *tokens);
+char		*remove_quotes(char *tokens);
 
 //---- parser_utils.c ----//
-bool				parser_cmp_squote(t_parser *param);
-bool				parser_cmp_dquote(t_parser *param);
-bool				parser_cmp_builtins(t_parser *param);
-bool				parser_cmp_metas(t_parser *tokens);
-bool				parser_cmp_abso(t_parser *tokens);
+bool		parser_cmp_squote(t_parser *param);
+bool		parser_cmp_dquote(t_parser *param);
+bool		parser_cmp_builtins(t_parser *param);
+bool		parser_cmp_metas(t_parser *tokens);
+bool		parser_cmp_abso(t_parser *tokens);
 
 //---- Expander ----//
 
-void				ft_expand(t_parser *lst);
-bool				check_for_meta(t_parser *lst);
-bool				check_for_builtin(t_parser *lst);
+void		ft_expand(t_parser *lst);
+bool		check_for_meta(t_parser *lst);
+bool		check_for_builtin(t_parser *lst);
 
 //---- Executor ----//
 typedef struct s_env
@@ -111,38 +111,49 @@ typedef struct s_env
 }							t_env;
 
 /*environment*/
-t_env				*env_list(char **envp);
-t_env				*env_lstnew(void *key, void *value, char *full);
-void				get_key_value(char *str, char **key, char **value);
-t_env				*env_lstlast(t_env *lst);
-void				env_lstadd_back(t_env **lst, t_env *new);
-void				print_list(t_env *env);
-void				print_list_key(t_env *env);
-void				print_list_value(t_env *env);
-char				**list_to_string(t_env *env);
+t_env		*env_list(char **envp);
+t_env		*env_lstnew(void *key, void *value, char *full);
+void		get_key_value(char *str, char **key, char **value);
+t_env		*env_lstlast(t_env *lst);
+void		env_lstadd_back(t_env **lst, t_env *new);
+void		print_list(t_env *env);
+void		print_list_key(t_env *env);
+void		print_list_value(t_env *env);
+char		**list_to_string(t_env *env);
+void		print_env_list(t_env *lst);
+void		print_list_full(t_env *env);
 
 //---- Built-in ----//
-void				ft_cd(t_parser *lst, t_env *env);
-void				ft_echo(t_parser *lst);
-void				ft_env(t_env *env);
-void				ft_pwd(void);
-void				ft_export(t_parser *lst, t_env *env);
-void				ft_unset(t_parser *lst, t_env *env);
+void		ft_cd(t_parser *lst, t_env *env);
+void		ft_echo(t_parser *lst);
+void		ft_env(t_env *env);
+void		ft_pwd(void);
+void		ft_export(t_parser *lst, t_env *env);
+void		ft_unset(t_parser *lst, t_env *env);
 
 /*execution*/
-t_parser			*mini_forks(t_parser *node, t_env *env, int fd_in, int *pipe_fd, int fork_pid, char **array_env);
-bool				absolute_check(t_parser *node);
-bool				parse_path(t_env *env, t_parser *node);
-char				*find_path(t_env *env, t_parser *node);
-char				*check_access(t_env *env, t_parser *node);
-void				ft_execute(char **envp, t_parser *list);
-void				build_process(t_parser *lst, t_env *env, char **array_env);
+typedef struct s_fd
+{
+	int		fd_in;
+	int		fork_pid;
+	int		pipe_fd[2];
+}				t_fd;
+
+
+t_parser	*mini_forks(t_parser *node, t_env *env, t_fd *fd, char **array_env);
+bool		absolute_check(t_parser *node);
+bool		parse_path(t_env *env, t_parser *node);
+char		*find_path(t_env *env, t_parser *node);
+char		*check_access(t_env *env, t_parser *node);
+void		ft_execute(char **envp, t_parser *list);
+void		build(t_parser *lst, t_env *env, char **array_env);
+t_fd		*init_fd_struct();
 
 //----Utils----//
-void				mini_error(char *string, int error);
-int					mini_strcmp(char *s1, char *s2);
-void				do_builtin(t_parser *lst, t_env *env);
-int					mini_lstsize(t_env *lst);
+void		mini_error(char *string, int error);
+int			mini_strcmp(char *s1, char *s2);
+void		do_builtin(t_parser *lst, t_env *env);
+int			mini_lstsize(t_env *lst);
 
 //------------ Minishell -----------//
 /**

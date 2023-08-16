@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/15 18:37:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 15:10:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,43 @@ void	ft_execute(char **envp, t_parser *lst)
 {
 	t_env	*env;
 	char	**array_env;
-	int i;
-	
+	int		i;
+
 	i = 0;
 	env = env_list(envp);
 	array_env = list_to_string(env);
-	while (array_env[i] != NULL)
-	{
-		printf("array = [%s]\n", array_env[i]);
-		i++;
-	}
-	// print_env_list(env);
+	// while (array_env[i] != NULL)
+	// {
+	// 	printf("array = [%s]\n", array_env[i]);
+	// 	i++;
+	// }
+	// // print_env_list(env);
+	// printf("----------------------------------------\n");
 	// print_list_full(env);
-	build_process(lst, env, array_env);
+	build(lst, env, array_env);
 }
 
-void	build_process(t_parser *lst, t_env *env, char **array_env)
+t_fd	*init_fd_struct(void)
 {
-	int			fork_pid;
-	int			fd_in;
-	int			pipe_fd[2];
+	t_fd	*fd;
 
-	fd_in = 0;
-	if (dup2(STDIN_FILENO, fd_in) == -1)
+	fd = (t_fd *)malloc(sizeof(t_fd));
+	if (!fd)
+		mini_error("malloc", errno);
+	fd->fd_in = 0;
+	fd->fork_pid = 0;
+	fd->pipe_fd[READ] = 0;
+	fd->pipe_fd[WRITE] = 0;
+	return (fd);
+}
+
+
+void	build(t_parser *lst, t_env *env, char **array_env)
+{
+	t_fd	*fd;
+
+	fd = init_fd_struct();
+	if (dup2(STDIN_FILENO, fd->fd_in) == -1)
 		mini_error("dup2", errno);
 	if (!lst)
 		mini_error("list", errno);
@@ -46,73 +60,84 @@ void	build_process(t_parser *lst, t_env *env, char **array_env)
 	{
 		if (lst->next)
 		{
-			fork_pid = fork();
-			if (fork_pid == -1)
+			fd->fork_pid = fork();
+			if (fd->fork_pid == -1)
 				mini_error("fork", errno);
-			if (fork_pid == 0)
+			if (fd->fork_pid == 0)
 			{
-				if (pipe(pipe_fd) == -1)
+				if (pipe(fd->pipe_fd) == -1)
 					mini_error("pipe", errno);
 				printf("build_process:		have to get a kindergarten\n");
-				mini_forks(lst, env, fd_in, pipe_fd, fork_pid, array_env);
-				if (dup2(pipe_fd[READ], fd_in) == -1)
+				mini_forks(lst, env, fd, array_env);
+				if (dup2(fd->pipe_fd[READ], fd->fd_in) == -1)
 				{
 					printf("build process:		you came back huh\n");
-					mini_error("1.... dup2", errno);
+					mini_error("1 dup2", errno);
 				}
-				// close(pipe_fd[READ]);
-				// close(pipe_fd[WRITE]);
+				// close(fd->pipe_fd[READ]);
+				// close(fd->pipe_fd[WRITE]);
 		}
 		else// Parent process - Wait for the child process to finish
-			waitpid(fork_pid, NULL, 0); // Properly wait for child process
+			waitpid(fd->fork_pid, NULL, 0); // Properly wait for child process
 		}
 		lst = lst->next;
 	}
-	close(pipe_fd[READ]);
+	close(fd->pipe_fd[READ]);
 	//if redirect found for outfile dup read end to outfile 
 	// close(pipe_fd[WRITE]);
 }
+
+//int dup2(int oldfd, int newfd);
 
 /**
  * @param lst linked list containing commands and atributes
  * @param env linked list containing environment
  * @brief makes child process and executes in it
 */
-t_parser	*mini_forks(t_parser *lst, t_env *env, int fd_in, int *pipe_fd, int fork_pid, char **array_env)
+t_parser	*mini_forks(t_parser *lst, t_env *env, t_fd *fd, char **array_env)
 {
 	char	*executable;
 
-	(void) env;
-	if (fork_pid == 0)
+	printf("fd_in = [%d]\n", fd->fd_in);
+	printf("pipe_fd = [%d]\n", fd->pipe_fd[READ]);
+
+	if (fd->fork_pid == 0)
 	{
 		printf("mini_forks:		children made\n");
-		if (dup2(pipe_fd[READ], fd_in) == -1)
+		if (dup2(fd->pipe_fd[READ], fd->fd_in) == -1)
 		{
 			printf("hier 1 ??\n");
 			mini_error(" 2.... dup2", errno);
 		}
-		close(pipe_fd[READ]); //needs error check
-		if (dup2(pipe_fd[WRITE], STDOUT_FILENO) == -1)
+		printf("fd_in = [%d]\n", fd->fd_in);
+		printf("pipe_fd = [%d]\n", fd->pipe_fd[READ]);
+		if (close(fd->pipe_fd[READ]) == -1)
+		{
+			mini_error("close", errno);
+		}
+		if (dup2(fd->pipe_fd[WRITE], STDOUT_FILENO) == -1)
 		{
 			printf("hier 2??\n");
 			mini_error(" 3..... dup2", errno);
 		}
-		close(pipe_fd[WRITE]);
+		puts("huehue");
+		close(fd->pipe_fd[WRITE]);
 		executable = check_access(env, lst);
+		printf("executble = [%s]\n", executable);
 		if (access(executable, X_OK) == -1)
 		{
 			printf("hier 3??\n");
 			mini_error(executable, errno);
 		}
-		if (execve(executable, &lst->str, array_env) == -1)
+		if (execve(executable, &lst->str, array_env) == -1)//but does this only give cat and not the next in the list?
 		{
 			printf("of hier?\n");
 			mini_error(lst->str, errno);
 		}
 	}
-	close(fd_in);
-	close(pipe_fd[WRITE]);
-	close(pipe_fd[READ]);
+	close(fd->fd_in);
+	close(fd->pipe_fd[WRITE]);
+	close(fd->pipe_fd[READ]);
 	return (lst);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/15 18:33:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 14:11:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,9 +201,9 @@ void	print_env_list(t_env *lst)
 	i = 0;
 	while (lst != NULL)
 	{
-		lst = lst->next;
-		i++;
 		printf("iterations [%d]\n", i);
+		i++;
+		lst = lst->next;
 	}
 }
 
