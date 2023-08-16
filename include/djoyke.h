@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:08:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 15:41:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ char		*find_path(t_env *env, t_parser *node);
 char		*check_access(t_env *env, t_parser *node);
 void		ft_execute(char **envp, t_parser *list);
 void		build(t_parser *lst, t_env *env, char **array_env);
-t_fd		*init_fd_struct();
+void		init_fd_struct(t_fd *fd);
 
 //----Utils----//
 void		mini_error(char *string, int error);

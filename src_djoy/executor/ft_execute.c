@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:10:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 16:47:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,59 +32,55 @@ void	ft_execute(char **envp, t_parser *lst)
 	build(lst, env, array_env);
 }
 
-t_fd	*init_fd_struct(void)
+void	init_fd_struct(t_fd *fd)
 {
-	t_fd	*fd;
-
-	fd = (t_fd *)malloc(sizeof(t_fd));
-	if (!fd)
-		mini_error("malloc", errno);
 	fd->fd_in = 0;
 	fd->fork_pid = 0;
 	fd->pipe_fd[READ] = 0;
 	fd->pipe_fd[WRITE] = 0;
-	return (fd);
 }
 
 
 void	build(t_parser *lst, t_env *env, char **array_env)
 {
-	t_fd	*fd;
+	t_fd	fd;
 
-	fd = init_fd_struct();
-	if (dup2(STDIN_FILENO, fd->fd_in) == -1)
+	init_fd_struct(&fd);
+	if (dup2(STDIN_FILENO, fd.fd_in) == -1)
 		mini_error("dup2", errno);
 	if (!lst)
 		mini_error("list", errno);
+	//lst_len cmd check
+	if (pipe(fd.pipe_fd) == -1)
+		mini_error("pipe", errno);
 	while (lst)
 	{
 		if (lst->next)
 		{
-			fd->fork_pid = fork();
-			if (fd->fork_pid == -1)
+			fd.fork_pid = fork();
+			if (fd.fork_pid == -1)
 				mini_error("fork", errno);
-			if (fd->fork_pid == 0)
+			if (fd.fork_pid == 0)
 			{
-				if (pipe(fd->pipe_fd) == -1)
-					mini_error("pipe", errno);
 				printf("build_process:		have to get a kindergarten\n");
-				mini_forks(lst, env, fd, array_env);
-				if (dup2(fd->pipe_fd[READ], fd->fd_in) == -1)
-				{
-					printf("build process:		you came back huh\n");
-					mini_error("1 dup2", errno);
-				}
-				// close(fd->pipe_fd[READ]);
-				// close(fd->pipe_fd[WRITE]);
-		}
-		else// Parent process - Wait for the child process to finish
-			waitpid(fd->fork_pid, NULL, 0); // Properly wait for child process
+				mini_forks(lst, env, &fd, array_env);
+				// if (dup2(fd.pipe_fd[READ], fd.fd_in) == -1)
+				// {
+				// 	printf("build process:		you came back huh\n");
+				// 	mini_error("1 dup2", errno);
+				// }
+				// close(fd.pipe_fd[READ]);
+				// close(fd.pipe_fd[WRITE]);
+			}
 		}
 		lst = lst->next;
+		//need to wait for the individual children to return (maybe the loop)
 	}
-	close(fd->pipe_fd[READ]);
+	// Parent process - Wait for the child process to finish
+	waitpid(fd.fork_pid, NULL, 0); // Properly wait for the last child process
+	close(fd.pipe_fd[READ]);
 	//if redirect found for outfile dup read end to outfile 
-	// close(pipe_fd[WRITE]);
+	// close(fd->pipe_fd[WRITE]);
 }
 
 //int dup2(int oldfd, int newfd);
@@ -115,11 +111,13 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, t_fd *fd, char **array_env)
 		{
 			mini_error("close", errno);
 		}
-		if (dup2(fd->pipe_fd[WRITE], STDOUT_FILENO) == -1)
-		{
-			printf("hier 2??\n");
-			mini_error(" 3..... dup2", errno);
-		}
+		printf("%d\n", fd->pipe_fd[WRITE]);
+		// if (dup2(fd->pipe_fd[WRITE], STDOUT_FILENO) == -1)
+		// {
+		// 	printf("hier 2??\n");
+		// 	mini_error(" 3..... dup2", errno);
+		// }
+		dprintf(2, "euagegauweg\n");
 		puts("huehue");
 		close(fd->pipe_fd[WRITE]);
 		executable = check_access(env, lst);
@@ -182,34 +180,6 @@ bool	parse_path(t_env *env, t_parser *node)
 	return (false);
 }
 
-char	*find_path(t_env *env, t_parser *node)
-{
-	char	*command;
-	char	*ok_path;
-	int		i;
-
-	i = 0;
-	if (!absolute_check(node) && parse_path(env, node))
-	{
-		while (env->path && env->path[i] != NULL)
-		{
-			command = ft_strjoin("/", node->str);
-			if (command == NULL)
-				mini_error("strjoin", errno);
-			ok_path = ft_strjoin(env->path[i], command);
-			if (ok_path == NULL)
-				mini_error("strjoin", errno);
-			free(command);
-			if (access(ok_path, F_OK))
-				return (ok_path);//it's a command;
-			if (!access(ok_path, F_OK))
-				return(node->str);//its just a string;
-			free(ok_path);
-			i++;
-		}
-	}
-	return (node->cmd);
-}
 
 /* checks if the path acces with access() for the first command */
 char	*check_access(t_env *env, t_parser *node)
