@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/16 15:41:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 17:08:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,7 @@ typedef struct s_fd
 
 t_parser	*mini_forks(t_parser *node, t_env *env, t_fd *fd, char **array_env);
 bool		absolute_check(t_parser *node);
-bool		parse_path(t_env *env, t_parser *node);
-char		*find_path(t_env *env, t_parser *node);
+bool		parse_path(t_env *env);
 char		*check_access(t_env *env, t_parser *node);
 void		ft_execute(char **envp, t_parser *list);
 void		build(t_parser *lst, t_env *env, char **array_env);

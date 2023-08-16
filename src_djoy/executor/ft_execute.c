@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/16 16:47:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 17:10:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,30 +141,38 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, t_fd *fd, char **array_env)
 
 bool	absolute_check(t_parser *node)
 {
+	printf("hierrrrr\n");
 	if (!node->abso)
+	{
+		printf("hierrrrr1\n");
 		return (false);
+	}
 	if (!ft_strncmp(node->abso, "/", 1) && access(node->abso, F_OK) == 0)
 		return (true);
 	if (!ft_strncmp(node->abso, "./", 2) && access(node->abso, F_OK) == 0)
 		return (true);
 	if (!ft_strncmp(node->abso, "../", 3) && access(node->abso, F_OK) == 0)
 		return (true);
+	printf("hierrrrr2\n");
 	return (false);
 }
 
 /* finds the PATH and stores it in a struct as a 2D array*/
-bool	parse_path(t_env *env, t_parser *node)
+bool	parse_path(t_env *env)
 {
 	int		i;
 	char	*temp_path;
 
-	(void)node;
 	i = 0;
-	while (env->key[i])
+	while (env)
 	{
-		if (ft_strncmp(&env->key[i], "PATH=", 5) == 0)
+		printf("hier dan\n");
+		printf("env->key = %s\n", env->key);
+		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
-			temp_path = ft_substr(&env->value[i], 0, ft_strlen(&env->value[i]));
+			printf("hier dan 1\n");
+			temp_path = ft_substr(env->value, 0, ft_strlen(env->value));
+			printf("temp_path = %s\n", temp_path);
 			if (temp_path == NULL)
 				mini_error ("malloc", errno);
 			env->path = ft_split(temp_path, ':');
@@ -175,7 +183,7 @@ bool	parse_path(t_env *env, t_parser *node)
 				mini_error ("malloc", errno);
 			return (true);
 		}
-		i++;
+		env = env->next;
 	}
 	return (false);
 }
@@ -189,14 +197,17 @@ char	*check_access(t_env *env, t_parser *node)
 	int		i;
 
 	i = 0;
-	if (!absolute_check(node) && parse_path(env, node))
+	printf("hierzo\n");
+	if (!absolute_check(node) && parse_path(env))
 	{
+		printf("hierzo1\n");
 		while (env->path && env->path[i] != NULL)
 		{
-			command = ft_strjoin("/", node->abso);
+			command = ft_strjoin("/", node->str);
 			if (command == NULL)
 				mini_error("malloc", errno);
 			ok_path = ft_strjoin(env->path[i], command);
+			printf("ok_path = [%s]\n", ok_path);
 			if (command == NULL)
 				mini_error("malloc", errno);
 			free(command);
