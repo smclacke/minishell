@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/16 17:10:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/16 17:16:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	build(t_parser *lst, t_env *env, char **array_env)
 		mini_error("pipe", errno);
 	while (lst)
 	{
-		if (lst->next)
+		if (lst)
 		{
 			fd.fork_pid = fork();
 			if (fd.fork_pid == -1)
