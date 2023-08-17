@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/08/03 17:26:56 by dreijans      ########   odam.nl          #
+#    Updated: 2023/08/17 14:51:38 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,8 @@ SRCS_DJOY		=	main_djoy.c				\
 					executor/ft_execute.c	\
 					executor/ft_make_env.c	\
 					executor/ft_utils.c		\
+					executor/list_utils.c 	\
+					executor/print_utils.c	\
 					expander/ft_expand.c 	\
 					lexer/lexer_utils.c 	\
 					lexer/lexer.c 			\

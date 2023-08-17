@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/16 14:11:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 14:58:58 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void	get_key_value(char *str, char **key, char **value)
 	}
 }
 
+/**
+ * @param str string from 2d array
+ * containing line from envp.
+ * @brief substrings string from envp[i].
+*/
 char	*get_full(char *str)
 {
 	char	*new_str;
@@ -66,38 +71,6 @@ char	*get_full(char *str)
 	if (str)
 		new_str = ft_substr(str, 0, ft_strlen(str));
 	return (new_str);
-}
-
-/**
- * @param lst linked list to loop through
- * @brief loops to list to go to last position
-*/
-t_env	*env_lstlast(t_env *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-/**
- * @param lst linked list
- * @param new new node to be added to linked list 
- * @brief loops through list to add the new node to the back
- * @todo adding previous in case of doubly linked list
-*/
-void	env_lstadd_back(t_env **lst, t_env *new)
-{
-	t_env	*last;
-
-	if (*lst)
-	{
-		last = env_lstlast(*lst);
-		last->next = new;
-	}
-	else
-		*lst = new;
 }
 
 /**
@@ -130,92 +103,26 @@ t_env	*env_list(char **envp)
 	return (env);
 }
 
+/**
+ * @param env linked list containing environment
+ * @brief turns environment linked list into 2d array
+ * @todo line 119: instead of errno need to return NULL?
+*/
 char	**list_to_string(t_env *env)
 {
 	char	**env_array;
 	int		i;
 
 	i = 0;
-	// env_array = (char **)malloc(sizeof(mini_lstsize(env) + 1));
 	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
 	if (!env_array)
-		mini_error ("malloc", errno);//or need to return NULL?
+		mini_error ("malloc", errno);
 	while (env)
 	{
 		env_array[i] = env->full;
-		// printf("array = [%s]\n", env_array[i]);
 		i++;
 		env = env->next;
 	}
 	env_array[i] = NULL;
-	return(env_array);
-}
-
-/**
- * @param env environment stored in linked list
- * @brief prints linked list containing env key or value
-*/
-void	print_list(t_env *env)
-{
-	while (env != NULL)
-	{
-		printf("%s=%s\n", env->key, env->value);
-		env = env->next;
-	}
-}
-
-/**
- * @param env environment stored in linked list
- * @brief prints linked list containing env key or value
-*/
-void	print_list_key(t_env *env)
-{
-	while (env != NULL)
-	{
-		printf("%s\n", env->key);
-		env = env->next;
-	}
-}
-
-/**
- * @param env environment stored in linked list
- * @brief prints linked list containing env key or value
-*/
-void	print_list_value(t_env *env)
-{
-	while (env != NULL)
-	{
-		printf("%s\n", env->value);
-		env = env->next;
-	}
-}
-
-/**
- * @param env environment stored in linked list
- * @brief prints linked list containing env key or value
-*/
-void	print_env_list(t_env *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst != NULL)
-	{
-		printf("iterations [%d]\n", i);
-		i++;
-		lst = lst->next;
-	}
-}
-
-/**
- * @param env environment stored in linked list
- * @brief prints linked list containing env full
-*/
-void	print_list_full(t_env *env)
-{
-	while (env != NULL)
-	{
-		printf("%s\n", env->full);
-		env = env->next;
-	}
+	return (env_array);
 }

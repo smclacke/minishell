@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/16 17:08:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 13:36:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,21 +132,22 @@ void		ft_export(t_parser *lst, t_env *env);
 void		ft_unset(t_parser *lst, t_env *env);
 
 /*execution*/
-typedef struct s_fd
+typedef struct s_execute
 {
 	int		fd_in;
 	int		fork_pid;
 	int		pipe_fd[2];
-}				t_fd;
+	char	**path;
+	char	**env_array;
+}				t_execute;
 
-
-t_parser	*mini_forks(t_parser *node, t_env *env, t_fd *fd, char **array_env);
+t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data);
 bool		absolute_check(t_parser *node);
-bool		parse_path(t_env *env);
-char		*check_access(t_env *env, t_parser *node);
+bool		parse_path(t_env *env, t_execute *data);
+char		*check_access(t_env *env, t_parser *node, t_execute *data);
 void		ft_execute(char **envp, t_parser *list);
-void		build(t_parser *lst, t_env *env, char **array_env);
-void		init_fd_struct(t_fd *fd);
+void		build(t_parser *lst, t_env *env, t_execute *data);
+void		init_execute_struct(t_execute *data, t_env *env);
 
 //----Utils----//
 void		mini_error(char *string, int error);
