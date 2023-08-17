@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 16:45:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 17:18:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,6 @@ bool		parser_cmp_builtins(t_parser *param);
 bool		parser_cmp_metas(t_parser *tokens);
 bool		parser_cmp_abso(t_parser *tokens);
 
-//---- Expander ----//
-
-void		ft_expand(t_parser *lst);
-bool		check_for_meta(t_parser *lst);
-bool		check_for_builtin(t_parser *lst);
-
 //---- Executor ----//
 typedef struct s_env
 {
@@ -108,7 +102,12 @@ typedef struct s_env
 	struct s_env		*previous;
 }							t_env;
 
-/*environment*/
+//---- Expander ----//
+void		ft_expand(t_parser *lst, t_env *env);
+bool		check_for_meta(t_parser *lst);
+bool		check_for_builtin(t_parser *lst);
+
+//----Environment----//
 t_env		*env_list(char **envp);
 t_env		*env_lstnew(void *key, void *value, char *full);
 void		get_key_value(char *str, char **key, char **value);
@@ -129,7 +128,7 @@ void		ft_pwd(void);
 void		ft_export(t_parser *lst, t_env *env);
 void		ft_unset(t_parser *lst, t_env *env);
 
-/*execution*/
+//----Execution----//
 typedef struct s_execute
 {
 	int		fd_in;

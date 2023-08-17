@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/16 14:03:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 17:14:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;	
-		ft_expand(tokens);
+		// ft_expand(tokens);
 		ft_execute(envp, tokens);
 		// free input (readline needs to be fred at end)	
 	}

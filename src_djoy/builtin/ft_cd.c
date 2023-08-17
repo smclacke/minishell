@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/08 18:08:23 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/17 16:59:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	ft_cd(t_parser *lst, t_env *env)
 	char		*old_work_dir;
 	char		*error;
 	char		*cwd;
-	// t_env		**head;
+	t_env		**head;
 
 	cwd = NULL;
 	old_work_dir = NULL;
-	// head = &env;
+	head = &env;
 	if (env)
 	{
 		home_dir = getenv("HOME");
@@ -47,15 +47,15 @@ void	ft_cd(t_parser *lst, t_env *env)
 			error = ft_strjoin("minishell: cd: ", lst->str);
 			mini_error(error, errno);
 		}
-		// if (!ft_strncmp ("OLDPWD=", env->key, 6))
-		// 	env = env->next;
-		// if (ft_strncmp ("OLDPWD=", env->key, 6))
-		// 	env->value = old_work_dir;
-		// env = *head;
-		// if (!ft_strncmp ("PWD=", env->key, 4))
-		// 	env = env->next;
-		// if (ft_strncmp ("PWD=", env->key, 4))
-		// 	env->value = getcwd(cwd, sizeof(cwd));
+		if (!ft_strncmp ("OLDPWD", env->key, 6))
+			env = env->next;
+		if (ft_strncmp ("OLDPWD", env->key, 6))
+			env->value = old_work_dir;
+		env = *head;
+		if (!ft_strncmp ("PWD", env->key, 4))
+			env = env->next;
+		if (ft_strncmp ("PWD", env->key, 4))
+			env->value = getcwd(cwd, sizeof(cwd));
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
 	}
 	printf("%s\n", getcwd(cwd, sizeof(cwd)));
