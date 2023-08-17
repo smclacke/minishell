@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/10 16:17:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 15:11:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 #include "../../include/djoyke.h"
 
-// /* sarah parses the word i need to check if the word requires an action:
-// "user" = user (word), "$user" = djoyke (action), '$user' = $user (word) */
-// //>>
-// //>
-
+/**
+ * @param lst linked list from parser
+ * @brief checks if there's a meta or a builtin
+ * sarah parses the word i need to check if the word requires an action:
+ * "user" = user (word), "$user" = djoyke (action), '$user' = $user (word)
+ * >>
+ * >
+*/
 void	ft_expand(t_parser *lst)
 {
 	if (check_for_meta(lst))
@@ -27,7 +30,6 @@ void	ft_expand(t_parser *lst)
 		printf("expander: 		there's a builtin whoop\n");
 }
 
-// // removing files int unlink(const char *pathname);
 /**
  * @param node linked list
  * @param env string or char to compare with
@@ -36,6 +38,7 @@ void	ft_expand(t_parser *lst)
  * @todo 
  * 1) needs to be passed to actual process,
  * 2) MAYBE MAKE IT A BOOL?
+ * 3) removing files int unlink(const char *pathname);
 */
 bool	check_for_meta(t_parser *lst)
 {
