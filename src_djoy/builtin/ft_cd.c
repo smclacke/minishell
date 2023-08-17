@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 16:59:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 21:16:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,61 @@ void	ft_cd(t_parser *lst, t_env *env)
 {
 	char		*home_dir;
 	char		*old_work_dir;
-	char		*error;
 	char		*cwd;
-	t_env		**head;
 
 	cwd = NULL;
 	old_work_dir = NULL;
-	head = &env;
 	if (env)
 	{
 		home_dir = getenv("HOME");
 		if (home_dir == NULL)
 			mini_error("getenv", errno);
-		printf("%s\n", getcwd(cwd, sizeof(cwd)));
 		old_work_dir = getcwd(cwd, sizeof(cwd));
-		if (access(lst->str, F_OK) == 0)
-			chdir(lst->str);
-		else
+		while (lst)
 		{
-			error = ft_strjoin("minishell: cd: ", lst->str);
-			mini_error(error, errno);
+			access_and_change(env, lst, old_work_dir, cwd);
+			lst = lst->next;
 		}
-		if (!ft_strncmp ("OLDPWD", env->key, 6))
-			env = env->next;
-		if (ft_strncmp ("OLDPWD", env->key, 6))
-			env->value = old_work_dir;
-		env = *head;
-		if (!ft_strncmp ("PWD", env->key, 4))
-			env = env->next;
-		if (ft_strncmp ("PWD", env->key, 4))
-			env->value = getcwd(cwd, sizeof(cwd));
-		printf("%s\n", getcwd(cwd, sizeof(cwd)));
 	}
-	printf("%s\n", getcwd(cwd, sizeof(cwd)));
+}
+
+void	access_and_change(t_env *env, t_parser *lst, char *opwd, char *cwd)
+{
+	char		*error;
+
+	if (lst->str != NULL)
+	{
+		if (access(lst->str, F_OK) == 0)
+		{
+			if (chdir(lst->str) == -1)
+			{
+				error = ft_strjoin("minishell: cd: ", lst->str);
+				mini_error(error, errno);
+			}
+			change_old_dir(env, opwd);
+			change_current_dir(env, getcwd(cwd, sizeof(cwd)));
+		}
+	}
+}
+
+void	change_old_dir(t_env *env, char *str)
+{
+	while (mini_strcmp ("OLDPWD", env->key) != 0)
+	{
+		env = env->next;
+		if (env == NULL)
+			return ;
+	}
+	env->value = str;
+}
+
+void	change_current_dir(t_env *env, char *str)
+{
+	while (mini_strcmp ("PWD", env->key) != 0)
+	{
+		env = env->next;
+		if (env == NULL)
+			return ;
+	}
+	env->value = str;
 }
