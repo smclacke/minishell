@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 21:15:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 21:18:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ void		ft_cd(t_parser *lst, t_env *env);
 void		access_and_change(t_env *env, t_parser *lst, char *opwd, char *cwd);
 void		change_old_dir(t_env *env, char *str);
 void		change_current_dir(t_env *env, char *str);
-// void 		change_dir(t_parser *lst);
 void		ft_echo(t_parser *lst);
 void		ft_env(t_env *env);
 void		ft_pwd(void);
