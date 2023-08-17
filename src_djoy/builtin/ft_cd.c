@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 21:39:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 21:41:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ void	access_and_change(t_env *env, t_parser *lst, char *opwd, char *cwd)
 			change_old_dir(env, opwd);
 			change_current_dir(env, getcwd(cwd, sizeof(cwd)));
 		}
-		if (access(lst->str, F_OK) == -1)
-		{
+		else
 			printf("cd: no such file or directory: %s\n", lst->str);
-		}
 	}
 }
 
