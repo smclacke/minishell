@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 14:52:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/17 16:43:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	env_lstadd_back(t_env **lst, t_env *new)
 		*lst = new;
 }
 
+/**
+ * @param lst linked list
+ * @brief loops through list count length
+ * @return int size
+*/
 int	mini_lstsize(t_env *lst)
 {
 	size_t	i;
