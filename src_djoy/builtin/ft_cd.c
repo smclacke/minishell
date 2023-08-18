@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 21:41:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/18 16:55:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,16 @@ void	access_and_change(t_env *env, t_parser *lst, char *opwd, char *cwd)
  * @param str string containing old working directory string
  * @brief loops through environment till OLDPWD is found
  * changes env->value to value of str
+ * @todo decide if I want to keep env->full
+ * else need to update that everytime I update my environment
 */
 void	change_old_dir(t_env *env, char *str)
 {
+	char	*key_equal;
+	char	*new_full;
+
+	key_equal = NULL;
+	new_full = NULL;
 	while (mini_strcmp ("OLDPWD", env->key) != 0)
 	{
 		env = env->next;
@@ -91,6 +98,9 @@ void	change_old_dir(t_env *env, char *str)
 			return ;
 	}
 	env->value = str;
+	key_equal = ft_strjoin(env->key, "=");
+	new_full = ft_strjoin(key_equal, str);
+	env->full = new_full;
 }
 
 /**
@@ -98,9 +108,16 @@ void	change_old_dir(t_env *env, char *str)
  * @param str string containing new working directory string
  * @brief loops through environment till PWD is found
  * changes env->value to value of str
+ * @todo decide if I want to keep env->full
+ * else need to update that everytime I update my environment
 */
 void	change_current_dir(t_env *env, char *str)
 {
+	char	*key_equal;
+	char	*new_full;
+
+	key_equal = NULL;
+	new_full = NULL;
 	while (mini_strcmp ("PWD", env->key) != 0)
 	{
 		env = env->next;
@@ -108,4 +125,7 @@ void	change_current_dir(t_env *env, char *str)
 			return ;
 	}
 	env->value = str;
+	key_equal = ft_strjoin(env->key, "=");
+	new_full = ft_strjoin(key_equal, str);
+	env->full = new_full;
 }

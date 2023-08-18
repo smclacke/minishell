@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 20:51:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/18 17:12:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	do_builtin(t_parser *lst, t_env *env)
 		ft_unset(lst, env);
 	if (mini_strcmp(lst->cmd, "env") == 0)
 		ft_env(env);
-	
 }
 
 /**
