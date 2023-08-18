@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/18 16:55:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/18 17:26:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
  * 				cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
  * line 66: check if needs error message with exit
  * 			give prompt back, and endline?
+ * @todo do we actually need OLDPWD and PWD bash doesnt have it
 */
 void	ft_cd(t_parser *lst, t_env *env)
 {

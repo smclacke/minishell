@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/18 17:22:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/18 17:39:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,20 @@ void	ft_execute(char **envp, t_parser *lst)
 	env = env_list(envp);
 	init_execute_struct(&data, env);
 	// printf("list before\n");
+	// printf("------------------------\n");
 	// print_list_full(env);
+	// printf("list before value+key\n");
+	// printf("------------------------\n");
+	// print_list(env);
 	ft_expand(lst, env);
+	ft_env(env);
 	// printf("list after\n");
+	// printf("------------------------\n");
 	// print_list_full(env);
+	// printf("list before value+key\n");
+	// printf("------------------------\n");
+	// print_list(env);
+	// printf("------------------------\n");
 	// build(lst, env, &data);
 }
 

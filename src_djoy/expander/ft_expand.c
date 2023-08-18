@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 17:17:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/18 17:38:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,13 @@
 */
 void	ft_expand(t_parser *lst, t_env *env)
 {
-	// while (lst)
-	// {
-		if (check_for_meta(lst))
-			printf("expander:		there's a meta whoop\n");
-		if (check_for_builtin(lst))
-		{
-			printf("expander: 		there's a builtin whoop\n");
-			do_builtin(lst, env);
-		}
-	// 	lst = lst->next;
-	// }
+	if (check_for_meta(lst))
+		printf("expander:		there's a meta whoop\n");
+	if (check_for_builtin(lst))
+	{
+		printf("expander: 		there's a builtin whoop\n");
+		do_builtin(lst, env);
+	}
 }
 
 /**
