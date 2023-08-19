@@ -6,6 +6,11 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
+HELLLLOOOOOO
+please just ignore quotes for now cause it's setting me back massively...
+handle errors, handle flags, put flag in node with cmd to send to executor
+come back to quotes when stronger and more slept
+
 ~~QUOTES~~
 
 ---> try using old ft_split, split on spaces, if quote found, stop splitting
@@ -17,7 +22,7 @@ dein computer, kein computer
 
 -> echo -n, only built in
 -> + if 'space' and '-' after something, check for flag validity in comb with cmd
-
+-> add to cmd node to send to executor
 
 ~~ERRORS~~
 
