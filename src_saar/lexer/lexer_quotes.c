@@ -6,11 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/14 21:02:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/19 14:20:01 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
+
 
 static char	*make_words(char *input)
 {
@@ -30,6 +31,39 @@ static char	*make_words(char *input)
 	words[i] = '\0';
 	return (words);
 }
+
+// char *make_quoted_string(char **input) {
+//     char *start = *input;
+//     char *end;
+
+//     (*input)++; // Move past the opening quote
+
+//     // Find the closing quote or the end of the string
+//     while (**input != '\0' && **input != lq_isquote(start[0])) {
+//         (*input)++;
+//     }
+
+//     end = *input;
+//     if (**input != '\0') {
+//         (*input)++; // Move past the closing quote
+//     }
+
+//     // Calculate the length of the substring
+//     int length = end - start;
+
+//     // Allocate memory for the substring
+//     char *substring = (char *)malloc(length + 1);
+
+//     if (substring != NULL) {
+//         // Copy the substring into the allocated memory
+//         for (int i = 0; i < length; i++) {
+//             substring[i] = start[i];
+//         }
+//         substring[length] = '\0'; // Null-terminate the substring
+//     }
+
+//     return substring;
+// }
 
 static char	*make_quotes(char *input)
 {
@@ -60,21 +94,19 @@ char	**ft_split_shelly(char *input)
 		return (0);
 	while (*input)
 	{
-		while (*input && lq_what_to_split(*input) && !lq_isquote(*input))
+		while (*input && lq_what_to_split(*input))
 			input++;
-		if (*input && lq_isquote(*input))
+		if (*input)
 		{
-			array[i] = make_quotes(input);
-			i++;
+			if (lq_isquote(*input))
+				array[i] = make_quotes(&input);
+			else
+				array[i] = make_words(&input);
 		}
-		else if (*input && !lq_isquote(*input))
-		{
-			array[i] = make_words(input);
-			i++;
-		}
+		i++;
 		while (*input && !lq_what_to_split(*input))
 			input++;
 	}
-	array[i] = 0;
+	array[i] = NULL;
 	return (array);
 }
