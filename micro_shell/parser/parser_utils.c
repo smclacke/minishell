@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:31:11 by smclacke      ########   odam.nl         */
+/*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/08/20 14:50:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,3 @@ bool	parser_cmp_abso(t_parser *tokens)
 		return (true);
 	return (false);
 }
-

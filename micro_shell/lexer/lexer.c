@@ -5,11 +5,10 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/20 14:46:40 by smclacke      ########   odam.nl         */
+/*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/08/20 14:50:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/minishell.h"
 
@@ -164,4 +163,3 @@ t_parser	*lexer(char *input)
 		return (0);
 	return (tokens);
 }
-
