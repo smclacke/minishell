@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/19 14:20:01 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/08/20 15:36:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ char	**ft_split_shelly(char *input)
 		if (*input)
 		{
 			if (lq_isquote(*input))
-				array[i] = make_quotes(&input);
+				array[i] = make_quotes(input);
 			else
-				array[i] = make_words(&input);
+				array[i] = make_words(input);
 		}
 		i++;
 		while (*input && !lq_what_to_split(*input))
