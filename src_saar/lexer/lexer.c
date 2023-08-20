@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/10 19:27:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/20 14:37:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,18 @@ static char	**parse_input(char *input)
 {
 	char	**array = NULL;
 
-	if (shelly_check_quotes(input))
-	{
-		array = ft_split_shelly(input);
-		if (!array)
-			return (NULL);
-	}
-	else
-	{
+	// if (shelly_check_quotes(input))
+	// {
+	// 	array = ft_split_shelly(input); // this needs to work at some point in the future
+	// 	if (!array)
+	// 		return (NULL);
+	// }
+	// else
+	// {
 		array = ft_split(input, ' ');
 		if (!array)
 			return (NULL);
-	}
+	// }
 	return (array);
 }
 
