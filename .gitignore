@@ -1,3 +1,6 @@
+# Ignore all
+*
+
 # Unignore Makefile
 !Makefile
 
