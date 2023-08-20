@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:19:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/20 16:31:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,20 @@ static void	*parser_define_tokens(t_parser *tokens)
 		printf("arg->cmd: %s\n", tokens->cmd);
 	}
 	else if (parser_cmp_abso(tokens))
-	{	
+	{
 		tokens->abso = tokens->input;
 		printf("arg->abso: %s\n", tokens->abso);
 	}
-	else if (parser_cmp_squote(tokens))
-	{
-		tokens->squote = tokens->input;
-		printf("arg->squote: %s\n", tokens->squote);
-	}
-	else if (parser_cmp_dquote(tokens))
-	{
-		tokens->dquote = tokens->input;
-		printf("arg->dquote: %s\n", tokens->dquote);
-	}
+	// else if (parser_cmp_squote(tokens))
+	// {
+	// 	tokens->squote = tokens->input;
+	// 	printf("arg->squote: %s\n", tokens->squote);
+	// }
+	// else if (parser_cmp_dquote(tokens))
+	// {
+	// 	tokens->dquote = tokens->input;
+	// 	printf("arg->dquote: %s\n", tokens->dquote);
+	// }
 	else
 	{
 		tokens->str = tokens->input;

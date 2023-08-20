@@ -11,6 +11,10 @@ please just ignore quotes for now cause it's setting me back massively...
 handle errors, handle flags, put flag in node with cmd to send to executor
 come back to quotes when stronger and more slept
 
+~~ MICROSHELLY ~~
+-> I broke it...
+-> fix it...
+
 ~~QUOTES~~
 
 ---> try using old ft_split, split on spaces, if quote found, stop splitting
@@ -20,9 +24,11 @@ come back to quotes when stronger and more slept
 
 ~~FLAGS~~
 
--> echo -n, only built in
--> + if 'space' and '-' after something, check for flag validity in comb with cmd
--> add to cmd node to send to executor
+///// Djoyke:
+-> flags are just strings, im sending them the same as any other str :)
+-> if echo and str after is -n, then dont just print -n, but remove newline, thats all
+-> otherwise cmd put whatever after is given to execve and will be handled
+-> pipes and redirects are important but other than that, we just give the input to executor
 
 ~~ERRORS~~
 
