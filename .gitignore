@@ -1,14 +1,14 @@
-# ignore all
+# Ignore all
 *
+
+# Unignore Makefile
+!Makefile
 
 # Unignore all dirs
 !*/
 
 # Unignore all with extensions
 !*.*
-
-# gitignore
-.gitignore
 
 # Object files
 *.o

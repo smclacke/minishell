@@ -6,11 +6,26 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:19:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/09 16:25:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sarah.h"
+
+t_parser	*shelly_parser_print(t_parser *tokens)
+{
+	t_parser	*list;
+	int			i = 0;
+
+	list = tokens;
+	while (list)
+	{
+		printf("index:	[%i]	 list:	[%s]\n", i, list->input);
+		i++;
+		list = list->next;
+	}
+	return (tokens);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -37,6 +52,7 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
+		shelly_parser_print(tokens);
 
 
 

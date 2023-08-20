@@ -6,20 +6,23 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
+HELLLLOOOOOO
+please just ignore quotes for now cause it's setting me back massively...
+handle errors, handle flags, put flag in node with cmd to send to executor
+come back to quotes when stronger and more slept
+
 ~~QUOTES~~
 
--> split on quotes and spaces correctly so initial list of tokens is good
-	> pretty simple while loopidyloop
-	> don't forget to check either side of the quotes for chars
-
--> take quoted tokens from lexer and break them up futher in parser, what am i checking for? (how is the parser handling quoted tokens?)
-
+---> try using old ft_split, split on spaces, if quote found, stop splitting
+---> add separately the part of the array from s or d quotes and then return to splitting on spaces
+---> this way, I need to check the whole word for quotes and fix the a"something" problem
 
 
 ~~FLAGS~~
 
--> echo -n
--> + if 'space' and '-' after something, check for flag validity
+-> echo -n, only built in
+-> + if 'space' and '-' after something, check for flag validity in comb with cmd
+-> add to cmd node to send to executor
 
 ~~ERRORS~~
 
@@ -38,8 +41,20 @@ dein computer, kein computer
 
 *Parser*
 
--> some<<something 
-	<<something
+->	some<<something 
+->	<<something
+				bash-3.2$ some<<something
+				> something
+				bash: some: command not found
+				bash-3.2$ some<<something
+				> hello
+				> some
+				> something
+				bash: some: command not found
+				bash-3.2$ <<something
+				> some
+				> something
+				bash-3.2$
 
 *Other*
 
