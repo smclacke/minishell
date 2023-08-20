@@ -15,12 +15,11 @@ come back to quotes when stronger and more slept
 -> I broke it...
 -> fix it...
 
-~~QUOTES~~
+~~ERRORS~~
 
----> try using old ft_split, split on spaces, if quote found, stop splitting
----> add separately the part of the array from s or d quotes and then return to splitting on spaces
----> this way, I need to check the whole word for quotes and fix the a"something" problem
-
+-> cmd not found
+-> unclosed quotes
+-> pipe stuff
 
 ~~FLAGS~~
 
@@ -30,11 +29,12 @@ come back to quotes when stronger and more slept
 -> otherwise cmd put whatever after is given to execve and will be handled
 -> pipes and redirects are important but other than that, we just give the input to executor
 
-~~ERRORS~~
 
--> cmd not found
--> unclosed quotes
--> pipe stuff
+~~QUOTES~~
+
+---> try using old ft_split, split on spaces, if quote found, stop splitting
+---> add separately the part of the array from s or d quotes and then return to splitting on spaces
+---> this way, I need to check the whole word for quotes and fix the a"something" problem
 
 
 ---------------------------------------------------------------------------------
