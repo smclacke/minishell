@@ -6,30 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/20 14:50:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/20 15:13:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-/**
- * need to wrtie this function
-*/
-bool	parser_cmp_squote(t_parser *tokens)
-{
-	if (!tokens)
-		return (false);
-	return (false);
-}
-/**
- * need to wrtie this function
-*/
-bool	parser_cmp_dquote(t_parser *tokens)
-{
-	if (!tokens)
-		return (false);
-	return (false);
-}
 
 bool	parser_cmp_builtins(t_parser *tokens)
 {
