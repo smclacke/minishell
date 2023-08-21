@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/20 16:34:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/21 21:25:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ typedef struct s_parser
 {
 	void				*input;
 	void				*tokens;
-	char				*str;
+	char				*str; // remove this
+	char				**str; // = takes all *strs, all strs up to pipes and redirects 
 	char				*cmd;
 	char				*meta;
-	char				*abso;
-	char				*flag;
+	char				*abso; // dont need this
+	char				*flag; // dont need this
 	char				*squote;
 	char				*dquote;
 	char				*here_doc;

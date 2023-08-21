@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/21 17:18:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/21 21:26:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 // struct: buildins + cmds, make new nodes with everything in it up to pipes and redirects
 // call vars in struct whatever they 'are' i.e., buildin = (echo hello) or
 // cmd = (ls -la), or redirect = (infile>>) 
+
+// don't just put all parts back into ONE node, create mini node arrays of the strings 
+// that need to be together
+
+// if str, put into str array, keep adding the separate strings up to pipes and redirect 
+
+echo hello | unset USER
+
+cmd, str, str -> cmd, **str = str, str
+
 
 echo hello
 ls -la
