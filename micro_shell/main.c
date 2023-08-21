@@ -6,19 +6,33 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 17:43:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/21 17:18:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/minishell.h"
 
-// INPUT: e'ch'o abc$abc 
-// OUTPUT: abc
+// struct: buildins + cmds, make new nodes with everything in it up to pipes and redirects
+// call vars in struct whatever they 'are' i.e., buildin = (echo hello) or
+// cmd = (ls -la), or redirect = (infile>>) 
 
-// Djoyke, when checking vadility of the rest of the input, after first peice of input, i can send
-// to you what is what and then you expand it, if its not good in expanding process, then error thrown
-// sarah: try explain this so it makes sense....
+echo hello
+ls -la
+
+~ builtins
+-> tokens
+lst->builtin
+lst->str
+-> parser
+lst->buildin = builtin + str 
+
+~ cmds
+-> tokens
+lst->cmd
+lst->str
+-> parser look for pipes and redirects
+lst->cmd = cmd + str in one node
 
 int	main(int argc, char **argv, char **envp)
 {
