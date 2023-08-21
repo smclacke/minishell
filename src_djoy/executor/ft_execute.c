@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/19 21:28:08 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/21 16:41:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,11 @@
  * 1) check if decisions need to be made in here
 */
 void	ft_execute(t_env *env, t_parser *lst)
-void	ft_execute(char **envp, t_parser *lst)
 {
-	// int			i;
-	// t_env		*env;
-	t_execute	data;
-
-	// i = 0;
-	// env = env_list(envp);
-	init_execute_struct(&data, env);
-	// printf("list before\n");
-	// printf("------------------------\n");
-	// print_list_full(env);
-	// printf("list before value+key\n");
-	// printf("------------------------\n");
-	// print_list(env);
+	// t_execute	data;
+	
+	// init_execute_struct(&data, env);
 	ft_expand(lst, env);
-	ft_env(env);
-	// printf("list after\n");
-	// printf("------------------------\n");
-	// print_list_full(env);
-	// printf("list before value+key\n");
-	// printf("------------------------\n");
-	// print_list(env);
-	// printf("------------------------\n");
 	// build(lst, env, &data);
 }
 

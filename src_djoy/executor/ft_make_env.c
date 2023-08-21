@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 21:16:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/21 16:27:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,16 @@ char	*get_full(char *str)
  * @brief putting the envp content into a linked list seperated by key and value
  * @return linked list 
 */
-t_env	*env_list(char **envp)
+t_env	*env_list(char **envp, t_env *env)
 {
 	int		i;
 	char	*key;
 	char	*value;
 	char	*full;
-	t_env	*env;
+	// t_env	*env;
 
 	i = 0;
-	env = NULL;
+	// env = NULL;
 	if (envp[i] == NULL)
 		mini_error("env", errno);
 	while (envp[i] != NULL)

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/19 21:21:04 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/21 16:48:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@
  * @param env pointer to environment
  * @brief unset values by deleting nodes in env linked list
 */
-void	ft_unset(t_parser *node, t_env *env)
+void	ft_unset(t_parser *node, t_env **env)
 {
 	t_env	*temp;
+	t_env	*head;
 
 	temp = NULL;
-	while (env->next != NULL)
+	head = env;
+	while (head)
 	{
-		if (ft_strcmp(env->next->key, &node->str[0]) == 0)
+		if (ft_strcmp(env->next->key, node->str) == 0)
 		{
 			temp = env->next;
 			env->next = env->next->next;
@@ -32,5 +34,4 @@ void	ft_unset(t_parser *node, t_env *env)
 		}
 		env = env->next;
 	}
-	print_list(env);
 }

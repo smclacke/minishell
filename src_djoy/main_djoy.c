@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/19 21:27:56 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/21 16:40:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_parser	*tokens;
-	// t_env		*env;
+	t_env		*env;
 
 	(void) argc;
 	(void) argv;
-	// env = NULL;
+	env = NULL;
+	env = env_list(envp, env);
 	tokens = NULL;
 	while (1)
 	{
@@ -34,10 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;	
-		// ft_expand(tokens);
-		// env = env_list(envp);
-		// ft_execute(env, tokens);
-		ft_execute(envp, tokens);
+		ft_execute(env, tokens);
 		// free input (readline needs to be fred at end)	
 	}
 	return (0);

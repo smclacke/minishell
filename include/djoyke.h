@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/19 21:21:19 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/08/21 16:40:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ bool		check_for_meta(t_parser *lst);
 bool		check_for_builtin(t_parser *lst);
 
 //----Environment----//
-t_env		*env_list(char **envp);
+// t_env		*env_list(char **envp);
+t_env		*env_list(char **envp, t_env *env);
 t_env		*env_lstnew(void *key, void *value, char *full);
 void		get_key_value(char *str, char **key, char **value);
 t_env		*env_lstlast(t_env *lst);
