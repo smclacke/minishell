@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 18:12:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/21 15:43:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/21 20:05:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	ft_env(t_env *env)
 	while (head != NULL)
 	{
 		printf("%s=%s\n", head->key, head->value);
-		// printf("%s\n", head->key);
-		// printf("%s\n", head->value);
-		// printf("%s\n", head->full);
 		head = head->next;
 	}
 }

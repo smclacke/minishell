@@ -6,11 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/21 16:41:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/21 18:13:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+
+//take all the nodes until the pipe or redirect, built-in and put it in execve
 
 /**
  * @param envp environment passed as 2d array
@@ -23,7 +25,7 @@
 void	ft_execute(t_env *env, t_parser *lst)
 {
 	// t_execute	data;
-	
+
 	// init_execute_struct(&data, env);
 	ft_expand(lst, env);
 	// build(lst, env, &data);

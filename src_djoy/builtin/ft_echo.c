@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/17 17:23:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/21 16:56:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
  * @brief writes node after command on standart output followed by /n char
  * -n TBA that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
+ * @todo 
+ * bash-3.2$ echo -nnnnnnn hi
+ * hibash-3.2$ echo -----n hi
+ * -----n hi
+ * bash-3.2$ echo hi -n
+ * hi -n
+ * bash-3.2$ echo "hi" -n
+ * hi -n
+ * fix it!!!!!!!!!
 */
 void	ft_echo(t_parser *lst)
 {

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/21 16:40:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/21 22:03:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,8 @@ void		ft_env(t_env *env);
 void		ft_pwd(void);
 void		ft_export(t_parser *lst, t_env *env);
 void		reassign_env(t_env *env, t_parser *node, char *n_k, char *n_v);
-void		ft_unset(t_parser *lst, t_env *env);
+void		ft_unset(t_parser *lst, t_env **env);
+void		mini_remove_env(char *str, t_env **env);
 
 //----Execution----//
 typedef struct s_execute

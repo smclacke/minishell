@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/18 17:40:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/21 19:45:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	do_builtin(t_parser *lst, t_env *env)
 	if (mini_strcmp(lst->cmd, "export") == 0)
 		ft_export(lst, env);
 	if (mini_strcmp(lst->cmd, "unset") == 0)
-		ft_unset(lst, env);
+		ft_unset(lst, &env);
 	if (mini_strcmp(lst->cmd, "env") == 0)
 		ft_env(env);
 }
