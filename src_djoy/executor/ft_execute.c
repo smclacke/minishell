@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/21 18:13:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/22 18:12:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
  * containing fd's and 2d arrays for later use
  * @todo 
  * 1) check if decisions need to be made in here
+ * env als double pointer meegeven
 */
-void	ft_execute(t_env *env, t_parser *lst)
+void	ft_execute(t_env **env, t_parser *lst)
 {
 	// t_execute	data;
 

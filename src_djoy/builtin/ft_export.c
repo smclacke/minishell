@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/21 18:38:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/22 18:15:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * check export edge cases
  * remove line 33: when parsing is fixed
 */
-void	ft_export(t_parser *node, t_env *env)
+void	ft_export(t_parser *node, t_env **env)
 {
 	char	*new_key;
 	char	*new_value;
@@ -37,7 +37,7 @@ void	ft_export(t_parser *node, t_env *env)
 	env_lstadd_back(&env, new_node);
 }
 
-void	reassign_env(t_env *env, t_parser *node, char *n_k, char *n_v)
+void	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 {
 	while (env)
 	{

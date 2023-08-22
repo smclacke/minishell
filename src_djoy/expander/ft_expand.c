@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/18 17:38:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/22 18:21:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * >>
  * >
 */
-void	ft_expand(t_parser *lst, t_env *env)
+void	ft_expand(t_parser *lst, t_env **env)
 {
 	if (check_for_meta(lst))
 		printf("expander:		there's a meta whoop\n");

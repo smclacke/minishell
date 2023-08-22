@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/21 15:27:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/22 18:33:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * 			give prompt back, and endline?
  * @todo do we actually need OLDPWD and PWD bash doesnt have it
 */
-void	ft_cd(t_parser *lst, t_env *env)
+void	ft_cd(t_parser *lst, t_env **env)
 {
 	char		*home_dir;
 	char		*old_work_dir;
@@ -56,7 +56,7 @@ void	ft_cd(t_parser *lst, t_env *env)
  * gives custom error if access not found
  * cd: no such file or directory: %s\n", lst->str
 */
-void	access_and_change(t_env *env, t_parser *lst, char *opwd, char *cwd)
+void	access_and_change(t_env **env, t_parser *lst, char *opwd, char *cwd)
 {
 	char		*error;
 
@@ -85,14 +85,29 @@ void	access_and_change(t_env *env, t_parser *lst, char *opwd, char *cwd)
  * @todo decide if I want to keep env->full
  * else need to update that everytime I update my environment
 */
-void	change_old_dir(t_env *env, char *str)
+void	change_old_dir(t_env **env, char *str)
 {
 	char	*key_equal;
 	char	*new_full;
+	t_env	*new;
+	char	*full;
 
 	key_equal = NULL;
 	new_full = NULL;
-	while (mini_strcmp ("OLDPWD", env->key) != 0)
+	new = NULL;
+	if (!env)
+	{
+		full = ft_strjoin("OLDPWD=", str);
+		if (full == NULL)
+			mini_error("malloc", errno);
+		new = env_lstnew("OLDPWD", str, full);
+		if (new == NULL)
+			mini_error("malloc", errno);
+		env_lstadd_back(env, new);
+		if (env == NULL)
+			mini_error("malloc", errno);
+	}
+	while (mini_strcmp ("OLDPWD", (t_env *)env->key) != 0)
 	{
 		env = env->next;
 		if (env == NULL)
@@ -112,7 +127,7 @@ void	change_old_dir(t_env *env, char *str)
  * @todo decide if I want to keep env->full
  * else need to update that everytime I update my environment
 */
-void	change_current_dir(t_env *env, char *str)
+void	change_current_dir(t_env **env, char *str)
 {
 	char	*key_equal;
 	char	*new_full;
