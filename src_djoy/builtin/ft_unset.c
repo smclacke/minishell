@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/21 22:14:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/22 16:26:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	ft_unset(t_parser *node, t_env **env)
 		mini_remove_env(node->next->str, env);
 		if (node->next != NULL)
 			node = node->next;
-		// }
-		// break ;
-		// if (node->next != NULL)
 	}
 }
 
@@ -42,28 +39,20 @@ void	mini_remove_env(char *str, t_env **env)
 	tmp = NULL;
 	while (current != NULL) 
 	{
-		printf("everything ok?\n");
 		printf("str = [%s]\n", str);
-		if (!strncmp(current->key, str, strlen(str)))
+		if (!ft_strncmp(current->key, str, strlen(str)))
 		{
+			previous->next = current;
+			current = current->next;
 			printf("hello there\n");
-			if (previous != NULL)
-				previous->next = current->next;
-			else
-			{
-				*env = current->next;
-			}
+		}
+		if (ft_strncmp(current->key, str, strlen(str)))
+		{
+			previous->next = current;
 			tmp = current;
 			current = current->next;
 			free(tmp);
-			printf("okay now\n");
 		}
-		else
-		{
-			previous = current;
-			current = current->next;
-		}
+		current = current->next;
 	}
 }
-
-// if (!strncmp(current->key, node->next->str[i], strlen(node->next->str[i])))
