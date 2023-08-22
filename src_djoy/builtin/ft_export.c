@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 19:32:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/22 19:33:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_export(t_parser *node, t_env **env)
 
 void	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 {
-	t_env 	*head;
+	t_env	*head;
 
 	head = *env;
 	while (head)
