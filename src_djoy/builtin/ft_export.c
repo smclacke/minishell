@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 18:15:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/22 19:32:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,24 @@ void	ft_export(t_parser *node, t_env **env)
 	reassign_env(env, node, new_key, new_value);
 	get_key_value(node->str, &new_key, &new_value);
 	new_node = env_lstnew(new_key, new_value, node->str);
-	env_lstadd_back(&env, new_node);
+	env_lstadd_back(env, new_node);
 }
 
 void	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 {
-	while (env)
+	t_env 	*head;
+
+	head = *env;
+	while (head)
 	{
-		if (mini_strcmp(node->str, env->full) == 0)
+		if (mini_strcmp(node->str, head->full) == 0)
 		{
-			env->full = node->str;
+			head->full = node->str;
 			get_key_value(node->str, &n_k, &n_v);
-			env->value = n_v;
-			env->key = n_k;
+			head->value = n_v;
+			head->key = n_k;
 			return ;
 		}
-		env = env->next;
+		head = head->next;
 	}
 }

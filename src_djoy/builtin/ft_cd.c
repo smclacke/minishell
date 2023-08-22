@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 18:33:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/22 19:31:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,12 @@ void	change_old_dir(t_env **env, char *str)
 	char	*new_full;
 	t_env	*new;
 	char	*full;
+	t_env	*head;
 
 	key_equal = NULL;
 	new_full = NULL;
 	new = NULL;
+	head = *env;
 	if (!env)
 	{
 		full = ft_strjoin("OLDPWD=", str);
@@ -107,16 +109,16 @@ void	change_old_dir(t_env **env, char *str)
 		if (env == NULL)
 			mini_error("malloc", errno);
 	}
-	while (mini_strcmp ("OLDPWD", (t_env *)env->key) != 0)
+	while (mini_strcmp ("OLDPWD", head->key) != 0)
 	{
-		env = env->next;
-		if (env == NULL)
+		head = head->next;
+		if (head == NULL)
 			return ;
 	}
-	env->value = str;
-	key_equal = ft_strjoin(env->key, "=");
+	head->value = str;
+	key_equal = ft_strjoin(head->key, "=");
 	new_full = ft_strjoin(key_equal, str);
-	env->full = new_full;
+	head->full = new_full;
 }
 
 /**
@@ -131,17 +133,19 @@ void	change_current_dir(t_env **env, char *str)
 {
 	char	*key_equal;
 	char	*new_full;
+	t_env	*head;
 
 	key_equal = NULL;
 	new_full = NULL;
-	while (mini_strcmp ("PWD", env->key) != 0)
+	head = *env;
+	while (mini_strcmp ("PWD", head->key) != 0)
 	{
-		env = env->next;
-		if (env == NULL)
+		head = head->next;
+		if (head == NULL)
 			return ;
 	}
-	env->value = str;
-	key_equal = ft_strjoin(env->key, "=");
+	head->value = str;
+	key_equal = ft_strjoin(head->key, "=");
 	new_full = ft_strjoin(key_equal, str);
-	env->full = new_full;
+	head->full = new_full;
 }
