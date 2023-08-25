@@ -6,23 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 15:36:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 15:48:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-
-/**
- * @param env pointer to environment
- * @brief free's content plus node.
-*/
-void	free_all(t_env *env)
-{
-	free(env->value);
-	free(env->key);
-	free(env->full);
-	free(env);
-}
 
 /**
  * @param argv terminal given arguments (for now)
