@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 15:57:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 17:45:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 */
 void	ft_unset(t_parser *node, t_env **env)
 {
+	if (word_check(node) == 1)
+		return ;
 	if (node != NULL)
 		node = node->next;
 	while (node)
@@ -61,8 +63,6 @@ void	mini_remove_env(char *str, t_env **env)
 		}
 	}
 }
-
-// !! if same keyname overwrite that with new else add
 
 // bash: export: `9h=haha': not a valid identifier
 // bash-3.2$ unset 999
