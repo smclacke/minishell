@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 19:31:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 14:47:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_cd(t_parser *lst, t_env **env)
  * gives custom error if access not found
  * cd: no such file or directory: %s\n", lst->str
 */
-void	access_and_change(t_env **env, t_parser *lst, char *opwd, char *cwd)
+void	access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 {
 	char		*error;
 
@@ -69,8 +69,8 @@ void	access_and_change(t_env **env, t_parser *lst, char *opwd, char *cwd)
 				error = ft_strjoin("minishell: cd: ", lst->str);
 				mini_error(error, errno);
 			}
-			change_old_dir(env, opwd);
-			change_current_dir(env, getcwd(cwd, sizeof(cwd)));
+			change_old_dir(env, o_d);
+			change_current_dir(env, getcwd(c_d, sizeof(c_d)));
 		}
 		else
 			printf("cd: no such file or directory: %s\n", lst->str);
@@ -96,19 +96,10 @@ void	change_old_dir(t_env **env, char *str)
 	key_equal = NULL;
 	new_full = NULL;
 	new = NULL;
+	full = NULL;
 	head = *env;
 	if (!env)
-	{
-		full = ft_strjoin("OLDPWD=", str);
-		if (full == NULL)
-			mini_error("malloc", errno);
-		new = env_lstnew("OLDPWD", str, full);
-		if (new == NULL)
-			mini_error("malloc", errno);
-		env_lstadd_back(env, new);
-		if (env == NULL)
-			mini_error("malloc", errno);
-	}
+		reassign_old_pwd(env, new, str, full);
 	while (mini_strcmp ("OLDPWD", head->key) != 0)
 	{
 		head = head->next;
@@ -148,4 +139,17 @@ void	change_current_dir(t_env **env, char *str)
 	key_equal = ft_strjoin(head->key, "=");
 	new_full = ft_strjoin(key_equal, str);
 	head->full = new_full;
+}
+
+void	reassign_old_pwd(t_env **env, t_env *new, char *str, char *full)
+{
+	full = ft_strjoin("OLDPWD=", str);
+	if (full == NULL)
+		mini_error("malloc", errno);
+	new = env_lstnew("OLDPWD", str, full);
+	if (new == NULL)
+		mini_error("malloc", errno);
+	env_lstadd_back(env, new);
+	if (env == NULL)
+		mini_error("malloc", errno);
 }

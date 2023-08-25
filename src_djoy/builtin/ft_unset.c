@@ -6,13 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 18:20:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 14:40:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 
-void	feree(t_env *env)
+/**
+ * @param env pointer to environment
+ * @brief free's content plus node.
+*/
+void	free_all(t_env *env)
 {
 	free(env->value);
 	free(env->key);
@@ -36,6 +40,11 @@ void	ft_unset(t_parser *node, t_env **env)
 	}
 }
 
+/**
+ * @param str key given as string
+ * @param env pointer to environment
+ * @brief loops through list and finds the key's to delete
+*/
 void	mini_remove_env(char *str, t_env **env)
 {
 	t_env	*previous;
@@ -55,7 +64,7 @@ void	mini_remove_env(char *str, t_env **env)
 				*env = current->next;
 			tmp = current;
 			current = current->next;
-			feree(tmp);
+			free_all(tmp);
 		}
 		else
 		{
