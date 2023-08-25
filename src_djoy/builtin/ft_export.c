@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 17:55:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 18:13:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_export(t_parser *node, t_env **env)
 
 	new_key = NULL;
 	new_value = NULL;
-	if (word_check(node) == 1)
+	if (word_check(node) == 0)
 		return ;
 	node = node->next; //for now until parser parses cmd with string in one node
 	if (ft_strchr(node->str, '=') == 0)
@@ -59,3 +59,6 @@ bool	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 	}
 	return (false);
 }
+
+//unset everything and make sure the first nod is freed as well
+//content needs to be freed

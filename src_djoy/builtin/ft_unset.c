@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 17:45:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 18:13:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,3 @@ void	mini_remove_env(char *str, t_env **env)
 		}
 	}
 }
-
-// bash: export: `9h=haha': not a valid identifier
-// bash-3.2$ unset 999
-// bash-3.2$ export djoyke =gek
-// bash: export: `=gek': not a valid identifier
-// bash-3.2$ export djoyke=gek gggg (working)
-// bash-3.2$ env (working)
-// djoyke=gek (working)
-// bash-3.2$ export djoyke="gek gggg" (two words if it's in quotations)
-// bash-3.2$ env
-// env part:
-// djoyke=gek gggg
-// bash-3.2$
-// bash-3.2$ export djoyke= gek (working)
-// bash-3.2$ env (working)
-// djoyke= (working)
