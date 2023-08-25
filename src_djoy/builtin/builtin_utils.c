@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 17:45:24 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 17:55:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	do_builtin(t_parser *node, t_env **env)
  * key (word) first letter has:
  * capital (H), lowercase (h), underscore (_) as first letter 
  * else give error if given 99=djoyke as key
- * bash: export: `99=djoyke': not a valid identifier
+ * minishell: export: `99=djoyke': not a valid identifier
  * rest of word can only have numbers, letters and underscore.
  * else give error export d@@=haha
- * bash: export: `d@@=haha': not a valid identifier
+ * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
  * @return true if nothing wrong found with the words
 */

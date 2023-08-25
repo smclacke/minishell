@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 17:15:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 17:54:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void		ft_echo(t_parser *lst);
 void		ft_env(t_env *env);
 void		ft_pwd(void);
 void		ft_export(t_parser *lst, t_env **env);
-void		reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v);
+bool		reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v);
 void		ft_unset(t_parser *lst, t_env **env);
 void		mini_remove_env(char *str, t_env **env);
 

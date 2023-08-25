@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 17:31:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 17:55:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ void	ft_export(t_parser *node, t_env **env)
 	node = node->next; //for now until parser parses cmd with string in one node
 	if (ft_strchr(node->str, '=') == 0)
 		mini_error("strchr", errno);
-	reassign_env(env, node, new_key, new_value);
+	if (reassign_env(env, node, new_key, new_value) == 1)
+		return ;
 	get_key_value(node->str, &new_key, &new_value);
 	new_node = env_lstnew(new_key, new_value, node->str);
 	env_lstadd_back(env, new_node);
 }
 
-void	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
+bool	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 {
 	t_env	*head;
 
@@ -52,10 +53,9 @@ void	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 			get_key_value(node->str, &n_k, &n_v);
 			head->value = n_v;
 			head->key = n_k;
-			return ;
+			return (true);
 		}
 		head = head->next;
 	}
+	return (false);
 }
-
-// !! if same keyname overwrite that with new else add
