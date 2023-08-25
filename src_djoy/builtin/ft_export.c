@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 19:33:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 17:31:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_export(t_parser *node, t_env **env)
 
 	new_key = NULL;
 	new_value = NULL;
+	if (word_check(node) == 1)
+		return ;
 	node = node->next; //for now until parser parses cmd with string in one node
 	if (ft_strchr(node->str, '=') == 0)
 		mini_error("strchr", errno);
@@ -55,3 +57,5 @@ void	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 		head = head->next;
 	}
 }
+
+// !! if same keyname overwrite that with new else add

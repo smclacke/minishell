@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 16:03:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 17:45:24 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_all(t_env *env)
  * 1) needs to be passed to actual process,
  * 2) exit(EXIT_FAILURE) is it really neccesary?
  * 3) MAYBE MAKE IT A BOOL?
- * 4) line 73: gives pwd not the entire path after unsetting
+ * 4) former line 73: gives pwd not the entire path after unsetting
 */
 void	do_builtin(t_parser *node, t_env **env)
 {
@@ -52,17 +52,64 @@ void	do_builtin(t_parser *node, t_env **env)
 		ft_env(*env);
 }
 
-void	word_check(t_parser *node)
+/**
+ * @param node node in linked list
+ * @brief checks if the words are export and unset norm
+ * proof.
+ * key (word) first letter has:
+ * capital (H), lowercase (h), underscore (_) as first letter 
+ * else give error if given 99=djoyke as key
+ * bash: export: `99=djoyke': not a valid identifier
+ * rest of word can only have numbers, letters and underscore.
+ * else give error export d@@=haha
+ * bash: export: `d@@=haha': not a valid identifier
+ * same for unset
+ * @return true if nothing wrong found with the words
+*/
+bool	word_check(t_parser *node)
 {
-	split_word = (node->str);
+	char	**words;
+	char	*cmd;
+	int		i;
+
+	i = 0;
+	cmd = node->cmd;
+	node = node->next;
+	words = ft_split(node->str, '=');
+	if (words == NULL)
+		mini_error("malloc", errno);
+	if (ft_isalpha(words[0][i]) == 0 && words[0][i] != '_')
+	{
+		put_custom_error(node, cmd);
+		return (false);
+	}
+	i = 1;
+	while (words[0][i])
+	{
+		if (words[0][i] != '_' && ft_isalnum(words[0][i]) != 0)
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
-/* make function for unset and export checking if 
-key (word) has:
-	 capital (H), lowercase (h), underscore (_) as first letter 
-else give error if given 99= as key
-	 bash: export: `99=': not a valid identifier
-	 rest of word can only have numbers, letters and underscore.
-else give error export d@@=haha
-	bash: export: `d@@=haha': not a valid identifier
-same for unset */
+/**
+ * @param node node in linked list
+ * @param cmd either unset or export
+ * @brief puts custom error message on STDOUT_FILENO
+*/
+void	put_custom_error(t_parser *node, char *cmd)
+{
+	if (mini_strcmp(cmd, "export") == 0)
+	{
+		ft_putstr_fd("minishell: export: `", STDOUT_FILENO);
+		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
+	}
+	else if (mini_strcmp(cmd, "unset") == 0)
+	{
+		ft_putstr_fd("minishell: unset: `", STDOUT_FILENO);
+		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
+	}
+}
