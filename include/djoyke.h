@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 14:45:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 15:58:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ void		print_env_list(t_env *lst);
 void		print_list_full(t_env *env);
 
 //---- Built-in ----//
+void		free_all(t_env *env);
+void		do_builtin(t_parser *node, t_env **env);
 void		ft_cd(t_parser *lst, t_env **env);
 void		access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
 void		change_old_dir(t_env **env, char *str);
@@ -156,7 +158,6 @@ void		init_execute_struct(t_execute *data, t_env *env);
 //----Utils----//
 void		mini_error(char *string, int error);
 int			mini_strcmp(char *s1, char *s2);
-void		do_builtin(t_parser *lst, t_env **env);
 int			mini_lstsize(t_env *lst);
 
 //------------ Minishell -----------//

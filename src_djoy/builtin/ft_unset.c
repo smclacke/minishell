@@ -6,23 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 14:40:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 15:57:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-
-/**
- * @param env pointer to environment
- * @brief free's content plus node.
-*/
-void	free_all(t_env *env)
-{
-	free(env->value);
-	free(env->key);
-	free(env->full);
-	free(env);
-}
 
 /**
  * @param argv terminal given arguments (for now)
@@ -73,3 +61,21 @@ void	mini_remove_env(char *str, t_env **env)
 		}
 	}
 }
+
+// !! if same keyname overwrite that with new else add
+
+// bash: export: `9h=haha': not a valid identifier
+// bash-3.2$ unset 999
+// bash-3.2$ export djoyke =gek
+// bash: export: `=gek': not a valid identifier
+// bash-3.2$ export djoyke=gek gggg (working)
+// bash-3.2$ env (working)
+// djoyke=gek (working)
+// bash-3.2$ export djoyke="gek gggg" (two words if it's in quotations)
+// bash-3.2$ env
+// env part:
+// djoyke=gek gggg
+// bash-3.2$
+// bash-3.2$ export djoyke= gek (working)
+// bash-3.2$ env (working)
+// djoyke= (working)

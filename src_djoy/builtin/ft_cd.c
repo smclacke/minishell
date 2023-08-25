@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 14:47:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 15:46:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,14 @@ void	change_current_dir(t_env **env, char *str)
 	head->full = new_full;
 }
 
+/**
+ * @param env environment in linked list which is NULL
+ * @param new node to be added to the list if list == NULL
+ * @param str value of the old_pwd given as string
+ * @param full NULL string to be filled with old_pwd=str
+ * @brief assigns full and new to their values and adds them to
+ * an empty list.
+*/
 void	reassign_old_pwd(t_env **env, t_env *new, char *str, char *full)
 {
 	full = ft_strjoin("OLDPWD=", str);

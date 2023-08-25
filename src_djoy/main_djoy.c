@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/22 18:16:17 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 16:03:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,7 @@ LEARN YOUR POINTER SHIT DJOYKE!!!! OOOOOOOH MYYYYYYGOFFDDD
 
 //ctrl d exits where it's in
 
-
 //als 1 input heeft echo hi geen childprocess anders wel ofcourse haha
-
 
 // exit in de pipeline 
 
@@ -112,6 +110,5 @@ LEARN YOUR POINTER SHIT DJOYKE!!!! OOOOOOOH MYYYYYYGOFFDDD
 // bash-3.2$
 
 // cd word uitgevoerd maar 2nd child doet er niks mee dus alleen hi als output
-
 
 // maybe functie voor single command of pipeline. 
