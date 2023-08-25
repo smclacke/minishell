@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 15:48:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 15:57:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,3 @@ void	mini_remove_env(char *str, t_env **env)
 // bash-3.2$ export djoyke= gek (working)
 // bash-3.2$ env (working)
 // djoyke= (working)
-
-/* make function for unset and export checking if 
-key (word) has:
-	 capital (H), lowercase (h), underscore (_) as first letter 
-else give error if given 99= as key
-	 bash: export: `99=': not a valid identifier
-	 rest of word can only have numbers, letters and underscore.
-else give error export d@@=haha
-	bash: export: `d@@=haha': not a valid identifier
-same for unset */
