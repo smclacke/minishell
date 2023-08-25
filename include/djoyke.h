@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 18:24:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/25 14:45:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,10 @@ void		print_list_full(t_env *env);
 
 //---- Built-in ----//
 void		ft_cd(t_parser *lst, t_env **env);
-void		access_and_change(t_env **env, t_parser *lst, char *opwd, char *cwd);
+void		access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
 void		change_old_dir(t_env **env, char *str);
 void		change_current_dir(t_env **env, char *str);
+void		reassign_old_pwd(t_env **env, t_env *new, char *str, char *full);
 void		ft_echo(t_parser *lst);
 void		ft_env(t_env *env);
 void		ft_pwd(void);
