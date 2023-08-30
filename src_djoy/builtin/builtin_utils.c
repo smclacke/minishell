@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 18:11:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/30 18:11:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,38 +66,18 @@ void	do_builtin(t_parser *node, t_env **env)
  * same for unset
  * @return true if nothing wrong found with the words
  * @todo  
- * ---> Djoyke Made!
-Gutentag Fräulein Shelly, wie geht's?export djoyke =gek
-iterations [0]
-iterations [1]
-iterations [2]
-arg->cmd: export
-arg->str: djoyke
-arg->str: =gek
-expander: 		there's a builtin whoop
-strchr: Undefined error: 0
-➜  new_mini git:(djoyke) ✗ make djoyke
- ---> Djoyke Made!
-Gutentag Fräulein Shelly, wie geht's?export djoyke =gek
-iterations [0]
-iterations [1]
-iterations [2]
-arg->cmd: export
-arg->str: djoyke
-arg->str: =gek
-expander: 		there's a builtin whoop
-minishell: export: `djoyke': not a valid identifier
-strchr: Undefined error: 0
-➜  new_mini git:(djoyke) ✗ make djoyke
- ---> Djoyke Made!
-Gutentag Fräulein Shelly, wie geht's?export djoyke=gek
-iterations [0]
-iterations [1]
-arg->cmd: export
-arg->str: djoyke=gek
-expander: 		there's a builtin whoop
-minishell: export: `djoyke=gek': not a valid identifier
-Gutentag Fräulein Shelly, wie geht's?en
+ * arg->cmd: export
+ * arg->str: djoyke
+ * arg->str: =gek
+ * expander: 		there's a builtin whoop
+ * 
+ * minishell: export: `djoyke': not a valid identifier 
+ * -->this thould be =gek instead.
+ * 
+ * strchr: Undefined error: 0 
+ * ->this should not happen at all dont go further.
+ * 
+ * still need to do bracket check
 */
 bool	word_check(t_parser *node)
 {
@@ -105,30 +85,29 @@ bool	word_check(t_parser *node)
 	char	*cmd;
 	int		i;
 
-	i = 0;
 	cmd = node->cmd;
-	node = node->next;
+	node = node->next;//node containing string for now fix when parsing is fixed
 	words = ft_split(node->str, '=');
 	if (words == NULL)
 		mini_error("malloc", errno);
-	if (ft_isalpha(words[0][i]) == 0 && words[0][i] != '_')
+	if ((ft_isalpha(words[0][0]) == 0) && words[0][0] != '_')
 	{
 		put_custom_error(node, cmd);
-		return (false);
+		return (true);
 	}
 	i = 1;
-	while (words[0][i])
+	while (words[0][i])//for now looping because not actual parsed list
 	{
-		if (words[0][i] != '_' && ft_isalnum(words[0][i]) != 0)
-			return (false);
+		if (words[0][i] == '_' || ft_isalnum(words[0][i]) != 0)
+			i++;
+		if (words[0][i] != '_' || ft_isalnum(words[0][i]) == 0)
+		{
+			put_custom_error(node, cmd);
+			return (true);
+		}
 		i++;
 	}
-	//spaces check returns second word need to make it still tho
-	//bash-3.2$ unset djoyke =gek
-	//bash-3.2$ export djoyke*=haha
-	//bash: export: `djoyke*=haha': not a valid identifier
-	//bracket check
-	return (true);
+	return (false);
 }
 
 /**
