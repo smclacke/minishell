@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 15:48:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/31 16:58:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,21 @@ void	mini_error(char *string, int error)
  * @brief compares 2 strings replace by the libft version without -n
  * @return difference if different or 0
  * old function:
- * 			printf("s1[%s]\n", s1);
- * 			printf("s2[%s]\n", s2);
- * 			while (s1[i] && s2[i])
- * 			{
- * 				if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
- * 					return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);	
- * 				i++;
- * 			}
- * 			return (0);
 */
 int	mini_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 
 	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
+	if (!s1 || !s2)
+		return (1);
+	while (s1[i] && s2[i])
+	{
+		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
+			return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	return (0);
 }
 
 /**

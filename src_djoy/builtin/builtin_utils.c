@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/30 18:11:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/31 19:28:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	free_all(t_env *env)
 */
 void	do_builtin(t_parser *node, t_env **env)
 {
+	if (!node)
+		mini_error("parser", errno);
 	if (mini_strcmp(node->cmd, "echo") == 0)
 		ft_echo(node);
 	if (mini_strcmp(node->cmd, "cd") == 0)
@@ -50,6 +52,8 @@ void	do_builtin(t_parser *node, t_env **env)
 		ft_unset(node, env);
 	if (mini_strcmp(node->cmd, "env") == 0)
 		ft_env(*env);
+	if (mini_strcmp(node->str, "exit") == 0) // needs to be command
+		ft_exit(node);
 }
 
 /**
@@ -78,6 +82,15 @@ void	do_builtin(t_parser *node, t_env **env)
  * ->this should not happen at all dont go further.
  * 
  * still need to do bracket check
+ * for now looping because not actual parsed list
+ * line 96: node containing string for now fix when parsing is fixed
+ * bash-3.2$ export djoyke =gek
+ * bash: export: `=gek': not a valid identifier
+ * bash-3.2$ export djoyke="gek gggg" (two words if it's in quotations)
+ * bash-3.2$ env
+ * env part:
+ * djoyke=gek gggg
+ * bash-3.2$
 */
 bool	word_check(t_parser *node)
 {
@@ -86,21 +99,25 @@ bool	word_check(t_parser *node)
 	int		i;
 
 	cmd = node->cmd;
-	node = node->next;//node containing string for now fix when parsing is fixed
+	node = node->next;
 	words = ft_split(node->str, '=');
+	printf("words are [%s], [%s], [%s]\n", words[0], words[1], words[2]);
+	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
+	{
+		put_custom_error(node, cmd);
+		return (true);
+	}
 	if (words == NULL)
-		mini_error("malloc", errno);
+		mini_error("malloc split", errno);
 	if ((ft_isalpha(words[0][0]) == 0) && words[0][0] != '_')
 	{
 		put_custom_error(node, cmd);
 		return (true);
 	}
 	i = 1;
-	while (words[0][i])//for now looping because not actual parsed list
+	while (words[0][i])
 	{
-		if (words[0][i] == '_' || ft_isalnum(words[0][i]) != 0)
-			i++;
-		if (words[0][i] != '_' || ft_isalnum(words[0][i]) == 0)
+		if (words[0][i] != '_' && ft_isalnum(words[0][i]) == 0)
 		{
 			put_custom_error(node, cmd);
 			return (true);
@@ -129,23 +146,12 @@ void	put_custom_error(t_parser *node, char *cmd)
 		ft_putstr_fd(node->str, STDOUT_FILENO);
 		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
 	}
+	else if (mini_strcmp(cmd, "exit") == 0)
+	{
+		node = node->next->next;// not necessary if parser alright
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
+		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
+		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd(": numeric argument required\n", STDOUT_FILENO);
+	}
 }
-// bash: export: `9h=haha': not a valid identifier (working)
-
-// bash-3.2$ unset 999
-// bash-3.2$ export djoyke =gek
-// bash: export: `=gek': not a valid identifier
-
-// bash-3.2$ export djoyke=gek gggg (working)
-// bash-3.2$ env (working)
-// djoyke=gek (working)
-
-// bash-3.2$ export djoyke="gek gggg" (two words if it's in quotations)
-// bash-3.2$ env
-// env part:
-// djoyke=gek gggg
-// bash-3.2$
-
-// bash-3.2$ export djoyke= gek (working)
-// bash-3.2$ env (working)
-// djoyke= (working)
