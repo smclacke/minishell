@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/30 18:11:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/31 14:06:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	do_builtin(t_parser *node, t_env **env)
  * ->this should not happen at all dont go further.
  * 
  * still need to do bracket check
+ * line 101: for now looping because not actual parsed list
+ * lini 91: node containing string for now fix when parsing is fixed
 */
 bool	word_check(t_parser *node)
 {
@@ -86,7 +88,7 @@ bool	word_check(t_parser *node)
 	int		i;
 
 	cmd = node->cmd;
-	node = node->next;//node containing string for now fix when parsing is fixed
+	node = node->next;
 	words = ft_split(node->str, '=');
 	if (words == NULL)
 		mini_error("malloc", errno);
@@ -96,7 +98,7 @@ bool	word_check(t_parser *node)
 		return (true);
 	}
 	i = 1;
-	while (words[0][i])//for now looping because not actual parsed list
+	while (words[0][i])
 	{
 		if (words[0][i] == '_' || ft_isalnum(words[0][i]) != 0)
 			i++;

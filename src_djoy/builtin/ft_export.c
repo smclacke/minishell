@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/30 18:10:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/31 14:07:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @brief export with no options
  * @todo first character cannot have a number but everything else can have
  * check export edge cases
- * remove line 33: when parsing is fixed
+ * remove line 33: when parsing parses cmd with string in one node
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -30,7 +30,7 @@ void	ft_export(t_parser *node, t_env **env)
 	new_value = NULL;
 	if (word_check(node) == 0)
 		return ;
-	node = node->next; //for now until parser parses cmd with string in one node
+	node = node->next;
 	if (ft_strchr(node->str, '=') == 0)
 		mini_error("strchr", errno);
 	if (reassign_env(env, node, new_key, new_value) == 1)
