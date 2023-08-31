@@ -6,30 +6,78 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/31 19:28:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/31 19:43:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 
-// 1) more than 2? place error  (don't exit)
-// 2) equal to 2? (exit)
-	// - 1) is it numeric?
-	// - 2) ato long long weeeh
-	// - 3) do freeking exit codes
-	// - up until 255 it displays 255
-	// - else should %256 to get the correct exit code if its numeric
-	// - above long long is considered as characters 
-	//	 so same exit code as characters
-	// - 4) not numeric display error message  (still exit)
-// 3) only exit? exit 0 (EXIT_SUCCES) (exit)
+/**
+ * @param str string to convert
+ * @brief converts array to long long int
+ * @todo actually make it into long long
+*/
+long long	atoll(char *str)
+{
+	long long	i;
+	long long	sign;
+	long long	number;
 
+	number = 0;
+	sign = 1;
+	i = 0;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign = sign * -1;
+		i++;
+	}
+	while (ft_isdigit(str[i]))
+	{
+		number = number * 10 + str[i] -48;
+		i++;
+	}
+	return (number * sign);
+}
+
+/**
+ * @param node parsed list
+ * @brief exits the program and displays corresponding error number
+ * @todo 
+ * 1) more than 2? place error  (don't exit)
+ * 2) equal to 2? (exit)
+ * 		- 1) is it numeric?
+ * 		- 2) ato long long weeeh
+ * 		- 3) do freeking exit codes
+ * 		- up until 255 it displays 255
+ * 		- else should %256 to get the correct exit code if its numeric
+ * 		- above long long is considered as characters 
+ * 		so same exit code as characters
+ * 		- 4) not numeric display error message  (still exit)
+ * 3) only exit? exit 0 (EXIT_SUCCES) (exit)
+*/
 void	ft_exit(t_parser *node)
 {
+	long long	error;
+
+	error = atoi(node->str);
 	if (node->next->next)
 	{
 		put_custom_error(node, "exit");
 		return ;
+	}
+	node = node->next;
+	while (node->next)//loop through nodes else loop through string when parsing correct
+	{
+		if (ft_isalnum(node->str) != 0)
+		{
+			exit(node->str);
+			// bash-3.2$ exit 1
+			// exit
+			// ➜  ~ echo $?
+			// 1
+		}
+		if ()
 	}
 	// while (node->next)//loop through nodes else loop through string when parsing correct
 	// {
