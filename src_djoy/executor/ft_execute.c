@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 18:12:39 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/31 16:52:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_execute(t_env **env, t_parser *lst)
 	// t_execute	data;
 
 	// init_execute_struct(&data, env);
+	// print_parser_list(lst);
 	ft_expand(lst, env);
 	// build(lst, env, &data);
 }

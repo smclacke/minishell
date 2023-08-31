@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/25 15:16:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/31 19:28:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,24 @@
 	// - 4) not numeric display error message  (still exit)
 // 3) only exit? exit 0 (EXIT_SUCCES) (exit)
 
+void	ft_exit(t_parser *node)
+{
+	if (node->next->next)
+	{
+		put_custom_error(node, "exit");
+		return ;
+	}
+	// while (node->next)//loop through nodes else loop through string when parsing correct
+	// {
+	// 	if (node->next != NULL)
+	// 	{
+	// 		put_custom_error(node, "exit");
+	// 		return ;
+	// 	}
+	// 	node = node->next;
+	// }
+}
+
 // ➜  ~ bash
 // bash-3.2$ exit
 // exit
@@ -31,62 +49,74 @@
 // $
 // ➜  ~ echo $?
 // 0
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit
 // exit
 // ➜  ~ echo $?
 // 0
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit 1
 // exit
 // ➜  ~ $?
 // zsh: command not found: 1
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit poop
 // exit
 // bash: exit: poop: numeric argument required
 // ➜  ~ $?
 // zsh: command not found: 255
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit 1 2
 // exit
 // bash: exit: too many arguments
 // bash-3.2$ $?
 // bash: 1: command not found
+//--------------------
 // bash-3.2$ exit 9223372036854775808
 // exit
 // bash: exit: 9223372036854775808: numeric argument required
 // ➜  ~ echo $?
 // 255
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit 9223372036854775807
 // exit
 // ➜  ~ $?
 // zsh: command not found: 255
+//--------------------
 // ➜  ~ bash exit 20
 // bash: exit: No such file or directory
 // ➜  ~ $?
 // zsh: command not found: 127
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit 20
 // exit
 // ➜  ~ $?
 // zsh: command not found: 20
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit 9223372036854775806
 // exit
 // ➜  ~ $?
 // zsh: command not found: 254
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit 9223372036854775805
 // exit
 // ➜  ~ $?
 // zsh: command not found: 253
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit 9223372036854775804
 // exit
 // ➜  ~ $?
 // zsh: command not found: 252
+//--------------------
 // ➜  ~ bash
 // bash-3.2$ exit 256
 // exit

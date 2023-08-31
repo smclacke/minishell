@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/22 18:21:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/31 18:22:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,16 @@ bool	check_for_meta(t_parser *lst)
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins: 
  * echo, cd, pwd, export, unset, env and exit
+ * @todo everything needs to be in either str or cmd not 2 diff
+ * thing!!
 */
 bool	check_for_builtin(t_parser *lst)
 {
-	if (lst->cmd == NULL)
+	if (!lst)
 		return (false);
-	if (mini_strcmp(lst->cmd, "echo") == 0)
+	if (mini_strcmp(lst->str, "exit") == 0)// needs to be cmd
+		return (true);
+	else if (mini_strcmp(lst->cmd, "echo") == 0)
 		return (true);
 	else if (mini_strcmp(lst->cmd, "cd") == 0)
 		return (true);
@@ -103,8 +107,38 @@ bool	check_for_builtin(t_parser *lst)
 		return (true);
 	else if (mini_strcmp(lst->cmd, "env") == 0)
 		return (true);
-	else if (mini_strcmp(lst->cmd, "exit") == 0)
-		return (true);
 	else
 		return (false);
 }
+
+// bash-3.2$ cat $djoyke
+// cat: haaa: No such file or directory
+// cat: ggg: No such file or directory
+// is moeilijk maybe not
+
+/*
+	cat $USER
+	
+	char ** =	[0] cat
+			 	[1] $USER
+				[2] NULL
+	
+	expanding handles [1]$USER (could be djoyke etc or nothing)
+	if it's nothing char ** after expanding should look like
+
+		char ** = [0] cat
+				[1] NULL
+
+	give that to execve
+
+
+	or:
+
+		char ** = [0] cat
+			 	[1] djoyke
+				[2] NULL
+	
+	[1] $USER get's removed not overwritten! (memcpy)
+	[2] NULL get's moved up!
+	
+*/
