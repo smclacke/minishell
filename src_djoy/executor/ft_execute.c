@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/31 16:52:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/01 13:41:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_execute(t_env **env, t_parser *lst)
  * 5) how to redirect output/input? 
  * 				if redirect found for outfile dup read end to outfile 
 				close(data->pipe_fd[WRITE]);
+ * pipe recursively!!! opens and closes step by step
 */
 void	build(t_parser *lst, t_env *env, t_execute *data)
 {
