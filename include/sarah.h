@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:42:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 17:07:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,12 @@
 
 typedef enum	e_metas
 {
-	DQUOTE = 1, // still need this?
-	SQUOTE = 2, // still need this?
-	DOLLAR = 3, // still need this?
-	MORE = 4,
-	MOREMORE = 5,
-	LESS = 6,
-	LESSLESS = 7,
-	PIPE = 8
+	DOLLAR = 1, // still need this?
+	MORE = 2,
+	MOREMORE = 3,
+	LESS = 4,
+	LESSLESS = 5,
+	PIPE = 6
 }		t_metas;
 
 typedef enum	e_files
@@ -58,7 +56,8 @@ typedef enum	e_files
 
 typedef struct	s_redirect
 {
-	enum e_files		file_type;
+	char				*file;
+	enum e_files		file_type; // do i need this?
 	enum e_metas		meta_type;
 	struct s_redirect	*previous;
 	struct s_redirect	*next;
@@ -66,8 +65,8 @@ typedef struct	s_redirect
 
 typedef struct s_command
 {
-	char				*cmd; // must be valid cmd, verified by strcmp with builtins or execve
-	char				*strs; // all shit after cmd (could be another cmd but in this case its str, or flag but jsut called str)
+	char				*cmd;
+	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
 	struct s_command	*previous;
 	struct s_command	*next;
 }			t_command;
@@ -83,23 +82,12 @@ typedef struct s_parser
 }	t_parser;
 
 
-	// char				*str; // remove this
-	// char				**str; // = takes all *strs, all strs up to pipes and redirects 
-	// char				*cmd;
-	// char				*meta;
-	// char				*abso; // dont need this
-	// char				*flag; // dont need this
-	// char				*squote;
-	// char				*dquote;
-	// char				*here_doc;
-
-
 //----- lexer.c -----//
-bool				closed_quotes(char *input);
-bool				shelly_check_quotes(char *tokens);
 t_parser			*lexer(char *input);
 
 // -------- Quotes --------//
+bool				closed_quotes(char *input);
+bool				shelly_check_quotes(char *tokens);
 char				**ft_split_shelly(char *input);
 
 // --------Quote utils ------//
@@ -109,7 +97,6 @@ int					which_quote(char c);
 int					lq_count_words(char *input);
 int					lq_word_length(char *input);
 int					quote_len(char *input);
-int					quote_length(char *input);
 
 //----- lexer_utils.c -----//
 void				init_parser(t_parser *token);
@@ -127,13 +114,6 @@ t_parser			*parser(t_parser *tokens);
 //---- parser_quotes.c ----//
 // bool				parser_check_quotes(char *tokens);
 // char				*remove_quotes(char *tokens);
-
-//---- parser_utils.c ----//
-bool				parser_cmp_squote(t_parser *param);
-bool				parser_cmp_dquote(t_parser *param);
-bool				parser_cmp_builtins(t_parser *param);
-bool				parser_cmp_metas(t_parser *tokens);
-bool				parser_cmp_abso(t_parser *tokens);
 
 
 // UTILS

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 16:01:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 16:27:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	init_parser(t_parser *tokens)
 {
+	tokens->redirect_list->file = NULL;
 	tokens->cmd_list->cmd = NULL;
 	tokens->cmd_list->strs = NULL;
 	tokens->input = NULL;
