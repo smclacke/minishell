@@ -12,17 +12,19 @@ handle errors, handle flags, put flag in node with cmd to send to executor
 come back to quotes when stronger and more slept
 
 ~~ MICROSHELLY ~~
--> I broke it...
--> fix it...
+-> usable?
+
+!! 2d array of strs...
+!! check first string for cmd?
+!! everything else is string (including all other commands)
+UNLESS pipe or redirect, then need the cmds again...
 
 ~~ERRORS~~
-
 -> cmd not found
 -> unclosed quotes
 -> pipe stuff
 
 ~~FLAGS~~
-
 ///// Djoyke:
 -> flags are just strings, im sending them the same as any other str :)
 -> if echo and str after is -n, then dont just print -n, but remove newline, thats all
@@ -31,7 +33,6 @@ come back to quotes when stronger and more slept
 
 
 ~~QUOTES~~
-
 ---> try using old ft_split, split on spaces, if quote found, stop splitting
 ---> add separately the part of the array from s or d quotes and then return to splitting on spaces
 ---> this way, I need to check the whole word for quotes and fix the a"something" problem

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 15:35:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 13:10:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	parser_cmp_char_builtins(char *tokens)
 		return (true);
 	else if (ft_strcmp(tokens, "unset") == 0)
 		return (true);
-	else if (ft_strcmp(tokens, "env") == 0)
+	else if (ft_strcmp(tokens, "env") == 0) // add exit
 		return (true);
 	return (false);
 }
