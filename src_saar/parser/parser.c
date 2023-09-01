@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 17:38:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 19:27:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static bool	parser_redirect(t_parser *tokens)
 {
+	t_metas	E_PIPE
 	if (!tokens)
 		return (false);
 	if (ft_strnstr(tokens->input, ">>", 2))
@@ -26,7 +27,8 @@ static bool	parser_redirect(t_parser *tokens)
 		return (true);
 	else if ((ft_strnstr(tokens->input, "|", 1)))
 	{
-		// tokens->redirect_list->meta_type = PIPE;
+		// tokens->redirect_list->meta_type[E_PIPE] = tokens->input;
+		printf("meta_type: [%d]\n", (int)tokens->redirect_list->meta_type[E_PIPE]);
 		return (true);
 	}
 	return (false);
@@ -38,7 +40,7 @@ static void	handle_redirect(t_parser *tokens)
 
 	if (!tokens)
 		exit(EXIT_FAILURE); // dunno, so something when error handling
-	// if (tokens->redirect_list->meta_type == PIPE)
+	// if (tokens->redirect_list->meta_type == E_PIPE)
 	// 	return ;
 	// else
 	// {
@@ -60,13 +62,19 @@ static void	handle_commands(t_parser *tokens)
 	printf("testing... maybe\n");
 }
 
-static void	*define_tokens(t_parser *tokens)
+static bool	file_is_attached(t_parser *tokens)
 {
-	if (parser_redirect(tokens))
-		handle_redirect(tokens);
-	else
-		handle_commands(tokens);
-	return (0);
+	if (!tokens)
+		return (false);
+	if (ft_strcmp(tokens->input, ">>") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "<<") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, ">") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "<") == 0)
+		return (true);
+	return (false);
 }
 
 /**
@@ -82,7 +90,18 @@ t_parser	*parser(t_parser *tokens)
 	token_list = tokens;
 	while (token_list)
 	{
-		define_tokens(token_list);	
+		if (parser_redirect(token_list))
+		{
+			handle_redirect(token_list);
+			// if file isn't attached, move to next and add as file to redirect list and not pipe
+			// if (!file_attached(token_list) && token_list->redirect->meta_type != PIPE)
+			// {
+			// 	token_list = token_list->next;
+			// 	token_list->redirect_list->file = token_list->input;
+			// }
+		}
+		else
+			handle_commands(token_list);	
 		token_list = token_list->next;
 	}
 	return (tokens);

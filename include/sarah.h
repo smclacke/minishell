@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 17:26:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 19:16:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,26 @@
 
 typedef enum	e_metas
 {
-	DOLLAR = 1, // still need this?
-	MORE = 2,
-	MOREMORE = 3,
-	LESS = 4,
-	LESSLESS = 5,
-	PIPE = 6
+	E_MORE = 0,
+	E_MOREMORE = 1,
+	E_LESS = 2,
+	E_LESSLESS = 3,
+	E_PIPE = 4
 }		t_metas;
 
 typedef enum	e_files
 {
-	S_INFILE = 1, // standard infile
-	S_OUTFILE = 2, // standard outfile
-	D_INFILE = 3, // this is heredoc (<<infile)
-	D_OUTFILE = 4 // this is append mode to outfile
+	S_INFILE = 0, // standard infile
+	S_OUTFILE = 1, // standard outfile
+	D_INFILE = 2, // this is heredoc (<<infile)
+	D_OUTFILE = 3 // this is append mode to outfile
 }		t_files;
 
 typedef struct	s_redirect
 {
 	char				*file;
-	enum e_files		file_type; // do i need this?
-	enum e_metas		meta_type;
+	enum e_files		*file_type[4]; // do i need this?
+	enum e_metas		*meta_type[5];
 	struct s_redirect	*previous;
 	struct s_redirect	*next;
 }				t_redirect;
