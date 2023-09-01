@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/21 16:56:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/01 17:53:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
  * bash-3.2$ echo "hi" -n
  * hi -n
  * fix it!!!!!!!!!
+ * make a part that when it encouters $random_name to go in 
+ * 		env and take whats after the random_name = sign
 */
 void	ft_echo(t_parser *lst)
 {

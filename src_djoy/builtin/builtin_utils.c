@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/31 19:28:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/01 18:55:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ bool	word_check(t_parser *node)
 	cmd = node->cmd;
 	node = node->next;
 	words = ft_split(node->str, '=');
-	printf("words are [%s], [%s], [%s]\n", words[0], words[1], words[2]);
 	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
 	{
 		put_custom_error(node, cmd);

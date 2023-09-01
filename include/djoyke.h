@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/01 13:38:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/01 16:39:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,36 +179,32 @@ typedef struct s_mini
 
 #endif
 
-
-
 //-----------------try out------------------//
-
-typedef struct s_parser 
-{
-	struct s_parser		*data;
-	struct s_parser		*next;
-}	t_parser;
-
 
 // typedef struct s_parser 
 // {
-// 	char **cmd_and_flags;   "ls", "-l"
-//	char **redirections;    INPUT_R, OUPUT_R 
-//	char **files;			"file_1" "file_2" 
+// 	struct s_parser		*data;
 // 	struct s_parser		*next;
 // }	t_parser;
 
+// // typedef struct s_parser 
+// // {
+// // 	char **cmd_and_flags;   "ls", "-l"
+// //	char **redirections;    INPUT_R, OUPUT_R 
+// //	char **files;			"file_1" "file_2" 
+// // 	struct s_parser		*next;
+// // }	t_parser;
 
-list->node[0]
-if node[1] exists then further
-if node[2] exists then further
+// list->node[0]
+// if node[1] exists then further
+// if node[2] exists then further
 
-example : minishell$> < file1 cmd1 | cmd2 >file2
-if space 2 parts if no space 1 part.
+// example : minishell$> < file1 cmd1 | cmd2 >file2
+// if space 2 parts if no space 1 part.
 
-linked list;
-data[0] = **array[0] < [1] file1 [2] cmd [3] NULL
-data[1] = **array[0] pipe [1] NULL
-data[2] = **array[0] cmd [1] >outfile [2] NULL
+// linked list;
+// data[0] = **array[0] < [1] file1 [2] cmd [3] NULL
+// data[1] = **array[0] pipe [1] NULL
+// data[2] = **array[0] cmd [1] >outfile [2] NULL
 
 //-----------------try out------------------//
