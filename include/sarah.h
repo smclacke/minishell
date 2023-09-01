@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 18:09:17 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/09/01 13:51:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,43 @@ typedef struct s_parser
 {
 	void				*input;
 	void				*tokens;
-	char				*str;
+	char				*str; // remove this
+	char				**str; // = takes all *strs, all strs up to pipes and redirects 
 	char				*cmd;
 	char				*meta;
-	char				*abso;
+	char				*abso; // dont need this
+	char				*flag; // dont need this
 	char				*squote;
 	char				*dquote;
 	char				*here_doc;
+	struct s_parser		*previous;
 	struct s_parser		*next;
 }	t_parser;
 
 //----- lexer.c -----//
-void				init_parser(t_parser *token);
+bool				closed_quotes(char *input);
+bool				shelly_check_quotes(char *tokens);
 t_parser			*lexer(char *input);
 
+// -------- Quotes --------//
+char				**ft_split_shelly(char *input);
+
+// --------Quote utils ------//
+int					lq_isquote(char c);
+int					lq_what_to_split(char c);
+int					which_quote(char c);
+int					lq_count_words(char *input);
+int					lq_word_length(char *input);
+int					quote_len(char *input);
+int					quote_length(char *input);
+
 //----- lexer_utils.c -----//
+void				init_parser(t_parser *token);
 t_parser			*lexer_listlast(t_parser *list);
 void				lexer_listadd_back(t_parser **list, t_parser *new);
 t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
-// -------- Quotes --------//
-char				*quote_tokens(char *input);
-int					closed_quotes(char *input);
-char				*check_quotes(char *input);
 
 // PARSER
 
@@ -83,8 +96,8 @@ char				*check_quotes(char *input);
 t_parser			*parser(t_parser *tokens);
 
 //---- parser_quotes.c ----//
-bool				parser_check_quotes(char *tokens);
-char				*remove_quotes(char *tokens);
+// bool				parser_check_quotes(char *tokens);
+// char				*remove_quotes(char *tokens);
 
 //---- parser_utils.c ----//
 bool				parser_cmp_squote(t_parser *param);

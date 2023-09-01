@@ -6,26 +6,36 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
-~~QUOTES~~
+HELLLLOOOOOO
+please just ignore quotes for now cause it's setting me back massively...
+handle errors, handle flags, put flag in node with cmd to send to executor
+come back to quotes when stronger and more slept
 
--> split on quotes and spaces correctly so initial list of tokens is good
-	> pretty simple while loopidyloop
-	> don't forget to check either side of the quotes for chars
+~~ MICROSHELLY ~~
+-> usable?
 
--> take quoted tokens from lexer and break them up futher in parser, what am i checking for? (how is the parser handling quoted tokens?)
-
-
-
-~~FLAGS~~
-
--> echo -n
--> + if 'space' and '-' after something, check for flag validity
+!! 2d array of strs...
+!! check first string for cmd?
+!! everything else is string (including all other commands)
+UNLESS pipe or redirect, then need the cmds again...
 
 ~~ERRORS~~
-
 -> cmd not found
 -> unclosed quotes
 -> pipe stuff
+
+~~FLAGS~~
+///// Djoyke:
+-> flags are just strings, im sending them the same as any other str :)
+-> if echo and str after is -n, then dont just print -n, but remove newline, thats all
+-> otherwise cmd put whatever after is given to execve and will be handled
+-> pipes and redirects are important but other than that, we just give the input to executor
+
+
+~~QUOTES~~
+---> try using old ft_split, split on spaces, if quote found, stop splitting
+---> add separately the part of the array from s or d quotes and then return to splitting on spaces
+---> this way, I need to check the whole word for quotes and fix the a"something" problem
 
 
 ---------------------------------------------------------------------------------
@@ -38,8 +48,20 @@ dein computer, kein computer
 
 *Parser*
 
--> some<<something 
-	<<something
+->	some<<something 
+->	<<something
+				bash-3.2$ some<<something
+				> something
+				bash: some: command not found
+				bash-3.2$ some<<something
+				> hello
+				> some
+				> something
+				bash: some: command not found
+				bash-3.2$ <<something
+				> some
+				> something
+				bash-3.2$
 
 *Other*
 
