@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/21 21:25:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:24:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@
 
 typedef enum	e_metas
 {
-	DQUOTE = 1,
-	SQUOTE = 2,
-	DOLLAR = 3,
+	DQUOTE = 1, // still need this?
+	SQUOTE = 2, // still need this?
+	DOLLAR = 3, // still need this?
 	MORE = 4,
 	MOREMORE = 5,
 	LESS = 6,
@@ -48,19 +48,41 @@ typedef enum	e_metas
 	PIPE = 8
 }		t_metas;
 
+typedef enum	e_files
+{
+	S_INFILE = 1, // infile
+	S_OUTFILE = 2, // outfile
+	D_INFILE = 3, // this is heredoc
+	D_OUTFILE = 4 // this is append mode to outfile
+}		t_files;
+
+typedef struct	s_redirect
+{
+	enum	e_files	file_type;
+	enum	e_metas	meta_type;
+}		t_redirect;
+
+typedef struct s_command
+{
+	char		*cmd;
+	char		**strs;
+}			t_command;
+
 typedef struct s_parser 
 {
 	void				*input;
 	void				*tokens;
-	char				*str; // remove this
-	char				**str; // = takes all *strs, all strs up to pipes and redirects 
-	char				*cmd;
-	char				*meta;
-	char				*abso; // dont need this
-	char				*flag; // dont need this
-	char				*squote;
-	char				*dquote;
-	char				*here_doc;
+	struct s_command	cmd_list;
+	struct s_redirect	redirect_list;
+	// char				*str; // remove this
+	// char				**str; // = takes all *strs, all strs up to pipes and redirects 
+	// char				*cmd;
+	// char				*meta;
+	// char				*abso; // dont need this
+	// char				*flag; // dont need this
+	// char				*squote;
+	// char				*dquote;
+	// char				*here_doc;
 	struct s_parser		*previous;
 	struct s_parser		*next;
 }	t_parser;

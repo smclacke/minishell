@@ -14,11 +14,6 @@ come back to quotes when stronger and more slept
 ~~ MICROSHELLY ~~
 -> usable?
 
-!! 2d array of strs...
-!! check first string for cmd?
-!! everything else is string (including all other commands)
-UNLESS pipe or redirect, then need the cmds again...
-
 ~~ERRORS~~
 -> cmd not found
 -> unclosed quotes
@@ -30,7 +25,6 @@ UNLESS pipe or redirect, then need the cmds again...
 -> if echo and str after is -n, then dont just print -n, but remove newline, thats all
 -> otherwise cmd put whatever after is given to execve and will be handled
 -> pipes and redirects are important but other than that, we just give the input to executor
-
 
 ~~QUOTES~~
 ---> try using old ft_split, split on spaces, if quote found, stop splitting
@@ -121,5 +115,41 @@ t_expand	*micro_expand(char **envp, t_parser *node)
 	}
 	return (expand);
 }
+
+
+---------------------------------------------------------------------------------
+**NEW_STYLEEE YEAHHHHH**
+
+//-----------------try out------------------//
+
+typedef struct s_parser 
+{
+	struct s_parser		*data;
+	struct s_parser		*next;
+}	t_parser;
+
+
+// typedef struct s_parser 
+// {
+// 	char **cmd_and_flags;   "ls", "-l"
+//	char **redirections;    INPUT_R, OUPUT_R 
+//	char **files;			"file_1" "file_2" 
+// 	struct s_parser		*next;
+// }	t_parser;
+
+
+list->node[0]
+if node[1] exists then further
+if node[2] exists then further
+
+example : minishell$> < file1 cmd1 | cmd2 >file2
+if space 2 parts if no space 1 part.
+
+linked list;
+data[0] = **array[0] < [1] file1 [2] cmd [3] NULL
+data[1] = **array[0] pipe [1] NULL
+data[2] = **array[0] cmd [1] >outfile [2] NULL
+
+//-----------------try out------------------//
 
 
