@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:31:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 14:37:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ bool	parser_cmp_dquote(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
+	if (ft_strcmp(tokens, "echo") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "cd") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "pwd") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "export") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "unset") == 0)
+		return (true);
+	else if (ft_strcmp(tokens, "env") == 0) // add exit
+		return (true);
 	return (false);
 }
 

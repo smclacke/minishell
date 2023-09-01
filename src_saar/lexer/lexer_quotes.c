@@ -6,123 +6,107 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 14:45:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/20 15:58:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-// ALL OF THESE FUNCTIONS NEED A LOT OF WORK
-// FIGURE OUT WHAT i'M DOING IN THE LEXER AND LEAVE THE REST FOR THE PARSER....
 
-/**
- * bleh, probably use this in parser instead of lexer, miss toch nodig, geen idee..
-*/
-// int	sign_tokens(char *input)
+static char	*make_words(char *input)
+{
+	int		i = 0;
+	int		len;
+	char	*words;
+
+	len = lq_word_length(input);
+	words = (char *)malloc(sizeof(char) * (len + 1));
+	if (!words)
+		return (0);
+	while (i < len)
+	{
+		words[i] = input[i];
+		i++;
+	}
+	words[i] = '\0';
+	return (words);
+}
+
+// char *make_quoted_string(char **input) {
+//     char *start = *input;
+//     char *end;
+
+//     (*input)++; // Move past the opening quote
+
+//     // Find the closing quote or the end of the string
+//     while (**input != '\0' && **input != lq_isquote(start[0])) {
+//         (*input)++;
+//     }
+
+//     end = *input;
+//     if (**input != '\0') {
+//         (*input)++; // Move past the closing quote
+//     }
+
+//     // Calculate the length of the substring
+//     int length = end - start;
+
+//     // Allocate memory for the substring
+//     char *substring = (char *)malloc(length + 1);
+
+//     if (substring != NULL) {
+//         // Copy the substring into the allocated memory
+//         for (int i = 0; i < length; i++) {
+//             substring[i] = start[i];
+//         }
+//         substring[length] = '\0'; // Null-terminate the substring
+//     }
+
+//     return substring;
+// }
+
+// static char	*make_quotes(char *input)
 // {
 // 	int		i = 0;
-// 	while (input[i])
-// 	{
-// 		if (ft_strcmp(&input[i], "$") == 0)
-// 			return (DOLLAR);
-// 		else if (ft_strcmp(&input[i], ">>") == 0)
-// 			return (MOREMORE);
-// 		else if (ft_strcmp(&input[i], ">") == 0)
-// 			return (MORE);
-// 		else if (ft_strcmp(&input[i], "<<") == 0)
-// 			return (LESSLESS);
-// 		else if (ft_strcmp(&input[i], "<") == 0)
-// 			return (LESS);
-// 		else if (ft_strcmp(&input[i], "|") == 0)
-// 			return (PIPE); 
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-/**
- * THIS NEEDS TO CHANGE, LEXER OR PARSER USEFUL??
- * @brief	if quotation is encountered in the command line input, find the last quotation in the string
- * 			and return it to parse_input to add to the array of strings to be tokenized.
- * @param	input from the command line
- * @return	string with all quotations from the input to be put into the array and tokenized
-*/
-// char	*quote_tokens(char *input)
-// {
-// 	char	*quote_strs = NULL;
-// 	int		i = 0;
-
-// 	while (input[i])
-// 	{
-// 		if (input[i] == '\'' && closed_quotes(&input[i]))
-// 			quote_strs = &input[i + closed_quotes(&input[i])];
-// 		if (input[i] == '\"' && closed_quotes(&input[i]))
-// 			quote_strs = &input[i + closed_quotes(&input[i])];
-// 		i++;
-// 	}
-// 	return (quote_strs);
-// }
-
-// /**
-//  * THIS ALSO NEEDS TO CAHNGE, LEXER OR PARSER USEFUL??
-//  * @brief	if a single quotation is found, the string to searched to find the corresponding single qutation
-//  * 			same for double quotations
-//  * 			if the number of the type of quotations that are found is not even, the quotes can't be closed 
-//  * 			and therefore must error. 
-//  * @param	input from the command line
-//  * @return	will error if matching quotations are not closed, will return the index of closed quotations
-// */
-// int	closed_quotes(char *input)
-// {
-// 	int	i;
-// 	int	count_double;
-// 	int	count_single;
-
-// 	i = 0;
-// 	count_double = 0;
-// 	count_single = 0;
-// 	while (input[i])
-// 	{
-// 		if (ft_isdouble_q(input[i]))
-// 			count_double++;
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (input[i])
-// 	{
-// 		if (ft_issingle_q(input[i]))
-// 			count_single++;
-// 		i++;
-// 	}
-// 	if ((count_double % 2) != 0 || (count_single % 2) != 0)
-// 		return (0); // ERROR HERE ...  and quit (?)
-// 	return (i);
-// }
-
-// /**
-//  * err.... am i going to use this?
-//  * find quotes, return substring from first quote to last quote in the input (not necessarily 
-//  * the pair of quotes, will handle this properly in parser)
-//  * if unclosed, throw error
-// */
-// char	*check_quotes(char *input)
-// {
-// 	int		i;
 // 	int		len;
-// 	char	*ret;
+// 	char	*quotes;
 
-// 	i = 0;
-// 	len = ft_strlen(input);
-// 	while (len > 0)
+// 	len = quote_len(input);
+// 	quotes = (char *)malloc(sizeof(char) * (len + 1));
+// 	if (!quotes)
+// 		return (0);
+// 	while (i < len)
 // 	{
-// 		if (ft_isquote(input[len]))
-// 		{
-// 			ret = ft_substr(input, i, len + 1);
-// 			if (!ret)
-// 				return (0);
-// 			return (ret);
-// 		}
-// 		--len;
+// 		quotes[i] = input[i];
+// 		i++;
 // 	}
-// 	return (0); // ERROR HERE ...  and quit (?)
+// 	quotes[i] = '\0';
+// 	return (quotes);
 // }
+
+char	**ft_split_shelly(char *input)
+{
+	char	**array;
+	int		i = 0;
+
+	array = (char **)malloc(sizeof(char *) * (lq_count_words(input) + 1));
+	if (!array)
+		return (0);
+	while (*input)
+	{
+		while (*input && lq_what_to_split(*input))
+			input++;
+		if (*input)
+		{
+			// if (lq_isquote(*input))
+			// 	array[i] = make_quotes(input);
+			// else
+			array[i] = make_words(input);
+		}
+		i++;
+		while (*input && !lq_what_to_split(*input))
+			input++;
+	}
+	array[i] = NULL;
+	return (array);
+}

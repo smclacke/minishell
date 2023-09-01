@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/08/25 15:54:27 by dreijans      ########   odam.nl          #
+#    Updated: 2023/09/01 13:54:58 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ DJOY			= djoyke
 SAAR			= sarah
 MICRO_SHELL		= micro
 
-CFLAGS			= -Wall -Wextra -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -g 
+#-fsanitize=address
 
 # -Werror 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
@@ -78,13 +79,14 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 
 ## SARAH ##
 
-SRCS_SAAR		= main_saar.c				\
-					lexer/lexer.c			\
-					lexer/lexer_utils.c		\
-					lexer/lexer_quotes.c	\
-					parser/parser.c			\
-					parser/parser_utils.c	\
-					parser/parser_quotes.c	\
+SRCS_SAAR		= main_saar.c					\
+					lexer/lexer.c				\
+					lexer/lexer_quotes.c		\
+					lexer/lexer_quote_utils.c	\
+					lexer/lexer_utils.c			\
+					parser/parser.c				\
+					parser/parser_utils.c		\
+					parser/parser_quotes.c		\
 					utils/error.c
 
 SAAR_DIR		= src_saar

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:19:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/08/10 18:35:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ t_parser	*lexer_listnew(void *input)
 	new = (t_parser *)malloc(sizeof(*new));
 	if (!new)
 		return (0);
+	init_parser(new);
 	new->input = input;
 	new->next = NULL;
 	return (new);
 }
 
-// print the tokens for testing purposes
 t_parser	*shelly_print_list(t_parser *token)
 {
 	t_parser	*list;
@@ -66,7 +66,7 @@ t_parser	*shelly_print_list(t_parser *token)
 	list = token;
 	while (list)
 	{
-		printf("list: \t\t~: %s\n", list->input);
+		printf("lexer token list: [%s]\n", list->input);
 		list = list->next;
 	}
 	return (token);
