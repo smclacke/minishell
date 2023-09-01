@@ -6,22 +6,22 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/10 18:35:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:33:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-void	init_parser(t_parser *tokens)
+void	init_lexer(t_parser *tokens)
 {
 	tokens->input = NULL;
-	tokens->str = NULL;
-	tokens->cmd = NULL;
-	tokens->meta = NULL;
-	tokens->abso = NULL;
-	tokens->squote = NULL;
-	tokens->dquote = NULL;
-	tokens->here_doc = NULL;
+	// tokens->str = NULL;
+	// tokens->cmd = NULL;
+	// tokens->meta = NULL;
+	// tokens->abso = NULL;
+	// tokens->squote = NULL;
+	// tokens->dquote = NULL;
+	// tokens->here_doc = NULL;
 }
 
 t_parser		*lexer_listlast(t_parser *list)
@@ -53,7 +53,7 @@ t_parser	*lexer_listnew(void *input)
 	new = (t_parser *)malloc(sizeof(*new));
 	if (!new)
 		return (0);
-	init_parser(new);
+	init_lexer(new);
 	new->input = input;
 	new->next = NULL;
 	return (new);

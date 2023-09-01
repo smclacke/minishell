@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:24:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:42:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,39 @@ typedef enum	e_metas
 
 typedef enum	e_files
 {
-	S_INFILE = 1, // infile
-	S_OUTFILE = 2, // outfile
-	D_INFILE = 3, // this is heredoc
+	S_INFILE = 1, // standard infile
+	S_OUTFILE = 2, // standard outfile
+	D_INFILE = 3, // this is heredoc (<<infile)
 	D_OUTFILE = 4 // this is append mode to outfile
 }		t_files;
 
 typedef struct	s_redirect
 {
-	enum	e_files	file_type;
-	enum	e_metas	meta_type;
-}		t_redirect;
+	enum e_files		file_type;
+	enum e_metas		meta_type;
+	struct s_redirect	*previous;
+	struct s_redirect	*next;
+}				t_redirect;
 
 typedef struct s_command
 {
-	char		*cmd;
-	char		**strs;
+	char				*cmd; // must be valid cmd, verified by strcmp with builtins or execve
+	char				*strs; // all shit after cmd (could be another cmd but in this case its str, or flag but jsut called str)
+	struct s_command	*previous;
+	struct s_command	*next;
 }			t_command;
 
-typedef struct s_parser 
+typedef struct s_parser
 {
 	void				*input;
 	void				*tokens;
-	struct s_command	cmd_list;
-	struct s_redirect	redirect_list;
+	struct s_command	*cmd_list;
+	struct s_redirect	*redirect_list;
+	struct s_parser		*previous;
+	struct s_parser		*next;
+}	t_parser;
+
+
 	// char				*str; // remove this
 	// char				**str; // = takes all *strs, all strs up to pipes and redirects 
 	// char				*cmd;
@@ -83,9 +92,7 @@ typedef struct s_parser
 	// char				*squote;
 	// char				*dquote;
 	// char				*here_doc;
-	struct s_parser		*previous;
-	struct s_parser		*next;
-}	t_parser;
+
 
 //----- lexer.c -----//
 bool				closed_quotes(char *input);

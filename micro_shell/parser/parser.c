@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/03 15:55:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:43:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,12 @@ static bool	parser_format_check(t_lexer *tokens, t_parser *parser_struct)
 
 void	init_parser(t_parser *parser_struct)
 {
-	parser_struct->str = NULL;
-	parser_struct->cmd = NULL;
-	parser_struct->sign = NULL;
-	parser_struct->abso = NULL;
+	parser_struct->cmd_list = NULL;
+	parser_struct->redirect_list = NULL;
+	// parser_struct->str = NULL;
+	// parser_struct->cmd = NULL;
+	// parser_struct->sign = NULL;
+	// parser_struct->abso = NULL;
 }
 
 /**
