@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 17:04:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 17:38:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,47 @@ static bool	parser_redirect(t_parser *tokens)
 		return (true);
 	else if ((ft_strnstr(tokens->input, "|", 1)))
 	{
-		tokens->redirect_list->meta_type = PIPE;
+		// tokens->redirect_list->meta_type = PIPE;
 		return (true);
 	}
 	return (false);
 }
 
-static void	handle_direct(t_parser *tokens)
+static void	handle_redirect(t_parser *tokens)
 {
+	// int	i = 0;
+
 	if (!tokens)
-		return (1);
-	if (tokens->redirect_list->mext_type = PIPE)
-		return ;
-	else
-	{
-		while (tokens[i])
-		{
+		exit(EXIT_FAILURE); // dunno, so something when error handling
+	// if (tokens->redirect_list->meta_type == PIPE)
+	// 	return ;
+	// else
+	// {
+		printf("test\n");
+		// while (tokens[i])
+		// {
 			// if ()
-			printf("here\n");
-		}	
+			
+		// }	
 	// check if file is attached to redirect, if not do next line, oherwise...
 	// separate redirect from file and then initalise them separately in redirects list
 		// tokens->redirect_list->file = tokens->next;
-	}
-	return (0);
+	// }
 }
 
 static void	handle_commands(t_parser *tokens)
 {
-	tokens = tokens->cmd_list->cmd;
-	prinf("testing... maybe\n");
+	// tokens->input = tokens->cmd_list->cmd;
+	printf("testing... maybe\n");
+}
+
+static void	*define_tokens(t_parser *tokens)
+{
+	if (parser_redirect(tokens))
+		handle_redirect(tokens);
+	else
+		handle_commands(tokens);
+	return (0);
 }
 
 /**
@@ -71,10 +82,7 @@ t_parser	*parser(t_parser *tokens)
 	token_list = tokens;
 	while (token_list)
 	{
-		if (parser_redirect(token_list))
-			handle_redirect(token_list);
-		else
-			handle_commands(token_list);
+		define_tokens(token_list);	
 		token_list = token_list->next;
 	}
 	return (tokens);

@@ -6,20 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 16:27:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/01 17:26:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-void	init_parser(t_parser *tokens)
+void	init_parser(t_parser *data)
 {
-	tokens->redirect_list->file = NULL;
-	tokens->cmd_list->cmd = NULL;
-	tokens->cmd_list->strs = NULL;
-	tokens->input = NULL;
-	tokens->cmd_list = NULL;
-	tokens->redirect_list = NULL;
+	// tokens->redirect_list->file = NULL; // i dont know
+	// tokens->cmd_list->cmd = NULL;
+	// tokens->cmd_list->strs = NULL;
+	data->input = NULL;
+	data->cmd_list = NULL;
+	data->redirect_list = NULL;
 }
 
 t_parser		*lexer_listlast(t_parser *list)
