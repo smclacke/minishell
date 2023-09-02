@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 16:45:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 17:37:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ static void	handle_commands(t_parser *tokens)
 	t_command	*cmd_list = NULL;
 
 	tokens->cmd_list = tokens->input;
-	cmd_list->info = tokens->cmd_list;
 	printf("tokens->cmd_list = [%s]\n", (char *)tokens->cmd_list);
-	printf("cmd_list = [%s]\n", (char *)cmd_list);
-	printf("cmd_list->data = [%s]\n", (char *)cmd_list->info);
 	printf("testing... maybe\n");
 }
 
