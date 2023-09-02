@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 17:06:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 20:48:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static t_parser	*make_token_list(char **parsed_input)
 {
 	t_parser		*tokens = NULL;
 	t_parser		*token;
-	char		*token_str;
-	int			len;
-	int			i = 0;
+	char			*token_str;
+	int				len;
+	int				i = 0;
 
 	while (parsed_input[i])
 	{

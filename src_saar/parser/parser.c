@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 18:39:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 20:58:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,20 @@ static void	handle_redirect(t_parser *tokens)
 }
 
 // first part in cmd, rest in strs
-static void	handle_commands(t_parser *tokens, int i)
+static void	handle_commands(t_parser *tokens)
 {
-	t_command	*commands = NULL;
+	// t_command	*commands;
+	t_parser		*tmp;
 
-	if (i != 0)
-	{
-		commands->strs = tokens->input;
-		i++;
-	}
-	tokens->cmd_list = tokens->input;
+	tmp = tokens;
+	tmp->cmd_list = tmp->input;
+	tmp->cmd_list->strs = tmp->cmd_list;
+	// commands = tokens->cmd_list;
+	// while (tmp)
+	// {
+	// 	tmp->cmd_list->strs = tmp->cmd_list;
+	// 	tmp->cmd_list = tmp->next->cmd_list;
+	// }
 }
 
 static bool	file_attached(t_parser *tokens)
@@ -96,7 +100,6 @@ static bool	file_attached(t_parser *tokens)
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*token_list;
-	int				i = 0;
 
 	token_list = tokens;
 	while (token_list)
@@ -111,9 +114,8 @@ t_parser	*parser(t_parser *tokens)
 			handle_redirect(token_list);
 		}
 		else
-			handle_commands(token_list, i);	
+			handle_commands(token_list);
 		token_list = token_list->next;
-		i++;
 	}
 	return (tokens);
 }

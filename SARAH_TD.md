@@ -28,6 +28,30 @@ full list = index : [1] | node: [|][(null)][|]
 full list = index : [2] | node: [hello][hello][(null)]
 // 
 
+//
+echo something | cd > outfile
+lexer list: [echo]
+lexer list: [something]
+lexer list: [|]
+lexer list: [cd]
+lexer list: [>]
+lexer list: [outfile]
+test
+test
+parser list: index [0] | node [echo]
+parser list: index [1] | node [something]
+parser list: index [2] | node [|]
+parser list: index [3] | node [cd]
+parser list: index [4] | node [>]
+parser list: index [5] | node [outfile]
+list: [0] | input: [echo] | cmd_list: [echo] | redirect_list: [(null)]
+list: [1] | input: [something] | cmd_list: [something] | redirect_list: [(null)]
+list: [2] | input: [|] | cmd_list: [(null)] | redirect_list: [|]
+list: [3] | input: [cd] | cmd_list: [cd] | redirect_list: [(null)]
+list: [4] | input: [>] | cmd_list: [(null)] | redirect_list: [(null)]
+list: [5] | input: [outfile] | cmd_list: [outfile] | redirect_list: [(null)]
+//
+
 we are getting somewhere....
 
 ---------------------------------------------------------------------------------

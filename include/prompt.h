@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 16:40:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 19:01:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 20:25:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@
      __\n\
  .--()°'.'\n\
 '|, . ,'\n\
- !_-(_|"RESET
+ !_-(_|\\"RESET
 
 // # define PROMPT BI_YELLOW"🍌🍌🍌🍌🍌🍌🍌🍌 Gutentag Fräulein Shelly, wie geht's?"RESET
 
