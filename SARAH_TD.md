@@ -6,51 +6,47 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 
 HELLLLLLLOOOOOO AGAIN, ELEPHANTS RULE
+ALSO, PLEASE PUT SHIT IN SOME PARSER UTILS.......
 
-//      __
+//
+     __
  .--()°'.'
 '|, . ,'
- !_-(_|echo | hello
+ !_-(_|\
+ 
+ echo | some < thing | nice
 lexer list: [echo]
 lexer list: [|]
-lexer list: [hello]
-tokens->cmd_list = [echo]
-testing... maybe
-tokens->redirect_list = [|]
+lexer list: [some]
+lexer list: [<]
+lexer list: [thing]
+lexer list: [|]
+lexer list: [nice]
+cmds->info: echo
+cmds->cmd: echo
+cmds->info: some
+cmds->cmd: some
 test
-tokens->cmd_list = [hello]
-testing... maybe
+cmds->info: thing
+cmds->strs: thing
+cmds->info: nice
+cmds->cmd: nice
 parser list: index [0] | node [echo]
 parser list: index [1] | node [|]
-parser list: index [2] | node [hello]
-full list = index : [0] | node: [echo][echo][(null)]
-full list = index : [1] | node: [|][(null)][|]
-full list = index : [2] | node: [hello][hello][(null)]
-// 
-
+parser list: index [2] | node [some]
+parser list: index [3] | node [<]
+parser list: index [4] | node [thing]
+parser list: index [5] | node [|]
+parser list: index [6] | node [nice]
+[0] || input: [echo] | cmd_list: [echo] | redirect_list: [(null)]
+[1] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
+[2] || input: [some] | cmd_list: [some] | redirect_list: [(null)]
+[3] || input: [<] | cmd_list: [(null)] | redirect_list: [<]
+[4] || input: [thing] | cmd_list: [thing] | redirect_list: [(null)]
+[5] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
+[6] || input: [nice] | cmd_list: [nice] | redirect_list: [(null)]
 //
-echo something | cd > outfile
-lexer list: [echo]
-lexer list: [something]
-lexer list: [|]
-lexer list: [cd]
-lexer list: [>]
-lexer list: [outfile]
-test
-test
-parser list: index [0] | node [echo]
-parser list: index [1] | node [something]
-parser list: index [2] | node [|]
-parser list: index [3] | node [cd]
-parser list: index [4] | node [>]
-parser list: index [5] | node [outfile]
-list: [0] | input: [echo] | cmd_list: [echo] | redirect_list: [(null)]
-list: [1] | input: [something] | cmd_list: [something] | redirect_list: [(null)]
-list: [2] | input: [|] | cmd_list: [(null)] | redirect_list: [|]
-list: [3] | input: [cd] | cmd_list: [cd] | redirect_list: [(null)]
-list: [4] | input: [>] | cmd_list: [(null)] | redirect_list: [(null)]
-list: [5] | input: [outfile] | cmd_list: [outfile] | redirect_list: [(null)]
-//
+ NEED TO FIX FILES AFTER REDIRECTS BECOMING STRS BUT OMG WE ARE GETTING SOMEWHERE
 
 we are getting somewhere....
 

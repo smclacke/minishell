@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 20:33:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 21:55:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	while (list)
 	{
 		printf("[%i] || input: [%s] | cmd_list: [%s] | redirect_list: [%s]\n", 
-			i, list->input, (char *)list->cmd_list, (char *)list->redirect_list);
+			i, list->input, (char *)list->cmd_list,  (char *)list->redirect_list);
 		i++;
 		list = list->next;
 	}
@@ -84,31 +84,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-
-/**
- * Old main
-*/
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	(void) argc;
-// 	(void) argv;
-// 	(void) envp;
-// 	char	*input;
-// 	t_lexer	*tokens = NULL;
-
-// 	while (1)
-// 	{
-// 		input = readline(PROMPT);
-// 		add_history(input);
-// 		tokens = lexer(input);
-// 		if (!tokens)
-// 			return (0);
-// 		ft_print_tokens(tokens);
-
-// 		// parse(tokens)
-// 		// send list to expander
-// 	}
-// 	return (0);
-	
-// }

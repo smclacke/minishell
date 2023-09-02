@@ -6,11 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 20:58:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 22:34:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
+
+static void	init_stuff(t_command *cmds)
+{
+	cmds->strs = NULL;
+	cmds->cmd = NULL;
+}	
 
 static bool	parser_redirect(t_parser *tokens)
 {
@@ -24,25 +30,38 @@ static bool	parser_redirect(t_parser *tokens)
 		return (true);
 	else if (ft_strnstr(tokens->input, "<", 1))
 		return (true);
-	else if ((ft_strnstr(tokens->input, "|", 1)))
-	{
-		tokens->redirect_list = tokens->input;
-		return (true);
-	}
 	return (false);
 }
 
-// put input into redirect_list, if file is attached, detach and add file to
-// file part of struct
-// if not attached, add next node into file part of struct
+static bool	file_attached(t_parser *tokens)
+{
+	if (!tokens)
+		return (false);
+	if (ft_strcmp(tokens->input, ">>") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "<<") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, ">") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "<") == 0)
+		return (true);
+	return (false);
+}
+
+/**
+ * function for when redirect is attached (no space) to file
+ * separate from file, put redirect and file nodes into correct part of redir struct 
+*/
 static void	handle_redirect(t_parser *tokens)
 {
 	// int	i = 0;
 
+	// if i use char *files, need to init it
+	tokens->redirect_list = tokens->input;
+	// need to put all into redir struct and in correct variable
+
 	if (!tokens)
-		exit(EXIT_FAILURE); // dunno, so something when error handling
-	// if (tokens->redirect_list->meta_type == E_PIPE)
-	// 	return ;
+		exit(EXIT_FAILURE); // dunno, do something when error handling
 	// else
 	// {
 		printf("test\n");
@@ -58,37 +77,29 @@ static void	handle_redirect(t_parser *tokens)
 }
 
 // first part in cmd, rest in strs
-static void	handle_commands(t_parser *tokens)
+static void	handle_commands(t_parser *tokens, int i)
 {
-	// t_command	*commands;
-	t_parser		*tmp;
+	t_command		*cmds;
+		
+	cmds = (t_command *)malloc(sizeof(t_command));
+	if (!cmds)
+		exit(EXIT_FAILURE); // fix this later
+	init_stuff(cmds);
+	tokens->cmd_list = tokens->input;
+	cmds->info = tokens->cmd_list;
+	printf("cmds->info: %s\n", cmds->info);
 
-	tmp = tokens;
-	tmp->cmd_list = tmp->input;
-	tmp->cmd_list->strs = tmp->cmd_list;
-	// commands = tokens->cmd_list;
-	// while (tmp)
-	// {
-	// 	tmp->cmd_list->strs = tmp->cmd_list;
-	// 	tmp->cmd_list = tmp->next->cmd_list;
-	// }
-}
-
-static bool	file_attached(t_parser *tokens)
-{
-	if (!tokens)
-		return (false);
-	if (ft_strcmp(tokens->input, ">>") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "<<") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, ">") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "<") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "|") == 0)
-		return (true);
-	return (false);
+	// first one cmd
+	if (i == 0)
+	{	
+		cmds->cmd = cmds->info;
+		printf("cmds->cmd: %s\n", cmds->cmd);
+	}
+	else
+	{
+		cmds->strs = cmds->info;
+		printf("cmds->strs: %s\n", cmds->strs);
+	}
 }
 
 /**
@@ -100,22 +111,36 @@ static bool	file_attached(t_parser *tokens)
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*token_list;
+	int				i = 0;
 
 	token_list = tokens;
 	while (token_list)
 	{
+		// if pipe, set node in redir struct, set index to 0 
+		if (ft_strcmp(token_list->input, "|") == 0)
+		{
+			token_list->redirect_list = token_list->input;
+			i = 0;
+			token_list = token_list->next;
+		}
 		if (parser_redirect(token_list))
 		{
-			if (!file_attached(token_list))
+			if (!file_attached(token_list)) // dettached files are still becoming cmd strs
 			{
-				token_list->redirect_list = token_list->next->input;
+				// need to set current node to meta and next node to file
+				// token_list->redirect_list->meta_type = token_list->input
+				token_list = token_list->next;
+				token_list->redirect_list = token_list->input;
 				token_list = token_list->next;
 			}
-			handle_redirect(token_list);
+			else
+				handle_redirect(token_list);
 		}
 		else
-			handle_commands(token_list);
+			handle_commands(token_list, i);
 		token_list = token_list->next;
+		i++;
 	}
 	return (tokens);
 }
+

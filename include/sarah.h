@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 20:30:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 21:55:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct	s_redirect
 	char				*file;
 	enum e_files		*file_type[4]; // do i want this?
 	enum e_metas		*meta_type[5];
-	// struct s_redirect	*previous;
 	struct s_redirect	*next;
 }				t_redirect;
 
@@ -67,17 +66,14 @@ typedef struct s_command
 	void				*info;
 	char				*cmd;
 	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
-	// struct s_command	*previous;
 	struct s_command	*next;
 }			t_command;
 
 typedef struct s_parser
 {
 	void				*input;
-	// void				*token;
 	struct s_command	*cmd_list;
 	struct s_redirect	*redirect_list;
-	// struct s_parser		*previous;
 	struct s_parser		*next;
 }	t_parser;
 
