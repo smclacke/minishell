@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 19:27:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 16:45:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	parser_redirect(t_parser *tokens)
 {
-	t_metas	E_PIPE
+	// t_metas	E_PIPE
 	if (!tokens)
 		return (false);
 	if (ft_strnstr(tokens->input, ">>", 2))
@@ -27,8 +27,8 @@ static bool	parser_redirect(t_parser *tokens)
 		return (true);
 	else if ((ft_strnstr(tokens->input, "|", 1)))
 	{
-		// tokens->redirect_list->meta_type[E_PIPE] = tokens->input;
-		printf("meta_type: [%d]\n", (int)tokens->redirect_list->meta_type[E_PIPE]);
+		// tokens->redirect_list->meta_type[4] = tokens->input;
+		// i want to assign this part of the token list to the correct meta_type enum, but don't know how :)
 		return (true);
 	}
 	return (false);
@@ -58,7 +58,13 @@ static void	handle_redirect(t_parser *tokens)
 
 static void	handle_commands(t_parser *tokens)
 {
-	// tokens->input = tokens->cmd_list->cmd;
+	t_command	*cmd_list = NULL;
+
+	tokens->cmd_list = tokens->input;
+	cmd_list->info = tokens->cmd_list;
+	printf("tokens->cmd_list = [%s]\n", (char *)tokens->cmd_list);
+	printf("cmd_list = [%s]\n", (char *)cmd_list);
+	printf("cmd_list->data = [%s]\n", (char *)cmd_list->info);
 	printf("testing... maybe\n");
 }
 

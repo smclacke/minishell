@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 19:16:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 16:44:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,47 +36,48 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef enum	e_metas
-{
-	E_MORE = 0,
-	E_MOREMORE = 1,
-	E_LESS = 2,
-	E_LESSLESS = 3,
-	E_PIPE = 4
-}		t_metas;
-
 typedef enum	e_files
 {
-	S_INFILE = 0, // standard infile
-	S_OUTFILE = 1, // standard outfile
-	D_INFILE = 2, // this is heredoc (<<infile)
-	D_OUTFILE = 3 // this is append mode to outfile
+	S_INFILE, // standard infile
+	S_OUTFILE, // standard outfile
+	D_INFILE, // this is heredoc (<<infile)
+	D_OUTFILE // this is append mode to outfile
 }		t_files;
+
+typedef enum	e_metas
+{
+	E_MORE,
+	E_MOREMORE,
+	E_LESS,
+	E_LESSLESS,
+	E_PIPE
+}		t_metas;
 
 typedef struct	s_redirect
 {
 	char				*file;
 	enum e_files		*file_type[4]; // do i need this?
 	enum e_metas		*meta_type[5];
-	struct s_redirect	*previous;
+	// struct s_redirect	*previous;
 	struct s_redirect	*next;
 }				t_redirect;
 
 typedef struct s_command
 {
+	void				*info;
 	char				*cmd;
 	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
-	struct s_command	*previous;
+	// struct s_command	*previous;
 	struct s_command	*next;
 }			t_command;
 
 typedef struct s_parser
 {
 	void				*input;
-	void				*tokens;
+	// void				*token;
 	struct s_command	*cmd_list;
 	struct s_redirect	*redirect_list;
-	struct s_parser		*previous;
+	// struct s_parser		*previous;
 	struct s_parser		*next;
 }	t_parser;
 
