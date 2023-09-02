@@ -5,6 +5,8 @@ dein computer, kein computer
 
 ---------------------------------------------------------------------------------
 
+RIGHT NOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 HELLLLLLLOOOOOO AGAIN, ELEPHANTS RULE
 ALSO, PLEASE PUT SHIT IN SOME PARSER UTILS.......
 
@@ -46,13 +48,70 @@ parser list: index [6] | node [nice]
 [5] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
 [6] || input: [nice] | cmd_list: [nice] | redirect_list: [(null)]
 //
- NEED TO FIX FILES AFTER REDIRECTS BECOMING STRS BUT OMG WE ARE GETTING SOMEWHERE
 
 we are getting somewhere....
+
+// just getting more and more beautiful......
+
+//     __
+ .--()°'.'
+'|, . ,'
+ !_-(_|\
+cmd str | cmd str str str | < file
+lexer list: [cmd]
+lexer list: [str]
+lexer list: [|]
+lexer list: [cmd]
+lexer list: [str]
+lexer list: [str]
+lexer list: [str]
+lexer list: [|]
+lexer list: [<]
+lexer list: [file]
+cmds->cmd: cmd
+cmds->strs: str
+redirect: |
+cmds->cmd: cmd
+cmds->strs: str
+cmds->strs: str
+cmds->strs: str
+redirect: |
+redirect: <
+test
+cmds->strs: file
+parser list: index [0] | node [cmd]
+parser list: index [1] | node [str]
+parser list: index [2] | node [|]
+parser list: index [3] | node [cmd]
+parser list: index [4] | node [str]
+parser list: index [5] | node [str]
+parser list: index [6] | node [str]
+parser list: index [7] | node [|]
+parser list: index [8] | node [<]
+parser list: index [9] | node [file]
+[0] || input: [cmd] | cmd_list: [cmd] | redirect_list: [(null)]
+[1] || input: [str] | cmd_list: [str] | redirect_list: [(null)]
+[2] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
+[3] || input: [cmd] | cmd_list: [cmd] | redirect_list: [(null)]
+[4] || input: [str] | cmd_list: [str] | redirect_list: [(null)]
+[5] || input: [str] | cmd_list: [str] | redirect_list: [(null)]
+[6] || input: [str] | cmd_list: [str] | redirect_list: [(null)]
+[7] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
+[8] || input: [<] | cmd_list: [(null)] | redirect_list: [<]
+[9] || input: [file] | cmd_list: [file] | redirect_list: [(null)]
+//
+
+
+->>>>>>> FIX THE FILE THING (file becomes cmd not redirc)
+->>>>>>> SEPARATE FILES from redirects 
+->>>>>>> HANDLE REDIRECTS, sort into correct vars, if file not attached, attach in parser func
+->>>>>>> FIGURE OUT ENUMS OR SOMETHING ELSE for redirect vars
+->>>>>> PUT SOME SHIT INTO UTILS PLEASE PLEASE 
 
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 
+ BLEHHHHH, RETURN TO THIS AFTER ABOVE IS DONE, QUOTES AND ERRORS IMPORTO, REST NOT SO MUCH (:)
 HELLLLOOOOOO
 please just ignore quotes for now cause it's setting me back massively...
 handle errors, handle flags, put flag in node with cmd to send to executor
