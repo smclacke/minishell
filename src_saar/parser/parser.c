@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 18:07:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 18:39:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ static bool	parser_redirect(t_parser *tokens)
 	else if ((ft_strnstr(tokens->input, "|", 1)))
 	{
 		tokens->redirect_list = tokens->input;
-		printf("tokens->redirect_list = [%s]\n", tokens->redirect_list);
-		// i want to assign this part of the token list to the correct meta_type enum, but don't know how :)
 		return (true);
 	}
 	return (false);
 }
 
+// put input into redirect_list, if file is attached, detach and add file to
+// file part of struct
+// if not attached, add next node into file part of struct
 static void	handle_redirect(t_parser *tokens)
 {
 	// int	i = 0;
@@ -56,16 +57,20 @@ static void	handle_redirect(t_parser *tokens)
 	// }
 }
 
-static void	handle_commands(t_parser *tokens)
+// first part in cmd, rest in strs
+static void	handle_commands(t_parser *tokens, int i)
 {
-	t_command	*cmd_list = NULL;
+	t_command	*commands = NULL;
 
+	if (i != 0)
+	{
+		commands->strs = tokens->input;
+		i++;
+	}
 	tokens->cmd_list = tokens->input;
-	printf("tokens->cmd_list = [%s]\n", (char *)tokens->cmd_list);
-	printf("testing... maybe\n");
 }
 
-static bool	file_is_attached(t_parser *tokens)
+static bool	file_attached(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
@@ -76,6 +81,8 @@ static bool	file_is_attached(t_parser *tokens)
 	else if (ft_strcmp(tokens->input, ">") == 0)
 		return (true);
 	else if (ft_strcmp(tokens->input, "<") == 0)
+		return (true);
+	else if (ft_strcmp(tokens->input, "|") == 0)
 		return (true);
 	return (false);
 }
@@ -89,23 +96,24 @@ static bool	file_is_attached(t_parser *tokens)
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*token_list;
+	int				i = 0;
 
 	token_list = tokens;
 	while (token_list)
 	{
 		if (parser_redirect(token_list))
 		{
+			if (!file_attached(token_list))
+			{
+				token_list->redirect_list = token_list->next->input;
+				token_list = token_list->next;
+			}
 			handle_redirect(token_list);
-			// if file isn't attached, move to next and add as file to redirect list and not pipe
-			// if (!file_attached(token_list) && token_list->redirect->meta_type != PIPE)
-			// {
-			// 	token_list = token_list->next;
-			// 	token_list->redirect_list->file = token_list->input;
-			// }
 		}
 		else
-			handle_commands(token_list);	
+			handle_commands(token_list, i);	
 		token_list = token_list->next;
+		i++;
 	}
 	return (tokens);
 }

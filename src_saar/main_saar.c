@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 18:13:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 18:24:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	list = tokens;
 	while (list)
 	{
-		printf("full list = index : [%i] | node: [%s][%s][%s]\n", i, list->input, (char *)list->cmd_list, (char *)list->redirect_list);
+		printf("list: [%i] | input: [%s] | cmd_list: [%s] | redirect_list: [%s]\n", 
+			i, list->input, (char *)list->cmd_list, (char *)list->redirect_list);
 		i++;
 		list = list->next;
 	}
