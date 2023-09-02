@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 17:37:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 18:07:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static bool	parser_redirect(t_parser *tokens)
 {
-	// t_metas	E_PIPE
 	if (!tokens)
 		return (false);
 	if (ft_strnstr(tokens->input, ">>", 2))
@@ -27,7 +26,8 @@ static bool	parser_redirect(t_parser *tokens)
 		return (true);
 	else if ((ft_strnstr(tokens->input, "|", 1)))
 	{
-		// tokens->redirect_list->meta_type[4] = tokens->input;
+		tokens->redirect_list = tokens->input;
+		printf("tokens->redirect_list = [%s]\n", tokens->redirect_list);
 		// i want to assign this part of the token list to the correct meta_type enum, but don't know how :)
 		return (true);
 	}

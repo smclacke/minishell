@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 16:44:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 18:08:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef enum	e_metas
 typedef struct	s_redirect
 {
 	char				*file;
-	enum e_files		*file_type[4]; // do i need this?
+	enum e_files		*file_type[4]; // do i want this?
 	enum e_metas		*meta_type[5];
 	// struct s_redirect	*previous;
 	struct s_redirect	*next;

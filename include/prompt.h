@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 16:40:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 17:47:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 18:06:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,25 @@
 
 // # define PROMPT BI_PURPLE"MICRO-SHELLY $"RESET
 
+// #define PROMPT BI_YELLOW"\
+//                  /eeeeeeeeeee\\\n\
+//    /RRRRRRRRRR\\ /eeeeeeeeeeeee\\ /RRRRRRRRRR\\\n\
+//   /RRRRRRRRRRRR\\|eeeeeeeeeeeee|/RRRRRRRRRRRR\\\n\
+//  /RRRRRRRRRRRRRR +++++++++++++ RRRRRRRRRRRRRR\\\n\
+// |RRRRRRRRRRRRRR ############### RRRRRRRRRRRRRR|\n\
+// |RRRRRRRRRRRRR ######### ####### RRRRRRRRRRRRR|\n\
+//  \\RRRRRRRRRRR ######### ######### RRRRRRRRRR/\n\
+//    |RRRRRRRRR ########## ######## RRRRRRRR|\n\
+//   |RRRRRRRRRR ################### RRRRRRRRR|\n\
+//                ######     ######\n\
+//                #####       #####\n\
+//                #nnn#       #nnn#\n"RESET
+
 #define PROMPT BI_GREEN"\
      __\n\
  .--()°'.'\n\
 '|, . ,'\n\
- !_-(_\n"RESET
+ !_-(_|"RESET
 
 // # define PROMPT BI_YELLOW"🍌🍌🍌🍌🍌🍌🍌🍌 Gutentag Fräulein Shelly, wie geht's?"RESET
 

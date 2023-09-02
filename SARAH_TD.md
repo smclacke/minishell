@@ -3,6 +3,33 @@
 Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
+
+
+HELLLLLLLOOOOOO AGAIN, ELEPHANTS RULE
+
+//      __
+ .--()°'.'
+'|, . ,'
+ !_-(_|echo | hello
+lexer list: [echo]
+lexer list: [|]
+lexer list: [hello]
+tokens->cmd_list = [echo]
+testing... maybe
+tokens->redirect_list = [|]
+test
+tokens->cmd_list = [hello]
+testing... maybe
+parser list: index [0] | node [echo]
+parser list: index [1] | node [|]
+parser list: index [2] | node [hello]
+full list = index : [0] | node: [echo][echo][(null)]
+full list = index : [1] | node: [|][(null)][|]
+full list = index : [2] | node: [hello][hello][(null)]
+// 
+
+we are getting somewhere....
+
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
 

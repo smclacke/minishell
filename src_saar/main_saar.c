@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 17:38:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 18:13:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,20 @@ t_parser	*shelly_parser_print(t_parser *tokens)
 	return (tokens);
 }
 
-// t_command	*print_command_list(t_command *cmd_list)
-// {
-// 	t_command	*list;
-// 	int			i = 0;
-
-// 	list = comd_list;
-// 	while ()
-// }
+t_parser	*print_the_full_thing(t_parser *tokens)
+{
+	t_parser	*list;
+	int			i = 0;
+	
+	list = tokens;
+	while (list)
+	{
+		printf("full list = index : [%i] | node: [%s][%s][%s]\n", i, list->input, (char *)list->cmd_list, (char *)list->redirect_list);
+		i++;
+		list = list->next;
+	}
+	return (tokens);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -62,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 		shelly_parser_print(tokens);
-
+		print_the_full_thing(tokens);
 
 
 
