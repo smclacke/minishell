@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/03 17:50:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/03 18:10:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,28 @@
  * function for when redirect is attached (no space) to file
  * separate from file, put redirect and file nodes into correct part of redir struct 
 */
+// IF THIS FUNCTION RETURNS, THEN FILE IS SEPARATE AND WE TAKE THE NEXT NODE IN PARSER()
 static int	handle_redirect(t_parser *tokens)
 {
-	// int	i = 0;
+	t_redirect	*redirects;
 
-	if (!tokens)
-		exit(EXIT_FAILURE); // dunno, do something when error handling
-	tokens->redirect_list = tokens->input;
-	printf("redirect: %s\n", (char *)tokens->redirect_list);
-	
-	if (ft_strnstr(tokens->input, "<"))
+	redirects = (t_redirect *)malloc(sizeof(t_redirect));
+	if (!redirects)
+		exit(EXIT_FAILURE); // fix this later
+
+	if (!file_attached(tokens))
+	{
+		tokens->redirect_list = tokens->input;
+		printf("redirect	| %s\n", (char *)tokens->redirect_list);
+		return (1);
+	}
+	else
+	{
+		// use exam split and split on metas....
+	}
+		
 	/**
-	 * IF THIS FUNCTION RETURNS, THEN FILE IS SEPARATE AND WE TAKE THE NEXT NODE IN PARSER()
+	 * 
 	 * first, check if file is attached or not...
 	 * if file was not attached, need to grab next node and make file var in parser()
 	*/
@@ -86,12 +96,12 @@ static void	handle_commands(t_parser *tokens, int i)
 	if (i == 0)
 	{	
 		cmds->cmd = cmds->info;
-		printf("cmds->cmd: %s\n", cmds->cmd);
+		printf("cmds->cmd	| %s\n", cmds->cmd);
 	}
 	else
 	{
 		cmds->strs = cmds->info;
-		printf("cmds->strs: %s\n", cmds->strs);
+		printf("cmds->strs	| %s\n", cmds->strs);
 	}
 }
 
@@ -113,17 +123,20 @@ t_parser	*parser(t_parser *tokens)
 		if (is_pipe(token_list))
 		{
 			token_list->redirect_list = token_list->input;
-			printf("redirect: %s\n", (char *)token_list->redirect_list);
+			printf("redirect	| %s\n", (char *)token_list->redirect_list);
 			i = 0;
 			token_list = token_list->next;
 		}
 		if (is_redirect(token_list))
+		{
 			if (handle_redirect(token_list))
 			{
 			// if file was not attached to redir, need to grab next node and make file var
-				token_list->redirect_list->file = token_list->next->input;
 				token_list = token_list->next;
+				token_list->redirect_list = token_list->input;
+				printf("redirect	| %s\n", (char *)token_list->redirect_list);
 			}
+		}
 		else
 			handle_commands(token_list, i);
 		token_list = token_list->next;

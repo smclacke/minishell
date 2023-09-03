@@ -102,11 +102,11 @@ parser list: index [9] | node [file]
 //
 
 
-->>>>>>> FIX THE FILE THING (file becomes cmd not redirc)
+->>>>XXX>>> FIX THE FILE THING (file becomes cmd not redirc)
 ->>>>>>> SEPARATE FILES from redirects 
 ->>>>>>> HANDLE REDIRECTS, sort into correct vars, if file not attached, attach in parser func
 ->>>>>>> FIGURE OUT ENUMS OR SOMETHING ELSE for redirect vars
-->>>>>> PUT SOME SHIT INTO UTILS PLEASE PLEASE 
+->>>XXX>>> PUT SOME SHIT INTO UTILS PLEASE PLEASE 
 
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**

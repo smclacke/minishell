@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/03 17:46:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/03 18:01:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_parser			*parser(t_parser *tokens);
 void				init_cmd_struct(t_command *cmds);
 bool				is_pipe(t_parser *tokens);
 bool				is_redirect(t_parser *tokens);
-// bool				file_attached(t_parser *tokens);
+bool				file_attached(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
 // UTILS

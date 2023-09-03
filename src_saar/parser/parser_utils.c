@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/03 17:45:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/03 18:01:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ bool	is_redirect(t_parser *tokens)
 /**
  * is redirect the only thing in node? ( file is not attached )
 */
-// bool	file_attached(t_parser *tokens)
-// {
-// 	if (!tokens)
-// 		return (false);
-// 	if (ft_strcmp(tokens->input, ">>") == 0)
-// 		return (true);
-// 	else if (ft_strcmp(tokens->input, "<<") == 0)
-// 		return (true);
-// 	else if (ft_strcmp(tokens->input, ">") == 0)
-// 		return (true);
-// 	else if (ft_strcmp(tokens->input, "<") == 0)
-// 		return (true);
-// 	return (false);
-// }
+bool	file_attached(t_parser *tokens)
+{
+	if (!tokens)
+		return (false);
+	if (ft_strcmp(tokens->input, ">>") == 0)
+		return (false);
+	else if (ft_strcmp(tokens->input, "<<") == 0)
+		return (false);
+	else if (ft_strcmp(tokens->input, ">") == 0)
+		return (false);
+	else if (ft_strcmp(tokens->input, "<") == 0)
+		return (false);
+	return (true);
+}
 
 t_parser	*shelly_parser_print(t_parser *tokens)
 {
