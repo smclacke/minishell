@@ -6,26 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 21:55:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/03 17:46:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sarah.h"
-
-t_parser	*shelly_parser_print(t_parser *tokens)
-{
-	t_parser	*list;
-	int			i = 0;
-
-	list = tokens;
-	while (list)
-	{
-		printf("parser list: index [%i] | node [%s]\n", i, list->input);
-		i++;
-		list = list->next;
-	}
-	return (tokens);
-}
 
 t_parser	*print_the_full_thing(t_parser *tokens)
 {
@@ -35,7 +20,7 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	list = tokens;
 	while (list)
 	{
-		printf("[%i] || input: [%s] | cmd_list: [%s] | redirect_list: [%s]\n", 
+		printf("[%i] || input: [%s] | cmd: [%s] | redirect: [%s]\n", 
 			i, list->input, (char *)list->cmd_list,  (char *)list->redirect_list);
 		i++;
 		list = list->next;
@@ -63,12 +48,12 @@ int	main(int argc, char **argv, char **envp)
 		tokens = lexer(input);
 		if (!tokens)
 			continue ;
-		shelly_print_list(tokens);
+		// shelly_print_list(tokens);
 
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		shelly_parser_print(tokens);
+		// shelly_parser_print(tokens);
 		print_the_full_thing(tokens);
 
 

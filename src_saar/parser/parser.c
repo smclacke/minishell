@@ -6,63 +6,28 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/02 22:56:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/03 17:50:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-static void	init_stuff(t_command *cmds)
-{
-	cmds->strs = NULL;
-	cmds->cmd = NULL;
-}	
-
-/**
- * is redirect in any of the node?
-*/
-static bool	parser_redirect(t_parser *tokens)
-{
-	if (!tokens)
-		return (false);
-	if (ft_strnstr(tokens->input, ">>", 2))
-		return (true);
-	else if (ft_strnstr(tokens->input, "<<", 2))
-		return (true);
-	else if ((ft_strnstr(tokens->input, ">", 1)))
-		return (true);
-	else if (ft_strnstr(tokens->input, "<", 1))
-		return (true);
-	return (false);
-}
-
-/**
- * is redirect the only thing in node? ( file is not attached )
-*/
-// static bool	file_attached(t_parser *tokens)
-// {
-// 	if (!tokens)
-// 		return (false);
-// 	if (ft_strcmp(tokens->input, ">>") == 0)
-// 		return (true);
-// 	else if (ft_strcmp(tokens->input, "<<") == 0)
-// 		return (true);
-// 	else if (ft_strcmp(tokens->input, ">") == 0)
-// 		return (true);
-// 	else if (ft_strcmp(tokens->input, "<") == 0)
-// 		return (true);
-// 	return (false);
-// }
-
 /**
  * function for when redirect is attached (no space) to file
  * separate from file, put redirect and file nodes into correct part of redir struct 
 */
-static void	handle_redirect(t_parser *tokens)
+static int	handle_redirect(t_parser *tokens)
 {
 	// int	i = 0;
 
+	if (!tokens)
+		exit(EXIT_FAILURE); // dunno, do something when error handling
+	tokens->redirect_list = tokens->input;
+	printf("redirect: %s\n", (char *)tokens->redirect_list);
+	
+	if (ft_strnstr(tokens->input, "<"))
 	/**
+	 * IF THIS FUNCTION RETURNS, THEN FILE IS SEPARATE AND WE TAKE THE NEXT NODE IN PARSER()
 	 * first, check if file is attached or not...
 	 * if file was not attached, need to grab next node and make file var in parser()
 	*/
@@ -76,27 +41,21 @@ static void	handle_redirect(t_parser *tokens)
 	// 	token_list->redirect_list = token_list->input;
 	// }
 
+
 	/**
 	 * if i use char *files, need to init it
 	*/ 
 
-
 	/**
 	 * need to put all into redir struct and in correct variable ( in correct order, at correct time...)
 	*/
-	tokens->redirect_list = tokens->input;
-	printf("redirect: %s\n", (char *)tokens->redirect_list);
-
 
 	/**
 	 * if file is attached to redir
 	 * separate redirect from file and then initalise them separately in redirects list
 	*/
-	if (!tokens)
-		exit(EXIT_FAILURE); // dunno, do something when error handling
 	// else
 	// {
-		printf("test\n");
 		// while (tokens[i])
 		// {
 			// if ()
@@ -104,6 +63,7 @@ static void	handle_redirect(t_parser *tokens)
 		// }	
 		// tokens->redirect_list->file = tokens->next;
 	// }
+	return (0);
 }
 
 /**
@@ -118,7 +78,7 @@ static void	handle_commands(t_parser *tokens, int i)
 	cmds = (t_command *)malloc(sizeof(t_command));
 	if (!cmds)
 		exit(EXIT_FAILURE); // fix this later
-	init_stuff(cmds);
+	init_cmd_struct(cmds);
 	tokens->cmd_list = tokens->input;
 	cmds->info = tokens->cmd_list;
 
@@ -150,16 +110,20 @@ t_parser	*parser(t_parser *tokens)
 	while (token_list)
 	{
 		// if pipe, set node in redir struct, set index to 0 for cmd vars
-		if (ft_strcmp(token_list->input, "|") == 0)
+		if (is_pipe(token_list))
 		{
 			token_list->redirect_list = token_list->input;
 			printf("redirect: %s\n", (char *)token_list->redirect_list);
 			i = 0;
 			token_list = token_list->next;
 		}
-		if (parser_redirect(token_list))
-			handle_redirect(token_list);
+		if (is_redirect(token_list))
+			if (handle_redirect(token_list))
+			{
 			// if file was not attached to redir, need to grab next node and make file var
+				token_list->redirect_list->file = token_list->next->input;
+				token_list = token_list->next;
+			}
 		else
 			handle_commands(token_list, i);
 		token_list = token_list->next;
