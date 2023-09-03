@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/03 18:10:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/03 19:52:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static int	handle_redirect(t_parser *tokens)
 	{
 		tokens->redirect_list = tokens->input;
 		printf("redirect	| %s\n", (char *)tokens->redirect_list);
-		return (1);
+		return (1);cmds->strs	| str
 	}
-	else
-	{
-		// use exam split and split on metas....
-	}
+	// else
+	// {
+	// 	// use exam split and split on metas....
+	// }
 		
 	/**
 	 * 
