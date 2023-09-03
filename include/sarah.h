@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/03 18:01:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/03 21:03:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,12 @@ t_parser			*parser(t_parser *tokens);
 //---- parser_quotes.c ----//
 // bool				parser_check_quotes(char *tokens);
 // char				*remove_quotes(char *tokens);
+
+//---- meta_split.c ----//
+int					ms_word_count(t_parser *tokens);
+int					ms_word_len(t_parser *tokens);
+t_parser			*ms_make_words(t_parser *tokens);
+t_parser			**meta_split(t_parser *tokens);
 
 //---- parser_utils.c ----//
 void				init_cmd_struct(t_command *cmds);

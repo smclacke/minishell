@@ -6,75 +6,72 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/03 19:43:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/03 19:50:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/03 21:02:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-int	what_to_split(char c)
+int	ms_word_count(t_parser *tokens)
 {
-	return (c == '>' || c == '<' || c == )
-}
-
-int	word_count(char *str)
-{
-	
-}
-
-int	word_len(char *str)
-{
-	
-}
-
-char	*make_words(char *str)
-{
-	char	*words;
 	int		i = 0;
-	int		len = word_len(str);
-	
-	words = (char *)malloc(sizeof(char) * len + 1);
+	int		count = 0;
+
+	while (tokens[i])
+	{
+		while (tokens[i] && !is_redirect(tokens[i]))
+			i++;
+		if (tokens[i])
+			count++;
+		while (tokens[i] && is_redirect(tokens[i]))
+			i++;
+	}
+	return (count);
+}
+
+int	ms_word_len(t_parser *tokens)
+{
+	int	i = 0;
+
+	while (tokens[i] && !is_redirect(tokens[i]))
+		i++;
+	return (i);
+}
+
+t_parser	*ms_make_words(t_parser *tokens)
+{
+	t_parser	*words;
+	int		i = 0;
+	int		len = ms_word_len(tokens);
+
+	words = (t_parser *)malloc(sizeof(t_parser) * len + 1);
 	while (i < len)
 	{
-		words[i] = str[i];
+		words[i] = tokens[i];
 		i++;
 	}
 	words[i] = '\0';
 	return (words);
 }
 
-char	**ft_split(char *str)
+t_parser	**meta_split(t_parser *tokens)
 {
-	char	**array;
+	t_parser	**array;
 	int		i = 0;
 	
-	array = (char **)malloc(sizeof(char *) * word_count(str) + 1);
-	while (*str)
+	array = (t_parser **)malloc(sizeof(t_parser *) * ms_word_count(tokens) + 1);
+	while (*tokens)
 	{
-		while (*str && !what_to_split(*str))
-			str++;
-		if (*str)
+		while (*tokens && !is_redirect(tokens))
+			tokens++;
+		if (*tokens)
 		{
-			array[i] = make_words(str);
+			array[i] = ms_make_words(tokens);
 			i++;
 		}
-		while (*str && !what_to_split(*str))
-			str++;
+		while (*tokens && is_redirect(tokens))
+			tokens++;
 	}
 	array[i] = 0;
 	return (array);
-}
-
-int	main()
-{
-	char	**array;
-	char	*str = "some<file<<meta>split>>up";
-	int		i = 0;
-
-	array = ft_split(str);
-	while (array[i])
-	{
-		printf("%s", array[i]);
-		i++;
-	}
 }
