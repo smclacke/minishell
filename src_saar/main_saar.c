@@ -6,12 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 23:11:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 23:13:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sarah.h"
 
+// why can't i print meta???????????
 t_parser	*print_the_full_thing(t_parser *tokens)
 {
 	t_parser	*list;
