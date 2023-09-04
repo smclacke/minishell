@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 21:11:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 22:09:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@ void	init_cmd_struct(t_command *cmds)
 	cmds->cmd = NULL;
 }
 
+void	init_red_struct(t_redirect *reds)
+{
+	reds->input = NULL;
+	reds->meta = NULL;
+	reds->file = NULL;
+}
+
 bool	is_pipe(t_parser *tokens)
 {
-	if (ft_strcmp(tokens->input, "|") == 0)
+	if (ft_strnstr(tokens->input, "|", 1))
 		return (true);
 	return (false);
 }
@@ -37,9 +44,11 @@ bool	is_redirect(t_parser *tokens)
 		return (true);
 	else if (ft_strnstr(tokens->input, "<<", 2))
 		return (true);
-	else if ((ft_strnstr(tokens->input, ">", 1)))
+	else if (ft_strnstr(tokens->input, ">", 1))
 		return (true);
 	else if (ft_strnstr(tokens->input, "<", 1))
+		return (true);
+	else if (ft_strnstr(tokens->input, "$", 1))
 		return (true);
 	return (false);
 }
@@ -58,6 +67,8 @@ bool	file_attached(t_parser *tokens)
 	else if (ft_strcmp(tokens->input, ">") == 0)
 		return (false);
 	else if (ft_strcmp(tokens->input, "<") == 0)
+		return (false);
+	else if (ft_strcmp(tokens->input, "$") == 0)
 		return (false);
 	return (true);
 }
