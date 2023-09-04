@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 15:26:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 18:07:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int	handle_redirect(t_parser *tokens)
 {
 	t_redirect	*redirects;
 	t_parser	*tmp;
-	t_parser	*reds;
+	// t_parser	*reds;
 
 	tmp = tokens;
-	reds = tokens->redirect_list;
+	// reds = tokens->redirect_list;
 
 	redirects = (t_redirect *)malloc(sizeof(t_redirect));
 	if (!redirects)
@@ -100,17 +100,17 @@ static void	handle_commands(t_parser *tokens, int i)
 		exit(EXIT_FAILURE); // fix this later
 	init_cmd_struct(cmds);
 	tokens->cmd_list = tokens->input;
-	cmds->info = tokens->cmd_list;
+	cmds->input = tokens->cmd_list;
 
 	// the one that must be a cmd (i think maybe, ask someone knowledgable about this)
 	if (i == 0)
 	{	
-		cmds->cmd = cmds->info;
+		cmds->cmd = cmds->input;
 		printf("cmds->cmd	| %s\n", cmds->cmd);
 	}
 	else
 	{
-		cmds->strs = cmds->info;
+		cmds->strs = cmds->input;
 		printf("cmds->strs	| %s\n", cmds->strs);
 	}
 }
@@ -148,7 +148,10 @@ t_parser	*parser(t_parser *tokens)
 			}
 		}
 		else
+		{
 			handle_commands(token_list, i);
+			// printf("cmd_list->strs: [%s]\n", token_list->cmd_list->strs);
+		}
 		token_list = token_list->next;
 		i++;
 	}

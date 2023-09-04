@@ -8,7 +8,7 @@ dein computer, kein computer
 RIGHT NOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 HELLLLLLLOOOOOO AGAIN, ELEPHANTS RULE
-ALSO, PLEASE PUT SHIT IN SOME PARSER UTILS.......
+ALSO, PLEASE PUT SOME SHIT IN PARSER UTILS.......
 
 //
      __
@@ -116,25 +116,25 @@ please just ignore quotes for now cause it's setting me back massively...
 handle errors, handle flags, put flag in node with cmd to send to executor
 come back to quotes when stronger and more slept
 
+ ADD DOLLAR TO META REDIRECTS :)
+
+~~ TOKENS ~~
+// split on spaces, split on metas but add metas to token array
+// if quotes, split those apart keep them totally intact
+	QUOTES~~
+---> try using old ft_split, split on spaces, if quote found, stop splitting
+---> add separately the part of the array from s or d quotes and then return to splitting on spaces
+---> this way, I need to check the whole word for quotes and fix the a"something" problem
+
+
 ~~ MICROSHELLY ~~
 -> usable?
+
 
 ~~ERRORS~~
 -> cmd not found
 -> unclosed quotes
 -> pipe stuff
-
-~~FLAGS~~
-///// Djoyke:
--> flags are just strings, im sending them the same as any other str :)
--> if echo and str after is -n, then dont just print -n, but remove newline, thats all
--> otherwise cmd put whatever after is given to execve and will be handled
--> pipes and redirects are important but other than that, we just give the input to executor
-
-~~QUOTES~~
----> try using old ft_split, split on spaces, if quote found, stop splitting
----> add separately the part of the array from s or d quotes and then return to splitting on spaces
----> this way, I need to check the whole word for quotes and fix the a"something" problem
 
 
 ---------------------------------------------------------------------------------
