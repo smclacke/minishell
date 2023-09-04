@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:27:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 21:34:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_all(t_env *env)
 */
 void	do_builtin(t_parser *node, t_env **env)
 {
-	if (node->cmd_list->cmd)
+	if (!node->cmd_list->cmd)
 		mini_error("parser", errno);
 	if (mini_strcmp(node->cmd_list->cmd, "echo") == 0)
 		ft_echo(node);
