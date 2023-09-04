@@ -101,8 +101,8 @@ parser list: index [9] | node [file]
 [9] || input: [file] | cmd_list: [file] | redirect_list: [(null)]
 //
 
-
-->>>>>>>>> SEPARATE FILES from redirects 
+->>>>>>>>> get the assigning to work....
+->>>>>>>>> SEPARATE FILES from redirects
 ->>>>>>>>> sort redirects into correct vars
 ->>>>>>>>> input after pipe without space works, so also need to be separated
 ->>>>>>>>> figure out whether im going to use enums or not
@@ -120,7 +120,7 @@ come back to quotes when stronger and more slept
 
 ~~ TOKENS ~~
 // split on spaces, split on metas but add metas to token array
-// if quotes, split those apart keep them totally intact
+// if quotes, split those separately,  keep everything in quotes totally intact
 	QUOTES~~
 ---> try using old ft_split, split on spaces, if quote found, stop splitting
 ---> add separately the part of the array from s or d quotes and then return to splitting on spaces
