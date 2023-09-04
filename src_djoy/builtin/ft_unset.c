@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/31 17:47:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 17:26:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_unset(t_parser *node, t_env **env)
 		node = node->next;
 	while (node)
 	{
-		mini_remove_env(node->str, env);
+		mini_remove_env(node->cmd_list->strs, env);
 		node = node->next;
 	}
 }

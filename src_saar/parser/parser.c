@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 15:58:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 17:42:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int	handle_redirect(t_parser *tokens)
 {
 	t_redirect	*redirects;
 	t_parser	*tmp;
-	t_parser	*reds;
+	// t_parser	*reds;
 
 	tmp = tokens;
-	reds = tokens->redirect_list;
+	// reds = tokens->redirect_list;
 
 	redirects = (t_redirect *)malloc(sizeof(t_redirect));
 	if (!redirects)

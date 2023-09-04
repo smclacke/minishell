@@ -6,11 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-<<<<<<< HEAD
-#    Updated: 2023/09/01 13:54:58 by smclacke      ########   odam.nl          #
-=======
-#    Updated: 2023/09/03 21:02:49 by smclacke      ########   odam.nl          #
->>>>>>> sarah
+#    Updated: 2023/09/04 17:40:15 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,9 +48,9 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		=	main_djoy.c				\
-					builtin/ft_echo.c		\
-					builtin/ft_cd.c 		\
+SRCS_DJOY		=	main_djoy.c						\
+					builtin/ft_echo.c				\
+					builtin/ft_cd.c 				\
 					builtin/ft_pwd.c 		\
 					builtin/ft_export.c 	\
 					builtin/ft_unset.c 		\
@@ -67,11 +63,10 @@ SRCS_DJOY		=	main_djoy.c				\
 					executor/list_utils.c 	\
 					executor/print_utils.c	\
 					expander/ft_expand.c 	\
-					lexer/lexer_utils.c 	\
-					lexer/lexer.c 			\
-					parser/parser_quotes.c	\
-					parser/parser_utils.c 	\
-					parser/parser.c 		
+					../src_saar/lexer/lexer_utils.c 	\
+					../src_saar/lexer/lexer.c 			\
+					../src_saar/parser/parser_utils.c 	\
+					../src_saar/parser/parser.c 		
 
 					
 
@@ -89,10 +84,7 @@ SRCS_SAAR		= main_saar.c					\
 					lexer/lexer_quote_utils.c	\
 					lexer/lexer_utils.c			\
 					parser/parser.c				\
-<<<<<<< HEAD
-=======
 					parser/meta_split.c			\
->>>>>>> sarah
 					parser/parser_utils.c		\
 					parser/parser_quotes.c		\
 					utils/error.c

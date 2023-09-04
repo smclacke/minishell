@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/01 18:55:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 17:27:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@ void	free_all(t_env *env)
 */
 void	do_builtin(t_parser *node, t_env **env)
 {
-	if (!node)
+	if (node->cmd_list->cmd)
 		mini_error("parser", errno);
-	if (mini_strcmp(node->cmd, "echo") == 0)
+	if (mini_strcmp(node->cmd_list->cmd, "echo") == 0)
 		ft_echo(node);
-	if (mini_strcmp(node->cmd, "cd") == 0)
+	if (mini_strcmp(node->cmd_list->cmd, "cd") == 0)
 		ft_cd(node, env);
-	if (mini_strcmp(node->cmd, "pwd") == 0)
+	if (mini_strcmp(node->cmd_list->cmd, "pwd") == 0)
 		ft_pwd();
-	if (mini_strcmp(node->cmd, "export") == 0)
+	if (mini_strcmp(node->cmd_list->cmd, "export") == 0)
 		ft_export(node, env);
-	if (mini_strcmp(node->cmd, "unset") == 0)
+	if (mini_strcmp(node->cmd_list->cmd, "unset") == 0)
 		ft_unset(node, env);
-	if (mini_strcmp(node->cmd, "env") == 0)
+	if (mini_strcmp(node->cmd_list->cmd, "env") == 0)
 		ft_env(*env);
-	if (mini_strcmp(node->str, "exit") == 0) // needs to be command
+	if (mini_strcmp(node->cmd_list->cmd, "exit") == 0)
 		ft_exit(node);
 }
 
@@ -98,9 +98,9 @@ bool	word_check(t_parser *node)
 	char	*cmd;
 	int		i;
 
-	cmd = node->cmd;
+	cmd = node->cmd_list->cmd;
 	node = node->next;
-	words = ft_split(node->str, '=');
+	words = ft_split(node->cmd_list->strs, '=');
 	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
 	{
 		put_custom_error(node, cmd);
@@ -136,21 +136,21 @@ void	put_custom_error(t_parser *node, char *cmd)
 	if (mini_strcmp(cmd, "export") == 0)
 	{
 		ft_putstr_fd("minishell: export: `", STDOUT_FILENO);
-		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd(node->cmd_list->strs, STDOUT_FILENO);
 		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
 	}
 	else if (mini_strcmp(cmd, "unset") == 0)
 	{
 		ft_putstr_fd("minishell: unset: `", STDOUT_FILENO);
-		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd(node->cmd_list->strs, STDOUT_FILENO);
 		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
 	}
 	else if (mini_strcmp(cmd, "exit") == 0)
 	{
-		node = node->next->next;// not necessary if parser alright
+		// node = node->next->next;// not necessary if parser alright
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
-		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd(node->cmd_list->strs, STDOUT_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDOUT_FILENO);
 	}
 }

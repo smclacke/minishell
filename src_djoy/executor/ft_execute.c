@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/01 13:41:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 17:31:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data)
 		// printf("executble = [%s]\n", executable);
 		if (access(executable, X_OK) == -1)
 			mini_error(executable, errno);
-		if (execve(executable, &lst->str, data->env_array) == -1)
-			mini_error(lst->str, errno);
+		if (execve(executable, &lst->cmd_list->strs, data->env_array) == -1)
+			mini_error(lst->cmd_list->strs, errno);
 	}
 	close(data->fd_in);
 	close(data->pipe_fd[WRITE]);
@@ -183,7 +183,7 @@ char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	{
 		while (data->path && data->path[i] != NULL)
 		{
-			command = ft_strjoin("/", node->str);
+			command = ft_strjoin("/", node->cmd_list->cmd);
 			if (command == NULL)
 				mini_error("malloc", errno);
 			ok_path = ft_strjoin(data->path[i], command);
@@ -196,7 +196,7 @@ char	*check_access(t_env *env, t_parser *node, t_execute *data)
 			free(ok_path);
 			i++;
 		}
-		mini_error(node->cmd, errno);
+		mini_error(node->cmd_list->cmd, errno);//check this out please
 	}
-	return (node->cmd);
+	return (node->cmd_list->cmd);//check this out please
 }

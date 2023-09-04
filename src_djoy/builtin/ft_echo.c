@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/01 17:53:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 17:22:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ void	ft_echo(t_parser *lst)
 
 	i = 0;
 	is_flag = 0;
-	if (!lst->cmd)
-		mini_error("node->str", errno);
+	if (!lst->cmd_list)
+		mini_error("cmd_list", errno);
 	else
 		lst = lst->next;
 	while (lst)
 	{
-		if (ft_strcmp(&lst->str[i], "-n") == 0)
+		if (ft_strcmp(&lst->cmd_list->strs[i], "-n") == 0)
 		{
 			++is_flag;
 			i++;
 		}
 		else
 		{
-			printf("%s\n", lst->str);
+			printf("%s\n", lst->cmd_list->strs);
 			i++;
 		}
 		lst = lst->next;

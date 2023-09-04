@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/01 19:08:24 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 17:54:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
-	if (check_for_meta(lst))
-		printf("expander:		there's a meta whoop\n");
+	// if (check_for_meta(lst))
+	// 	printf("expander:		there's a meta whoop\n");
+	printf("----------------\n");
+	print_parser_list(lst);
+	printf("----------------\n");
 	if (check_for_builtin(lst))
 	{
 		printf("expander: 		there's a builtin whoop\n");
@@ -106,43 +109,43 @@ void	ft_expand(t_parser *lst, t_env **env)
  * 2) MAYBE MAKE IT A BOOL?
  * 3) removing files int unlink(const char *pathname);
 */
-bool	check_for_meta(t_parser *lst)
-{
-	if (lst->meta == NULL)
-		return (false);
-	if (mini_strcmp(lst->meta, "$") == 0)
-	{
-		printf("expander:		dolllaaaah\n");
-		return (true);
-	}
-	else if (mini_strcmp(lst->meta, ">>") == 0)
-	{
-		printf("expander:		Output Append\n");
-		return (true);
-	}
-	else if (mini_strcmp(lst->meta, "<<") == 0)
-	{
-		printf("expander:		here doc\n");
-		return (true);
-	}
-	else if (mini_strcmp(lst->meta, ">") == 0)
-	{
-		printf("expander:		output Redirect\n");
-		return (true);
-	}
-	else if (mini_strcmp(lst->meta, "<") == 0)
-	{
-		printf("expander:		Input Redirect\n");
-		return (true);
-	}
-	else if (mini_strcmp(lst->meta, "|") == 0)
-	{
-		printf("expander:		pipe\n");
-		return (true);
-	}
-	else
-		return (false);
-}
+// bool	check_for_meta(t_parser *node)
+// {
+// 	if (node->redirect_list == NULL)
+// 		return (false);
+// 	if (mini_strcmp(node->redirect_list, "$") == 0)
+// 	{
+// 		printf("expander:		dolllaaaah\n");
+// 		return (true);
+// 	}
+// 	else if (mini_strcmp(node->redirect_list, ">>") == 0)
+// 	{
+// 		printf("expander:		Output Append\n");
+// 		return (true);
+// 	}
+// 	else if (mini_strcmp(node->redirect_list, "<<") == 0)
+// 	{
+// 		printf("expander:		here doc\n");
+// 		return (true);
+// 	}
+// 	else if (mini_strcmp(node->redirect_list, ">") == 0)
+// 	{
+// 		printf("expander:		output Redirect\n");
+// 		return (true);
+// 	}
+// 	else if (mini_strcmp(node->redirect_list, "<") == 0)
+// 	{
+// 		printf("expander:		Input Redirect\n");
+// 		return (true);
+// 	}
+// 	else if (mini_strcmp(node->redirect_list, "|") == 0)
+// 	{
+// 		printf("expander:		pipe\n");
+// 		return (true);
+// 	}
+// 	else
+// 		return (false);
+// }
 
 /**
  * @param node linked list
@@ -152,23 +155,24 @@ bool	check_for_meta(t_parser *lst)
  * @todo everything needs to be in either str or cmd not 2 diff
  * thing!!
 */
-bool	check_for_builtin(t_parser *lst)
+bool	check_for_builtin(t_parser *node)
 {
-	if (!lst)
+	if (!node)
 		return (false);
-	if (mini_strcmp(lst->str, "exit") == 0)// needs to be cmd
+	printf("cmd = [%s]\n", node->cmd_list->cmd);
+	if (mini_strcmp(node->cmd_list->cmd, "exit") == 0)
 		return (true);
-	else if (mini_strcmp(lst->cmd, "echo") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "echo") == 0)
 		return (true);
-	else if (mini_strcmp(lst->cmd, "cd") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "cd") == 0)
 		return (true);
-	else if (mini_strcmp(lst->cmd, "pwd") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "pwd") == 0)
 		return (true);
-	else if (mini_strcmp(lst->cmd, "export") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "export") == 0)
 		return (true);
-	else if (mini_strcmp(lst->cmd, "unset") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "unset") == 0)
 		return (true);
-	else if (mini_strcmp(lst->cmd, "env") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "env") == 0)
 		return (true);
 	else
 		return (false);

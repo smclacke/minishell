@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/31 16:58:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 17:33:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,16 @@ void	init_execute_struct(t_execute *data, t_env *env)
 */
 bool	absolute_check(t_parser *node)
 {
-	if (!node->abso)
+	if (!node->cmd_list->cmd)
 		return (false);
-	if (!ft_strncmp(node->abso, "/", 1) && access(node->abso, F_OK) == 0)
+	if (!ft_strncmp(node->cmd_list->cmd, "/", 1)
+		&& access(node->cmd_list->cmd, F_OK) == 0)
 		return (true);
-	if (!ft_strncmp(node->abso, "./", 2) && access(node->abso, F_OK) == 0)
+	if (!ft_strncmp(node->cmd_list->cmd, "./", 2)
+		&& access(node->cmd_list->cmd, F_OK) == 0)
 		return (true);
-	if (!ft_strncmp(node->abso, "../", 3) && access(node->abso, F_OK) == 0)
+	if (!ft_strncmp(node->cmd_list->cmd, "../", 3)
+		&& access(node->cmd_list->cmd, F_OK) == 0)
 		return (true);
 	return (false);
 }
