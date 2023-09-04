@@ -6,21 +6,22 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/09 16:25:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 15:59:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sarah.h"
 
-t_parser	*shelly_parser_print(t_parser *tokens)
+t_parser	*print_the_full_thing(t_parser *tokens)
 {
 	t_parser	*list;
 	int			i = 0;
-
+	
 	list = tokens;
 	while (list)
 	{
-		printf("index:	[%i]	 list:	[%s]\n", i, list->input);
+		printf("[%i] || input: [%s] | cmd: [%s] | redirect: [%s]\n", 
+			i, list->input, (char *)list->cmd_list,  (char *)list->redirect_list);
 		i++;
 		list = list->next;
 	}
@@ -47,13 +48,13 @@ int	main(int argc, char **argv, char **envp)
 		tokens = lexer(input);
 		if (!tokens)
 			continue ;
-		shelly_print_list(tokens);
+		// shelly_print_list(tokens);
 
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		shelly_parser_print(tokens);
-
+		// shelly_parser_print(tokens);
+		print_the_full_thing(tokens);
 
 
 
@@ -68,31 +69,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-
-/**
- * Old main
-*/
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	(void) argc;
-// 	(void) argv;
-// 	(void) envp;
-// 	char	*input;
-// 	t_lexer	*tokens = NULL;
-
-// 	while (1)
-// 	{
-// 		input = readline(PROMPT);
-// 		add_history(input);
-// 		tokens = lexer(input);
-// 		if (!tokens)
-// 			return (0);
-// 		ft_print_tokens(tokens);
-
-// 		// parse(tokens)
-// 		// send list to expander
-// 	}
-// 	return (0);
-	
-// }

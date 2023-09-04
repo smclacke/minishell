@@ -6,12 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/08/20 14:37:33 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2023/09/02 21:23:46 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
+<<<<<<< HEAD
 /**
  * @brief	if a single quotation is found, the string to searched to find the corresponding single qutation
  * 			same for double quotations
@@ -71,6 +76,8 @@ bool	shelly_check_quotes(char *tokens)
 	}
 	return (false);
 }
+=======
+>>>>>>> sarah
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
@@ -111,9 +118,9 @@ static t_parser	*make_token_list(char **parsed_input)
 {
 	t_parser		*tokens = NULL;
 	t_parser		*token;
-	char		*token_str;
-	int			len;
-	int			i = 0;
+	char			*token_str;
+	int				len;
+	int				i = 0;
 
 	while (parsed_input[i])
 	{

@@ -6,51 +6,29 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/20 16:31:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 15:59:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-/**
- * need to wrtie this function
-*/
-bool	parser_cmp_squote(t_parser *tokens)
+void	init_cmd_struct(t_command *cmds)
 {
-	if (!tokens)
-		return (false);
-	return (false);
-}
-/**
- * need to wrtie this function
-*/
-bool	parser_cmp_dquote(t_parser *tokens)
-{
-	if (!tokens)
-		return (false);
-	return (false);
+	cmds->strs = NULL;
+	cmds->cmd = NULL;
 }
 
-bool	parser_cmp_builtins(t_parser *tokens)
+bool	is_pipe(t_parser *tokens)
 {
-	if (!tokens)
-		return (false);
-	if (ft_strcmp(tokens->input, "echo") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "cd") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "pwd") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "export") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "unset") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "env") == 0)
+	if (ft_strcmp(tokens->input, "|") == 0)
 		return (true);
 	return (false);
 }
 
-bool	parser_cmp_metas(t_parser *tokens)
+/**
+ * is redirect in any of the node?
+*/
+bool	is_redirect(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
@@ -62,22 +40,38 @@ bool	parser_cmp_metas(t_parser *tokens)
 		return (true);
 	else if (ft_strnstr(tokens->input, "<", 1))
 		return (true);
-	else if ((ft_strnstr(tokens->input, "$", 1)))
-		return (true);
-	else if ((ft_strnstr(tokens->input, "|", 1)))
-		return (true);
 	return (false);
 }
 
-bool	parser_cmp_abso(t_parser *tokens)
+/**
+ * is redirect the only thing in node? ( file is not attached )
+*/
+bool	file_attached(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
-	if (ft_strnstr(tokens->input, "/", ft_strlen(tokens->input)))
-		return (true);
-	else if (ft_strnstr(tokens->input, "./", ft_strlen(tokens->input)))
-		return (true);
-	else if (ft_strnstr(tokens->input, "../", ft_strlen(tokens->input)))
-		return (true);
-	return (false);
+	if (ft_strcmp(tokens->input, ">>") == 0)
+		return (false);
+	else if (ft_strcmp(tokens->input, "<<") == 0)
+		return (false);
+	else if (ft_strcmp(tokens->input, ">") == 0)
+		return (false);
+	else if (ft_strcmp(tokens->input, "<") == 0)
+		return (false);
+	return (true);
+}
+
+t_parser	*shelly_parser_print(t_parser *tokens)
+{
+	t_parser	*list;
+	int			i = 0;
+
+	list = tokens;
+	while (list)
+	{
+		printf("parser list: index [%i] | node [%s]\n", i, list->input);
+		i++;
+		list = list->next;
+	}
+	return (tokens);
 }

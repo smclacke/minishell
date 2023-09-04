@@ -6,7 +6,11 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
+<<<<<<< HEAD
 #    Updated: 2023/09/01 13:54:58 by smclacke      ########   odam.nl          #
+=======
+#    Updated: 2023/09/03 21:02:49 by smclacke      ########   odam.nl          #
+>>>>>>> sarah
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +89,10 @@ SRCS_SAAR		= main_saar.c					\
 					lexer/lexer_quote_utils.c	\
 					lexer/lexer_utils.c			\
 					parser/parser.c				\
+<<<<<<< HEAD
+=======
+					parser/meta_split.c			\
+>>>>>>> sarah
 					parser/parser_utils.c		\
 					parser/parser_quotes.c		\
 					utils/error.c

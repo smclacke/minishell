@@ -6,11 +6,71 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/20 15:58:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 15:59:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
+
+/**
+ * @brief	if a single quotation is found, the string to searched to find the corresponding single qutation
+ * 			same for double quotations
+ * 			if the number of the type of quotations that are found is not even, the quotes can't be closed 
+ * 			and therefore must error. 
+ * @param	input from the command line
+ * @return	will error if matching quotations are not closed, will return the index of closed quotations
+*/
+bool	closed_quotes(char *input)
+{
+	int	i;
+	int	count_double;
+	int	count_single;
+
+	i = 0;
+	count_double = 0;
+	count_single = 0;
+	while (input[i])
+	{
+		if (ft_isdouble_q(input[i]))
+			count_double++;
+		i++;
+	}
+	i = 0;
+	while (input[i])
+	{
+		if (ft_issingle_q(input[i]))
+			count_single++;
+		i++;
+	}
+	if ((count_double % 2) != 0 || (count_single % 2) != 0)
+		return (false);
+	return (true);
+}
+
+/**
+ * @brief	Check if there are any quotes and if they are closed
+ * @param	tokens take the token->input (char *) to check through the string
+ * @return	bool: true/false 1/0
+*/
+bool	shelly_check_quotes(char *tokens)
+{
+	char	*tmp;
+	int		i = 0;
+	
+	tmp = tokens;
+	while (tmp[i])
+	{
+		if (ft_isquote(tmp[i]))
+		{	
+			if (closed_quotes(tmp))
+				return (true);
+			else
+				exit(EXIT_FAILURE); // need to error correctly for open quotes
+		}
+		i++;
+	}
+	return (false);
+}
 
 
 static char	*make_words(char *input)

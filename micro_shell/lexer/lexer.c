@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 14:44:51 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/09/01 14:36:53 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2023/09/01 15:57:10 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +75,12 @@ bool	shelly_check_quotes(char *tokens)
 	}
 	return (false);
 }
+<<<<<<< HEAD
 /**
  * need to check for flags somewhere!
 */
+=======
+>>>>>>> sarah
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there

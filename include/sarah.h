@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 13:51:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 15:58:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,54 @@
 # define TRUE 1
 # define FALSE 0
 
+typedef enum	e_files
+{
+	S_INFILE, // standard infile
+	S_OUTFILE, // standard outfile
+	D_INFILE, // this is heredoc (<<infile)
+	D_OUTFILE // this is append mode to outfile
+}		t_files;
+
 typedef enum	e_metas
 {
-	DQUOTE = 1,
-	SQUOTE = 2,
-	DOLLAR = 3,
-	MORE = 4,
-	MOREMORE = 5,
-	LESS = 6,
-	LESSLESS = 7,
-	PIPE = 8
+	E_MORE,
+	E_MOREMORE,
+	E_LESS,
+	E_LESSLESS,
+	E_PIPE
 }		t_metas;
 
-typedef struct s_parser 
+typedef struct	s_redirect
+{
+	char				*file;
+	enum e_files		*file_type[4]; // do i want this?
+	enum e_metas		*meta_type[5];
+	struct s_redirect	*next;
+}				t_redirect;
+
+typedef struct s_command
+{
+	void				*info;
+	char				*cmd;
+	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
+	struct s_command	*next;
+}			t_command;
+
+typedef struct s_parser
 {
 	void				*input;
-	void				*tokens;
-	char				*str; // remove this
-	char				**str; // = takes all *strs, all strs up to pipes and redirects 
-	char				*cmd;
-	char				*meta;
-	char				*abso; // dont need this
-	char				*flag; // dont need this
-	char				*squote;
-	char				*dquote;
-	char				*here_doc;
-	struct s_parser		*previous;
+	struct s_command	*cmd_list;
+	struct s_redirect	*redirect_list;
 	struct s_parser		*next;
 }	t_parser;
 
+
 //----- lexer.c -----//
-bool				closed_quotes(char *input);
-bool				shelly_check_quotes(char *tokens);
 t_parser			*lexer(char *input);
 
 // -------- Quotes --------//
+bool				closed_quotes(char *input);
+bool				shelly_check_quotes(char *tokens);
 char				**ft_split_shelly(char *input);
 
 // --------Quote utils ------//
@@ -80,7 +93,6 @@ int					which_quote(char c);
 int					lq_count_words(char *input);
 int					lq_word_length(char *input);
 int					quote_len(char *input);
-int					quote_length(char *input);
 
 //----- lexer_utils.c -----//
 void				init_parser(t_parser *token);
@@ -99,13 +111,18 @@ t_parser			*parser(t_parser *tokens);
 // bool				parser_check_quotes(char *tokens);
 // char				*remove_quotes(char *tokens);
 
-//---- parser_utils.c ----//
-bool				parser_cmp_squote(t_parser *param);
-bool				parser_cmp_dquote(t_parser *param);
-bool				parser_cmp_builtins(t_parser *param);
-bool				parser_cmp_metas(t_parser *tokens);
-bool				parser_cmp_abso(t_parser *tokens);
+//---- meta_split.c ----//
+int					ms_word_count(t_parser *tokens);
+int					ms_word_len(t_parser *tokens);
+t_parser			*ms_make_words(t_parser *tokens);
+t_parser			**meta_split(t_parser *tokens);
 
+//---- parser_utils.c ----//
+void				init_cmd_struct(t_command *cmds);
+bool				is_pipe(t_parser *tokens);
+bool				is_redirect(t_parser *tokens);
+bool				file_attached(t_parser *tokens);
+t_parser			*shelly_parser_print(t_parser *tokens);
 
 // UTILS
 // --------- Error -------- //

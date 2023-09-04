@@ -6,22 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/10 18:35:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 15:59:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-void	init_parser(t_parser *tokens)
+void	init_parser(t_parser *data)
 {
-	tokens->input = NULL;
-	tokens->str = NULL;
-	tokens->cmd = NULL;
-	tokens->meta = NULL;
-	tokens->abso = NULL;
-	tokens->squote = NULL;
-	tokens->dquote = NULL;
-	tokens->here_doc = NULL;
+	data->input = NULL;
+	data->cmd_list = NULL;
+	data->redirect_list = NULL;
 }
 
 t_parser		*lexer_listlast(t_parser *list)
@@ -66,7 +61,7 @@ t_parser	*shelly_print_list(t_parser *token)
 	list = token;
 	while (list)
 	{
-		printf("lexer token list: [%s]\n", list->input);
+		printf("lexer list: [%s]\n", list->input);
 		list = list->next;
 	}
 	return (token);

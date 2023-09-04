@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 16:40:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/26 23:12:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/02 20:25:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 //      `.^,,'  ,     (    \\`-.      /  `.-~~--..--~~~-.\n\
 //    /~/~~~~~ /...;/~~~~~  (`\\`.   <__                 `.\n\
 //    \"\"\"\"~~~~~~~~~~\"\"~~~~~~~,','~~~~~~~~~~~~~~~~.~~~~,','\n\
-//                           `\"                  `.~~_,'\n"
+//                           `\"                  `.~~_,'\n"RESET
 
 
 // #define PROMPT BI_WHITE"\
@@ -44,12 +44,32 @@
 //      vV\\|/vV|`-'\\  ,---\\   | \\Vv\\hjwVv\\//v\n\
 //                 _) )    `. \\ /\n\
 //                (__/       ) )\n\
-//                          (_/\n"
+//                          (_/\n" RESET
 
 // # define PROMPT BI_GREEN"WHAT THE"BI_RED" SHELL?!"RESET
 
 // # define PROMPT BI_PURPLE"MICRO-SHELLY $"RESET
 
-# define PROMPT BI_YELLOW"Gutentag Fräulein Shelly, wie geht's?"RESET
+// #define PROMPT BI_YELLOW"\
+//                  /eeeeeeeeeee\\\n\
+//    /RRRRRRRRRR\\ /eeeeeeeeeeeee\\ /RRRRRRRRRR\\\n\
+//   /RRRRRRRRRRRR\\|eeeeeeeeeeeee|/RRRRRRRRRRRR\\\n\
+//  /RRRRRRRRRRRRRR +++++++++++++ RRRRRRRRRRRRRR\\\n\
+// |RRRRRRRRRRRRRR ############### RRRRRRRRRRRRRR|\n\
+// |RRRRRRRRRRRRR ######### ####### RRRRRRRRRRRRR|\n\
+//  \\RRRRRRRRRRR ######### ######### RRRRRRRRRR/\n\
+//    |RRRRRRRRR ########## ######## RRRRRRRR|\n\
+//   |RRRRRRRRRR ################### RRRRRRRRR|\n\
+//                ######     ######\n\
+//                #####       #####\n\
+//                #nnn#       #nnn#\n"RESET
+
+#define PROMPT BI_GREEN"\
+     __\n\
+ .--()°'.'\n\
+'|, . ,'\n\
+ !_-(_|\\"RESET
+
+// # define PROMPT BI_YELLOW"🍌🍌🍌🍌🍌🍌🍌🍌 Gutentag Fräulein Shelly, wie geht's?"RESET
 
 #endif

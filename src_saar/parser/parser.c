@@ -6,74 +6,152 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 13:55:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 15:58:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/sarah.h"
 
-// FLAGS FLAGS FLAGS
 /**
- * @brief	assigns the tokens to a member in the parser struct:
- * 			meta, cmd, absolute path,  anything else str
- * @param	tokens passed from the lexer
- * @param	parser_struct  structure to assign each token to the correct member within parser struct
- * @return	assigns the token input to a member in the parser struct
+ * function for when redirect is attached (no space) to file
+ * separate from file, put redirect and file nodes into correct part of redir struct 
 */
-static void	*parser_define_tokens(t_parser *tokens)
+// IF THIS FUNCTION RETURNS, THEN FILE IS SEPARATE AND WE TAKE THE NEXT NODE IN PARSER()
+static int	handle_redirect(t_parser *tokens)
 {
-	if (!tokens)
-		return (false);
-	if (parser_cmp_metas(tokens))
+	t_redirect	*redirects;
+	t_parser	*tmp;
+	t_parser	*reds;
+
+	tmp = tokens;
+	reds = tokens->redirect_list;
+
+	redirects = (t_redirect *)malloc(sizeof(t_redirect));
+	if (!redirects)
+		exit(EXIT_FAILURE); // fix this later
+
+	if (!file_attached(tokens))
 	{
-		tokens->meta = tokens->input;
-		printf("arg->meta: %s\n", tokens->meta);
+		tokens->redirect_list = tokens->input;
+		printf("redirect	| %s\n", (char *)tokens->redirect_list);
+		return (1);
 	}
-	else if (parser_cmp_builtins(tokens))
+	// else
+	// {
+	// // 	// use exam split and split on metas....
+	// 	while (tmp)
+	// 	{
+	// 		tokens->redirect_list = meta_split(tmp);
+	// 		tmp = tmp->next;
+	// 	}
+	// }
+		
+	/**
+	 * 
+	 * first, check if file is attached or not...
+	 * if file was not attached, need to grab next node and make file var in parser()
+	*/
+	// if (file_attached(token_list))
+	// {
+	// 	// need to set current node to meta and next node to file
+	// 	// token_list->redirect_list->meta_type = token_list->input
+	// 	printf("token: %s", token_list->input);
+	// 	printf("do you even work?\n");
+	// 	token_list = token_list->next;
+	// 	token_list->redirect_list = token_list->input;
+	// }
+
+
+	/**
+	 * if i use char *files, need to init it
+	*/ 
+
+	/**
+	 * need to put all into redir struct and in correct variable ( in correct order, at correct time...)
+	*/
+
+	/**
+	 * if file is attached to redir
+	 * separate redirect from file and then initalise them separately in redirects list
+	*/
+	// else
+	// {
+		// while (tokens[i])
+		// {
+			// if ()
+			
+		// }	
+		// tokens->redirect_list->file = tokens->next;
+	// }
+	return (0);
+}
+
+/**
+ * first node in list, if not redirc, cmd
+ * first thing after pipe, if not redirec, cmd (right?)
+ * everything else string
+*/
+static void	handle_commands(t_parser *tokens, int i)
+{
+	t_command		*cmds;
+		
+	cmds = (t_command *)malloc(sizeof(t_command));
+	if (!cmds)
+		exit(EXIT_FAILURE); // fix this later
+	init_cmd_struct(cmds);
+	tokens->cmd_list = tokens->input;
+	cmds->info = tokens->cmd_list;
+
+	// the one that must be a cmd (i think maybe, ask someone knowledgable about this)
+	if (i == 0)
 	{	
-		tokens->cmd = tokens->input;
-		printf("arg->cmd: %s\n", tokens->cmd);
+		cmds->cmd = cmds->info;
+		printf("cmds->cmd	| %s\n", cmds->cmd);
 	}
-	else if (parser_cmp_abso(tokens))
-	{
-		tokens->abso = tokens->input;
-		printf("arg->abso: %s\n", tokens->abso);
-	}
-	// else if (parser_cmp_squote(tokens))
-	// {
-	// 	tokens->squote = tokens->input;
-	// 	printf("arg->squote: %s\n", tokens->squote);
-	// }
-	// else if (parser_cmp_dquote(tokens))
-	// {
-	// 	tokens->dquote = tokens->input;
-	// 	printf("arg->dquote: %s\n", tokens->dquote);
-	// }
 	else
 	{
-		tokens->str = tokens->input;
-		printf("arg->str: %s\n", tokens->str);
+		cmds->strs = cmds->info;
+		printf("cmds->strs	| %s\n", cmds->strs);
 	}
-	return (0);
 }
 
 /**
  * @brief	Main parser function:
 			Check the tokens to see which member of the parser struct they need to be sorted into
-			Return the new parser_struct to the expander
  * @param	tokens t_lexer tokens passed from the lexer to be sorted by the parser
- * @return	parser_struct: all the tokens given by the lexer have been sorted into the parser struct. The first argument is checked for its validity
+ * @return	parser_struct: all the tokens given by the lexer have been sorted into the parser struct
 */
 t_parser	*parser(t_parser *tokens)
 {
-	t_parser		*list;
+	t_parser		*token_list;
+	int				i = 0;
 
-	list = tokens;
-	while (list)
+	token_list = tokens;
+	while (token_list)
 	{
-		// if quotes, handle separately..
-		parser_define_tokens(list);
-		list = list->next;
+		// if pipe, set node in redir struct, set index to 0 for cmd vars
+		if (is_pipe(token_list))
+		{
+			token_list->redirect_list = token_list->input;
+			printf("redirect	| %s\n", (char *)token_list->redirect_list);
+			i = 0;
+			token_list = token_list->next;
+		}
+		if (is_redirect(token_list))
+		{
+			if (handle_redirect(token_list))
+			{
+			// if file was not attached to redir, need to grab next node and make file var
+				token_list = token_list->next;
+				token_list->redirect_list = token_list->input;
+				printf("redirect	| %s\n", (char *)token_list->redirect_list);
+			}
+		}
+		else
+			handle_commands(token_list, i);
+		token_list = token_list->next;
+		i++;
 	}
 	return (tokens);
 }
+
