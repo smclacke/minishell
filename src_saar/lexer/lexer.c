@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:55:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 22:38:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char	**parse_input(char *input)
 	char	**array = NULL;
 	// int		i = 0;
 
+		 // WE MUST SEPARATE METAS,,,,,,,,, OUI?
 	// split on spaces, split on metas but add metas to token array
 	// if quotes, split those apart keep them totally intact
 	// if (shelly_check_quotes(input))

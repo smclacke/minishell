@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 22:13:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 23:03:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,35 @@
 // 	return (0);
 // }
 
+/**
+ * printf("am i here?\n");
+			// if (handle_redirect(token_list))
+			// {
+			// // if file was not attached to redir, need to grab next node and make file var
+			// 	token_list = token_list->next;
+			// 	token_list->redirect_list = token_list->input;
+			// 	printf("redirect	| %s\n", (char *)token_list->redirect_list);
+			// }
+			// probably same as command, need to put the new struct vars into parser struct
+			if (file_attached(token_list))
+			{
+				// split and init into struct vars from here and skip handle_reds?
+				// reds = handle_annoying_redirects(token_list);
+				printf("you forgot a fucking space\n");
+			}
+*/
+		// // if pipe, set node in redir struct, set index to 0 for cmd vars
+		// if (is_pipe(token_list))
+		// {
+		// 	token_list->redirect_list = token_list->input;
+		// 	printf("redirect	| %s\n", (char *)token_list->redirect_list);
+		// 	i = 0;
+		// 	token_list = token_list->next;
+		// }
+		// // if 
+
+
+
 static t_command	*handle_commands(t_parser *tokens, int i)
 {
 	t_command		*cmds;
@@ -114,14 +143,17 @@ static t_redirect	*handle_redirect(t_parser *tokens)
 		exit(EXIT_FAILURE); // fix this later
 	init_red_struct(reds);
 	tokens->redirect_list = tokens->input;
+
+	printf("tokens->redirect_list: [%s]\n", (char *)tokens->redirect_list);
+	
 	reds->input = tokens->redirect_list;
 
-	if (is_redirect(tokens) || is_pipe(tokens))
-		reds->meta = reds->input;
-	else
-		reds->file = reds->input;
-	printf("reds->meta	| %s\n", reds->meta);
-	printf("reds->file	| %s\n", reds->file);
+	printf("reds->input: [%s]\n", reds->input);
+
+	reds->meta = reds->input;
+
+	printf("reds->meta: [%s]\n", reds->meta);
+	
 	return (reds);
 }
 
@@ -141,40 +173,26 @@ t_parser	*parser(t_parser *tokens)
 	token_list = tokens;
 	while (token_list)
 	{
-		// if pipe, set node in redir struct, set index to 0 for cmd vars
-		if (is_pipe(token_list))
-		{
-			token_list->redirect_list = token_list->input;
-			printf("redirect	| %s\n", (char *)token_list->redirect_list);
-			i = 0;
-			token_list = token_list->next;
-		}
 		if (is_redirect(token_list))
 		{
-			printf("am i here?\n");
-			// if (handle_redirect(token_list))
-			// {
-			// // if file was not attached to redir, need to grab next node and make file var
-			// 	token_list = token_list->next;
-			// 	token_list->redirect_list = token_list->input;
-			// 	printf("redirect	| %s\n", (char *)token_list->redirect_list);
-			// }
-			// probably same as command, need to put the new struct vars into parser struct
-			if (file_attached(token_list))
-			{
-				// split and init into struct vars from here and skip handle_reds?
-				// reds = handle_annoying_redirects(token_list);
-				printf("you forgot a fucking space\n");
-			}
-			else
-				reds = handle_redirect(token_list);
+			// put reds in struct
+			reds = handle_redirect(token_list);
 			token_list->redirect_list = reds;
+			printf("reds = [%s]\n", (char *)token_list->redirect_list->meta);
 		}
+		// if there was a redirect, need to check which so that if >, next node is file, 
+		// and if pipe, next is command ( don't use index anymore, just keep for first arg)
+
+		
+		// if (there was a sassy red and i need to do something with next node) ...
+
+		
 		else
 		{
-			printf("i shouldnt be here\n");
 			cmds = handle_commands(token_list, i);
 			token_list->cmd_list = cmds;
+			printf("cmds = [%s]\n", (char *)token_list->cmd_list->cmd);
+			printf("cmds = [%s]\n", (char *)token_list->cmd_list->strs);
 		}
 		token_list = token_list->next;
 		i++;
