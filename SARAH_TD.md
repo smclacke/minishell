@@ -102,11 +102,10 @@ parser list: index [9] | node [file]
 //
 
 
-->>>>XXX>>> FIX THE FILE THING (file becomes cmd not redirc)
-->>>>>>> SEPARATE FILES from redirects 
-->>>>>>> HANDLE REDIRECTS, sort into correct vars, if file not attached, attach in parser func
-->>>>>>> FIGURE OUT ENUMS OR SOMETHING ELSE for redirect vars
-->>>XXX>>> PUT SOME SHIT INTO UTILS PLEASE PLEASE 
+->>>>>>>>> SEPARATE FILES from redirects 
+->>>>>>>>> sort redirects into correct vars
+->>>>>>>>> input after pipe without space works, so also need to be separated
+->>>>>>>>> figure out whether im going to use enums or not
 
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
