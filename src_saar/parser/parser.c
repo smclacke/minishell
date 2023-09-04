@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:47:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 21:28:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,7 @@ static int	handle_redirect(t_parser *tokens)
 	return (0);
 }
 
-/**
- * first node in list, if not redirc, cmd
- * first thing after pipe, if not redirec, cmd (right?)
- * everything else string
-*/
-static void	*handle_commands(t_parser *tokens, int i)
+static t_command	*handle_commands(t_parser *tokens, int i)
 {
 	t_command		*cmds;
 		
@@ -99,54 +94,17 @@ static void	*handle_commands(t_parser *tokens, int i)
 	if (!cmds)
 		exit(EXIT_FAILURE); // fix this later
 	init_cmd_struct(cmds);
-	
 	tokens->cmd_list = tokens->input;
-	cmds = tokens->cmd_list;
+	cmds->input = tokens->cmd_list;
 
-	printf("tokens->cmd_list: [%s]\n", (char *)tokens->cmd_list);
-	printf("cmds: [%s]\n", (char *)cmds);
-	
-	// printf("cmds->input: [%s]\n", cmds->input);
-	
-	// cmds->input = tokens->cmd_list;
-
-	// printf("cmds->input: [%s]\n", cmds->input);
-	
-	// the one that must be a cmd (i think maybe, ask someone knowledgable about this)
+	// the one that must be a cmd
 	if (i == 0)
-	{	
-		cmds->cmd = cmds;
-		printf("cmds->cmd	| %s\n", cmds->cmd);
-	}
+		cmds->cmd = cmds->input;
 	else
-	{
-		cmds->strs = (char *)cmds;
-		printf("cmds->strs	| %s\n", cmds->strs);
-	}
-	
-	// tokens->cmd_list->cmd = cmds->cmd;
-	// tokens->cmd_list->strs = cmds->strs;
-	
-
-	// tokens->cmd_list->input = tokens->cmd_list;
-
-	// tokens->cmd_list->input = tokens->cmd_list;
-
-	// printf("tokens->cmd_list->input: [%s]\n", tokens->cmd_list->input);
-
-	// if (i == 0)
-	// {	
-	// 	tokens->cmd_list->cmd = tokens->cmd_list;
-	// 	printf("tokens->cmd_list->cmd	| %s\n", tokens->cmd_list->cmd);
-	// }
-	// else
-	// {
-	// 	tokens->cmd_list->strs = tokens->cmd_list;
-	// 	printf("tokens->cmd_list->strs 	| %s\n", tokens->cmd_list->strs );
-	// }
-
-
+		cmds->strs = cmds->input;
+	return (cmds);
 }
+
 
 /**
  * @brief	Main parser function:
@@ -157,6 +115,7 @@ static void	*handle_commands(t_parser *tokens, int i)
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*token_list;
+	t_command		*cmds;
 	int				i = 0;
 
 	token_list = tokens;
@@ -182,9 +141,10 @@ t_parser	*parser(t_parser *tokens)
 		}
 		else
 		{
-			handle_commands(token_list, i);
-			// printf("cmd_list->strs: [%s]\n", token_list->cmd_list->strs);
-			// printf("token_list->cmd_list: [%s]\n", token_list->cmd_list);
+			cmds = handle_commands(token_list, i);
+			token_list->cmd_list = cmds;
+			printf("token_list->cmd_list->cmd: [%s]\n", (char *)token_list->cmd_list->cmd);
+			printf("token_list->cmd_list->strs: [%s]\n", (char *)token_list->cmd_list->strs);
 		}
 		token_list = token_list->next;
 		i++;

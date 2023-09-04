@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 20:37:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 21:11:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_cmd_struct(t_command *cmds)
 {
-	// cmds->input = NULL;
+	cmds->input = NULL;
 	cmds->strs = NULL;
 	cmds->cmd = NULL;
 }
