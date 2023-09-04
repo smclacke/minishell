@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/09/04 15:58:52 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2023/09/04 21:11:40 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +67,7 @@ typedef struct	s_redirect
 
 typedef struct s_command
 {
-	void				*info;
+	void				*input;
 	char				*cmd;
 	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
 	struct s_command	*next;

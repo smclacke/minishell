@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:42:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 21:29:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,7 @@ static int	handle_redirect(t_parser *tokens)
 	return (0);
 }
 
-/**
- * first node in list, if not redirc, cmd
- * first thing after pipe, if not redirec, cmd (right?)
- * everything else string
-*/
-static void	handle_commands(t_parser *tokens, int i)
+static t_command	*handle_commands(t_parser *tokens, int i)
 {
 	t_command		*cmds;
 		
@@ -100,20 +95,16 @@ static void	handle_commands(t_parser *tokens, int i)
 		exit(EXIT_FAILURE); // fix this later
 	init_cmd_struct(cmds);
 	tokens->cmd_list = tokens->input;
-	cmds->info = tokens->cmd_list;
+	cmds->input = tokens->cmd_list;
 
-	// the one that must be a cmd (i think maybe, ask someone knowledgable about this)
+	// the one that must be a cmd
 	if (i == 0)
-	{	
-		cmds->cmd = cmds->info;
-		printf("cmds->cmd	| %s\n", cmds->cmd);
-	}
+		cmds->cmd = cmds->input;
 	else
-	{
-		cmds->strs = cmds->info;
-		printf("cmds->strs	| %s\n", cmds->strs);
-	}
+		cmds->strs = cmds->input;
+	return (cmds);
 }
+
 
 /**
  * @brief	Main parser function:
@@ -124,6 +115,7 @@ static void	handle_commands(t_parser *tokens, int i)
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*token_list;
+	t_command		*cmds;
 	int				i = 0;
 
 	token_list = tokens;
@@ -148,7 +140,12 @@ t_parser	*parser(t_parser *tokens)
 			}
 		}
 		else
-			handle_commands(token_list, i);
+		{
+			cmds = handle_commands(token_list, i);
+			token_list->cmd_list = cmds;
+			printf("token_list->cmd_list->cmd: [%s]\n", (char *)token_list->cmd_list->cmd);
+			printf("token_list->cmd_list->strs: [%s]\n", (char *)token_list->cmd_list->strs);
+		}
 		token_list = token_list->next;
 		i++;
 	}
