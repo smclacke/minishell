@@ -38,7 +38,8 @@ void	ft_cd(t_parser *lst, t_env **env)
 		if (home_dir == NULL)
 			mini_error("getenv", errno);
 		old_work_dir = getcwd(cwd, sizeof(cwd));
-		while (lst)
+		// lst = lst->next;
+		while (lst->next)
 		{
 			access_and_change(env, lst, old_work_dir, cwd);
 			lst = lst->next;

@@ -15,8 +15,7 @@ DJOY			= djoyke
 SAAR			= sarah
 MICRO_SHELL		= micro
 
-CFLAGS			= -Wall -Wextra -g 
-#-fsanitize=address
+CFLAGS			= -Wall -Wextra -g -fsanitize=address
 
 # -Werror 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
