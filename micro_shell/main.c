@@ -6,16 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/25 12:11:57 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
+/*   Updated: 2023/09/01 14:36:30 by smclacke      ########   odam.nl         */
+=======
 /*   Updated: 2023/08/21 21:26:20 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/minishell.h"
 
 // struct: buildins + cmds, make new nodes with everything in it up to pipes and redirects
 // call vars in struct whatever they 'are' i.e., buildin = (echo hello) or
 // cmd = (ls -la), or redirect = (infile>>) 
+<<<<<<< HEAD
 
 // don't just put all parts back into ONE node, create mini node arrays of the strings 
 // that need to be together
@@ -30,6 +34,22 @@ cmd, str, str -> cmd, **str = str, str
 echo hello
 ls -la
 
+=======
+
+// don't just put all parts back into ONE node, create mini node arrays of the strings 
+// that need to be together
+
+// if str, put into str array, keep adding the separate strings up to pipes and redirect 
+
+echo hello | unset USER
+
+cmd, str, str -> cmd, **str = str, str
+
+
+echo hello
+ls -la
+
+>>>>>>> sarah
 ~ builtins
 -> tokens
 lst->builtin
@@ -47,45 +67,38 @@ lst->cmd = cmd + str in one node
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
-	t_lexer		*tokens;
-	t_parser	*parser_struct;
-	t_expand	*expand_list;
+	t_parser	*tokens;
+	// t_env		*env;
 
 	(void) argc;
 	(void) argv;
+	(void) envp;
+
 	tokens = NULL;
-	parser_struct = NULL;
 	while (1)
 	{
 		input = readline(PROMPT);
 		add_history(input);
-
-		//-- Sarah --//
 		tokens = lexer(input);
 		if (!tokens)
 			continue ;
-		print_lexer(tokens);
-		
+		shelly_print_list(tokens);
 
-		parser_struct = parser(tokens);
-		if (!parser_struct)
+		tokens = parser(tokens);
+		if (!tokens)
 			continue ;
-		
+
 
 
 
 
 		//-- Djoyke --//
-		// micro_echo(parser_struct);
-		// env = micro_env_list(envp);
 		// expand(mini->tokens) // tokens from s_parser struct, 
 		//	check built-in, check meta char, check quotes.
-		// micro_execute(envp, par_tokens);
-		expand_list = micro_expand(parser_struct);
-		if (micro_execute(envp, parser_struct))
-			continue ;
-		// micro_echo(parser_struct);
+		if (shelly_check_for_builtin(tokens))//will be a expand funct
+			printf("there's a builtin whoop\n");
 		// execution // make env_list, create child processes, execve
+		micro_execute(envp, tokens);
 		// free input (readline needs to be fred at end)	
 	}
 	return (0);

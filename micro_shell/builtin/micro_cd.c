@@ -6,9 +6,10 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 19:51:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 17:13:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/minishell.h"
 
@@ -22,7 +23,7 @@
  * change pwd 
  * change oldpwd
 */
-void	micro_cd(t_expand *lst, t_env *env)
+void	micro_cd(t_parser *lst, t_env *env)
 {
 	char		*home_dir;
 	char		*old_work_dir;
@@ -36,7 +37,7 @@ void	micro_cd(t_expand *lst, t_env *env)
 	{
 		home_dir = getenv("HOME");
 		if (home_dir == NULL)
-			micro_error("getenv", errno);
+			mini_error("getenv", errno);
 		printf("%s\n", getcwd(cwd, sizeof(cwd)));
 		old_work_dir = getcwd(cwd, sizeof(cwd));
 		if (access(lst->str, F_OK) == 0)
@@ -44,7 +45,7 @@ void	micro_cd(t_expand *lst, t_env *env)
 		else
 		{
 			error = ft_strjoin("minishell: cd: ", lst->str);
-			micro_error(error, errno);
+			mini_error(error, errno);
 		}
 		// if (!ft_strncmp ("OLDPWD=", env->key, 6))
 		// 	env = env->next;

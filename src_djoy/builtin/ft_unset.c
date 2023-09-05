@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/18 13:04:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/05 18:08:35 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,53 @@
  * @param argv terminal given arguments (for now)
  * @param env pointer to environment
  * @brief unset values by deleting nodes in env linked list
+ * @todo 
+ * bash-3.2$ unset djoyke=gek
+ * bash: unset: `djoyke=gek': not a valid identifier
 */
-void	ft_unset(char *argv, t_env *env)
+void	ft_unset(t_parser *node, t_env **env)
 {
-	t_env *temp;
-
-	temp = NULL;
-	while (env->next != NULL)
+	if (word_check(node) == 1)
+		return ;
+	if (node != NULL)
+		node = node->next;
+	while (node)
 	{
-		if (ft_strcmp(env->next->key, argv) == 0)
-		{
-			temp = env->next;
-			env->next = env->next->next;
-			free(temp);
-		}
-		env = env->next;
+		mini_remove_env(node->cmd_list->strs, env);
+		node = node->next;
 	}
-	print_list(env);
+}
+
+/**
+ * @param str key given as string
+ * @param env pointer to environment
+ * @brief loops through list and finds the key's to delete
+*/
+void	mini_remove_env(char *str, t_env **env)
+{
+	t_env	*previous;
+	t_env	*current;
+	t_env	*tmp;
+
+	previous = NULL;
+	current = *env;
+	tmp = NULL;
+	while (current != NULL) 
+	{
+		if (!ft_strncmp(current->key, str, ft_strlen(str)))
+		{
+			if (previous != NULL)
+				previous->next = current->next;
+			else 
+				*env = current->next;
+			tmp = current;
+			current = current->next;
+			free_all(tmp);
+		}
+		else
+		{
+			previous = current;
+			current = current->next;
+		}
+	}
 }

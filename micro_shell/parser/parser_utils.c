@@ -6,22 +6,29 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 16:37:55 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
+/*   Updated: 2023/09/01 14:37:44 by smclacke      ########   odam.nl         */
+=======
 /*   Updated: 2023/09/01 13:10:33 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-bool	parser_cmp_pipe(t_lexer *tokens)
+/**
+ * need to wrtie this function
+*/
+bool	parser_cmp_squote(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
-	if (ft_strnstr(tokens->input, "|", 1) == 0)
-		return (true);
 	return (false);
 }
-
-bool	parser_cmp_char_builtins(char *tokens)
+/**
+ * need to wrtie this function
+*/
+bool	parser_cmp_dquote(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
@@ -40,7 +47,7 @@ bool	parser_cmp_char_builtins(char *tokens)
 	return (false);
 }
 
-bool	parser_cmp_builtins(t_lexer *tokens)
+bool	parser_cmp_builtins(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
@@ -59,7 +66,7 @@ bool	parser_cmp_builtins(t_lexer *tokens)
 	return (false);
 }
 
-bool	parser_cmp_signs(t_lexer *tokens)
+bool	parser_cmp_metas(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
@@ -73,16 +80,21 @@ bool	parser_cmp_signs(t_lexer *tokens)
 		return (true);
 	else if ((ft_strnstr(tokens->input, "$", 1)))
 		return (true);
+	else if ((ft_strnstr(tokens->input, "|", 1)))
+		return (true);
 	return (false);
 }
-// is this enough/going to work for all cases?
-bool	parser_cmp_abso(t_lexer *tokens)
+
+bool	parser_cmp_abso(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
-	if (ft_strnstr(tokens->input, "/bin", ft_strlen(tokens->input)))
+	if (ft_strnstr(tokens->input, "/", ft_strlen(tokens->input)))
 		return (true);
-	else if (ft_strnstr(tokens->input, "/usr", ft_strlen(tokens->input)))
+	else if (ft_strnstr(tokens->input, "./", ft_strlen(tokens->input)))
+		return (true);
+	else if (ft_strnstr(tokens->input, "../", ft_strlen(tokens->input)))
 		return (true);
 	return (false);
 }
+

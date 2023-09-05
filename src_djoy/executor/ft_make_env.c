@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env_list.c                                         :+:    :+:            */
+/*   ft_make_env.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/28 13:29:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 15:35:33 by dreijans      ########   odam.nl         */
+/*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/09/04 18:14:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param key data passed from environment before = sign
@@ -21,7 +21,7 @@
  * @todo 
  * 1) needs to add previous in case of doubly linked list
 */
-t_env	*env_lstnew(void *key, void *value)
+t_env	*env_lstnew(void *key, void *value, char *full)
 {
 	t_env	*new;
 
@@ -30,6 +30,7 @@ t_env	*env_lstnew(void *key, void *value)
 		return (NULL);
 	new->key = key;
 	new->value = value;
+	new->full = full;
 	new->next = NULL;
 	return (new);
 }
@@ -57,35 +58,18 @@ void	get_key_value(char *str, char **key, char **value)
 }
 
 /**
- * @param lst linked list to loop through
- * @brief loops to list to go to last position
+ * @param str string from 2d array
+ * containing line from envp.
+ * @brief substrings string from envp[i].
 */
-t_env	*env_lstlast(t_env *lst)
+char	*get_full(char *str)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
+	char	*new_str;
 
-/**
- * @param lst linked list
- * @param new new node to be added to linked list 
- * @brief loops through list to add the new node to the back
- * @todo adding previous in case of doubly linked list
-*/
-void	env_lstadd_back(t_env **lst, t_env *new)
-{
-	t_env	*last;
-
-	if (*lst)
-	{
-		last = mini_lstlast(*lst);
-		last->next = new;
-	}
-	else
-		*lst = new;
+	new_str = NULL;
+	if (str)
+		new_str = ft_substr(str, 0, ft_strlen(str));
+	return (new_str);
 }
 
 /**
@@ -96,22 +80,48 @@ void	env_lstadd_back(t_env **lst, t_env *new)
  * @brief putting the envp content into a linked list seperated by key and value
  * @return linked list 
 */
-t_env	*env_list(char **envp)
+t_env	*env_list(char **envp, t_env *env)
 {
 	int		i;
 	char	*key;
 	char	*value;
-	t_env	*env;
+	char	*full;
+	// t_env	*env;
 
 	i = 0;
-	env = NULL;
+	// env = NULL;
 	if (envp[i] == NULL)
 		mini_error("env", errno);
 	while (envp[i] != NULL)
 	{
 		get_key_value(envp[i], &key, &value);
-		mini_lstadd_back(&env, mini_lstnew(key, value));
+		full = get_full(envp[i]);
+		env_lstadd_back(&env, env_lstnew(key, value, full));
 		i++;
 	}
 	return (env);
+}
+
+/**
+ * @param env linked list containing environment
+ * @brief turns environment linked list into 2d array
+ * @todo line 119: instead of errno need to return NULL?
+*/
+char	**list_to_string(t_env *env)
+{
+	char	**env_array;
+	int		i;
+
+	i = 0;
+	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
+	if (!env_array)
+		mini_error ("malloc", errno);
+	while (env)
+	{
+		env_array[i] = env->full;
+		i++;
+		env = env->next;
+	}
+	env_array[i] = NULL;
+	return (env_array);
 }

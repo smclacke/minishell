@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/03 21:02:49 by smclacke      ########   odam.nl          #
+#    Updated: 2023/09/04 17:40:15 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ DJOY			= djoyke
 SAAR			= sarah
 MICRO_SHELL		= micro
 
-CFLAGS			= -Wall -Wextra -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -g 
+#-fsanitize=address
 
 # -Werror 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
@@ -47,17 +48,26 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		=	main_djoy.c			\
-					env_list.c			\
-					utils.c				\
-					builtin/ft_echo.c	\
-					builtin/ft_cd.c 	\
-					builtin/ft_pwd.c 	\
-					builtin/ft_export.c \
-					builtin/ft_unset.c 	\
-					builtin/ft_env.c 	\
-					test/pipes_forks.c	\
-					test/fake_input.c	
+SRCS_DJOY		=	main_djoy.c						\
+					builtin/ft_echo.c				\
+					builtin/ft_cd.c 				\
+					builtin/ft_pwd.c 		\
+					builtin/ft_export.c 	\
+					builtin/ft_unset.c 		\
+					builtin/ft_env.c 		\
+					builtin/builtin_utils.c \
+					builtin/ft_exit.c		\
+					executor/ft_execute.c	\
+					executor/ft_make_env.c	\
+					executor/ft_utils.c		\
+					executor/list_utils.c 	\
+					executor/print_utils.c	\
+					expander/ft_expand.c 	\
+					../src_saar/lexer/lexer_utils.c 	\
+					../src_saar/lexer/lexer.c 			\
+					../src_saar/parser/parser_utils.c 	\
+					../src_saar/parser/parser.c 		
+
 					
 
 DJOY_DIR		= src_djoy
@@ -87,21 +97,21 @@ OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 
 ## MICRO_SHELL ##
 
-SRCS_MICRO		= main.c					\
-					lexer/lexer.c			\
-					lexer/lexer_utils.c		\
-					parser/parser.c			\
-					parser/parser_quotes.c	\
-					parser/parser_utils.c	\
-					builtin/micro_cd.c		\
-					builtin/micro_echo.c	\
-					builtin/micro_env.c		\
-					builtin/micro_export.c	\
-					builtin/micro_pwd.c		\
-					builtin/micro_unset.c	\
-					executor/micro_env.c 	\
+SRCS_MICRO		= main.c						\
+					lexer/lexer.c				\
+					lexer/lexer_utils.c			\
+					parser/parser.c				\
+					parser/parser_quotes.c		\
+					parser/parser_utils.c		\
+					builtin/micro_cd.c			\
+					builtin/micro_echo.c		\
+					builtin/micro_env.c			\
+					builtin/micro_export.c		\
+					builtin/micro_pwd.c			\
+					builtin/micro_unset.c		\
+					executor/micro_env.c 		\
 					executor/micro_execute.c	\
-					executor/micro_utils.c	\
+					executor/micro_utils.c		\
 					expander/micro_expand.c 
 					
 
@@ -152,7 +162,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
-	@ mkdir -p $(OBJ_DJOY_DIR)/test
+	@ mkdir -p $(OBJ_DJOY_DIR)/executor
+	@ mkdir -p $(OBJ_DJOY_DIR)/expander
+	@ mkdir -p $(OBJ_DJOY_DIR)/lexer
+	@ mkdir -p $(OBJ_DJOY_DIR)/parser
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
