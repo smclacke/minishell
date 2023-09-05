@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:26:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/05 18:08:35 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	mini_remove_env(char *str, t_env **env)
 	tmp = NULL;
 	while (current != NULL) 
 	{
-		if (!ft_strncmp(current->key, str, strlen(str)))
+		if (!ft_strncmp(current->key, str, ft_strlen(str)))
 		{
 			if (previous != NULL)
 				previous->next = current->next;
