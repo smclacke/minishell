@@ -27,6 +27,7 @@
 # include <sys/ioctl.h>
 # include <errno.h>
 # include <stdbool.h>
+# include <sys/wait.h>
 
 # define READ 0
 # define WRITE 1
