@@ -38,8 +38,8 @@ void	ft_echo(t_parser *lst)
 	is_flag = 0;
 	if (!lst->cmd_list)
 		mini_error("cmd_list", errno);
-	else
-		lst = lst->next;
+	lst = lst->next;
+	printf("what are you ? = [%s]\n", lst->cmd_list->strs);
 	while (lst)
 	{
 		if (ft_strcmp(&lst->cmd_list->strs[i], "-n") == 0)
