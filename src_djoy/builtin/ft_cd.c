@@ -34,15 +34,23 @@ void	ft_cd(t_parser *lst, t_env **env)
 	old_work_dir = NULL;
 	if (env)
 	{
-		home_dir = getenv("HOME");
+		home_dir = getenv("HOME");//pakt niet eigen env? schr
 		if (home_dir == NULL)
 			mini_error("getenv", errno);
+	// 		while (mini_strcmp ("OLDPWD", head->key) != 0)
+	// {
+	// 	printf("hello 5\n");
+	// 	head = head->next;
+	// 	if (head == NULL)
+	// 		return ;
+	// }
 		old_work_dir = getcwd(cwd, sizeof(cwd));
-		// lst = lst->next;
-		while (lst->next)
+		lst->cmd_list = lst->cmd_list->next;
+		while (lst->cmd_list)
 		{
 			access_and_change(env, lst, old_work_dir, cwd);
-			lst = lst->next;
+			printf("hello 1\n");
+			lst->cmd_list = lst->cmd_list->next;
 		}
 	}
 }
@@ -63,10 +71,13 @@ void	access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 
 	if (lst->cmd_list->strs != NULL)
 	{
+		printf("hello 2\n");
 		if (access(lst->cmd_list->strs, F_OK) == 0)
 		{
+			printf("hello 3\n");
 			if (chdir(lst->cmd_list->strs) == -1)
 			{
+				printf("hello fail\n");
 				error = ft_strjoin("minishell: cd: ", lst->cmd_list->strs);
 				mini_error(error, errno);
 			}
@@ -89,20 +100,22 @@ void	access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 void	change_old_dir(t_env **env, char *str)
 {
 	char	*key_equal;
+	char	*full;
 	char	*new_full;
 	t_env	*new;
-	char	*full;
 	t_env	*head;
 
 	key_equal = NULL;
+	full = NULL;
 	new_full = NULL;
 	new = NULL;
-	full = NULL;
 	head = *env;
 	if (!env)
 		reassign_old_pwd(env, new, str, full);
+	printf("hello 4\n");
 	while (mini_strcmp ("OLDPWD", head->key) != 0)
 	{
+		printf("hello 5\n");
 		head = head->next;
 		if (head == NULL)
 			return ;
@@ -130,8 +143,10 @@ void	change_current_dir(t_env **env, char *str)
 	key_equal = NULL;
 	new_full = NULL;
 	head = *env;
+	printf("hello 6\n");
 	while (mini_strcmp ("PWD", head->key) != 0)
 	{
+		printf("hello 7\n");
 		head = head->next;
 		if (head == NULL)
 			return ;
@@ -153,6 +168,8 @@ void	change_current_dir(t_env **env, char *str)
 void	reassign_old_pwd(t_env **env, t_env *new, char *str, char *full)
 {
 	full = ft_strjoin("OLDPWD=", str);
+	printf("hello 8\n");
+	printf("full = [%s]\n", full);
 	if (full == NULL)
 		mini_error("malloc", errno);
 	new = env_lstnew("OLDPWD", str, full);

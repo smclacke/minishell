@@ -40,19 +40,19 @@ void	do_builtin(t_parser *node, t_env **env)
 {
 	if (!node->cmd_list->cmd)
 		mini_error("parser", errno);
-	if (mini_strcmp(node->cmd_list->cmd, "echo") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "echo") == 0)
 		ft_echo(node);
-	if (mini_strcmp(node->cmd_list->cmd, "cd") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "cd") == 0)
 		ft_cd(node, env);
-	if (mini_strcmp(node->cmd_list->cmd, "pwd") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "pwd") == 0)
 		ft_pwd();
-	if (mini_strcmp(node->cmd_list->cmd, "export") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "export") == 0)
 		ft_export(node, env);
-	if (mini_strcmp(node->cmd_list->cmd, "unset") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "unset") == 0)
 		ft_unset(node, env);
-	if (mini_strcmp(node->cmd_list->cmd, "env") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "env") == 0)
 		ft_env(*env);
-	if (mini_strcmp(node->cmd_list->cmd, "exit") == 0)
+	else if (mini_strcmp(node->cmd_list->cmd, "exit") == 0)
 		ft_exit(node);
 }
 

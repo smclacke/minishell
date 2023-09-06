@@ -17,6 +17,7 @@ void	init_parser(t_parser *data)
 	data->input = NULL;
 	data->cmd_list = NULL;
 	data->redirect_list = NULL;
+	// data->next = NULL;//dont forget
 }
 
 t_parser		*lexer_listlast(t_parser *list)

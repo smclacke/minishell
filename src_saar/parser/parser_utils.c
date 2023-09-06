@@ -17,6 +17,7 @@ void	init_cmd_struct(t_command *cmds)
 	cmds->input = NULL;
 	cmds->strs = NULL;
 	cmds->cmd = NULL;
+	// cmds->next = NULL;//dont forget
 }
 
 bool	is_pipe(t_parser *tokens)

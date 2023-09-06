@@ -25,10 +25,10 @@ void	ft_env(t_env *env)
 
 	head = env;
 	printf("what the shell env\n");
-	// while (head != NULL)
-	// {
-	// 	printf("%s=%s\n", head->key, head->value);
-	// 	head = head->next;
-	// }
-	print_list_full(env);
+	while (head != NULL)
+	{
+		printf("%s=%s\n", head->key, head->value);
+		head = head->next;
+	}
+	// print_list_full(env);
 }
