@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 22:46:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 12:26:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_cmd_struct(t_command *cmds)
 	cmds->input = NULL;
 	cmds->strs = NULL;
 	cmds->cmd = NULL;
+	cmds->next = NULL;
 }
 
 void	init_red_struct(t_redirect *reds)
@@ -24,6 +25,7 @@ void	init_red_struct(t_redirect *reds)
 	reds->input = NULL;
 	reds->meta = NULL;
 	reds->file = NULL;
+	reds->next = NULL;
 }
 
 // bool	is_red_with_sass(t_parser *tokens)

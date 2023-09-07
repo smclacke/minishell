@@ -6,13 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 23:13:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 12:36:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/sarah.h"
 
-// why can't i print meta???????????
 t_parser	*print_the_full_thing(t_parser *tokens)
 {
 	t_parser	*list;
@@ -21,8 +20,12 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	list = tokens;
 	while (list)
 	{
-		printf("[%i] || input: [%s] | cmd_list->cmd: [%s] | cmd_list->strs: [%s] | redirect->meta: [%s]\n", 
-			i, list->input, (char *)list->cmd_list->cmd, (char *)list->cmd_list->strs, (char *)list->redirect_list->meta);
+		printf("[%i] | ", i);
+		printf("input: [%s] \n", list->input);
+		// printf("cmd_list->cmd: [%s] | ", list->cmd_list->cmd);
+		// printf("redirect->meta: [%s]\n", list->redirect_list->meta);
+		// printf("[%i] || input: [%s] | cmd_list->cmd: [%s] | cmd_list->strs: [%s] | redirect->meta: [%s]\n", 
+		// 	i, list->input, (char *)list->cmd_list->cmd, (char *)list->cmd_list->strs, (char *)list->redirect_list->meta);
 		i++;
 		list = list->next;
 	}
