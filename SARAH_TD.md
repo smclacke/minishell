@@ -5,6 +5,31 @@ dein computer, kein computer
 
 ---------------------------------------------------------------------------------
 
+........................
+token->cmd->cmd = [e]
+token->cmd->strs = [(null)]
+[0] | input: [e] cmd_list->cmd: [e] | cmd_list->str: [(null)] | ----------------
+||
+index = [0], cmd = [e]
+index = [0], str = [(null)]
+NULL
+----------------
+cmd = [e]
+expander: 		there's a builtin whoop
+........................
+token->cmd->cmd = [c]
+token->cmd->strs = [(null)]
+[0] | input: [c] cmd_list->cmd: [c] | cmd_list->str: [(null)] | ----------------
+||
+index = [0], cmd = [c]
+index = [0], str = [(null)]
+NULL
+----------------
+cmd = [c]
+expander: 		there's a builtin whoop
+........................
+
+
 RIGHT NOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 HELLLLLLLOOOOOO AGAIN, ELEPHANTS RULE

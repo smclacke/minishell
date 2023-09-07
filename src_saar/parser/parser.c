@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 19:30:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 23:34:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static t_command	*handle_commands(t_parser *tokens, int i)
+static t_command	*handle_commands(t_parser *tokens, int flag)
 {
 	t_command		*cmds;
 
@@ -24,7 +24,7 @@ static t_command	*handle_commands(t_parser *tokens, int i)
 	cmds->input = tokens->cmd_list;
 
 	// the one that must be a cmd
-	if (i == 0)
+	if (flag == 0)
 		cmds->cmd = cmds->input;
 	else
 		cmds->strs = cmds->input;
@@ -38,13 +38,14 @@ static t_redirect	*handle_redirect(t_parser *tokens)
 	reds = (t_redirect *)malloc(sizeof(t_redirect));
 	if (!reds)
 		exit(EXIT_FAILURE); // fix this later
-	init_red_struct(tokens->redirect_list);
-
+	init_red_struct(reds);
+	printf("(reds)tokens->input: [%s]\n", tokens->input);
 	tokens->redirect_list = tokens->input;
+	printf("(reds)tokens->redirect_list: [%s]\n", tokens->redirect_list);
 	reds->input = tokens->redirect_list;
+	printf("(reds)reds->input: [%s]\n", reds->input);
 	reds->meta = reds->input;
-
-
+	printf("(reds)reds->meta: [%s]\n", reds->meta);
 
 	return (reds);
 }
@@ -58,9 +59,9 @@ static t_redirect	*handle_redirect(t_parser *tokens)
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*token_list;
-	t_command		*cmds;
-	t_redirect		*reds;
-	int				i = 0;
+	t_command		*cmds = NULL;
+	t_redirect		*reds = NULL;
+	int				flag = 0;
 
 	token_list = tokens;
 	while (token_list)
@@ -74,19 +75,17 @@ t_parser	*parser(t_parser *tokens)
 		}
 		// if there was a redirect, need to check which so that if >, next node is file, 
 		// and if pipe, next is command ( don't use index anymore, just keep for first arg)
-
-		
-		// if (there was a sassy red and i need to do something with next node) ...
-
+		// so.... if (there was a sassy red and i need to do something with next node) ...
 		else
 		{
-			cmds = handle_commands(token_list, i);
+			// puts rest in command struct as cmd or str
+			cmds = handle_commands(token_list, flag);
 			token_list->cmd_list = cmds;
 			printf("token->cmd->cmd = [%s]\n", token_list->cmd_list->cmd);
 			printf("token->cmd->strs = [%s]\n", token_list->cmd_list->strs);
 		}
 		token_list = token_list->next;
-		i++;
+		flag++;
 	}
 	return (tokens);
 }
