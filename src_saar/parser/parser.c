@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/09/07 12:36:10 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2023/09/05 18:13:54 by SarahLouise   ########   odam.nl         */
+>>>>>>> ce3766d9807ace0322a8acea7c858b32bec7fb6c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +92,13 @@ t_parser	*parser(t_parser *tokens)
 		{
 			cmds = handle_commands(token_list, i);
 			token_list->cmd_list = cmds;
+<<<<<<< HEAD
 			printf("token->cmd->cmd = [%s]\n", (char *)token_list->cmd_list->cmd);
 			printf("token->cmd->strs = [%s]\n", (char *)token_list->cmd_list->strs);
+=======
+			printf("cmds = [%s]\n", (char *)token_list->cmd_list->cmd);
+			printf("strs = [%s]\n", (char *)token_list->cmd_list->strs);
+>>>>>>> ce3766d9807ace0322a8acea7c858b32bec7fb6c
 		}
 		token_list = token_list->next;
 		i++;

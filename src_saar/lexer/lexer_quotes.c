@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/01 17:07:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/04 15:59:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,4 +170,3 @@ char	**ft_split_shelly(char *input)
 	array[i] = NULL;
 	return (array);
 }
-

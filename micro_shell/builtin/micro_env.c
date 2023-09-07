@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 18:12:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 14:07:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/07/27 15:29:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 void	micro_env(t_env *env)
 {
-	printf("what the shell env");
+	printf("what the shell env\n");
 	while (env != NULL)
 	{
 		printf("%s=%s\n", env->key, env->value);

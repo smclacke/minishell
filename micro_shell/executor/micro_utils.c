@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/02 19:08:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/03 15:51:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,18 @@ int	micro_strcmp(char *s1, char *s2)
  * 2) exit(EXIT_FAILURE) is it really neccesary?
  * 3) MAYBE MAKE IT A BOOL?
 */
-void	micro_check_for_builtin(t_expand *lst, t_env *env)
+void	micro_check_for_builtin(t_parser *lst, t_env *env)
 {
-	if (ft_strcmp(lst->builtin, "echo") == 0)
+	if (ft_strcmp(lst->cmd, "echo") == 0)
 		micro_echo(lst);
-	if (ft_strcmp(lst->builtin, "cd") == 0)
+	if (ft_strcmp(lst->cmd, "cd") == 0)
 		micro_cd(lst, env);
-	if (ft_strcmp(lst->builtin, "pwd") == 0)
+	if (ft_strcmp(lst->cmd, "pwd") == 0)
 		micro_pwd();
-	if (ft_strcmp(lst->builtin, "export") == 0)
+	if (ft_strcmp(lst->cmd, "export") == 0)
 		micro_export(lst, env);
-	if (ft_strcmp(lst->builtin, "unset") == 0)//gives pwd not the entire path after unsetting
+	if (ft_strcmp(lst->cmd, "unset") == 0)//gives pwd not the entire path after unsetting
 		micro_unset(lst, env);
-	if (ft_strcmp(lst->builtin, "env") == 0)
+	if (ft_strcmp(lst->cmd, "env") == 0)
 		micro_env(env);
 }

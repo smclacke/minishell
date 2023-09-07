@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/09/07 12:36:29 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2023/09/05 18:13:50 by SarahLouise   ########   odam.nl         */
+>>>>>>> ce3766d9807ace0322a8acea7c858b32bec7fb6c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 		// shelly_parser_print(tokens);
-		print_the_full_thing(tokens);
+		// print_the_full_thing(tokens);
 
 
 

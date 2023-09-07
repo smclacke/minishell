@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/02 19:08:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/08/08 15:29:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,75 +53,68 @@ typedef enum e_signs
 }		t_signs;
 
 // LEXER
-typedef	struct s_lexer
-{
-	void				*input;
-	void				*token;
-	struct s_lexer		*next;
-}	t_lexer;
-
-//----- lexer.c -----//
-void			init_lexer(t_lexer *token_list);
-t_lexer			*lexer(char *input);
-
-//----- lexer_utils.c -----//
-t_lexer			*lexer_listlast(t_lexer *list);
-void			lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer			*lexer_listnew(void *input);
-t_lexer			*print_lexer(t_lexer *token);
-
-// -------- Quotes --------//
-int				sign_tokens(char *input);
-char			*quote_tokens(char *input);
-int				closed_quotes(char *input);
-char			*check_quotes(char *input);
-
-// PARSER
 typedef struct s_parser 
 {
-	void				*input; // do i need this?
+	void				*input;
+	void				*tokens;
 	char				*str;
 	char				*cmd;
-	char				*sign;
-	char				*abso; // DECIDE WHAT WE ARE USING, SILLY SARAH...
-	char				*path;
+	char				*meta;
+	char				*abso;
+	char				*squote;
+	char				*dquote;
 	char				*here_doc;
 	struct s_parser		*next;
-	struct s_lexer		*tokens;		// do i need both tokens and par_tokens
-	struct s_lexer		*par_tokens;
 }	t_parser;
 
+//----- lexer.c -----//
+void				init_parser(t_parser *token);
+t_parser			*lexer(char *input);
+
+//----- lexer_utils.c -----//
+t_parser			*lexer_listlast(t_parser *list);
+void				lexer_listadd_back(t_parser **list, t_parser *new);
+t_parser			*lexer_listnew(void *input);
+t_parser			*shelly_print_list(t_parser *token);
+
+// -------- Quotes --------//
+char				*quote_tokens(char *input);
+int					closed_quotes(char *input);
+char				*check_quotes(char *input);
+
+// PARSER
+
 //---- parser.c ----//
-void			init_parser(t_parser *parser_struct);
-t_parser		*parser(t_lexer *tokens);
+t_parser			*parser(t_parser *tokens);
 
 //---- parser_quotes.c ----//
-bool			parser_check_quotes(char *tokens);
-char			*remove_quotes(char *tokens);
+bool				parser_check_quotes(char *tokens);
+char				*remove_quotes(char *tokens);
 
 //---- parser_utils.c ----//
-bool			parser_cmp_pipe(t_lexer *tokens);
-bool			parser_cmp_char_builtins(char *tokens);
-bool			parser_cmp_builtins(t_lexer *param);
-bool			parser_cmp_signs(t_lexer *tokens);
-bool			parser_cmp_abso(t_lexer *tokens);
+bool				parser_cmp_squote(t_parser *param);
+bool				parser_cmp_dquote(t_parser *param);
+bool				parser_cmp_builtins(t_parser *param);
+bool				parser_cmp_metas(t_parser *tokens);
+bool				parser_cmp_abso(t_parser *tokens);
+
 
 //---- Expander ----//
-typedef struct s_expand
-{
-	char				*sign;
-	char				*str;
-	char				*builtin;
-	char				*cmd;
-	struct s_expand		*next;
-	struct s_expand		*previous;
-}						t_expand;
+// typedef struct s_expand
+// {
+// 	char				*sign;
+// 	char				*str;
+// 	char				*builtin;
+// 	char				*cmd;
+// 	struct s_expand		*next;
+// 	struct s_expand		*previous;
+// }						t_expand;
 
-t_expand	*micro_expand(t_parser *node);
+// void		*micro_expand(t_parser *node);
 // bool		micro_check_for_meta(t_parser *node);
 bool		shelly_check_for_builtin(t_parser *node);
-t_expand	*shelly_expand_lstlast(t_expand *lst);
-void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
+// t_expand	*shelly_expand_lstlast(t_expand *lst);
+// void		shelly_expand_lstadd_back(t_expand **lst, t_expand *new);
 
 //---- Executor ----//
 typedef struct s_env
@@ -143,12 +136,12 @@ void		micro_print_list_key(t_env *env);
 void		micro_print_list_value(t_env *env);
 
 //---- Built-in ----//
-void		micro_cd(t_expand *lst, t_env *env);
-void		micro_echo(t_expand *lst);
+void		micro_cd(t_parser *lst, t_env *env);
+void		micro_echo(t_parser *lst);
 void		micro_env(t_env *env);
 void		micro_pwd(void);
-void		micro_export(t_expand *lst, t_env *env);
-void		micro_unset(t_expand *lst, t_env *env);
+void		micro_export(t_parser *lst, t_env *env);
+void		micro_unset(t_parser *lst, t_env *env);
 
 /*execution*/
 // t_parser	*micro_build_process(t_parser *node, t_env *env);
@@ -157,14 +150,14 @@ void		micro_unset(t_expand *lst, t_env *env);
 // bool		micro_parse_path(t_env *env, t_parser *node);
 // char		*micro_find_path(t_env *env, t_parser *node);
 // void		micro_build(t_parser *node, t_env *env);
-void		micro_execute(char **envp, t_expand *list);
-void		micro_build(t_expand *lst, t_env *env);
-void		micro_check_for_meta(t_expand *lst);
+void		micro_execute(char **envp, t_parser *list);
+void		micro_build(t_parser *lst, t_env *env);
+void		micro_check_for_meta(t_parser *lst);
 
 //----Utils----//
 void		micro_error(char *string, int error);
 int			micro_strcmp(char *s1, char *s2);
-void		micro_check_for_builtin(t_expand *lst, t_env *env);
+void		micro_check_for_builtin(t_parser *lst, t_env *env);
 
 //------------ Minishell -----------//
 

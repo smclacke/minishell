@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/26 16:38:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/04 17:12:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define DJOYKE_H
 
 # include "libft/include/libft.h"
-// # include "../include/minishell.h"
-# include "colour.h"
 # include "prompt.h"
+# include "sarah.h"
+# include "colour.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,67 +25,188 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <sys/ioctl.h>
-# include <stdbool.h>
 # include <errno.h>
-# include <stddef.h>
+# include <stdbool.h>
+# include <sys/wait.h>
 
 # define READ 0
 # define WRITE 1
 
-/* struct for the env, prepped to be doubly, for now singularly linked */
+# define SUCCESS 0
+# define ERROR -1
+
+# define TRUE 1
+# define FALSE 0
+
+//---- Lexer ----//
+// typedef enum e_metas
+// {
+// 	DQUOTE = 1,
+// 	SQUOTE = 2,
+// 	DOLLAR = 3,
+// 	MORE = 4,
+// 	MOREMORE = 5,
+// 	LESS = 6,
+// 	LESSLESS = 7,
+// 	PIPE = 8
+// }		t_metas;
+
+// typedef struct s_parser 
+// {
+// 	void				*input;
+// 	void				*tokens;
+// 	char				*str;
+// 	char				*cmd;
+// 	char				*meta;
+// 	char				*abso;
+// 	char				*squote;
+// 	char				*dquote;
+// 	char				*here_doc;
+// 	struct s_parser		*next;
+// }	t_parser;
+
+// //----- lexer.c -----//
+// void		init_parser(t_parser *token);
+// t_parser	*lexer(char *input);
+
+// //----- lexer_utils.c -----//
+// t_parser	*lexer_listlast(t_parser *list);
+// void		lexer_listadd_back(t_parser **list, t_parser *new);
+// t_parser	*lexer_listnew(void *input);
+// t_parser	*shelly_print_list(t_parser *token);
+
+// // -------- Quotes --------//
+// char		*quote_tokens(char *input);
+// int			closed_quotes(char *input);
+// char		*check_quotes(char *input);
+
+// //---- parser.c ----//
+// t_parser	*parser(t_parser *tokens);
+
+// //---- parser_quotes.c ----//
+// bool		parser_check_quotes(char *tokens);
+// char		*remove_quotes(char *tokens);
+
+// //---- parser_utils.c ----//
+// bool		parser_cmp_squote(t_parser *param);
+// bool		parser_cmp_dquote(t_parser *param);
+// bool		parser_cmp_builtins(t_parser *param);
+// bool		parser_cmp_metas(t_parser *tokens);
+// bool		parser_cmp_abso(t_parser *tokens);
+
+//---- Executor ----//
 typedef struct s_env
 {
 	char				*key;
 	char				*value;
-	// char				full;
+	char				*full;
 	struct s_env		*next;
 	struct s_env		*previous;
 }							t_env;
 
-/* struct for the commands, prepped to be doubly, for now singularly linked */
-typedef struct s_command
+//---- Expander ----//
+void		ft_expand(t_parser *lst, t_env **env);
+bool		check_for_meta(t_parser *lst);
+bool		check_for_builtin(t_parser *lst);
+
+//----Environment----//
+// t_env		*env_list(char **envp);
+t_env		*env_list(char **envp, t_env *env);
+t_env		*env_lstnew(void *key, void *value, char *full);
+void		get_key_value(char *str, char **key, char **value);
+t_env		*env_lstlast(t_env *lst);
+void		env_lstadd_back(t_env **lst, t_env *new);
+void		print_list(t_env *env);
+void		print_list_key(t_env *env);
+void		print_list_value(t_env *env);
+char		**list_to_string(t_env *env);
+void		print_env_list(t_env *lst);
+void		print_list_full(t_env *env);
+
+//---- Built-in ----//
+void		free_all(t_env *env);
+void		do_builtin(t_parser *node, t_env **env);
+bool		word_check(t_parser *node);
+void		ft_cd(t_parser *lst, t_env **env);
+void		put_custom_error(t_parser *node, char *cmd);
+void		access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
+void		change_old_dir(t_env **env, char *str);
+void		change_current_dir(t_env **env, char *str);
+void		reassign_old_pwd(t_env **env, t_env *new, char *str, char *full);
+void		ft_echo(t_parser *lst);
+void		ft_env(t_env *env);
+void		ft_exit(t_parser *node);
+void		ft_pwd(void);
+void		ft_export(t_parser *lst, t_env **env);
+bool		reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v);
+void		ft_unset(t_parser *lst, t_env **env);
+void		mini_remove_env(char *str, t_env **env);
+
+//----Execution----//
+typedef struct s_execute
 {
-	char					**arg;
-	char					*command;
-	char					**path;
-	struct s_command		*next;
-	struct s_command		*previous;
-}							t_command;
+	int		fd_in;
+	int		fork_pid;
+	int		pipe_fd[2];
+	char	**path;
+	char	**env_array;
+}				t_execute;
 
-/* list making functions */
-void	env_lstadd_back(t_env **lst, t_env *new);
-t_env	*env_lstlast(t_env *lst);
-t_env	*env_lstnew(void *key, void *value);
-t_env	*env_list(char **envp);
-void	get_key_value(char *str, char **key, char **value);
+t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data);
+bool		absolute_check(t_parser *node);
+bool		parse_path(t_env *env, t_execute *data);
+char		*check_access(t_env *env, t_parser *node, t_execute *data);
+void		ft_execute(t_env **env, t_parser *list);
+void		build(t_parser *lst, t_env *env, t_execute *data);
+void		init_execute_struct(t_execute *data, t_env *env);
 
-/* built-in utils and functions */
-void	*ft_echo(char **argv);
-void	ft_cd(char *argv);
-void	ft_pwd(char *path);
-void	ft_export(char **argv, t_env *env);
-void	ft_unset(char *argv, t_env *env);
-void	ft_env(t_env *env);
+//----Utils----//
+void		mini_error(char *string, int error);
+int			mini_strcmp(char *s1, char *s2);
+int			mini_lstsize(t_env *lst);
+void		print_parser_list(t_parser *lst);
 
-/* utils */
-void	print_list(t_env *env);
-void	print_list_key(t_env *env);
-void	print_list_value(t_env *env);
-int		ft_strcmp(const char *s1, const char *s2);
-void	mini_error(char *string, int error);
-void	check_for_builtin(char **argv, t_env *env);//for now index 1
+//------------ Minishell -----------//
+/**
+ * everything that we share
+ * add our structs that hold the info that we need to share/
+ * for minishell as a whole 
+*/
 
-/* fake input */
-t_command	*command_lstnew(char **command);
-t_command	*command_lstlast(t_command *lst);
-void		command_lstadd_back(t_command **lst, t_command *new);
-t_command	*init_command(void);
-void		print_list_command(t_command *list);
-void		print_command(t_command *list);
-
-/* execute */
-void	set_pipes(t_command *input, t_env *env);
-void	set_forks(t_command *input, t_env *env, int fd_in, int *pipe_fd);
-char	*find_path(t_env *env, t_command *input);
+typedef struct s_mini
+{
+	struct s_parser		tokens;
+	struct s_env		environ;
+}	t_mini;
 
 #endif
+
+//-----------------try out------------------//
+
+// typedef struct s_parser 
+// {
+// 	struct s_parser		*data;
+// 	struct s_parser		*next;
+// }	t_parser;
+
+// // typedef struct s_parser 
+// // {
+// // 	char **cmd_and_flags;   "ls", "-l"
+// //	char **redirections;    INPUT_R, OUPUT_R 
+// //	char **files;			"file_1" "file_2" 
+// // 	struct s_parser		*next;
+// // }	t_parser;
+
+// list->node[0]
+// if node[1] exists then further
+// if node[2] exists then further
+
+// example : minishell$> < file1 cmd1 | cmd2 >file2
+// if space 2 parts if no space 1 part.
+
+// linked list;
+// data[0] = **array[0] < [1] file1 [2] cmd [3] NULL
+// data[1] = **array[0] pipe [1] NULL
+// data[2] = **array[0] cmd [1] >outfile [2] NULL
+
+//-----------------try out------------------//

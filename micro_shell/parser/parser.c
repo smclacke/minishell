@@ -6,90 +6,66 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:14:07 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
+/*   Updated: 2023/08/08 15:31:42 by smclacke      ########   odam.nl         */
+=======
 /*   Updated: 2023/09/01 15:43:48 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/**
- * I need a, this is a string with quotes check and then like thousands of functions to handle that
-*/
-
-/**
- * @brief	Checking whether the first arg token is valid:
- * 			$, <<. >>, <, >, or absolute path. Builtin has been checked in format_check()
- * 			~ Add check for other cmds somehow ~
- * 			The rest of the arg tokens are checked in define_token
- * @param	tokens first arg token passed from the lexer to the parser
- * @param	parser_struct  structure to assign each token to the correct member within parser struct
- * @return	bool: true/false 1/0
-*/
-static bool	parser_define_first_token(t_lexer *tokens, t_parser  *parser_struct)
-{
-	if (!tokens)
-		return (false);
-	if (parser_cmp_signs(tokens))
-	{
-		parser_struct->sign = tokens->input;
-		printf("first->sign:	~: %s\n", parser_struct->sign);
-		return (true);
-	}
-	else if (parser_cmp_builtins(tokens))
-	{	
-		parser_struct->cmd = tokens->input;
-		printf("first->cmd:		~: %s\n", parser_struct->cmd);
-		return (true);
-	}
-	else if (parser_cmp_abso(tokens))
-	{
-		parser_struct->abso = tokens->input; // will at some point need to validate the paths...
-		printf("first->abso:	~: %s\n", parser_struct->abso);
-		return (true);	
-	}
-	return (false);
-}
-
+// FLAGS FLAGS FLAGS
 /**
  * @brief	assigns the tokens to a member in the parser struct:
- * 			sign, pipe, absolute path or str. Builtins are already checked in format_check()
- * @param	tokens passed from the lexer, first token has already been handled in parser_define_first_token()
+ * 			meta, cmd, absolute path,  anything else str
+ * @param	tokens passed from the lexer
  * @param	parser_struct  structure to assign each token to the correct member within parser struct
  * @return	assigns the token input to a member in the parser struct
 */
-static void	*parser_define_tokens(t_lexer *tokens, t_parser *parser_struct)
+static void	*parser_define_tokens(t_parser *tokens)
 {
 	if (!tokens)
 		return (false);
-	if (parser_cmp_signs(tokens))
+	if (parser_cmp_metas(tokens))
 	{
-		parser_struct->sign = tokens->input;
-		printf("second->sign: %s\n", parser_struct->sign);
+		tokens->meta = tokens->input;
+		printf("arg->meta: %s\n", tokens->meta);
 	}
-	if (parser_cmp_pipe(tokens))
+	else if (parser_cmp_builtins(tokens))
+	{	
+		tokens->cmd = tokens->input;
+		printf("arg->cmd: %s\n", tokens->cmd);
+	}
+	else if (parser_cmp_abso(tokens))
+	{	
+		tokens->abso = tokens->input;
+		printf("arg->abso: %s\n", tokens->abso);
+	}
+	else if (parser_cmp_squote(tokens))
 	{
-		parser_struct->sign = tokens->input;
-		printf("second->sign: %s\n", parser_struct->sign);
+		tokens->squote = tokens->input;
+		printf("arg->squote: %s\n", tokens->squote);
 	}
-	if (parser_cmp_builtins(tokens))
-	{	
-		parser_struct->cmd = tokens->input;
-		printf("second->cmd: %s\n", parser_struct->cmd);
-	}
-	if (parser_cmp_abso(tokens))
-	{	
-		parser_struct->abso = tokens->input;
-		printf("second->abso: %s\n", parser_struct->abso);
+	else if (parser_cmp_dquote(tokens))
+	{
+		tokens->dquote = tokens->input;
+		printf("arg->dquote: %s\n", tokens->dquote);
 	}
 	else
 	{
-		parser_struct->str = tokens->input;
-		printf("second->str: %s\n", parser_struct->str);
+		tokens->str = tokens->input;
+		printf("arg->str: %s\n", tokens->str);
 	}
 	return (0);
 }
 
 /**
+<<<<<<< HEAD
+ * @brief	Main parser function:
+			Check the tokens to see which member of the parser struct they need to be sorted into
+=======
  * @brief	take all tokens, put input into a temp, remove the quotes and make lowercase
  * 			test if it's a buildin, if yes, return the temp as this is valid
  * 			else, return the original input to test against signs etc
@@ -131,32 +107,21 @@ void	init_parser(t_parser *parser_struct)
 /**
  * @brief	Main parser function: check vadility of first token
 			Check the rest of the tokens to see which member of the parser struct they need to be sorted into
+>>>>>>> sarah
 			Return the new parser_struct to the expander
  * @param	tokens t_lexer tokens passed from the lexer to be sorted by the parser
  * @return	parser_struct: all the tokens given by the lexer have been sorted into the parser struct. The first argument is checked for its validity
 */
-t_parser	*parser(t_lexer *tokens)
+t_parser	*parser(t_parser *tokens)
 {
-	t_parser	*parser_struct;
-	t_lexer		*list;
+	t_parser		*list;
 
-	parser_struct = (t_parser *)malloc(sizeof(t_parser));
-	if (!parser_struct)
-		return (0);
-	init_parser(parser_struct);
-	if (!parser_format_check(&tokens[0], parser_struct))
-	{
-		if (!parser_define_first_token(&tokens[0], parser_struct))
-			return (0); // first argument is not valid
-	}
-	tokens = tokens->next;
 	list = tokens;
 	while (list)
 	{
-		if (!parser_format_check(tokens, parser_struct))
-			parser_define_tokens(list, parser_struct);
+		// if quotes, handle separately..
+		parser_define_tokens(list);
 		list = list->next;
 	}
-	return (parser_struct);
+	return (tokens);
 }
-
