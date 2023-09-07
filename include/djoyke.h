@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:12:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/07 14:30:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft/include/libft.h"
 # include "prompt.h"
-# include "sarah.h"
 # include "colour.h"
+# include "sarah.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -37,6 +37,7 @@
 
 # define TRUE 1
 # define FALSE 0
+
 
 //---- Lexer ----//
 // typedef enum e_metas

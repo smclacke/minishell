@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/05 18:27:36 by SarahLouise   ########   odam.nl          #
+#    Updated: 2023/09/07 14:47:12 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,16 +61,11 @@ SRCS_DJOY		=	main_djoy.c						\
 					executor/ft_utils.c		\
 					executor/list_utils.c 	\
 					executor/print_utils.c	\
-					expander/ft_expand.c 	\
-					../src_saar/lexer/lexer_utils.c 	\
-					../src_saar/lexer/lexer.c 			\
-					../src_saar/parser/parser_utils.c 	\
-					../src_saar/parser/parser.c 		
-
+					expander/ft_expand.c 
 					
 
 DJOY_DIR		= src_djoy
-SRC_DJOY		= $(addprefix $(DJOY_DIR)/, $(SRCS_DJOY))
+SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))
 
 OBJ_DJOY_DIR	= obj_djoy
 OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
@@ -85,11 +80,10 @@ SRCS_SAAR		= main_saar.c					\
 					parser/parser.c				\
 					parser/meta_split.c			\
 					parser/parser_utils.c		\
-					parser/parser_quotes.c		\
-					utils/error.c
+					parser/parser_quotes.c
 
 SAAR_DIR		= src_saar
-SRC_SAAR		= $(addprefix $(SAAR_DIR)/, $(SRCS_SAAR))
+SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
 
 OBJ_SAAR_DIR	= obj_saar
 OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
@@ -137,12 +131,12 @@ $(NAME)			:	$(OBJ)
 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 	@ ./minishell
 
-$(DJOY)			:	$(OBJ_DJOY)
+$(DJOY)			:	$(OBJ_DJOY) $(OBJ_SAAR)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 	@ ./djoyke
 
-$(SAAR)			:	$(OBJ_SAAR)
+$(SAAR)			:	$(OBJ_SAAR) $(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 	@ ./sarah
@@ -160,6 +154,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)
+	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/executor
 	@ mkdir -p $(OBJ_DJOY_DIR)/expander
@@ -171,7 +166,10 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_SAAR_DIR)/parser
 	@ mkdir -p $(OBJ_SAAR_DIR)/lexer
-	@ mkdir -p $(OBJ_SAAR_DIR)/utils
+	@ mkdir -p $(OBJ_DJOY_DIR)
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c

@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 13:52:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 14:37:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sarah.h"
+#include "../../include/shelly.h"
 
 static t_command	*handle_commands(t_parser *tokens, int i)
 {

@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:14:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/07 14:37:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sarah.h"
+#include "../../include/shelly.h"
 
 void	init_cmd_struct(t_command *cmds)
 {
