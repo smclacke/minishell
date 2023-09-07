@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/04 21:29:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 14:07:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_cmd_struct(t_command *cmds)
 	cmds->input = NULL;
 	cmds->strs = NULL;
 	cmds->cmd = NULL;
+	cmds->next = NULL;
 }
 
 bool	is_pipe(t_parser *tokens)
