@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/05 18:10:17 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/09/07 13:52:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	list = tokens;
 	while (list)
 	{
-		printf("[%i] || input: [%s] | cmd_list->cmd: [%s] | cmd_list->strs: [%s] | redirect: [%s]\n", 
-			i, list->input, (char *)list->cmd_list->cmd, (char *)list->cmd_list->strs, (char *)list->redirect_list);
+		printf("[%i] | ", i);
+		printf("input: [%s] \n", list->input);
+		// printf("cmd_list->cmd: [%s] | ", list->cmd_list->cmd);
+		// printf("redirect->meta: [%s]\n", list->redirect_list->meta);
+		// printf("[%i] || input: [%s] | cmd_list->cmd: [%s] | cmd_list->strs: [%s] | redirect->meta: [%s]\n", 
+		// 	i, list->input, (char *)list->cmd_list->cmd, (char *)list->cmd_list->strs, (char *)list->redirect_list->meta);
 		i++;
 		list = list->next;
 	}
 	return (tokens);
 }
-
 
 int	main(int argc, char **argv, char **envp)
 {
