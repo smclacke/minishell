@@ -19,7 +19,7 @@
 static t_command	*handle_commands(t_parser *tokens, int i)
 {
 	t_command		*cmds;
-		
+
 	cmds = (t_command *)malloc(sizeof(t_command));
 	if (!cmds)
 		exit(EXIT_FAILURE); // fix this later
