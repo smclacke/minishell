@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:37:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 15:08:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_red_struct(t_redirect *reds)
 {
 	reds->input = NULL;
 	reds->meta = NULL;
-	reds->file = NULL;
+	// reds->file = NULL;
 	reds->next = NULL;
 }
 

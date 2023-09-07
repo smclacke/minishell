@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:35:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 15:04:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_echo(t_parser *lst)
 		}
 		else
 		{
-			printf("%s\n", lst->cmd_list->strs);
+			printf("%s ", lst->cmd_list->strs);
 			i++;
 		}
 		lst = lst->next;

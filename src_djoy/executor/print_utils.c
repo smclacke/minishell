@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:49:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:36:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 15:03:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,11 @@ void	print_parser_list(t_parser *lst)
 	i = 0;
 	while (lst != NULL)
 	{
+		printf("||\n");
 		printf("index = [%d], cmd = [%s]\n", i, lst->cmd_list->cmd);
 		printf("index = [%d], str = [%s]\n", i, lst->cmd_list->strs);
-		printf("next node\n");
+		// printf("index = [%d], meta = [%s]\n", i, lst->redirect_list->meta);
+		// printf("next node\n");
 		if (lst->next == NULL)
 			printf("NULL\n");
 		lst = lst->next;
