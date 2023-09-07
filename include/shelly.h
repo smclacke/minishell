@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 15:08:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 19:24:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_command
 	char				*cmd; // first arg if not a redirect and whatever comes after a pipe
 	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
 	struct s_command	*next;
-}			t_command;
+}				t_command;
 
 typedef struct s_parser
 {
@@ -79,7 +79,7 @@ typedef struct s_parser
 	struct s_command	*cmd_list;
 	struct s_redirect	*redirect_list;
 	struct s_parser		*next;
-}	t_parser;
+}				t_parser;
 
 
 //----- lexer.c -----//

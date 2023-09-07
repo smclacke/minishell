@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 15:12:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 19:30:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static t_redirect	*handle_redirect(t_parser *tokens)
 	reds = (t_redirect *)malloc(sizeof(t_redirect));
 	if (!reds)
 		exit(EXIT_FAILURE); // fix this later
-	init_red_struct(reds);
+	init_red_struct(tokens->redirect_list);
 
 	tokens->redirect_list = tokens->input;
-
 	reds->input = tokens->redirect_list;
-
 	reds->meta = reds->input;
+
+
 
 	return (reds);
 }
