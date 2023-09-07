@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:35:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 16:00:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_cd(t_parser *lst, t_env **env)
 		while (lst)
 		{
 			access_and_change(env, lst, old_work_dir, cwd);
-			printf("hello 1\n");
 			lst = lst->next;
 		}
 	}
@@ -72,13 +71,10 @@ void	access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 		return ;
 	else if (lst->cmd_list->strs != NULL)
 	{
-		printf("hello 2\n");
 		if (access(lst->cmd_list->strs, F_OK) == 0)
 		{
-			printf("hello 3\n");
 			if (chdir(lst->cmd_list->strs) == -1)
 			{
-				printf("hello fail\n");
 				error = ft_strjoin("minishell: cd: ", lst->cmd_list->strs);
 				mini_error(error, errno);
 			}
@@ -113,10 +109,8 @@ void	change_old_dir(t_env **env, char *str)
 	head = *env;
 	if (!env)
 		reassign_old_pwd(env, new, str, full);
-	printf("hello 4\n");
 	while (mini_strcmp ("OLDPWD", head->key) != 0)
 	{
-		printf("hello 5\n");
 		head = head->next;
 		if (head == NULL)
 			return ;
@@ -144,10 +138,8 @@ void	change_current_dir(t_env **env, char *str)
 	key_equal = NULL;
 	new_full = NULL;
 	head = *env;
-	printf("hello 6\n");
 	while (mini_strcmp ("PWD", head->key) != 0)
 	{
-		printf("hello 7\n");
 		head = head->next;
 		if (head == NULL)
 			return ;
@@ -169,7 +161,6 @@ void	change_current_dir(t_env **env, char *str)
 void	reassign_old_pwd(t_env **env, t_env *new, char *str, char *full)
 {
 	full = ft_strjoin("OLDPWD=", str);
-	printf("hello 8\n");
 	printf("full = [%s]\n", full);
 	if (full == NULL)
 		mini_error("malloc", errno);
