@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:24:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/07 14:11:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_cd(t_parser *lst, t_env **env)
 		home_dir = getenv("HOME");//pakt niet eigen env? schr
 		if (home_dir == NULL)
 			mini_error("getenv", errno);
-	// 		while (mini_strcmp ("OLDPWD", head->key) != 0)
+	// 	while (mini_strcmp ("OLDPWD", head->key) != 0)
 	// {
 	// 	printf("hello 5\n");
 	// 	head = head->next;
@@ -45,12 +45,11 @@ void	ft_cd(t_parser *lst, t_env **env)
 	// 		return ;
 	// }
 		old_work_dir = getcwd(cwd, sizeof(cwd));
-		lst->cmd_list = lst->cmd_list->next;
-		while (lst->cmd_list)
+		while (lst)
 		{
 			access_and_change(env, lst, old_work_dir, cwd);
 			printf("hello 1\n");
-			lst->cmd_list = lst->cmd_list->next;
+			lst = lst->next;
 		}
 	}
 }
@@ -69,7 +68,9 @@ void	access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 {
 	char		*error;
 
-	if (lst->cmd_list->strs != NULL)
+	if (!lst->cmd_list->strs)
+		return ;
+	else if (lst->cmd_list->strs != NULL)
 	{
 		printf("hello 2\n");
 		if (access(lst->cmd_list->strs, F_OK) == 0)
