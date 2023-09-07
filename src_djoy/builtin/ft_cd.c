@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:11:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/07 14:42:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,18 @@
  * 				cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
  * line 66: check if needs error message with exit
  * 			give prompt back, and endline?
- * @todo do we actually need OLDPWD and PWD bash doesnt have it
+ * @todo
+ * getenv actually gets the og env not my own,
+ * 		need to make own getenv
+ * 		something like:
+ * 			while (mini_strcmp ("HOME", head->key) != 0)
+ * 			{
+ * 				head = head->next;
+ * 				if (head == NULL)
+ * 				return ;
+ *				if (mini_strcmp ("HOME", head->key == 0))
+ *					means it not there so return mini_error?
+ * 			}
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
@@ -34,16 +45,9 @@ void	ft_cd(t_parser *lst, t_env **env)
 	old_work_dir = NULL;
 	if (env)
 	{
-		home_dir = getenv("HOME");//pakt niet eigen env? schr
+		home_dir = getenv("HOME");
 		if (home_dir == NULL)
 			mini_error("getenv", errno);
-	// 	while (mini_strcmp ("OLDPWD", head->key) != 0)
-	// {
-	// 	printf("hello 5\n");
-	// 	head = head->next;
-	// 	if (head == NULL)
-	// 		return ;
-	// }
 		old_work_dir = getcwd(cwd, sizeof(cwd));
 		while (lst)
 		{

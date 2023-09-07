@@ -6,39 +6,48 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/01 13:02:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/07 20:20:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+#include <limits.h>
+
+#define LONG_MIN_STR "-9223372036854775808"
+#define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
 
 /**
  * @param str string to convert
  * @brief converts array to long long int
- * @todo actually make it into long long
+ * @todo nothing but limits.h is very cool wow
+ * 		write (1, LONG_MIN_STR, sizeof(LONG_MIN_STR));
+ * 		zo cool he size changes when long_min_str changes
+ * 		remember forever
 */
-// long long	atoll(char *str)
-// {
-// 	long long	i;
-// 	long long	sign;
-// 	long long	number;
+static long long	mini_atoll(char *str)
+{
+	size_t			i;
+	int				sign;
+	long long		number;
 
-// 	number = 0;
-// 	sign = 1;
-// 	i = 0;
-// 	if (str[i] == '+' || str[i] == '-')
-// 	{
-// 		if (str[i] == '-')
-// 			sign = sign * -1;
-// 		i++;
-// 	}
-// 	while (ft_isdigit(str[i]))
-// 	{
-// 		number = number * 10 + str[i] -48;
-// 		i++;
-// 	}
-// 	return (number * sign);
-// }
+	number = 0;
+	sign = 1;
+	i = 0;
+	if (mini_strcmp(str, LONG_MIN_STR) == 0)
+		return (LONG_MIN);
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (ft_isdigit(str[i]))
+	{
+		number = number * 10 + str[i] -48;
+		i++;
+	}
+	return (number * sign);
+}
 
 /**
  * @param node parsed list
@@ -55,39 +64,38 @@
  * 		so same exit code as characters
  * 		- 4) not numeric display error message  (still exit)
  * 3) only exit? exit 0 (EXIT_SUCCES) (exit)
+ * exit | something doesnt print exit (also exit in pipe?? so sad)
 */
 void	ft_exit(t_parser *node)
 {
-	// long long	error;
+	long long	error;
+	int			i;
 
-	// error = atoi(node->str);
-	// if (node->next->next)
-	// {
-	// 	put_custom_error(node, "exit");
-	// 	return ;
-	// }
-	// node = node->next;
-	// while (node->next)//loop through nodes else loop through string when parsing correct
-	// {
-	// 	if (ft_isalnum(node->str) != 0)
-	// 	{
-	// 		exit(error); //does this display the right error number?
-	// 		bash-3.2$ exit 1
-	// 		exit
-	// 		➜  ~ echo $?
-	// 		1
-	// 	}
-	// 	if ()
-	// }
-	while (node->next)//loop through nodes else loop through string when parsing correct
+	i = 0;
+	node = node->next;
+	if (node->next)
 	{
-		if (node->next != NULL)
+		write(STDOUT_FILENO, TOO_MANY_ARG, sizeof(TOO_MANY_ARG));
+		exit(1);
+	}
+	error = mini_atoll(node->cmd_list->strs);
+	while (node->cmd_list->strs[i])
+	{
+		if (ft_isalnum(node->cmd_list->strs[i]) == 0)
 		{
 			put_custom_error(node, "exit");
-			return ;
+			exit(255); //needs to be return, int error needs to be 
 		}
-		node = node->next;
+		i++;
 	}
+	if (error > 255)
+		error = error % 256;
+	write(STDOUT_FILENO, "exit\n", 5);
+	exit(error); //needs to be a return
+// 	make: *** [djoyke] Error 20
+// bash-3.2$ echo $?
+// 2
+// bash-3.2$
 }
 
 // ➜  ~ bash

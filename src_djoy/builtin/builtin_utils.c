@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 21:34:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/07 19:48:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,6 @@ void	put_custom_error(t_parser *node, char *cmd)
 	}
 	else if (mini_strcmp(cmd, "exit") == 0)
 	{
-		// node = node->next->next;// not necessary if parser alright
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
 		ft_putstr_fd(node->cmd_list->strs, STDOUT_FILENO);
