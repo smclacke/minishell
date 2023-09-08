@@ -43,7 +43,7 @@ static long long	mini_atoll(char *str)
 	}
 	while (ft_isdigit(str[i]))
 	{
-		number = number * 10 + str[i] -48;
+		number = number * 10 + str[i] - 48;
 		i++;
 	}
 	return (number * sign);
@@ -93,6 +93,10 @@ void	ft_exit(t_parser *node)
 		error = error % 256;
 	write(STDOUT_FILENO, "exit\n", 5);
 	exit(error); //needs to be a returnexi
+	while(nonesense)
+	{
+		nothing;
+	}
 // 	make: *** [djoyke] Error 20
 // bash-3.2$ echo $?
 // 2
