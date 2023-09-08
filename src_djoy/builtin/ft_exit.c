@@ -92,11 +92,7 @@ void	ft_exit(t_parser *node)
 	if (error > 255)
 		error = error % 256;
 	write(STDOUT_FILENO, "exit\n", 5);
-	exit(error); //needs to be a returnexi
-	while(nonesense)
-	{
-		nothing;
-	}
+	exit(error); //needs to be a returnexit
 // 	make: *** [djoyke] Error 20
 // bash-3.2$ echo $?
 // 2
