@@ -65,6 +65,7 @@ static long long	mini_atoll(char *str)
  * 		- 4) not numeric display error message  (still exit)
  * 3) only exit? exit 0 (EXIT_SUCCES) (exit)
  * exit | something doesnt print exit (also exit in pipe?? so sad)
+ * check alpha numeric first and then the arguments if more than 1
 */
 void	ft_exit(t_parser *node)
 {
