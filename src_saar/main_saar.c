@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 20:11:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 21:11:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	while (list)
 	{
 		printf("[%i] | ", i);
-		printf("cmd: [%s] | ", list->data_list->cmd);
-		printf("file: [%s] | ", list->data_list->file);
-		printf("meta: [%s] | ", list->data_list->meta);
-		printf("strs: [%s]\n ", list->data_list->strs);
+		printf("cmd = %s | ", list->data_list->cmd);
+		printf("file = %s | ", list->data_list->file);
+		printf("meta = %s | ", list->data_list->meta);
+		printf("strs = %s\n ", list->data_list->strs);
 		i++;
 		list = list->next;
 	}
@@ -50,11 +50,10 @@ int	main(int argc, char **argv, char **envp)
 		tokens = lexer(input);
 		if (!tokens)
 			continue ;
-		// shelly_print_list(tokens);
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		// shelly_parser_print(tokens);
+
 		print_the_full_thing(tokens);
 
 

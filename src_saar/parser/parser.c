@@ -6,67 +6,68 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 20:20:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 21:22:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static t_data_type	*handle_types(t_parser *tokens, int flag)
+static t_data_type	*handle_types(t_data_type *data, int flag)
 {
-	t_data_type	*data;
-
-	data = (t_data_type *)malloc(sizeof(t_data_type));
-	if (!data)
-		exit((EXIT_FAILURE));
-	init_type_struct(data);
-	tokens->data_list = tokens->input;
-	data->input = tokens->data_list;
 	if (is_redirect(data->input))
-	{
 		data->meta = data->input;
-		printf("data->meta: [%s]\n", data->meta);
-	}
 	else
 	{	
 		if (flag == 0)
-		{
 			data->cmd = data->input;
-			printf("data->cmd: [%s]\n", data->cmd);
-		}
 		else
-		{	
 			data->strs = data->input;
-			printf("data->strs: [%s]\n", data->strs);
-		}
 	}
-	printf("flag = : %i\n", flag);
 	return (data);
 }
 
+static t_data_type	*handle_next(t_data_type *data, char *type)
+{
+	printf("hello?\n");
+	printf("data->input: %s\n", data->input);
+	if (type == PIPE)
+		data->cmd = data->input;
+	else
+		data->strs = data->input;
+	return (data);
+}
+
+// trying to set vars that follow reds accordingly in my if statement
+// need to make a function to put all the doubly shit into and just do that...
+ 
 /**
  * @brief	Main parser function:
 			Check the tokens to see which member of the parser struct they need to be sorted into
  * @param	tokens t_lexer tokens passed from the lexer to be sorted by the parser
- * @return	parser_struct: all the tokens given by the lexer have been sorted into the parser struct
+ * @return	tokens: all the tokens given by the lexer have been sorted into the parser->data_type struct
 */
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*token_list;
-	t_data_type		*type = NULL;
+	t_data_type		*data;
+	char			*type;
 	int				i = 0;
 
 	token_list = tokens;
 	while (token_list)
 	{
-		type = handle_types(token_list, i);
-		token_list->data_list = type;
-		if (is_redirect(token_list->input) == 2)
+		data = init_data();
+		token_list->data_list = token_list->input;
+		data->input = token_list->data_list;
+		token_list->data_list = handle_types(data, i);
+		type = is_redirect(token_list->input);
+		if (type && token_list->next)
 		{
-			i = 0;
+			data = init_data();
 			token_list = token_list->next;
-			type = handle_types(token_list, i);
-			token_list->data_list = type;
+			token_list->data_list = token_list->input;
+			data->input = token_list->data_list;
+			token_list->data_list = handle_next(data, type);
 		}
 		token_list = token_list->next;
 		i++;

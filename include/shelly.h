@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 20:21:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 21:06:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ typedef struct s_parser
 //----- lexer.c -----//
 t_parser			*lexer(char *input);
 
+//----- lexer_utils.c -----//
+void				init_parser(t_parser *token);
+t_parser			*lexer_listlast(t_parser *list);
+void				lexer_listadd_back(t_parser **list, t_parser *new);
+t_parser			*lexer_listnew(void *input);
+t_parser			*shelly_print_list(t_parser *token);
+
+
+
+// UGHGSFKLAHF;GIJAIJFKNBMVLK;GLDJKDKKHLKSSJKL;JMNSDGJKV
 // -------- Quotes --------//
 bool				closed_quotes(char *input);
 bool				shelly_check_quotes(char *tokens);
@@ -77,13 +87,7 @@ int					which_quote(char c);
 int					lq_count_words(char *input);
 int					lq_word_length(char *input);
 int					quote_len(char *input);
-
-//----- lexer_utils.c -----//
-void				init_parser(t_parser *token);
-t_parser			*lexer_listlast(t_parser *list);
-void				lexer_listadd_back(t_parser **list, t_parser *new);
-t_parser			*lexer_listnew(void *input);
-t_parser			*shelly_print_list(t_parser *token);
+// UGHGSFKLAHF;GIJAIJFKNBMVLK;GLDJKDKKHLKSSJKL;JMNSDGJKV
 
 
 // PARSER
@@ -91,21 +95,17 @@ t_parser			*shelly_print_list(t_parser *token);
 //---- parser.c ----//
 t_parser			*parser(t_parser *tokens);
 
+//---- parser_utils.c ----//
+void				init_type_struct(t_data_type *type);
+t_data_type			*init_data(void);
+char				*is_redirect(void *input);
+t_parser			*shelly_parser_print(t_parser *tokens);
+
 //---- parser_quotes.c ----//
 // bool				parser_check_quotes(char *tokens);
 // char				*remove_quotes(char *tokens);
 
-//---- meta_split.c ----//
-int					ms_word_count(t_parser *tokens);
-int					ms_word_len(t_parser *tokens);
-t_parser			*ms_make_words(t_parser *tokens);
-t_parser			**meta_split(t_parser *tokens);
 
-//---- parser_utils.c ----//
-void				init_type_struct(t_data_type *type);
-// bool				is_pipe(t_parser *tokens);
-int				is_redirect(void *input);
-t_parser			*shelly_parser_print(t_parser *tokens);
 
 
 
