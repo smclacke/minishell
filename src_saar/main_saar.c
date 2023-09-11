@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 15:53:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 16:36:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		// shelly_parser_print(tokens);
-		// print_the_full_thing(tokens);
 
 
 		ft_execute(&env, tokens);
@@ -67,3 +65,6 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
+
+		// shelly_parser_print(tokens);
+		// print_the_full_thing(tokens);

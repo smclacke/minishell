@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 15:49:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 17:02:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_parser	*parser(t_parser *tokens)
 	t_command		*cmds = NULL;
 	t_redirect		*reds = NULL;
 	int				flag = 0;
+	int				i = 0;
 
 	token_list = tokens;
 	while (token_list)
@@ -70,8 +71,10 @@ t_parser	*parser(t_parser *tokens)
 		{
 			// put reds in struct
 			reds = handle_redirect(token_list);
+			// printf("reds %s\n", reds->meta);
 			token_list->redirect_list = reds;
-			printf("token->red->meta = [%s]\n", token_list->redirect_list->meta);
+			reds = reds->next;
+			// printf("token->red->meta = [%s]\n", token_list->redirect_list->meta);
 		}
 		// if there was a redirect, need to check which so that if >, next node is file, 
 		// and if pipe, next is command ( don't use index anymore, just keep for first arg)
@@ -81,11 +84,15 @@ t_parser	*parser(t_parser *tokens)
 			// puts rest in command struct as cmd or str
 			cmds = handle_commands(token_list, flag);
 			token_list->cmd_list = cmds;
-			printf("token->cmd->cmd = [%s]\n", token_list->cmd_list->cmd);
-			printf("token->cmd->strs = [%s]\n", token_list->cmd_list->strs);
+			cmds = cmds->next;
 		}
+		// printf("token->cmd->cmd = [%s]\n", token_list->cmd_list->cmd);
+		// printf("token->cmd->strs = [%s]\n", token_list->cmd_list->strs);
+		// printf("token->red->meta = [%s]\n", token_list->redirect_list->meta);
 		token_list = token_list->next;
 		flag++;
+		printf("index: [%i]\n", i);
+		i++;
 	}
 	return (tokens);
 }
