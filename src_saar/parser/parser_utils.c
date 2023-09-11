@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 14:48:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 15:46:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	init_red_struct(t_redirect *reds)
 {
 	reds->input = NULL;
 	reds->meta = NULL;
-	reds->next = NULL;
-		
+	reds->next = NULL;	
 }
 
 // bool	is_red_with_sass(t_parser *tokens)

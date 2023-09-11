@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 14:48:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 15:49:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static t_redirect	*handle_redirect(t_parser *tokens)
 	if (!reds)
 		exit(EXIT_FAILURE); // fix this later
 	init_red_struct(reds);
-	printf("(reds)tokens->input: [%s]\n", tokens->input);
+	// printf("(reds)tokens->input: [%s]\n", tokens->input);
 	tokens->redirect_list = tokens->input;
-	printf("(reds)tokens->redirect_list: [%s]\n", (char *)tokens->redirect_list);
+	// printf("(reds)tokens->redirect_list: [%s]\n", (char *)tokens->redirect_list);
 	reds->input = tokens->redirect_list;
-	printf("(reds)reds->input: [%s]\n", reds->input);
+	// printf("(reds)reds->input: [%s]\n", reds->input);
 	reds->meta = reds->input;
-	printf("(reds)reds->meta: [%s]\n", reds->meta);
+	// printf("(reds)reds->meta: [%s]\n", reds->meta);
 
 	return (reds);
 }
@@ -62,8 +62,6 @@ t_parser	*parser(t_parser *tokens)
 	t_command		*cmds = NULL;
 	t_redirect		*reds = NULL;
 	int				flag = 0;
-	int				re = 0;
-	int				cmd = 0;
 
 	token_list = tokens;
 	while (token_list)
@@ -72,7 +70,7 @@ t_parser	*parser(t_parser *tokens)
 		{
 			// put reds in struct
 			reds = handle_redirect(token_list);
-			token_list->redirect_list = reds; 
+			token_list->redirect_list = reds;
 			printf("token->red->meta = [%s]\n", token_list->redirect_list->meta);
 		}
 		// if there was a redirect, need to check which so that if >, next node is file, 
@@ -89,7 +87,6 @@ t_parser	*parser(t_parser *tokens)
 		token_list = token_list->next;
 		flag++;
 	}
-	printf("re: [%i]\ncmd: [%i]\n", re, cmd);
 	return (tokens);
 }
 

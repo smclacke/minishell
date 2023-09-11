@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:36:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 15:47:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	ft_expand(t_parser *lst, t_env **env)
 {
 	// if (check_for_meta(lst))
 	// 	printf("expander:		there's a meta whoop\n");
-	printf("----------------\n");
-	print_parser_list(lst);
-	printf("----------------\n");
+	// printf("----------------\n");
+	// print_parser_list(lst);
+	// printf("----------------\n");
 	if (check_for_builtin(lst))
 	{
 		printf("expander: 		there's a builtin whoop\n");
@@ -159,7 +159,7 @@ bool	check_for_builtin(t_parser *node)
 {
 	if (!node)
 		return (false);
-	printf("cmd = [%s]\n", node->cmd_list->cmd);
+	// printf("cmd = [%s]\n", node->cmd_list->cmd);
 	if (mini_strcmp(node->cmd_list->cmd, "exit") == 0)
 		return (true);
 	else if (mini_strcmp(node->cmd_list->cmd, "echo") == 0)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 23:22:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 15:46:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ t_parser			**meta_split(t_parser *tokens);
 //---- parser_utils.c ----//
 void				init_cmd_struct(t_command *cmds);
 void				init_red_struct(t_redirect *reds);
-// void				init_cmd_struct(t_command *cmds);
-// void				init_red_struct(t_redirect *reds);
 bool				is_pipe(t_parser *tokens);
 bool				is_redirect(t_parser *tokens);
 bool				file_attached(t_parser *tokens);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 14:43:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 15:53:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 		printf("input: [%s] ", list->input);
 		printf("cmd_list->cmd: [%s] | ", list->cmd_list->cmd);
 		printf("cmd_list->str: [%s] | ", list->cmd_list->strs);
-		// printf("redirect->meta: [%s]\n", list->redirect_list->meta);
+		printf("redirect->meta: [%s]\n", list->redirect_list->meta);
 
 		i++;
 		list = list->next;
@@ -57,7 +57,7 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		shelly_parser_print(tokens);
+		// shelly_parser_print(tokens);
 		// print_the_full_thing(tokens);
 
 
