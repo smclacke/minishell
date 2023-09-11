@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 18:39:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 19:51:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static t_data_type	*handle_types(t_parser *tokens)
+static t_data_type	*handle_types(t_parser *tokens, int flag)
 {
 	t_data_type	*data;
 
@@ -22,19 +22,27 @@ static t_data_type	*handle_types(t_parser *tokens)
 	init_type_struct(data);
 	tokens->data_list = tokens->input;
 	data->input = tokens->data_list;
-	// data->cmd = data->input;
-	// printf("data->cmd: [%s]\n", data->cmd);
-	
 	if (is_redirect(data->input))
 	{
 		data->meta = data->input;
 		printf("data->meta: [%s]\n", data->meta);
+		if (ft_strcmp(data->input, "|") == 0)
+			flag = 1;
 	}
 	else
 	{	
-		data->strs = data->input;
-		printf("data->strs: [%s]\n", data->strs);
+		if (flag == 0 || flag == 1)
+		{
+			data->cmd = data->input;
+			printf("data->cmd (AFTER PIPE): [%s]\n", data->cmd);
+		}
+		else
+		{	
+			data->strs = data->input;
+			printf("data->strs: [%s]\n", data->strs);
+		}
 	}
+	printf("flag = : %i\n", flag);
 	return (data);
 }
 
@@ -53,7 +61,7 @@ t_parser	*parser(t_parser *tokens)
 	token_list = tokens;
 	while (token_list)
 	{
-		type = handle_types(token_list);
+		type = handle_types(token_list, i);
 		token_list->data_list = type;
 		token_list = token_list->next;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 18:33:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 19:46:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_data_type
 	char				*meta;
 	char				*file; // after delimiters
 	struct s_data_type	*next;
+	struct s_data_type	*prev;
 }				t_data_type;
 
 typedef struct s_parser
@@ -105,7 +106,7 @@ t_parser			**meta_split(t_parser *tokens);
 void				init_type_struct(t_data_type *type);
 // void				init_red_struct(t_redirect *reds);
 // bool				is_pipe(t_parser *tokens);
-bool	is_redirect(void *input);
+bool				is_redirect(void *input);
 // bool				file_attached(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
