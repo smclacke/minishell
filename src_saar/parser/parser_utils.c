@@ -6,25 +6,19 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 16:26:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 17:59:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-void	init_cmd_struct(t_command *cmds)
+void	init_type_struct(t_data_type *type)
 {
-	cmds->input = NULL;
-	cmds->strs = NULL;
-	cmds->cmd = NULL;
-	cmds->next = NULL;
-}
-
-void	init_red_struct(t_redirect *reds)
-{
-	reds->input = NULL;
-	reds->meta = NULL;
-	reds->next = NULL;	
+	type->input = NULL;
+	type->strs = NULL;
+	type->cmd = NULL;
+	type->meta = NULL;
+	type->next = NULL;
 }
 
 // bool	is_red_with_sass(t_parser *tokens)
@@ -52,33 +46,10 @@ bool	is_redirect(t_parser *tokens)
 		return (true);
 	else if (ft_strcmp(tokens->input, "<") == 0)
 		return (true);
-	else if (ft_strcmp(tokens->input, "$") == 0)
-		return (true);
 	else if (ft_strcmp(tokens->input, "|") == 0)
 		return (true);
 	return (false);
 }
-
-// SPLIT METAS IN LEXER SO THIS ISN'T NECESSARY ANYMORE
-// /**
-//  * is redirect the only thing in node? ( file is not attached )
-// */
-// bool	file_attached(t_parser *tokens)
-// {
-// 	if (!tokens)
-// 		return (false);
-// 	if (ft_strcmp(tokens->input, ">>") == 0)
-// 		return (false);
-// 	else if (ft_strcmp(tokens->input, "<<") == 0)
-// 		return (false);
-// 	else if (ft_strcmp(tokens->input, ">") == 0)
-// 		return (false);
-// 	else if (ft_strcmp(tokens->input, "<") == 0)
-// 		return (false);
-// 	else if (ft_strcmp(tokens->input, "$") == 0)
-// 		return (false);
-// 	return (true);
-// }
 
 t_parser	*shelly_parser_print(t_parser *tokens)
 {
@@ -89,9 +60,6 @@ t_parser	*shelly_parser_print(t_parser *tokens)
 	while (list)
 	{
 		printf("parser list: index [%i] | node [%s]\n", i, list->input);
-		printf("parser list: index [%i] | node->cmd [%s]\n", i, list->cmd_list->cmd);
-		printf("parser list: index [%i] | node->cmd [%s]\n", i, list->cmd_list->strs);
-		// printf("parser list: index [%i] | node->cmd [%s]\n", i, list->redirect_list->meta);
 		i++;
 		list = list->next;
 	}

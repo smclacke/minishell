@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/07 14:47:12 by smclacke      ########   odam.nl          #
+#    Updated: 2023/09/11 18:09:58 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,9 @@ SRCS_SAAR		= main_saar.c					\
 					parser/parser_quotes.c
 
 SAAR_DIR		= src_saar
-SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
+SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)))
+#  $(SRC_DJOY)
+
 
 OBJ_SAAR_DIR	= obj_saar
 OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
@@ -136,7 +138,8 @@ $(DJOY)			:	$(OBJ_DJOY) $(OBJ_SAAR)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 	@ ./djoyke
 
-$(SAAR)			:	$(OBJ_SAAR) $(OBJ_DJOY)
+# $(OBJ_DJOY)
+$(SAAR)			:	$(OBJ_SAAR) 
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 	@ ./sarah
@@ -166,10 +169,10 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_SAAR_DIR)/parser
 	@ mkdir -p $(OBJ_SAAR_DIR)/lexer
-	@ mkdir -p $(OBJ_DJOY_DIR)
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/expander
+# @ mkdir -p $(OBJ_DJOY_DIR)
+# @ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
+# @ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
+# @ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c

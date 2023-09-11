@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 15:46:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 18:08:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,46 +38,26 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef enum	e_files
-{
-	S_INFILE, // standard infile
-	S_OUTFILE, // standard outfile
-	D_INFILE, // this is heredoc (<<infile)
-	D_OUTFILE // this is append mode to outfile
-}		t_files;
+# define PIPE |
+# define MORE >
+# define MOREMORE >>
+# define LESS <
+# define LESSLESS <<
 
-typedef enum	e_metas
-{
-	E_MORE,
-	E_MOREMORE,
-	E_LESS,
-	E_LESSLESS,
-	E_PIPE
-}		t_metas;
-
-typedef struct	s_redirect
-{
-	void				*input;
-	char				*meta;
-	// char				*file;
-	// enum e_files		*file_type[4]; // do i want this?
-	// enum e_metas		*meta_type[5];
-	struct s_redirect	*next;
-}				t_redirect;
-
-typedef struct s_command
+typedef struct s_data_type
 {
 	void				*input;
 	char				*cmd; // first arg if not a redirect and whatever comes after a pipe
 	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
-	struct s_command	*next;
-}				t_command;
+	char				*meta;
+	char				*file;
+	struct s_data_type	*next;
+}				t_data_type;
 
 typedef struct s_parser
 {
 	void				*input;
-	struct s_command	*cmd_list;
-	struct s_redirect	*redirect_list;
+	struct s_data_type	*data_list;
 	struct s_parser		*next;
 }				t_parser;
 
@@ -122,86 +102,86 @@ t_parser			*ms_make_words(t_parser *tokens);
 t_parser			**meta_split(t_parser *tokens);
 
 //---- parser_utils.c ----//
-void				init_cmd_struct(t_command *cmds);
-void				init_red_struct(t_redirect *reds);
-bool				is_pipe(t_parser *tokens);
+void				init_type_struct(t_data_type *type);
+// void				init_red_struct(t_redirect *reds);
+// bool				is_pipe(t_parser *tokens);
 bool				is_redirect(t_parser *tokens);
-bool				file_attached(t_parser *tokens);
+// bool				file_attached(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
 
 
 //---------------DJOYKE-----------//
 
-typedef struct s_env
-{
-	char				*key;
-	char				*value;
-	char				*full;
-	struct s_env		*next;
-	struct s_env		*previous;
-}							t_env;
+// typedef struct s_env
+// {
+// 	char				*key;
+// 	char				*value;
+// 	char				*full;
+// 	struct s_env		*next;
+// 	struct s_env		*previous;
+// }							t_env;
 
-//---- Expander ----//
-void		ft_expand(t_parser *lst, t_env **env);
-bool		check_for_meta(t_parser *lst);
-bool		check_for_builtin(t_parser *lst);
+// //---- Expander ----//
+// void		ft_expand(t_parser *lst, t_env **env);
+// bool		check_for_meta(t_parser *lst);
+// bool		check_for_builtin(t_parser *lst);
 
-//----Environment----//
-// t_env		*env_list(char **envp);
-t_env		*env_list(char **envp, t_env *env);
-t_env		*env_lstnew(void *key, void *value, char *full);
-void		get_key_value(char *str, char **key, char **value);
-t_env		*env_lstlast(t_env *lst);
-void		env_lstadd_back(t_env **lst, t_env *new);
-void		print_list(t_env *env);
-void		print_list_key(t_env *env);
-void		print_list_value(t_env *env);
-char		**list_to_string(t_env *env);
-void		print_env_list(t_env *lst);
-void		print_list_full(t_env *env);
+// //----Environment----//
+// // t_env		*env_list(char **envp);
+// t_env		*env_list(char **envp, t_env *env);
+// t_env		*env_lstnew(void *key, void *value, char *full);
+// void		get_key_value(char *str, char **key, char **value);
+// t_env		*env_lstlast(t_env *lst);
+// void		env_lstadd_back(t_env **lst, t_env *new);
+// void		print_list(t_env *env);
+// void		print_list_key(t_env *env);
+// void		print_list_value(t_env *env);
+// char		**list_to_string(t_env *env);
+// void		print_env_list(t_env *lst);
+// void		print_list_full(t_env *env);
 
-//---- Built-in ----//
-void		free_all(t_env *env);
-void		do_builtin(t_parser *node, t_env **env);
-bool		word_check(t_parser *node);
-void		ft_cd(t_parser *lst, t_env **env);
-void		put_custom_error(t_parser *node, char *cmd);
-void		access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
-void		change_old_dir(t_env **env, char *str);
-void		change_current_dir(t_env **env, char *str);
-void		reassign_old_pwd(t_env **env, t_env *new, char *str, char *full);
-void		ft_echo(t_parser *lst);
-void		ft_env(t_env *env);
-void		ft_exit(t_parser *node);
-void		ft_pwd(void);
-void		ft_export(t_parser *lst, t_env **env);
-bool		reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v);
-void		ft_unset(t_parser *lst, t_env **env);
-void		mini_remove_env(char *str, t_env **env);
+// //---- Built-in ----//
+// void		free_all(t_env *env);
+// void		do_builtin(t_parser *node, t_env **env);
+// bool		word_check(t_parser *node);
+// void		ft_cd(t_parser *lst, t_env **env);
+// void		put_custom_error(t_parser *node, char *cmd);
+// void		access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
+// void		change_old_dir(t_env **env, char *str);
+// void		change_current_dir(t_env **env, char *str);
+// void		reassign_old_pwd(t_env **env, t_env *new, char *str, char *full);
+// void		ft_echo(t_parser *lst);
+// void		ft_env(t_env *env);
+// void		ft_exit(t_parser *node);
+// void		ft_pwd(void);
+// void		ft_export(t_parser *lst, t_env **env);
+// bool		reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v);
+// void		ft_unset(t_parser *lst, t_env **env);
+// void		mini_remove_env(char *str, t_env **env);
 
-//----Execution----//
-typedef struct s_execute
-{
-	int		fd_in;
-	int		fork_pid;
-	int		pipe_fd[2];
-	char	**path;
-	char	**env_array;
-}				t_execute;
+// //----Execution----//
+// typedef struct s_execute
+// {
+// 	int		fd_in;
+// 	int		fork_pid;
+// 	int		pipe_fd[2];
+// 	char	**path;
+// 	char	**env_array;
+// }				t_execute;
 
-t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data);
-bool		absolute_check(t_parser *node);
-bool		parse_path(t_env *env, t_execute *data);
-char		*check_access(t_env *env, t_parser *node, t_execute *data);
-void		ft_execute(t_env **env, t_parser *list);
-void		build(t_parser *lst, t_env *env, t_execute *data);
-void		init_execute_struct(t_execute *data, t_env *env);
+// t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data);
+// bool		absolute_check(t_parser *node);
+// bool		parse_path(t_env *env, t_execute *data);
+// char		*check_access(t_env *env, t_parser *node, t_execute *data);
+// void		ft_execute(t_env **env, t_parser *list);
+// void		build(t_parser *lst, t_env *env, t_execute *data);
+// void		init_execute_struct(t_execute *data, t_env *env);
 
-//----Utils----//
-void		mini_error(char *string, int error);
-int			mini_strcmp(char *s1, char *s2);
-int			mini_lstsize(t_env *lst);
-void		print_parser_list(t_parser *lst);
+// //----Utils----//
+// void		mini_error(char *string, int error);
+// int			mini_strcmp(char *s1, char *s2);
+// int			mini_lstsize(t_env *lst);
+// void		print_parser_list(t_parser *lst);
 
 #endif

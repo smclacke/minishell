@@ -4,6 +4,12 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
+HELLOHELLOHELLOHELLO 11/09/23
+
+LETS SIMPLIFY SO I HAVE SOMETHING THAT ACTUALLY WORKS.... WOOW AMAZING IDEA......
+
+
+---------------------------------------------------------------------------------
 
 DJOYKE, YOUR STRCMP IS CAUSING THIS PROBLEM: (s1 || s2) NOT (s1 && s2)
 ........................

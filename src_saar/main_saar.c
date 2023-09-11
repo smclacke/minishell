@@ -6,14 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 16:36:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 18:21:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
-
-		// printf("[%i] || input: [%s] | cmd_list->cmd: [%s] | cmd_list->strs: [%s] | redirect->meta: [%s]\n", 
-		// 	i, list->input, (char *)list->cmd_list->cmd, (char *)list->cmd_list->strs, (char *)list->redirect_list->meta);
 
 t_parser	*print_the_full_thing(t_parser *tokens)
 {
@@ -24,11 +21,7 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	while (list)
 	{
 		printf("[%i] | ", i);
-		printf("input: [%s] ", list->input);
-		printf("cmd_list->cmd: [%s] | ", list->cmd_list->cmd);
-		printf("cmd_list->str: [%s] | ", list->cmd_list->strs);
-		printf("redirect->meta: [%s]\n", list->redirect_list->meta);
-
+		printf("list->data_list->cmd: [%s] \n", list->data_list->cmd);
 		i++;
 		list = list->next;
 	}
@@ -39,12 +32,13 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_parser	*tokens;
-	t_env		*env;
+	// t_env		*env;
 
 	(void) argc;
 	(void) argv;
-	env = NULL;
-	env = env_list(envp, env);
+	(void) envp;
+	// env = NULL;
+	// env = env_list(envp, env);
 	tokens = NULL;
 	while (1)
 	{
@@ -57,14 +51,13 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
+		// shelly_parser_print(tokens);
+		print_the_full_thing(tokens);
 
 
-		ft_execute(&env, tokens);
+		// ft_execute(&env, tokens);
 		// free input (readline needs to be fred at end)	
 	}
 	return (0);
 }
 
-
-		// shelly_parser_print(tokens);
-		// print_the_full_thing(tokens);
