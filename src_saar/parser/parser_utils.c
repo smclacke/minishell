@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 17:59:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 18:33:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 void	init_type_struct(t_data_type *type)
 {
 	type->input = NULL;
-	type->strs = NULL;
 	type->cmd = NULL;
+	type->strs = NULL;
 	type->meta = NULL;
+	type->file = NULL;
 	type->next = NULL;
 }
 
@@ -34,19 +35,19 @@ void	init_type_struct(t_data_type *type)
 /**
  * is redirect in any of the node?
 */
-bool	is_redirect(t_parser *tokens)
+bool	is_redirect(void *input)
 {
-	if (!tokens)
-		return (false);
-	if (ft_strcmp(tokens->input, ">>") == 0)
+	// if (!tokens)
+	// 	return (false);
+	if (ft_strcmp(input, ">>") == 0)
 		return (true);
-	else if (ft_strcmp(tokens->input, "<<") == 0)
+	else if (ft_strcmp(input, "<<") == 0)
 		return (true);
-	else if (ft_strcmp(tokens->input, ">") == 0)
+	else if (ft_strcmp(input, ">") == 0)
 		return (true);
-	else if (ft_strcmp(tokens->input, "<") == 0)
+	else if (ft_strcmp(input, "<") == 0)
 		return (true);
-	else if (ft_strcmp(tokens->input, "|") == 0)
+	else if (ft_strcmp(input, "|") == 0)
 		return (true);
 	return (false);
 }

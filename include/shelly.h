@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 18:08:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 18:33:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_data_type
 	char				*cmd; // first arg if not a redirect and whatever comes after a pipe
 	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
 	char				*meta;
-	char				*file;
+	char				*file; // after delimiters
 	struct s_data_type	*next;
 }				t_data_type;
 
@@ -105,7 +105,7 @@ t_parser			**meta_split(t_parser *tokens);
 void				init_type_struct(t_data_type *type);
 // void				init_red_struct(t_redirect *reds);
 // bool				is_pipe(t_parser *tokens);
-bool				is_redirect(t_parser *tokens);
+bool	is_redirect(void *input);
 // bool				file_attached(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 

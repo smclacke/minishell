@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 18:21:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 18:39:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	while (list)
 	{
 		printf("[%i] | ", i);
-		printf("list->data_list->cmd: [%s] \n", list->data_list->cmd);
+		printf("list->cmd: [%s] |", list->data_list->cmd);
+		printf("list->file: [%s] |", list->data_list->file);
+		printf("list->meta: [%s] |", list->data_list->meta);
+		printf("list->strs: [%s]\n", list->data_list->strs);
 		i++;
 		list = list->next;
 	}
