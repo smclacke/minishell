@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 19:42:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 20:22:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_type_struct(t_data_type *type)
 	type->meta = NULL;
 	type->file = NULL;
 	type->next = NULL;
-	type->prev = NULL;
 }
 
 // bool	is_red_with_sass(t_parser *tokens)
@@ -33,22 +32,19 @@ void	init_type_struct(t_data_type *type)
 // 	return (false);
 // }
 
-/**
- * is redirect in any of the node?
-*/
-bool	is_redirect(void *input)
+int	is_redirect(void *input)
 {
-	if (ft_strcmp(input, ">>") == 0)
-		return (true);
-	else if (ft_strcmp(input, "<<") == 0)
-		return (true);
-	else if (ft_strcmp(input, ">") == 0)
-		return (true);
-	else if (ft_strcmp(input, "<") == 0)
-		return (true);
-	else if (ft_strcmp(input, "|") == 0)
-		return (true);
-	return (false);
+	if (ft_strcmp(input, MOREMORE) == 0)
+		return (1);
+	else if (ft_strcmp(input, LESSLESS) == 0)
+		return (1);
+	else if (ft_strcmp(input, MORE) == 0)
+		return (1);
+	else if (ft_strcmp(input, LESS) == 0)
+		return (1);
+	else if (ft_strcmp(input, PIPE) == 0)
+		return (2);
+	return (0);
 }
 
 t_parser	*shelly_parser_print(t_parser *tokens)

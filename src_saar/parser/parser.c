@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 19:51:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 20:20:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ static t_data_type	*handle_types(t_parser *tokens, int flag)
 	{
 		data->meta = data->input;
 		printf("data->meta: [%s]\n", data->meta);
-		if (ft_strcmp(data->input, "|") == 0)
-			flag = 1;
 	}
 	else
 	{	
-		if (flag == 0 || flag == 1)
+		if (flag == 0)
 		{
 			data->cmd = data->input;
-			printf("data->cmd (AFTER PIPE): [%s]\n", data->cmd);
+			printf("data->cmd: [%s]\n", data->cmd);
 		}
 		else
 		{	
@@ -63,6 +61,13 @@ t_parser	*parser(t_parser *tokens)
 	{
 		type = handle_types(token_list, i);
 		token_list->data_list = type;
+		if (is_redirect(token_list->input) == 2)
+		{
+			i = 0;
+			token_list = token_list->next;
+			type = handle_types(token_list, i);
+			token_list->data_list = type;
+		}
 		token_list = token_list->next;
 		i++;
 	}
