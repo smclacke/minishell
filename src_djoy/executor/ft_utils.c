@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 23:48:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 13:22:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	mini_error(char *string, int error)
  * @return difference if different or 0
  * old function:
 */
-int	mini_strcmp(char *s1, char *s2)
+int	.
+mini_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 

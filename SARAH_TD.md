@@ -5,6 +5,7 @@ dein computer, kein computer
 
 ---------------------------------------------------------------------------------
 
+DJOYKE, YOUR STRCMP IS CAUSING THIS PROBLEM: (s1 || s2) NOT (s1 && s2)
 ........................
 token->cmd->cmd = [e]
 token->cmd->strs = [(null)]
