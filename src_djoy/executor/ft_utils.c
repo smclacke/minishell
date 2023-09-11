@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:33:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/11 17:06:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	mini_strcmp(char *s1, char *s2)
 	i = 0;
 	if (!s1 || !s2)
 		return (1);
-	while (s1[i] && s2[i])
+	while (s1[i] || s2[i])
 	{
 		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
 			return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
