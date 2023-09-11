@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 21:22:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 21:27:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static t_data_type	*handle_types(t_data_type *data, int flag)
 
 static t_data_type	*handle_next(t_data_type *data, char *type)
 {
+// need cmd after pipe, in and out files, delimiters are just strs
 	printf("hello?\n");
 	printf("data->input: %s\n", data->input);
 	if (type == PIPE)
@@ -39,7 +40,6 @@ static t_data_type	*handle_next(t_data_type *data, char *type)
 
 // trying to set vars that follow reds accordingly in my if statement
 // need to make a function to put all the doubly shit into and just do that...
- 
 /**
  * @brief	Main parser function:
 			Check the tokens to see which member of the parser struct they need to be sorted into
