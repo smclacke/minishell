@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 23:38:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/11 14:48:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ t_parser	*shelly_parser_print(t_parser *tokens)
 	while (list)
 	{
 		printf("parser list: index [%i] | node [%s]\n", i, list->input);
+		printf("parser list: index [%i] | node->cmd [%s]\n", i, list->cmd_list->cmd);
+		printf("parser list: index [%i] | node->cmd [%s]\n", i, list->cmd_list->strs);
+		printf("parser list: index [%i] | node->cmd [%s]\n", i, list->redirect_list->meta);
 		i++;
 		list = list->next;
 	}

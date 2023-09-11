@@ -128,10 +128,10 @@ parser list: index [9] | node [file]
 //
 
 ->>>>>>>>> get the assigning to work....
-->>>>>>>>> SEPARATE FILES from redirects
-->>>>>>>>> sort redirects into correct vars
-->>>>>>>>> input after pipe without space works, so also need to be separated
-->>>>>>>>> figure out whether im going to use enums or not
+->>>>>>>>> SEPARATE FILES from redirects (lexer)
+->>>>>>>>> sort redirects into correct vars... ^^
+->>>>>>>>> input after pipe without space works, so also need to be separated (lexer)
+->>>>>>>>> figure out whether im going to use enums or not (probs not)
 
 ---------------------------------------------------------------------------------
 **CURRENT TO DO'S:**
