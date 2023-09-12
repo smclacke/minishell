@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 18:00:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:08:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_parser(t_parser *data)
 {
 	data->input = NULL;
-	data->data_list = NULL;
+	data->data_type = NULL;
 	data->next = NULL;
 }
 
