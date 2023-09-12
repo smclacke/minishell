@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 16:00:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:13:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,22 @@ void	access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 {
 	char		*error;
 
-	if (!lst->cmd_list->strs)
+	if (!lst->data_type->strs)
 		return ;
-	else if (lst->cmd_list->strs != NULL)
+	else if (lst->data_type->strs != NULL)
 	{
-		if (access(lst->cmd_list->strs, F_OK) == 0)
+		if (access(lst->data_type->strs, F_OK) == 0)
 		{
-			if (chdir(lst->cmd_list->strs) == -1)
+			if (chdir(lst->data_type->strs) == -1)
 			{
-				error = ft_strjoin("minishell: cd: ", lst->cmd_list->strs);
+				error = ft_strjoin("minishell: cd: ", lst->data_type->strs);
 				mini_error(error, errno);
 			}
 			change_old_dir(env, o_d);
 			change_current_dir(env, getcwd(c_d, sizeof(c_d)));
 		}
 		else
-			printf("cd: no such file or directory: %s\n", lst->cmd_list->strs);
+			printf("cd: no such file or directory: %s\n", lst->data_type->strs);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/11 15:47:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:17:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,19 +160,19 @@ bool	check_for_builtin(t_parser *node)
 	if (!node)
 		return (false);
 	// printf("cmd = [%s]\n", node->cmd_list->cmd);
-	if (mini_strcmp(node->cmd_list->cmd, "exit") == 0)
+	if (mini_strcmp(node->data_type->cmd, "exit") == 0)
 		return (true);
-	else if (mini_strcmp(node->cmd_list->cmd, "echo") == 0)
+	else if (mini_strcmp(node->data_type->cmd, "echo") == 0)
 		return (true);
-	else if (mini_strcmp(node->cmd_list->cmd, "cd") == 0)
+	else if (mini_strcmp(node->data_type->cmd, "cd") == 0)
 		return (true);
-	else if (mini_strcmp(node->cmd_list->cmd, "pwd") == 0)
+	else if (mini_strcmp(node->data_type->cmd, "pwd") == 0)
 		return (true);
-	else if (mini_strcmp(node->cmd_list->cmd, "export") == 0)
+	else if (mini_strcmp(node->data_type->cmd, "export") == 0)
 		return (true);
-	else if (mini_strcmp(node->cmd_list->cmd, "unset") == 0)
+	else if (mini_strcmp(node->data_type->cmd, "unset") == 0)
 		return (true);
-	else if (mini_strcmp(node->cmd_list->cmd, "env") == 0)
+	else if (mini_strcmp(node->data_type->cmd, "env") == 0)
 		return (true);
 	else
 		return (false);

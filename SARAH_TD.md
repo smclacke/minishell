@@ -30,6 +30,10 @@ im sorry this is going to be horrible to read, but it all works now with metas, 
 [13] | cmd = (null) | file = (null) | meta = < | strs = (null)
 [14] | cmd = (null) | file = thigns | meta = (null) | strs = (null)
 
+
+integrating the new parser into your srcs on my branch was fine, but now we need
+some changes, e.g. ft_echo is trying to iterate through a list of strings but it now needs to iterate through the whole list and while there are strings, do the thing
+
 ---------------------------------------------------------------------------------
 
 **TO DOOOOOOS**
