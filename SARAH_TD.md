@@ -4,10 +4,111 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
-HELLOHELLOHELLOHELLO 11/09/23
+**CURRENT MESSAGES? UPDATES**
+
+HELLOHELLOHELLOHELLO 11/09/23, and it works ::)
 
 LETS SIMPLIFY SO I HAVE SOMETHING THAT ACTUALLY WORKS.... WOOW AMAZING IDEA......
 
+MESSAGE TO DJOYKE:
+im sorry this is going to be horrible to read, but it all works now with metas,  cmd after pipe, files after redirects,,, :') after << we are looking for a delimiter which is just a string that we need to compare the input from the command line to to see if we should end the here_doc or not, i can add a delimiter var if you like or ill leave it as a string, just let me know cause that would be really easy to add if it would make life easier for you :slightly_smiling_face: 
+
+ !_-(_|\echo some | thing >> in < input > more more | more < thigns
+[0] | cmd = echo | file = (null) | meta = (null) | strs = (null)
+[1] | cmd = (null) | file = (null) | meta = (null) | strs = some
+[2] | cmd = (null) | file = (null) | meta = | | strs = (null)
+[3] | cmd = thing | file = (null) | meta = (null) | strs = (null)
+[4] | cmd = (null) | file = (null) | meta = >> | strs = (null)
+[5] | cmd = (null) | file = in | meta = (null) | strs = (null)
+[6] | cmd = (null) | file = (null) | meta = < | strs = (null)
+[7] | cmd = (null) | file = input | meta = (null) | strs = (null)
+[8] | cmd = (null) | file = (null) | meta = > | strs = (null)
+[9] | cmd = (null) | file = more | meta = (null) | strs = (null)
+[10] | cmd = (null) | file = (null) | meta = (null) | strs = more
+[11] | cmd = (null) | file = (null) | meta = | | strs = (null)
+[12] | cmd = more | file = (null) | meta = (null) | strs = (null)
+[13] | cmd = (null) | file = (null) | meta = < | strs = (null)
+[14] | cmd = (null) | file = thigns | meta = (null) | strs = (null)
+
+---------------------------------------------------------------------------------
+
+**TO DOOOOOOS**
+
+LEXER
+->>>>>>>>> SEPARATE FILES from redirects and attachments to pipes (lexer)
+->>>>>>>>> SEPARATE QUOTES... need to talk to someone about quote handling cause its too much
+->>>>>>>>> split the rest on spaces
+
+PARSER
+->>>>>>>>> what is the parser missing??
+->>>>>>>>> should dollar just be a string or no?
+
+OTHER
+->>>>>>>>> errors ....
+					-> cmd not found
+					-> unclosed quotes
+					-> pipe stuff
+->>>>>>>>> figure out whether im going to use enums or not (probs not)
+->>>>>>>>> where do i parser quote tokens???????
+
+I think abc$abc, some<<something are both for the expander and ill leave them intact in the tokens
+
+
+---------------------------------------------------------------------------------
+**TALK TO DJOYKE ABOUT THIS**
+
+**ONE**
+// i could check the exact behaviour of this and parse it to remove the unnecessary bits
+// STILL NEED TO FIGURE OUT WHAT IM DOING WITH THIS, PARSER REMOVES OR EXPANDER TAKES WHATS NECESSARY?
+
+Gutentag Fräulein Shelly, wie geht's?echo abc$abc
+lexer: 		~: echo
+lexer: 		~: abc$abc
+first->cmd: echo
+second->str: abc$abc 
+
+**TWO**
+I'll give you cmds, files and strs, do you want delimiter vars as well for after << ??
+
+
+
+---------------------------------------------------------------------------------
+
+
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
+
+---------------------------------------------------------------------------------
+**NEW_STYLEEE YEAHHHHH**
+
+//-----------------try out------------------//
+
+typedef struct s_parser 
+{
+	struct s_parser		*data;
+	struct s_parser		*next;
+}	t_parser;
+
+
+// typedef struct s_parser 
+// {
+// 	char **cmd_and_flags;   "ls", "-l"
+//	char **redirections;    INPUT_R, OUPUT_R 
+//	char **files;			"file_1" "file_2" 
+// 	struct s_parser		*next;
+// }	t_parser;
+
+
+list->node[0]
+if node[1] exists then further
+if node[2] exists then further
+
+example : minishell$> < file1 cmd1 | cmd2 >file2
+if space 2 parts if no space 1 part.
+
+linked list;
+data[0] = **array[0] < [1] file1 [2] cmd [3] NULL
+data[1] = **array[0] pipe [1] NULL
+data[2] = **array[0] cmd [1] >outfile [2] NULL
 
 ---------------------------------------------------------------------------------
 
@@ -36,289 +137,6 @@ cmd = [c]
 expander: 		there's a builtin whoop
 ........................
 
-
-RIGHT NOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-HELLLLLLLOOOOOO AGAIN, ELEPHANTS RULE
-ALSO, PLEASE PUT SOME SHIT IN PARSER UTILS.......
-
-//
-     __
- .--()°'.'
-'|, . ,'
- !_-(_|\
- 
- echo | some < thing | nice
-lexer list: [echo]
-lexer list: [|]
-lexer list: [some]
-lexer list: [<]
-lexer list: [thing]
-lexer list: [|]
-lexer list: [nice]
-cmds->info: echo
-cmds->cmd: echo
-cmds->info: some
-cmds->cmd: some
-test
-cmds->info: thing
-cmds->strs: thing
-cmds->info: nice
-cmds->cmd: nice
-parser list: index [0] | node [echo]
-parser list: index [1] | node [|]
-parser list: index [2] | node [some]
-parser list: index [3] | node [<]
-parser list: index [4] | node [thing]
-parser list: index [5] | node [|]
-parser list: index [6] | node [nice]
-[0] || input: [echo] | cmd_list: [echo] | redirect_list: [(null)]
-[1] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
-[2] || input: [some] | cmd_list: [some] | redirect_list: [(null)]
-[3] || input: [<] | cmd_list: [(null)] | redirect_list: [<]
-[4] || input: [thing] | cmd_list: [thing] | redirect_list: [(null)]
-[5] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
-[6] || input: [nice] | cmd_list: [nice] | redirect_list: [(null)]
-//
-
-we are getting somewhere....
-
-// just getting more and more beautiful......
-
-//     __
- .--()°'.'
-'|, . ,'
- !_-(_|\
-cmd str | cmd str str str | < file
-lexer list: [cmd]
-lexer list: [str]
-lexer list: [|]
-lexer list: [cmd]
-lexer list: [str]
-lexer list: [str]
-lexer list: [str]
-lexer list: [|]
-lexer list: [<]
-lexer list: [file]
-cmds->cmd: cmd
-cmds->strs: str
-redirect: |
-cmds->cmd: cmd
-cmds->strs: str
-cmds->strs: str
-cmds->strs: str
-redirect: |
-redirect: <
-test
-cmds->strs: file
-parser list: index [0] | node [cmd]
-parser list: index [1] | node [str]
-parser list: index [2] | node [|]
-parser list: index [3] | node [cmd]
-parser list: index [4] | node [str]
-parser list: index [5] | node [str]
-parser list: index [6] | node [str]
-parser list: index [7] | node [|]
-parser list: index [8] | node [<]
-parser list: index [9] | node [file]
-[0] || input: [cmd] | cmd_list: [cmd] | redirect_list: [(null)]
-[1] || input: [str] | cmd_list: [str] | redirect_list: [(`null)]
-[2] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
-[3] || input: [cmd] | cmd_list: [cmd] | redirect_list: [(null)]
-[4] || input: [str] | cmd_list: [str] | redirect_list: [(null)]
-[5] || input: [str] | cmd_list: [str] | redirect_list: [(null)]
-[6] || input: [str] | cmd_list: [str] | redirect_list: [(null)]
-[7] || input: [|] | cmd_list: [(null)] | redirect_list: [|]
-[8] || input: [<] | cmd_list: [(null)] | redirect_list: [<]
-[9] || input: [file] | cmd_list: [file] | redirect_list: [(null)]
-//
-
-->>>>>>>>> get the assigning to work....
-->>>>>>>>> SEPARATE FILES from redirects (lexer)
-->>>>>>>>> sort redirects into correct vars... ^^
-->>>>>>>>> input after pipe without space works, so also need to be separated (lexer)
-->>>>>>>>> figure out whether im going to use enums or not (probs not)
-
 ---------------------------------------------------------------------------------
-**CURRENT TO DO'S:**
-
- BLEHHHHH, RETURN TO THIS AFTER ABOVE IS DONE, QUOTES AND ERRORS IMPORTO, REST NOT SO MUCH (:)
-HELLLLOOOOOO
-please just ignore quotes for now cause it's setting me back massively...
-handle errors, handle flags, put flag in node with cmd to send to executor
-come back to quotes when stronger and more slept
-
- ADD DOLLAR TO META REDIRECTS :)
-
-~~ TOKENS ~~
-// split on spaces, split on metas but add metas to token array
-// if quotes, split those separately,  keep everything in quotes totally intact
-	QUOTES~~
----> try using old ft_split, split on spaces, if quote found, stop splitting
----> add separately the part of the array from s or d quotes and then return to splitting on spaces
----> this way, I need to check the whole word for quotes and fix the a"something" problem
-
-
-~~ MICROSHELLY ~~
--> usable?
-
-
-~~ERRORS~~
--> cmd not found
--> unclosed quotes
--> pipe stuff
-
-
----------------------------------------------------------------------------------
-**FUTURE TO DOS::**
-
-*Lexer*
-
--> send good tokens to parser
-
-
-*Parser*
-
-->	some<<something 
-->	<<something
-				bash-3.2$ some<<something
-				> something
-				bash: some: command not found
-				bash-3.2$ some<<something
-				> hello
-				> some
-				> something
-				bash: some: command not found
-				bash-3.2$ <<something
-				> some
-				> something
-				bash-3.2$
-
-*Other*
-
-
----------------------------------------------------------------------------------
-**TALK TO DJOYKE ABOUT THIS**
-
-Gutentag Fräulein Shelly, wie geht's?echo abc$abc
-lexer: 		~: echo
-lexer: 		~: abc$abc
-first->cmd: echo
-second->str: abc$abc 
-
-// i could check the exact behaviour of this and parse it to remove the unnecessary bits
-
-+++++++++++
-
-Gutentag Fräulein Shelly, wie geht's?/usr/bin/cd some thing
-lexer: 		~: /usr/bin/cd
-lexer: 		~: some
-lexer: 		~: thing
-first->abso: /usr/bin/cd
-second->str: some
-second->str: thing
-Gutentag Fräulein Shelly, wie geht's?/bin/echo some thing
-lexer: 		~: /bin/echo
-lexer: 		~: some
-lexer: 		~: thing
-first->abso: /bin/echo
-second->str: some
-second->str: thing
-
-IM GOING TO GIVE YOU AN ABSO PATH IN THE STRUCT, STILL NEED TO CHECK IF ITS THE CORRECT 
-ABSO PATH, ECHO WORKS, CD DOESN'T, ETC ETC., USE EXECVE FOR THESE BECAUSE USING
-THE ENV PATH FOR THESE NOT OUR BUILDINS
-// I COULD CHECK THESE PATHS AND ONLY GIVE YOU VALID ONES
-
-+++++++++++++++++++++
-
-djoyke... maybe use a static function once in a while.... please
-
-+++++++++++++++++++++++++=
-
-
-t_expand	*micro_expand(char **envp, t_parser *node)
-{
-	// t_env	    *env;
-    t_expand    *expand;
-
-    (void) envp;
-	expand = NULL;
-	// env = micro_env_list(envp);
-	while (node)
-	{
-        shelly_expand_lstadd_back(&expand, init_expand_list(node));
-		node = node->next;
-	}
-	return (expand);
-}
-
----------------------------------------------------------------------------------
-**NEW_STYLEEE YEAHHHHH**
-
-//-----------------try out------------------//
-
-typedef struct s_parser 
-{
-	struct s_parser		*data;
-	struct s_parser		*next;
-}	t_parser;
-
-
-// typedef struct s_parser 
-// {
-// 	char **cmd_and_flags;   "ls", "-l"
-//	char **redirections;    INPUT_R, OUPUT_R 
-//	char **files;			"file_1" "file_2" 
-// 	struct s_parser		*next;
-// }	t_parser;
-
-
-list->node[0]
-if node[1] exists then further
-if node[2] exists then further
-
-example : minishell$> < file1 cmd1 | cmd2 >file2
-if space 2 parts if no space 1 part.
-
-linked list;
-data[0] = **array[0] < [1] file1 [2] cmd [3] NULL
-data[1] = **array[0] pipe [1] NULL
-data[2] = **array[0] cmd [1] >outfile [2] NULL
-
----------------------------------------------------------------------------------
-**NEW_STYLEEE YEAHHHHH**
-
-//-----------------try out------------------//
-
-typedef struct s_parser 
-{
-	struct s_parser		*data;
-	struct s_parser		*next;
-}	t_parser;
-
-
-// typedef struct s_parser 
-// {
-// 	char **cmd_and_flags;   "ls", "-l"
-//	char **redirections;    INPUT_R, OUPUT_R 
-//	char **files;			"file_1" "file_2" 
-// 	struct s_parser		*next;
-// }	t_parser;
-
-
-list->node[0]
-if node[1] exists then further
-if node[2] exists then further
-
-example : minishell$> < file1 cmd1 | cmd2 >file2
-if space 2 parts if no space 1 part.
-
-linked list;
-data[0] = **array[0] < [1] file1 [2] cmd [3] NULL
-data[1] = **array[0] pipe [1] NULL
-data[2] = **array[0] cmd [1] >outfile [2] NULL
-
-//-----------------try out------------------//
 
 
