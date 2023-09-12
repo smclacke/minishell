@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 16:07:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 17:45:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@
 # define MOREMORE ">>"
 # define LESS "<"
 # define LESSLESS "<<"
+# define DOUBLE_Q "\""
+# define SINGLE_Q "\'"
+
 
 typedef struct s_data_type
 {
@@ -72,27 +75,11 @@ void				lexer_listadd_back(t_parser **list, t_parser *new);
 t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
+//----- splitting.c -----//
+char				**parse_input(char *input);
 
-
-// UGHGSFKLAHF;GIJAIJFKNBMVLK;GLDJKDKKHLKSSJKL;JMNSDGJKV
-// -------- Quotes --------//
-bool				closed_quotes(char *input);
-bool				shelly_check_quotes(char *tokens);
-char				**ft_split_shelly(char *input);
-
-// --------Quote utils ------//
-int					lq_isquote(char c);
-int					lq_what_to_split(char c);
-int					which_quote(char c);
-int					lq_count_words(char *input);
-int					lq_word_length(char *input);
-int					quote_len(char *input);
-
-//---- parser_quotes.c ----//
-// bool				parser_check_quotes(char *tokens);
-// char				*remove_quotes(char *tokens);
-
-// UGHGSFKLAHF;GIJAIJFKNBMVLK;GLDJKDKKHLKSSJKL;JMNSDGJKV
+//----- splitting_utils.c -----//
+char				*which_quote(char c);
 
 
 // PARSER

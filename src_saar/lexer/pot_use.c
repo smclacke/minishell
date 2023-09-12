@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lexer_quote_utils.c                                :+:    :+:            */
+/*   pot_use_uote.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/08 23:30:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:36:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 17:50:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ int	lq_isquote(char c)
 int	lq_what_to_split(char c)
 {
 	return (c == 0 || c == 32 || c == 9 || c == 10);
-}
-
-int	which_quote(char c)
-{
-	if (c == '\"')
-		return (2);
-	else if (c == '\'')
-		return (1);
-	return (0);
 }
 
 int	lq_count_words(char *input)
