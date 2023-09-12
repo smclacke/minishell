@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:36:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:24:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-
+// everything starts and finishes here.... let's goooooooo
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
  * 			are no quotations, the string is split on spaces. If a quotation is encountered, 
