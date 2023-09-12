@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/11 21:06:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:01:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ char	*is_redirect(void *input)
 t_parser	*shelly_parser_print(t_parser *tokens)
 {
 	t_parser	*list;
-	int			i = 0;
+	int			i;
 
+	i = 0;
 	list = tokens;
 	while (list)
 	{
