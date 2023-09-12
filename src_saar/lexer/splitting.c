@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 18:02:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 18:51:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,54 @@
 // 	return (NULL);
 // }
 
-static char	*find_tokens(char *input)
-{
-	char	*tmp;
-	tmp = (char *)malloc(sizeof(char) * total_len + 1);
-	while (input[i])
-	{
-		while (input[i] && !which_quote(input[i]) && !is_redirect(input[i]))
-		{
-			if (lq_what_to_split(input[i]))
-			{
-				tmp = ft_substr(input, 0, i - 1);
+// static char	*find_tokens(char *input)
+// {
+// 	char	*tmp;
+// 	tmp = (char *)malloc(sizeof(char) * total_len + 1);
+// 	while (input[i])
+// 	{
+// 		while (input[i] && !which_quote(input[i]) && !is_redirect(input[i]))
+// 		{
+// 			if (lq_what_to_split(input[i]))
+// 			{
+// 				tmp = ft_substr(input, 0, i - 1);
 				
-			}
+// 			}
 			
-		}
-		i++;
-	}
+// 		}
+// 		i++;
+// 	}
 	
-}
+// }
 
+
+
+
+
+// split up to metas, spaces and quotes
+// if quote, find the matching quotes and add as part of array
+// if meta (NOT DOLLAR), tokenize that meta alone
 static char	**make_array(char *input)
 {
 	char	**array;
-	int		token_count = count_tokens(input);
-	int		total_len = ft_strlen(input);
+	char	*quote;
+	int		quote_indexes;
+	// (void)	input;
+	// int		token_count = count_tokens(input);
+	// int		total_len = ft_strlen(input);
 	int		i = 0;
 
-	array = (char **)malloc(sizeof(char *) * token_count + 1);
-	array = find_tokens(input);
+	quote_indexes = find_quote(input);
+	if (quote_indexes)
+	{
+		// there are quotes
+	}
+	else if ()
+	{
+		// find metas
+	}
+	// array = (char **)malloc(sizeof(char *) * ft_strlen(input) + 1);
+	// array = find_tokens(input);
 	// while (input)
 	// {
 	// 	while (input && good_stuff(input))
@@ -68,6 +87,7 @@ static char	**make_array(char *input)
 	// 	while (input && !good_stuff(input))
 	// 		input++;
 	// }
+
 	array = 0;
 	return (array);
 }
@@ -83,9 +103,20 @@ static char	**make_array(char *input)
 char	**parse_input(char *input)
 {
 	char	**array = NULL;
+	int		i = 0;
 
-	array = make_array(input);
-	// array = ft_split(input, ' ');
+	while (input[i])
+	{
+		if (is_quote(input[i]) || is_meta(&input[i]))
+		{
+			array = make_array(input);
+			if (!array)
+				return (NULL);
+			return (array);
+		}
+		i++;
+	}
+	array = ft_split(input, ' ');
 	if (!array)
 		return (NULL);
 	return (array);

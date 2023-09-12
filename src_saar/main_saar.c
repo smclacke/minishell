@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 17:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/12 18:25:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 
-		// print_the_full_thing(tokens);
+		print_the_full_thing(tokens);
 
 
 		// ft_execute(&env, tokens);
