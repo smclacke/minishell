@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 20:20:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 20:40:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ static int	len_token(char *input)
 			&& !is_token(&input[i]))
 	{
 		if (ft_isquote(input[i]))
+		{
 			i += next_quote(&input[i], input[i]);
+			return (i);
+		}
 		i++;
 	}
+	printf("index = %i\n", i);
 	return (i);
 }
 
@@ -61,8 +65,23 @@ static char	*give_tokens(char *input)
 	token = ft_substr(input, 0, token_len);
 	if (!token)
 		return (NULL);
+	printf("give_token: %s\n", token);
 	input += token_len;
 	return (token);
+}
+
+static int	amount_tokens(char *input)
+{
+	int	i = 0;
+	int	count = 0;
+
+	while (input[i])
+	{
+		count += len_token(&input[i]);
+		i++;
+	}
+	printf("count = %i\n", count);
+	return (count);
 }
 
 /**
@@ -83,9 +102,11 @@ char	**parse_input(char *input)
 		if (ft_isquote(input[i]) || is_meta(&input[i]))
 		{
 			i = 0;
+			array = (char **)malloc(sizeof(char *) * amount_tokens(input));
 			while (input)
 			{
 				array[i] = give_tokens(input);
+				printf("parse_input_array: %s\n", array[i]);
 				i++;
 			}
 			if (!array)
@@ -100,76 +121,4 @@ char	**parse_input(char *input)
 	return (array);
 }
 
-
-
-
-// int		quotes_yes(char *input) // which quote
-// {
-// 	int		i = 0;
-// 	while (input[i])
-// 	{
-// 		if (which_quote(input[i]) == 2)
-// 			return (DOUBLE_Q);
-// 		else if ()
-// 	}
-
-// 	return (NULL);
-// }
-
-// static char	*find_tokens(char *input)
-// {
-// 	char	*tmp;
-// 	tmp = (char *)malloc(sizeof(char) * total_len + 1);
-// 	while (input[i])
-// 	{
-// 		while (input[i] && !which_quote(input[i]) && !is_redirect(input[i]))
-// 		{
-// 			if (lq_what_to_split(input[i]))
-// 			{
-// 				tmp = ft_substr(input, 0, i - 1);
-				
-// 			}
-			
-// 		}
-// 		i++;
-// 	}
-	
-// }
-
-// split up to metas, spaces and quotes
-// if quote, find the matching quotes and add as part of array
-// if meta (NOT DOLLAR), tokenize that meta alone
-// static char	**make_array(char *input)
-// {
-// 	char	**array;
-// 	char	*quote;
-// 	int		quote_indexes;
-// 	// (void)	input;
-// 	// int		token_count = count_tokens(input);
-// 	// int		total_len = ft_strlen(input);
-// 	int		i = 0;
-
-// 	quote_indexes = find_quote(input);
-// 	if (quote_indexes)
-// 	{
-// 		// there are quotes
-// 	}
-// 	else if ()
-// 	{
-// 		// find metas
-// 	}
-// 	// array = (char **)malloc(sizeof(char *) * ft_strlen(input) + 1);
-// 	// array = find_tokens(input);
-// 	// while (input)
-// 	// {
-// 	// 	while (input && good_stuff(input))
-// 	// 		input++;
-// 	// 	if (input && !good_stuff(input))
-// 	// 		array = split_input(input);
-// 	// 	while (input && !good_stuff(input))
-// 	// 		input++;
-// 	// }
-
-// 	array = 0;
-// 	return (array);
-// }
+	// printf("whats up?\n");
