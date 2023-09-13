@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 18:47:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 18:49:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 		 // WE MUST SEPARATE METAS
 	// split on spaces, split on metas but add metas to token array
 	// if quotes, split those apart keep them totally intact
-
 
 static int	len_token(char *input)
 {
