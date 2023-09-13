@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 18:51:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 17:08:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,40 +57,40 @@
 // split up to metas, spaces and quotes
 // if quote, find the matching quotes and add as part of array
 // if meta (NOT DOLLAR), tokenize that meta alone
-static char	**make_array(char *input)
-{
-	char	**array;
-	char	*quote;
-	int		quote_indexes;
-	// (void)	input;
-	// int		token_count = count_tokens(input);
-	// int		total_len = ft_strlen(input);
-	int		i = 0;
+// static char	**make_array(char *input)
+// {
+// 	char	**array;
+// 	char	*quote;
+// 	int		quote_indexes;
+// 	// (void)	input;
+// 	// int		token_count = count_tokens(input);
+// 	// int		total_len = ft_strlen(input);
+// 	int		i = 0;
 
-	quote_indexes = find_quote(input);
-	if (quote_indexes)
-	{
-		// there are quotes
-	}
-	else if ()
-	{
-		// find metas
-	}
-	// array = (char **)malloc(sizeof(char *) * ft_strlen(input) + 1);
-	// array = find_tokens(input);
-	// while (input)
-	// {
-	// 	while (input && good_stuff(input))
-	// 		input++;
-	// 	if (input && !good_stuff(input))
-	// 		array = split_input(input);
-	// 	while (input && !good_stuff(input))
-	// 		input++;
-	// }
+// 	quote_indexes = find_quote(input);
+// 	if (quote_indexes)
+// 	{
+// 		// there are quotes
+// 	}
+// 	else if ()
+// 	{
+// 		// find metas
+// 	}
+// 	// array = (char **)malloc(sizeof(char *) * ft_strlen(input) + 1);
+// 	// array = find_tokens(input);
+// 	// while (input)
+// 	// {
+// 	// 	while (input && good_stuff(input))
+// 	// 		input++;
+// 	// 	if (input && !good_stuff(input))
+// 	// 		array = split_input(input);
+// 	// 	while (input && !good_stuff(input))
+// 	// 		input++;
+// 	// }
 
-	array = 0;
-	return (array);
-}
+// 	array = 0;
+// 	return (array);
+// }
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
@@ -105,17 +105,17 @@ char	**parse_input(char *input)
 	char	**array = NULL;
 	int		i = 0;
 
-	while (input[i])
-	{
-		if (is_quote(input[i]) || is_meta(&input[i]))
-		{
-			array = make_array(input);
-			if (!array)
-				return (NULL);
-			return (array);
-		}
-		i++;
-	}
+	// while (input[i])
+	// {
+	// 	if (is_quote(input[i]) || is_meta(&input[i]))
+	// 	{
+	// 		array = make_array(input);
+	// 		if (!array)
+	// 			return (NULL);
+	// 		return (array);
+	// 	}
+	// 	i++;
+	// }
 	array = ft_split(input, ' ');
 	if (!array)
 		return (NULL);
