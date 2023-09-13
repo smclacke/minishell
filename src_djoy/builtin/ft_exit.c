@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/13 17:55:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/13 17:57:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static long long	mini_atoll(char *str)
  * 		- 4) not numeric display error message  (still exit)
  * 3) only exit? exit 0 (EXIT_SUCCES) (exit)
  * exit | something doesnt print exit (also exit in pipe?? so sad)
+ * check alpha numeric first and then the arguments if more than 1 (done)
 */
 void	ft_exit(t_parser *node)
 {
@@ -73,20 +74,20 @@ void	ft_exit(t_parser *node)
 
 	i = 0;
 	node = node->next;
-	if (node->next)
-	{
-		write(STDOUT_FILENO, TOO_MANY_ARG, sizeof(TOO_MANY_ARG));
-		exit(1);
-	}
 	error = mini_atoll(node->cmd_list->strs);
 	while (node->cmd_list->strs[i])
 	{
-		if (ft_isalnum(node->cmd_list->strs[i]) == 0)
+		if (ft_isdigit(node->cmd_list->strs[i]) == 0)
 		{
 			put_custom_error(node, "exit");
 			exit(255); //needs to be return, int error needs to be 
 		}
 		i++;
+	}
+	if (node->next)
+	{
+		write(STDOUT_FILENO, TOO_MANY_ARG, sizeof(TOO_MANY_ARG));
+		exit(1);
 	}
 	if (error > 255)
 		error = error % 256;
