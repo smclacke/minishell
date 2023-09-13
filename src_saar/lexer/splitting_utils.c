@@ -6,17 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 18:35:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 18:47:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-bool	is_quote(char input)
+int	next_quote(char *input, char c)
 {
-	if (input == '\'' || input == '\"')
-		return(true);
-	return (false);
+	int	i;
+
+	i = 1;
+	while (input[i] && input[i] != c)
+		i++;
+	return (i);
 }
 
 bool	is_meta(char *input)

@@ -6,116 +6,94 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 16:02:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 18:42:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/shelly.h"
+#include "../../include/sarah.h"
 
-/**
- * @brief	checks whether the input token is a redirect
- * 			if so, token->data_type = meta
- * 			otherwise, checks whether it's the first token
- * 			if so, token->data_type = cmd
- * 			otherwise, the input is initialized as a strs
- * @param	data pasing the data var form the data_type struct 
- * 			so initialize it's input correctly into it's struct
- * @param	flag checks whether this is the first token, 
- * 			if so it is initialized as cmd
- * @return	data: parser->data_type back to the parser function to 
- * 			move on to sort the next token
-*/
-static t_data_type	*handle_types(t_data_type *data, int flag)
+static t_command	*handle_commands(t_parser *tokens, int i)
 {
-	if (is_redirect(data->input))
-		data->meta = data->input;
+	t_command		*cmds;
+
+	cmds = (t_command *)malloc(sizeof(t_command));
+	if (!cmds)
+		exit(EXIT_FAILURE); // fix this later
+	init_cmd_struct(cmds);
+	tokens->cmd_list = tokens->input;
+	cmds->input = tokens->cmd_list;
+
+	// the one that must be a cmd
+	if (i == 0)
+		cmds->cmd = cmds->input;
 	else
-	{
-		if (flag == 0)
-			data->cmd = data->input;
-		else
-			data->strs = data->input;
-	}
-	return (data);
+		cmds->strs = cmds->input;
+	return (cmds);
 }
 
-// DO WE WANT DELIMITER VAR OR JUST STR AFTER << HERE_DOC??
-/**
- * @brief	if previous token was a redirect, 
- * 			the following one is going to be cmd, file or delimiter
- * 			same thing as handle_types but now checks 
- * 			which meta type came before
- * @param	data pasing the data var form the data_type struct 
- * 			so initialize it's input correctly into it's struct
- * @param	type type of meta from the token before this 
- * 			current one that's now being handled
- * @return	data: parser->data_type back to the parser function 
- * 			to move on to sort the next token
-*/
-static t_data_type	*handle_next(t_data_type *data, char *type)
+static t_redirect	*handle_redirect(t_parser *tokens)
 {
-	if (ft_strcmp(type, PIPE) == 0)
-		data->cmd = data->input;
-	else if (ft_strcmp(type, LESSLESS) == 0)
-		data->strs = data->input;
-	else
-		data->file = data->input;
-	return (data);
-}
+	t_redirect	*reds;
 
-/**
- * @brief	Takes the t_parser tokens, puts the input into 
- * 			the t_parser data_type (struct) varibale
- * 			called data and returns to main parser function 
- * 			so the input can be sorted accordingly
- * @param	tokens input from parser struct that is put into the direct struct
- * @param	data data_type struct variable to use in handle functions
- * @return	data->input: input put into the data_type struct to be 
- * 			sorted in the struct by correct var type in the handle functions
-*/
-static void	*give_data(t_parser *tokens, t_data_type *data)
-{
-	tokens->data_type = tokens->input;
-	data->input = tokens->data_type;
-	return (data->input);
+	reds = (t_redirect *)malloc(sizeof(t_redirect));
+	if (!reds)
+		exit(EXIT_FAILURE); // fix this later
+	init_red_struct(reds);
+	tokens->redirect_list = tokens->input;
+
+	// printf("tokens->redirect_list: [%s]\n", (char *)tokens->redirect_list);
+	
+	reds->input = tokens->redirect_list;
+
+	// printf("reds->input: [%s]\n", reds->input);
+
+	reds->meta = reds->input;
+
+	printf("reds->meta: [%s]\n", reds->meta);
+	
+	return (reds);
 }
 
 /**
  * @brief	Main parser function:
- *			takes the tokens, puts them into the data_type struct 
- *			and then sorts them based on there position into the correct 
- *			data_type struct variable, returning the new sorted token 
- *			list to the executor
- * @param	tokens t_parser tokens passed from the lexer 
- * 			to be sorted by the parser()
- * @return	tokens: all the tokens given by the lexer have been 
- * 			sorted into the parser->data_type struct
- * 			making them more managable for the executor
+			Check the tokens to see which member of the parser struct they need to be sorted into
+ * @param	tokens t_lexer tokens passed from the lexer to be sorted by the parser
+ * @return	parser_struct: all the tokens given by the lexer have been sorted into the parser struct
 */
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser		*token_list;
-	t_data_type		*data;
-	char			*type;
-	int				i;
+	t_command		*cmds;
+	t_redirect		*reds;
+	int				i = 0;
 
-	i = 0;
 	token_list = tokens;
 	while (token_list)
 	{
-		data = init_data();
-		data->input = give_data(token_list, data);
-		token_list->data_type = handle_types(data, i);
-		type = is_redirect(token_list->input);
-		if (type && token_list->next)
+		if (is_redirect(token_list))
 		{
-			token_list = token_list->next;
-			data = init_data();
-			data->input = give_data(token_list, data);
-			token_list->data_type = handle_next(data, type);
+			// put reds in struct
+			reds = handle_redirect(token_list);
+			token_list->redirect_list = reds;
+			printf("toen->red->meta = [%s]\n", (char *)token_list->redirect_list->meta);
+		}
+		// if there was a redirect, need to check which so that if >, next node is file, 
+		// and if pipe, next is command ( don't use index anymore, just keep for first arg)
+
+		
+		// if (there was a sassy red and i need to do something with next node) ...
+
+		
+		else
+		{
+			cmds = handle_commands(token_list, i);
+			token_list->cmd_list = cmds;
+			printf("token->cmd->cmd = [%s]\n", (char *)token_list->cmd_list->cmd);
+			printf("token->cmd->strs = [%s]\n", (char *)token_list->cmd_list->strs);
 		}
 		token_list = token_list->next;
 		i++;
 	}
 	return (tokens);
 }
+

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 18:35:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 19:59:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,27 @@
 # define SINGLE_Q "\'"
 
 
+/**
+ * @brief	specifies the different types of tokens from the lexer, that are parsed and then given to the executor
+ * @param	cmd: first arg from commandline or arg after a pipe
+ * @param	meta: pipe, more, less, moremore, lessless. Dollar is excluded and handled as a string
+ * @param	file: in and out files, args that come after more, less and moremore
+ * @param	strs: all other input. command arguments, typos...
+*/
 typedef struct s_data_type
 {
 	void				*input;
-	char				*cmd; // first arg if not a redirect and whatever comes after a pipe
-	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
-	char				*meta; // | < > << >> (not including dollar ... for now)
-	char				*file; // after < > >> redirects
+	char				*cmd;
+	char				*meta;
+	char				*file;
+	char				*strs;
 	struct s_data_type	*next;
 }				t_data_type;
 
 typedef struct s_parser
 {
 	void				*input;
-	struct s_data_type	*data_type; // token sorted into applicable variable
+	struct s_data_type	*data_type;
 	struct s_parser		*next;
 }				t_parser;
 
@@ -79,11 +86,8 @@ t_parser			*shelly_print_list(t_parser *token);
 char				**parse_input(char *input);
 
 //----- splitting_utils.c -----//
-bool				is_quote(char input);
+int					next_quote(char *input, char c);
 bool				is_meta(char *input);
-
-
-// PARSER
 
 //---- parser.c ----//
 t_parser			*parser(t_parser *tokens);
