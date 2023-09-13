@@ -10,27 +10,6 @@ HELLOHELLOHELLOHELLO 11/09/23, and it works ::)
 
 LETS SIMPLIFY SO I HAVE SOMETHING THAT ACTUALLY WORKS.... WOOW AMAZING IDEA......
 
-MESSAGE TO DJOYKE:
-im sorry this is going to be horrible to read, but it all works now with metas,  cmd after pipe, files after redirects,,, :') after << we are looking for a delimiter which is just a string that we need to compare the input from the command line to to see if we should end the here_doc or not, i can add a delimiter var if you like or ill leave it as a string, just let me know cause that would be really easy to add if it would make life easier for you :slightly_smiling_face: 
-
- !_-(_|\echo some | thing >> in < input > more more | more < thigns
-[0] | cmd = echo | file = (null) | meta = (null) | strs = (null)
-[1] | cmd = (null) | file = (null) | meta = (null) | strs = some
-[2] | cmd = (null) | file = (null) | meta = | | strs = (null)
-[3] | cmd = thing | file = (null) | meta = (null) | strs = (null)
-[4] | cmd = (null) | file = (null) | meta = >> | strs = (null)
-[5] | cmd = (null) | file = in | meta = (null) | strs = (null)
-[6] | cmd = (null) | file = (null) | meta = < | strs = (null)
-[7] | cmd = (null) | file = input | meta = (null) | strs = (null)
-[8] | cmd = (null) | file = (null) | meta = > | strs = (null)
-[9] | cmd = (null) | file = more | meta = (null) | strs = (null)
-[10] | cmd = (null) | file = (null) | meta = (null) | strs = more
-[11] | cmd = (null) | file = (null) | meta = | | strs = (null)
-[12] | cmd = more | file = (null) | meta = (null) | strs = (null)
-[13] | cmd = (null) | file = (null) | meta = < | strs = (null)
-[14] | cmd = (null) | file = thigns | meta = (null) | strs = (null)
-
-
 integrating the new parser into your srcs on my branch was fine, but now we need
 some changes, e.g. ft_echo is trying to iterate through a list of strings but it now needs to iterate through the whole list and while there are strings, do the thing
 
@@ -45,7 +24,7 @@ LEXER
 
 PARSER
 ->>>>>>>>> what is the parser missing??
-->>>>>>>>> should dollar just be a string or no?
+->>>>>>>>> should dollar just be a string or no? YES
 
 OTHER
 ->>>>>>>>> errors ....
@@ -53,7 +32,7 @@ OTHER
 					-> unclosed quotes
 					-> pipe stuff
 ->>>>>>>>> figure out whether im going to use enums or not (probs not)
-->>>>>>>>> where do i parser quote tokens???????
+->>>>>>>>> where do i parser quote tokens??????? EXPAND THEM :):), or like parse between parser and expansion but like its good as one token for now and ill fix it at some point in the future
 
 I think abc$abc, some<<something are both for the expander and ill leave them intact in the tokens
 
@@ -63,17 +42,14 @@ I think abc$abc, some<<something are both for the expander and ill leave them in
 
 **ONE**
 // i could check the exact behaviour of this and parse it to remove the unnecessary bits
-// STILL NEED TO FIGURE OUT WHAT IM DOING WITH THIS, PARSER REMOVES OR EXPANDER TAKES WHATS NECESSARY?
+// STILL NEED TO FIGURE OUT WHAT IM DOING WITH THIS, 
+// PARSER REMOVES OR !!EXPANDER TAKES WHATS NECESSARY?!!
 
 Gutentag Fräulein Shelly, wie geht's?echo abc$abc
 lexer: 		~: echo
 lexer: 		~: abc$abc
 first->cmd: echo
 second->str: abc$abc 
-
-**TWO**
-I'll give you cmds, files and strs, do you want delimiter vars as well for after << ??
-
 
 
 ---------------------------------------------------------------------------------

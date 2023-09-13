@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 18:35:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 18:12:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_data_type
 	void				*input;
 	char				*cmd; // first arg if not a redirect and whatever comes after a pipe
 	char				*strs; // all shit after cmd up to any redirect (could be another cmd but in this case its str, or flag but just called str)
-	char				*meta; // | < > << >> (not including dollar ... for now)
+	char				*meta; // | < > << >> (not including dollar! dollar stays as string in whatever form it comes in)
 	char				*file; // after < > >> redirects
 	struct s_data_type	*next;
 }				t_data_type;
