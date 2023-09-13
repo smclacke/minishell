@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 20:20:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/13 17:54:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static long long	mini_atoll(char *str)
 	}
 	while (ft_isdigit(str[i]))
 	{
-		number = number * 10 + str[i] - 48;
+		number = number * 10 + str[i] -48;
 		i++;
 	}
 	return (number * sign);
@@ -65,7 +65,6 @@ static long long	mini_atoll(char *str)
  * 		- 4) not numeric display error message  (still exit)
  * 3) only exit? exit 0 (EXIT_SUCCES) (exit)
  * exit | something doesnt print exit (also exit in pipe?? so sad)
- * check alpha numeric first and then the arguments if more than 1
 */
 void	ft_exit(t_parser *node)
 {
@@ -92,7 +91,7 @@ void	ft_exit(t_parser *node)
 	if (error > 255)
 		error = error % 256;
 	write(STDOUT_FILENO, "exit\n", 5);
-	exit(error); //needs to be a returnexit
+	exit(error); //needs to be a return
 // 	make: *** [djoyke] Error 20
 // bash-3.2$ echo $?
 // 2
