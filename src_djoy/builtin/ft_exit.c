@@ -6,11 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/13 17:57:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/13 20:22:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
+// #include "../../include/djoyke.h"
 #include <limits.h>
 
 #define LONG_MIN_STR "-9223372036854775808"
@@ -74,10 +75,10 @@ void	ft_exit(t_parser *node)
 
 	i = 0;
 	node = node->next;
-	error = mini_atoll(node->cmd_list->strs);
-	while (node->cmd_list->strs[i])
+	error = mini_atoll(node->data_type->strs);
+	while (node->data_type->strs[i])
 	{
-		if (ft_isdigit(node->cmd_list->strs[i]) == 0)
+		if (ft_isdigit(node->data_type->strs[i]) == 0)
 		{
 			put_custom_error(node, "exit");
 			exit(255); //needs to be return, int error needs to be 

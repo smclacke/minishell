@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 18:49:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 20:20:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,36 @@
 	// split on spaces, split on metas but add metas to token array
 	// if quotes, split those apart keep them totally intact
 
+static int	is_token(char *input)
+{
+	if (*input == '|')
+		return (1);
+	if (*input == '<')
+	{
+		if (!ft_strncmp(input, "<<", 2))
+			return (1);
+		return (2);
+	}
+	else if (*input == '>')
+	{
+		if (!ft_strncmp(input, ">>", 2))
+			return (1);
+		return (2);
+	}
+	return (0);
+}
+
 static int	len_token(char *input)
 {
 	int	i = 0;
 
-	if (is_redirect(input[i]))
-		return (is_redirect(input[i]));
+	if (is_token(&input[i]))
+		return (is_token(&input[i]));
 	while (input[i] && !ft_isspace(input[i])
-			&& !is_redirect(input[i]))
+			&& !is_token(&input[i]))
 	{
 		if (ft_isquote(input[i]))
-			i += find_next_quote(input[i], input[i]);
+			i += next_quote(&input[i], input[i]);
 		i++;
 	}
 	return (i);

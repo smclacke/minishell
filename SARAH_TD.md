@@ -13,10 +13,6 @@ LETS SIMPLIFY SO I HAVE SOMETHING THAT ACTUALLY WORKS.... WOOW AMAZING IDEA.....
 integrating the new parser into your srcs on my branch was fine, but now we need
 some changes, e.g. ft_echo is trying to iterate through a list of strings but it now needs to iterate through the whole list and while there are strings, do the thing
 
-!!!!!!!! struct comments
-!!!!!!!! update my own libft, merge to main so main is also updated
-!!!!!!!! test new lexer stuff and do alllll the fixing....
-
 ---------------------------------------------------------------------------------
 
 **TO DOOOOOOS**
