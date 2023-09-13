@@ -6,13 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/08 23:30:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 18:15:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 18:14:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-
 
 int	lq_what_to_split(char c)
 {

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 17:08:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 18:47:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,74 @@
 		 // WE MUST SEPARATE METAS
 	// split on spaces, split on metas but add metas to token array
 	// if quotes, split those apart keep them totally intact
+
+
+static int	len_token(char *input)
+{
+	int	i = 0;
+
+	if (is_redirect(input[i]))
+		return (is_redirect(input[i]));
+	while (input[i] && !ft_isspace(input[i])
+			&& !is_redirect(input[i]))
+	{
+		if (ft_isquote(input[i]))
+			i += find_next_quote(input[i], input[i]);
+		i++;
+	}
+	return (i);
+}
+
+static char	*give_tokens(char *input)
+{
+	char	*token;
+	int		token_len;
+
+	token_len = len_token(input);
+	token = ft_substr(input, 0, token_len);
+	if (!token)
+		return (NULL);
+	input += token_len;
+	return (token);
+}
+
+/**
+ * @brief	takes the input string from the command line, iterates through it. While there
+ * 			are no quotations, the string is split on spaces with metas (exc. dollar) also being 
+ * 			split into separate str. If a quotation is encountered, the matching quote is found and
+ * 			all of that input is put into token
+ * @param	input input from the command line
+ * @return	2D array of separated strings made from the input, ready to be tokenized
+*/
+char	**parse_input(char *input)
+{
+	char	**array = NULL;
+	int		i = 0;
+
+	while (input[i])
+	{
+		if (ft_isquote(input[i]) || is_meta(&input[i]))
+		{
+			i = 0;
+			while (input)
+			{
+				array[i] = give_tokens(input);
+				i++;
+			}
+			if (!array)
+				return (NULL);
+			return (array);
+		}
+		i++;
+	}
+	array = ft_split(input, ' ');
+	if (!array)
+		return (NULL);
+	return (array);
+}
+
+
+
 
 // int		quotes_yes(char *input) // which quote
 // {
@@ -49,10 +117,6 @@
 // 	}
 	
 // }
-
-
-
-
 
 // split up to metas, spaces and quotes
 // if quote, find the matching quotes and add as part of array
@@ -91,33 +155,3 @@
 // 	array = 0;
 // 	return (array);
 // }
-
-/**
- * @brief	takes the input string from the command line, iterates through it. While there
- * 			are no quotations, the string is split on spaces with metas (exc. dollar) also being 
- * 			split into separate str. If a quotation is encountered, the matching quote is found and
- * 			all of that input is put into token
- * @param	input input from the command line
- * @return	2D array of separated strings made from the input, ready to be tokenized
-*/
-char	**parse_input(char *input)
-{
-	char	**array = NULL;
-	int		i = 0;
-
-	// while (input[i])
-	// {
-	// 	if (is_quote(input[i]) || is_meta(&input[i]))
-	// 	{
-	// 		array = make_array(input);
-	// 		if (!array)
-	// 			return (NULL);
-	// 		return (array);
-	// 	}
-	// 	i++;
-	// }
-	array = ft_split(input, ' ');
-	if (!array)
-		return (NULL);
-	return (array);
-}

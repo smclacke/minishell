@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 18:12:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/13 18:47:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@
 # define SINGLE_Q "\'"
 
 
+/**
+ * // put notes here
+*/
 typedef struct s_data_type
 {
 	void				*input;
@@ -79,11 +82,8 @@ t_parser			*shelly_print_list(t_parser *token);
 char				**parse_input(char *input);
 
 //----- splitting_utils.c -----//
-bool				is_quote(char input);
+int					next_quote(char *input, char c);
 bool				is_meta(char *input);
-
-
-// PARSER
 
 //---- parser.c ----//
 t_parser			*parser(t_parser *tokens);
