@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/11/24 15:47:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/02 15:04:42 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/09/13 20:07:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_printf(const char *str, ...)
 			i += ft_eval_format((char *)str, valist);
 		}
 		else if (*str != '%')
-				i += write(1, str, 1);
+			i += write(1, str, 1);
 		if (str)
 			str++;
 	}
