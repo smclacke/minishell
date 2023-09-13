@@ -6,47 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/05 18:14:32 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/09/12 17:39:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sarah.h"
-
-
-/**
- * @brief	takes the input string from the command line, iterates through it. While there
- * 			are no quotations, the string is split on spaces. If a quotation is encountered, 
- * 			the last quotation in the string is found and that segment is made into a separate
- * 			part of the array. 
- * @param	input input from the command line
- * @return	2D array of separated strings made from the input, ready to be tokenized
-*/
-static char	**parse_input(char *input)
-{
-	char	**array = NULL;
-	// int		i = 0;
-
-		 // WE MUST SEPARATE METAS,,,,,,,,, OUI?
-	// split on spaces, split on metas but add metas to token array
-	// if quotes, split those apart keep them totally intact
-	// if (shelly_check_quotes(input))
-	// {
-	// 	array = ft_split_shelly(input); // this needs to work at some point in the future
-	// 	if (!array)
-	// 		return (NULL);
-	// }
-	// else
-	// {
-		array = ft_split(input, ' ');
-		if (!array)
-			return (NULL);
-		// while (array[i])
-		// {
-			
-		// }
-	// }
-	return (array);
-}
+#include "../../include/shelly.h"
 
 /**
  * @brief	once input has been parsed, quoted segments separated and spaces removed from the rest

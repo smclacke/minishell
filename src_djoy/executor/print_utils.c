@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:49:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:52:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:17:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 /**
  * @param env environment stored in linked list
@@ -92,9 +92,11 @@ void	print_parser_list(t_parser *lst)
 	i = 0;
 	while (lst != NULL)
 	{
-		printf("index = [%d], cmd = [%s]\n", i, lst->cmd_list->cmd);
-		printf("index = [%d], str = [%s]\n", i, lst->cmd_list->strs);
-		printf("next node\n");
+		printf("||\n");
+		printf("index = [%d], cmd = [%s]\n", i, lst->data_type->cmd);
+		printf("index = [%d], str = [%s]\n", i, lst->data_type->strs);
+		// printf("index = [%d], meta = [%s]\n", i, lst->redirect_list->meta);
+		// printf("next node\n");
 		if (lst->next == NULL)
 			printf("NULL\n");
 		lst = lst->next;

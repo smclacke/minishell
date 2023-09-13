@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:33:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:16:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 /**
  * @param string argument given to perror
@@ -37,7 +37,7 @@ int	mini_strcmp(char *s1, char *s2)
 	i = 0;
 	if (!s1 || !s2)
 		return (1);
-	while (s1[i] && s2[i])
+	while (s1[i] || s2[i])
 	{
 		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
 			return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
@@ -69,16 +69,16 @@ void	init_execute_struct(t_execute *data, t_env *env)
 */
 bool	absolute_check(t_parser *node)
 {
-	if (!node->cmd_list->cmd)
+	if (!node->data_type->cmd)
 		return (false);
-	if (!ft_strncmp(node->cmd_list->cmd, "/", 1)
-		&& access(node->cmd_list->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->data_type->cmd, "/", 1)
+		&& access(node->data_type->cmd, F_OK) == 0)
 		return (true);
-	if (!ft_strncmp(node->cmd_list->cmd, "./", 2)
-		&& access(node->cmd_list->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->data_type->cmd, "./", 2)
+		&& access(node->data_type->cmd, F_OK) == 0)
 		return (true);
-	if (!ft_strncmp(node->cmd_list->cmd, "../", 3)
-		&& access(node->cmd_list->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->data_type->cmd, "../", 3)
+		&& access(node->data_type->cmd, F_OK) == 0)
 		return (true);
 	return (false);
 }

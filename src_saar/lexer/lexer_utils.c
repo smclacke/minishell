@@ -6,17 +6,16 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:14:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:08:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sarah.h"
+#include "../../include/shelly.h"
 
 void	init_parser(t_parser *data)
 {
 	data->input = NULL;
-	data->cmd_list = NULL;
-	data->redirect_list = NULL;
+	data->data_type = NULL;
 	data->next = NULL;
 }
 
