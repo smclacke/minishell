@@ -107,7 +107,7 @@ try delimiter with and without quotes!!! (ole note)
 
 • Handle ’ (single quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence.
 • Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
-5
+
 Minishell As beautiful as a shell
 • Implement redirections:
 ◦ < should redirect input.

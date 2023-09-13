@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/04 17:26:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:14:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 /**
  * @param node pointer to node in list given in the form of a string
@@ -31,12 +31,12 @@ void	ft_export(t_parser *node, t_env **env)
 	if (word_check(node) == 1)
 		return ;
 	node = node->next;
-	if (ft_strchr(node->cmd_list->strs, '=') == 0)
+	if (ft_strchr(node->data_type->strs, '=') == 0)
 		mini_error("strchr", errno);
 	if (reassign_env(env, node, new_key, new_value) == 1)
 		return ;
-	get_key_value(node->cmd_list->strs, &new_key, &new_value);
-	new_node = env_lstnew(new_key, new_value, node->cmd_list->strs);
+	get_key_value(node->data_type->strs, &new_key, &new_value);
+	new_node = env_lstnew(new_key, new_value, node->data_type->strs);
 	env_lstadd_back(env, new_node);
 }
 
@@ -47,10 +47,10 @@ bool	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 	head = *env;
 	while (head)
 	{
-		if (mini_strcmp(node->cmd_list->strs, head->full) == 0)
+		if (mini_strcmp(node->data_type->strs, head->full) == 0)
 		{
-			head->full = node->cmd_list->strs;
-			get_key_value(node->cmd_list->strs, &n_k, &n_v);
+			head->full = node->data_type->strs;
+			get_key_value(node->data_type->strs, &n_k, &n_v);
 			head->value = n_v;
 			head->key = n_k;
 			return (true);

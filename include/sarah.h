@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/05 18:14:04 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/09/07 14:31:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <signal.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <sys/wait.h>
 #include <stdbool.h>
 
 # define READ 0
@@ -35,6 +36,15 @@
 
 # define TRUE 1
 # define FALSE 0
+
+typedef struct s_env
+{
+	char				*key;
+	char				*value;
+	char				*full;
+	struct s_env		*next;
+	struct s_env		*previous;
+}							t_env;
 
 typedef enum	e_files
 {

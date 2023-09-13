@@ -6,86 +6,54 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:14:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/12 16:01:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/sarah.h"
+#include "../../include/shelly.h"
 
-void	init_cmd_struct(t_command *cmds)
+void	init_type_struct(t_data_type *type)
 {
-	cmds->input = NULL;
-	cmds->strs = NULL;
-	cmds->cmd = NULL;
-	cmds->next = NULL;
+	type->input = NULL;
+	type->cmd = NULL;
+	type->strs = NULL;
+	type->meta = NULL;
+	type->file = NULL;
+	type->next = NULL;
 }
 
-void	init_red_struct(t_redirect *reds)
+t_data_type	*init_data(void)
 {
-	reds->input = NULL;
-	reds->meta = NULL;
-	reds->file = NULL;
-	reds->next = NULL;
+	t_data_type		*data;
+
+	data = (t_data_type *)malloc(sizeof(t_data_type));
+	if (!data)
+		exit(EXIT_FAILURE);
+	init_type_struct(data);
+	return (data);
 }
 
-// bool	is_red_with_sass(t_parser *tokens)
-// {
-// 	if (!tokens)
-// 		return (false);
-// 	if (ft_strcmp(tokens->input, "|") == 0)
-// 		return (true);
-// 	else if (ft_strcmp(tokens->input, "<<"))
-// 	return (false);
-// }
-
-/**
- * is redirect in any of the node?
-*/
-bool	is_redirect(t_parser *tokens)
+char	*is_redirect(void *input)
 {
-	if (!tokens)
-		return (false);
-	if (ft_strcmp(tokens->input, ">>") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "<<") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, ">") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "<") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "$") == 0)
-		return (true);
-	else if (ft_strcmp(tokens->input, "|") == 0)
-		return (true);
-	return (false);
+	if (ft_strcmp(input, MOREMORE) == 0)
+		return (MOREMORE);
+	else if (ft_strcmp(input, LESSLESS) == 0)
+		return (LESSLESS);
+	else if (ft_strcmp(input, MORE) == 0)
+		return (MORE);
+	else if (ft_strcmp(input, LESS) == 0)
+		return (LESS);
+	else if (ft_strcmp(input, PIPE) == 0)
+		return (PIPE);
+	return (NULL);
 }
-
-// SPLIT METAS IN LEXER SO THIS ISN'T NECESSARY ANYMORE
-// /**
-//  * is redirect the only thing in node? ( file is not attached )
-// */
-// bool	file_attached(t_parser *tokens)
-// {
-// 	if (!tokens)
-// 		return (false);
-// 	if (ft_strcmp(tokens->input, ">>") == 0)
-// 		return (false);
-// 	else if (ft_strcmp(tokens->input, "<<") == 0)
-// 		return (false);
-// 	else if (ft_strcmp(tokens->input, ">") == 0)
-// 		return (false);
-// 	else if (ft_strcmp(tokens->input, "<") == 0)
-// 		return (false);
-// 	else if (ft_strcmp(tokens->input, "$") == 0)
-// 		return (false);
-// 	return (true);
-// }
 
 t_parser	*shelly_parser_print(t_parser *tokens)
 {
 	t_parser	*list;
-	int			i = 0;
+	int			i;
 
+	i = 0;
 	list = tokens;
 	while (list)
 	{

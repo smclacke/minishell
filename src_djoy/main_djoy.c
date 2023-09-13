@@ -6,40 +6,40 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/25 16:03:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/07 14:45:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+// #include "../include/djoyke.h"
 
-/* checking the edge cases for this one */
-int	main(int argc, char **argv, char **envp)
-{
-	char		*input;
-	t_parser	*tokens;
-	t_env		*env;
+// /* checking the edge cases for this one */
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char		*input;
+// 	t_parser	*tokens;
+// 	t_env		*env;
 
-	(void) argc;
-	(void) argv;
-	env = NULL;
-	env = env_list(envp, env);
-	tokens = NULL;
-	while (1)
-	{
-		input = readline(PROMPT);
-		add_history(input);
-		tokens = lexer(input);
-		if (!tokens)
-			continue ;
-		shelly_print_list(tokens);
-		tokens = parser(tokens);
-		if (!tokens)
-			continue ;	
-		ft_execute(&env, tokens);
-		// free input (readline needs to be fred at end)	
-	}
-	return (0);
-}
+// 	(void) argc;
+// 	(void) argv;
+// 	env = NULL;
+// 	env = env_list(envp, env);
+// 	tokens = NULL;
+// 	while (1)
+// 	{
+// 		input = readline(PROMPT);
+// 		add_history(input);
+// 		tokens = lexer(input);
+// 		if (!tokens)
+// 			continue ;
+// 		shelly_print_list(tokens);
+// 		tokens = parser(tokens);
+// 		if (!tokens)
+// 			continue ;	
+// 		ft_execute(&env, tokens);
+// 		// free input (readline needs to be fred at end)	
+// 	}
+// 	return (0);
+// }
 
 /*
 
