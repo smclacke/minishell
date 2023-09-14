@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/14 13:42:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/14 13:46:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,9 @@ t_parser			*shelly_parser_print(t_parser *tokens);
 
 // OTHER FUNCTIONS
 // ------------ Other ---------// // not sure if necessary, just keeping for now
-void		parse_space(char *input);
-void		error_no_cmd(void);
-void		error_space(char *cmd);
+void			parse_space(char *input);
+void			error_no_cmd(void);
+void			error_space(char *cmd);
 
 // EXITCODES
 typedef enum e_exitcode
