@@ -6,12 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 13:40:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/14 14:56:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/shelly.h"
-// #include "../../include/djoyke.h"
+#include "../../include/djoyke.h"
 #include <limits.h>
 
 #define LONG_MIN_STR "-9223372036854775808"

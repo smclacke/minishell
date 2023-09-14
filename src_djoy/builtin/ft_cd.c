@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:50:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/14 14:54:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/shelly.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param lst parsed linked list
@@ -51,7 +51,7 @@ void	ft_cd(t_parser *lst, t_env **env)
 		old_work_dir = getcwd(cwd, sizeof(cwd));
 		while (lst)
 		{
-			access_and_change(env, lst, old_work_dir, cwd);
+			access_change(env, lst, old_work_dir, cwd);
 			lst = lst->next;
 		}
 	}
@@ -112,7 +112,7 @@ void	change_old_dir(t_env **env, char *str)
 	new = NULL;
 	head = *env;
 	if (!env)
-		reassign_old_pwd(env, new, str, full);
+		reassign_opwd(env, new, str, full);
 	while (mini_strcmp ("OLDPWD", head->key) != 0)
 	{
 		head = head->next;

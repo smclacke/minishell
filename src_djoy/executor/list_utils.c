@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:36:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/14 14:56:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/shelly.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param lst linked list to loop through

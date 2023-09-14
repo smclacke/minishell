@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:50:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/14 14:58:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@
 # define FALSE 0
 
 /**
- * @brief	specifies the different types of tokens from the lexer, that are parsed and then given to the executor
+ * @brief	specifies the different types of tokens from the lexer, 
+ * that are parsed and then given to the executor
  * @param	cmd: first arg from commandline or arg after a pipe
- * @param	meta: pipe, more, less, moremore, lessless. Dollar is excluded and handled as a string
+ * @param	meta: pipe, more, less, moremore, lessless.
+ * Dollar is excluded and handled as a string
  * @param	file: in and out files, args that come after more, less and moremore
  * @param	strs: all other input. command arguments, typos...
 */

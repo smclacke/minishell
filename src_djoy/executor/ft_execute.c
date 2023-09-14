@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/12 16:16:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/14 14:56:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/shelly.h"
+#include "../../include/djoyke.h"
 
 //take all the nodes until the pipe or redirect, built-in and put it in execve
 

@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/12 16:11:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/14 15:02:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/shelly.h"
+#include "../../include/djoyke.h"
 
 /**
  * @param node string to echo
@@ -27,7 +27,7 @@
  * hi -n
  * fix it!!!!!!!!!
  * make a part that when it encouters $random_name to go in 
- * 		env and take whats after the random_name = sign
+ * env and take whats after the random_name = sign
 */
 void	ft_echo(t_parser *lst)
 {
@@ -41,9 +41,9 @@ void	ft_echo(t_parser *lst)
 	lst = lst->next;
 	while (lst)
 	{
-		if (ft_strcmp(&lst->data_type->strs[i], "-n") == 0)
+		if (ft_strcmp(lst->data_type->strs, "-n") == 0)
 		{
-			++is_flag;
+			is_flag++;
 			i++;
 		}
 		else
