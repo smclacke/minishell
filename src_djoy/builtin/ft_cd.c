@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/13 17:53:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/14 14:50:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_cd(t_parser *lst, t_env **env)
  * gives custom error if access not found
  * cd: no such file or directory: %s\n", lst->str
 */
-void	access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
+void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 {
 	char		*error;
 
@@ -162,7 +162,7 @@ void	change_current_dir(t_env **env, char *str)
  * @brief assigns full and new to their values and adds them to
  * an empty list.
 */
-void	reassign_old_pwd(t_env **env, t_env *new, char *str, char *full)
+void	reassign_opwd(t_env **env, t_env *new, char *str, char *full)
 {
 	full = ft_strjoin("OLDPWD=", str);
 	printf("full = [%s]\n", full);

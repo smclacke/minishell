@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 21:58:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/14 14:37:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,70 +17,70 @@
 	// split on spaces, split on metas but add metas to token array
 	// if quotes, split those apart keep them totally intact
 
-static int	len_token(char *input)
-{
-	int	i = 0;
+// static int	len_token(char *input)
+// {
+// 	int	i = 0;
 
-	if (is_token(&input[i]))
-		return (is_token(&input[i]));
-	while (input[i] && !ft_isspace(input[i])
-			&& !is_token(&input[i]))
-	{
-		if (ft_isquote(input[i]))
-		{
-			i++;
-			i += next_quote(&input[i], input[i]);
-			printf("LT | index = %i\n", i);
-			return (i);
-		}
-		printf("this is fucked\n");
-		i++;
-	}
-	return (i);
-}
+// 	if (is_token(&input[i]))
+// 		return (is_token(&input[i]));
+// 	while (input[i] && !ft_isspace(input[i])
+// 			&& !is_token(&input[i]))
+// 	{
+// 		if (ft_isquote(input[i]))
+// 		{
+// 			i++;
+// 			i += next_quote(&input[i], input[i]);
+// 			printf("LT | index = %i\n", i);
+// 			return (i);
+// 		}
+// 		printf("this is fucked\n");
+// 		i++;
+// 	}
+// 	return (i);
+// }
 
-static char	*give_tokens(char *input)
-{
-	char	*token;
-	int		token_len;
+// static char	*give_tokens(char *input)
+// {
+// 	char	*token;
+// 	int		token_len;
 
-	token_len = len_token(input);
-	printf("GT | token_len = %i\n", token_len);
-	token = ft_substr(input, 0, token_len);
-	if (!token)
-		return (NULL);
-	printf("GT | give_token: %s\n", token);
-	input += token_len;
-	return (token);
-}
+// 	token_len = len_token(input);
+// 	printf("GT | token_len = %i\n", token_len);
+// 	token = ft_substr(input, 0, token_len);
+// 	if (!token)
+// 		return (NULL);
+// 	printf("GT | give_token: %s\n", token);
+// 	input += token_len;
+// 	return (token);
+// }
 
-static int	amount_tokens(char *input)
-{
-	int	i = 0;
-	int	count = 0;
+// static int	amount_tokens(char *input)
+// {
+// 	int	i = 0;
+// 	int	count = 0;
 
-	printf("AT | INPUT = %s\n", input);
-	while (input[i])
-	{
-		i += len_token(&input[i]);
-		count++;
-		printf("AT | count = %i\n", count);
-	}
-	return (count);
-}
+// 	printf("AT | INPUT = %s\n", input);
+// 	while (input[i])
+// 	{
+// 		i += len_token(&input[i]);
+// 		count++;
+// 		printf("AT | count = %i\n", count);
+// 	}
+// 	return (count);
+// }
 
-static bool	annoying_split(char *input)
-{
-	int	i = 0;
+// static bool	annoying_split(char *input)
+// {
+// 	int	i = 0;
 	
-	while (input[i])
-	{
-		if (ft_isquote(input[i]) || is_meta(&input[i]))
-			return (true);
-		i++;
-	}
-	return (false);
-}
+// 	while (input[i])
+// 	{
+// 		if (ft_isquote(input[i]) || is_meta(&input[i]))
+// 			return (true);
+// 		i++;
+// 	}
+// 	return (false);
+// }
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
@@ -93,23 +93,23 @@ static bool	annoying_split(char *input)
 char	**parse_input(char *input)
 {
 	char	**array = NULL;
-	int		no_tokens = 0;
-	int		i = 0;
+	// int		no_tokens = 0;
+	// int		i = 0;
 
-	if (annoying_split(input))
-	{
-		no_tokens = amount_tokens(input);
-		array = (char **)malloc(sizeof(char *) * no_tokens + 1);
-		while (i < no_tokens)
-		{
-			printf("i = %i | no_tokens = %i\n", i, no_tokens);
-			array[i] = give_tokens(input);
-			printf("PI | array =  %s\n", array[i]);
-			i++;
-		}
-	}
-	else
-		array = ft_split(input, ' ');;
+	// if (annoying_split(input))
+	// {
+	// 	no_tokens = amount_tokens(input);
+	// 	array = (char **)malloc(sizeof(char *) * no_tokens + 1);
+	// 	while (i < no_tokens)
+	// 	{
+	// 		printf("i = %i | no_tokens = %i\n", i, no_tokens);
+	// 		array[i] = give_tokens(input);
+	// 		printf("PI | array =  %s\n", array[i]);
+	// 		i++;
+	// 	}
+	// }
+	// else
+		array = ft_split(input, ' ');
 	if (!array)
 		return (NULL);
 	return (array);

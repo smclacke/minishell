@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:27:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/14 14:39:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct s_env
-{
-	char				*key;
-	char				*value;
-	char				*full;
-	struct s_env		*next;
-	struct s_env		*previous;
-}							t_env;
+// typedef struct s_env
+// {
+// 	char				*key;
+// 	char				*value;
+// 	char				*full;
+// 	struct s_env		*next;
+// 	struct s_env		*previous;
+// }							t_env;
 
 typedef enum	e_files
 {
