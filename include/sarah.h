@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/26 14:10:39 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/07 14:31:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/14 13:40:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ typedef struct s_parser
 	struct s_redirect	*redirect_list;
 	struct s_parser		*next;
 }	t_parser;
-
 
 //----- lexer.c -----//
 t_parser			*lexer(char *input);
