@@ -15,6 +15,8 @@ some changes, e.g. ft_echo is trying to iterate through a list of strings but it
 
 ---------------------------------------------------------------------------------
 
+IS QUITE LONGGGGGGGGGGGGGGGGG :))))))
+
 // MAX = GOOD
 // exit 9223372036854775807
 // MIN = GOOD
@@ -36,8 +38,6 @@ some changes, e.g. ft_echo is trying to iterate through a list of strings but it
 // LESS THAN MIN = GOOD
 // exit -9223372036854775805
 // exit -9223372036854775706
-
-
 
 
 **TO DOOOOOOS**
