@@ -15,6 +15,31 @@ some changes, e.g. ft_echo is trying to iterate through a list of strings but it
 
 ---------------------------------------------------------------------------------
 
+// MAX = GOOD
+// exit 9223372036854775807
+// MIN = GOOD
+// exit -9223372036854775808
+
+// MORE THAN MAX = BAD
+// exit 9223372036854775808
+// exit 9223372036854775809
+// exit 9223372036854775819
+
+// LESS THAN MAX = GOOD
+// exit 9223372036854775708
+// exit 9223372036854775803
+
+// MORE THAN MIN = BAD
+// exit -9223372036854775810
+// exit -9223372036854775809
+
+// LESS THAN MIN = GOOD
+// exit -9223372036854775805
+// exit -9223372036854775706
+
+
+
+
 **TO DOOOOOOS**
 
 LEXER

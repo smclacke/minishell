@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/12 17:45:00 by smclacke      ########   odam.nl          #
+#    Updated: 2023/09/14 20:32:10 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,7 +138,7 @@ $(DJOY)			:	$(OBJ_DJOY) $(OBJ_SAAR)
 $(SAAR)			:	$(OBJ_SAAR) $(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
-	@ ./sarah
+#@ ./sarah
 
 $(MICRO_SHELL)	:	$(OBJ_MICRO)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL)
