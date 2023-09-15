@@ -14,13 +14,9 @@
 #include <limits.h>
 #include <stdint.h>
 
-#define LONG_MIN_STR "-9223372036854775808"
 #define LONG_MAX_STR "9223372036854775807"
-// -9223372036854775810
-// -9223372036854775805
-// 9223372036854775708
-// 9223372036854775803
 #define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
+
 
 /**
  * @param str string to convert
@@ -30,48 +26,36 @@
  * 		zo cool he size changes when long_min_str changes
  * 		remember forever
 */
-static long long	mini_atoll(t_parser *node, char *str)
+static unsigned long long	mini_atoll(t_parser *node, char *str)
 {
-	int			i;
-	int			sign;
-	long long	number;
+	size_t					i;
+	int						sign;
+	long long				num_check;
+	unsigned long long		number;
 
 	number = 0;
 	sign = 1;
 	i = 0;
-	if (mini_strcmp(str, LONG_MIN_STR) == 0)
-		return (LLONG_MIN);
-	if (mini_strcmp(str, LONG_MAX_STR) == 0)
-		return (LLONG_MAX);
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
-			sign = -1;
+		{
+			ft_putstr_fd("exit\n", STDOUT_FILENO);
+			ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
+			ft_putstr_fd(str, STDOUT_FILENO);
+			ft_putstr_fd(": positive digit argument required\n", STDOUT_FILENO);
+		}
 		i++;
 	}
 	while (ft_isdigit(str[i]))
 	{
-		printf("number = [%lld]\n", number);
-		if (number > LLONG_MAX / 10) //checking if overflow before it happens
-		{
-			put_custom_error(node, "exit");
-			exit(255);
-		}
-		else if (sign == -1)
-		{
-			if (number > (LLONG_MIN / 10) * -1)
-			{
-				put_custom_error(node, "exit");
-				exit(255);
-			}
-		}
-		// laatste van number vergelijken met laatste van LLONG_MAX
-		//werkt net niet met edge case -9223372036854775810
-		number = number * 10 + str[i] - 48;
+		number = number * 10 + str[i] -48;
 		i++;
 	}
-	printf("last number = [%lld]\n", number * sign);
-	printf("LLONG_MAX = [%lld]\n", LLONG_MAX / 10);
+	num_check = number * sign;
+	printf("number = [%lld]\n", num_check);
+	if (num_check < 0)
+		put_custom_error(node, str);
 	return (number * sign);
 }
 
