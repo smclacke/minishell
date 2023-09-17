@@ -6,18 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 16:08:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/17 19:12:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-void	init_parser(t_parser *data)
-{
-	data->input = NULL;
-	data->data_type = NULL;
-	data->next = NULL;
-}
 
 t_parser		*lexer_listlast(t_parser *list)
 {
@@ -48,7 +41,7 @@ t_parser	*lexer_listnew(void *input)
 	new = (t_parser *)malloc(sizeof(*new));
 	if (!new)
 		return (0);
-	init_parser(new);
+	ft_bzero(new, sizeof(t_parser));
 	new->input = input;
 	new->next = NULL;
 	return (new);

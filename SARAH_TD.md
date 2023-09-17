@@ -6,12 +6,7 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT MESSAGES? UPDATES**
 
-HELLOHELLOHELLOHELLO 11/09/23, and it works ::)
-
-LETS SIMPLIFY SO I HAVE SOMETHING THAT ACTUALLY WORKS.... WOOW AMAZING IDEA......
-
-integrating the new parser into your srcs on my branch was fine, but now we need
-some changes, e.g. ft_echo is trying to iterate through a list of strings but it now needs to iterate through the whole list and while there are strings, do the thing
+mehmehmehmeh
 
 ---------------------------------------------------------------------------------
 
@@ -43,6 +38,16 @@ IS QUITE LONGGGGGGGGGGGGGGGGG :))))))
 **TO DOOOOOOS**
 
 LEXER
+
+// this is problem
+<<
+input: <<
+&input: <<
+is meta: 1
+&input: <
+is meta: 2
+
+
 ->>>>>>>>> SEPARATE FILES from redirects and attachments to pipes (lexer)
 ->>>>>>>>> SEPARATE QUOTES... need to talk to someone about quote handling cause its too much
 ->>>>>>>>> split the rest on spaces

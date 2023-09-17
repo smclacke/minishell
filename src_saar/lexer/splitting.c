@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 21:58:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/17 19:33:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ static int	len_token(char *input)
 {
 	int	i = 0;
 
-	if (is_token(&input[i]))
+	if (is_token(&input[i]) == 2)
+	{
+		printf("&input: %s\n", &input[i]);
+		printf("is meta: %i\n", is_token(&input[i]));
+		i++;
+		return (is_token(&input[i]));
+	}
+	else if (is_token(&input[i]) == 1)
 		return (is_token(&input[i]));
 	while (input[i] && !ft_isspace(input[i])
 			&& !is_token(&input[i]))
@@ -30,7 +37,7 @@ static int	len_token(char *input)
 		{
 			i++;
 			i += next_quote(&input[i], input[i]);
-			printf("LT | index = %i\n", i);
+			// printf("LT | index = %i\n", i);
 			return (i);
 		}
 		printf("this is fucked\n");
@@ -45,11 +52,9 @@ static char	*give_tokens(char *input)
 	int		token_len;
 
 	token_len = len_token(input);
-	printf("GT | token_len = %i\n", token_len);
 	token = ft_substr(input, 0, token_len);
 	if (!token)
 		return (NULL);
-	printf("GT | give_token: %s\n", token);
 	input += token_len;
 	return (token);
 }
@@ -59,12 +64,12 @@ static int	amount_tokens(char *input)
 	int	i = 0;
 	int	count = 0;
 
-	printf("AT | INPUT = %s\n", input);
+	// printf("AT | INPUT = %s\n", input);
 	while (input[i])
 	{
 		i += len_token(&input[i]);
 		count++;
-		printf("AT | count = %i\n", count);
+		// printf("AT | count = %i\n", count);
 	}
 	return (count);
 }
@@ -98,12 +103,14 @@ char	**parse_input(char *input)
 
 	if (annoying_split(input))
 	{
+		printf("input: %s\n", input);
 		no_tokens = amount_tokens(input);
+		printf("amount of toks: %i", no_tokens);
 		array = (char **)malloc(sizeof(char *) * no_tokens + 1);
 		while (i < no_tokens)
 		{
-			printf("i = %i | no_tokens = %i\n", i, no_tokens);
-			array[i] = give_tokens(input);
+			// printf("i = %i | no_tokens = %i\n", i, no_tokens);
+			// array[i] = give_tokens(input);
 			printf("PI | array =  %s\n", array[i]);
 			i++;
 		}
