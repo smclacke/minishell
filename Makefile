@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/14 20:32:10 by smclacke      ########   odam.nl          #
+#    Updated: 2023/09/19 00:51:43 by SarahLouise   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -170,6 +170,7 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
+
 
 $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)
