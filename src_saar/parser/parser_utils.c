@@ -6,21 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 20:25:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/17 19:13:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-void	init_type_struct(t_data_type *type)
-{
-	type->input = NULL;
-	type->cmd = NULL;
-	type->strs = NULL;
-	type->meta = NULL;
-	type->file = NULL;
-	type->next = NULL;
-}
 
 t_data_type	*init_data(void)
 {
@@ -29,7 +19,7 @@ t_data_type	*init_data(void)
 	data = (t_data_type *)malloc(sizeof(t_data_type));
 	if (!data)
 		exit(EXIT_FAILURE);
-	init_type_struct(data);
+	ft_bzero(data, sizeof(t_data_type));
 	return (data);
 }
 

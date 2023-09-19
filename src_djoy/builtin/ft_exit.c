@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 18:56:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/19 02:10:51 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,42 @@
 #include <limits.h>
 #include <stdint.h>
 
+#define LONG_MIN_STR "-9223372036854775808"
 #define LONG_MAX_STR "9223372036854775807"
 #define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
+
+
+// MAX = GOOD
+// exit 9223372036854775807
+// MIN = GOOD
+// exit -9223372036854775808
+
+// MORE THAN MAX = BAD
+// exit 9223372036854775808 // DOESNT WORK !!
+// exit 9223372036854775819 // WORKS
+
+// LESS THAN MAX = GOOD
+// exit 9223372036854775708 // WORKS
+// exit 9223372036854775803 // WORKS
+
+// LESS THAN MIN = BAD
+// exit -9223372036854775810 // WORKS
+// exit -9223372036854775809 // DOESNT WORK !!
+
+// MORE THAN MIN = GOOD
+// exit -9223372036854775805 // WORKS
+// exit -9223372036854775706 // WORKS
+
+
+// printf("LLONG_MAX = [%lld]\n", LLONG_MAX);
+// printf("LLONG_MIN CAL = [%lld]\n", (LLONG_MIN / 10) * -1);
+// printf("LLONG_MIN = [%lld]\n", LLONG_MIN);
+// printf("LLONG_MAX CAL = [%lld]\n", (LLONG_MAX / 10));
+// LLONG_MAX = [9223372036854775807]
+// LLONG_MIN = [-9223372036854775808]
+// LLONG_MAX CAL = [922337203685477580]
+// LLONG_MIN CAL = [922337203685477580]
+
 
 
 /**
@@ -26,16 +60,19 @@
  * 		zo cool he size changes when long_min_str changes
  * 		remember forever
 */
-static unsigned long long	mini_atoll(t_parser *node, char *str)
+static long long int	mini_atoll(t_parser *node, char *str)
 {
-	size_t					i;
-	int						sign;
-	long long				num_check;
-	unsigned long long		number;
+	int			i;
+	int			sign;
+	long long	number;
 
 	number = 0;
 	sign = 1;
 	i = 0;
+	if (mini_strcmp(str, LONG_MIN_STR) == 0)
+		return (LLONG_MIN);
+	if (mini_strcmp(str, LONG_MAX_STR) == 0)
+		return (LLONG_MAX);
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
@@ -47,15 +84,35 @@ static unsigned long long	mini_atoll(t_parser *node, char *str)
 		}
 		i++;
 	}
+	printf("LLONG_MAX = [%lld]\n", LLONG_MAX);
+	printf("LLONG_MIN = [%lld]\n", LLONG_MIN);
+	printf("LLONG_MAX CAL = [%lld]\n", (LLONG_MAX / 10));
+	printf("LLONG_MIN CAL = [%lld]\n", (LLONG_MIN / 10) * -1);
 	while (ft_isdigit(str[i]))
 	{
-		number = number * 10 + str[i] -48;
+		printf("number = [%lld]\n", number);
+		if ((number > (LLONG_MAX / 10) && ((number * 10 + str[i] - 48) > LLONG_MAX % 10)) || (number > (LLONG_MAX / 10)))
+		{
+			if (number == number + 8)
+			{	
+				printf("you?\n");
+				put_custom_error(node, "exit");
+				exit(255);
+			}
+		}
+		else if (sign == -1)
+		{
+			if (number > (LLONG_MAX / 10) * -1)
+			{
+				printf("or you?\n");
+				put_custom_error(node, "exit");
+				exit(255);
+			}
+		}
+		number = number * 10 + str[i] - 48;
 		i++;
 	}
-	num_check = number * sign;
-	printf("number = [%lld]\n", num_check);
-	if (num_check < 0)
-		put_custom_error(node, str);
+	printf("last number = [%lld]\n", number * sign);
 	return (number * sign);
 }
 

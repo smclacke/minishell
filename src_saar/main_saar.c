@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:43:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/19 02:09:56 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,35 @@
 // 	return (tokens);
 // }
 
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	char		*input;
-// 	t_parser	*tokens;
-// 	// t_env		*env;
+int	main(int argc, char **argv, char **envp)
+{
+	char		*input;
+	t_parser	*tokens;
+	t_env		*env;
 
-// 	(void) argc;
-// 	(void) argv;
-// 	(void) envp;
-// 	// env = NULL;
-// 	// env = env_list(envp, env);
-// 	tokens = NULL;
-// 	while (1)
-// 	{
-// 		input = readline(PROMPT);
-// 		add_history(input);
-// 		tokens = lexer(input);
-// 		if (!tokens)
-// 			continue ;
-// 		shelly_print_list(tokens);
-// 		tokens = parser(tokens);
-// 		if (!tokens)
-// 			continue ;
+	(void) argc;
+	(void) argv;
+	// (void) envp;
+	env = NULL;
+	env = env_list(envp, env);
+	tokens = NULL;
+	while (1)
+	{
+		input = readline(PROMPT);
+		add_history(input);
+		tokens = lexer(input);
+		if (!tokens)
+			continue ;
+		// shelly_print_list(tokens);
+		tokens = parser(tokens);
+		if (!tokens)
+			continue ;
 
-// 		print_the_full_thing(tokens);
+		// print_the_full_thing(tokens);
 
 
-// 		// ft_execute(&env, tokens);
-// 		// free input (readline needs to be fred at end)	
-// 	}
-// 	return (0);
-// }
+		ft_execute(&env, tokens);
+		// free input (readline needs to be fred at end)	
+	}
+	return (0);
+}

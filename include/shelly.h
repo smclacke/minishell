@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 20:56:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/17 19:14:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_parser
 t_parser			*lexer(char *input);
 
 //----- lexer_utils.c -----//
-void				init_parser(t_parser *token);
 t_parser			*lexer_listlast(t_parser *list);
 void				lexer_listadd_back(t_parser **list, t_parser *new);
 t_parser			*lexer_listnew(void *input);
@@ -94,7 +93,6 @@ int					is_token(char *input);
 t_parser			*parser(t_parser *tokens);
 
 //---- parser_utils.c ----//
-void				init_type_struct(t_data_type *type);
 t_data_type			*init_data(void);
 char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);

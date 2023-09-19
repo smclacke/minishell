@@ -6,18 +6,53 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT MESSAGES? UPDATES**
 
-HELLOHELLOHELLOHELLO 11/09/23, and it works ::)
+mehmehmehmeh
 
-LETS SIMPLIFY SO I HAVE SOMETHING THAT ACTUALLY WORKS.... WOOW AMAZING IDEA......
 
-integrating the new parser into your srcs on my branch was fine, but now we need
-some changes, e.g. ft_echo is trying to iterate through a list of strings but it now needs to iterate through the whole list and while there are strings, do the thing
 
+
+github_pat_11A3OH7SI0nnUxYziMhWKF_
+wmbE5nZ7eBtXam3x8hJG93BnEesxMZ2ZPmJEmNJZGmdEQHFRVY5eKzmRQIY
 ---------------------------------------------------------------------------------
+
+IS QUITE LONGGGGGGGGGGGGGGGGG :))))))
+
+// MAX = GOOD
+// exit 9223372036854775807
+// MIN = GOOD
+// exit -9223372036854775808
+
+// MORE THAN MAX = BAD
+// exit 9223372036854775808
+// exit 9223372036854775809
+// exit 9223372036854775819
+
+// LESS THAN MAX = GOOD
+// exit 9223372036854775708
+// exit 9223372036854775803
+
+// MORE THAN MIN = BAD
+// exit -9223372036854775810
+// exit -9223372036854775809
+
+// LESS THAN MIN = GOOD
+// exit -9223372036854775805
+// exit -9223372036854775706
+
 
 **TO DOOOOOOS**
 
 LEXER
+
+// this is problem
+<<
+input: <<
+&input: <<
+is meta: 1
+&input: <
+is meta: 2
+
+
 ->>>>>>>>> SEPARATE FILES from redirects and attachments to pipes (lexer)
 ->>>>>>>>> SEPARATE QUOTES... need to talk to someone about quote handling cause its too much
 ->>>>>>>>> split the rest on spaces
