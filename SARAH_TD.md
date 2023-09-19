@@ -8,11 +8,25 @@ dein computer, kein computer
 
 mehmehmehmeh
 
+i told my dad not to use metas....
+     __
+ .--()°'.'
+'|, . ,'
+ !_-(_|\grep >
+input: grep >
+this is fucked
+this is fucked
+this is fucked
+this is fucked
+^C
+➜  minishel
 
+but he laughed so kinda win....
 
+// dont know what this is right now
 
+wmbE5nZ7eBtXam3x8hJG93BnEesxMZ2ZPmJEmNJZGmdEQHFRVY5eKzmRQIY 
 github_pat_11A3OH7SI0nnUxYziMhWKF_
-wmbE5nZ7eBtXam3x8hJG93BnEesxMZ2ZPmJEmNJZGmdEQHFRVY5eKzmRQIY
 ---------------------------------------------------------------------------------
 
 IS QUITE LONGGGGGGGGGGGGGGGGG :))))))
@@ -59,7 +73,7 @@ is meta: 2
 
 PARSER
 ->>>>>>>>> what is the parser missing??
-->>>>>>>>> should dollar just be a string or no? YES
+WHY ARENT THERE MORE TO DOOOOOOOOS....
 
 OTHER
 ->>>>>>>>> errors ....
@@ -79,6 +93,7 @@ I think abc$abc, some<<something are both for the expander and ill leave them in
 // i could check the exact behaviour of this and parse it to remove the unnecessary bits
 // STILL NEED TO FIGURE OUT WHAT IM DOING WITH THIS, 
 // PARSER REMOVES OR !!EXPANDER TAKES WHATS NECESSARY?!!
+// JA WEETJE JE, DOE MAAR EVEN EXPADNER WANT ANDERS HEEFT HIJ BEST WEING OM TE DOEN
 
 Gutentag Fräulein Shelly, wie geht's?echo abc$abc
 lexer: 		~: echo

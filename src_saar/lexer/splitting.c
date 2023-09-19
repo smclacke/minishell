@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/19 01:46:14 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/09/19 02:33:50 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	len_token(char *input)
 		printf("&input: %s\n", &input[i]);
 		printf("is meta: %i\n", is_token(&input[i]));
 		i++;
-		return (is_token(&input[i]));
+		return (is_token(&input[i])); // BIG no no, << willl return 2 but token willbe second <
 	}
 	else if (is_token(&input[i]) == 1)
 		return (is_token(&input[i]));
@@ -103,21 +103,21 @@ char	**parse_input(char *input)
 	int		no_tokens = 0;
 	int		i = 0;
 
-	// if (annoying_split(input))
-	// {
-	// 	printf("input: %s\n", input);
-	// 	no_tokens = amount_tokens(input);
-	// 	printf("amount of toks: %i", no_tokens);
-	// 	array = (char **)malloc(sizeof(char *) * no_tokens + 1);
-	// 	while (i < no_tokens)
-	// 	{
-	// 		// printf("i = %i | no_tokens = %i\n", i, no_tokens);
-	// 		// array[i] = give_tokens(input);
-	// 		printf("PI | array =  %s\n", array[i]);
-	// 		i++;
-	// 	}
-	// }
-	// else
+	if (annoying_split(input))
+	{
+		printf("input: %s\n", input);
+		no_tokens = amount_tokens(input);
+		printf("amount of toks: %i", no_tokens);
+		array = (char **)malloc(sizeof(char *) * no_tokens + 1);
+		while (i < no_tokens)
+		{
+			// printf("i = %i | no_tokens = %i\n", i, no_tokens);
+			// array[i] = give_tokens(input);
+			printf("PI | array =  %s\n", array[i]);
+			i++;
+		}
+	}
+	else
 		array = ft_split(input, ' ');;
 	if (!array)
 		return (NULL);
