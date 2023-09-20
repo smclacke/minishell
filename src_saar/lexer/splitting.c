@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/20 12:07:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 13:26:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	len_token(char *input)
 			// printf("LT | index = %i\n", i);
 			return (i);
 		}
-		printf("this is fucked\n");
+		// printf("this is fucked\n");
 		i++;
 	}
 	return (i);
@@ -68,6 +68,8 @@ static int	amount_tokens(char *input)
 	while (input[i])
 	{
 		i += len_token(&input[i]);
+		printf("amount i = %i\n", i);
+		i++;
 		count++;
 		// printf("AT | count = %i\n", count);
 	}
@@ -80,7 +82,10 @@ static bool	annoying_split(char *input)
 	
 	while (input[i])
 	{
-		if (ft_isquote(input[i]) || is_meta(&input[i]))
+		printf("input[i]: %c\n", input[i]);
+		printf("&input[i]: %s\n", &input[i]);
+		printf("input: %s\n", input);
+		if (ft_isquote(input[i]) || is_meta(input[i]))
 			return (true);
 		i++;
 	}
@@ -101,22 +106,27 @@ char	**parse_input(char *input)
 	int		no_tokens = 0;
 	int		i = 0;
 
+	printf("input: %s\n", input);
 	if (annoying_split(input))
 	{
-		printf("input: %s\n", input);
+		printf("Wtf?\n");
 		no_tokens = amount_tokens(input);
-		printf("amount of toks: %i", no_tokens);
+		printf("amount of toks: %i\n", no_tokens);
 		array = (char **)malloc(sizeof(char *) * no_tokens + 1);
 		while (i < no_tokens)
 		{
+			printf("are you here?\n");
 			// printf("i = %i | no_tokens = %i\n", i, no_tokens);
-			// array[i] = give_tokens(input);
-			printf("PI | array =  %s\n", array[i]);
+			array[i] = give_tokens(input);
+			// printf("PI | array =  %s\n", array[i]);
 			i++;
 		}
 	}
 	else
+	{
+		printf("youre ehre are you?\n");	
 		array = ft_split(input, ' ');;
+	}
 	if (!array)
 		return (NULL);
 	return (array);

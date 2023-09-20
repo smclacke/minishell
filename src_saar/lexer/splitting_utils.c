@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 21:07:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 13:26:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	next_quote(char *input, char c)
 }
 
 // can i combine is_meta and is_token and just use one of these?
+
+// int		ft_is_meta(int c)
+// {
+// 	return (c == '|');
+// }
 
 bool	is_meta(char *input)
 {

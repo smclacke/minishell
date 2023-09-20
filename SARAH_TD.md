@@ -86,6 +86,31 @@ OTHER
 I think abc$abc, some<<something are both for the expander and ill leave them intact in the tokens
 
 
+need to rethink a bit.... 
+
+cmd or redirect...
+as first or after pipe....
+but this is ok, everything is ok
+
+bash-3.2$ < out cat | cat > out2 -e
+bash-3.2$ cat out2
+Makefile$
+README.md$
+SARAH+tokens.md$
+SARAH_TD.md$
+heredoc_notes.md$
+include$
+micro_shell$
+mini_src$
+minishell$
+obj$
+obj_djoy$
+obj_saar$
+out$
+sarah$
+src_djoy$
+src_saar$
+
 ---------------------------------------------------------------------------------
 **TALK TO DJOYKE ABOUT THIS**
 
@@ -100,6 +125,43 @@ lexer: 		~: echo
 lexer: 		~: abc$abc
 first->cmd: echo
 second->str: abc$abc 
+
+
+**TWO**
+void	ft_echo(t_parser *lst)
+{
+	int	i;
+	int	is_flag;
+
+
+	i = 0;
+	is_flag = 0;
+	if (!lst->data_type->cmd)
+		mini_error("lst->cmd", errno);
+	lst = lst->next;
+	while (lst)
+	{
+		if (lst->data_type->strs)
+		{
+			if (ft_strcmp(lst->data_type->strs, "-n") == 0)
+			{
+				++is_flag;
+				i++;
+			}
+			else
+			{
+				printf("%s ", lst->data_type->strs);
+				i++;
+			}
+		}
+		lst = lst->next;
+	}
+	if (is_flag != 0)
+		printf("\n");
+}
+
+Echo was segfaulting, I edited the code a bit so that we look through the list for the strs
+echo << some, then we need to handle the redirect correctly otherwise we will just skip it...
 
 
 ---------------------------------------------------------------------------------
