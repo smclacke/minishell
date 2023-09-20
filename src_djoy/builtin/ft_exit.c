@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 18:56:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/20 14:56:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #define LONG_MAX_STR "9223372036854775807"
 #define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
-
 
 /**
  * @param str string to convert

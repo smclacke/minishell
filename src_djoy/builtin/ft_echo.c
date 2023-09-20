@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 15:02:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/20 15:13:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,27 @@ void	ft_echo(t_parser *lst)
 	if (!lst->data_type->cmd)
 		mini_error("lst->cmd", errno);
 	lst = lst->next;
+	if (!lst->data_type->strs)
+	{
+		// 1) check if the next one is a meta, 
+		//    | >> etc to see if you need to echo into something
+		// 2) or to just put the newline on the terminal
+		printf("\n");
+	}
 	while (lst)
 	{
-		if (ft_strcmp(lst->data_type->strs, "-n") == 0)
+		if (lst->data_type->strs)
 		{
-			is_flag++;
-			i++;
-		}
-		else
-		{
-			printf("%s ", lst->data_type->strs);
-			i++;
+			if (ft_strcmp(lst->data_type->strs, "-n") == 0)
+			{
+				is_flag++;
+				i++;
+			}
+			else
+			{
+				printf("%s ", lst->data_type->strs);
+				i++;
+			}
 		}
 		lst = lst->next;
 	}
