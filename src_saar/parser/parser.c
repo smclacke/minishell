@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 20:25:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 19:58:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static t_data_type	*handle_types(t_data_type *data, int flag)
 	return (data);
 }
 
-// DO WE WANT DELIMITER VAR OR JUST STR AFTER << HERE_DOC??
 /**
  * @brief	if previous token was a redirect, 
  * 			the following one is going to be cmd, file or delimiter
@@ -54,8 +53,13 @@ static t_data_type	*handle_types(t_data_type *data, int flag)
 */
 static t_data_type	*handle_next(t_data_type *data, char *type)
 {
-	if (ft_strcmp(type, PIPE) == 0)
-		data->cmd = data->input;
+	if (ft_strnstr(type, PIPE, 1))
+	{
+		if (is_meta(data->input))
+			data->file = data->input;
+		else
+			data->cmd = data->input;
+	}
 	else if (ft_strcmp(type, LESSLESS) == 0)
 		data->strs = data->input;
 	else

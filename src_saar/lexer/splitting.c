@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/20 19:33:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 20:09:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	start_token(char *input, int old_start)
 	return (j);	
 }
 
-static char	*give_tokens(char *input, int len)
+static char	*split_tokens(char *input, int len)
 {
 	char	*token;
 
@@ -48,35 +48,39 @@ static char	*give_tokens(char *input, int len)
 	return (token);
 }
 
-static bool	annoying_split(char *input)
-{
-	int	i = 0;
-	
-	if (is_meta(input))
-		return (true);
-	while (input[i])
-	{
-		if (ft_isquote(input[i]))
-			return (true);
-		i++;
-	}
-	return (false);
-}
-
 static int	amount_tokens(char *input)
 {
 	int	i = 0;
 	int	count = 0;
 
-	while (input[i])
+	while (input[i] && !ft_isquote(input[i]))
 	{
-		while (input[i] && ft_isspace(input[i]))
+		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
 			i++;
 		count++;
-		while (input[i] && !ft_isspace(input[i]))
+		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
 			i++;
 	}
+	if (ft_isquote(input[i]))
+	{
+		printf("is it here?\n");
+		i += next_quote(input, *which_quote(input));
+		count++;
+	}
 	return (count);
+}
+
+static int	annoying_split(char *input)
+{
+	int	i = 0;
+
+	while (input[i])
+	{
+		if (ft_isquote(input[i]) || ft_ismeta(input[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 /**
@@ -87,7 +91,6 @@ static int	amount_tokens(char *input)
  * @param	input input from the command line
  * @return	2D array of separated strings made from the input, ready to be tokenized
 */
-//not recognising pipes correctly
 char	**parse_input(char *input)
 {
 	char	**array = NULL;
@@ -99,14 +102,13 @@ char	**parse_input(char *input)
 	if (annoying_split(input))
 	{
 		no_tokens = amount_tokens(input);
-		printf("amount of tokens: %i\n", no_tokens);
 		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 		while (i < no_tokens)
 		{
 			start = start_token(input, (start + len));
 			len = len_token(input, start);
 			array[i] = (char *)malloc(sizeof(char) * (len + 1));
-			array[i] = give_tokens(&input[start], len);
+			array[i] = split_tokens(&input[start], len);
 			i++;
 		}
 		array[no_tokens] = NULL;
