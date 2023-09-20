@@ -6,6 +6,15 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT MESSAGES? UPDATES**
 
+!! annoying_split() func doesn't work...
+!! first arg + after pipe could be cmd or redirect.... :)
+!! amount of tokens need to check attached redirects and quotes
+!! split needs to handle quotes
+!! split needs to handle redirects attached
+
+
+---------------------------------------------------------------------------------
+
 mehmehmehmeh
 
 i told my dad not to use metas....

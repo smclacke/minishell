@@ -6,77 +6,34 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/20 19:16:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 19:33:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// static int	len_token(char *input)
-// {
-// 	int	i = 0;
-// 	int j = 0;
-// 	int len = 0;
-
-// 	while (input[i])
-// 	{
-// 		while (input[i] && ft_isspace(input[i]))
-// 			i++;
-// 		j = i;
-// 		while (input[i] && !ft_isspace(input[i]))
-// 			i++;
-// 		len = i - j;
-// 		return (len);
-// 	}
-// 	return (0);
-// }
-
-// static int	start_token(char *input, int len)
-// {
-// 	int	i = len;
-// 	int j = 0;
-
-// 	while (input[i])
-// 	{
-// 		while (input[i] && ft_isspace(input[i]))
-// 			i++;
-// 		j = len + i;
-// 		while (input[i] && !ft_isspace(input[i]))
-// 			i++;
-// 		return (j);
-// 	}
-// 	return (0);
-// }
-
 static int	len_token(char *input, int len)
 {
-	int	i = 0;
 	int j = 0;
 
-	while (input[i] && ft_isspace(input[i]))
-		i++;
-	j = i;
-	while (input[i] && !ft_isspace(input[i]))
-		i++;
-	len = i - j;
+	while (input[len] && ft_isspace(input[len]))
+		len++;
+	j = len;
+	while (input[len] && !ft_isspace(input[len]))
+		len++;
+	len = len - j;
 	return (len);	
 }
 
 static int	start_token(char *input, int old_start)
 {
-	int	i = old_start;
 	int j = 0;
 
-	// i keep ging throuh the input from the start....
-	printf("old_start = %i\n", old_start);
-	// while (input[i])
-	// {
-		while (input[i] && ft_isspace(input[i]))
-			i++;
-		j = i;
-		while (input[i] && !ft_isspace(input[i]))
-			i++;
-	// }
+	while (input[old_start] && ft_isspace(input[old_start]))
+		old_start++;
+	j = old_start;
+	while (input[old_start] && !ft_isspace(input[old_start]))
+		old_start++;
 	return (j);	
 }
 
@@ -122,7 +79,6 @@ static int	amount_tokens(char *input)
 	return (count);
 }
 
-
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
  * 			are no quotations, the string is split on spaces with metas (exc. dollar) also being 
@@ -140,30 +96,24 @@ char	**parse_input(char *input)
 	int		len = 0;
 	int		i = 0;
 
-	// if (annoying_split(input))
-	// {
-	no_tokens = amount_tokens(input);
-	printf("amount of tokens: %i\n", no_tokens);
-	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-	while (i < no_tokens)
+	if (annoying_split(input))
 	{
-		start = start_token(input, len);
-		printf("start: %i\n", start);
-		len = len_token(input, len);
-		printf("len: %i\n", len);
-		array[i] = (char *)malloc(sizeof(char) * (len + 1));
-		array[i] = give_tokens(&input[start], len);
-		i++;
+		no_tokens = amount_tokens(input);
+		printf("amount of tokens: %i\n", no_tokens);
+		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
+		while (i < no_tokens)
+		{
+			start = start_token(input, (start + len));
+			len = len_token(input, start);
+			array[i] = (char *)malloc(sizeof(char) * (len + 1));
+			array[i] = give_tokens(&input[start], len);
+			i++;
+		}
+		array[no_tokens] = NULL;
 	}
-	array[no_tokens] = NULL;
-	// }
-	// else
-	// {
-	// 	// printf("youre here arent you?\n");	
-		// array = ft_split(input, ' ');
-	// }
+	else
+		array = ft_split(input, ' ');
 	if (!array)
 		return (NULL);
 	return (array);
-	// return (0);
 }
