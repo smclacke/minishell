@@ -6,45 +6,78 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/20 18:34:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 19:16:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+// static int	len_token(char *input)
+// {
+// 	int	i = 0;
+// 	int j = 0;
+// 	int len = 0;
+
+// 	while (input[i])
+// 	{
+// 		while (input[i] && ft_isspace(input[i]))
+// 			i++;
+// 		j = i;
+// 		while (input[i] && !ft_isspace(input[i]))
+// 			i++;
+// 		len = i - j;
+// 		return (len);
+// 	}
+// 	return (0);
+// }
+
+// static int	start_token(char *input, int len)
+// {
+// 	int	i = len;
+// 	int j = 0;
+
+// 	while (input[i])
+// 	{
+// 		while (input[i] && ft_isspace(input[i]))
+// 			i++;
+// 		j = len + i;
+// 		while (input[i] && !ft_isspace(input[i]))
+// 			i++;
+// 		return (j);
+// 	}
+// 	return (0);
+// }
+
 static int	len_token(char *input, int len)
 {
-	int	i = len;
+	int	i = 0;
 	int j = 0;
 
-	while (input[i])
-	{
+	while (input[i] && ft_isspace(input[i]))
+		i++;
+	j = i;
+	while (input[i] && !ft_isspace(input[i]))
+		i++;
+	len = i - j;
+	return (len);	
+}
+
+static int	start_token(char *input, int old_start)
+{
+	int	i = old_start;
+	int j = 0;
+
+	// i keep ging throuh the input from the start....
+	printf("old_start = %i\n", old_start);
+	// while (input[i])
+	// {
 		while (input[i] && ft_isspace(input[i]))
 			i++;
 		j = i;
 		while (input[i] && !ft_isspace(input[i]))
 			i++;
-		len = i - j;
-		return (len);
-	}
-	return (0);
-}
-
-static int	start_token(char *input, int len)
-{
-	int	i = len;
-	int j = 0;
-
-	while (input[i])
-	{
-		while (input[i] && ft_isspace(input[i]))
-			i++;
-		j = i;
-		// while (input[i] && !ft_isspace(input[i]))
-		// 	i++;
-		return (j);
-	}
-	return (0);
+	// }
+	return (j);	
 }
 
 static char	*give_tokens(char *input, int len)
@@ -72,7 +105,6 @@ static bool	annoying_split(char *input)
 	}
 	return (false);
 }
-
 
 static int	amount_tokens(char *input)
 {
