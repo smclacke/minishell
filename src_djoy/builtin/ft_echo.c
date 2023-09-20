@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/20 13:09:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 15:06:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_echo(t_parser *lst)
 	while (lst)
 	{
 		// if ndoe after cmd is not str, problem...
+		// next node check
 		if (lst->data_type->strs)
 		{
 			if (ft_strcmp(lst->data_type->strs, "-n") == 0)

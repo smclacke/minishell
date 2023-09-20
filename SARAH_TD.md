@@ -141,6 +141,35 @@ void	ft_echo(t_parser *lst)
 	lst = lst->next;
 	while (lst)
 	{
+		if (ft_strcmp(lst->data_type->strs[i], "-n") == 0)
+		{
+			++is_flag;
+			i++;
+		}
+		else
+		{
+			printf("%s ", lst->data_type->strs);
+			i++;
+		}
+		lst = lst->next;
+	}
+	if (is_flag != 0)
+		printf("\n");
+}
+
+void	ft_echo(t_parser *lst)
+{
+	int	i;
+	int	is_flag;
+
+
+	i = 0;
+	is_flag = 0;
+	if (!lst->data_type->cmd)
+		mini_error("lst->cmd", errno);
+	lst = lst->next;
+	while (lst)
+	{
 		if (lst->data_type->strs)
 		{
 			if (ft_strcmp(lst->data_type->strs, "-n") == 0)
