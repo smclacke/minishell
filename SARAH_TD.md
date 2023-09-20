@@ -13,9 +13,11 @@ could give you something that NEEDS to be a cmd if not a file and then basically
 
 
 !! amount of tokens need to check attached redirects and quotes
+changing this function, need to check quote funcs cause segfault :)
+then do a meta check and separate those
+
 !! split needs to handle quotes
 !! split needs to handle redirects attached
-
 
 ---------------------------------------------------------------------------------
 
