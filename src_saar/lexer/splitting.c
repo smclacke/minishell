@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/20 16:24:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 18:13:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,31 +47,24 @@
 	// 	}
 	// 	// printf("this is fucked\n");
 	// 	i++;
-
-// int		give_j(int j)
-// {
-// 	return (j);
-// }
 	
-static int	len_token(char *input)
+static int	len_token(char *input, int len)
 {
 	int	i = 0;
 	int j = 0;
-	int	len = 0;
 
 	while (input[i])
 	{
 		while (input[i] && ft_isspace(input[i]))
 			i++;
 		j = i;
-		// give_j(j);
 		while (input[i] && !ft_isspace(input[i]))
 			i++;
 		len = i - j;
-		printf("len_token = %i\n", len);
+		// printf("len_token = %i\n", len);
+		return (len);
 	}
-	printf("hello 3\n");
-	return (len);	
+	return (0);
 }
 
 static int	start_token(char *input)
@@ -79,26 +72,39 @@ static int	start_token(char *input)
 	int	i = 0;
 	int j = 0;
 
-	printf("hello 4\n");
 	while (input[i])
 	{
 		while (input[i] && ft_isspace(input[i]))
 			i++;
 		j = i;
-		// give_j(j);
 		while (input[i] && !ft_isspace(input[i]))
 			i++;
-		printf("start_token = %i\n", j);
+		return (j);	
+		// printf("start_token = %i\n", j);
 	}
-	return (j);	
+	return (0);
+}
+
+static int	amount_tokens(char *input)
+{
+	int	i = 0;
+	int	count = 0;
+
+	while (input[i])
+	{
+		while (input[i] && ft_isspace(input[i]))
+			i++;
+		count++;
+		while (input[i] && !ft_isspace(input[i]))
+			i++;
+	}
+	return (count);
 }
 
 static char	*give_tokens(char *input, int len)
 {
 	char	*token;
-	// int		token_len;
 
-	// token_len = len_token(input);
 	token = ft_substr(input, 0, len);
 	if (!token)
 		return (NULL);
@@ -121,35 +127,6 @@ static bool	annoying_split(char *input)
 	return (false);
 }
 
-
-static int	amount_tokens(char *input)
-{
-	int	i = 0;
-	int	count = 0;
-	// int	len = 0;
-
-	// how many tokennnnssss?????
-	while (input[i])
-	{
-		while (input[i] && ft_isspace(input[i]))
-			i++;
-		count++;
-		while (input[i] && !ft_isspace(input[i]))
-			i++;
-	}
-	printf("hello 2\n");
-	return (count);
-	// while (input[i])
-	// {
-	// len = len_token(&input[i]);
-	// 	count++;
-	// 	i++;
-	// }
-	// printf("count = %i\n", count);
-	// return (count);
-}
-
-
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
  * 			are no quotations, the string is split on spaces with metas (exc. dollar) also being 
@@ -158,7 +135,7 @@ static int	amount_tokens(char *input)
  * @param	input input from the command line
  * @return	2D array of separated strings made from the input, ready to be tokenized
 */
-//not recognising pipes correctly
+//not annoying() correctly
 char	**parse_input(char *input)
 {
 	char	**array = NULL;
@@ -172,20 +149,16 @@ char	**parse_input(char *input)
 	// {
 	no_tokens = amount_tokens(input);
 	printf("amount of tokens: %i\n", no_tokens);
-	printf("hello 1\n");
 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-	// while (n >= 0)
 	while (i < no_tokens)
 	{
-		len = len_token(input);
+		len = len_token(input, len);
+		printf("token len: %i\n", len);
 		start = start_token(input);
-		array[i] = (char *)malloc(sizeof(char) * len + 1);
-		//into array[i], &input[start], len
+		printf("start token: %i\n", start);
+		array[i] = (char *)malloc(sizeof(char) * (len + 1));
 		array[i] = give_tokens(&input[start], len);
-		// i++;
-		// printf("IAMHEREEERERER = %i\n", i);
 		i++;
-		// no_tokens--;
 	}
 	array[no_tokens] = NULL;
 	// }
