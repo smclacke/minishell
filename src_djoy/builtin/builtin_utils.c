@@ -6,11 +6,14 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:46:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 18:15:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+#include <limits.h>
+
+#define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
 
 /**
  * @param env pointer to environment
@@ -57,7 +60,36 @@ void	do_builtin(t_parser *node, t_env **env)
 }
 
 /**
- * @param node node in linked list
+ * @param temp linked list
+ * @param words 2D array with seperate words key and value
+ * @param cmd string containing command
+ * @brief checks if key and value are alphanumeric
+ * @return 1 if not alphanumeric, 0 is alphanumeric
+*/
+int	key_value_check(t_parser *temp, char **words, char *cmd)
+{
+	int	i;
+
+	if ((ft_isalpha(words[0][0]) == 0) && words[0][0] != '_')
+	{
+		put_custom_error(temp, cmd);
+		return (1);
+	}
+	i = 1;
+	while (words[0][i])
+	{
+		if (words[0][i] != '_' && ft_isalnum(words[0][i]) == 0)
+		{
+			put_custom_error(temp, cmd);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+/**
+ * @param lst linked list
  * @brief checks if the words are export and unset norm
  * proof.
  * key (word) first letter has:
@@ -69,60 +101,36 @@ void	do_builtin(t_parser *node, t_env **env)
  * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
  * @return true if nothing wrong found with the words
- * @todo  
- * arg->cmd: export
- * arg->str: djoyke
- * arg->str: =gek
- * expander: 		there's a builtin whoop
- * 
- * minishell: export: `djoyke': not a valid identifier 
- * -->this thould be =gek instead.
- * 
- * strchr: Undefined error: 0 
- * ->this should not happen at all dont go further.
- * 
- * still need to do bracket check
- * for now looping because not actual parsed list
- * line 96: node containing string for now fix when parsing is fixed
- * bash-3.2$ export djoyke =gek
- * bash: export: `=gek': not a valid identifier
+ * @todo 
+ * HANDLE QUOTES WHEN IT'S FIXED IN THE PARSER, you're doing great honey
  * bash-3.2$ export djoyke="gek gggg" (two words if it's in quotations)
  * bash-3.2$ env
  * env part:
  * djoyke=gek gggg
  * bash-3.2$
+ * 2) export djoyke
+ * will be added to environmet but not shown when doing env
+ * becuase there's no value
+ * but export will show it when you print declare -x; fix in env
 */
-bool	word_check(t_parser *node)
+bool	word_check(t_parser *lst)
 {
-	char	**words;
-	char	*cmd;
-	int		i;
+	t_parser	*temp;
+	char		**words;
+	char		*cmd;
 
-	cmd = node->data_type->cmd;
-	node = node->next;
-	words = ft_split(node->data_type->strs, '=');
+	cmd = lst->data_type->cmd;
+	temp = lst->next;
+	words = ft_split(temp->data_type->strs, '=');
 	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
 	{
-		put_custom_error(node, cmd);
+		put_custom_error(temp, cmd);
 		return (true);
 	}
 	if (words == NULL)
 		mini_error("malloc split", errno);
-	if ((ft_isalpha(words[0][0]) == 0) && words[0][0] != '_')
-	{
-		put_custom_error(node, cmd);
+	if (key_value_check(temp, words, cmd) == 1)
 		return (true);
-	}
-	i = 1;
-	while (words[0][i])
-	{
-		if (words[0][i] != '_' && ft_isalnum(words[0][i]) == 0)
-		{
-			put_custom_error(node, cmd);
-			return (true);
-		}
-		i++;
-	}
 	return (false);
 }
 
@@ -150,6 +158,6 @@ void	put_custom_error(t_parser *node, char *cmd)
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
 		ft_putstr_fd(node->data_type->strs, STDOUT_FILENO);
-		ft_putstr_fd(": positive numeric argument 255 or below required\n", STDOUT_FILENO);
+		ft_putstr_fd(ERROR_MESSAGE, STDOUT_FILENO);
 	}
 }

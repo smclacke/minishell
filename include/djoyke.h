@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 17:10:39 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 17:43:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void			print_list_full(t_env *env);
 //---- Built-in ----//
 void			free_all(t_env *env);
 void			do_builtin(t_parser *node, t_env **env);
-bool			word_check(t_parser *node);
+bool			word_check(t_parser *lst);
 void			ft_cd(t_parser *lst, t_env **env);
 void			put_custom_error(t_parser *node, char *cmd);
 void			access_change(t_env **env, t_parser *lst, char *o_d, char *c_d);

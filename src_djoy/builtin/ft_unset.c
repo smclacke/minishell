@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:56:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 18:19:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
  * @param argv terminal given arguments (for now)
  * @param env pointer to environment
  * @brief unset values by deleting nodes in env linked list
- * @todo 
- * bash-3.2$ unset djoyke=gek
- * bash: unset: `djoyke=gek': not a valid identifier
 */
 void	ft_unset(t_parser *node, t_env **env)
 {
@@ -47,13 +44,13 @@ void	mini_remove_env(char *str, t_env **env)
 	previous = NULL;
 	current = *env;
 	tmp = NULL;
-	while (current != NULL) 
+	while (current != NULL)
 	{
 		if (!ft_strncmp(current->key, str, ft_strlen(str)))
 		{
 			if (previous != NULL)
 				previous->next = current->next;
-			else 
+			else
 				*env = current->next;
 			tmp = current;
 			current = current->next;
