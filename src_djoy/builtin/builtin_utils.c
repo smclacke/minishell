@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:55:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 16:46:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,6 @@ void	put_custom_error(t_parser *node, char *cmd)
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
 		ft_putstr_fd(node->data_type->strs, STDOUT_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDOUT_FILENO);
+		ft_putstr_fd(": positive numeric argument 255 or below required\n", STDOUT_FILENO);
 	}
 }
