@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:54:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 20:21:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void	reassign_opwd(t_env **env, t_env *new, char *str, char *full)
 	printf("full = [%s]\n", full);
 	if (full == NULL)
 		mini_error("malloc", errno);
-	new = env_lstnew("OLDPWD", str, full);
+	new = env_lstnew("OLDPWD", str, full, (*env)->has_value);
 	if (new == NULL)
 		mini_error("malloc", errno);
 	env_lstadd_back(env, new);

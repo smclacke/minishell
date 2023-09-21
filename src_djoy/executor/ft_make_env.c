@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:46:46 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:56:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 20:20:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@
  * @brief malloc's and init node for linked list containing: 
  * key, value and next
  * @return node made
- * @todo 
- * 1) needs to add previous in case of doubly linked list
 */
-t_env	*env_lstnew(void *key, void *value, char *full)
+t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 {
 	t_env	*new;
 
@@ -32,6 +30,7 @@ t_env	*env_lstnew(void *key, void *value, char *full)
 	new->value = value;
 	new->full = full;
 	new->next = NULL;
+	new->has_value = has_value;
 	return (new);
 }
 
@@ -43,9 +42,10 @@ t_env	*env_lstnew(void *key, void *value, char *full)
  * containing a string substringed from str after = sign
  * @brief substrings key and value from str without the '=' sign
 */
-void	get_key_value(char *str, char **key, char **value)
+int	get_key_value(char *str, char **key, char **value)
 {
 	int		i;
+	int		has_value;
 
 	i = 0;
 	while (str[i] != '=' && str[i] != '\0')
@@ -54,7 +54,14 @@ void	get_key_value(char *str, char **key, char **value)
 	{
 		*key = ft_substr(str, 0, i);
 		*value = ft_substr(str, i + 1, (ft_strlen(str) - i));
+		has_value = TRUE;
 	}
+	else
+	{
+		*key = ft_substr(str, 0, i);
+		has_value = FALSE;
+	}
+	return (has_value);
 }
 
 /**
@@ -78,25 +85,25 @@ char	*get_full(char *str)
  * @param value char string to be receiving value of env value
  * @param env linked list containing key and env
  * @brief putting the envp content into a linked list seperated by key and value
- * @return linked list 
+ * @return linked list
+ * @todo do i want to keep full??
 */
 t_env	*env_list(char **envp, t_env *env)
 {
 	int		i;
+	int		has_value;
 	char	*key;
 	char	*value;
 	char	*full;
-	// t_env	*env;
 
 	i = 0;
-	// env = NULL;
 	if (envp[i] == NULL)
 		mini_error("env", errno);
 	while (envp[i] != NULL)
 	{
-		get_key_value(envp[i], &key, &value);
+		has_value = get_key_value(envp[i], &key, &value);
 		full = get_full(envp[i]);
-		env_lstadd_back(&env, env_lstnew(key, value, full));
+		env_lstadd_back(&env, env_lstnew(key, value, full, has_value));
 		i++;
 	}
 	return (env);
@@ -105,7 +112,6 @@ t_env	*env_list(char **envp, t_env *env)
 /**
  * @param env linked list containing environment
  * @brief turns environment linked list into 2d array
- * @todo line 119: instead of errno need to return NULL?
 */
 char	**list_to_string(t_env *env)
 {

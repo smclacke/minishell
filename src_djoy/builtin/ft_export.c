@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 18:23:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 20:26:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ void	export_print(t_env *env)
 {
 	while (env != NULL)
 	{
-		printf("declare -x %s=%s\n", env->key, env->value);
+		if (env->has_value)
+			printf("declare -x %s=%s\n", env->key, env->value);
+		else
+			printf("declare -x %s\n", env->key);
 		env = env->next;
 	}
 }
@@ -44,15 +47,27 @@ void	export_print(t_env *env)
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options
+ * @todo do add:
+ * key
+ * key=
+ *  !_-(_|\export key
+ * lexer list: [export]
+ * lexer list: [key]
+ * [0]	 cmd = export	file = (null)	meta = (null)	strs = (null)
+ * [1]	 cmd = (null)	file = (null)	meta = (null)	strs = key
+ * expander: 		there's a builtin whoop
+ * strchr: Undefined error: 0
 */
 void	ft_export(t_parser *node, t_env **env)
 {
 	char	*new_key;
 	char	*new_value;
+	int		h_v;
 	t_env	*new_node;
 
 	new_key = NULL;
 	new_value = NULL;
+	h_v = 0;
 	if (!node->next)
 	{
 		export_print(*env);
@@ -63,26 +78,25 @@ void	ft_export(t_parser *node, t_env **env)
 	if (word_check(node) == 1)
 		return ;
 	node = node->next;
-	if (ft_strchr(node->data_type->strs, '=') == 0)
-		mini_error("strchr", errno);
 	if (reassign_env(env, node, new_key, new_value) == 1)
 		return ;
-	get_key_value(node->data_type->strs, &new_key, &new_value);
-	new_node = env_lstnew(new_key, new_value, node->data_type->strs);
+	h_v = get_key_value(node->data_type->strs, &new_key, &new_value);
+	new_node = env_lstnew(new_key, new_value, node->data_type->strs, h_v);
 	env_lstadd_back(env, new_node);
 }
 
-bool	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
+bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 {
 	t_env	*head;
+	int		has_value;
 
-	head = *env;
+	head = *e;
 	while (head)
 	{
 		if (mini_strcmp(node->data_type->strs, head->full) == 0)
 		{
 			head->full = node->data_type->strs;
-			get_key_value(node->data_type->strs, &n_k, &n_v);
+			has_value = get_key_value(node->data_type->strs, &n_k, &n_v);
 			head->value = n_v;
 			head->key = n_k;
 			return (true);

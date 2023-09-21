@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 17:43:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 20:20:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_env
 	char				*full;
 	struct s_env		*next;
 	struct s_env		*previous;
+	int					has_value;
 }							t_env;
 
 //---- Expander ----//
@@ -109,8 +110,8 @@ bool			check_for_builtin(t_parser *lst);
 //----Environment----//
 // t_env		*env_list(char **envp);
 t_env			*env_list(char **envp, t_env *env);
-t_env			*env_lstnew(void *key, void *value, char *full);
-void			get_key_value(char *str, char **key, char **value);
+t_env			*env_lstnew(void *key, void *value, char *full, int h_v);
+int				get_key_value(char *str, char **key, char **value);
 t_env			*env_lstlast(t_env *lst);
 void			env_lstadd_back(t_env **lst, t_env *new);
 void			print_list(t_env *env);
