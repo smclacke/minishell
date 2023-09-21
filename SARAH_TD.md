@@ -9,15 +9,59 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **CURRENT MESSAGES? UPDATES**
 
-!! first arg + after pipe could be cmd or redirect.... :)
-....  <out echo hello 
-need to check all strings incase there are cmds, not always first/after pipe....
-could give you something that NEEDS to be a cmd if not a file and then basically the other strings will just need to be checked.....................
+**ALL THE FUN ARG SHIT**
+
+**EXAMPLE**
+<out echo hello 
+ -> hello
+
+**EXAMPLE**
+<infile cat | cat >out = works
+
+**EXAMPLE**
+echo hello | cat >infile
+cat infile
+ -> hello
+echo hello | >infile
+cat infile
+
+**EXAMPLE**
+echo hello | cat >infile
+cat infile
+ -> hello
+echo hello | >infile
+cat infile
+// nothing in infile anymore, but also doesn't echo hello since stdout is redirected and no cmd for infile...
+
+**EXAMPLE**
+echo hello | >infile
+cat infile
+echo hello | <infile
+cat infile
+echo hello | cat <infile
+cat infile
+cat Makefile | cat <infile
+cat infile
+
+// put the makefile into the infile, then run cat Makefile | <infile, Makefile is still in the infile
 
 
--> cmd must be..
+-> cmd can only be:
 	first arg, after redirect or pipe... more? otherwise str
+-> first arg can be cmd, or infile or here_doc
+-> atfer pipe, can be cmd in/out file (but pipe wont actually do anything without a cmd after it, other than just making the out file)
 
+**EXAMPLE**
+echo hello <<something >out
+> what
+> is
+> happening
+> something
+cat out
+ -> hello
+
+
+---------------------------------------------------------------------------------
 
 !! amount of tokens need to check attached redirects and quotes
 changing this function, need to check quote funcs cause segfault :)
@@ -26,10 +70,10 @@ then do a meta check and separate those
 !! split needs to handle quotes
 !! split needs to handle redirects attached
 
+
 ---------------------------------------------------------------------------------
 
 mehmehmehmeh
-
      __
  .--()°'.'
 '|, . ,'
