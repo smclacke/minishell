@@ -1,5 +1,17 @@
+---------------------------------------------------------------------------------
 
-**SARAH, SHIT TO DO AFTER MICRO SHELLY, DONT FORGETTTTTTTTTT, and during...**
+mehmehmehmeh
+     __
+ .--()°'.'
+'|, . ,'
+ !_-(_|\grep >
+input: grep >
+this is fucked
+this is fucked
+this is fucked
+this is fucked
+
+**SARAH, SHIT TO DO**
 
 HELLO WHAT DE FOOK
 
@@ -7,9 +19,35 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
-**CURRENT MESSAGES? UPDATES**
+**THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 
-**ALL THE FUN ARG SHIT**
+my brain is fried and i hate this project :)
+
+Holy mother of fuckidy fuck
+here we gooo
+
+**21-09**
+
+-> triple check the FUN ARG SHIT makes sense and im handling everything properly
+-> re-write parser to make it make sense, everything up to pipe is sorted
+-> make it so that << >> are actually handled... yayy
+
+-> fix the new quote shit in lexer: (last to do notes before this shit show:)
+		!! amount of tokens need to check attached redirects and quotes
+		changing this function, need to check quote funcs cause segfault :)
+		then do a meta check and separate those
+
+		!! split needs to handle quotes
+		!! split needs to handle redirects attached
+-> add meta separatation in lexer
+-> check that quotes are whole: abd"bull"shit = is one token
+-> cry
+-> find problems
+-> cry some more
+
+---------------------------------------------------------------------------------
+
+**ALL THE FUN ARG SHIT** ja? nee? ja? nee? ik weet het niet meeeeer
 
 **EXAMPLE**
 <out echo hello 
@@ -45,7 +83,6 @@ cat infile
 
 // put the makefile into the infile, then run cat Makefile | <infile, Makefile is still in the infile
 
-
 -> cmd can only be:
 	first arg, after redirect or pipe... more? otherwise str
 -> first arg can be cmd, or infile or here_doc
@@ -63,28 +100,7 @@ cat out
 
 ---------------------------------------------------------------------------------
 
-!! amount of tokens need to check attached redirects and quotes
-changing this function, need to check quote funcs cause segfault :)
-then do a meta check and separate those
-
-!! split needs to handle quotes
-!! split needs to handle redirects attached
-
-
----------------------------------------------------------------------------------
-
-mehmehmehmeh
-     __
- .--()°'.'
-'|, . ,'
- !_-(_|\grep >
-input: grep >
-this is fucked
-this is fucked
-this is fucked
-this is fucked
-^C
-➜  minishel
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
 ---------------------------------------------------------------------------------
 
@@ -124,7 +140,6 @@ input: <<
 is meta: 1
 &input: <
 is meta: 2
-
 
 ->>>>>>>>> SEPARATE FILES from redirects and attachments to pipes (lexer)
 ->>>>>>>>> SEPARATE QUOTES... need to talk to someone about quote handling cause its too much
@@ -252,10 +267,6 @@ Echo was segfaulting, I edited the code a bit so that we look through the list f
 echo << some, then we need to handle the redirect correctly otherwise we will just skip it...
 
 
----------------------------------------------------------------------------------
-
-
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
 ---------------------------------------------------------------------------------
 **NEW_STYLEEE YEAHHHHH**
