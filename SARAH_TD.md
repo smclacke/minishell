@@ -27,7 +27,6 @@ then do a meta check and separate those
 
 mehmehmehmeh
 
-i told my dad not to use metas....
      __
  .--()°'.'
 '|, . ,'
@@ -40,12 +39,6 @@ this is fucked
 ^C
 ➜  minishel
 
-but he laughed so kinda win....
-
-// dont know what this is right now
-
-wmbE5nZ7eBtXam3x8hJG93BnEesxMZ2ZPmJEmNJZGmdEQHFRVY5eKzmRQIY 
-github_pat_11A3OH7SI0nnUxYziMhWKF_
 ---------------------------------------------------------------------------------
 
 IS QUITE LONGGGGGGGGGGGGGGGGG :))))))
