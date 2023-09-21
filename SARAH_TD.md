@@ -12,6 +12,10 @@ need to check all strings incase there are cmds, not always first/after pipe....
 could give you something that NEEDS to be a cmd if not a file and then basically the other strings will just need to be checked.....................
 
 
+-> cmd must be..
+	first arg, after redirect or pipe... more? otherwise str
+
+
 !! amount of tokens need to check attached redirects and quotes
 changing this function, need to check quote funcs cause segfault :)
 then do a meta check and separate those
