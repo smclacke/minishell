@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 18:16:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/21 18:23:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ void	export_print(t_env *env)
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options
- * @todo first character cannot have a number but everything else can have
- * check export edge cases
- * WHY (*env)????
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -94,5 +91,3 @@ bool	reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v)
 	}
 	return (false);
 }
-
-//content needs to be freed
