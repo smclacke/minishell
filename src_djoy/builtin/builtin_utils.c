@@ -108,10 +108,6 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * env part:
  * djoyke=gek gggg
  * bash-3.2$
- * 2) export djoyke
- * will be added to environmet but not shown when doing env
- * becuase there's no value
- * but export will show it when you print declare -x; fix in env
 */
 bool	word_check(t_parser *lst)
 {
