@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/14 15:42:28 by dreijans      ########   odam.nl          #
+#    Updated: 2023/09/19 02:11:26 by SarahLouise   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,7 +139,7 @@ $(DJOY)			:	$(OBJ_DJOY) $(OBJ_SAAR)
 $(SAAR)			:	$(OBJ_SAAR) $(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
-	@ ./sarah
+#@ ./sarah
 
 $(MICRO_SHELL)	:	$(OBJ_MICRO)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL)
@@ -171,6 +171,7 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
+
 
 $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)
