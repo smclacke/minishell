@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/17 19:12:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 20:58:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_parser	*shelly_print_list(t_parser *token)
 	list = token;
 	while (list)
 	{
-		printf("lexer list: [%s]\n", list->input);
+		printf("lexer list: [%s]\n", (char *)list->input);
 		list = list->next;
 	}
 	return (token);

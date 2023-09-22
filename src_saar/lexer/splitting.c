@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 20:03:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 20:58:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@
 		 // WE MUST SEPARATE METAS
 	// split on spaces, split on metas but add metas to token array
 	// if quotes, split those apart keep them totally intact
+	// inc. something"thing"more = one token
+	// ignore dollas
 
-// static int	len_token(char *input)
-// {
-// 	int	i = 0;
-// 	while (input[len] && ft_isspace(input[len]))
-// 		len++;
-// 	j = len;
-// 	while (input[len] && !ft_isspace(input[len]))
-// 		len++;
-// 	len = len - j;
-// 	return (len);	
-// }
+static int	len_token(char *input, int len)
+{
+	int	j = 0;
+	while (input[len] && ft_isspace(input[len]))
+		len++;
+	j = len;
+	while (input[len] && !ft_isspace(input[len]))
+		len++;
+	len = len - j;
+	return (len);	
+}
 
 static int	start_token(char *input, int old_start)
 {
@@ -50,6 +52,22 @@ static char	*split_tokens(char *input, int len)
 		return (NULL);
 	input += len;
 	return (token);
+}
+
+static int	amount_tokens(char *input)
+{
+	int	i = 0;
+	int	count = 0;
+
+	while (input[i])
+	{
+		while (input[i] && ft_isspace(input[i]))
+			i++;
+		count++;
+		while (input[i] && !ft_isspace(input[i]))
+			i++;
+	}
+	return (count);
 }
 
 // static int	amount_tokens(char *input)
@@ -86,18 +104,18 @@ static char	*split_tokens(char *input, int len)
 // 	return (false);
 // }
 
-// static int	annoying_split(char *input)
-// {
-// 	int	i = 0;
+static int	annoying_split(char *input)
+{
+	int	i = 0;
 
-// 	while (input[i])
-// 	{
-// 		if (ft_isquote(input[i]) || ft_ismeta(input[i]))
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	while (input[i])
+	{
+		if (ft_isquote(input[i]) || ft_ismeta(input[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
@@ -110,26 +128,26 @@ static char	*split_tokens(char *input, int len)
 char	**parse_input(char *input)
 {
 	char	**array = NULL;
-	// int		no_tokens = 0;
-	// int		start = 0;
-	// int		len = 0;
-	// int		i = 0;
+	int		no_tokens = 0;
+	int		start = 0;
+	int		len = 0;
+	int		i = 0;
 
-	// if (annoying_split(input))
-	// {
-	// 	no_tokens = amount_tokens(input);
-	// 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-	// 	while (i < no_tokens)
-	// 	{
-	// 		start = start_token(input, (start + len));
-	// 		len = len_token(input, start);
-	// 		array[i] = (char *)malloc(sizeof(char) * (len + 1));
-	// 		array[i] = split_tokens(&input[start], len);
-	// 		i++;
-	// 	}
-	// 	array[no_tokens] = NULL;
-	// }
-	// else
+	if (annoying_split(input))
+	{
+		no_tokens = amount_tokens(input);
+		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
+		while (i < no_tokens)
+		{
+			start = start_token(input, (start + len));
+			len = len_token(input, start);
+			array[i] = (char *)malloc(sizeof(char) * (len + 1));
+			array[i] = split_tokens(&input[start], len);
+			i++;
+		}
+		array[no_tokens] = NULL;
+	}
+	else
 	array = ft_split(input, ' ');
 	if (!array)
 		return (NULL);

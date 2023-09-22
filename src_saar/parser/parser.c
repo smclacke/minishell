@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 20:02:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 20:56:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static t_data_type	*handle_vars(t_data_type *data, int *flag)
+static t_data	*handle_vars(t_data *data, int *flag)
 {
 	if (!*flag)
 	{
@@ -29,7 +29,7 @@ static t_data_type	*handle_vars(t_data_type *data, int *flag)
 		if (is_redirect(data->input))
 			data->meta = data->input;
 		else
-			data->strs = data->input;
+			data->str = data->input;
 	}
 	return (data);
 }
@@ -40,12 +40,12 @@ static t_data_type	*handle_vars(t_data_type *data, int *flag)
  * @param	type
  * @return	
 */
-static t_data_type	*handle_next(t_data_type *data, char *type)
+static t_data	*handle_next(t_data *data, char *type)
 {
 	if (is_meta(data->input))
 		data->meta = data->input;
 	else if (ft_strcmp(type, LESSLESS) == 0) //here_doc
-		data->strs = data->input;
+		data->str = data->input;
 	else
 		data->file = data->input;
 	return (data);
@@ -56,21 +56,21 @@ static t_data_type	*handle_next(t_data_type *data, char *type)
  * @param	tokens
  * @param	data
  * @param	flag
- * @return	tokens->data_type
+ * @return	tokens->data
  * 
 */
-static t_data_type	*handle_all(t_parser *tokens, t_data_type *data, int *flag)
+static t_data	*handle_all(t_parser *tokens, t_data *data, int *flag)
 {
 	if (data && !is_pipe(data->input))
-		tokens->data_type = handle_vars(data, flag);
+		tokens->data = handle_vars(data, flag);
 	else if (data && is_pipe(data->input))
-		tokens->data_type = handle_pipe(data, flag);
-	return (tokens->data_type);
+		tokens->data = handle_pipe(data, flag);
+	return (tokens->data);
 }
 
 /**
  * @brief	main parser func:
- * 			takes the tokens, puts them into the data_type struct
+ * 			takes the tokens, puts them into the data struct
  * 			with init_data(). If there's a redirect, the type is saved
  * 			in type var and the next token is handled depending on
  * 			the type of redirect before it. handle_all() checks whether a 
@@ -85,13 +85,13 @@ static t_data_type	*handle_all(t_parser *tokens, t_data_type *data, int *flag)
  *			- if pipe, cmd_flag reset to find the new cmd, rest works the same
  * @param	tokens t_tokens passed from the lexer to be sorted by the parser()
  * @return	tokens: all the tokens given by the lexer have been
- * 			sorted into the parser->data_type struct making
+ * 			sorted into the parser->data struct making
  * 			them more managable for the executor
 */
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser	*token_list;
-	t_data_type	*data;
+	t_data		*data;
 	char		*type;
 	int			flag;
 
@@ -102,12 +102,12 @@ t_parser	*parser(t_parser *tokens)
 	{
 		data = init_data(token_list);
 		type = is_redirect(token_list->input);
-		token_list->data_type = handle_all(token_list, data, &flag);
+		token_list->data = handle_all(token_list, data, &flag);
 		if (type && token_list->next)
 		{
 			token_list = token_list->next;
 			data = init_data(token_list);
-			token_list->data_type = handle_next(data, type);
+			token_list->data = handle_next(data, type);
 		}
 		token_list = token_list->next;
 	}
