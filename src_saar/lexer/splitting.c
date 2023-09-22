@@ -21,14 +21,14 @@
 // {
 // 	int	i = 0;
 
-	while (input[len] && ft_isspace(input[len]))
-		len++;
-	j = len;
-	while (input[len] && !ft_isspace(input[len]))
-		len++;
-	len = len - j;
-	return (len);	
-}
+// 	while (input[len] && ft_isspace(input[len]))
+// 		len++;
+// 	j = len;
+// 	while (input[len] && !ft_isspace(input[len]))
+// 		len++;
+// 	len = len - j;
+// 	return (len);	
+// }
 
 static int	start_token(char *input, int old_start)
 {
@@ -39,7 +39,7 @@ static int	start_token(char *input, int old_start)
 	j = old_start;
 	while (input[old_start] && !ft_isspace(input[old_start]))
 		old_start++;
-	return (j);	
+	return (j);
 }
 
 static char	*split_tokens(char *input, int len)
@@ -58,27 +58,27 @@ static char	*split_tokens(char *input, int len)
 // 	int	i = 0;
 // 	int	count = 0;
 
-	while (input[i] && !ft_isquote(input[i]))
-	{
-		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
-			i++;
-		count++;
-		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
-			i++;
-	}
-	if (ft_isquote(input[i]))
-	{
-		printf("is it here?\n");
-		i += next_quote(input, *which_quote(input));
-		count++;
-	}
-	return (count);
-}
+// 	while (input[i] && !ft_isquote(input[i]))
+// 	{
+// 		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
+// 			i++;
+// 		count++;
+// 		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
+// 			i++;
+// 	}
+// 	if (ft_isquote(input[i]))
+// 	{
+// 		printf("is it here?\n");
+// 		i += next_quote(input, *which_quote(input));
+// 		count++;
+// 	}
+// 	return (count);
+// }
 
 // static bool	annoying_split(char *input)
 // {
 // 	int	i = 0;
-	
+
 // 	while (input[i])
 // 	{
 // 		if (ft_isquote(input[i]) || is_meta(&input[i]))
