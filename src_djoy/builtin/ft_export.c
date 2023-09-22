@@ -41,14 +41,14 @@ void	export_print(t_env *env)
 	}
 }
 
-char *check_for_equal_sign(char *str)
+char	*check_for_equal_sign(char *str)
 {
-	char *comp_str;
+	char	*comp_str;
 
 	comp_str = NULL;
 	if (str[ft_strlen(str) - 1] == '=')
 		comp_str = ft_substr(str, 0, (ft_strlen(str) - 1));
-	return(comp_str);
+	return (comp_str);
 }
 
 /**
