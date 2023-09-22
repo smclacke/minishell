@@ -6,12 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 20:56:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 22:36:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @brief	
+ * @param	data
+ * @param	flag
+ * @return	
+*/
 static t_data	*handle_vars(t_data *data, int *flag)
 {
 	if (!*flag)

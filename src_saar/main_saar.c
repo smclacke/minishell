@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 21:41:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 22:31:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	// (void) envp;
 	env = NULL;
 	env = env_list(envp, env);
 	tokens = NULL;
@@ -59,7 +58,7 @@ int	main(int argc, char **argv, char **envp)
 
 
 		ft_execute(&env, tokens);
-		// free input (readline needs to be fred at end)	
+		// free input (readline needs to be Mr Fred at end)	
 	}
 	return (0);
 }

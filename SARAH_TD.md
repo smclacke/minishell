@@ -33,6 +33,7 @@ YES-> triple check the FUN ARG SHIT makes sense and im handling everything prope
 YES-> re-write parser to make it make sense, everything up to pipe is sorted
 
 -> make it so that << >> are actually handled... yayy // lexer right?
+// i dont remember what i was thinking with this to do :)
 
 -> fix the new quote shit in lexer: (last to do notes before this shit show:)
 		!! amount of tokens need to check attached redirects and quotes
@@ -41,6 +42,7 @@ YES-> re-write parser to make it make sense, everything up to pipe is sorted
 
 		!! split needs to handle quotes
 		!! split needs to handle redirects attached
+
 -> add meta separatation in lexer
 -> check that quotes are whole: abd"bull"shit = is one token
 -> cry
