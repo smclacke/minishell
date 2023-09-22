@@ -6,11 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 13:40:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 16:53:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+
+// static t_data_type		*set_data_struct(t_parser *tokens)
+// {
+// 	t_data_type	*data;
+
+// 	data = init_data();
+// 	tokens->data_type = tokens->input;
+// 	data->input = tokens->data_type;
+// 	return (data);
+// }
+
 
 /**
  * @brief	checks whether the input token is a redirect

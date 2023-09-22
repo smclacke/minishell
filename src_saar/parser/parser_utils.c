@@ -6,11 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/17 19:13:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 16:25:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+t_data_type		*handle_pipe(t_data_type *data)
+{
+	data->meta = data->input;
+	return (data);
+}
+
+int	is_pipe(void *input)
+{
+	if (ft_strcmp(input, PIPE) == 0)
+		return (1);
+	return (0);
+}
 
 t_data_type	*init_data(void)
 {
@@ -33,8 +46,8 @@ char	*is_redirect(void *input)
 		return (MORE);
 	else if (ft_strcmp(input, LESS) == 0)
 		return (LESS);
-	else if (ft_strcmp(input, PIPE) == 0)
-		return (PIPE);
+	// else if (ft_strcmp(input, PIPE) == 0)
+	// 	return (PIPE);
 	return (NULL);
 }
 
