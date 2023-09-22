@@ -12,6 +12,10 @@
 
 #include "../../include/djoyke.h"
 
+/**
+ * @param lst  parser linked list
+ * @brief checks if there's an space in the next node.
+*/
 int	space_check(t_parser *lst)
 {
 	t_parser	*temp;
@@ -41,6 +45,10 @@ void	export_print(t_env *env)
 	}
 }
 
+/**
+ * @param str string from the t_parser node containing export argument
+ * @brief checks string if there's an equal sign present
+*/
 char	*check_for_equal_sign(char *str)
 {
 	char	*comp_str;
@@ -83,6 +91,14 @@ void	ft_export(t_parser *node, t_env **env)
 	env_lstadd_back(env, new_node);
 }
 
+/**
+ * @param e double pointer to environmet list
+ * @param node pointer to node in list given in the form of a string
+ * @param n_k string to contain new key value
+ * @param n_v string to contain new value value
+ * @brief reassigns lines in the environment when export arguments is
+ * 		  is an already excisting key.
+*/
 bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 {
 	t_env	*head;
