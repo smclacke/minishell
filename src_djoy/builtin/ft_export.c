@@ -40,7 +40,7 @@ void	export_print(t_env *env)
 	while (env != NULL)
 	{
 		if (env->has_value)
-			printf("declare -x %s=%s\n", env->key, env->value);
+			printf("declare -x %s=\"%s\"\n", env->key, env->value);
 		env = env->next;
 	}
 }
