@@ -59,22 +59,22 @@ here we gooo
 <infile cat | cat >out = works
 
 **EXAMPLE**
-echo hello | cat >infile
+echo hello | cat >outfile
 cat infile
  -> hello
-echo hello | >infile
+echo hello | >outfile
 cat infile
 
 **EXAMPLE**
-echo hello | cat >infile
+echo hello | cat >outfile
 cat infile
  -> hello
-echo hello | >infile
+echo hello | >outfile
 cat infile
 // nothing in infile anymore, but also doesn't echo hello since stdout is redirected and no cmd for infile...
 
 **EXAMPLE**
-echo hello | >infile
+echo hello | >outfile
 cat infile
 echo hello | <infile
 cat infile
