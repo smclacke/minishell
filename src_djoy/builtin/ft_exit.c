@@ -59,6 +59,7 @@ void	ft_exit(t_parser *lst)
 	int			status;
 
 	exit_status = 0;
+	status = 0;
 	if (!lst->next && lst->data_type->cmd)
 	{
 		write(STDOUT_FILENO, "exit\n", 5);

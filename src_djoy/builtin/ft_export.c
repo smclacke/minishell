@@ -37,26 +37,24 @@ void	export_print(t_env *env)
 	{
 		if (env->has_value)
 			printf("declare -x %s=%s\n", env->key, env->value);
-		else
-			printf("declare -x %s\n", env->key);
 		env = env->next;
 	}
+}
+
+char *check_for_equal_sign(char *str)
+{
+	char *comp_str;
+
+	comp_str = NULL;
+	if (str[ft_strlen(str) - 1] == '=')
+		comp_str = ft_substr(str, 0, (ft_strlen(str) - 1));
+	return(comp_str);
 }
 
 /**
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options
- * @todo do add:
- * key
- * key=
- *  !_-(_|\export key
- * lexer list: [export]
- * lexer list: [key]
- * [0]	 cmd = export	file = (null)	meta = (null)	strs = (null)
- * [1]	 cmd = (null)	file = (null)	meta = (null)	strs = key
- * expander: 		there's a builtin whoop
- * strchr: Undefined error: 0
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -89,17 +87,24 @@ bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 {
 	t_env	*head;
 	int		has_value;
+	char	*str;
+	char	*comp_str;
 
 	head = *e;
+	str = node->data_type->strs;
+	comp_str = check_for_equal_sign(str);
 	while (head)
 	{
-		if (mini_strcmp(node->data_type->strs, head->full) == 0)
+		if (mini_strcmp(comp_str, head->key) == 0)
 		{
-			head->full = node->data_type->strs;
-			has_value = get_key_value(node->data_type->strs, &n_k, &n_v);
-			head->value = n_v;
-			head->key = n_k;
-			return (true);
+			if (str[ft_strlen(str) == '='])
+			{
+				head->full = node->data_type->strs;
+				has_value = get_key_value(node->data_type->strs, &n_k, &n_v);
+				head->value = n_v;
+				head->key = n_k;
+				return (true);
+			}
 		}
 		head = head->next;
 	}
