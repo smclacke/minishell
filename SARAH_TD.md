@@ -29,7 +29,9 @@ here we gooo
 **21-09**
 
 -> triple check the FUN ARG SHIT makes sense and im handling everything properly
+
 -> re-write parser to make it make sense, everything up to pipe is sorted
+
 -> make it so that << >> are actually handled... yayy
 
 -> fix the new quote shit in lexer: (last to do notes before this shit show:)

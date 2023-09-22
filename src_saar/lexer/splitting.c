@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/20 20:12:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 14:02:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,27 +94,27 @@ static int	annoying_split(char *input)
 char	**parse_input(char *input)
 {
 	char	**array = NULL;
-	int		no_tokens = 0;
-	int		start = 0;
-	int		len = 0;
-	int		i = 0;
+	// int		no_tokens = 0;
+	// int		start = 0;
+	// int		len = 0;
+	// int		i = 0;
 
-	if (annoying_split(input))
-	{
-		no_tokens = amount_tokens(input);
-		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-		while (i < no_tokens)
-		{
-			start = start_token(input, (start + len));
-			len = len_token(input, start);
-			array[i] = (char *)malloc(sizeof(char) * (len + 1));
-			array[i] = split_tokens(&input[start], len);
-			i++;
-		}
-		array[no_tokens] = NULL;
-	}
-	else
-		array = ft_split(input, ' ');
+	// if (annoying_split(input))
+	// {
+	// 	no_tokens = amount_tokens(input);
+	// 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
+	// 	while (i < no_tokens)
+	// 	{
+	// 		start = start_token(input, (start + len));
+	// 		len = len_token(input, start);
+	// 		array[i] = (char *)malloc(sizeof(char) * (len + 1));
+	// 		array[i] = split_tokens(&input[start], len);
+	// 		i++;
+	// 	}
+	// 	array[no_tokens] = NULL;
+	// }
+	// else
+	array = ft_split(input, ' ');
 	if (!array)
 		return (NULL);
 	return (array);
