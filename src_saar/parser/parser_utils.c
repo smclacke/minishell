@@ -6,16 +6,16 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 17:40:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 18:23:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-t_data_type		*handle_pipe(t_data_type *data, int *flag_cmd)
+t_data_type		*handle_pipe(t_data_type *data, int *flag)
 {
 	data->meta = data->input;
-	*flag_cmd = 0;
+	*flag = 0;
 	return (data);
 }
 
