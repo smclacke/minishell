@@ -32,7 +32,7 @@ here we gooo
 
 -> re-write parser to make it make sense, everything up to pipe is sorted
 
--> make it so that << >> are actually handled... yayy
+-> make it so that << >> are actually handled... yayy // lexer right?
 
 -> fix the new quote shit in lexer: (last to do notes before this shit show:)
 		!! amount of tokens need to check attached redirects and quotes

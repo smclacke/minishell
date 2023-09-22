@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 13:52:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 16:53:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 17:34:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@
 // 	tokens->data_type = tokens->input;
 // 	data->input = tokens->data_type;
 // 	return (data);
+// }
+
+
+// static void	*give_data(t_parser *tokens, t_data_type *data)
+// {
+// 	tokens->data_type = tokens->input;
+// 	data->input = tokens->data_type;
+// 	return (data->input);
 // }
 
 

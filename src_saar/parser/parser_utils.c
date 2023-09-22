@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 16:25:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 17:35:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	is_pipe(void *input)
 	return (0);
 }
 
-t_data_type	*init_data(void)
+t_data_type	*init_data(t_parser *tokens)
 {
 	t_data_type		*data;
 
@@ -33,6 +33,8 @@ t_data_type	*init_data(void)
 	if (!data)
 		exit(EXIT_FAILURE);
 	ft_bzero(data, sizeof(t_data_type));
+	tokens->data_type = tokens->input;
+	data->input = tokens->data_type;
 	return (data);
 }
 
@@ -46,8 +48,9 @@ char	*is_redirect(void *input)
 		return (MORE);
 	else if (ft_strcmp(input, LESS) == 0)
 		return (LESS);
-	// else if (ft_strcmp(input, PIPE) == 0)
-	// 	return (PIPE);
+	// else if (ft_strcmp(input, PIPE) == 0) // don't know if i use this somewhere else
+	// 	return (PIPE); // but so far not causing a problem
+	// dont want to check pipe in parser so...
 	return (NULL);
 }
 
