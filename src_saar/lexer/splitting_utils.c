@@ -6,11 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 21:07:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/20 20:09:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+char	*which_quote(char *input)
+{
+	if (ft_strnstr(input, SINGLE_Q, 1))
+		return (SINGLE_Q);
+	else if (ft_strnstr(input, DOUBLE_Q, 1))
+		return (DOUBLE_Q);
+	return (0);
+}
 
 int	next_quote(char *input, char c)
 {
@@ -22,21 +31,24 @@ int	next_quote(char *input, char c)
 	return (i);
 }
 
-// can i combine is_meta and is_token and just use one of these?
-
 bool	is_meta(char *input)
 {
-	if (ft_strcmp(input, MOREMORE) == 0)
+	if (ft_strnstr(input, MOREMORE, 2))
 		return (true);
-	else if (ft_strcmp(input, LESSLESS) == 0)
+	else if (ft_strnstr(input, LESSLESS, 2))
 		return (true);
-	else if (ft_strcmp(input, MORE) == 0)
+	else if (ft_strnstr(input, MORE, 1))
 		return (true);
-	else if (ft_strcmp(input, LESS) == 0)
+	else if (ft_strnstr(input, LESS, 1))
 		return (true);
-	else if (ft_strcmp(input, PIPE) == 0)
+	else if (ft_strnstr(input, PIPE, 1))
 		return (true);
 	return (false);
+}
+
+int	ft_ismeta(int c)
+{
+	return (c == '|' || c == '<' || c == '>');
 }
 
 int	is_token(char *input)

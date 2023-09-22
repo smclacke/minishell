@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/19 02:10:59 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/09/22 19:00:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_expand(t_parser *lst, t_env **env)
 	// printf("----------------\n");
 	if (check_for_builtin(lst))
 	{
-		// printf("expander: 		there's a builtin whoop\n");
+		printf("expander: 		there's a builtin whoop\n");
 		do_builtin(lst, env);
 	}
 	/*

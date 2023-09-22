@@ -1,18 +1,109 @@
-**SARAH, SHIT TO DO AFTER MICRO SHELLY, DONT FORGETTTTTTTTTT, and during...**
+---------------------------------------------------------------------------------
+
+mehmehmehmeh
+     __
+ .--()°'.'
+'|, . ,'
+ !_-(_|\grep >
+input: grep >
+this is fucked
+this is fucked
+this is fucked
+this is fucked
+
+**SARAH, SHIT TO DO**
+
+HELLO WHAT DE FOOK
 
 Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
-**CURRENT MESSAGES? UPDATES**
+**THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 
-mehmehmehmeh
+my brain is fried and i hate this project :)
+
+Holy mother of fuckidy fuck
+here we gooo
+
+**21-09**
+
+-> triple check the FUN ARG SHIT makes sense and im handling everything properly
+
+-> re-write parser to make it make sense, everything up to pipe is sorted
+
+-> make it so that << >> are actually handled... yayy // lexer right?
+
+-> fix the new quote shit in lexer: (last to do notes before this shit show:)
+		!! amount of tokens need to check attached redirects and quotes
+		changing this function, need to check quote funcs cause segfault :)
+		then do a meta check and separate those
+
+		!! split needs to handle quotes
+		!! split needs to handle redirects attached
+-> add meta separatation in lexer
+-> check that quotes are whole: abd"bull"shit = is one token
+-> cry
+-> find problems
+-> cry some more
+
+---------------------------------------------------------------------------------
+
+**ALL THE FUN ARG SHIT** ja? nee? ja? nee? ik weet het niet meeeeer
+
+**EXAMPLE**
+<out echo hello 
+ -> hello
+
+**EXAMPLE**
+<infile cat | cat >out = works
+
+**EXAMPLE**
+echo hello | cat >outfile
+cat infile
+ -> hello
+echo hello | >outfile
+cat infile
+
+**EXAMPLE**
+echo hello | cat >outfile
+cat infile
+ -> hello
+echo hello | >outfile
+cat infile
+// nothing in infile anymore, but also doesn't echo hello since stdout is redirected and no cmd for infile...
+
+**EXAMPLE**
+echo hello | >outfile
+cat infile
+echo hello | <infile
+cat infile
+echo hello | cat <infile
+cat infile
+cat Makefile | cat <infile
+cat infile
+
+// put the makefile into the infile, then run cat Makefile | <infile, Makefile is still in the infile
+
+-> cmd can only be:
+	first arg, after redirect or pipe... more? otherwise str
+-> first arg can be cmd, or infile or here_doc
+-> atfer pipe, can be cmd in/out file (but pipe wont actually do anything without a cmd after it, other than just making the out file)
+
+**EXAMPLE**
+echo hello <<something >out
+> what
+> is
+> happening
+> something
+cat out
+ -> hello
 
 
+---------------------------------------------------------------------------------
 
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
-github_pat_11A3OH7SI0nnUxYziMhWKF_
-wmbE5nZ7eBtXam3x8hJG93BnEesxMZ2ZPmJEmNJZGmdEQHFRVY5eKzmRQIY
 ---------------------------------------------------------------------------------
 
 IS QUITE LONGGGGGGGGGGGGGGGGG :))))))
@@ -52,14 +143,13 @@ is meta: 1
 &input: <
 is meta: 2
 
-
 ->>>>>>>>> SEPARATE FILES from redirects and attachments to pipes (lexer)
 ->>>>>>>>> SEPARATE QUOTES... need to talk to someone about quote handling cause its too much
 ->>>>>>>>> split the rest on spaces
 
 PARSER
 ->>>>>>>>> what is the parser missing??
-->>>>>>>>> should dollar just be a string or no? YES
+WHY ARENT THERE MORE TO DOOOOOOOOS....
 
 OTHER
 ->>>>>>>>> errors ....
@@ -72,6 +162,31 @@ OTHER
 I think abc$abc, some<<something are both for the expander and ill leave them intact in the tokens
 
 
+need to rethink a bit.... 
+
+cmd or redirect...
+as first or after pipe....
+but this is ok, everything is ok
+
+bash-3.2$ < out cat | cat > out2 -e
+bash-3.2$ cat out2
+Makefile$
+README.md$
+SARAH+tokens.md$
+SARAH_TD.md$
+heredoc_notes.md$
+include$
+micro_shell$
+mini_src$
+minishell$
+obj$
+obj_djoy$
+obj_saar$
+out$
+sarah$
+src_djoy$
+src_saar$
+
 ---------------------------------------------------------------------------------
 **TALK TO DJOYKE ABOUT THIS**
 
@@ -79,6 +194,7 @@ I think abc$abc, some<<something are both for the expander and ill leave them in
 // i could check the exact behaviour of this and parse it to remove the unnecessary bits
 // STILL NEED TO FIGURE OUT WHAT IM DOING WITH THIS, 
 // PARSER REMOVES OR !!EXPANDER TAKES WHATS NECESSARY?!!
+// JA WEETJE JE, DOE MAAR EVEN EXPADNER WANT ANDERS HEEFT HIJ BEST WEING OM TE DOEN
 
 Gutentag Fräulein Shelly, wie geht's?echo abc$abc
 lexer: 		~: echo
@@ -87,10 +203,72 @@ first->cmd: echo
 second->str: abc$abc 
 
 
----------------------------------------------------------------------------------
+**TWO**
+void	ft_echo(t_parser *lst)
+{
+	int	i;
+	int	is_flag;
 
 
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
+	i = 0;
+	is_flag = 0;
+	if (!lst->data_type->cmd)
+		mini_error("lst->cmd", errno);
+	lst = lst->next;
+	while (lst)
+	{
+		if (ft_strcmp(lst->data_type->strs[i], "-n") == 0)
+		{
+			++is_flag;
+			i++;
+		}
+		else
+		{
+			printf("%s ", lst->data_type->strs);
+			i++;
+		}
+		lst = lst->next;
+	}
+	if (is_flag != 0)
+		printf("\n");
+}
+
+void	ft_echo(t_parser *lst)
+{
+	int	i;
+	int	is_flag;
+
+
+	i = 0;
+	is_flag = 0;
+	if (!lst->data_type->cmd)
+		mini_error("lst->cmd", errno);
+	lst = lst->next;
+	while (lst)
+	{
+		if (lst->data_type->strs)
+		{
+			if (ft_strcmp(lst->data_type->strs, "-n") == 0)
+			{
+				++is_flag;
+				i++;
+			}
+			else
+			{
+				printf("%s ", lst->data_type->strs);
+				i++;
+			}
+		}
+		lst = lst->next;
+	}
+	if (is_flag != 0)
+		printf("\n");
+}
+
+Echo was segfaulting, I edited the code a bit so that we look through the list for the strs
+echo << some, then we need to handle the redirect correctly otherwise we will just skip it...
+
+
 
 ---------------------------------------------------------------------------------
 **NEW_STYLEEE YEAHHHHH**
@@ -153,5 +331,4 @@ expander: 		there's a builtin whoop
 ........................
 
 ---------------------------------------------------------------------------------
-
 

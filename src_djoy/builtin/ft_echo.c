@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/20 15:13:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/22 19:01:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_echo(t_parser *lst)
 {
 	int	i;
 	int	is_flag;
+
 
 	i = 0;
 	is_flag = 0;

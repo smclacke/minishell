@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/19 02:09:36 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/09/22 19:02:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,43 +21,35 @@
 // {
 // 	int	i = 0;
 
-	if (is_token(&input[i]) == 2)
-	{
-		printf("&input: %s\n", &input[i]);
-		printf("is meta: %i\n", is_token(&input[i]));
-		i++;
-		return (is_token(&input[i]));
-	}
-	else if (is_token(&input[i]) == 1)
-		return (is_token(&input[i]));
-	while (input[i] && !ft_isspace(input[i])
-			&& !is_token(&input[i]))
-	{
-		if (ft_isquote(input[i]))
-		{
-			i++;
-			i += next_quote(&input[i], input[i]);
-			// printf("LT | index = %i\n", i);
-			return (i);
-		}
-		printf("this is fucked\n");
-		i++;
-	}
-	return (i);
+	while (input[len] && ft_isspace(input[len]))
+		len++;
+	j = len;
+	while (input[len] && !ft_isspace(input[len]))
+		len++;
+	len = len - j;
+	return (len);	
 }
 
+static int	start_token(char *input, int old_start)
+{
+	int j = 0;
 
+	while (input[old_start] && ft_isspace(input[old_start]))
+		old_start++;
+	j = old_start;
+	while (input[old_start] && !ft_isspace(input[old_start]))
+		old_start++;
+	return (j);	
+}
 
-static char	*give_tokens(char *input)
+static char	*split_tokens(char *input, int len)
 {
 	char	*token;
-	int		token_len;
 
-	token_len = len_token(input);
-	token = ft_substr(input, 0, token_len);
+	token = ft_substr(input, 0, len);
 	if (!token)
 		return (NULL);
-	input += token_len;
+	input += len;
 	return (token);
 }
 
@@ -66,12 +58,19 @@ static char	*give_tokens(char *input)
 // 	int	i = 0;
 // 	int	count = 0;
 
-	// printf("AT | INPUT = %s\n", input);
-	while (input[i])
+	while (input[i] && !ft_isquote(input[i]))
 	{
-		i += len_token(&input[i]);
+		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
+			i++;
 		count++;
-		// printf("AT | count = %i\n", count);
+		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
+			i++;
+	}
+	if (ft_isquote(input[i]))
+	{
+		printf("is it here?\n");
+		i += next_quote(input, *which_quote(input));
+		count++;
 	}
 	return (count);
 }
@@ -88,6 +87,18 @@ static char	*give_tokens(char *input)
 // 	}
 // 	return (false);
 // }
+static int	annoying_split(char *input)
+{
+	int	i = 0;
+
+	while (input[i])
+	{
+		if (ft_isquote(input[i]) || ft_ismeta(input[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
@@ -101,24 +112,26 @@ char	**parse_input(char *input)
 {
 	char	**array = NULL;
 	// int		no_tokens = 0;
+	// int		start = 0;
+	// int		len = 0;
 	// int		i = 0;
 
 	// if (annoying_split(input))
 	// {
-	// 	printf("input: %s\n", input);
 	// 	no_tokens = amount_tokens(input);
-	// 	printf("amount of toks: %i", no_tokens);
-	// 	array = (char **)malloc(sizeof(char *) * no_tokens + 1);
+	// 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 	// 	while (i < no_tokens)
 	// 	{
-	// 		// printf("i = %i | no_tokens = %i\n", i, no_tokens);
-	// 		// array[i] = give_tokens(input);
-	// 		printf("PI | array =  %s\n", array[i]);
+	// 		start = start_token(input, (start + len));
+	// 		len = len_token(input, start);
+	// 		array[i] = (char *)malloc(sizeof(char) * (len + 1));
+	// 		array[i] = split_tokens(&input[start], len);
 	// 		i++;
 	// 	}
+	// 	array[no_tokens] = NULL;
 	// }
 	// else
-		array = ft_split(input, ' ');;
+	array = ft_split(input, ' ');
 	if (!array)
 		return (NULL);
 	return (array);
