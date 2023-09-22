@@ -6,15 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 18:32:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 20:02:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static t_data_type		*handle_vars(t_data_type *data, int *flag)
+static t_data_type	*handle_vars(t_data_type *data, int *flag)
 {
-	if (*flag == 0)
+	if (!*flag)
 	{
 		if (is_redirect(data->input))
 			data->meta = data->input;
@@ -24,7 +24,7 @@ static t_data_type		*handle_vars(t_data_type *data, int *flag)
 			*flag = 1;
 		}
 	}
-	else if (*flag != 0)
+	else if (*flag)
 	{	
 		if (is_redirect(data->input))
 			data->meta = data->input;
@@ -34,7 +34,13 @@ static t_data_type		*handle_vars(t_data_type *data, int *flag)
 	return (data);
 }
 
-static t_data_type		*handle_next(t_data_type *data, char *type)
+/**
+ * @brief	
+ * @param	data
+ * @param	type
+ * @return	
+*/
+static t_data_type	*handle_next(t_data_type *data, char *type)
 {
 	if (is_meta(data->input))
 		data->meta = data->input;
@@ -45,7 +51,15 @@ static t_data_type		*handle_next(t_data_type *data, char *type)
 	return (data);
 }
 
-static t_data_type		*handle_all(t_parser *tokens, t_data_type *data, int *flag)
+/**
+ * @brief	
+ * @param	tokens
+ * @param	data
+ * @param	flag
+ * @return	tokens->data_type
+ * 
+*/
+static t_data_type	*handle_all(t_parser *tokens, t_data_type *data, int *flag)
 {
 	if (data && !is_pipe(data->input))
 		tokens->data_type = handle_vars(data, flag);
@@ -64,6 +78,11 @@ static t_data_type		*handle_all(t_parser *tokens, t_data_type *data, int *flag)
  * 			i.e. cmd str | < file CMD str str...
  * 			Flag is used to find the cmd from the strs, first str without
  * 			redirect is cmd, if pipe, this is reset.
+ *  		- if < or >, next is in or out file
+ *			- if << here_doc, next is limiter string
+ *			- if >> concat, so outfile follows
+ *			- if first encountered cmd, then cmd, all others strs
+ *			- if pipe, cmd_flag reset to find the new cmd, rest works the same
  * @param	tokens t_tokens passed from the lexer to be sorted by the parser()
  * @return	tokens: all the tokens given by the lexer have been
  * 			sorted into the parser->data_type struct making
@@ -94,11 +113,4 @@ t_parser	*parser(t_parser *tokens)
 	}
 	return (tokens);
 }
-
-// if < or >, next is in or out, nothing else matters
-// if << here_doc 
-// if >> concat, so outfile follows
-// if first encountered cmd, cmd, all others strs
-// everything else is str
-// if pipe, cmd_flag reset to find the new cmd, rest works the same
 

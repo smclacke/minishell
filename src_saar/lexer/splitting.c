@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 19:02:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 20:03:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,14 @@
 // static int	len_token(char *input)
 // {
 // 	int	i = 0;
-
-	while (input[len] && ft_isspace(input[len]))
-		len++;
-	j = len;
-	while (input[len] && !ft_isspace(input[len]))
-		len++;
-	len = len - j;
-	return (len);	
-}
+// 	while (input[len] && ft_isspace(input[len]))
+// 		len++;
+// 	j = len;
+// 	while (input[len] && !ft_isspace(input[len]))
+// 		len++;
+// 	len = len - j;
+// 	return (len);	
+// }
 
 static int	start_token(char *input, int old_start)
 {
@@ -57,23 +56,22 @@ static char	*split_tokens(char *input, int len)
 // {
 // 	int	i = 0;
 // 	int	count = 0;
-
-	while (input[i] && !ft_isquote(input[i]))
-	{
-		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
-			i++;
-		count++;
-		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
-			i++;
-	}
-	if (ft_isquote(input[i]))
-	{
-		printf("is it here?\n");
-		i += next_quote(input, *which_quote(input));
-		count++;
-	}
-	return (count);
-}
+// 	while (input[i] && !ft_isquote(input[i]))
+// 	{
+// 		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
+// 			i++;
+// 		count++;
+// 		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
+// 			i++;
+// 	}
+// 	if (ft_isquote(input[i]))
+// 	{
+// 		printf("is it here?\n");
+// 		i += next_quote(input, *which_quote(input));
+// 		count++;
+// 	}
+// 	return (count);
+// }
 
 // static bool	annoying_split(char *input)
 // {
@@ -87,18 +85,19 @@ static char	*split_tokens(char *input, int len)
 // 	}
 // 	return (false);
 // }
-static int	annoying_split(char *input)
-{
-	int	i = 0;
 
-	while (input[i])
-	{
-		if (ft_isquote(input[i]) || ft_ismeta(input[i]))
-			return (1);
-		i++;
-	}
-	return (0);
-}
+// static int	annoying_split(char *input)
+// {
+// 	int	i = 0;
+
+// 	while (input[i])
+// 	{
+// 		if (ft_isquote(input[i]) || ft_ismeta(input[i]))
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 17:40:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 19:21:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int					is_pipe(void *input);
 t_data_type			*init_data(t_parser *tokens);
 char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);
-
-
 
 
 //---------------DJOYKE-----------//
