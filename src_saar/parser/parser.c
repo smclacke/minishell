@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 17:41:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 18:16:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,39 +45,46 @@ static t_data_type		*handle_next(t_data_type *data, char *type)
 	return (data);
 }
 
+static t_data_type		*handle_all(t_parser *tokens, t_data_type *data)
+{
+	int	flag_cmd;
+
+	flag_cmd = 0;
+	if (data && !is_pipe(data->input))
+		tokens->data_type = handle_vars(data, &flag_cmd);
+	else if (data && is_pipe(data->input))
+		tokens->data_type = handle_pipe(data, &flag_cmd);
+	return (tokens->data_type);
+}
+
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser	*token_list;
 	t_data_type	*data;
-	int			flag_cmd = 0;
-	char		*type = NULL;
+	char		*type;
 
+	type = NULL;
 	token_list = tokens;
 	while (token_list)
 	{
 		data = init_data(token_list);
 		type = is_redirect(token_list->input);
-		if (data && !is_pipe(data->input))
+		token_list->data_type = handle_all(token_list, data);
+		if (type && token_list->next)
 		{
-			token_list->data_type = handle_vars(data, &flag_cmd);
-			if (type && token_list->next)
-			{
-				token_list = token_list->next;
-				data = init_data(token_list);
-				token_list->data_type = handle_next(data, type);
-			}
+			token_list = token_list->next;
+			data = init_data(token_list);
+			token_list->data_type = handle_next(data, type);
 		}
-		if (data && is_pipe(data->input))
-			token_list->data_type = handle_pipe(data, &flag_cmd);
 		token_list = token_list->next;
 	}
 	return (tokens);
 }
 
 // if < or >, next is in or out, nothing else matters
-// if str after < or >, in and out files (with nothing attatched to meta)
 // if << here_doc 
-// if >> concat out, if str after >>, out file
-// if first encountered cmd, cmd
+// if >> concat, so outfile follows
+// if first encountered cmd, cmd, all others strs
 // everything else is str
+// if pipe, cmd_flag reset to find the new cmd, rest works the same
 
