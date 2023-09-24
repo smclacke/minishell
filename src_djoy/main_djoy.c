@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/21 18:00:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/24 21:45:11 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,6 @@ int	main(int argc, char **argv, char **envp)
 ◦ unset with no options
 ◦ env with no options or arguments
 ◦ exit with no options (closes terminal?, closes bash)
-
-
-LEARN YOUR POINTER SHIT DJOYKE!!!! OOOOOOOH MYYYYYYGOFFDDD
 
 
 */
