@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 15:17:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 15:47:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,61 @@
 	// inc. something"thing"more = one token
 	// ignore dollas
 
-static int	len_token(char *input, int len)
+// static int	len_token(char *input, int len)
+// {
+// 	int	j = 0;
+// 	while (input[len] && ft_isspace(input[len]))
+// 		len++;
+// 	j = len;
+// 	while (input[len] && !ft_isspace(input[len]))
+// 		len++;
+// 	len = len - j;
+// 	return (len);	
+// }
+
+// static int	start_token(char *input, int old_start)
+// {
+// 	int j = 0;
+
+// 	while (input[old_start] && ft_isspace(input[old_start]))
+// 		old_start++;
+// 	j = old_start;
+// 	while (input[old_start] && !ft_isspace(input[old_start]))
+// 		old_start++;
+// 	return (j);	
+// }
+
+static int	len_token(char *input, int len, char *quote_type)
 {
 	int	j = 0;
+
 	while (input[len] && ft_isspace(input[len]))
 		len++;
 	j = len;
 	while (input[len] && !ft_isspace(input[len]))
+	{
+		if (ft_isquote(input[len]))
+			len += next_quote(&input[len], *quote_type);
 		len++;
+	}
 	len = len - j;
 	return (len);	
 }
 
-static int	start_token(char *input, int old_start)
+static int	start_token(char *input, int old_start, char *quote_type)
 {
 	int j = 0;
 
+	printf("quoteeee = %s\n", quote_type);
 	while (input[old_start] && ft_isspace(input[old_start]))
 		old_start++;
 	j = old_start;
 	while (input[old_start] && !ft_isspace(input[old_start]))
+	{
+		if (ft_isquote(input[old_start]))
+			old_start += next_quote(&input[old_start], *quote_type);
 		old_start++;
+	}
 	return (j);
 }
 
@@ -54,11 +88,10 @@ static char	*split_tokens(char *input, int len)
 	return (token);
 }
 
-static int	amount_tokens(char *input)
+static int	amount_tokens(char *input, char *quote_type)
 {
 	int		i = 0;
 	int		count = 0;
-	char	*quote_type = NULL;
 
 	while (input[i])
 	{
@@ -71,6 +104,7 @@ static int	amount_tokens(char *input)
 			{
 				quote_type = which_quote(&input[i]);
 				i += next_quote(&input[i], *quote_type);
+				printf("quote wtf = %s\n", quote_type);
 			}
 			i++;
 		}
@@ -106,18 +140,21 @@ char	**parse_input(char *input)
 	int		start = 0;
 	int		len = 0;
 	int		i = 0;
+	char	*quote_type = NULL;
 
 	if (annoying_split(input))
 	{
-		no_tokens = amount_tokens(input);
+		quote_type = which_quote(input);
+		printf("quote_type = %s\n", quote_type);
+		no_tokens = amount_tokens(input, quote_type);
 		printf("no_tokens: %i\n", no_tokens);
 		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 		if (!array)
 			return (NULL);
 		while (i < no_tokens)
 		{
-			start = start_token(input, (start + len));
-			len = len_token(input, start);
+			start = start_token(input, (start + len), quote_type);
+			len = len_token(input, start, quote_type);
 			array[i] = (char *)malloc(sizeof(char) * (len + 1));
 			if (!array)
 				return (NULL);

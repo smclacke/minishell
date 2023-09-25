@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 20:56:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 15:44:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,22 @@
  * @param	cmd: first arg from commandline or arg after a pipe
  * @param	meta: pipe, more, less, moremore, lessless. Dollar is excluded and handled as a string
  * @param	file: in and out files, args that come after more, less and moremore
- * @param	str: all other input. command arguments, typos...
+ * @param	strs: all other input. command arguments, typos...
 */
-typedef struct s_data
+typedef struct s_data_type
 {
 	void				*input;
 	char				*cmd;
 	char				*meta;
 	char				*file;
-	char				*str;
-	struct s_data		*next;
-}				t_data;
+	char				*strs;
+	struct s_data_type	*next;
+}				t_data_type;
 
 typedef struct s_parser
 {
 	void				*input;
-	struct s_data		*data;
+	struct s_data_type	*data_type;
 	struct s_parser		*next;
 }				t_parser;
 
@@ -95,11 +95,13 @@ int					is_token(char *input);
 t_parser			*parser(t_parser *tokens);
 
 //---- parser_utils.c ----//
-t_data				*handle_pipe(t_data *data, int *flag_cmd);
+t_data_type			*handle_pipe(t_data_type *data, int *flag_cmd);
 int					is_pipe(void *input);
-t_data				*init_data(t_parser *tokens);
+t_data_type			*init_data(t_parser *tokens);
 char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);
+
+
 
 
 //---------------DJOYKE-----------//
