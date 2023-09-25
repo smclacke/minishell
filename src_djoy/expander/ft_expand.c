@@ -78,9 +78,10 @@ dreijans@f0r2s14:~/Documents/rank3$
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
+	expand_dollar(node, env)//going to be here for now
 	while (lst)
 	{
-		if (check_for_meta(lst))
+		if (check_for_meta(lst, env))
 		{
 			printf("expander:		there's a meta whoop\n");
 			printf("\n----------------------------------\n");
@@ -93,6 +94,26 @@ void	ft_expand(t_parser *lst, t_env **env)
 		}
 		lst = lst->next;
 	}
+}
+
+void	expand_dollar(t_parser *node, t_env **env)
+{
+	while (ft_strnnode->data->str[i])
+	{
+		if ()
+	}
+}
+
+
+/**
+ * @param node linked list
+ * @param env string or char to compare with
+ * @brief checks arguments to find meta_chars: 
+ * $, >>, <<, >, <, |
+ * @todo 
+ * 1) needs to be passed to actual process,
+ * 2) MAYBE MAKE IT A BOOL?
+ * 3) removing files int unlink(const char *pathname);
 	/*
 	// while (lst)
 	// {
@@ -108,23 +129,12 @@ void	ft_expand(t_parser *lst, t_env **env)
 	// 				}
 	// 	}
 	*/
-}
-
-/**
- * @param node linked list
- * @param env string or char to compare with
- * @brief checks arguments to find meta_chars: 
- * $, >>, <<, >, <, |
- * @todo 
- * 1) needs to be passed to actual process,
- * 2) MAYBE MAKE IT A BOOL?
- * 3) removing files int unlink(const char *pathname);
 */
 bool	check_for_meta(t_parser *node)
 {
 	if (node->data == NULL)
 		return (false);
-	if (mini_strcmp(node->data->cmd, "$") == 0)
+	if (mini_strcmp(node->data->str, "$") == 0)
 	{
 		printf("expander:		dolllaaaah\n");
 		return (true);
