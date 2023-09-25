@@ -19,21 +19,19 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
+**25/09:**
+
+-> get this splitting done... simplify.. look for spaces, look for quotes, look for metas...
+
+-> protecting all mallocs in parse_input(), like four times???
+
+---------------------------------------------------------------------------------
 **THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 
 my brain is fried and i hate this project :)
 
 Holy mother of fuckidy fuck
 here we gooo
-
-**21-09**
-
-YES-> triple check the FUN ARG SHIT makes sense and im handling everything properly
-
-YES-> re-write parser to make it make sense, everything up to pipe is sorted
-
--> make it so that << >> are actually handled... yayy // lexer right?
-// i dont remember what i was thinking with this to do :)
 
 -> fix the new quote shit in lexer: (last to do notes before this shit show:)
 		!! amount of tokens need to check attached redirects and quotes

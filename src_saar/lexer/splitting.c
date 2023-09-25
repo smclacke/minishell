@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 20:58:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 13:31:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,20 @@ static char	*split_tokens(char *input, int len)
 
 static int	amount_tokens(char *input)
 {
-	int	i = 0;
-	int	count = 0;
+	int		i = 0;
+	int		count = 0;
+	char	*quote_type = NULL;
 
 	while (input[i])
 	{
 		while (input[i] && ft_isspace(input[i]))
 			i++;
+		if (ft_isquote(input[i]))
+		{
+			quote_type = which_quote(&input[i]);
+			i += next_quote(&input[i], *quote_type);
+			printf("i = %i\n", i);
+		}	
 		count++;
 		while (input[i] && !ft_isspace(input[i]))
 			i++;
@@ -89,19 +96,6 @@ static int	amount_tokens(char *input)
 // 		count++;
 // 	}
 // 	return (count);
-// }
-
-// static bool	annoying_split(char *input)
-// {
-// 	int	i = 0;
-	
-// 	while (input[i])
-// 	{
-// 		if (ft_isquote(input[i]) || is_meta(&input[i]))
-// 			return (true);
-// 		i++;
-// 	}
-// 	return (false);
 // }
 
 static int	annoying_split(char *input)
@@ -136,13 +130,20 @@ char	**parse_input(char *input)
 	if (annoying_split(input))
 	{
 		no_tokens = amount_tokens(input);
+		printf("no_tokens: %i\n", no_tokens);
 		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
+		if (!array)
+			return (NULL);
 		while (i < no_tokens)
 		{
 			start = start_token(input, (start + len));
 			len = len_token(input, start);
 			array[i] = (char *)malloc(sizeof(char) * (len + 1));
+			if (!array)
+				return (NULL);
 			array[i] = split_tokens(&input[start], len);
+			if (!array)
+				return (NULL);
 			i++;
 		}
 		array[no_tokens] = NULL;
