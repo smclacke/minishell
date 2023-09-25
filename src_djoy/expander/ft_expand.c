@@ -69,12 +69,6 @@
  * does this mean that if a process ended correctly 
  * it needs to return 0? as in EXIT_SUCCESS?
  * if >>$USER no expanding user it's a delimiter now
- dreijans@f0r2s14:~/Documents/rank3$ echo $
-$
-dreijans@f0r2s14:~/Documents/rank3$ echo $USER
-dreijans
-dreijans@f0r2s14:~/Documents/rank3$ 
-
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
@@ -96,9 +90,39 @@ void	ft_expand(t_parser *lst, t_env **env)
 	}
 }
 
+/**
+ * @param node parser linked list
+ * @param env environmet linked list
+ * @brief checks for a $ sign in the node
+ * @todo
+ * echo $
+ * $
+ * -----------------
+ * echo $USER
+ * dreijans
+ * -----------------
+ * echo abc$USER
+ * abcdreijans
+* -----------------
+ * echo abc$i
+ * abc
+ * -----------------
+ * echo abc$
+ * abc$
+ * -----------------
+ * echo a$bc
+ * a
+ * -----------------
+ * echo $ USER
+ * $ USER
+ * 1) if whats after $ can be linked to env print the value equivalent
+ * 2) if there's something before the $ echo will print that
+ * 3) if it's just a dollar echo will print it and the string that
+ * comes after it.
+*/
 void	expand_dollar(t_parser *node, t_env **env)
 {
-	while (ft_strnnode->data->str[i])
+	while (ft_strnstr(node->data->str, "$", )
 	{
 		if ()
 	}
@@ -173,8 +197,6 @@ bool	check_for_meta(t_parser *node)
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins: 
  * echo, cd, pwd, export, unset, env and exit
- * @todo everything needs to be in either str or cmd not 2 diff
- * thing!!
 */
 bool	check_for_builtin(t_parser *node)
 {
