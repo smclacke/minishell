@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 13:31:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 14:17:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,33 @@ static int	amount_tokens(char *input)
 
 	while (input[i])
 	{
-		while (input[i] && ft_isspace(input[i]))
-			i++;
 		if (ft_isquote(input[i]))
 		{
 			quote_type = which_quote(&input[i]);
 			i += next_quote(&input[i], *quote_type);
-			printf("i = %i\n", i);
-		}	
-		count++;
-		while (input[i] && !ft_isspace(input[i]))
-			i++;
+			while (input[i] && !ft_isspace(input[i]))
+			{
+				printf("input = %c\n", input[i]);
+				i++;
+			}
+			count++;
+		}
+		while (input[i] && !ft_isquote(input[i]))
+		{
+			while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
+				i++;
+			// if (ft_isquote(input[i]))
+			// {
+			// 	quote_type = which_quote(&input[i]);
+			// 	printf("quote_type: %s\n", quote_type);
+			// 	i += next_quote(&input[i], *quote_type);
+			// 	printf("i = %i\n", i);
+			// 	i++;
+			// }	
+			count++;
+			while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
+				i++;
+		}
 	}
 	return (count);
 }
