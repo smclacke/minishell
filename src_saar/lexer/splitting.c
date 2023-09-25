@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 14:22:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 15:17:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,57 +62,21 @@ static int	amount_tokens(char *input)
 
 	while (input[i])
 	{
-		if (ft_isquote(input[i]))
+		while (input[i] && ft_isspace(input[i]))
+			i++;
+		count++;
+		while (input[i] && !ft_isspace(input[i]))
 		{
-			quote_type = which_quote(&input[i]);
-			i += next_quote(&input[i], *quote_type);
-			while (input[i] && !ft_isspace(input[i]))
+			if (ft_isquote(input[i]))
 			{
-				printf("input = %c\n", input[i]);
-				i++;
+				quote_type = which_quote(&input[i]);
+				i += next_quote(&input[i], *quote_type);
 			}
-			count++;
-		}
-		while (input[i] && !ft_isquote(input[i]))
-		{
-			while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
-				i++;
-			// if (ft_isquote(input[i]))
-			// {
-			// 	quote_type = which_quote(&input[i]);
-			// 	printf("quote_type: %s\n", quote_type);
-			// 	i += next_quote(&input[i], *quote_type);
-			// 	printf("i = %i\n", i);
-			// 	i++;
-			// }	
-			count++;
-			while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
-				i++;
+			i++;
 		}
 	}
 	return (count);
 }
-
-// static int	amount_tokens(char *input)
-// {
-// 	int	i = 0;
-// 	int	count = 0;
-// 	while (input[i] && !ft_isquote(input[i]))
-// 	{
-// 		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
-// 			i++;
-// 		count++;
-// 		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
-// 			i++;
-// 	}
-// 	if (ft_isquote(input[i]))
-// 	{
-// 		printf("is it here?\n");
-// 		i += next_quote(input, *which_quote(input));
-// 		count++;
-// 	}
-// 	return (count);
-// }
 
 static int	annoying_split(char *input)
 {
