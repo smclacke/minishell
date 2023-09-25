@@ -39,6 +39,11 @@ void	ft_echo(t_parser *lst)
 	is_flag = 0;
 	if (!lst->data_type->cmd)
 		mini_error("lst->cmd", errno);
+	if (!lst->next)
+	{
+		printf("\n");
+		return ;
+	}
 	lst = lst->next;
 	if (!lst->data_type->strs)
 	{

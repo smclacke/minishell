@@ -72,15 +72,20 @@
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
-	// if (check_for_meta(lst))
-	// 	printf("expander:		there's a meta whoop\n");
-	// printf("----------------\n");
-	// print_parser_list(lst);
-	// printf("----------------\n");
-	if (check_for_builtin(lst))
+	while (lst)
 	{
-		printf("expander: 		there's a builtin whoop\n");
-		do_builtin(lst, env);
+		if (check_for_meta(lst))
+		{
+			printf("expander:		there's a meta whoop\n");
+			printf("\n----------------------------------\n");
+		}
+		if (check_for_builtin(lst))
+		{
+			printf("expander: 		there's a builtin whoop\n");
+			printf("\n----------------------------------\n");
+			do_builtin(lst, env);
+		}
+		lst = lst->next;
 	}
 	/*
 	// while (lst)
@@ -109,43 +114,43 @@ void	ft_expand(t_parser *lst, t_env **env)
  * 2) MAYBE MAKE IT A BOOL?
  * 3) removing files int unlink(const char *pathname);
 */
-// bool	check_for_meta(t_parser *node)
-// {
-// 	if (node->redirect_list == NULL)
-// 		return (false);
-// 	if (mini_strcmp(node->redirect_list, "$") == 0)
-// 	{
-// 		printf("expander:		dolllaaaah\n");
-// 		return (true);
-// 	}
-// 	else if (mini_strcmp(node->redirect_list, ">>") == 0)
-// 	{
-// 		printf("expander:		Output Append\n");
-// 		return (true);
-// 	}
-// 	else if (mini_strcmp(node->redirect_list, "<<") == 0)
-// 	{
-// 		printf("expander:		here doc\n");
-// 		return (true);
-// 	}
-// 	else if (mini_strcmp(node->redirect_list, ">") == 0)
-// 	{
-// 		printf("expander:		output Redirect\n");
-// 		return (true);
-// 	}
-// 	else if (mini_strcmp(node->redirect_list, "<") == 0)
-// 	{
-// 		printf("expander:		Input Redirect\n");
-// 		return (true);
-// 	}
-// 	else if (mini_strcmp(node->redirect_list, "|") == 0)
-// 	{
-// 		printf("expander:		pipe\n");
-// 		return (true);
-// 	}
-// 	else
-// 		return (false);
-// }
+bool	check_for_meta(t_parser *node)
+{
+	if (node->data_type == NULL)
+		return (false);
+	if (mini_strcmp(node->data_type->cmd, "$") == 0)
+	{
+		printf("expander:		dolllaaaah\n");
+		return (true);
+	}
+	else if (mini_strcmp(node->data_type->meta, ">>") == 0)
+	{
+		printf("expander:		Output Append\n");
+		return (true);
+	}
+	else if (mini_strcmp(node->data_type->meta, "<<") == 0)
+	{
+		printf("expander:		here doc\n");
+		return (true);
+	}
+	else if (mini_strcmp(node->data_type->meta, ">") == 0)
+	{
+		printf("expander:		output Redirect\n");
+		return (true);
+	}
+	else if (mini_strcmp(node->data_type->meta, "<") == 0)
+	{
+		printf("expander:		Input Redirect\n");
+		return (true);
+	}
+	else if (mini_strcmp(node->data_type->meta, "|") == 0)
+	{
+		printf("expander:		pipe\n");
+		return (true);
+	}
+	else
+		return (false);
+}
 
 /**
  * @param node linked list
@@ -159,7 +164,6 @@ bool	check_for_builtin(t_parser *node)
 {
 	if (!node)
 		return (false);
-	// printf("cmd = [%s]\n", node->cmd_list->cmd);
 	if (mini_strcmp(node->data_type->cmd, "exit") == 0)
 		return (true);
 	else if (mini_strcmp(node->data_type->cmd, "echo") == 0)

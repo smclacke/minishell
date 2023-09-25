@@ -157,4 +157,3 @@ void	put_custom_error(t_parser *node, char *cmd)
 		ft_putstr_fd(ERROR_MESSAGE, STDOUT_FILENO);
 	}
 }
-
