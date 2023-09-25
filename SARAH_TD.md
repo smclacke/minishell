@@ -19,20 +19,63 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
+**25/09:**
+
+-> get this splitting done... simplify.. look for spaces, look for quotes, look for metas...
+
+-> protecting all mallocs in parse_input(), like four times???
+
+
+     __
+ .--()°'.'
+'|, . ,'
+ !_-(_|\echo "some thing" hello
+i = 16
+no_tokens: 3
+lexer list: [echo]
+lexer list: ["some]
+lexer list: [thing"]
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = "some
+[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"
+expander: 		there's a builtin whoop
+"some thing"      __
+ .--()°'.'
+'|, . ,'
+ !_-(_|\echo "some thing"sdf hello
+i = 16
+no_tokens: 3
+lexer list: [echo]
+lexer list: ["some]
+lexer list: [thing"sdf]
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = "some
+[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"sdf
+expander: 		there's a builtin whoop
+"some thing"sdf      __
+ .--()°'.'
+'|, . ,'
+ !_-(_|\echo sdf"some thing"sdf hello
+no_tokens: 4
+lexer list: [echo]
+lexer list: [sdf"some]
+lexer list: [thing"sdf]
+lexer list: [hello]
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = sdf"some
+[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"sdf
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = hello
+expander: 		there's a builtin whoop
+sdf"some thing"sdf hello 
+
+
+---------------------------------------------------------------------------------
 **THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 
 my brain is fried and i hate this project :)
 
 Holy mother of fuckidy fuck
 here we gooo
-
-**21-09**
-
--> triple check the FUN ARG SHIT makes sense and im handling everything properly
-
--> re-write parser to make it make sense, everything up to pipe is sorted
-
--> make it so that << >> are actually handled... yayy // lexer right?
 
 -> fix the new quote shit in lexer: (last to do notes before this shit show:)
 		!! amount of tokens need to check attached redirects and quotes
@@ -41,6 +84,7 @@ here we gooo
 
 		!! split needs to handle quotes
 		!! split needs to handle redirects attached
+
 -> add meta separatation in lexer
 -> check that quotes are whole: abd"bull"shit = is one token
 -> cry

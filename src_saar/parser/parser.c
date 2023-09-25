@@ -6,15 +6,21 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 18:32:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/22 22:36:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static t_data_type		*handle_vars(t_data_type *data, int *flag)
+/**
+ * @brief	
+ * @param	data
+ * @param	flag
+ * @return	
+*/
+static t_data	*handle_vars(t_data *data, int *flag)
 {
-	if (*flag == 0)
+	if (!*flag)
 	{
 		if (is_redirect(data->input))
 			data->meta = data->input;
@@ -24,39 +30,53 @@ static t_data_type		*handle_vars(t_data_type *data, int *flag)
 			*flag = 1;
 		}
 	}
-	else if (*flag != 0)
+	else if (*flag)
 	{	
 		if (is_redirect(data->input))
 			data->meta = data->input;
 		else
-			data->strs = data->input;
+			data->str = data->input;
 	}
 	return (data);
 }
 
-static t_data_type		*handle_next(t_data_type *data, char *type)
+/**
+ * @brief	
+ * @param	data
+ * @param	type
+ * @return	
+*/
+static t_data	*handle_next(t_data *data, char *type)
 {
 	if (is_meta(data->input))
 		data->meta = data->input;
 	else if (ft_strcmp(type, LESSLESS) == 0) //here_doc
-		data->strs = data->input;
+		data->str = data->input;
 	else
 		data->file = data->input;
 	return (data);
 }
 
-static t_data_type		*handle_all(t_parser *tokens, t_data_type *data, int *flag)
+/**
+ * @brief	
+ * @param	tokens
+ * @param	data
+ * @param	flag
+ * @return	tokens->data
+ * 
+*/
+static t_data	*handle_all(t_parser *tokens, t_data *data, int *flag)
 {
 	if (data && !is_pipe(data->input))
-		tokens->data_type = handle_vars(data, flag);
+		tokens->data = handle_vars(data, flag);
 	else if (data && is_pipe(data->input))
-		tokens->data_type = handle_pipe(data, flag);
-	return (tokens->data_type);
+		tokens->data = handle_pipe(data, flag);
+	return (tokens->data);
 }
 
 /**
  * @brief	main parser func:
- * 			takes the tokens, puts them into the data_type struct
+ * 			takes the tokens, puts them into the data struct
  * 			with init_data(). If there's a redirect, the type is saved
  * 			in type var and the next token is handled depending on
  * 			the type of redirect before it. handle_all() checks whether a 
@@ -64,15 +84,20 @@ static t_data_type		*handle_all(t_parser *tokens, t_data_type *data, int *flag)
  * 			i.e. cmd str | < file CMD str str...
  * 			Flag is used to find the cmd from the strs, first str without
  * 			redirect is cmd, if pipe, this is reset.
+ *  		- if < or >, next is in or out file
+ *			- if << here_doc, next is limiter string
+ *			- if >> concat, so outfile follows
+ *			- if first encountered cmd, then cmd, all others strs
+ *			- if pipe, cmd_flag reset to find the new cmd, rest works the same
  * @param	tokens t_tokens passed from the lexer to be sorted by the parser()
  * @return	tokens: all the tokens given by the lexer have been
- * 			sorted into the parser->data_type struct making
+ * 			sorted into the parser->data struct making
  * 			them more managable for the executor
 */
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser	*token_list;
-	t_data_type	*data;
+	t_data		*data;
 	char		*type;
 	int			flag;
 
@@ -83,22 +108,15 @@ t_parser	*parser(t_parser *tokens)
 	{
 		data = init_data(token_list);
 		type = is_redirect(token_list->input);
-		token_list->data_type = handle_all(token_list, data, &flag);
+		token_list->data = handle_all(token_list, data, &flag);
 		if (type && token_list->next)
 		{
 			token_list = token_list->next;
 			data = init_data(token_list);
-			token_list->data_type = handle_next(data, type);
+			token_list->data = handle_next(data, type);
 		}
 		token_list = token_list->next;
 	}
 	return (tokens);
 }
-
-// if < or >, next is in or out, nothing else matters
-// if << here_doc 
-// if >> concat, so outfile follows
-// if first encountered cmd, cmd, all others strs
-// everything else is str
-// if pipe, cmd_flag reset to find the new cmd, rest works the same
 

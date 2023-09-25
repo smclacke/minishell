@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 19:02:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 14:22:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,20 @@
 		 // WE MUST SEPARATE METAS
 	// split on spaces, split on metas but add metas to token array
 	// if quotes, split those apart keep them totally intact
+	// inc. something"thing"more = one token
+	// ignore dollas
 
-// static int	len_token(char *input)
-// {
-// 	int	i = 0;
-
-// 	while (input[len] && ft_isspace(input[len]))
-// 		len++;
-// 	j = len;
-// 	while (input[len] && !ft_isspace(input[len]))
-// 		len++;
-// 	len = len - j;
-// 	return (len);	
-// }
+static int	len_token(char *input, int len)
+{
+	int	j = 0;
+	while (input[len] && ft_isspace(input[len]))
+		len++;
+	j = len;
+	while (input[len] && !ft_isspace(input[len]))
+		len++;
+	len = len - j;
+	return (len);	
+}
 
 static int	start_token(char *input, int old_start)
 {
@@ -53,11 +54,49 @@ static char	*split_tokens(char *input, int len)
 	return (token);
 }
 
+static int	amount_tokens(char *input)
+{
+	int		i = 0;
+	int		count = 0;
+	char	*quote_type = NULL;
+
+	while (input[i])
+	{
+		if (ft_isquote(input[i]))
+		{
+			quote_type = which_quote(&input[i]);
+			i += next_quote(&input[i], *quote_type);
+			while (input[i] && !ft_isspace(input[i]))
+			{
+				printf("input = %c\n", input[i]);
+				i++;
+			}
+			count++;
+		}
+		while (input[i] && !ft_isquote(input[i]))
+		{
+			while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
+				i++;
+			// if (ft_isquote(input[i]))
+			// {
+			// 	quote_type = which_quote(&input[i]);
+			// 	printf("quote_type: %s\n", quote_type);
+			// 	i += next_quote(&input[i], *quote_type);
+			// 	printf("i = %i\n", i);
+			// 	i++;
+			// }	
+			count++;
+			while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
+				i++;
+		}
+	}
+	return (count);
+}
+
 // static int	amount_tokens(char *input)
 // {
 // 	int	i = 0;
 // 	int	count = 0;
-
 // 	while (input[i] && !ft_isquote(input[i]))
 // 	{
 // 		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
@@ -75,18 +114,6 @@ static char	*split_tokens(char *input, int len)
 // 	return (count);
 // }
 
-// static bool	annoying_split(char *input)
-// {
-// 	int	i = 0;
-
-// 	while (input[i])
-// 	{
-// 		if (ft_isquote(input[i]) || is_meta(&input[i]))
-// 			return (true);
-// 		i++;
-// 	}
-// 	return (false);
-// }
 static int	annoying_split(char *input)
 {
 	int	i = 0;
@@ -111,26 +138,33 @@ static int	annoying_split(char *input)
 char	**parse_input(char *input)
 {
 	char	**array = NULL;
-	// int		no_tokens = 0;
-	// int		start = 0;
-	// int		len = 0;
-	// int		i = 0;
+	int		no_tokens = 0;
+	int		start = 0;
+	int		len = 0;
+	int		i = 0;
 
-	// if (annoying_split(input))
-	// {
-	// 	no_tokens = amount_tokens(input);
-	// 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-	// 	while (i < no_tokens)
-	// 	{
-	// 		start = start_token(input, (start + len));
-	// 		len = len_token(input, start);
-	// 		array[i] = (char *)malloc(sizeof(char) * (len + 1));
-	// 		array[i] = split_tokens(&input[start], len);
-	// 		i++;
-	// 	}
-	// 	array[no_tokens] = NULL;
-	// }
-	// else
+	if (annoying_split(input))
+	{
+		no_tokens = amount_tokens(input);
+		printf("no_tokens: %i\n", no_tokens);
+		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
+		if (!array)
+			return (NULL);
+		while (i < no_tokens)
+		{
+			start = start_token(input, (start + len));
+			len = len_token(input, start);
+			array[i] = (char *)malloc(sizeof(char) * (len + 1));
+			if (!array)
+				return (NULL);
+			array[i] = split_tokens(&input[start], len);
+			if (!array)
+				return (NULL);
+			i++;
+		}
+		array[no_tokens] = NULL;
+	}
+	else
 	array = ft_split(input, ' ');
 	if (!array)
 		return (NULL);
