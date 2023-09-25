@@ -6,63 +6,63 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/21 18:00:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/25 14:24:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/djoyke.h"
+// #include "../include/djoyke.h"
 
-t_parser	*print_the_full_thing(t_parser *tokens)
-{
-	t_parser	*list;
-	int			i;
+// t_parser	*print_the_full_thing(t_parser *tokens)
+// {
+// 	t_parser	*list;
+// 	int			i;
 
-	i = 0;
-	list = tokens;
-	while (list)
-	{
-		printf("[%i]\t ", i);
-		printf("cmd = %s\t", list->data_type->cmd);
-		printf("file = %s\t", list->data_type->file);
-		printf("meta = %s\t", list->data_type->meta);
-		printf("strs = %s\n", list->data_type->strs);
-		i++;
-		list = list->next;
-	}
-	return (tokens);
-}
+// 	i = 0;
+// 	list = tokens;
+// 	while (list)
+// 	{
+// 		printf("[%i]\t ", i);
+// 		printf("cmd = %s\t", list->data_type->cmd);
+// 		printf("file = %s\t", list->data_type->file);
+// 		printf("meta = %s\t", list->data_type->meta);
+// 		printf("strs = %s\n", list->data_type->strs);
+// 		i++;
+// 		list = list->next;
+// 	}
+// 	return (tokens);
+// }
 
-// /* checking the edge cases for this one */
-int	main(int argc, char **argv, char **envp)
-{
-	char		*input;
-	t_parser	*tokens;
-	t_env		*env;
+// // /* checking the edge cases for this one */
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char		*input;
+// 	t_parser	*tokens;
+// 	t_env		*env;
 
-	(void) argc;
-	(void) argv;
-	env = NULL;
-	env = env_list(envp, env);
-	tokens = NULL;
-	while (1)
-	{
-		input = readline(PROMPT);
-		add_history(input);
-		tokens = lexer(input);
-		if (!tokens)
-			continue ;
-		shelly_print_list(tokens);
-		tokens = parser(tokens);
-		if (!tokens)
-			continue ;
-		print_the_full_thing(tokens);
-		ft_execute(&env, tokens);
-		// free input (readline needs to be fred at end)
-		// DO YOU WANT TO KEEP ENV-FULL OR NOT! IF NOT PLEASE REMOVE 
-		//DJOYKE
-	}
-	return (0);
-}
+// 	(void) argc;
+// 	(void) argv;
+// 	env = NULL;
+// 	env = env_list(envp, env);
+// 	tokens = NULL;
+// 	while (1)
+// 	{
+// 		input = readline(PROMPT);
+// 		add_history(input);
+// 		tokens = lexer(input);
+// 		if (!tokens)
+// 			continue ;
+// 		shelly_print_list(tokens);
+// 		tokens = parser(tokens);
+// 		if (!tokens)
+// 			continue ;
+// 		print_the_full_thing(tokens);
+// 		ft_execute(&env, tokens);
+// 		// free input (readline needs to be fred at end)
+// 		// DO YOU WANT TO KEEP ENV-FULL OR NOT! IF NOT PLEASE REMOVE 
+// 		//DJOYKE
+// 	}
+// 	return (0);
+// }
 
 /*
 
@@ -74,9 +74,6 @@ int	main(int argc, char **argv, char **envp)
 ◦ unset with no options
 ◦ env with no options or arguments
 ◦ exit with no options (closes terminal?, closes bash)
-
-
-LEARN YOUR POINTER SHIT DJOYKE!!!! OOOOOOOH MYYYYYYGOFFDDD
 
 
 */

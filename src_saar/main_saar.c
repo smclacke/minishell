@@ -6,30 +6,30 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 19:00:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 17:20:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-// t_parser	*print_the_full_thing(t_parser *tokens)
-// {
-// 	t_parser	*list;
-// 	int			i = 0;
+t_parser	*print_the_full_thing(t_parser *tokens)
+{
+	t_parser	*list;
+	int			i = 0;
 	
-// 	list = tokens;
-// 	while (list)
-// 	{
-// 		printf("[%i]\t ", i);
-// 		printf("cmd = %s\t", list->data_type->cmd);
-// 		printf("file = %s\t", list->data_type->file);
-// 		printf("meta = %s\t", list->data_type->meta);
-// 		printf("strs = %s\n", list->data_type->strs);
-// 		i++;
-// 		list = list->next;
-// 	}
-// 	return (tokens);
-// }
+	list = tokens;
+	while (list)
+	{
+		printf("[%i]\t ", i);
+		printf("cmd = %s\t", list->data->cmd);
+		printf("file = %s\t", list->data->file);
+		printf("meta = %s\t", list->data->meta);
+		printf("str = %s\n", list->data->str);
+		i++;
+		list = list->next;
+	}
+	return (tokens);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -39,7 +39,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	// (void) envp;
 	env = NULL;
 	env = env_list(envp, env);
 	tokens = NULL;

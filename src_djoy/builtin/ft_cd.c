@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 20:21:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/09/22 20:51:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	change_old_dir(t_env **env, char *str)
 	head = *env;
 	if (!env)
 		reassign_opwd(env, new, str, full);
-	while (mini_strcmp ("OLDPWD", head->key) != 0)
+	if (mini_strcmp ("OLDPWD", head->key) != 0)
 	{
 		head = head->next;
 		if (head == NULL)
