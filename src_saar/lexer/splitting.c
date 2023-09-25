@@ -6,41 +6,57 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 14:22:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 17:17:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// everything starts and finishes here.... let's goooooooo
-		 // WE MUST SEPARATE METAS
-	// split on spaces, split on metas but add metas to token array
-	// if quotes, split those apart keep them totally intact
-	// inc. something"thing"more = one token
-	// ignore dollas
-
-static int	len_token(char *input, int len)
-{
-	int	j = 0;
-	while (input[len] && ft_isspace(input[len]))
-		len++;
-	j = len;
-	while (input[len] && !ft_isspace(input[len]))
-		len++;
-	len = len - j;
-	return (len);	
-}
-
 static int	start_token(char *input, int old_start)
 {
-	int j = 0;
+	int 	j = 0;
+	char	*quote_type = NULL;
 
 	while (input[old_start] && ft_isspace(input[old_start]))
 		old_start++;
 	j = old_start;
 	while (input[old_start] && !ft_isspace(input[old_start]))
+	{
+		if (ft_isquote(input[old_start]))
+		{
+			quote_type = which_quote(&input[old_start]);
+			old_start += next_quote(&input[old_start], *quote_type);
+			
+		}
 		old_start++;
+	}
 	return (j);
+}
+
+static int	len_token(char *input, int len)
+{
+	int		j = 0;
+	char	*quote_type = NULL;
+
+	// if (is_meta(input))
+	// {
+	// 	printf("len meta = %i\n", is_token(input));
+	// 	return (is_token(input));
+	// }
+	while (input[len] && ft_isspace(input[len]))
+		len++;
+	j = len;
+	while (input[len] && !ft_isspace(input[len]))
+	{	
+		if (ft_isquote(input[len]))
+		{
+			quote_type = which_quote(&input[len]);
+			len += next_quote(&input[len], *quote_type);
+		}
+		len++;
+	}
+	len = len - j;
+	return (len);	
 }
 
 static char	*split_tokens(char *input, int len)
@@ -62,57 +78,28 @@ static int	amount_tokens(char *input)
 
 	while (input[i])
 	{
-		if (ft_isquote(input[i]))
+		while (input[i] && ft_isspace(input[i]))
+			i++;
+		count++;
+		// if (ft_ismeta(input[i]))
+		// {
+		// 	if (ft_strnstr(input, MOREMORE, 2) || ft_strnstr(input, LESSLESS, 2))
+		// 		i++;
+		// 	count++;
+		// 	i++;
+		// }
+		while (input[i] && !ft_isspace(input[i]))
 		{
-			quote_type = which_quote(&input[i]);
-			i += next_quote(&input[i], *quote_type);
-			while (input[i] && !ft_isspace(input[i]))
+			if (ft_isquote(input[i]))
 			{
-				printf("input = %c\n", input[i]);
-				i++;
+				quote_type = which_quote(&input[i]);
+				i += next_quote(&input[i], *quote_type);
 			}
-			count++;
-		}
-		while (input[i] && !ft_isquote(input[i]))
-		{
-			while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
-				i++;
-			// if (ft_isquote(input[i]))
-			// {
-			// 	quote_type = which_quote(&input[i]);
-			// 	printf("quote_type: %s\n", quote_type);
-			// 	i += next_quote(&input[i], *quote_type);
-			// 	printf("i = %i\n", i);
-			// 	i++;
-			// }	
-			count++;
-			while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
-				i++;
+			i++;
 		}
 	}
 	return (count);
 }
-
-// static int	amount_tokens(char *input)
-// {
-// 	int	i = 0;
-// 	int	count = 0;
-// 	while (input[i] && !ft_isquote(input[i]))
-// 	{
-// 		while (input[i] && ft_isspace(input[i]) && !ft_isquote(input[i]))
-// 			i++;
-// 		count++;
-// 		while (input[i] && !ft_isspace(input[i]) && !ft_isquote(input[i]))
-// 			i++;
-// 	}
-// 	if (ft_isquote(input[i]))
-// 	{
-// 		printf("is it here?\n");
-// 		i += next_quote(input, *which_quote(input));
-// 		count++;
-// 	}
-// 	return (count);
-// }
 
 static int	annoying_split(char *input)
 {

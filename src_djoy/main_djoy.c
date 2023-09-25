@@ -6,11 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/09/24 21:45:11 by djoyke        ########   odam.nl         */
-=======
-/*   Updated: 2023/09/22 20:03:52 by smclacke      ########   odam.nl         */
->>>>>>> sarah
+/*   Updated: 2023/09/25 14:24:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
