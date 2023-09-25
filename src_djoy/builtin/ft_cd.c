@@ -71,22 +71,22 @@ void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 {
 	char		*error;
 
-	if (!lst->data_type->strs)
+	if (!lst->data->str)
 		return ;
-	else if (lst->data_type->strs != NULL)
+	else if (lst->data->str != NULL)
 	{
-		if (access(lst->data_type->strs, F_OK) == 0)
+		if (access(lst->data->str, F_OK) == 0)
 		{
-			if (chdir(lst->data_type->strs) == -1)
+			if (chdir(lst->data->str) == -1)
 			{
-				error = ft_strjoin("minishell: cd: ", lst->data_type->strs);
+				error = ft_strjoin("minishell: cd: ", lst->data->str);
 				mini_error(error, errno);
 			}
 			change_old_dir(env, o_d);
 			change_current_dir(env, getcwd(c_d, sizeof(c_d)));
 		}
 		else
-			printf("cd: no such file or directory: %s\n", lst->data_type->strs);
+			printf("cd: no such file or directory: %s\n", lst->data->str);
 	}
 }
 

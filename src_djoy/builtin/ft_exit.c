@@ -24,9 +24,9 @@ void	digit_check(t_parser *lst)
 	int	i;
 
 	i = 0;
-	while (lst->data_type->strs[i])
+	while (lst->data->str[i])
 	{
-		if (ft_isdigit(lst->data_type->strs[i]) == 0)
+		if (ft_isdigit(lst->data->str[i]) == 0)
 		{
 			put_custom_error(lst, "exit");
 			exit(255);
@@ -60,7 +60,7 @@ void	ft_exit(t_parser *lst)
 
 	exit_status = 0;
 	status = 0;
-	if (!lst->next && lst->data_type->cmd)
+	if (!lst->next && lst->data->cmd)
 	{
 		write(STDOUT_FILENO, "exit\n", 5);
 		if (WIFEXITED(status))
@@ -70,7 +70,7 @@ void	ft_exit(t_parser *lst)
 	lst = lst->next;
 	digit_check(lst);
 	arg_check(lst);
-	error = ft_atoi(lst->data_type->strs);
+	error = ft_atoi(lst->data->str);
 	if (error > 255)
 	{
 		put_custom_error(lst, "exit");

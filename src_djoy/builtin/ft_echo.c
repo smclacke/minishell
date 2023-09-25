@@ -37,7 +37,7 @@ void	ft_echo(t_parser *lst)
 
 	i = 0;
 	is_flag = 0;
-	if (!lst->data_type->cmd)
+	if (!lst->data->cmd)
 		mini_error("lst->cmd", errno);
 	if (!lst->next)
 	{
@@ -45,7 +45,7 @@ void	ft_echo(t_parser *lst)
 		return ;
 	}
 	lst = lst->next;
-	if (!lst->data_type->strs)
+	if (!lst->data->str)
 	{
 		// 1) check if the next one is a meta, 
 		//    | >> etc to see if you need to echo into something
@@ -54,16 +54,16 @@ void	ft_echo(t_parser *lst)
 	}
 	while (lst)
 	{
-		if (lst->data_type->strs)
+		if (lst->data->str)
 		{
-			if (ft_strcmp(lst->data_type->strs, "-n") == 0)
+			if (ft_strcmp(lst->data->str, "-n") == 0)
 			{
 				is_flag++;
 				i++;
 			}
 			else
 			{
-				printf("%s ", lst->data_type->strs);
+				printf("%s ", lst->data->str);
 				i++;
 			}
 		}

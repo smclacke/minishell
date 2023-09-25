@@ -86,8 +86,8 @@ void	ft_export(t_parser *node, t_env **env)
 	node = node->next;
 	if (reassign_env(env, node, new_key, new_value) == 1)
 		return ;
-	h_v = get_key_value(node->data_type->strs, &new_key, &new_value);
-	new_node = env_lstnew(new_key, new_value, node->data_type->strs, h_v);
+	h_v = get_key_value(node->data->str, &new_key, &new_value);
+	new_node = env_lstnew(new_key, new_value, node->data->str, h_v);
 	env_lstadd_back(env, new_node);
 }
 
@@ -107,7 +107,7 @@ bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 	char	*comp_str;
 
 	head = *e;
-	str = node->data_type->strs;
+	str = node->data->str;
 	comp_str = check_for_equal_sign(str);
 	while (head)
 	{
@@ -115,8 +115,8 @@ bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 		{
 			if (str[ft_strlen(str) == '='])
 			{
-				head->full = node->data_type->strs;
-				has_value = get_key_value(node->data_type->strs, &n_k, &n_v);
+				head->full = node->data->str;
+				has_value = get_key_value(node->data->str, &n_k, &n_v);
 				head->value = n_v;
 				head->key = n_k;
 				return (true);

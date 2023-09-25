@@ -69,16 +69,16 @@ void	init_execute_struct(t_execute *data, t_env *env)
 */
 bool	absolute_check(t_parser *node)
 {
-	if (!node->data_type->cmd)
+	if (!node->data->cmd)
 		return (false);
-	if (!ft_strncmp(node->data_type->cmd, "/", 1)
-		&& access(node->data_type->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->data->cmd, "/", 1)
+		&& access(node->data->cmd, F_OK) == 0)
 		return (true);
-	if (!ft_strncmp(node->data_type->cmd, "./", 2)
-		&& access(node->data_type->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->data->cmd, "./", 2)
+		&& access(node->data->cmd, F_OK) == 0)
 		return (true);
-	if (!ft_strncmp(node->data_type->cmd, "../", 3)
-		&& access(node->data_type->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->data->cmd, "../", 3)
+		&& access(node->data->cmd, F_OK) == 0)
 		return (true);
 	return (false);
 }

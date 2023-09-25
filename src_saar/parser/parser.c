@@ -31,7 +31,7 @@ static t_data	*handle_vars(t_data *data, int *flag)
 		}
 	}
 	else if (*flag)
-	{	
+	{
 		if (is_redirect(data->input))
 			data->meta = data->input;
 		else

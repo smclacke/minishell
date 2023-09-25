@@ -118,8 +118,8 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data)
 		// printf("executble = [%s]\n", executable);
 		if (access(executable, X_OK) == -1)
 			mini_error(executable, errno);
-		if (execve(executable, &lst->data_type->strs, data->env_array) == -1)
-			mini_error(lst->data_type->strs, errno);
+		if (execve(executable, &lst->data->str, data->env_array) == -1)
+			mini_error(lst->data->str, errno);
 	}
 	close(data->fd_in);
 	close(data->pipe_fd[WRITE]);
@@ -183,7 +183,7 @@ char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	{
 		while (data->path && data->path[i] != NULL)
 		{
-			command = ft_strjoin("/", node->data_type->cmd);
+			command = ft_strjoin("/", node->data->cmd);
 			if (command == NULL)
 				mini_error("malloc", errno);
 			ok_path = ft_strjoin(data->path[i], command);
@@ -196,7 +196,7 @@ char	*check_access(t_env *env, t_parser *node, t_execute *data)
 			free(ok_path);
 			i++;
 		}
-		mini_error(node->data_type->cmd, errno);//check this out please
+		mini_error(node->data->cmd, errno);//check this out please
 	}
-	return (node->data_type->cmd);//check this out please
+	return (node->data->cmd);//check this out please
 }

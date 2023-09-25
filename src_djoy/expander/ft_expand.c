@@ -69,6 +69,12 @@
  * does this mean that if a process ended correctly 
  * it needs to return 0? as in EXIT_SUCCESS?
  * if >>$USER no expanding user it's a delimiter now
+ dreijans@f0r2s14:~/Documents/rank3$ echo $
+$
+dreijans@f0r2s14:~/Documents/rank3$ echo $USER
+dreijans
+dreijans@f0r2s14:~/Documents/rank3$ 
+
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
@@ -116,34 +122,34 @@ void	ft_expand(t_parser *lst, t_env **env)
 */
 bool	check_for_meta(t_parser *node)
 {
-	if (node->data_type == NULL)
+	if (node->data == NULL)
 		return (false);
-	if (mini_strcmp(node->data_type->cmd, "$") == 0)
+	if (mini_strcmp(node->data->cmd, "$") == 0)
 	{
 		printf("expander:		dolllaaaah\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data_type->meta, ">>") == 0)
+	else if (mini_strcmp(node->data->meta, ">>") == 0)
 	{
 		printf("expander:		Output Append\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data_type->meta, "<<") == 0)
+	else if (mini_strcmp(node->data->meta, "<<") == 0)
 	{
 		printf("expander:		here doc\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data_type->meta, ">") == 0)
+	else if (mini_strcmp(node->data->meta, ">") == 0)
 	{
 		printf("expander:		output Redirect\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data_type->meta, "<") == 0)
+	else if (mini_strcmp(node->data->meta, "<") == 0)
 	{
 		printf("expander:		Input Redirect\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data_type->meta, "|") == 0)
+	else if (mini_strcmp(node->data->meta, "|") == 0)
 	{
 		printf("expander:		pipe\n");
 		return (true);
@@ -164,19 +170,19 @@ bool	check_for_builtin(t_parser *node)
 {
 	if (!node)
 		return (false);
-	if (mini_strcmp(node->data_type->cmd, "exit") == 0)
+	if (mini_strcmp(node->data->cmd, "exit") == 0)
 		return (true);
-	else if (mini_strcmp(node->data_type->cmd, "echo") == 0)
+	else if (mini_strcmp(node->data->cmd, "echo") == 0)
 		return (true);
-	else if (mini_strcmp(node->data_type->cmd, "cd") == 0)
+	else if (mini_strcmp(node->data->cmd, "cd") == 0)
 		return (true);
-	else if (mini_strcmp(node->data_type->cmd, "pwd") == 0)
+	else if (mini_strcmp(node->data->cmd, "pwd") == 0)
 		return (true);
-	else if (mini_strcmp(node->data_type->cmd, "export") == 0)
+	else if (mini_strcmp(node->data->cmd, "export") == 0)
 		return (true);
-	else if (mini_strcmp(node->data_type->cmd, "unset") == 0)
+	else if (mini_strcmp(node->data->cmd, "unset") == 0)
 		return (true);
-	else if (mini_strcmp(node->data_type->cmd, "env") == 0)
+	else if (mini_strcmp(node->data->cmd, "env") == 0)
 		return (true);
 	else
 		return (false);

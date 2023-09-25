@@ -53,14 +53,14 @@ typedef struct s_data_type
 	char				*cmd;
 	char				*meta;
 	char				*file;
-	char				*strs;
+	char				*str;
 	struct s_data_type	*next;
 }				t_data_type;
 
 typedef struct s_parser
 {
 	void				*input;
-	struct s_data_type	*data_type;
+	struct s_data_type	*data;
 	struct s_parser		*next;
 }				t_parser;
 

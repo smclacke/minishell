@@ -25,7 +25,7 @@ void	ft_unset(t_parser *node, t_env **env)
 		node = node->next;
 	while (node)
 	{
-		mini_remove_env(node->data_type->strs, env);
+		mini_remove_env(node->data->str, env);
 		node = node->next;
 	}
 }
