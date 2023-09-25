@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 17:17:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 18:13:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ static int	start_token(char *input, int old_start)
 	j = old_start;
 	while (input[old_start] && !ft_isspace(input[old_start]))
 	{
+		if (ft_ismeta(input[old_start]))
+		{
+			old_start += which_meta(&input[old_start]);
+			printf("old_start = %i\n", old_start);
+			return (old_start);
+		}
 		if (ft_isquote(input[old_start]))
 		{
 			quote_type = which_quote(&input[old_start]);
 			old_start += next_quote(&input[old_start], *quote_type);
-			
 		}
 		old_start++;
 	}
@@ -81,13 +86,13 @@ static int	amount_tokens(char *input)
 		while (input[i] && ft_isspace(input[i]))
 			i++;
 		count++;
-		// if (ft_ismeta(input[i]))
-		// {
-		// 	if (ft_strnstr(input, MOREMORE, 2) || ft_strnstr(input, LESSLESS, 2))
-		// 		i++;
-		// 	count++;
-		// 	i++;
-		// }
+		if (ft_ismeta(input[i]))
+		{
+			if (ft_strnstr(input, MOREMORE, 2) || ft_strnstr(input, LESSLESS, 2))
+				i++;
+			count++;
+			i++;
+		}
 		while (input[i] && !ft_isspace(input[i]))
 		{
 			if (ft_isquote(input[i]))

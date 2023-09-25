@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 16:55:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/25 18:11:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_parser			*shelly_print_list(t_parser *token);
 char				**parse_input(char *input);
 
 //----- splitting_utils.c -----//
+int					which_meta(char *input);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
 bool				is_meta(char *input);
