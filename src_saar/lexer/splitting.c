@@ -6,11 +6,22 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/26 15:35:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/26 22:04:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+static char	*split_tokens(char *input, int len)
+{
+	char	*token;
+
+	token = ft_substr(input, 0, len);
+	if (!token)
+		return (NULL);
+	input += len;
+	return (token);
+}
 
 static int	start_token(char *input, int old_start)
 {
@@ -61,17 +72,6 @@ static int	len_token(char *input, int len)
 	return (len);	
 }
 
-static char	*split_tokens(char *input, int len)
-{
-	char	*token;
-
-	token = ft_substr(input, 0, len);
-	if (!token)
-		return (NULL);
-	input += len;
-	return (token);
-}
-
 static int	amount_tokens(char *input)
 {
 	int		i = 0;
@@ -82,26 +82,30 @@ static int	amount_tokens(char *input)
 	{
 		while (input[i] && ft_isspace(input[i]))
 			i++;
-		count++;
 		if (ft_ismeta(input[i]))
 		{
-			if (ft_strnstr(input, MOREMORE, 2) || ft_strnstr(input, LESSLESS, 2))
+			if (ft_ismeta(input[i + 1]))
 				i++;
 			count++;
 			i++;
 		}
-		while (input[i] && !ft_isspace(input[i]))
+		if (input[i] && !ft_isspace(input[i]))
 		{
-			if (ft_isquote(input[i]))
+			while (input[i] && !ft_isspace(input[i]) && !ft_ismeta(input[i]))
 			{
-				quote_type = which_quote(&input[i]);
-				i += next_quote(&input[i], *quote_type);
+				if (ft_isquote(input[i]))
+				{
+					quote_type = which_quote(&input[i]);
+					i += next_quote(&input[i], *quote_type);
+				}
+				i++;
 			}
-			i++;
+			count++;
 		}
 	}
 	return (count);
 }
+
 
 static int	annoying_split(char *input)
 {

@@ -44,7 +44,8 @@ dein computer, kein computer
 
 -> EXPANSION LET'S FUCKING GOOOOOO
 
----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+
 echo >> things
 no_tokens: 4
 start = 0
@@ -62,7 +63,7 @@ lexer list: []
 expander: 		there's a builtin whoop
 
 
- !_-(_|\echo some|thing
+echo some|thing
 no_tokens: 2
 start = 0
 start = 5
@@ -74,7 +75,7 @@ expander: 		there's a builtin whoop
 some|    
 
 
- !_-(_|\ecommmm|hello
+ecommmm|hello
 no_tokens: 1
 start = 0
 lexer list: [ecommmm|hello]
