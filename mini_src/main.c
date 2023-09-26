@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 23:55:35 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/19 01:48:16 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2023/09/26 14:04:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	main()
 {
-	printf("I'm the minishell executable\n");
+	printf("I'm the minishell executable woo woo\n");
 }
