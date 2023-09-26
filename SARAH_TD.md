@@ -49,6 +49,45 @@ dein computer, kein computer
 
 -----------------------------------------------------------------------------
 
+wtf>> | hellllo"some thing"wtttfff >thing > thing > > thing
+no_tokens: 11
+start = 0
+start = 3
+start = 6
+start = 8
+start = 35
+start = 36
+start = 42
+start = 44
+start = 50
+start = 52
+start = 54
+lexer list: [wtf]
+lexer list: [>>]
+lexer list: [|]
+lexer list: [hellllo"some thing"wtttfff]
+lexer list: [>]
+lexer list: [thing]
+lexer list: [>]
+lexer list: [thing]
+lexer list: [>]
+lexer list: [>]
+lexer list: [thing]
+[0]	 cmd = wtf	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[2]	 cmd = (null)	file = (null)	meta = |	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = hellllo"some thing"wtttfff
+[4]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[5]	 cmd = (null)	file = thing	meta = (null)	str = (null)
+[6]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[7]	 cmd = (null)	file = thing	meta = (null)	str = (null)
+[8]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[9]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[10]	 cmd = (null)	file = (null)	meta = (null)	str = thing
+
+
+
+
 echo >> things
 no_tokens: 4
 start = 0
