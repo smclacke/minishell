@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 18:13:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/26 14:26:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@ static int	start_token(char *input, int old_start)
 	int 	j = 0;
 	char	*quote_type = NULL;
 
+	printf("old_start = %i\n", old_start);
 	while (input[old_start] && ft_isspace(input[old_start]))
 		old_start++;
 	j = old_start;
+	// if (ft_ismeta(input[old_start]))
+	// {
+	// 	printf("which_meta ret = %i\n", which_meta(&input[old_start]));
+	// 	old_start += which_meta(&input[old_start]);
+	// 	printf("olllllld = %i\n", old_start);
+	// 	return (old_start);
+	// }
 	while (input[old_start] && !ft_isspace(input[old_start]))
 	{
-		if (ft_ismeta(input[old_start]))
-		{
-			old_start += which_meta(&input[old_start]);
-			printf("old_start = %i\n", old_start);
-			return (old_start);
-		}
 		if (ft_isquote(input[old_start]))
 		{
 			quote_type = which_quote(&input[old_start]);
@@ -43,14 +45,15 @@ static int	len_token(char *input, int len)
 	int		j = 0;
 	char	*quote_type = NULL;
 
-	// if (is_meta(input))
-	// {
-	// 	printf("len meta = %i\n", is_token(input));
-	// 	return (is_token(input));
-	// }
 	while (input[len] && ft_isspace(input[len]))
 		len++;
 	j = len;
+	if (ft_ismeta(input[len]))
+	{
+		len += which_meta(&input[len]);
+		printf("len = %i\n", len);
+		return (len);
+	}
 	while (input[len] && !ft_isspace(input[len]))
 	{	
 		if (ft_isquote(input[len]))
@@ -145,6 +148,7 @@ char	**parse_input(char *input)
 		while (i < no_tokens)
 		{
 			start = start_token(input, (start + len));
+			printf("start = %i\n", start);
 			len = len_token(input, start);
 			array[i] = (char *)malloc(sizeof(char) * (len + 1));
 			if (!array)
