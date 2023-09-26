@@ -44,9 +44,45 @@ dein computer, kein computer
 
 -> EXPANSION LET'S FUCKING GOOOOOO
 
+---------------------------------------------------------------------------------
+echo >> things
+no_tokens: 4
+start = 0
+start = 5
+start = 8
+start = 14
+lexer list: [echo]
+lexer list: [>>]
+lexer list: [things]
+lexer list: []
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[2]	 cmd = (null)	file = things	meta = (null)	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = 
+expander: 		there's a builtin whoop
 
+
+ !_-(_|\echo some|thing
+no_tokens: 2
+start = 0
+start = 5
+lexer list: [echo]
+lexer list: [some|]
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = some|
+expander: 		there's a builtin whoop
+some|    
+
+
+ !_-(_|\ecommmm|hello
+no_tokens: 1
+start = 0
+lexer list: [ecommmm|hello]
+[0]	 cmd = ecommmm|hello	file = (null)	meta = (null)	str = (null)
+     _
 
 ---------------------------------------------------------------------------------
+
 
 **OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
