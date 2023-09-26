@@ -29,6 +29,9 @@ dein computer, kein computer
 **25/09:**
 
 -> meta separation
+//// seems to actually be doing the thing.... 
+//// do loads of testing before moving on, ask if im crazy
+//// norm and clean up
 
 -> protecting all mallocs in parse_input(), like four times???
 
