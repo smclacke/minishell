@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/26 14:22:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/26 15:16:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 int		which_meta(char *input)
 {
-	printf("what yuo doinggg?\n");
 	if (ft_strnstr(input, MOREMORE, 2))
 		return (2);
 	else if (ft_strnstr(input, LESSLESS, 2))
