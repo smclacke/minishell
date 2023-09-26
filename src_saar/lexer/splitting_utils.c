@@ -6,11 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 18:12:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/26 12:15:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+// try to just use like max 2 functions for metas.... this is getting out of hand
 
 int		which_meta(char *input)
 {
@@ -66,7 +68,7 @@ int	ft_ismeta(int c)
 	return (c == '|' || c == '<' || c == '>');
 }
 
-int	is_token(char *input)
+int	is_token(char *input) // am i even using this function?
 {
 	if (*input == '|')
 		return (1);
