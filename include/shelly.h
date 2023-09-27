@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 18:11:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 17:06:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@
 
 
 /**
- * @brief	specifies the different types of tokens from the lexer, that are parsed and then given to the executor
- * @param	cmd: first arg from commandline or arg after a pipe
- * @param	meta: pipe, more, less, moremore, lessless. Dollar is excluded and handled as a string
- * @param	file: in and out files, args that come after more, less and moremore
- * @param	str: all other input. command arguments, typos...
+ * @brief	specifies the different variable types of tokens from the
+ * 			lexer that are parsed and then given to the executor
+ * @param	cmd: first string in each process without redirect char
+ * @param	meta: pipe, more, less, moremore, lessless. 
+ * 			**dollar is excluded and handled as a string
+ * @param	file: in and out files; after more, less and moremore chars
+ * @param	str:  limiter for here_doc (string after <<) and all other input
 */
 typedef struct s_data
 {
@@ -81,16 +83,18 @@ void				lexer_listadd_back(t_parser **list, t_parser *new);
 t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
-//----- splitting.c -----//
+//----- token.c -----//
 char				**parse_input(char *input);
 
-//----- splitting_utils.c -----//
-int					which_meta(char *input);
+//----- token_size.c -----//
+int					start_token(char *input, int old_start);
+int					len_token(char *input, int len);
+
+//----- token_utils.c -----//
+int					is_meta(char *input);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
-bool				is_meta(char *input);
 int					ft_ismeta(int c);
-int					is_token(char *input);
 
 //---- parser.c ----//
 t_parser			*parser(t_parser *tokens);
@@ -98,8 +102,8 @@ t_parser			*parser(t_parser *tokens);
 //---- parser_utils.c ----//
 t_data				*handle_pipe(t_data *data, int *flag_cmd);
 int					is_pipe(void *input);
-t_data				*init_data(t_parser *tokens);
 char				*is_redirect(void *input);
+t_data				*init_data(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
 

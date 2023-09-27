@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/22 20:46:25 by smclacke      ########   odam.nl          #
+#    Updated: 2023/09/27 17:03:57 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,9 +74,10 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 
 SRCS_SAAR		= main_saar.c					\
 					lexer/lexer.c				\
-					lexer/splitting.c			\
-					lexer/splitting_utils.c		\
 					lexer/lexer_utils.c			\
+					lexer/token.c				\
+					lexer/token_size.c			\
+					lexer/token_utils.c			\
 					parser/parser.c				\
 					parser/parser_utils.c
 

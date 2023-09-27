@@ -1,73 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   splitting.c                                        :+:    :+:            */
+/*   token.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/26 22:23:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 17:10:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// i'm doing the same things over and over its a fucking mess...
-// works tho :)
-
-static int	start_token(char *input, int old_start)
-{
-	int 	j;
-	char	*quote_type;
-
-	j = 0;
-	quote_type = NULL;
-	while (input[old_start] && ft_isspace(input[old_start]))
-		old_start++;
-	j = old_start;
-	while (input[old_start] && !ft_isspace(input[old_start]))
-	{
-		if (ft_ismeta(input[old_start]))
-			return (j);
-		if (ft_isquote(input[old_start]))
-		{
-			quote_type = which_quote(&input[old_start]);
-			old_start += next_quote(&input[old_start], *quote_type);
-		}
-		old_start++;
-	}
-	return (j);
-}
-
-static int	len_token(char *input, int len)
-{
-	int		j;
-	char	*quote_type;
-
-	j = 0;
-	quote_type = NULL;
-	while (input[len] && ft_isspace(input[len]))
-		len++;
-	j = len;
-	if (ft_ismeta(input[len]))
-	{
-		len += which_meta(&input[len]);
-		len = len - j;
-		return (len);
-	}
-	while (input[len] && !ft_isspace(input[len]) && !ft_ismeta(input[len]))
-	{	
-		if (ft_isquote(input[len]))
-		{
-			quote_type = which_quote(&input[len]);
-			len += next_quote(&input[len], *quote_type);
-		}
-		len++;
-	}
-	len = len - j;
-	return (len);	
-}
-
+/**
+ * @brief	
+ * @param	
+ * @param	
+ * @return	
+*/
 static int	amount_tokens(char *input)
 {
 	int		i = 0;
@@ -102,6 +52,12 @@ static int	amount_tokens(char *input)
 	return (count);
 }
 
+/**
+ * @brief	
+ * @param	
+ * @param	
+ * @return	
+*/
 static char	*split_tokens(char *input, int len)
 {
 	char	*token;
@@ -113,7 +69,13 @@ static char	*split_tokens(char *input, int len)
 	return (token);
 }
 
-static int	annoying_split(char *input)
+/**
+ * @brief	if there's quotation and/or meta char, need to find them and
+ * 			split them accordingly. Otherwise, just split on spaces
+ * @param	input input from the command line
+ * @return	1 yes there's a meta and/or quotation. 0 false
+*/
+static int	parser_split(char *input)
 {
 	int	i = 0;
 
@@ -127,12 +89,13 @@ static int	annoying_split(char *input)
 }
 
 /**
- * @brief	takes the input string from the command line, iterates through it. While there
- * 			are no quotations, the string is split on spaces with metas (exc. dollar) also being 
- * 			split into separate str. If a quotation is encountered, the matching quote is found and
- * 			all of that input is put into token
+ * @brief	takes the input string from the command line, 
+ * 			iterates through it. If there are quoations and/or meta chars,
+ * 			input is split on metas, quotations and spaces.
+ * 			otherwise only spaces
  * @param	input input from the command line
- * @return	2D array of separated strings made from the input, ready to be tokenized
+ * @return	2D array of separated strings made from the input, 
+ * 			ready to be tokenized into the parser struct list of tokens
 */
 char	**parse_input(char *input)
 {
@@ -142,7 +105,7 @@ char	**parse_input(char *input)
 	int		len = 0;
 	int		i = 0;
 
-	if (annoying_split(input))
+	if (parser_split(input))
 	{
 		no_tokens = amount_tokens(input);
 		printf("no_tokens: %i\n", no_tokens);
@@ -155,8 +118,6 @@ char	**parse_input(char *input)
 			printf("start = %i\n", start);
 			len = len_token(input, start);
 			array[i] = (char *)malloc(sizeof(char) * (len + 1));
-			// if (!array)
-			// 	return (NULL);
 			array[i] = split_tokens(&input[start], len);
 			i++;
 		}

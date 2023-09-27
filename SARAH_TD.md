@@ -35,10 +35,6 @@ dein computer, kein computer
 
 -> protecting all mallocs in parse_input(), like four times???
 
--> I do not need that many meta checking functions... 
-
--> do i even use is_token() ?
-
 -> TEST TEST TEST
 
 -> normmmm

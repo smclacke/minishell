@@ -6,16 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 22:36:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 17:21:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * @brief	
- * @param	data
- * @param	flag
+ * @brief	sorting all tokens from one process together
+ * 			if no cmd has been found, the first string not
+ * 			assocciated with a redrect is assigned data->cmd
+ * 			is meta char, data->meta
+ * 			all other input is str, token after redirect is
+ * 			handled in handle_next(), (e.g. in/out files)
+ * @param	data struct holding the varibale types of the lexer tokens
+ * @param	flag int to check whether the cmd of the process has been found
+ * @return	tokens->data passed from the data struct into the parser struct
+ * 			after varibales have been assigned correctly
  * @return	
 */
 static t_data	*handle_vars(t_data *data, int *flag)
@@ -41,16 +48,22 @@ static t_data	*handle_vars(t_data *data, int *flag)
 }
 
 /**
- * @brief	
- * @param	data
- * @param	type
- * @return	
+ * @brief	if previous token was a meta char, the next is 
+ * 			either an in or out file, or the here_doc limiter
+ * 			- if < or >, next is in or out file
+ *			- if << here_doc, next is limiter string
+ *			- if >> concat, so outfile follows
+			- don't need to handle pipes here
+ * @param	data struct holding the varibale types of the lexer tokens
+ * @param	type the previous tokens type of meta character
+ * @return	tokens->data passed from the data struct into the parser struct
+ * 			after varibales have been assigned correctly
 */
 static t_data	*handle_next(t_data *data, char *type)
 {
 	if (is_meta(data->input))
 		data->meta = data->input;
-	else if (ft_strcmp(type, LESSLESS) == 0) //here_doc
+	else if (ft_strcmp(type, LESSLESS) == 0)
 		data->str = data->input;
 	else
 		data->file = data->input;
@@ -58,12 +71,16 @@ static t_data	*handle_next(t_data *data, char *type)
 }
 
 /**
- * @brief	
- * @param	tokens
- * @param	data
- * @param	flag
- * @return	tokens->data
- * 
+ * @brief	if no pipe meta is encountered, handle_vars()
+ * 			everything possible within one process (i.e. one cmd)
+ * 			if pipe meta is found, this is added to variable struct
+ * 			and the process starts from the beginning finding the 
+ * 			new cmd string etc.
+ * @param	tokens t_tokens passed from the lexer to be sorted by the parser()
+ * @param	data struct holding the variable types of the lexer tokens
+ * @param	flag int to check whether the cmd of the process has been found
+ * @return	tokens->data passed from the data struct into the parser struct
+ * 			after varibales have been assigned correctly
 */
 static t_data	*handle_all(t_parser *tokens, t_data *data, int *flag)
 {
@@ -88,7 +105,7 @@ static t_data	*handle_all(t_parser *tokens, t_data *data, int *flag)
  *			- if << here_doc, next is limiter string
  *			- if >> concat, so outfile follows
  *			- if first encountered cmd, then cmd, all others strs
- *			- if pipe, cmd_flag reset to find the new cmd, rest works the same
+ *			- if pipe, flag is reset to find the new cmd, rest works the same
  * @param	tokens t_tokens passed from the lexer to be sorted by the parser()
  * @return	tokens: all the tokens given by the lexer have been
  * 			sorted into the parser->data struct making
