@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 18:38:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 19:07:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,13 @@ int	len_token(char *input, int len)
 */
 int	amount_tokens(char *input)
 {
-	int		i = 0;
-	int		count = 0;
-	char	*quote_type = NULL;
+	int		i;
+	int		count;
+	char	*quote_type;
 
+	i = 0;
+	count = 0;
+	quote_type = NULL;
 	while (input[i])
 	{
 		while (input[i] && ft_isspace(input[i]))
