@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 20:52:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 20:54:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static char	*split_tokens(char *input, int len)
 	return (token);
 }
 
+/**
+ * @brief	
+ * @param	
+ * @return	
+*/
 static char	**parser_split(char *input)
 {
 	char	**array;
@@ -51,6 +56,8 @@ static char	**parser_split(char *input)
 		start = start_token(input, (start + len));
 		len = len_token(input, start);
 		array[i] = (char *)malloc(sizeof(char *) * (len + 1));
+		if (!array[i])
+			return (NULL);
 		array[i] = split_tokens(&input[start], len);
 		i++;
 	}
@@ -65,30 +72,10 @@ static char	**parser_split(char *input)
  * @return	2D array of separated strings made from the input, 
  * 			ready to be tokenized into the parser struct list of tokens
 */
-
 char	**parse_input(char *input)
 {
 	char	**array;
-	// int		no_tokens;
-	// int		start = 0;
-	// int		len = 0;
-	// int		i = 0;
 
-	// no_tokens = amount_tokens(input);
-	// array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-	// if (!array)
-	// 	return (NULL);
-	// while (i < no_tokens)
-	// {
-	// 	start = start_token(input, (start + len));
-	// 	len = len_token(input, start);
-	// 	array[i] = (char *)malloc(sizeof(char) * (len + 1));
-	// 	if (!array)
-	// 		return (NULL);
-	// 	array[i] = split_tokens(&input[start], len);
-	// 	i++;
-	// }
-	// array[i] = NULL;
 	array = parser_split(input);
 	if (!array)
 		return (NULL);
