@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 19:41:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 20:31:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 {
 	t_parser	*list;
 	int			i = 0;
-	
 	list = tokens;
+	printf("hello?\n");
 	while (list)
 	{
 		printf("[%i]\t ", i);
@@ -54,7 +54,8 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 
-		// print_the_full_thing(tokens);
+		// shelly_parser_print(tokens);
+		print_the_full_thing(tokens);
 
 
 		// ft_execute(&env, tokens);

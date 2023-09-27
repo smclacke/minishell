@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 19:43:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 20:31:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*split_tokens(char *input, int len)
  * @param	no_tokens number of tokens needed and therefore 
  * 			amount of space needed in the array
  * @return	array of tokens which will be passed to the parser
-*/
+ */
 static char	**parser_split(char *input, int no_tokens)
 {
 	char	**array;
@@ -55,11 +55,15 @@ static char	**parser_split(char *input, int no_tokens)
 	i = 0;
 	while (i < no_tokens)
 	{
+		printf("no_tokens = %i\n", no_tokens);
 		start = start_token(input, (start + len));
+		printf("start_token = %i\n", start);
 		len = len_token(input, start);
+		printf("len_token = %i\n", len);
 		array[i] = (char *)malloc(sizeof(char) * (len + 1));
 		if (!array[i])
 			return (NULL);
+		printf("i am here\n");
 		array[i] = split_tokens(&input[start], len);
 		i++;
 	}
@@ -105,7 +109,6 @@ char	**parse_input(char *input)
 	printf("input = %s\n", input);
 	if (check_split(input))
 	{
-		printf("where????");
 		no_tokens = amount_tokens(input);
 		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 		if (!array)
@@ -143,12 +146,12 @@ char	**parse_input(char *input)
 // 			printf("start = %i\n", start);
 // 			len = len_token(input, start);
 // 			array[i] = (char *)malloc(sizeof(char) * (len + 1));
-// 			// if (!array)
-// 			// 	return (NULL);
+// 			if (!array)
+// 				return (NULL);
 // 			array[i] = split_tokens(&input[start], len);
 // 			i++;
 // 		}
-// 		array[no_tokens] = NULL;
+// 		array[i] = NULL;
 // 	}
 // 	else
 // 		array = ft_split(input, ' ');

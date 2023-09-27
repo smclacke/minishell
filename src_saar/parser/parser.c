@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 17:54:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 20:31:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 */
 static t_data	*handle_vars(t_data *data, int *flag)
 {
-	if (!data)
-		return (NULL);
 	if (!*flag)
 	{
 		if (is_redirect(data->input))
@@ -64,8 +62,6 @@ static t_data	*handle_vars(t_data *data, int *flag)
 */
 static t_data	*handle_next(t_data *data, char *type)
 {
-	if (!data)
-		return (NULL);
 	if (is_meta(data->input))
 		data->meta = data->input;
 	else if (ft_strcmp(type, LESSLESS) == 0)
@@ -89,8 +85,6 @@ static t_data	*handle_next(t_data *data, char *type)
 */
 static t_data	*handle_all(t_parser *tokens, t_data *data, int *flag)
 {
-	if (!tokens || data)
-		return (NULL);
 	if (data && !is_pipe(data->input))
 		tokens->data = handle_vars(data, flag);
 	else if (data && is_pipe(data->input))
