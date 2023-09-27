@@ -1,5 +1,12 @@
 ---------------------------------------------------------------------------------
 
+**THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
+
+my brain is fried and i hate this project :)
+
+Holy mother of fuckidy fuck
+here we gooo
+
 mehmehmehmeh
      __
  .--()°'.'
@@ -21,61 +28,104 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **25/09:**
 
--> get this splitting done... simplify.. look for spaces, look for quotes, look for metas...
+-> meta separation
+//// seems to actually be doing the thing.... 
+//// do loads of testing before moving on, ask if im crazy
+//// norm and clean up
 
 -> protecting all mallocs in parse_input(), like four times???
 
+-> TEST TEST TEST
 
-     __
- .--()°'.'
-'|, . ,'
- !_-(_|\echo "some thing" hello
-i = 16
-no_tokens: 3
-lexer list: [echo]
-lexer list: ["some]
-lexer list: [thing"]
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = "some
-[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"
-expander: 		there's a builtin whoop
-"some thing"      __
- .--()°'.'
-'|, . ,'
- !_-(_|\echo "some thing"sdf hello
-i = 16
-no_tokens: 3
-lexer list: [echo]
-lexer list: ["some]
-lexer list: [thing"sdf]
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = "some
-[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"sdf
-expander: 		there's a builtin whoop
-"some thing"sdf      __
- .--()°'.'
-'|, . ,'
- !_-(_|\echo sdf"some thing"sdf hello
+-> normmmm
+
+-> cleaner, better, blah blah
+
+-> EXPANSION LET'S FUCKING GOOOOOO
+
+-----------------------------------------------------------------------------
+
+wtf>> | hellllo"some thing"wtttfff >thing > thing > > thing
+no_tokens: 11
+start = 0
+start = 3
+start = 6
+start = 8
+start = 35
+start = 36
+start = 42
+start = 44
+start = 50
+start = 52
+start = 54
+lexer list: [wtf]
+lexer list: [>>]
+lexer list: [|]
+lexer list: [hellllo"some thing"wtttfff]
+lexer list: [>]
+lexer list: [thing]
+lexer list: [>]
+lexer list: [thing]
+lexer list: [>]
+lexer list: [>]
+lexer list: [thing]
+[0]	 cmd = wtf	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[2]	 cmd = (null)	file = (null)	meta = |	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = hellllo"some thing"wtttfff
+[4]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[5]	 cmd = (null)	file = thing	meta = (null)	str = (null)
+[6]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[7]	 cmd = (null)	file = thing	meta = (null)	str = (null)
+[8]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[9]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[10]	 cmd = (null)	file = (null)	meta = (null)	str = thing
+
+
+
+
+echo >> things
 no_tokens: 4
+start = 0
+start = 5
+start = 8
+start = 14
 lexer list: [echo]
-lexer list: [sdf"some]
-lexer list: [thing"sdf]
-lexer list: [hello]
+lexer list: [>>]
+lexer list: [things]
+lexer list: []
 [0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = sdf"some
-[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"sdf
-[3]	 cmd = (null)	file = (null)	meta = (null)	str = hello
+[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[2]	 cmd = (null)	file = things	meta = (null)	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = 
 expander: 		there's a builtin whoop
-sdf"some thing"sdf hello 
 
+
+echo some|thing
+no_tokens: 2
+start = 0
+start = 5
+lexer list: [echo]
+lexer list: [some|]
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = some|
+expander: 		there's a builtin whoop
+some|    
+
+
+ecommmm|hello
+no_tokens: 1
+start = 0
+lexer list: [ecommmm|hello]
+[0]	 cmd = ecommmm|hello	file = (null)	meta = (null)	str = (null)
+     _
 
 ---------------------------------------------------------------------------------
-**THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 
-my brain is fried and i hate this project :)
 
-Holy mother of fuckidy fuck
-here we gooo
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
+
+---------------------------------------------------------------------------------
 
 -> fix the new quote shit in lexer: (last to do notes before this shit show:)
 		!! amount of tokens need to check attached redirects and quotes
@@ -142,11 +192,6 @@ echo hello <<something >out
 > something
 cat out
  -> hello
-
-
----------------------------------------------------------------------------------
-
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
 ---------------------------------------------------------------------------------
 

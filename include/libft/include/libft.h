@@ -6,7 +6,7 @@
 /*   By: SarahLouise <SarahLouise@student.42.fr>      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 19:21:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/13 18:42:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 18:11:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,5 +182,7 @@ int		ft_isquote(int c);
 int		ft_ispipe(int c);
 
 char	*ft_strcpy(char *dest, char *src);
+
+int		ft_ismeta(int c);
 
 #endif

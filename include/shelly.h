@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 16:55:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 18:39:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@
 
 
 /**
- * @brief	specifies the different types of tokens from the lexer, that are parsed and then given to the executor
- * @param	cmd: first arg from commandline or arg after a pipe
- * @param	meta: pipe, more, less, moremore, lessless. Dollar is excluded and handled as a string
- * @param	file: in and out files, args that come after more, less and moremore
- * @param	str: all other input. command arguments, typos...
+ * @brief	specifies the different variable types of tokens from the
+ * 			lexer that are parsed and then given to the executor
+ * @param	cmd: first string in each process without redirect char
+ * @param	meta: pipe, more, less, moremore, lessless. 
+ * 			**dollar is excluded and handled as a string
+ * @param	file: in and out files; after more, less and moremore chars
+ * @param	str:  limiter for here_doc (string after <<) and all other input
 */
 typedef struct s_data
 {
@@ -71,40 +73,47 @@ typedef struct s_parser
 	struct s_parser		*next;
 }				t_parser;
 
-
-//----- lexer.c -----//
+// lexer
+//---------- lexer ----------//
 t_parser			*lexer(char *input);
 
-//----- lexer_utils.c -----//
+//-------- lexer_utils --------//
 t_parser			*lexer_listlast(t_parser *list);
 void				lexer_listadd_back(t_parser **list, t_parser *new);
 t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
-//----- splitting.c -----//
+//---------- token ----------//
 char				**parse_input(char *input);
 
-//----- splitting_utils.c -----//
+//-------- token_size --------//
+int					start_token(char *input, int old_start);
+int					len_token(char *input, int len);
+int					amount_tokens(char *input);
+
+//-------- token_utils --------//
+int					is_meta(char *input);
+int					space_or_meta(int c);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
-bool				is_meta(char *input);
-int					ft_ismeta(int c);
-int					is_token(char *input);
 
-//---- parser.c ----//
+// parser
+//-------- parser --------//
 t_parser			*parser(t_parser *tokens);
 
-//---- parser_utils.c ----//
+//-------- parser_utils --------//
 t_data				*handle_pipe(t_data *data, int *flag_cmd);
 int					is_pipe(void *input);
-t_data				*init_data(t_parser *tokens);
 char				*is_redirect(void *input);
+t_data				*init_data(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
+// expand
+//---------- quotes ----------//
 
 
 
-//---------------DJOYKE-----------//
+//--------------------DJOYKE---------------------//
 
 typedef struct s_env
 {
