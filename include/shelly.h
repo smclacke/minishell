@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 17:59:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 18:39:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,30 +77,31 @@ typedef struct s_parser
 //---------- lexer ----------//
 t_parser			*lexer(char *input);
 
-//---------- lexer_utils ----------//
+//-------- lexer_utils --------//
 t_parser			*lexer_listlast(t_parser *list);
 void				lexer_listadd_back(t_parser **list, t_parser *new);
 t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
-//----- token -----//
+//---------- token ----------//
 char				**parse_input(char *input);
 
-//----- token_size -----//
+//-------- token_size --------//
 int					start_token(char *input, int old_start);
 int					len_token(char *input, int len);
+int					amount_tokens(char *input);
 
-//----- token_utils -----//
+//-------- token_utils --------//
 int					is_meta(char *input);
+int					space_or_meta(int c);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
-int					ft_ismeta(int c);
 
 // parser
-//---- parser ----//
+//-------- parser --------//
 t_parser			*parser(t_parser *tokens);
 
-//---- parser_utils ----//
+//-------- parser_utils --------//
 t_data				*handle_pipe(t_data *data, int *flag_cmd);
 int					is_pipe(void *input);
 char				*is_redirect(void *input);
@@ -108,11 +109,11 @@ t_data				*init_data(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
 // expand
-//------- quotes -------//
+//---------- quotes ----------//
 
 
 
-//---------------DJOYKE-----------//
+//--------------------DJOYKE---------------------//
 
 typedef struct s_env
 {

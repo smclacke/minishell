@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   splitting_utils.c                                  :+:    :+:            */
+/*   token_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 16:54:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 18:11:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ int		is_meta(char *input)
 	return (0);
 }
 
+int	space_or_meta(int c)
+{
+	if (ft_isspace(c) || ft_ismeta(c))
+		return (c);
+	return (0);
+}
+
 char	*which_quote(char *input)
 {
 	if (ft_strnstr(input, SINGLE_Q, 1))
@@ -44,9 +51,4 @@ int	next_quote(char *input, char c)
 	while (input[i] && input[i] != c)
 		i++;
 	return (i);
-}
-
-int	ft_ismeta(int c)
-{
-	return (c == '|' || c == '<' || c == '>');
 }
