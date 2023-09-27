@@ -72,10 +72,10 @@
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
-	expand_dollar(node, env)//going to be here for now
+	// expand_dollar(node, env);//going to be here for now
 	while (lst)
 	{
-		if (check_for_meta(lst, env))
+		if (check_for_meta(lst))
 		{
 			printf("expander:		there's a meta whoop\n");
 			printf("\n----------------------------------\n");
@@ -119,13 +119,32 @@ void	ft_expand(t_parser *lst, t_env **env)
  * 2) if there's something before the $ echo will print that
  * 3) if it's just a dollar echo will print it and the string that
  * comes after it.
+ * maybe this can already be done in parser
 */
 void	expand_dollar(t_parser *node, t_env **env)
 {
-	while (ft_strnstr(node->data->str, "$", )
+	int		len;
+	int		i;
+	char	*compare_string;
+	char	*temp;
+
+	len = ft_strlen(node->data->str);
+	i = 0;
+	/*
+	1- loop through string save everything in temp until $
+	2- if index of $ == len put that in temp too/ or return OG.
+	3- if $ != len put rest in compare_string = ft_substr
+	*/
+	while (env[i])
 	{
-		if ()
+		if (mini_strcmp(node->data->str, &env->value, len - 1));
+		//4-  if temp != NULL and if it finds anything str_join temp with env->value
+		//5-  else replace node->date->str with expanded value from
+		//env->value[i];
+
 	}
+	//6- if that doesnt return a value just return temp;
+	//7- working? great make it work with quotes
 }
 
 
@@ -138,7 +157,6 @@ void	expand_dollar(t_parser *node, t_env **env)
  * 1) needs to be passed to actual process,
  * 2) MAYBE MAKE IT A BOOL?
  * 3) removing files int unlink(const char *pathname);
-	/*
 	// while (lst)
 	// {
 	// 	if (lst->cmd)
@@ -152,7 +170,6 @@ void	expand_dollar(t_parser *node, t_env **env)
 	// 					expand to check the exit code
 	// 				}
 	// 	}
-	*/
 */
 bool	check_for_meta(t_parser *node)
 {
@@ -161,6 +178,7 @@ bool	check_for_meta(t_parser *node)
 	if (mini_strcmp(node->data->str, "$") == 0)
 	{
 		printf("expander:		dolllaaaah\n");
+		//dollar_expand fucntion
 		return (true);
 	}
 	else if (mini_strcmp(node->data->meta, ">>") == 0)

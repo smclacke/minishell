@@ -19,3 +19,62 @@
     1) check exit and unset again for the quoted value etc
     2) check echo again
 3) make bash script for easier testing
+
+
+-------------------$-----------------------
+
+-----------------------------------------
+
+echo $USER
+dreijans
+
+echo "$USER"
+dreijans
+
+------------------------------------------------
+
+echo $ USER
+$ USER
+
+echo $"USER"
+USER
+
+-------------------------------------------------
+
+echo $ U"SER"
+$ USER
+
+echo '$USER'
+$USER
+
+echo $'USER'
+USER
+
+echo $U'SER'
+SER
+
+"echo $USER"
+echo minishell: command not found
+
+'echo $USER'
+echo $USER: command not found
+
+
+-------------------------------------------------
+
+echo abc$USER
+abcdreijans
+
+echo "abc$USER"
+abcdreijans
+
+-----------------------------------------------------
+
+echo abc$i
+abc
+
+echo abc$
+abc$
+
+echo a$bc
+a
