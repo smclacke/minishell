@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 19:27:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 19:43:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,29 @@ static char	*split_tokens(char *input, int len)
  * 			amount of space needed in the array
  * @return	array of tokens which will be passed to the parser
 */
-// static char	**parser_split(char *input, int no_tokens)
-// {
-// 	char	**array;
-// 	int		start;
-// 	int		len;
-// 	int		i;
+static char	**parser_split(char *input, int no_tokens)
+{
+	char	**array;
+	int		start;
+	int		len;
+	int		i;
 
-// 	array = NULL;
-// 	start = 0;
-// 	len = 0;
-// 	i = 0;
-// 	while (i < no_tokens)
-// 	{
-// 		start = start_token(input, (start + len));
-// 		printf("start = %i\n", start);
-// 		len = len_token(input, start);
-// 		array[i] = (char *)malloc(sizeof(char) * (len + 1));
-// 		// if (!array)
-// 		// 	return (NULL);
-// 		array[i] = split_tokens(&input[start], len);
-// 		i++;
-// 	}
-// 	return (array);
-// }
+	array = NULL;
+	start = 0;
+	len = 0;
+	i = 0;
+	while (i < no_tokens)
+	{
+		start = start_token(input, (start + len));
+		len = len_token(input, start);
+		array[i] = (char *)malloc(sizeof(char) * (len + 1));
+		if (!array[i])
+			return (NULL);
+		array[i] = split_tokens(&input[start], len);
+		i++;
+	}
+	return (array);
+}
 
 /**
  * @brief	if there's quotation and/or meta char, need to find them and
@@ -87,33 +86,6 @@ static int	check_split(char *input)
 	return (0);
 }
 
-// static char	**parser_split(char *input)
-// {
-// 	char	**array;
-// 	int		no_tokens;
-// 	int		start;
-// 	int		len;
-// 	int		i;
-
-// 	array = NULL;
-// 	start = 0;
-// 	len = 0;
-// 	i = 0;
-// 	no_tokens = amount_tokens(input);
-// 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-// 	if (!array)
-// 		return (NULL);
-// 	while (i < no_tokens)
-// 	{
-// 		start = start_token(input, (start + len));
-// 		len = len_token(input, start);
-// 		array[i] = (char *)malloc(sizeof(char) * (len + 1));
-// 		array[i] = split_tokens(&input[start], len);
-// 		i++;
-// 	}
-// 	return (array);
-// }
-
 // /**
 //  * @brief	takes the input string from the command line, 
 //  * 			iterates through it. If there are quoations and/or meta chars,
@@ -123,58 +95,24 @@ static int	check_split(char *input)
 //  * @return	2D array of separated strings made from the input, 
 //  * 			ready to be tokenized into the parser struct list of tokens
 // */
-// char	**parse_input(char *input)
-// {
-// 	char	**array;
-// 	// int		no_tokens;
-
-// 	array = NULL;
-// 	// no_tokens = 0;
-// 	if (check_split(input))
-// 	{
-// 		// no_tokens = amount_tokens(input);
-// 		// array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-// 		// if (!array)
-// 		// 	return (NULL);
-// 		array = parser_split(input);
-// 		if (!array)
-// 			return (NULL);
-// 	}
-// 	else
-// 		array = ft_split(input, ' ');
-// 	if (!array)
-// 		return (NULL);
-// 	return (array);
-// }
-
-// OLD
 char	**parse_input(char *input)
 {
-	char	**array = NULL;
-	int		no_tokens = 0;
-	int		start = 0;
-	int		len = 0;
-	int		i = 0;
+	char	**array;
+	int		no_tokens;
 
+	array = NULL;
+	no_tokens = 0;
+	printf("input = %s\n", input);
 	if (check_split(input))
 	{
+		printf("where????");
 		no_tokens = amount_tokens(input);
-		printf("no_tokens: %i\n", no_tokens);
 		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 		if (!array)
 			return (NULL);
-		while (i < no_tokens)
-		{
-			start = start_token(input, (start + len));
-			printf("start = %i\n", start);
-			len = len_token(input, start);
-			array[i] = (char *)malloc(sizeof(char) * (len + 1));
-			// if (!array)
-			// 	return (NULL);
-			array[i] = split_tokens(&input[start], len);
-			i++;
-		}
-		array[no_tokens] = NULL;
+		array = parser_split(input, no_tokens);
+		if (!array)
+			return (NULL);
 	}
 	else
 		array = ft_split(input, ' ');
@@ -182,3 +120,39 @@ char	**parse_input(char *input)
 		return (NULL);
 	return (array);
 }
+
+// OLD
+// char	**parse_input(char *input)
+// {
+// 	char	**array = NULL;
+// 	int		no_tokens = 0;
+// 	int		start = 0;
+// 	int		len = 0;
+// 	int		i = 0;
+
+// 	if (check_split(input))
+// 	{
+// 		no_tokens = amount_tokens(input);
+// 		printf("no_tokens: %i\n", no_tokens);
+// 		array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
+// 		if (!array)
+// 			return (NULL);
+// 		while (i < no_tokens)
+// 		{
+// 			start = start_token(input, (start + len));
+// 			printf("start = %i\n", start);
+// 			len = len_token(input, start);
+// 			array[i] = (char *)malloc(sizeof(char) * (len + 1));
+// 			// if (!array)
+// 			// 	return (NULL);
+// 			array[i] = split_tokens(&input[start], len);
+// 			i++;
+// 		}
+// 		array[no_tokens] = NULL;
+// 	}
+// 	else
+// 		array = ft_split(input, ' ');
+// 	if (!array)
+// 		return (NULL);
+// 	return (array);
+// }
