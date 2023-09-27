@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 17:21:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 17:54:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@
  * @param	flag int to check whether the cmd of the process has been found
  * @return	tokens->data passed from the data struct into the parser struct
  * 			after varibales have been assigned correctly
- * @return	
+ * @return	tokens->data passed from the data struct into the parser struct
+ * 			after varibales have been assigned correctly
 */
 static t_data	*handle_vars(t_data *data, int *flag)
 {
+	if (!data)
+		return (NULL);
 	if (!*flag)
 	{
 		if (is_redirect(data->input))
@@ -38,7 +41,7 @@ static t_data	*handle_vars(t_data *data, int *flag)
 		}
 	}
 	else if (*flag)
-	{	
+	{
 		if (is_redirect(data->input))
 			data->meta = data->input;
 		else
@@ -61,6 +64,8 @@ static t_data	*handle_vars(t_data *data, int *flag)
 */
 static t_data	*handle_next(t_data *data, char *type)
 {
+	if (!data)
+		return (NULL);
 	if (is_meta(data->input))
 		data->meta = data->input;
 	else if (ft_strcmp(type, LESSLESS) == 0)
@@ -84,6 +89,8 @@ static t_data	*handle_next(t_data *data, char *type)
 */
 static t_data	*handle_all(t_parser *tokens, t_data *data, int *flag)
 {
+	if (!tokens || data)
+		return (NULL);
 	if (data && !is_pipe(data->input))
 		tokens->data = handle_vars(data, flag);
 	else if (data && is_pipe(data->input))
@@ -136,4 +143,3 @@ t_parser	*parser(t_parser *tokens)
 	}
 	return (tokens);
 }
-

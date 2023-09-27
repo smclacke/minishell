@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 17:06:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 17:59:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,39 +73,42 @@ typedef struct s_parser
 	struct s_parser		*next;
 }				t_parser;
 
-
-//----- lexer.c -----//
+// lexer
+//---------- lexer ----------//
 t_parser			*lexer(char *input);
 
-//----- lexer_utils.c -----//
+//---------- lexer_utils ----------//
 t_parser			*lexer_listlast(t_parser *list);
 void				lexer_listadd_back(t_parser **list, t_parser *new);
 t_parser			*lexer_listnew(void *input);
 t_parser			*shelly_print_list(t_parser *token);
 
-//----- token.c -----//
+//----- token -----//
 char				**parse_input(char *input);
 
-//----- token_size.c -----//
+//----- token_size -----//
 int					start_token(char *input, int old_start);
 int					len_token(char *input, int len);
 
-//----- token_utils.c -----//
+//----- token_utils -----//
 int					is_meta(char *input);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
 int					ft_ismeta(int c);
 
-//---- parser.c ----//
+// parser
+//---- parser ----//
 t_parser			*parser(t_parser *tokens);
 
-//---- parser_utils.c ----//
+//---- parser_utils ----//
 t_data				*handle_pipe(t_data *data, int *flag_cmd);
 int					is_pipe(void *input);
 char				*is_redirect(void *input);
 t_data				*init_data(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
+// expand
+//------- quotes -------//
 
 
 
