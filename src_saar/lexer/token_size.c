@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 19:29:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 15:21:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 int	start_token(char *input, int old_start)
 {
-	int 	new_start;
+	int		new_start;
 	char	*quote_type;
 
 	new_start = 0;
@@ -76,7 +76,7 @@ int	len_token(char *input, int len)
 		return (len);
 	}
 	while (input[len] && !space_or_meta(input[len]))
-	{	
+	{
 		if (ft_isquote(input[len]))
 		{
 			quote_type = which_quote(&input[len]);
@@ -85,46 +85,63 @@ int	len_token(char *input, int len)
 		len++;
 	}
 	len = len - tmp;
-	return (len);	
+	return (len);
 }
 
 /**
- * @brief	
- * @param	
- * @param	
- * @return	
+ * @brief	gets the index position after parsing through the
+ * 			input of characters as long as there are no metas
+ * 			or spaces, handling quotations, for amount_tokens()
+ * @param	input from the command line
+ * @param	i current index of input
+ * @return	index after parsing through chars and quotes
+*/
+static int	quote_input(char *input, int i)
+{
+	char	*quote_type;
+
+	quote_type = NULL;
+	while (input[i] && !space_or_meta(input[i]))
+	{
+		if (ft_isquote(input[i]))
+		{
+			quote_type = which_quote(&input[i]);
+			i += next_quote(&input[i], *quote_type);
+		}
+		i++;
+	}
+	return (i);
+}
+
+/**
+ * @brief	parses through the input and counts how many "words"
+ * 			quoted strings and metas, returns the amount so that
+ * 			array can be given enough space to store these tokens in
+ * @param	input from the command line
+ * @return	count amount of strings that will be put into array 
+ * 			and then tokenized
 */
 int	amount_tokens(char *input)
 {
 	int		i;
 	int		count;
-	char	*quote_type;
 
 	i = 0;
 	count = 0;
-	quote_type = NULL;
 	while (input[i])
 	{
 		while (input[i] && ft_isspace(input[i]))
 			i++;
 		if (ft_ismeta(input[i]))
 		{
-			if (ft_ismeta(input[i + 1])) // like... different?
+			if (ft_ismeta(input[i + 1]))
 				i++;
 			count++;
 			i++;
 		}
 		if (input[i] && !ft_isspace(input[i]))
 		{
-			while (input[i] && !space_or_meta(input[i]))
-			{
-				if (ft_isquote(input[i]))
-				{
-					quote_type = which_quote(&input[i]); //
-					i += next_quote(&input[i], *quote_type); // these two in one func ?
-				}
-				i++;
-			}
+			i = quote_input(input, i);
 			count++;
 		}
 	}

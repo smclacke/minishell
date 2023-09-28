@@ -26,17 +26,22 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
-**25/09:**
+**TO DO**
 
--> amount_tokens() in token_size.c, normed, cleaner and commented
+-> ERRORS lexer and parser
+-> LEAKS lexer and parser
+-> expand quotes
 
--> LEAKSSSSSSS
+**DJOYKE**
+subject = • Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
 
--> TEST TEST TEST
+---------------------------------------------------------------------------------
 
--> EXPANSION LET'S FUCKING GOOOOOO
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
 -----------------------------------------------------------------------------
+
+Current :)
 
 wtf>> | hellllo"some thing"wtttfff >thing > thing > > thing
 no_tokens: 11
@@ -74,49 +79,16 @@ lexer list: [thing]
 [9]	 cmd = (null)	file = (null)	meta = >	str = (null)
 [10]	 cmd = (null)	file = (null)	meta = (null)	str = thing
 
-
-
-
-echo >> things
-no_tokens: 4
-start = 0
-start = 5
-start = 8
-start = 14
-lexer list: [echo]
-lexer list: [>>]
-lexer list: [things]
-lexer list: []
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
-[2]	 cmd = (null)	file = things	meta = (null)	str = (null)
-[3]	 cmd = (null)	file = (null)	meta = (null)	str = 
-expander: 		there's a builtin whoop
-
-
-echo some|thing
-no_tokens: 2
-start = 0
-start = 5
-lexer list: [echo]
-lexer list: [some|]
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = some|
-expander: 		there's a builtin whoop
-some|    
-
-
-ecommmm|hello
-no_tokens: 1
-start = 0
-lexer list: [ecommmm|hello]
-[0]	 cmd = ecommmm|hello	file = (null)	meta = (null)	str = (null)
-     _
-
 ---------------------------------------------------------------------------------
+**25/09:**
 
+-> amount_tokens() in token_size.c, normed, cleaner and commented
 
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
+-> LEAKSSSSSSS
+
+-> TEST TEST TEST
+
+-> EXPANSION LET'S FUCKING GOOOOOO
 
 ---------------------------------------------------------------------------------
 
@@ -413,4 +385,40 @@ expander: 		there's a builtin whoop
 ........................
 
 ---------------------------------------------------------------------------------
+
+echo >> things
+no_tokens: 4
+start = 0
+start = 5
+start = 8
+start = 14
+lexer list: [echo]
+lexer list: [>>]
+lexer list: [things]
+lexer list: []
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[2]	 cmd = (null)	file = things	meta = (null)	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = 
+expander: 		there's a builtin whoop
+
+
+echo some|thing
+no_tokens: 2
+start = 0
+start = 5
+lexer list: [echo]
+lexer list: [some|]
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = some|
+expander: 		there's a builtin whoop
+some|    
+
+
+ecommmm|hello
+no_tokens: 1
+start = 0
+lexer list: [ecommmm|hello]
+[0]	 cmd = ecommmm|hello	file = (null)	meta = (null)	str = (null)
+     _
 
