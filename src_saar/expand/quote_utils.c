@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 16:44:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 17:21:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,24 @@ char	*remove_quotes(char *str, int len)
 	int		j = 0;
 	char	*tmp;
 
-	tmp = malloc(sizeof(char) * len + 1);
+	tmp = (char *)malloc(sizeof(char) * len + 1);
 	if (!tmp)
 		return (NULL);
 	while (str[i])
 	{
-		// while (str[i] && !ft_isquote(str[i]))
-		// {
+		printf("str[i] = %c\n", str[i]);
+		if (ft_isquote(str[i]))
+			i++;
+		else
+		{
 			tmp[j] = str[i];
 			j++;
 			i++;
-		// }
-		// if (ft_isquote(str[i]))
-		// 	i++;
+		}
 	}
+	tmp[j] = 0;
 	// printf("tmp = %s\n", tmp);
 	// str = tmp;
 	// printf("str = %s\n", str);
-	return (str);
+	return (tmp);
 }
