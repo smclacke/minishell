@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 18:11:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 19:05:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-int		is_meta(char *input)
+int	is_meta(char *input)
 {
 	if (ft_strnstr(input, MOREMORE, 2))
 		return (2);

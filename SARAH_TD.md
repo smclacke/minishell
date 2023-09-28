@@ -28,18 +28,11 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **25/09:**
 
--> meta separation
-//// seems to actually be doing the thing.... 
-//// do loads of testing before moving on, ask if im crazy
-//// norm and clean up
+-> amount_tokens() in token_size.c, normed, cleaner and commented
 
--> protecting all mallocs in parse_input(), like four times???
+-> LEAKSSSSSSS
 
 -> TEST TEST TEST
-
--> normmmm
-
--> cleaner, better, blah blah
 
 -> EXPANSION LET'S FUCKING GOOOOOO
 

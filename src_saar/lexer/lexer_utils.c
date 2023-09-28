@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 20:58:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 19:05:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-t_parser		*lexer_listlast(t_parser *list)
+t_parser	*lexer_listlast(t_parser *list)
 {
 	if (!list)
 		return (0);
