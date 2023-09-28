@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 19:09:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 19:16:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_parser			*cmd_quotes(t_parser *tokens);
 
 //-------- quote_utils --------//
 int					check_quotes(char *str);
-int					check_flag(char *str);
+int					check_space(char *str);
 int					len_wo_quotes(char *str);
 char				*remove_quotes(char *str, int len);
 

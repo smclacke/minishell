@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 19:09:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 19:13:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_quotes(char *str)
 	return (0);
 }
 
-int	check_flag(char *str)
+int	check_space(char *str)
 {
 	int	i;
 
