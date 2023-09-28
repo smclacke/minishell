@@ -6,11 +6,25 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 19:16:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 23:17:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+static int	ft_islower(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 /**
  * @brief	removes both single and double quotes from in and around cmds
@@ -30,9 +44,8 @@ t_parser	*cmd_quotes(t_parser *tokens)
 	{
 		if (list->data->cmd)
 		{
-			if (check_quotes(list->data->cmd))
+			if (ft_islower(list->data->cmd) && check_quotes(list->data->cmd))
 			{
-				// check if command + str/flag in quotes (not valid)
 				if (check_space(list->data->cmd))
 				{
 					len = len_wo_quotes(list->data->cmd);

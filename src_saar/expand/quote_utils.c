@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 19:13:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 23:05:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	check_quotes(char *str)
 	return (0);
 }
 
+/**
+ * @brief	are there spaces inside the quotation?
+*/
 int	check_space(char *str)
 {
 	int	i;
@@ -40,6 +43,9 @@ int	check_space(char *str)
 	return (1);
 }
 
+/**
+ * @brief	length of string without any quotations
+*/
 int	len_wo_quotes(char *str)
 {
 	int	len;
@@ -60,6 +66,9 @@ int	len_wo_quotes(char *str)
 	return (len);
 }
 
+/**
+ * @brief	removes any/all quotations
+*/
 char	*remove_quotes(char *str, int len)
 {
 	int		i;

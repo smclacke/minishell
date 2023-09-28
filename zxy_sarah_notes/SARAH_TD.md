@@ -32,8 +32,12 @@ dein computer, kein computer
 -> LEAKS lexer and parser
 -> expand quotes
 
-
 subject = • Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
+
+-------------->  e"C"ho
+Command 'eCho' not found
+
+APPARENTLY IT'S CASE SENSITIVE
 
 
 HAWHAWHAW
@@ -52,6 +56,45 @@ len = 8
 [6]	 cmd = cdfgfdss	file = (null)	meta = (null)	str = (null)
 [7]	 cmd = (null)	file = (null)	meta = >>	str = (null)
 [8]	 cmd = (null)	file = something	meta = (null)	str = (null)
+
+---------------------------------------------------------------------------------
+I'm confused by all this extra shit i had in this function so im keeping it incase i figure out what the point of it all was....
+
+/**
+ * @brief	find the start position of each token
+ * 			old_start from previous position is added inc. spaces
+ * 			if meta is encountered, immediately return that position
+ * 			(metas become their own tokens separately)
+ * 			if quote, find matching quote and keep iterating
+ * 			until the next space (outside the quotes) is found
+ * @param	input from command line
+ * @param	old_start from previous token
+ * @return	new_start = new starting position of token needed to be made
+*/
+int	start_token(char *input, int old_start)
+{
+	int		new_start;
+	char	*quote_type;
+
+	new_start = 0;
+	quote_type = NULL;
+	while (input[old_start] && ft_isspace(input[old_start]))
+		old_start++;
+	new_start = old_start;
+	// while (input[old_start] && !ft_isspace(input[old_start]))
+	// {
+	// 	if (ft_ismeta(input[old_start]))
+	// 		return (new_start);
+	// 	if (ft_isquote(input[old_start]))
+	// 	{
+	// 		quote_type = which_quote(&input[old_start]);
+	// 		old_start += next_quote(&input[old_start], *quote_type);
+	// 	}
+	// 	old_start++;
+	// }
+	return (new_start);
+}
+
 
 ---------------------------------------------------------------------------------
 

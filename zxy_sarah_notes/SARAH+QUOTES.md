@@ -5,7 +5,10 @@ bash =
 echo "something << hello >in"
 something << hello >in
 
+--------------> Is it the case that all strs (in my struct)
+		can just lose their quotes..? for all cases?
 
+--------------> what else do we need to do with the quotes??
 
 - **SINGLE QUOTES**
 
