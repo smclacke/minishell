@@ -36,7 +36,13 @@ dein computer, kein computer
 
 -> EXPANSION LET'S FUCKING GOOOOOO
 
+-> update for djoyke: 
+	- no longer splitting only on spaces, just using my meaty split since why not and norm
+	- 
+
 -----------------------------------------------------------------------------
+
+Current :)
 
 wtf>> | hellllo"some thing"wtttfff >thing > thing > > thing
 no_tokens: 11
@@ -75,43 +81,6 @@ lexer list: [thing]
 [10]	 cmd = (null)	file = (null)	meta = (null)	str = thing
 
 
-
-
-echo >> things
-no_tokens: 4
-start = 0
-start = 5
-start = 8
-start = 14
-lexer list: [echo]
-lexer list: [>>]
-lexer list: [things]
-lexer list: []
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
-[2]	 cmd = (null)	file = things	meta = (null)	str = (null)
-[3]	 cmd = (null)	file = (null)	meta = (null)	str = 
-expander: 		there's a builtin whoop
-
-
-echo some|thing
-no_tokens: 2
-start = 0
-start = 5
-lexer list: [echo]
-lexer list: [some|]
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = some|
-expander: 		there's a builtin whoop
-some|    
-
-
-ecommmm|hello
-no_tokens: 1
-start = 0
-lexer list: [ecommmm|hello]
-[0]	 cmd = ecommmm|hello	file = (null)	meta = (null)	str = (null)
-     _
 
 ---------------------------------------------------------------------------------
 
@@ -413,4 +382,40 @@ expander: 		there's a builtin whoop
 ........................
 
 ---------------------------------------------------------------------------------
+
+echo >> things
+no_tokens: 4
+start = 0
+start = 5
+start = 8
+start = 14
+lexer list: [echo]
+lexer list: [>>]
+lexer list: [things]
+lexer list: []
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[2]	 cmd = (null)	file = things	meta = (null)	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = 
+expander: 		there's a builtin whoop
+
+
+echo some|thing
+no_tokens: 2
+start = 0
+start = 5
+lexer list: [echo]
+lexer list: [some|]
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = some|
+expander: 		there's a builtin whoop
+some|    
+
+
+ecommmm|hello
+no_tokens: 1
+start = 0
+lexer list: [ecommmm|hello]
+[0]	 cmd = ecommmm|hello	file = (null)	meta = (null)	str = (null)
+     _
 

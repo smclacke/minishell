@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 20:54:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 14:27:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,25 @@ static char	*split_tokens(char *input, int len)
 }
 
 /**
- * @brief	
- * @param	
+ * @brief	create an array by splitting the input string
+ * 			quotations stay intact including spaces and anything
+ * 			on either side of them, everything else is split
+ * 			on spaces and meta characters
+ * @param	input from the command line
  * @return	
 */
 static char	**parser_split(char *input)
 {
 	char	**array;
-	int		no_tokens;
+	int		i;
 	int		start;
 	int		len;
-	int		i;
+	int		no_tokens;
 
-	no_tokens = amount_tokens(input);
 	i = 0;
 	start = 0;
 	len = 0;
+	no_tokens = amount_tokens(input);
 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 	if (!array)
 		return (NULL);
@@ -66,11 +69,10 @@ static char	**parser_split(char *input)
 }
 
 /**
- * @brief	takes the input string from the command line, 
- * 			splits it up on spaces and metas, unless inside quotations
- * @param	input input from the command line
- * @return	2D array of separated strings made from the input, 
- * 			ready to be tokenized into the parser struct list of tokens
+ * @brief	creates an array of tokens from input by calling parser_split()
+ * @param	input from the command line
+ * @return	2D array of separated strings made from the input
+ * 			ready to be parsed into the parser struct list of tokens
 */
 char	**parse_input(char *input)
 {
