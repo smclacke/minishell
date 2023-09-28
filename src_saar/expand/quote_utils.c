@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 18:51:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 18:59:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ int	len_wo_quotes(char *str)
 
 char	*remove_quotes(char *str, int len)
 {
-	int		i = 0;
-	int		j = 0;
+	int		i;
+	int		j;
 	char	*new;
 
+	i = 0;
+	j = 0;
 	new = (char *)malloc(sizeof(char) * len + 1);
 	if (!new)
 		return (NULL);
