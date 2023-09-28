@@ -23,9 +23,12 @@ something
 echo 'some""thing'
 some""thing
 
+echo "some'th'in"g
+some'th'ing
+
 **THIS**
-
-
+remove the OUTER MOST (but not necessarily actually outside chars) quotes
+if more quotes inside and not matching the outer most, keep them
 
 - **SINGLE QUOTES**
 
