@@ -28,8 +28,45 @@ $USER
 
 
 
-
-
 meta characters have special meaning and need to be quoted if representing itself
+
+
+	**COMMAND QUOTATIONS**
+:):):)
+
+"wc -l" < file somthing | << eof
+[0]	 cmd = "wc -l"	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = <	str = (null)
+[2]	 cmd = (null)	file = file	meta = (null)	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = somthing
+[4]	 cmd = (null)	file = (null)	meta = |	str = (null)
+[5]	 cmd = (null)	file = (null)	meta = <<	str = (null)
+[6]	 cmd = (null)	file = (null)	meta = (null)	str = eof
+
+
+wc -l < file something | << eof
+[0]	 cmd = wc	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = -l
+[2]	 cmd = (null)	file = (null)	meta = <	str = (null)
+[3]	 cmd = (null)	file = file	meta = (null)	str = (null)
+[4]	 cmd = (null)	file = (null)	meta = (null)	str = something
+[5]	 cmd = (null)	file = (null)	meta = |	str = (null)
+[6]	 cmd = (null)	file = (null)	meta = <<	str = (null)
+[7]	 cmd = (null)	file = (null)	meta = (null)	str = eof
+
+
+< Makefile wc -l
+234
+< Makefile "wc -l"
+wc -l: command not found
+< Makefile "wc"
+ 234  639 6115
+
+================
+
+ < Makefile "echo"
+
+ < Makefile "echo -n"
+echo -n: command not found
 
 

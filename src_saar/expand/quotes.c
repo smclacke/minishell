@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 18:55:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 19:11:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ t_parser	*cmd_quotes(t_parser *tokens)
 		{
 			if (check_quotes(list->data->cmd))
 			{
-				len = len_wo_quotes(list->data->cmd);
-				list->data->cmd = remove_quotes(list->data->cmd, len);
+				// check if command + flag in quotes (not valid)
+				if (check_flag(list->data->cmd))
+				{
+					len = len_wo_quotes(list->data->cmd);
+					list->data->cmd = remove_quotes(list->data->cmd, len);	
+				}
 			}
 		}
 		list = list->next;
