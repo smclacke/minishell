@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 14:27:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 15:06:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static char	*split_tokens(char *input, int len)
 }
 
 /**
- * @brief	create an array by splitting the input string
+ * @brief	creates an array by splitting the input string;
  * 			quotations stay intact including spaces and anything
  * 			on either side of them, everything else is split
  * 			on spaces and meta characters
  * @param	input from the command line
- * @return	
+ * @return	array of strs to be tokenized
 */
 static char	**parser_split(char *input)
 {
