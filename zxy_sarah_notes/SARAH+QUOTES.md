@@ -17,6 +17,19 @@ something << hello >in
     - double quote can be quoted within double quotes by preceding it with a backslash DON'T HANDLE THIS
     - preserve the literal value of all characters within the quotes
     - EXCEPT FOR ‘$’
+
+- **DOLLAR**
+
         - BUT subject = Handle " (double quote) which should prevent the shell from interpreting the meta characters in the quoted sequence except for $ (dollar sign).
+=== // dollar in or out DOUBLE quotes should still be dollar
+=== // dollar in SINGLE quotes should not be dollar:
+echo '$USER'
+$USER
+
+
+
+
 
 meta characters have special meaning and need to be quoted if representing itself
+
+
