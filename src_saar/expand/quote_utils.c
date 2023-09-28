@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 17:21:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 18:51:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ int	len_wo_quotes(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isquote(str[i]))
+		while (str[i] && !ft_isquote(str[i]))
+		{
 			i++;
-		i++;
-		len++;
+			len++;
+		}
+		if (str[i] && ft_isquote(str[i]))
+			i++;
 	}
 	return (len);
 }
@@ -47,26 +50,22 @@ char	*remove_quotes(char *str, int len)
 {
 	int		i = 0;
 	int		j = 0;
-	char	*tmp;
+	char	*new;
 
-	tmp = (char *)malloc(sizeof(char) * len + 1);
-	if (!tmp)
+	new = (char *)malloc(sizeof(char) * len + 1);
+	if (!new)
 		return (NULL);
 	while (str[i])
 	{
-		printf("str[i] = %c\n", str[i]);
 		if (ft_isquote(str[i]))
 			i++;
 		else
 		{
-			tmp[j] = str[i];
+			new[j] = str[i];
 			j++;
 			i++;
 		}
 	}
-	tmp[j] = 0;
-	// printf("tmp = %s\n", tmp);
-	// str = tmp;
-	// printf("str = %s\n", str);
-	return (tmp);
+	new[j] = 0;
+	return (new);
 }

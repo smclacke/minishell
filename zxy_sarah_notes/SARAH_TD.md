@@ -35,6 +35,23 @@ dein computer, kein computer
 **DJOYKE**
 subject = • Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
 
+HAWHAWHAW
+
+minishell: < file 'ec"h"o' | < in c'd'f'g'f'd's's'"" >> something
+cmd with quotes = 'ec"h"o'
+len = 4
+cmd with quotes = c'd'f'g'f'd's's'""
+len = 8
+[0]	 cmd = (null)	file = (null)	meta = <	str = (null)
+[1]	 cmd = (null)	file = file	meta = (null)	str = (null)
+[2]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = |	str = (null)
+[4]	 cmd = (null)	file = (null)	meta = <	str = (null)
+[5]	 cmd = (null)	file = in	meta = (null)	str = (null)
+[6]	 cmd = cdfgfdss	file = (null)	meta = (null)	str = (null)
+[7]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[8]	 cmd = (null)	file = something	meta = (null)	str = (null)
+
 ---------------------------------------------------------------------------------
 
 **OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
