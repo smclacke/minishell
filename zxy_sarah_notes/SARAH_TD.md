@@ -30,17 +30,17 @@ dein computer, kein computer
 
 -> ERRORS lexer and parser
 -> LEAKS lexer and parser
--> expand quotes
+-> expand quotes (note md)
 
-subject = • Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
 
+**MAKE SURE BUILTINS ARE CHECKED CORRETLY**
 -------------->  e"C"ho
 Command 'eCho' not found
-
-APPARENTLY IT'S CASE SENSITIVE
+**APPARENTLY IT'S CASE SENSITIVE**
 
 
 HAWHAWHAW
+HEHE
 
 minishell: < file 'ec"h"o' | < in c'd'f'g'f'd's's'"" >> something
 cmd with quotes = 'ec"h"o'

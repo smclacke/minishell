@@ -5,10 +5,27 @@ bash =
 echo "something << hello >in"
 something << hello >in
 
---------------> Is it the case that all strs (in my struct)
-		can just lose their quotes..? for all cases?
 
---------------> what else do we need to do with the quotes??
+**THIS**
+
+echo "some'thi'ng"
+some'thi'ng
+
+echo "somet""hing"
+something
+
+echo 'something'
+something
+
+echo 'some''thing'
+something
+
+echo 'some""thing'
+some""thing
+
+**THIS**
+
+
 
 - **SINGLE QUOTES**
 
