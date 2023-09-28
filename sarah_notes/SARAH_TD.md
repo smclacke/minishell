@@ -32,6 +32,8 @@ dein computer, kein computer
 -> LEAKS lexer and parser
 -> expand quotes
 
+**DJOYKE**
+subject = • Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
 
 ---------------------------------------------------------------------------------
 
