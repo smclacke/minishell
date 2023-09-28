@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 15:20:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 15:21:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 */
 int	start_token(char *input, int old_start)
 {
-	int 	new_start;
+	int		new_start;
 	char	*quote_type;
 
 	new_start = 0;
@@ -76,7 +76,7 @@ int	len_token(char *input, int len)
 		return (len);
 	}
 	while (input[len] && !space_or_meta(input[len]))
-	{	
+	{
 		if (ft_isquote(input[len]))
 		{
 			quote_type = which_quote(&input[len]);
@@ -85,7 +85,7 @@ int	len_token(char *input, int len)
 		len++;
 	}
 	len = len - tmp;
-	return (len);	
+	return (len);
 }
 
 /**
@@ -99,7 +99,7 @@ int	len_token(char *input, int len)
 static int	quote_input(char *input, int i)
 {
 	char	*quote_type;
-	
+
 	quote_type = NULL;
 	while (input[i] && !space_or_meta(input[i]))
 	{
