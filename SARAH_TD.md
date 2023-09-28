@@ -26,19 +26,16 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
-**25/09:**
+**TO DO**
 
--> amount_tokens() in token_size.c, normed, cleaner and commented
+-> ERRORS lexer and parser
+-> LEAKS lexer and parser
+-> expand quotes
 
--> LEAKSSSSSSS
 
--> TEST TEST TEST
+---------------------------------------------------------------------------------
 
--> EXPANSION LET'S FUCKING GOOOOOO
-
--> update for djoyke: 
-	- no longer splitting only on spaces, just using my meaty split since why not and norm
-	- 
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
 -----------------------------------------------------------------------------
 
@@ -80,12 +77,16 @@ lexer list: [thing]
 [9]	 cmd = (null)	file = (null)	meta = >	str = (null)
 [10]	 cmd = (null)	file = (null)	meta = (null)	str = thing
 
-
-
 ---------------------------------------------------------------------------------
+**25/09:**
 
+-> amount_tokens() in token_size.c, normed, cleaner and commented
 
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
+-> LEAKSSSSSSS
+
+-> TEST TEST TEST
+
+-> EXPANSION LET'S FUCKING GOOOOOO
 
 ---------------------------------------------------------------------------------
 
