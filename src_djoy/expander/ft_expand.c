@@ -72,22 +72,65 @@
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
-	// expand_dollar(node, env);//going to be here for now
-	while (lst)
+	t_parser	*head;
+	int			len;
+
+	head = lst;
+	while (head)
 	{
-		if (check_for_meta(lst))
+		if (head->data->str != NULL)
 		{
-			printf("expander:		there's a meta whoop\n");
-			printf("\n----------------------------------\n");
+			len = ft_strlen(head->data->str);
+			if (ft_strnstr(head->data->str, "$", len))
+				expand_dollar(head, env, len);
 		}
-		if (check_for_builtin(lst))
-		{
-			printf("expander: 		there's a builtin whoop\n");
-			printf("\n----------------------------------\n");
-			do_builtin(lst, env);
-		}
-		lst = lst->next;
+		check_for_meta(head);
+		if (check_for_builtin(head))
+			do_builtin(head, env);
+		// if (check_for_meta(head))
+		// {
+		// 	printf("expander:		there's a meta whoop\n");
+		// 	printf("\n----------------------------------\n");
+		// }
+		// if (check_for_builtin(head))
+		// {
+		// 	printf("expander: 		there's a builtin whoop\n");
+		// 	printf("\n----------------------------------\n");
+		// 	do_builtin(head, env);
+		// }
+		head = head->next;
 	}
+}
+
+int	check_for_value(t_parser *node, char *str, char *str2, t_env **env)
+{
+	char	*temp;
+	char	*new_str;
+	t_env	*head;
+
+	temp = NULL;
+	new_str = NULL;
+	head = *env;
+	while (head)
+	{
+		if (mini_strcmp(str, head->key) == 0)
+		{
+			temp = str;
+			str = ft_substr(head->value, 0, ft_strlen(head->value));//it leaks here 9 bytes check later
+			free_str(temp);
+			new_str = ft_strjoin(str2, str);//it leaks here 13 bytes 1 ovject check later
+			temp = node->data->str;
+			node->data->str = new_str;
+			printf("new_str = [%s]\n", node->data->str);
+			free_str(temp);
+			free_str(new_str);
+			free_str(str);
+			return (1);
+		}
+		else
+			head = head->next;
+	}
+	return (0);
 }
 
 /**
@@ -115,63 +158,44 @@ void	ft_expand(t_parser *lst, t_env **env)
  * -----------------
  * echo $ USER
  * $ USER
- * 1) if whats after $ can be linked to env print the value equivalent
- * 2) if there's something before the $ echo will print that
- * 3) if it's just a dollar echo will print it and the string that
- * comes after it.
- * maybe this can already be done in parser
-*/
-void	expand_dollar(t_parser *node, t_env **env)
-{
-	int		len;
-	int		i;
-	char	*before_dollar;
-	char	*compare_str;
-	char	*temp;
 
-	len = ft_strlen(node->data->str);
+*/
+void	expand_dollar(t_parser *node, t_env **env, int len)
+{
+	int			i;
+	char		*before_dollar;
+	char		*compare_str;
+	char		*temp;
+
 	i = 0;
 	before_dollar = NULL;
 	compare_str = NULL;
 	temp = NULL;
-	while (node->data->str)
+	while (node->data->str[i] != '\0')
 	{
-		while (node->data->str[i] != '$')
+		if (node->data->str[i] == '$' && i == (len - 1))
+			return ;
+		else if (node->data->str[i] == '$' && i != len)
 		{
+			before_dollar = ft_substr(node->data->str, 0, i);//leaks here 5 bytes 1 object check later
 			i++;
-			if (node->data->str[i] == '$' && i == len)
-				return ;
+			compare_str = ft_substr(node->data->str, i, len - i);//leaks here 5 bytes 1 obtject check later
+			printf("compare_str = [%s]\n", compare_str);
+			printf("before_dollar = [%s]\n", before_dollar);
+			if (check_for_value(node, compare_str, before_dollar, env) == 0)
+			{
+				temp = node->data->str;
+				// printf("temp = [%s]\n", temp);
+				printf("1 node->data->str = [%s]\n", node->data->str);
+				node->data->str = before_dollar; //segfaults here when the expanded string no existy
+				printf("2 node->data->str = [%s]\n", node->data->str);
+				free_str(temp);
+			}
+			free_str(before_dollar);
+			printf("node->data->str = [%s]\n", node->data->str);
 		}
-		before_dollar = ft_substr(node->data->str, 0, i);
-		temp = node->data->str;
-		node->data->str = before_dollar;
-		free (temp);
-		printf("node->data->str = [%s]\n", node->data->str);
-		if (node->data->str[i] == '$' && i != len)
-		{
-			i++;
-			compare_str = ft_substr(node->data->str, i, len - i);
-			temp = node->data->str;
-			node->data->str = compare_str;
-			free (temp);
-		}
-		printf("node->data->str = [%s]\n", node->data->str);
+		i++;
 	}
-	/*
-	1- loop through string save everything in temp until $
-	2- if index of $ == len put that in temp too/ or return OG.
-	3- if $ != len put rest in compare_string = ft_substr
-	*/
-	while (env[i])
-	{
-		if (mini_strcmp(node->data->str, &env->value, len - 1));
-		//4-  if temp != NULL and if it finds anything str_join temp with env->value
-		//5-  else replace node->date->str with expanded value from
-		//env->value[i];
-
-	}
-	//6- if that doesnt return a value just return temp;
-	//7- working? great make it work with quotes
 }
 
 

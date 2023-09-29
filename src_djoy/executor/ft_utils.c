@@ -82,3 +82,9 @@ bool	absolute_check(t_parser *node)
 		return (true);
 	return (false);
 }
+
+void	free_str(char *str)
+{
+	str = NULL;
+	free (str);
+}

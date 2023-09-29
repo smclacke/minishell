@@ -106,6 +106,7 @@ typedef struct s_env
 bool			check_for_meta(t_parser *lst);
 void			ft_expand(t_parser *lst, t_env **env);
 bool			check_for_builtin(t_parser *lst);
+void			expand_dollar(t_parser *node, t_env **env, int len);
 
 //----Environment----//
 // t_env		*env_list(char **envp);
@@ -163,6 +164,7 @@ void			mini_error(char *string, int error);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
 void			print_parser_list(t_parser *lst);
+void			free_str(char *str);
 
 //------------ Minishell -----------//
 /**

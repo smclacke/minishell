@@ -1,9 +1,25 @@
------------Start with $ expanding----------
+-----------$ expanding----------
 
-1) find out what how $USER, $Random, $ is used.
-2) check for edge cases
-3) do I want to put it into a struct?
-4) how to pass it.
+builtin is not executing if:
+ !_-(_|\echo abc$USER
+[0]      cmd = echo     file = (null)   meta = (null)   str = (null)
+[1]      cmd = (null)   file = (null)   meta = (null)   str = abc$USER
+abc$USER compare_str = [USER]
+before_dollar = [abc]
+node->data->str = [abcdreijans]
+
+ !_-(_|\echo $
+[0]      cmd = echo     file = (null)   meta = (null)   str = (null)
+[1]      cmd = (null)   file = (null)   meta = (null)   str = $
+$ expander:             dolllaaaah
+
+ !_-(_|\echo abc$i
+[0]      cmd = echo     file = (null)   meta = (null)   str = (null)
+[1]      cmd = (null)   file = (null)   meta = (null)   str = abc$i
+abc$i compare_str = [i]
+before_dollar = [abc]
+node->data->str = [abc]
+SEGFAULT
 
 ----------Make the executor expandable based on pipes--------
 
@@ -19,6 +35,12 @@
     1) check exit and unset again for the quoted value etc
     2) check echo again
 3) make bash script for easier testing
+
+
+---------------BUILTIN------------------------------
+
+review the checking of the builtins because its case sensitive
+
 
 
 -------------------$-----------------------
