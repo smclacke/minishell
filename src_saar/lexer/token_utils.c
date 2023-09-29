@@ -1,16 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   splitting_utils.c                                  :+:    :+:            */
+/*   token_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 15:43:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 19:05:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+int	is_meta(char *input)
+{
+	if (ft_strnstr(input, MOREMORE, 2))
+		return (2);
+	else if (ft_strnstr(input, LESSLESS, 2))
+		return (2);
+	else if (ft_strnstr(input, MORE, 1))
+		return (1);
+	else if (ft_strnstr(input, LESS, 1))
+		return (1);
+	else if (ft_strnstr(input, PIPE, 1))
+		return (1);
+	return (0);
+}
+
+int	space_or_meta(int c)
+{
+	if (ft_isspace(c) || ft_ismeta(c))
+		return (c);
+	return (0);
+}
 
 char	*which_quote(char *input)
 {
@@ -29,43 +51,4 @@ int	next_quote(char *input, char c)
 	while (input[i] && input[i] != c)
 		i++;
 	return (i);
-}
-
-bool	is_meta(char *input)
-{
-	if (ft_strnstr(input, MOREMORE, 2))
-		return (true);
-	else if (ft_strnstr(input, LESSLESS, 2))
-		return (true);
-	else if (ft_strnstr(input, MORE, 1))
-		return (true);
-	else if (ft_strnstr(input, LESS, 1))
-		return (true);
-	else if (ft_strnstr(input, PIPE, 1))
-		return (true);
-	return (false);
-}
-
-int	ft_ismeta(int c)
-{
-	return (c == '|' || c == '<' || c == '>');
-}
-
-int	is_token(char *input)
-{
-	if (*input == '|')
-		return (1);
-	if (*input == '<')
-	{
-		if (!ft_strncmp(input, "<<", 2))
-			return (1);
-		return (2);
-	}
-	else if (*input == '>')
-	{
-		if (!ft_strncmp(input, ">>", 2))
-			return (1);
-		return (2);
-	}
-	return (0);
 }

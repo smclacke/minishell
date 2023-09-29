@@ -1,5 +1,12 @@
 ---------------------------------------------------------------------------------
 
+**THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
+
+my brain is fried and i hate this project :)
+
+Holy mother of fuckidy fuck
+here we gooo
+
 mehmehmehmeh
      __
  .--()°'.'
@@ -19,63 +26,71 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 ---------------------------------------------------------------------------------
-**25/09:**
+**TO DO**
 
--> get this splitting done... simplify.. look for spaces, look for quotes, look for metas...
+-> ERRORS lexer and parser
+-> LEAKS lexer and parser
+-> expand quotes
 
--> protecting all mallocs in parse_input(), like four times???
-
-
-     __
- .--()°'.'
-'|, . ,'
- !_-(_|\echo "some thing" hello
-i = 16
-no_tokens: 3
-lexer list: [echo]
-lexer list: ["some]
-lexer list: [thing"]
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = "some
-[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"
-expander: 		there's a builtin whoop
-"some thing"      __
- .--()°'.'
-'|, . ,'
- !_-(_|\echo "some thing"sdf hello
-i = 16
-no_tokens: 3
-lexer list: [echo]
-lexer list: ["some]
-lexer list: [thing"sdf]
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = "some
-[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"sdf
-expander: 		there's a builtin whoop
-"some thing"sdf      __
- .--()°'.'
-'|, . ,'
- !_-(_|\echo sdf"some thing"sdf hello
-no_tokens: 4
-lexer list: [echo]
-lexer list: [sdf"some]
-lexer list: [thing"sdf]
-lexer list: [hello]
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = sdf"some
-[2]	 cmd = (null)	file = (null)	meta = (null)	str = thing"sdf
-[3]	 cmd = (null)	file = (null)	meta = (null)	str = hello
-expander: 		there's a builtin whoop
-sdf"some thing"sdf hello 
-
+**DJOYKE**
+subject = • Handle " (double quote) which should prevent the shell from interpreting the metacharacters in the quoted sequence except for $ (dollar sign).
 
 ---------------------------------------------------------------------------------
-**THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 
-my brain is fried and i hate this project :)
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
-Holy mother of fuckidy fuck
-here we gooo
+-----------------------------------------------------------------------------
+
+Current :)
+
+wtf>> | hellllo"some thing"wtttfff >thing > thing > > thing
+no_tokens: 11
+start = 0
+start = 3
+start = 6
+start = 8
+start = 35
+start = 36
+start = 42
+start = 44
+start = 50
+start = 52
+start = 54
+lexer list: [wtf]
+lexer list: [>>]
+lexer list: [|]
+lexer list: [hellllo"some thing"wtttfff]
+lexer list: [>]
+lexer list: [thing]
+lexer list: [>]
+lexer list: [thing]
+lexer list: [>]
+lexer list: [>]
+lexer list: [thing]
+[0]	 cmd = wtf	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[2]	 cmd = (null)	file = (null)	meta = |	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = hellllo"some thing"wtttfff
+[4]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[5]	 cmd = (null)	file = thing	meta = (null)	str = (null)
+[6]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[7]	 cmd = (null)	file = thing	meta = (null)	str = (null)
+[8]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[9]	 cmd = (null)	file = (null)	meta = >	str = (null)
+[10]	 cmd = (null)	file = (null)	meta = (null)	str = thing
+
+---------------------------------------------------------------------------------
+**25/09:**
+
+-> amount_tokens() in token_size.c, normed, cleaner and commented
+
+-> LEAKSSSSSSS
+
+-> TEST TEST TEST
+
+-> EXPANSION LET'S FUCKING GOOOOOO
+
+---------------------------------------------------------------------------------
 
 -> fix the new quote shit in lexer: (last to do notes before this shit show:)
 		!! amount of tokens need to check attached redirects and quotes
@@ -142,11 +157,6 @@ echo hello <<something >out
 > something
 cat out
  -> hello
-
-
----------------------------------------------------------------------------------
-
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
 ---------------------------------------------------------------------------------
 
@@ -375,4 +385,40 @@ expander: 		there's a builtin whoop
 ........................
 
 ---------------------------------------------------------------------------------
+
+echo >> things
+no_tokens: 4
+start = 0
+start = 5
+start = 8
+start = 14
+lexer list: [echo]
+lexer list: [>>]
+lexer list: [things]
+lexer list: []
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = >>	str = (null)
+[2]	 cmd = (null)	file = things	meta = (null)	str = (null)
+[3]	 cmd = (null)	file = (null)	meta = (null)	str = 
+expander: 		there's a builtin whoop
+
+
+echo some|thing
+no_tokens: 2
+start = 0
+start = 5
+lexer list: [echo]
+lexer list: [some|]
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = some|
+expander: 		there's a builtin whoop
+some|    
+
+
+ecommmm|hello
+no_tokens: 1
+start = 0
+lexer list: [ecommmm|hello]
+[0]	 cmd = ecommmm|hello	file = (null)	meta = (null)	str = (null)
+     _
 

@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/22 20:46:25 by smclacke      ########   odam.nl          #
+#    Updated: 2023/09/27 17:58:30 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,11 +74,13 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 
 SRCS_SAAR		= main_saar.c					\
 					lexer/lexer.c				\
-					lexer/splitting.c			\
-					lexer/splitting_utils.c		\
 					lexer/lexer_utils.c			\
+					lexer/token.c				\
+					lexer/token_size.c			\
+					lexer/token_utils.c			\
 					parser/parser.c				\
-					parser/parser_utils.c
+					parser/parser_utils.c		\
+					expand/quotes.c
 
 SAAR_DIR		= src_saar
 SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
@@ -165,6 +167,7 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_SAAR_DIR)/parser
 	@ mkdir -p $(OBJ_SAAR_DIR)/lexer
+	@ mkdir -p $(OBJ_SAAR_DIR)/expand
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor

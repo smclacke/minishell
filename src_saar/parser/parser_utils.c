@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/22 20:58:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/27 17:06:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-t_data		*handle_pipe(t_data *data, int *flag)
+t_data	*handle_pipe(t_data *data, int *flag)
 {
 	data->meta = data->input;
 	*flag = 0;
@@ -26,6 +26,19 @@ int	is_pipe(void *input)
 	return (0);
 }
 
+char	*is_redirect(void *input)
+{
+	if (ft_strcmp(input, MOREMORE) == 0)
+		return (MOREMORE);
+	else if (ft_strcmp(input, LESSLESS) == 0)
+		return (LESSLESS);
+	else if (ft_strcmp(input, MORE) == 0)
+		return (MORE);
+	else if (ft_strcmp(input, LESS) == 0)
+		return (LESS);
+	return (NULL);
+}
+
 t_data	*init_data(t_parser *tokens)
 {
 	t_data		*data;
@@ -37,22 +50,6 @@ t_data	*init_data(t_parser *tokens)
 	tokens->data = tokens->input;
 	data->input = tokens->data;
 	return (data);
-}
-
-char	*is_redirect(void *input)
-{
-	if (ft_strcmp(input, MOREMORE) == 0)
-		return (MOREMORE);
-	else if (ft_strcmp(input, LESSLESS) == 0)
-		return (LESSLESS);
-	else if (ft_strcmp(input, MORE) == 0)
-		return (MORE);
-	else if (ft_strcmp(input, LESS) == 0)
-		return (LESS);
-	// else if (ft_strcmp(input, PIPE) == 0) // don't know if i use this somewhere else
-	// 	return (PIPE); // but so far not causing a problem
-	// dont want to check pipe in parser so...
-	return (NULL);
 }
 
 t_parser	*shelly_parser_print(t_parser *tokens)

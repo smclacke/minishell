@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   ft_ismeta.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 23:55:35 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 18:51:18 by smclacke      ########   odam.nl         */
+/*   Created: 2023/09/27 18:11:03 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/09/27 18:11:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/libft.h"
 
-int	main()
+int	ft_ismeta(int c)
 {
-	printf("I'm the minishell executable woo hoo\n");
+	return (c == '|' || c == '<' || c == '>');
 }
