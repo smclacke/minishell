@@ -125,11 +125,38 @@ void	expand_dollar(t_parser *node, t_env **env)
 {
 	int		len;
 	int		i;
-	char	*compare_string;
+	char	*before_dollar;
+	char	*compare_str;
 	char	*temp;
 
 	len = ft_strlen(node->data->str);
 	i = 0;
+	before_dollar = NULL;
+	compare_str = NULL;
+	temp = NULL;
+	while (node->data->str)
+	{
+		while (node->data->str[i] != '$')
+		{
+			i++;
+			if (node->data->str[i] == '$' && i == len)
+				return ;
+		}
+		before_dollar = ft_substr(node->data->str, 0, i);
+		temp = node->data->str;
+		node->data->str = before_dollar;
+		free (temp);
+		printf("node->data->str = [%s]\n", node->data->str);
+		if (node->data->str[i] == '$' && i != len)
+		{
+			i++;
+			compare_str = ft_substr(node->data->str, i, len - i);
+			temp = node->data->str;
+			node->data->str = compare_str;
+			free (temp);
+		}
+		printf("node->data->str = [%s]\n", node->data->str);
+	}
 	/*
 	1- loop through string save everything in temp until $
 	2- if index of $ == len put that in temp too/ or return OG.
