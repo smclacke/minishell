@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 15:21:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/28 23:10:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 /**
  * @brief	find the start position of each token
  * 			old_start from previous position is added inc. spaces
- * 			if meta is encountered, immediately return that position
- * 			(metas become their own tokens separately)
- * 			if quote, find matching quote and keep iterating
- * 			until the next space (outside the quotes) is found
  * @param	input from command line
  * @param	old_start from previous token
- * @return	new_start = new starting position of token needed to be made
+ * @return	new_start = new starting position of next token to make
 */
 int	start_token(char *input, int old_start)
 {
@@ -33,17 +29,6 @@ int	start_token(char *input, int old_start)
 	while (input[old_start] && ft_isspace(input[old_start]))
 		old_start++;
 	new_start = old_start;
-	while (input[old_start] && !ft_isspace(input[old_start]))
-	{
-		if (ft_ismeta(input[old_start]))
-			return (new_start);
-		if (ft_isquote(input[old_start]))
-		{
-			quote_type = which_quote(&input[old_start]);
-			old_start += next_quote(&input[old_start], *quote_type);
-		}
-		old_start++;
-	}
 	return (new_start);
 }
 
@@ -100,7 +85,9 @@ static int	quote_input(char *input, int i)
 {
 	char	*quote_type;
 
-	quote_type = NULL;
+	quote_type = (char *)malloc(sizeof(char) * 2);
+	if (!quote_type)
+		exit(EXIT_FAILURE);
 	while (input[i] && !space_or_meta(input[i]))
 	{
 		if (ft_isquote(input[i]))
