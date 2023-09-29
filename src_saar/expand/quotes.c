@@ -6,17 +6,27 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 23:43:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/29 15:48:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+// i need a function that checks what the first quote type is, then removes
+// all of those quotes but leaves any quote that is not that type
+// e'c""h'o something
+// ec""ho: command not found
+// e'c''h'o something
+// something
+
+// strings and cmds!!
+
+
 // string quotation bulllll
 t_parser	*str_quotes(t_parser *tokens)
 {
 	t_parser	*list;
-	int			len;
+	// int			len;
 	
 	list = tokens;
 	while (list)
