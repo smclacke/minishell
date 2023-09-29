@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/29 15:48:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/29 17:21:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_parser	*str_quotes(t_parser *tokens)
 	{
 		if (list->data->str)
 		{
-			if (check_quotes(list->data->cmd))
+			if (check_quotes(list->data->str))
 			{
 				printf("pseudo code\n");
 				// check which is the first type of quote, remove
@@ -50,8 +50,9 @@ t_parser	*str_quotes(t_parser *tokens)
 }
 
 /**
- * @brief	removes both single and double quotes from in and around cmds
- * 			checks if there are spaces within the quotations 
+ * @brief	removes first encountered set of quotes and all of the same type
+ * 			leaves inside quotes of a different type
+ * 			e.g. "ec''ho" = ec''ho | "ec""ho" = echo
  * 			(i.e. cmd + str/flag), if so, leaves the quotes since the
  * 			cmd is invalid
  * @param	tokens from parser
@@ -61,18 +62,24 @@ t_parser	*cmd_quotes(t_parser *tokens)
 {
 	t_parser	*list;
 	int			len;
+	// char		*quote_type;
+	char		*cmd;
 
 	list = tokens;
 	while (list)
 	{
 		if (list->data->cmd)
 		{
-			if (check_quotes(list->data->cmd))
+			cmd = list->data->cmd;
+			if (check_quotes(cmd))
 			{
-				if (check_space(list->data->cmd))
+				if (!check_space(cmd))
 				{
-					len = len_wo_quotes(list->data->cmd);
-					list->data->cmd = remove_quotes(list->data->cmd, len);	
+					// check which is the first quote, rmove only that sort
+					// quote_type = which_quote(&cmd);
+					// printf("quote_type = %s\n", quote_type);
+					len = len_wo_quotes(cmd);
+					list->data->cmd = remove_quotes(cmd, len);	
 				}
 			}
 		}

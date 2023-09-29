@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 23:37:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/29 17:22:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int					amount_tokens(char *input);
 //-------- token_utils --------//
 int					is_meta(char *input);
 int					space_or_meta(int c);
+int					is_quote_type(int c, int q);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
 

@@ -6,12 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/28 23:05:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/09/29 17:21:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @brief	are there any quotes?
+*/
 int	check_quotes(char *str)
 {
 	int	i;
@@ -37,14 +40,15 @@ int	check_space(char *str)
 	while (str[i])
 	{
 		if (ft_isspace(str[i]))
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 /**
  * @brief	length of string without any quotations
+ * 				CHANGE TO GET LENGTH WITHOUT SPECIFIC TYPE OF QUOTE
 */
 int	len_wo_quotes(char *str)
 {
@@ -55,19 +59,19 @@ int	len_wo_quotes(char *str)
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] && !ft_isquote(str[i]))
+		while (str[i]) //&& !is_quote_type(str[i], quote_type)) // + is same quote type
 		{
 			i++;
 			len++;
 		}
-		if (str[i] && ft_isquote(str[i]))
+		if (str[i]) // && is_quote_type(str[i], quote_type))
 			i++;
 	}
 	return (len);
 }
 
 /**
- * @brief	removes any/all quotations
+ * @brief	removes all quotations CHANGE TO REMOVE SPECIFIC TYPE OF QUOTE
 */
 char	*remove_quotes(char *str, int len)
 {
