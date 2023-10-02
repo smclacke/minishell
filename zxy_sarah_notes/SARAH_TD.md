@@ -28,6 +28,10 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **TO DO**
 
+err.... quote tokens are fucked...
+fix the leaks
+then expand quotes (read notes...)
+
 -> ERRORS lexer and parser
 -> LEAKS lexer and parser
 -> expand quotes (note md)

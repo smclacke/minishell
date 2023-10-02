@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 19:23:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 20:44:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,10 @@
 */
 int	start_token(char *input, int old_start)
 {
-	int		new_start;
-	// char	*quote_type;
-
-	new_start = 0;
-	// quote_type = NULL;
 	while (input[old_start] && ft_isspace(input[old_start]))
 		old_start++;
-	new_start = old_start;
-	return (new_start);
+	return (old_start);
 }
-
-// int	start_token(char *input, int old_start)
-// {
-// 	int		new_start;
-// 	char	*quote_type;
-
-// 	new_start = 0;
-// 	quote_type = NULL;
-// 	while (input[old_start] && ft_isspace(input[old_start]))
-// 		old_start++;
-// 	new_start = old_start;
-// 	while (input[old_start] && !ft_isspace(input[old_start]))
-// 	{
-// 		if (ft_ismeta(input[old_start]))
-// 			return (new_start);
-// 		if (ft_isquote(input[old_start]))
-// 		{
-// 			quote_type = which_quote(&input[old_start]);
-// 			old_start += next_quote(&input[old_start], *quote_type);
-// 		}
-// 		old_start++;
-// 	}
-// 	return (new_start);
-// }
 
 /**
  * @brief	getting the length of the token i want to make
