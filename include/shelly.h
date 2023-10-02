@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 19:18:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 21:53:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 # define DOUBLE_Q "\""
 # define SINGLE_Q "\'"
 
-
 /**
  * @brief	specifies the different variable types of tokens from the
  * 			lexer that are parsed and then given to the executor
@@ -56,22 +55,29 @@
  * @param	file: in and out files; after more, less and moremore chars
  * @param	str:  limiter for here_doc (string after <<) and all other input
 */
-typedef struct s_data
+// typedef struct s_data
+// {
+// 	void				*input;
+// 	char				*cmd;
+// 	char				*meta;
+// 	char				*file;
+// 	char				*str;
+// 	struct s_data		*next;
+// }				t_data;
+
+typedef struct s_parser
 {
 	void				*input;
 	char				*cmd;
 	char				*meta;
 	char				*file;
 	char				*str;
-	struct s_data		*next;
-}				t_data;
-
-typedef struct s_parser
-{
-	void				*input;
-	struct s_data		*data;
 	struct s_parser		*next;
 }				t_parser;
+
+// utils
+// void	free_data(t_data *data);
+void	free_tokens(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//
@@ -102,10 +108,10 @@ int					next_quote(char *input, char c);
 t_parser			*parser(t_parser *tokens);
 
 //-------- parser_utils --------//
-t_data				*handle_pipe(t_data *data, int *flag_cmd);
+t_parser			*handle_pipe(t_parser *data, int *flag);
 int					is_pipe(void *input);
 char				*is_redirect(void *input);
-t_data				*init_data(t_parser *tokens);
+// t_data				*init_data(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
 // expand

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/29 17:21:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 21:54:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ t_parser	*str_quotes(t_parser *tokens)
 	list = tokens;
 	while (list)
 	{
-		if (list->data->str)
+		if (list->str)
 		{
-			if (check_quotes(list->data->str))
+			if (check_quotes(list->str))
 			{
 				printf("pseudo code\n");
 				// check which is the first type of quote, remove
@@ -68,9 +68,9 @@ t_parser	*cmd_quotes(t_parser *tokens)
 	list = tokens;
 	while (list)
 	{
-		if (list->data->cmd)
+		if (list->cmd)
 		{
-			cmd = list->data->cmd;
+			cmd = list->cmd;
 			if (check_quotes(cmd))
 			{
 				if (!check_space(cmd))
@@ -79,7 +79,7 @@ t_parser	*cmd_quotes(t_parser *tokens)
 					// quote_type = which_quote(&cmd);
 					// printf("quote_type = %s\n", quote_type);
 					len = len_wo_quotes(cmd);
-					list->data->cmd = remove_quotes(cmd, len);	
+					list->cmd = remove_quotes(cmd, len);	
 				}
 			}
 		}

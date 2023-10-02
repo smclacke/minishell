@@ -28,7 +28,9 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **TO DO**
 
-err.... quote tokens are fucked...
+for in the future... don't change utils... ever. 
+
+
 fix the leaks
 then expand quotes (read notes...)
 

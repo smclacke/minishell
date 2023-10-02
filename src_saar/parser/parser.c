@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 20:31:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 21:54:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
  * @return	tokens->data passed from the data struct into the parser struct
  * 			after varibales have been assigned correctly
 */
-static t_data	*handle_vars(t_data *data, int *flag)
+static t_parser	*handle_vars(t_parser *data, int *flag)
 {
 	if (!*flag)
 	{
@@ -60,7 +60,7 @@ static t_data	*handle_vars(t_data *data, int *flag)
  * @return	tokens->data passed from the data struct into the parser struct
  * 			after varibales have been assigned correctly
 */
-static t_data	*handle_next(t_data *data, char *type)
+static t_parser	*handle_next(t_parser *data, char *type)
 {
 	if (is_meta(data->input))
 		data->meta = data->input;
@@ -83,13 +83,13 @@ static t_data	*handle_next(t_data *data, char *type)
  * @return	tokens->data passed from the data struct into the parser struct
  * 			after varibales have been assigned correctly
 */
-static t_data	*handle_all(t_parser *tokens, t_data *data, int *flag)
+static t_parser	*handle_all(t_parser *data, int *flag)
 {
 	if (data && !is_pipe(data->input))
-		tokens->data = handle_vars(data, flag);
+		data = handle_vars(data, flag);
 	else if (data && is_pipe(data->input))
-		tokens->data = handle_pipe(data, flag);
-	return (tokens->data);
+		data = handle_pipe(data, flag);
+	return (data);
 }
 
 /**
@@ -115,7 +115,7 @@ static t_data	*handle_all(t_parser *tokens, t_data *data, int *flag)
 t_parser	*parser(t_parser *tokens)
 {
 	t_parser	*token_list;
-	t_data		*data;
+	// t_data		*data;
 	char		*type;
 	int			flag;
 
@@ -124,14 +124,14 @@ t_parser	*parser(t_parser *tokens)
 	flag = 0;
 	while (token_list)
 	{
-		data = init_data(token_list);
+		// data = init_data(token_list);
 		type = is_redirect(token_list->input);
-		token_list->data = handle_all(token_list, data, &flag);
+		token_list = handle_all(token_list, &flag);
 		if (type && token_list->next)
 		{
 			token_list = token_list->next;
-			data = init_data(token_list);
-			token_list->data = handle_next(data, type);
+			// data = init_data(token_list);
+			token_list = handle_next(token_list, type);
 		}
 		token_list = token_list->next;
 	}

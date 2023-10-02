@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 20:44:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 21:29:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
  * @param	old_start from previous token
  * @return	new_start = new starting position of next token to make
 */
+// PASS OLD_START AS POINTER AND JUST KEEP UPDATING THE ADDRESS INSTEAD OF 
+// RETURNING EACH TIME :)
 int	start_token(char *input, int old_start)
 {
 	while (input[old_start] && ft_isspace(input[old_start]))
@@ -79,9 +81,6 @@ static int	quote_input(char *input, int i)
 {
 	char	*quote_type;
 
-	quote_type = (char *)malloc(sizeof(char) * 2);
-	if (!quote_type)
-		exit(EXIT_FAILURE);
 	while (input[i] && !space_or_meta(input[i]))
 	{
 		if (ft_isquote(input[i]))

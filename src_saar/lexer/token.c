@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 19:20:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 21:33:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char	*split_tokens(char *input, int len)
 
 	token = ft_substr(input, 0, len);
 	if (!token)
-		return (NULL);
+		mini_error("malloc error", STDERR_FILENO);
 	input += len;
 	return (token);
 }
@@ -53,16 +53,11 @@ static char	**parser_split(char *input)
 	no_tokens = amount_tokens(input);
 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 	if (!array)
-		return (ft_free_arr(array), NULL);
+		mini_error("malloc error", STDERR_FILENO);
 	while (i < no_tokens)
 	{
 		start = start_token(input, (start + len));
-		printf("start = %d\n", start);
 		len = len_token(input, start);
-		printf("len = %i\n", len);
-		array[i] = (char *)malloc(sizeof(char) * (len + 1));
-		if (!array[i])
-			return (NULL);
 		array[i] = split_tokens(&input[start], len);
 		i++;
 	}
@@ -82,6 +77,6 @@ char	**parse_input(char *input)
 
 	array = parser_split(input);
 	if (!array)
-		return (NULL);
+		mini_error("malloc error", STDERR_FILENO);
 	return (array);
 }
