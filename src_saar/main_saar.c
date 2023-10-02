@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 14:12:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 14:40:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int argc, char **argv, char **envp)
 	env = NULL;
 	env = env_list(envp, env);
 	tokens = NULL;
-	tmp = tokens;
 	while (1)
 	{
 		input = readline(PROMPT);
@@ -59,16 +58,17 @@ int	main(int argc, char **argv, char **envp)
 		// print_the_full_thing(tokens);
 
 		// cmd_quotes(tokens); // part of the expander
-		print_the_full_thing(tokens);
+		// print_the_full_thing(tokens);
 
 
 		ft_execute(&env, tokens);
 		// free input (readline needs to be fred at end)	
 	}
+	tmp = tokens;
 	while (tokens)
 	{
 		tmp = tokens->next;
-		ft_bzero(tokens, sizeof(t_parser));
+		ft_bzero(tmp, sizeof(t_parser));
 		tmp = tokens;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 14:11:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 14:36:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_parser	*lexer(char *input)
 	t_parser		*tokens;
 	char			**parsed_input;
 
-	parsed_input = NULL;
+	// parsed_input = NULL;
 	tokens = (t_parser *)malloc(sizeof(t_parser));
 	if (!tokens)
 		return (0);
@@ -75,8 +75,8 @@ t_parser	*lexer(char *input)
 		return (0);
 	free(input);
 	tokens = make_token_list(parsed_input);
-	free(parsed_input);
 	if (!tokens)
 		return (0);
+	free(parsed_input);
 	return (tokens);
 }
