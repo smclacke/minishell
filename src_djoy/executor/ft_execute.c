@@ -26,11 +26,26 @@
 void	ft_execute(t_env **env, t_parser *lst)
 {
 	// t_execute	data;
+	t_parser *temp;
+	t_parser *head;
 
-	// init_execute_struct(&data, env);
+	head = lst;
+	temp = lst;
+	// // init_execute_struct(&data, env);
 	// print_parser_list(lst);
 	ft_expand(lst, env);
-	// build(lst, env, &data);
+	// // build(lst, env, &data);
+	while (head)
+	{
+		temp = head->next;
+		free_str(head->data->cmd);
+		free_str(head->data->file);
+		free_str(head->data->meta);
+		free_str(head->data->str);
+		head = NULL;
+		head = temp;
+	}
+	free(head);
 }
 
 /**

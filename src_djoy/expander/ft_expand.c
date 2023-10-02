@@ -84,25 +84,19 @@ void	ft_expand(t_parser *lst, t_env **env)
 			if (ft_strnstr(head->data->str, "$", len))
 				expand_dollar(head, env, len);
 		}
+		head = head->next;
+	}
+	head = lst;
+	while (head)
+	{
 		check_for_meta(head);
 		if (check_for_builtin(head))
 			do_builtin(head, env);
-		// if (check_for_meta(head))
-		// {
-		// 	printf("expander:		there's a meta whoop\n");
-		// 	printf("\n----------------------------------\n");
-		// }
-		// if (check_for_builtin(head))
-		// {
-		// 	printf("expander: 		there's a builtin whoop\n");
-		// 	printf("\n----------------------------------\n");
-		// 	do_builtin(head, env);
-		// }
 		head = head->next;
 	}
 }
 
-int	check_for_value(t_parser *node, char *str, char *str2, t_env **env)
+char	*check_for_value(char *comp, t_env **env)
 {
 	char	*temp;
 	char	*new_str;
@@ -113,24 +107,15 @@ int	check_for_value(t_parser *node, char *str, char *str2, t_env **env)
 	head = *env;
 	while (head)
 	{
-		if (mini_strcmp(str, head->key) == 0)
+		if (mini_strcmp(comp, head->key) == 0)
 		{
-			temp = str;
-			str = ft_substr(head->value, 0, ft_strlen(head->value));//it leaks here 9 bytes check later
-			free_str(temp);
-			new_str = ft_strjoin(str2, str);//it leaks here 13 bytes 1 ovject check later
-			temp = node->data->str;
-			node->data->str = new_str;
-			printf("new_str = [%s]\n", node->data->str);
-			free_str(temp);
-			free_str(new_str);
-			free_str(str);
-			return (1);
+			new_str = ft_substr(head->value, 0, ft_strlen(head->value));
+			return (new_str);
 		}
 		else
 			head = head->next;
 	}
-	return (0);
+	return (NULL);
 }
 
 /**
@@ -158,44 +143,60 @@ int	check_for_value(t_parser *node, char *str, char *str2, t_env **env)
  * -----------------
  * echo $ USER
  * $ USER
-
+ * ----------------
+ * echo $USER$USER
+ * dreijansdreijans
 */
 void	expand_dollar(t_parser *node, t_env **env, int len)
 {
 	int			i;
+	int			j;
 	char		*before_dollar;
+	char		*value;
 	char		*compare_str;
-	char		*temp;
+	char		*new_str;
 
 	i = 0;
 	before_dollar = NULL;
 	compare_str = NULL;
-	temp = NULL;
+	new_str = NULL;
 	while (node->data->str[i] != '\0')
 	{
-		if (node->data->str[i] == '$' && i == (len - 1))
+		if (node->data->str[i] == '$' && (i + 1) == len)
 			return ;
-		else if (node->data->str[i] == '$' && i != len)
+		else if (node->data->str[i] == '$' && (i + 1) != len)
 		{
-			before_dollar = ft_substr(node->data->str, 0, i);//leaks here 5 bytes 1 object check later
+			before_dollar = ft_substr(node->data->str, 0, i);
+			printf("before_dolor = [%s]\n", before_dollar);
 			i++;
-			compare_str = ft_substr(node->data->str, i, len - i);//leaks here 5 bytes 1 obtject check later
+			// find length of key(after $, stop on next dolaar. TODO: put in other function)
+			j = i;
+			while (node->data->str[j] != '$' && node->data->str[j] != '\0')
+				j++;
+			compare_str = ft_substr(node->data->str, i, j - i);
 			printf("compare_str = [%s]\n", compare_str);
-			printf("before_dollar = [%s]\n", before_dollar);
-			if (check_for_value(node, compare_str, before_dollar, env) == 0)
-			{
-				temp = node->data->str;
-				// printf("temp = [%s]\n", temp);
-				printf("1 node->data->str = [%s]\n", node->data->str);
-				node->data->str = before_dollar; //segfaults here when the expanded string no existy
-				printf("2 node->data->str = [%s]\n", node->data->str);
-				free_str(temp);
-			}
-			free_str(before_dollar);
-			printf("node->data->str = [%s]\n", node->data->str);
+			// 1: split up into before the variable, the variable key, and after the variable.
+			// 2: find the variable, if nothing, just return empty string(MALLOCED LIKE THE REST)
+			// 3: glue before, the variable value, and after back together
+			// 4: 
+			// if (check_for_value(node, compare_str, env) == 0) new function char functie 
+			value = check_for_value(compare_str, env);
+			printf("value = [%s]\n", value);
+			new_str = ft_strjoin(before_dollar, value);
+			printf("new_str = [%s]\n", new_str);
+			//go throuhg the loop again to find something else to expand! like abc$USER$USER
+			// i--; //zet terug naar char before expanding $ sing
+			i = j;
+			//find a way to put after i in value again and join it with new_str before assigning to node->data->str
+			printf("i = [%i]\n", i);
+			continue ;
 		}
 		i++;
 	}
+	if (compare_str != NULL)
+		free_str(compare_str);
+	if (before_dollar != NULL)
+		free_str(before_dollar);
 }
 
 

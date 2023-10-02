@@ -58,7 +58,6 @@ int	main(int argc, char **argv, char **envp)
 
 
 		ft_execute(&env, tokens);
-		// free input (readline needs to be fred at end)	
 	}
 	return (0);
 }
