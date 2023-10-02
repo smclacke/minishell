@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 13:47:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 19:20:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ static char	**parser_split(char *input)
 	while (i < no_tokens)
 	{
 		start = start_token(input, (start + len));
+		printf("start = %d\n", start);
 		len = len_token(input, start);
+		printf("len = %i\n", len);
 		array[i] = (char *)malloc(sizeof(char) * (len + 1));
 		if (!array[i])
 			return (NULL);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/29 17:20:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 19:18:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,18 @@ int	space_or_meta(int c)
 	return (0);
 }
 
-// int		is_quote_type(int c, int q)
+// int		which_q_sort(char *input)
 // {
-// 	return (c == );
+// 	int	i = 0;
+
+// 	while (input[i])
+// 	{
+// 		if (input[i] == '\'')
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
 // }
-
-int		which_q_sort(char *input)
-{
-	int	i = 0;
-
-	while (input[i])
-	{
-		if (input[i] == '\'')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 char	*which_quote(char *input)
 {

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 14:36:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 19:18:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ t_parser	*lexer(char *input)
 	parsed_input = parse_input(input);
 	if (!parsed_input)
 		return (0);
-	free(input);
+	// free(input);
 	tokens = make_token_list(parsed_input);
 	if (!tokens)
 		return (0);
-	free(parsed_input);
+	// free(parsed_input);
 	return (tokens);
 }

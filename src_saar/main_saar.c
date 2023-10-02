@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 14:40:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/02 19:12:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	main(int argc, char **argv, char **envp)
 	char		*input;
 	t_parser	*tokens;
 	t_env		*env;
-	t_parser	*tmp;
 
 	(void) argc;
 	(void) argv;
@@ -55,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 		// shelly_parser_print(tokens);
-		// print_the_full_thing(tokens);
+		print_the_full_thing(tokens);
 
 		// cmd_quotes(tokens); // part of the expander
 		// print_the_full_thing(tokens);
@@ -63,13 +62,6 @@ int	main(int argc, char **argv, char **envp)
 
 		ft_execute(&env, tokens);
 		// free input (readline needs to be fred at end)	
-	}
-	tmp = tokens;
-	while (tokens)
-	{
-		tmp = tokens->next;
-		ft_bzero(tmp, sizeof(t_parser));
-		tmp = tokens;
 	}
 	return (0);
 }
