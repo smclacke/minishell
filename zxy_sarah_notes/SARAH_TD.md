@@ -30,9 +30,7 @@ dein computer, kein computer
 
 for in the future... don't change utils... ever. 
 
-
-fix the leaks
-then expand quotes (read notes...)
+---> unclosed quotes segfault
 
 -> ERRORS lexer and parser
 -> LEAKS lexer and parser
