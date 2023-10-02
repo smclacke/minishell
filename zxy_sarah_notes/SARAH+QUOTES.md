@@ -6,6 +6,10 @@ echo "something << hello >in"
 something << hello >in
 
 
+e'c""h'o something
+ec""ho: command not found
+
+
 **THIS**
 
 echo "some'thi'ng"
