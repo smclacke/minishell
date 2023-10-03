@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 15:30:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 16:05:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,19 @@ int	len_wo_quotes(char *str, char *quote_type)
 	i = 0;
 	while (str[i])
 	{
-		while (!is_same_quote(str[i], quote_type))
+		if (is_same_quote(str[i], quote_type))
+			i++;
+		else
 		{
 			len++;
 			i++;
 		}
-		i++;
 	}
 	return (len);
 }
 
 /**
- * @brief	removes all quotations CHANGE TO REMOVE SPECIFIC TYPE OF QUOTE
+ * @brief	removes type of quotations given in quote_type
 */
 char	*remove_quotes(char *str, int len, char *quote_type)
 {

@@ -6,27 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 15:32:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 16:09:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// i need a function that checks what the first quote type is, then removes
-// all of those quotes but leaves any quote that is not that type
-// e'c""h'o something
-// ec""ho: command not found
-// e'c''h'o something
-// something
-
-// strings and cmds!!
-
-
-// string quotation bulllll
-t_parser	*str_quotes(t_parser *tokens)
+/**
+ * @brief	removes first encountered set of quotes and all of the same type
+ * 			leaves inside quotes of a different type
+ * 			e.g. echo "some''thing "hi"" -> some''thing hi
+ * @param	tokens from parser
+ * @return	expanded tokens
+*/
+static t_parser	*str_quotes(t_parser *tokens)
 {
 	t_parser	*list;
-	// int			len;
+	char		*quote_type;
+	int			len;
 	
 	list = tokens;
 	while (list)
@@ -35,14 +32,9 @@ t_parser	*str_quotes(t_parser *tokens)
 		{
 			if (check_quotes(list->str))
 			{
-				printf("pseudo code\n");
-				// same as cmd but spaces are ok
-				// check which is the first type of quote, remove
-				// it and all of the same
-				// if other quotes, keep
-				// which_quotes
-				// remove that specific quote (from all str)
-				// keep the other type of quote
+				quote_type = which_quote(list->str);
+				len = len_wo_quotes(list->str, quote_type);
+				list->str = remove_quotes(list->str, len, quote_type);
 			}
 		}
 		list = list->next;
@@ -54,35 +46,39 @@ t_parser	*str_quotes(t_parser *tokens)
  * @brief	removes first encountered set of quotes and all of the same type
  * 			leaves inside quotes of a different type
  * 			e.g. "ec''ho" = ec''ho | "ec""ho" = echo
- * 			(i.e. cmd + str/flag), if so, leaves the quotes since the
- * 			cmd is invalid
+ * 			checks if there are spaces (i.e. cmd + str/flag)
+ * 			if so, leaves the quotes since the cmd is invalid anyway
  * @param	tokens from parser
  * @return	expanded tokens
 */
-t_parser	*cmd_quotes(t_parser *tokens)
+static t_parser	*cmd_quotes(t_parser *tokens)
 {
 	t_parser	*list;
-	int			len;
 	char		*quote_type;
-	char		*cmd;
+	int			len;
 
 	list = tokens;
 	while (list)
 	{
 		if (list->cmd)
 		{
-			cmd = list->cmd;
-			if (check_quotes(cmd))
+			if (check_quotes(list->cmd))
 			{
-				if (!check_space(cmd))
+				if (!check_space(list->cmd))
 				{
-					quote_type = which_quote(cmd);
-					len = len_wo_quotes(cmd, quote_type);
-					list->cmd = remove_quotes(cmd, len, quote_type);	
+					quote_type = which_quote(list->cmd);
+					len = len_wo_quotes(list->cmd, quote_type);
+					list->cmd = remove_quotes(list->cmd, len, quote_type);	
 				}
 			}
 		}
 		list = list->next;
 	}
 	return (tokens);
+}
+
+void	expand_quotes(t_parser *tokens)
+{
+	cmd_quotes(tokens);
+	str_quotes(tokens);
 }

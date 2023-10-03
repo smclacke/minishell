@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 15:25:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 16:08:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_parser			*shelly_parser_print(t_parser *tokens);
 
 // expand
 //---------- quotes ----------//
-t_parser			*cmd_quotes(t_parser *tokens);
+void				expand_quotes(t_parser *tokens);
 
 //-------- quote_utils --------//
 int					check_quotes(char *str);
