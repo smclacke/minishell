@@ -18,6 +18,11 @@ this is fucked
 this is fucked
 this is fucked
 
+
+echo "some 'hi thing"
+some 'hi thing
+
+
 **SARAH, SHIT TO DO**
 
 HELLO WHAT DE FOOK
