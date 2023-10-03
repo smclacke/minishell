@@ -78,10 +78,10 @@ void	ft_expand(t_parser *lst, t_env **env)
 	head = lst;
 	while (head)
 	{
-		if (head->data->str != NULL)
+		if (head->str != NULL)
 		{
-			len = ft_strlen(head->data->str);
-			if (ft_strnstr(head->data->str, "$", len))
+			len = ft_strlen(head->str);
+			if (ft_strnstr(head->str, "$", len))
 				expand_dollar(head, env, len);
 		}
 		head = head->next;
@@ -96,7 +96,7 @@ void	ft_expand(t_parser *lst, t_env **env)
 	}
 }
 
-char	*check_for_value(char *comp, t_env **env)
+char	*get_value(char *comp, t_env **env)
 {
 	char	*temp;
 	char	*new_str;
@@ -154,64 +154,48 @@ void	expand_dollar(t_parser *node, t_env **env, int len)
 	char		*before_dollar;
 	char		*value;
 	char		*compare_str;
-	char		*new_str;
+	char		*temp;
 
 	i = 0;
 	before_dollar = NULL;
 	compare_str = NULL;
-	new_str = NULL;
-	while (node->data->str[i] != '\0')
+	while (node->str[i] != '\0')
 	{
-		if (node->data->str[i] == '$' && (i + 1) == len)
+		if (node->str[i] == '$' && (i + 1) == len)
 			return ;
-		else if (node->data->str[i] == '$' && (i + 1) != len)
+		else if (node->str[i] == '$' && (i + 1) != len)
 		{
-			before_dollar = ft_substr(node->data->str, 0, i);
-			printf("before_dolor = [%s]\n", before_dollar);
+			if (before_dollar == NULL)
+				before_dollar = ft_substr(node->str, 0, i);
 			i++;
-			// find length of key(after $, stop on next dolaar. TODO: put in other function)
 			j = i;
-			while (node->data->str[j] != '$' && node->data->str[j] != '\0')
+			while (node->str[j] != '$' && node->str[j] != '\0')
 				j++;
-			compare_str = ft_substr(node->data->str, i, j - i);
-			printf("compare_str = [%s]\n", compare_str);
-			// 1: split up into before the variable, the variable key, and after the variable.
-			// 2: find the variable, if nothing, just return empty string(MALLOCED LIKE THE REST)
-			// 3: glue before, the variable value, and after back together
-			// 4: 
-			// if (check_for_value(node, compare_str, env) == 0) new function char functie 
-			value = check_for_value(compare_str, env);
-			printf("value = [%s]\n", value);
-			new_str = ft_strjoin(before_dollar, value);
-			printf("new_str = [%s]\n", new_str);
-			//go throuhg the loop again to find something else to expand! like abc$USER$USER
-			// i--; //zet terug naar char before expanding $ sing
+			compare_str = ft_substr(node->str, i, j - i);
+			value = get_value(compare_str, env);
+			if (value == NULL)
+			{
+				free_str(compare_str);
+				free_str(value);
+				break ;
+			}
+			free_str(compare_str);
+			temp = before_dollar;
+			before_dollar = ft_strjoin(before_dollar, value);
+			free_str(temp);
+			free_str(value);
 			i = j;
-			//find a way to put after i in value again and join it with new_str before assigning to node->data->str
-// 			 !_-(_|\echo abc$USER$USER
-// [0]      cmd = echo     file = (null)   meta = (null)   str = (null)
-// [1]      cmd = (null)   file = (null)   meta = (null)   str = abc$USER$USER
-// before_dolor = [abc]
-// compare_str = [USER]
-// value = [dreijans]
-// new_str = [abcdreijans]
-// i = [8]
-// before_dolor = [abc$USER]
-// compare_str = [USER]
-// value = [dreijans]
-// new_str = [abc$USERdreijans]
-// i = [13]
-// abc$USER$USER  
-			printf("i = [%i]\n", i);
-			continue ;
+			i--; //zet terug naar char before expanding $ sing
 		}
 		i++;
 	}
-	if (compare_str != NULL)
-		free_str(compare_str);
-	if (before_dollar != NULL)
-		free_str(before_dollar);
+	temp = node->str;
+	node->str = ft_substr(before_dollar, 0, ft_strlen(before_dollar));
+	free_str(temp);
+	free_str(before_dollar);
 }
+
+
 
 
 /**

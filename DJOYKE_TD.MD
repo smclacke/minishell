@@ -41,6 +41,10 @@ SEGFAULT
 
 review the checking of the builtins because its case sensitive
 
+--------------CD-------------------
+
+cd .. is segfaulting look at it!
+
 
 
 -------------------$-----------------------
