@@ -83,8 +83,8 @@ bool	absolute_check(t_parser *node)
 	return (false);
 }
 
-void	free_str(char *str)
+void	free_strs(char *str, char *str2)
 {
 	free (str);
-	// str = NULL;
+	free (str2);
 }

@@ -175,15 +175,13 @@ void	expand_dollar(t_parser *node, t_env **env, int len)
 			value = get_value(compare_str, env);
 			if (value == NULL)
 			{
-				free_str(compare_str);
-				free_str(value);
+				free_strs(compare_str, value);
 				break ;
 			}
-			free_str(compare_str);
+			free(compare_str);
 			temp = before_dollar;
 			before_dollar = ft_strjoin(before_dollar, value);
-			free_str(temp);
-			free_str(value);
+			free_strs(temp, value);
 			i = j;
 			i--; //zet terug naar char before expanding $ sing
 		}
@@ -191,8 +189,7 @@ void	expand_dollar(t_parser *node, t_env **env, int len)
 	}
 	temp = node->str;
 	node->str = ft_substr(before_dollar, 0, ft_strlen(before_dollar));
-	free_str(temp);
-	free_str(before_dollar);
+	free_strs(temp, before_dollar);
 }
 
 

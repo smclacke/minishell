@@ -167,7 +167,7 @@ void			mini_error(char *string, int error);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
 void			print_parser_list(t_parser *lst);
-void			free_str(char *str);
+void			free_strs(char *str, char *str2);
 
 //------------ Minishell -----------//
 /**
