@@ -6,27 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 22:03:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:06:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
-
-// void	free_data(t_data *data)
-// {
-// 	t_data	*tmp;
-
-// 	while (data)
-// 	{
-// 		tmp = data->next;
-// 		free (data->cmd);
-// 		free (data->meta);
-// 		free (data->file);
-// 		free (data->str);
-// 		free (data);
-// 		data = tmp;
-// 	}
-// }
 
 void	free_tokens(t_parser *tokens)
 {
@@ -39,7 +23,6 @@ void	free_tokens(t_parser *tokens)
 		free (tokens->meta);
 		free (tokens->file);
 		free (tokens->str);
-		// free_data(tokens->data);
 		free (tokens);
 		tokens = tmp;
 	}
