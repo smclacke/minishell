@@ -188,6 +188,20 @@ void	expand_dollar(t_parser *node, t_env **env, int len)
 			// i--; //zet terug naar char before expanding $ sing
 			i = j;
 			//find a way to put after i in value again and join it with new_str before assigning to node->data->str
+// 			 !_-(_|\echo abc$USER$USER
+// [0]      cmd = echo     file = (null)   meta = (null)   str = (null)
+// [1]      cmd = (null)   file = (null)   meta = (null)   str = abc$USER$USER
+// before_dolor = [abc]
+// compare_str = [USER]
+// value = [dreijans]
+// new_str = [abcdreijans]
+// i = [8]
+// before_dolor = [abc$USER]
+// compare_str = [USER]
+// value = [dreijans]
+// new_str = [abc$USERdreijans]
+// i = [13]
+// abc$USER$USER  
 			printf("i = [%i]\n", i);
 			continue ;
 		}
