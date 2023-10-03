@@ -28,6 +28,10 @@ dein computer, kein computer
 ---------------------------------------------------------------------------------
 **TO DO**
 
+for in the future... don't change utils... ever. 
+
+---> unclosed quotes segfault
+
 -> ERRORS lexer and parser
 -> LEAKS lexer and parser
 -> expand quotes (note md)
