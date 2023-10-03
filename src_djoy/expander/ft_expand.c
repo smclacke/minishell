@@ -118,6 +118,33 @@ char	*get_value(char *comp, t_env **env)
 	return (NULL);
 }
 
+char	*get_compare_str(t_parser *node, char *comp_str, int i, int j)
+{
+	while (node->str[j] != '$' && node->str[j] != '\0')
+		j++;
+	comp_str = ft_substr(node->str, i, j - i);
+	return (comp_str);
+}
+
+char	*swap_pointer(char *before_dollar, char *env_value)
+{
+	char	*temp;
+
+	temp = before_dollar;
+	before_dollar = ft_strjoin(before_dollar, env_value);
+	free_strs(temp, env_value);
+	return (before_dollar);
+}
+
+void	return_exp(t_parser *node, char *before_dollar)
+{
+	char	*temp;
+
+	temp = node->str;
+	node->str = ft_substr(before_dollar, 0, ft_strlen(before_dollar));
+	free_strs(temp, before_dollar);
+}
+
 /**
  * @param node parser linked list
  * @param env environmet linked list
@@ -146,54 +173,56 @@ char	*get_value(char *comp, t_env **env)
  * ----------------
  * echo $USER$USER
  * dreijansdreijans
+ * 
+ * 
+ * 
+ * 
+ * 
+ * make a expander struct hehehehehhehe so we can make this reeeeeealy short!!!!!!!!!!!!
+ * 
+ * 
+ * 
+ * 
+ * 
 */
 void	expand_dollar(t_parser *node, t_env **env, int len)
 {
 	int			i;
 	int			j;
 	char		*before_dollar;
-	char		*value;
-	char		*compare_str;
-	char		*temp;
+	char		*env_value;
+	char		*comp_str;
 
 	i = 0;
 	before_dollar = NULL;
-	compare_str = NULL;
+	env_value = NULL;
+	comp_str = NULL;
 	while (node->str[i] != '\0')
 	{
-		if (node->str[i] == '$' && (i + 1) == len)
+		if (node->str[i] == '$' && (i + 1) == len)//is dollar at len?
 			return ;
-		else if (node->str[i] == '$' && (i + 1) != len)
+		else if (node->str[i] == '$' && (i + 1) != len)// dollar is not at len
 		{
-			if (before_dollar == NULL)
+			get_parts(node, env);
+			if (before_dollar == NULL) // set before first dollar once only
 				before_dollar = ft_substr(node->str, 0, i);
 			i++;
 			j = i;
-			while (node->str[j] != '$' && node->str[j] != '\0')
-				j++;
-			compare_str = ft_substr(node->str, i, j - i);
-			value = get_value(compare_str, env);
-			if (value == NULL)
+			comp_str = get_compare_str(node, comp_str, i, j);
+			env_value = get_value(comp_str, env);
+			if (env_value == NULL)
 			{
-				free_strs(compare_str, value);
+				free_strs(comp_str, env_value);
 				break ;
 			}
-			free(compare_str);
-			temp = before_dollar;
-			before_dollar = ft_strjoin(before_dollar, value);
-			free_strs(temp, value);
-			i = j;
-			i--; //zet terug naar char before expanding $ sing
+			free(comp_str);
+			before_dollar = swap_pointer(before_dollar, env_value);
+			i = j - 1;//zet terug naar char before expanding $ sing
 		}
 		i++;
 	}
-	temp = node->str;
-	node->str = ft_substr(before_dollar, 0, ft_strlen(before_dollar));
-	free_strs(temp, before_dollar);
+	return_exp(node, before_dollar);
 }
-
-
-
 
 /**
  * @param node linked list
