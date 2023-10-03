@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/29 17:21:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:48:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ int	check_space(char *str)
 
 /**
  * @brief	length of string without any quotations
- * 				CHANGE TO GET LENGTH WITHOUT SPECIFIC TYPE OF QUOTE
 */
-int	len_wo_quotes(char *str)
+int	len_wo_quotes(char *str, char *quote_type)
 {
 	int	len;
 	int	i;
@@ -59,7 +58,26 @@ int	len_wo_quotes(char *str)
 	i = 0;
 	while (str[i])
 	{
-		while (str[i]) //&& !is_quote_type(str[i], quote_type)) // + is same quote type
+		if ()
+		{	
+			i++;
+			len++;
+		}
+		i++;
+	}
+	return (len);
+}
+
+int	len_wo_quotes(char *str, char *quote_type)
+{
+	int	len;
+	int	i;
+
+	len = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && !ft_strcmp(str)) // + is not same quote type
 		{
 			i++;
 			len++;
