@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 20:26:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:21:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	ft_export(t_parser *node, t_env **env)
 	node = node->next;
 	if (reassign_env(env, node, new_key, new_value) == 1)
 		return ;
-	h_v = get_key_value(node->data->str, &new_key, &new_value);
-	new_node = env_lstnew(new_key, new_value, node->data->str, h_v);
+	h_v = get_key_value(node->str, &new_key, &new_value);
+	new_node = env_lstnew(new_key, new_value, node->str, h_v);
 	env_lstadd_back(env, new_node);
 }
 
@@ -107,7 +107,7 @@ bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 	char	*comp_str;
 
 	head = *e;
-	str = node->data->str;
+	str = node->str;
 	comp_str = check_for_equal_sign(str);
 	while (head)
 	{
@@ -115,8 +115,8 @@ bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 		{
 			if (str[ft_strlen(str) == '='])
 			{
-				head->full = node->data->str;
-				has_value = get_key_value(node->data->str, &n_k, &n_v);
+				head->full = node->str;
+				has_value = get_key_value(node->str, &n_k, &n_v);
 				head->value = n_v;
 				head->key = n_k;
 				return (true);

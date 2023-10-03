@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 17:14:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:20:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	digit_check(t_parser *lst)
 	int	i;
 
 	i = 0;
-	while (lst->data->str[i])
+	while (lst->str[i])
 	{
-		if (ft_isdigit(lst->data->str[i]) == 0)
+		if (ft_isdigit(lst->str[i]) == 0)
 		{
 			put_custom_error(lst, "exit");
 			exit(255);
@@ -60,7 +60,7 @@ void	ft_exit(t_parser *lst)
 
 	exit_status = 0;
 	status = 0;
-	if (!lst->next && lst->data->cmd)
+	if (!lst->next && lst->cmd)
 	{
 		write(STDOUT_FILENO, "exit\n", 5);
 		if (WIFEXITED(status))
@@ -70,7 +70,7 @@ void	ft_exit(t_parser *lst)
 	lst = lst->next;
 	digit_check(lst);
 	arg_check(lst);
-	error = ft_atoi(lst->data->str);
+	error = ft_atoi(lst->str);
 	if (error > 255)
 	{
 		put_custom_error(lst, "exit");

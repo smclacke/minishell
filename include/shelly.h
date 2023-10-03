@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 12:52:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:17:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,6 @@
  * @param	file: in and out files; after more, less and moremore chars
  * @param	str:  limiter for here_doc (string after <<) and all other input
 */
-// typedef struct s_data
-// {
-// 	void				*input;
-// 	char				*cmd;
-// 	char				*meta;
-// 	char				*file;
-// 	char				*str;
-// 	struct s_data		*next;
-// }				t_data;
-
 typedef struct s_parser
 {
 	void				*input;
@@ -76,7 +66,6 @@ typedef struct s_parser
 }				t_parser;
 
 // utils
-// void	free_data(t_data *data);
 void	free_tokens(t_parser *tokens);
 
 // lexer
@@ -110,7 +99,6 @@ t_parser			*parser(t_parser *tokens);
 t_parser			*handle_pipe(t_parser *data, int *flag);
 int					is_pipe(void *input);
 char				*is_redirect(void *input);
-// t_data				*init_data(t_parser *tokens);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
 // expand

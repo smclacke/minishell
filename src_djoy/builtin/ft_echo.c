@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/22 19:01:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:20:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_echo(t_parser *lst)
 
 	i = 0;
 	is_flag = 0;
-	if (!lst->data->cmd)
+	if (!lst->cmd)
 		mini_error("lst->cmd", errno);
 	if (!lst->next)
 	{
@@ -45,7 +45,7 @@ void	ft_echo(t_parser *lst)
 		return ;
 	}
 	lst = lst->next;
-	if (!lst->data->str)
+	if (!lst->str)
 	{
 		// 1) check if the next one is a meta, 
 		//    | >> etc to see if you need to echo into something
@@ -54,16 +54,16 @@ void	ft_echo(t_parser *lst)
 	}
 	while (lst)
 	{
-		if (lst->data->str)
+		if (lst->str)
 		{
-			if (ft_strcmp(lst->data->str, "-n") == 0)
+			if (ft_strcmp(lst->str, "-n") == 0)
 			{
 				is_flag++;
 				i++;
 			}
 			else
 			{
-				printf("%s ", lst->data->str);
+				printf("%s ", lst->str);
 				i++;
 			}
 		}

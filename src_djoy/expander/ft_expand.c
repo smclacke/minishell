@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/22 19:00:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:18:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,58 +121,58 @@ void	ft_expand(t_parser *lst, t_env **env)
  * comes after it.
  * maybe this can already be done in parser
 */
-void	expand_dollar(t_parser *node, t_env **env)
-{
-	int		len;
-	int		i;
-	char	*before_dollar;
-	char	*compare_str;
-	char	*temp;
+// void	expand_dollar(t_parser *node, t_env **env)
+// {
+// 	int		len;
+// 	int		i;
+// 	char	*before_dollar;
+// 	char	*compare_str;
+// 	char	*temp;
 
-	len = ft_strlen(node->data->str);
-	i = 0;
-	before_dollar = NULL;
-	compare_str = NULL;
-	temp = NULL;
-	while (node->data->str)
-	{
-		while (node->data->str[i] != '$')
-		{
-			i++;
-			if (node->data->str[i] == '$' && i == len)
-				return ;
-		}
-		before_dollar = ft_substr(node->data->str, 0, i);
-		temp = node->data->str;
-		node->data->str = before_dollar;
-		free (temp);
-		printf("node->data->str = [%s]\n", node->data->str);
-		if (node->data->str[i] == '$' && i != len)
-		{
-			i++;
-			compare_str = ft_substr(node->data->str, i, len - i);
-			temp = node->data->str;
-			node->data->str = compare_str;
-			free (temp);
-		}
-		printf("node->data->str = [%s]\n", node->data->str);
-	}
-	/*
-	1- loop through string save everything in temp until $
-	2- if index of $ == len put that in temp too/ or return OG.
-	3- if $ != len put rest in compare_string = ft_substr
-	*/
-	while (env[i])
-	{
-		if (mini_strcmp(node->data->str, &env->value, len - 1));
-		//4-  if temp != NULL and if it finds anything str_join temp with env->value
-		//5-  else replace node->date->str with expanded value from
-		//env->value[i];
+// 	len = ft_strlen(node->data->str);
+// 	i = 0;
+// 	before_dollar = NULL;
+// 	compare_str = NULL;
+// 	temp = NULL;
+// 	while (node->data->str)
+// 	{
+// 		while (node->data->str[i] != '$')
+// 		{
+// 			i++;
+// 			if (node->data->str[i] == '$' && i == len)
+// 				return ;
+// 		}
+// 		before_dollar = ft_substr(node->data->str, 0, i);
+// 		temp = node->data->str;
+// 		node->data->str = before_dollar;
+// 		free (temp);
+// 		printf("node->data->str = [%s]\n", node->data->str);
+// 		if (node->data->str[i] == '$' && i != len)
+// 		{
+// 			i++;
+// 			compare_str = ft_substr(node->data->str, i, len - i);
+// 			temp = node->data->str;
+// 			node->data->str = compare_str;
+// 			free (temp);
+// 		}
+// 		printf("node->data->str = [%s]\n", node->data->str);
+// 	}
+// 	/*
+// 	1- loop through string save everything in temp until $
+// 	2- if index of $ == len put that in temp too/ or return OG.
+// 	3- if $ != len put rest in compare_string = ft_substr
+// 	*/
+// 	while (env[i])
+// 	{
+// 		if (mini_strcmp(node->data->str, &env->value, len - 1));
+// 		//4-  if temp != NULL and if it finds anything str_join temp with env->value
+// 		//5-  else replace node->date->str with expanded value from
+// 		//env->value[i];
 
-	}
-	//6- if that doesnt return a value just return temp;
-	//7- working? great make it work with quotes
-}
+// 	}
+// 	//6- if that doesnt return a value just return temp;
+// 	//7- working? great make it work with quotes
+// }
 
 
 /**
@@ -200,35 +200,35 @@ void	expand_dollar(t_parser *node, t_env **env)
 */
 bool	check_for_meta(t_parser *node)
 {
-	if (node->data == NULL)
+	if (!node)
 		return (false);
-	if (mini_strcmp(node->data->str, "$") == 0)
+	if (mini_strcmp(node->str, "$") == 0)
 	{
 		printf("expander:		dolllaaaah\n");
 		//dollar_expand fucntion
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, ">>") == 0)
+	else if (mini_strcmp(node->meta, ">>") == 0)
 	{
 		printf("expander:		Output Append\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, "<<") == 0)
+	else if (mini_strcmp(node->meta, "<<") == 0)
 	{
 		printf("expander:		here doc\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, ">") == 0)
+	else if (mini_strcmp(node->meta, ">") == 0)
 	{
 		printf("expander:		output Redirect\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, "<") == 0)
+	else if (mini_strcmp(node->meta, "<") == 0)
 	{
 		printf("expander:		Input Redirect\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, "|") == 0)
+	else if (mini_strcmp(node->meta, "|") == 0)
 	{
 		printf("expander:		pipe\n");
 		return (true);
@@ -247,19 +247,19 @@ bool	check_for_builtin(t_parser *node)
 {
 	if (!node)
 		return (false);
-	if (mini_strcmp(node->data->cmd, "exit") == 0)
+	if (mini_strcmp(node->cmd, "exit") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "echo") == 0)
+	else if (mini_strcmp(node->cmd, "echo") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "cd") == 0)
+	else if (mini_strcmp(node->cmd, "cd") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "pwd") == 0)
+	else if (mini_strcmp(node->cmd, "pwd") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "export") == 0)
+	else if (mini_strcmp(node->cmd, "export") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "unset") == 0)
+	else if (mini_strcmp(node->cmd, "unset") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "env") == 0)
+	else if (mini_strcmp(node->cmd, "env") == 0)
 		return (true);
 	else
 		return (false);
