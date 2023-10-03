@@ -6,18 +6,77 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 21:33:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 12:52:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * @brief	create a substr to add to the 2D array
+ * @brief	gets the index position after parsing through the
+ * 			input of characters as long as there are no metas
+ * 			or spaces, handling quotations, for amount_tokens()
+ * @param	input from the command line
+ * @param	i current index of input
+ * @return	index after parsing through chars and quotes
+*/
+static int	quote_input(char *input, int i)
+{
+	char	*quote_type;
+
+	while (input[i] && !space_or_meta(input[i]))
+	{
+		if (ft_isquote(input[i]))
+		{
+			quote_type = which_quote(&input[i]);
+			i += next_quote(&input[i], *quote_type);
+		}
+		i++;
+	}
+	return (i);
+}
+
+/**
+ * @brief	parses through the input and counts how many "words"
+ * 			quoted strings and metas, returns the amount so that
+ * 			array can be given enough space to store these tokens in
+ * @param	input from the command line
+ * @return	count = amount of strings that will be put into array 
+ * 			and then tokenized
+*/
+static int	amount_tokens(char *input)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (input[i])
+	{
+		while (input[i] && ft_isspace(input[i]))
+			i++;
+		if (ft_ismeta(input[i]))
+		{
+			if (ft_ismeta(input[i + 1]))
+				i++;
+			count++;
+			i++;
+		}
+		if (input[i] && !ft_isspace(input[i]))
+		{
+			i = quote_input(input, i);
+			count++;
+		}
+	}
+	return (count);
+}
+
+/**
+ * @brief	creates a substr to add to the 2D array
  * 			based on the length and starting position of the
  * 			input. the substr will be added as a token to the struct 
  * @param	input from the command line
- * @param	len length, decired section of input str
+ * @param	len length, desired section of input str
  * @return	token string to add to the array of tokens
 */
 static char	*split_tokens(char *input, int len)
@@ -69,7 +128,7 @@ static char	**parser_split(char *input)
  * @brief	creates an array of tokens from input by calling parser_split()
  * @param	input from the command line
  * @return	2D array of separated strings made from the input
- * 			ready to be parsed into the parser struct list of tokens
+ * 			ready to be passed into the parser struct list of tokens
 */
 char	**parse_input(char *input)
 {

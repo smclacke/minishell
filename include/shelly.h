@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 21:53:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 12:52:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char				**parse_input(char *input);
 //-------- token_size --------//
 int					start_token(char *input, int old_start);
 int					len_token(char *input, int len);
-int					amount_tokens(char *input);
 
 //-------- token_utils --------//
 int					is_meta(char *input);
