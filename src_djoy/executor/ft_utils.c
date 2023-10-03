@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:22:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:24:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	init_execute_struct(t_execute *data, t_env *env)
 */
 bool	absolute_check(t_parser *node)
 {
-	if (!node->data->cmd)
+	if (!node->cmd)
 		return (false);
 	if (!ft_strncmp(node->cmd, "/", 1)
 		&& access(node->cmd, F_OK) == 0)
