@@ -19,9 +19,6 @@ this is fucked
 this is fucked
 
 
-echo "some 'hi thing"
-some 'hi thing
-
 
 **SARAH, SHIT TO DO**
 
@@ -30,22 +27,22 @@ HELLO WHAT DE FOOK
 Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
+for in the future... don't change utils... ever. 
+
 ---------------------------------------------------------------------------------
 **TO DO**
 
-for in the future... don't change utils... ever. 
+----------------------------> expand quotes (note md)
 
----> unclosed quotes segfault
-
--> ERRORS lexer and parser
--> LEAKS lexer and parser
--> expand quotes (note md)
-
+********************************************************************************
 
 **MAKE SURE BUILTINS ARE CHECKED CORRETLY**
 -------------->  e"C"ho
 Command 'eCho' not found
 **APPARENTLY IT'S CASE SENSITIVE**
+
+echo "some 'hi thing"
+some 'hi thing
 
 
 HAWHAWHAW
