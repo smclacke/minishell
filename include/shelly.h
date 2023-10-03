@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 16:08:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 19:58:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void				expand_quotes(t_parser *tokens);
 int					check_quotes(char *str);
 int					check_space(char *str);
 int					len_wo_quotes(char *str, char *quote_type);
-char				*remove_quotes(char *str, int len, char *quote_type);
+char				*remove_quotes(char *str);
 
 //--------------------DJOYKE---------------------//
 
