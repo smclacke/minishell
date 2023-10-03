@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 15:24:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 15:30:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*remove_quotes(char *str, int len, char *quote_type)
 		return (NULL);
 	while (str[i])
 	{
-		if (ft_isquote(str[i]))
+		if (is_same_quote(str[i], quote_type))
 			i++;
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:06:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 15:34:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_parser	*lexer_listnew(void *input)
 
 	new = (t_parser *)malloc(sizeof(*new));
 	if (!new)
-		mini_error("malloc error", STDERR_FILENO);
+		mini_error("malloc error listnew", STDERR_FILENO);
 	ft_bzero(new, sizeof(t_parser));
 	new->input = input;
 	new->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 15:24:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 15:32:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ t_parser	*cmd_quotes(t_parser *tokens)
 				{
 					quote_type = which_quote(cmd);
 					len = len_wo_quotes(cmd, quote_type);
-					printf("len = %i\n", len);
 					list->cmd = remove_quotes(cmd, len, quote_type);	
 				}
 			}
