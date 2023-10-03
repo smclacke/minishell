@@ -34,6 +34,8 @@ for in the future... don't change utils... ever.
 
 ----------------------------> expand quotes (note md)
 
+---------------------------> malloc error with no input...
+
 ********************************************************************************
 
 **MAKE SURE BUILTINS ARE CHECKED CORRETLY**

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:37:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 15:25:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int					len_token(char *input, int len);
 //-------- token_utils --------//
 int					is_meta(char *input);
 int					space_or_meta(int c);
+int					is_same_quote(int c, char *quote_type);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
 
@@ -109,7 +110,7 @@ t_parser			*cmd_quotes(t_parser *tokens);
 int					check_quotes(char *str);
 int					check_space(char *str);
 int					len_wo_quotes(char *str, char *quote_type);
-char				*remove_quotes(char *str, int len);
+char				*remove_quotes(char *str, int len, char *quote_type);
 
 //--------------------DJOYKE---------------------//
 

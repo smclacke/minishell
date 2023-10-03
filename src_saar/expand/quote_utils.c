@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:48:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 15:24:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_space(char *str)
 }
 
 /**
- * @brief	length of string without any quotations
+ * @brief	length of string without any of the first quote type
 */
 int	len_wo_quotes(char *str, char *quote_type)
 {
@@ -58,32 +58,12 @@ int	len_wo_quotes(char *str, char *quote_type)
 	i = 0;
 	while (str[i])
 	{
-		if ()
-		{	
-			i++;
+		while (!is_same_quote(str[i], quote_type))
+		{
 			len++;
+			i++;
 		}
 		i++;
-	}
-	return (len);
-}
-
-int	len_wo_quotes(char *str, char *quote_type)
-{
-	int	len;
-	int	i;
-
-	len = 0;
-	i = 0;
-	while (str[i])
-	{
-		while (str[i] && !ft_strcmp(str)) // + is not same quote type
-		{
-			i++;
-			len++;
-		}
-		if (str[i]) // && is_quote_type(str[i], quote_type))
-			i++;
 	}
 	return (len);
 }
@@ -91,7 +71,7 @@ int	len_wo_quotes(char *str, char *quote_type)
 /**
  * @brief	removes all quotations CHANGE TO REMOVE SPECIFIC TYPE OF QUOTE
 */
-char	*remove_quotes(char *str, int len)
+char	*remove_quotes(char *str, int len, char *quote_type)
 {
 	int		i;
 	int		j;
