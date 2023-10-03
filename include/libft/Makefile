@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/05/12 14:53:21 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/27 18:12:09 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/02 13:13:27 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRCS		=	is_func/ft_ispipe.c				\
     			convert/ft_toupper.c			\
 				convert/ft_lower_str.c			\
 				convert/ft_upper_str.c			\
+				convert/ft_atoi_base.c			\
     			puts/ft_putchar_fd.c			\
     			puts/ft_putendl_fd.c			\
     			puts/ft_putnbr_fd.c				\
@@ -98,7 +99,6 @@ PURPLE		:= \033[1;95m
 CYAN		:= \033[1;96m
 WHITE		:= \033[1;97m
 BLACK		:= \033[1;90m
-
 
 all: $(NAME)
 

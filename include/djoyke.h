@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 20:20:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:17:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,57 +39,60 @@
 # define FALSE 0
 
 /**
- * @brief	specifies the different types of tokens from the lexer, 
- * that are parsed and then given to the executor
- * @param	cmd: first arg from commandline or arg after a pipe
- * @param	meta: pipe, more, less, moremore, lessless.
- * Dollar is excluded and handled as a string
- * @param	file: in and out files, args that come after more, less and moremore
- * @param	strs: all other input. command arguments, typos...
+ * @brief	specifies the different variable types of tokens from the
+ * 			lexer that are parsed and then given to the executor
+ * @param	cmd: first string in each process without redirect char
+ * @param	meta: pipe, more, less, moremore, lessless. 
+ * 			**dollar is excluded and handled as a string
+ * @param	file: in and out files; after more, less and moremore chars
+ * @param	str:  limiter for here_doc (string after <<) and all other input
 */
-typedef struct s_data_type
+typedef struct s_parser
 {
 	void				*input;
 	char				*cmd;
 	char				*meta;
 	char				*file;
 	char				*str;
-	struct s_data_type	*next;
-}				t_data_type;
-
-typedef struct s_parser
-{
-	void				*input;
-	struct s_data_type	*data;
 	struct s_parser		*next;
 }				t_parser;
 
-//----- lexer.c -----//
-t_parser		*lexer(char *input);
+// utils
+void	free_tokens(t_parser *tokens);
 
-//----- lexer_utils.c -----//
-void			init_parser(t_parser *token);
-t_parser		*lexer_listlast(t_parser *list);
-void			lexer_listadd_back(t_parser **list, t_parser *new);
-t_parser		*lexer_listnew(void *input);
-t_parser		*shelly_print_list(t_parser *token);
+// lexer
+//---------- lexer ----------//
+t_parser			*lexer(char *input);
 
-//----- splitting.c -----//
-char			**parse_input(char *input);
+//-------- lexer_utils --------//
+t_parser			*lexer_listlast(t_parser *list);
+void				lexer_listadd_back(t_parser **list, t_parser *new);
+t_parser			*lexer_listnew(void *input);
+t_parser			*shelly_print_list(t_parser *token);
 
-//----- splitting_utils.c -----//
-int				next_quote(char *input, char c);
-bool			is_meta(char *input);
-int				is_token(char *input);
+//---------- token ----------//
+char				**parse_input(char *input);
 
-//---- parser.c ----//
-t_parser		*parser(t_parser *tokens);
+//-------- token_size --------//
+int					start_token(char *input, int old_start);
+int					len_token(char *input, int len);
 
-//---- parser_utils.c ----//
-void			init_type_struct(t_data_type *type);
-t_data_type		*init_data(void);
-char			*is_redirect(void *input);
-t_parser		*shelly_parser_print(t_parser *tokens);
+//-------- token_utils --------//
+int					is_meta(char *input);
+int					space_or_meta(int c);
+char				*which_quote(char *input);
+int					next_quote(char *input, char c);
+
+// parser
+//-------- parser --------//
+t_parser			*parser(t_parser *tokens);
+
+//-------- parser_utils --------//
+t_parser			*handle_pipe(t_parser *data, int *flag);
+int					is_pipe(void *input);
+char				*is_redirect(void *input);
+t_parser			*shelly_parser_print(t_parser *tokens);
+
 
 //---- Executor ----//
 typedef struct s_env

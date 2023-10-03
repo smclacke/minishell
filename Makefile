@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/09/27 17:58:30 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/03 13:04:10 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,17 @@ SAAR			= sarah
 MICRO_SHELL		= micro
 
 CFLAGS			= -Wall -Wextra -g -fsanitize=address
-
+# valgrind --leak-check=yes ./sarah 
 # -Werror 
+
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include
+HEADERS			= prompt.h djoyke.h shelly.h colour.h sarah.h minishell.h
 IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
+
+HEADER_DIR		= include
+HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
 
 # ifdef DEBUG
 # CFLAGS += -g
@@ -73,6 +78,7 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 ## SARAH ##
 
 SRCS_SAAR		= main_saar.c					\
+					utils.c						\
 					lexer/lexer.c				\
 					lexer/lexer_utils.c			\
 					lexer/token.c				\
@@ -80,7 +86,8 @@ SRCS_SAAR		= main_saar.c					\
 					lexer/token_utils.c			\
 					parser/parser.c				\
 					parser/parser_utils.c		\
-					expand/quotes.c
+					expand/quotes.c				\
+					expand/quote_utils.c
 
 SAAR_DIR		= src_saar
 SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
@@ -140,7 +147,7 @@ $(DJOY)			:	$(OBJ_DJOY) $(OBJ_SAAR)
 $(SAAR)			:	$(OBJ_SAAR) $(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
-#@ ./sarah
+	@ ./sarah
 
 $(MICRO_SHELL)	:	$(OBJ_MICRO)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL)
@@ -163,7 +170,7 @@ $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/parser
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c
+$(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_SAAR_DIR)/parser
 	@ mkdir -p $(OBJ_SAAR_DIR)/lexer

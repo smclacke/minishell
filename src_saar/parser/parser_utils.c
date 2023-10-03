@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/27 17:06:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:05:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-t_data	*handle_pipe(t_data *data, int *flag)
+t_parser	*handle_pipe(t_parser *data, int *flag)
 {
 	data->meta = data->input;
 	*flag = 0;
@@ -37,19 +37,6 @@ char	*is_redirect(void *input)
 	else if (ft_strcmp(input, LESS) == 0)
 		return (LESS);
 	return (NULL);
-}
-
-t_data	*init_data(t_parser *tokens)
-{
-	t_data		*data;
-
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
-		exit(EXIT_FAILURE);
-	ft_bzero(data, sizeof(t_data));
-	tokens->data = tokens->input;
-	data->input = tokens->data;
-	return (data);
 }
 
 t_parser	*shelly_parser_print(t_parser *tokens)

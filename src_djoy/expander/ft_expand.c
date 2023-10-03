@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/22 19:00:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/03 13:18:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,35 +239,35 @@ void	expand_dollar(t_parser *node, t_env **env, int len)
 */
 bool	check_for_meta(t_parser *node)
 {
-	if (node->data == NULL)
+	if (!node)
 		return (false);
-	if (mini_strcmp(node->data->str, "$") == 0)
+	if (mini_strcmp(node->str, "$") == 0)
 	{
 		printf("expander:		dolllaaaah\n");
 		//dollar_expand fucntion
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, ">>") == 0)
+	else if (mini_strcmp(node->meta, ">>") == 0)
 	{
 		printf("expander:		Output Append\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, "<<") == 0)
+	else if (mini_strcmp(node->meta, "<<") == 0)
 	{
 		printf("expander:		here doc\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, ">") == 0)
+	else if (mini_strcmp(node->meta, ">") == 0)
 	{
 		printf("expander:		output Redirect\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, "<") == 0)
+	else if (mini_strcmp(node->meta, "<") == 0)
 	{
 		printf("expander:		Input Redirect\n");
 		return (true);
 	}
-	else if (mini_strcmp(node->data->meta, "|") == 0)
+	else if (mini_strcmp(node->meta, "|") == 0)
 	{
 		printf("expander:		pipe\n");
 		return (true);
@@ -286,19 +286,19 @@ bool	check_for_builtin(t_parser *node)
 {
 	if (!node)
 		return (false);
-	if (mini_strcmp(node->data->cmd, "exit") == 0)
+	if (mini_strcmp(node->cmd, "exit") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "echo") == 0)
+	else if (mini_strcmp(node->cmd, "echo") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "cd") == 0)
+	else if (mini_strcmp(node->cmd, "cd") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "pwd") == 0)
+	else if (mini_strcmp(node->cmd, "pwd") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "export") == 0)
+	else if (mini_strcmp(node->cmd, "export") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "unset") == 0)
+	else if (mini_strcmp(node->cmd, "unset") == 0)
 		return (true);
-	else if (mini_strcmp(node->data->cmd, "env") == 0)
+	else if (mini_strcmp(node->cmd, "env") == 0)
 		return (true);
 	else
 		return (false);

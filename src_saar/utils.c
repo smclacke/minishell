@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_isquote.c                                       :+:    :+:            */
+/*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/14 13:22:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 20:43:08 by smclacke      ########   odam.nl         */
+/*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/10/03 13:06:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "../include/shelly.h"
 
-int	ft_isquote(int c)
+void	free_tokens(t_parser *tokens)
 {
-	return (c == '\'' || c == '\"');
+	t_parser	*tmp;
+
+	while (tokens)
+	{
+		tmp = tokens->next;
+		free (tokens->cmd);
+		free (tokens->meta);
+		free (tokens->file);
+		free (tokens->str);
+		free (tokens);
+		tokens = tmp;
+	}
 }
