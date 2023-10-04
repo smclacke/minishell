@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/03 13:04:10 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/04 12:28:46 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,9 +52,9 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		=	main_djoy.c						\
-					builtin/ft_echo.c				\
-					builtin/ft_cd.c 				\
+SRCS_DJOY		=	main_djoy.c				\
+					builtin/ft_echo.c		\
+					builtin/ft_cd.c 		\
 					builtin/ft_pwd.c 		\
 					builtin/ft_export.c 	\
 					builtin/ft_unset.c 		\
@@ -66,7 +66,9 @@ SRCS_DJOY		=	main_djoy.c						\
 					executor/ft_utils.c		\
 					executor/list_utils.c 	\
 					executor/print_utils.c	\
-					expander/ft_expand.c 
+					expander/ft_expand.c	\
+					expander/ft_utils.c		\
+					expander/expand_utils.c 
 					
 
 DJOY_DIR		= src_djoy

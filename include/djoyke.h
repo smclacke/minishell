@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:17:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/04 13:23:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,40 +58,40 @@ typedef struct s_parser
 }				t_parser;
 
 // utils
-void	free_tokens(t_parser *tokens);
+void			free_tokens(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//
-t_parser			*lexer(char *input);
+t_parser		*lexer(char *input);
 
 //-------- lexer_utils --------//
-t_parser			*lexer_listlast(t_parser *list);
-void				lexer_listadd_back(t_parser **list, t_parser *new);
-t_parser			*lexer_listnew(void *input);
-t_parser			*shelly_print_list(t_parser *token);
+t_parser		*lexer_listlast(t_parser *list);
+void			lexer_listadd_back(t_parser **list, t_parser *new);
+t_parser		*lexer_listnew(void *input);
+t_parser		*shelly_print_list(t_parser *token);
 
 //---------- token ----------//
-char				**parse_input(char *input);
+char			**parse_input(char *input);
 
 //-------- token_size --------//
-int					start_token(char *input, int old_start);
-int					len_token(char *input, int len);
+int				start_token(char *input, int old_start);
+int				len_token(char *input, int len);
 
 //-------- token_utils --------//
-int					is_meta(char *input);
-int					space_or_meta(int c);
-char				*which_quote(char *input);
-int					next_quote(char *input, char c);
+int				is_meta(char *input);
+int				space_or_meta(int c);
+char			*which_quote(char *input);
+int				next_quote(char *input, char c);
 
 // parser
 //-------- parser --------//
-t_parser			*parser(t_parser *tokens);
+t_parser		*parser(t_parser *tokens);
 
 //-------- parser_utils --------//
-t_parser			*handle_pipe(t_parser *data, int *flag);
-int					is_pipe(void *input);
-char				*is_redirect(void *input);
-t_parser			*shelly_parser_print(t_parser *tokens);
+t_parser		*handle_pipe(t_parser *data, int *flag);
+int				is_pipe(void *input);
+char			*is_redirect(void *input);
+t_parser		*shelly_parser_print(t_parser *tokens);
 
 
 //---- Executor ----//
@@ -106,13 +106,28 @@ typedef struct s_env
 }							t_env;
 
 //---- Expander ----//
+typedef struct s_expand
+{
+	char				*before_dollar;
+	char				*env_value;
+	char				*comp_str;
+	int					i;
+	int					j;
+}							t_expand;
+
+void			init_expand_struct(t_expand *data);
+void			free_remain_struct(t_expand *data);
+void			get_compare_str(t_parser *node, t_expand *exp, int i, int j);
+void			reassing_before_dollar(t_expand *exp);
+void			return_exp(t_parser *node, t_expand *exp);
+void			get_before_dollar(t_parser *node, t_expand *exp, int i);
+int				get_check_value(t_expand *exp, t_env **env);
 bool			check_for_meta(t_parser *lst);
 void			ft_expand(t_parser *lst, t_env **env);
 bool			check_for_builtin(t_parser *lst);
-void			expand_dollar(t_parser *node, t_env **env, int len);
+void			exp_dollar(t_parser *node, t_env **env, t_expand *exp, int len);
 
 //----Environment----//
-// t_env		*env_list(char **envp);
 t_env			*env_list(char **envp, t_env *env);
 t_env			*env_lstnew(void *key, void *value, char *full, int h_v);
 int				get_key_value(char *str, char **key, char **value);
@@ -183,33 +198,3 @@ typedef struct s_mini
 }	t_mini;
 
 #endif
-
-//-----------------try out------------------//
-
-// typedef struct s_parser 
-// {
-// 	struct s_parser		*data;
-// 	struct s_parser		*next;
-// }	t_parser;
-
-// // typedef struct s_parser 
-// // {
-// // 	char **cmd_and_flags;   "ls", "-l"
-// //	char **redirections;    INPUT_R, OUPUT_R 
-// //	char **files;			"file_1" "file_2" 
-// // 	struct s_parser		*next;
-// // }	t_parser;
-
-// list->node[0]
-// if node[1] exists then further
-// if node[2] exists then further
-
-// example : minishell$> < file1 cmd1 | cmd2 >file2
-// if space 2 parts if no space 1 part.
-
-// linked list;
-// data[0] = **array[0] < [1] file1 [2] cmd [3] NULL
-// data[1] = **array[0] pipe [1] NULL
-// data[2] = **array[0] cmd [1] >outfile [2] NULL
-
-//-----------------try out------------------//
