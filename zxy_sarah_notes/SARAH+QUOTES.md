@@ -12,7 +12,7 @@ ec""ho: command not found
 
 e""ch''o
 
- e'c""h"'o"
+ e'c""h"'o" UNCLOSED
 > e'c""h"'o"^C
  e"ch''''''''o"
 ech''''''''o: command not found
