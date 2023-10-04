@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/04 12:28:46 by dreijans      ########   odam.nl          #
+#    Updated: 2023/10/04 14:10:35 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,23 +52,24 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		=	main_djoy.c				\
-					builtin/ft_echo.c		\
-					builtin/ft_cd.c 		\
-					builtin/ft_pwd.c 		\
-					builtin/ft_export.c 	\
-					builtin/ft_unset.c 		\
-					builtin/ft_env.c 		\
-					builtin/builtin_utils.c \
-					builtin/ft_exit.c		\
-					executor/ft_execute.c	\
-					executor/ft_make_env.c	\
-					executor/ft_utils.c		\
-					executor/list_utils.c 	\
-					executor/print_utils.c	\
-					expander/ft_expand.c	\
-					expander/ft_utils.c		\
-					expander/expand_utils.c 
+SRCS_DJOY		=	main_djoy.c					\
+					builtin/ft_echo.c			\
+					builtin/ft_cd.c 			\
+					builtin/ft_pwd.c 			\
+					builtin/ft_export.c 		\
+					builtin/ft_unset.c 			\
+					builtin/ft_env.c 			\
+					builtin/builtin_utils.c 	\
+					builtin/ft_exit.c			\
+					executor/ft_execute.c		\
+					executor/ft_make_env.c		\
+					executor/ft_utils.c			\
+					executor/list_utils.c 		\
+					executor/print_utils.c		\
+					expander/ft_expand.c		\
+					expander/ft_utils.c			\
+					expander/dollar_utils_one.c	\
+					expander/dollar_utils_two.c	
 					
 
 DJOY_DIR		= src_djoy

@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   expand_utils.c                                     :+:    :+:            */
+/*   dollar_utils_two.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:19:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/04 13:29:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/04 14:09:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-
-/**
- * @param node node from parser linked list
- * @param exp expander struct
- * @param i index
- * @param j index at next $ sign
- * @brief gets the string to compare the environment key to
-*/
-void	get_compare_str(t_parser *node, t_expand *exp, int i, int j)
-{
-	while (node->str[j] != '$' && node->str[j] != '\0')
-		j++;
-	exp->comp_str = ft_substr(node->str, i, j - i);
-}
 
 /**
  * @param exp expander struct
@@ -40,37 +26,6 @@ void	reassing_before_dollar(t_expand *exp)
 	temp = exp->before_dollar;
 	exp->before_dollar = ft_strjoin(exp->before_dollar, exp->env_value);
 	free_strs(temp, exp->env_value);
-}
-
-/**
- * @param node node from parser linked list
- * @param exp expander struct
- * @brief replaces the node->str with expanded value and frees
- * temp, before_dollar and the entire expand struct.
-*/
-void	return_exp(t_parser *node, t_expand *exp)
-{
-	char	*temp;
-	int		len;
-
-	temp = node->str;
-	len = ft_strlen(exp->before_dollar);
-	node->str = ft_substr(exp->before_dollar, 0, len);
-	free_strs(temp, exp->before_dollar);
-	free(exp);
-}
-
-/**
- * @param node node from parser linked list
- * @param exp expander struct
- * @param i index
- * @brief replaces the before_dollar string if it's NULL with 
- * node->str content of i lenght.
-*/
-void	get_before_dollar(t_parser *node, t_expand *exp, int i)
-{
-	if (exp->before_dollar == NULL)
-		exp->before_dollar = ft_substr(node->str, 0, i);
 }
 
 /**
@@ -100,3 +55,22 @@ int	get_check_value(t_expand *exp, t_env **env)
 	}
 	return (0);
 }
+
+/**
+ * @param node node from parser linked list
+ * @param exp expander struct
+ * @brief replaces the node->str with expanded value and frees
+ * temp, before_dollar and the entire expand struct.
+*/
+void	return_exp(t_parser *node, t_expand *exp)
+{
+	char	*temp;
+	int		len;
+
+	temp = node->str;
+	len = ft_strlen(exp->before_dollar);
+	node->str = ft_substr(exp->before_dollar, 0, len);
+	free_strs(temp, exp->before_dollar);
+	free(exp);
+}
+

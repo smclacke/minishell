@@ -41,11 +41,6 @@ SEGFAULT
 
 review the checking of the builtins because its case sensitive
 
---------------CD-------------------
-
-cd .. is segfaulting look at it!
-
-
 
 -------------------$-----------------------
 
@@ -104,3 +99,12 @@ abc$
 
 echo a$bc
 a
+
+
+---------------------METAA-------------------------------
+
+1) infile <
+2) outfile >
+3) pipe |
+4) append >>
+5) heredoc <<

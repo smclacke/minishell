@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/04 13:23:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/04 13:53:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void			init_expand_struct(t_expand *data);
 void			free_remain_struct(t_expand *data);
 void			get_compare_str(t_parser *node, t_expand *exp, int i, int j);
 void			reassing_before_dollar(t_expand *exp);
+void			dollar(t_parser *node, t_env **env, t_expand *exp, int len);
 void			return_exp(t_parser *node, t_expand *exp);
 void			get_before_dollar(t_parser *node, t_expand *exp, int i);
 int				get_check_value(t_expand *exp, t_env **env);
