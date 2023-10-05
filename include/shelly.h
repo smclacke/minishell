@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 19:22:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 19:51:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,9 @@ void				increment(int *len, int *i);
 int					check_quotes(char *str);
 int					check_space(char *str);
 int					quote_type(int str);
+
+//-------- dollar_quotes --------//
+
 
 //--------------------DJOYKE---------------------//
 

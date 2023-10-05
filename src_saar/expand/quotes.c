@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 19:42:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 19:45:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ static char	*remove_quotes(char *str)
 	free (str);
 	return (new);
 }
-
 
 /**
  * @brief	if cmd has quotes, check if there is a space inside,

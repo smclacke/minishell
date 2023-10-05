@@ -32,9 +32,35 @@ for in the future... don't change utils... ever.
 ---------------------------------------------------------------------------------
 **TO DO**
 
--> "" and '' segfaults :)
+-> fyi echo should be if is_flag == 0 put \n
 
--> echo should be if is_flag == 0 put \n
+-> fyi not doing anything with strs with dollars in qoute expansion
+
+-> dollars and quotes...
+
+
+-> cd is segfaulting again
+minishell $cd ""
+[0]	 cmd = cd	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = 
+cd: no such file or directory: 
+minishell $cd ''
+[0]	 cmd = cd	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = 
+cd: no such file or directory: 
+
+cd "" and cd '' seems to work the same as cd .
+
+-> whyyyy
+➜  minishell git:(sarah) ✗ cd ""
+➜  minishell git:(sarah) ✗ cd ''
+➜  minishell git:(sarah) ✗ cd 
+➜  ~ cd .
+➜  ~ cd Desktop/minishell 
+➜  minishell git:(sarah) ✗ cd .
+➜  minishell git:(sarah) ✗ cd ""
+➜  minishell git:(sarah) ✗ cd ''
+
 
 ********************************************************************************
 
