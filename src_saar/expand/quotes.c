@@ -6,17 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 18:29:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 19:22:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-static void	increment(int *len, int *i)
-{
-	(*len)++;
-	(*i)++;
-}
 
 /**
  * @brief	length of string without the quotes that are going to be removed
@@ -49,25 +43,11 @@ static int	len_quotes(char *str)
 	return (len);
 }
 
-/**
- * @brief	finds matching sets of quotes, removes them leaving
- * 			everything inside those quotes intact
-*/
-static char	*remove_quotes(char *str)
+static char	*copy_quoteless(char *str, char *new, int q, int j)
 {
 	int		i;
-	int		j;
-	int		q;
-	int		len;
-	char	*new;
 
 	i = 0;
-	j = 0;
-	q = 0;
-	len = len_quotes(str);
-	new = (char *)malloc(sizeof(char) * len + 1);
-	if (!new)
-		mini_error("malloc noped", errno);
 	while (str[i])
 	{
 		while (str[i] && !ft_isquote(str[i]))
@@ -88,8 +68,29 @@ static char	*remove_quotes(char *str)
 		if (ft_isquote(str[i]) && str[i] == q)
 			i++;
 	}
-	free (str);
 	new[j] = 0;
+	return (new);
+}
+
+/**
+ * @brief	finds matching sets of quotes, removes them leaving
+ * 			everything inside those quotes intact
+*/
+static char	*remove_quotes(char *str)
+{
+	int		j;
+	int		q;
+	int		len;
+	char	*new;
+
+	j = 0;
+	q = 0;
+	len = len_quotes(str);
+	new = (char *)malloc(sizeof(char) * len + 1);
+	if (!new)
+		mini_error("malloc noped", errno);
+	new = copy_quoteless(str, new, q, j);
+	free (str);
 	return (new);
 }
 
@@ -110,7 +111,7 @@ void	expand_quotes(t_parser *tokens)
 			if (check_quotes(list->cmd))
 			{
 				if (!check_space(list->cmd))
-					list->cmd = remove_quotes(list->cmd);	
+					list->cmd = remove_quotes(list->cmd);
 			}
 		}
 		if (list->str)

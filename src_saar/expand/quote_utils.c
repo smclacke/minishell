@@ -6,11 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 18:15:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 19:22:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+void	increment(int *len, int *i)
+{
+	(*len)++;
+	(*i)++;
+}
 
 /**
  * @brief	are there any quotes?
