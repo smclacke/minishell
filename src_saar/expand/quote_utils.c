@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/04 15:36:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 17:54:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,10 @@ static int	quote_type(int str)
 }
 
 /**
- * encounter quote, find matching, remove those
- * encounter quote....
- * till end of str
+ * @brief	length of string without the quotes that are going to be removed
+ * 			encounter a quote, find matching, remove both, keep everything
+ * 			inside those quotes intact
 */
-
 static int	len_quotes(char *str)
 {
 	int	i;
@@ -93,6 +92,10 @@ static int	len_quotes(char *str)
 	return (len);
 }
 
+/**
+ * @brief	finds matching sets of quotes, removes them leaving
+ * 			everything inside those quotes intact
+*/
 char	*remove_quotes(char *str)
 {
 	int		i;
@@ -105,7 +108,6 @@ char	*remove_quotes(char *str)
 	j = 0;
 	q = 0;
 	len = len_quotes(str);
-	printf("len = %i\n", len);
 	new = (char *)malloc(sizeof(char) * len + 1);
 	if (!new)
 		mini_error("malloc noped", STDERR_FILENO);
@@ -120,7 +122,6 @@ char	*remove_quotes(char *str)
 		if (ft_isquote(str[i]))
 		{
 			q = quote_type(str[i]);
-			printf("q = %i\n", q);
 			i++;
 			while (str[i] && str[i] != q)
 			{
@@ -136,90 +137,3 @@ char	*remove_quotes(char *str)
 	new[j] = 0;
 	return (new);
 }
-
-
-/**
- * @brief	length of string without any of the first quote type
- * 			but ec''h""o like = 4...
-*/
-// int	len_quotes(char *str)
-// {
-// 	int		len;
-// 	int		i;
-// 	char	*quote_type;
-
-// 	len = 0;
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (ft_isquote(str[i]))
-// 		{
-// 			quote_type = which_quote(&str[i]);
-// 			i++;
-// 		}
-// 		if (is_same_quote(str[i], quote_type))
-// 			i++;
-// 		len++;
-// 		i++;
-// 	}
-// 	return (len);
-// }
-
-/**
- * this doesn't work
- * to do:
- * fix it
-*/
-
-/**
- * @brief	removes type of quotations given in quote_type
-*/
-// char	*remove_quotes(char *str)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		len;
-// 	char	*new;
-// 	char	*quote_type;
-	
-
-// 	i = 0;
-// 	j = 0;
-// 	len = len_quotes(str);
-// 	new = (char *)malloc(sizeof(char) * (len + 1));
-// 	while (str[i])
-// 	{
-// 		if (ft_isquote(str[i]))
-// 		{
-// 			quote_type = which_quote(&str[i]);
-// 			i++;
-// 		}
-// 		if (is_same_quote(str[i], quote_type)) 
-// 			i++;
-// 		new[j] = str[i];
-// 		i++;
-// 		j++;
-// 	}
-// 	new[j] = 0;
-// 	return (new);
-// }
-
-
-/**
- * while quote is not closed... remve/keep quotes
- * if quote is closed, renew process for many other quotes..
- * e""ch''o = echo :)
- * the next of the same is the closing quote...
- * ignore anything inside
-*/
-
-/**
- * what am i actually doing?
- * 
- * find matching quote
- * get rid of those quotes
- * next quote
- * find matching quote
- * get rid of those quotes
- * 
-*/

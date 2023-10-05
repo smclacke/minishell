@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 15:34:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 17:47:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_parser	*lexer_listlast(t_parser *list)
 {
 	if (!list)
-		mini_error("uhoh error", STDERR_FILENO);
+		mini_error("uhoh error, lstlast", STDERR_FILENO);
 	while (list->next)
 		list = list->next;
 	return (list);
