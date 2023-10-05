@@ -10,6 +10,22 @@ e'c""h'o something
 ec""ho: command not found
 
 
+e""ch''o
+
+ e'c""h"'o" UNCLOSED
+> e'c""h"'o"^C
+ e"ch''''''''o"
+ech''''''''o: command not found
+ e"ch""""""o"
+
+ e""ch''o
+
+ "e""ch''o"
+ech''o: command not found
+
+
+
+
 **THIS**
 
 echo "some'thi'ng"

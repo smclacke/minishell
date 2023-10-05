@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 12:42:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/04 14:56:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ int	space_or_meta(int c)
 {
 	if (ft_isspace(c) || ft_ismeta(c))
 		return (c);
+	return (0);
+}
+
+int		is_same_quote(int c, char *quote_type)
+{
+	if (c == *quote_type)
+		return (1);
 	return (0);
 }
 
