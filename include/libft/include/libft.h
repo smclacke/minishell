@@ -6,7 +6,7 @@
 /*   By: SarahLouise <SarahLouise@student.42.fr>      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 19:21:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 13:13:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 19:42:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,7 @@ char	*ft_strcpy(char *dest, char *src);
 int		ft_atoi_base(const char *str, int base);
 
 int		ft_ismeta(int c);
+
+int		ft_isdollar(char *str);
 
 #endif
