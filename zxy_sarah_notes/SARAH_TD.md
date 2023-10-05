@@ -32,21 +32,18 @@ for in the future... don't change utils... ever.
 ---------------------------------------------------------------------------------
 **TO DO**
 
+-> pwd leaks
+
 -> fyi echo should be if is_flag == 0 put \n
 
 -> fyi not doing anything with strs with dollars in qoute expansion
+		handling separately
 
 -> dollars and quotes...
 
--> cd is segfaulting again
-minishell $cd ""
-[0]	 cmd = cd	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = 
-cd: no such file or directory: 
-minishell $cd ''
-[0]	 cmd = cd	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = 
-cd: no such file or directory: 
+-> cd is segfaulting again, in change_old_dir(), when str is null it segfaults since new_full = ft_strjoin(key_equal, str);
+		old_work_dir = null (at the start?) this is being passed as str
+		to strjoin for new_full and then segfaults
 
 cd "" and cd '' seems to work the same as cd .
 

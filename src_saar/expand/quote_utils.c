@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 19:22:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 22:08:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	check_quotes(char *str)
 
 /**
  * @brief	are there spaces inside the quotation?
+ * 			cmds are invalid if this is true
 */
 int	check_space(char *str)
 {

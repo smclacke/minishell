@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 19:51:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 23:27:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_parser
 	char				*cmd;
 	char				*meta;
 	char				*file;
-	char				*str;
+	char				*str;;
 	struct s_parser		*next;
 }				t_parser;
 
