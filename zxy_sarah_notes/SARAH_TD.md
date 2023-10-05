@@ -38,7 +38,6 @@ for in the future... don't change utils... ever.
 
 -> dollars and quotes...
 
-
 -> cd is segfaulting again
 minishell $cd ""
 [0]	 cmd = cd	file = (null)	meta = (null)	str = (null)

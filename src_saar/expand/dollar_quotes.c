@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 19:54:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 20:14:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+// $USER
+// zsh: command not found: smclacke
+// this was still expanded
 
 /**
  * "$USER"
@@ -27,4 +31,14 @@
  * 
  * echo asdf'$USER'
  * asdf$USER
+ * 
+ * $U"SER"
+ * SER
+ * 
+ * $U'SER'
+ * SER
+ * 
+ * echo asdf$U"SER"
+ * asdfSER
+
 */
