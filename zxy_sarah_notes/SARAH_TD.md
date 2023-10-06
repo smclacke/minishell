@@ -39,13 +39,36 @@ for in the future... don't change utils... ever.
 -> not doing anything with strs with dollars in qoute expansion
 		handling separately
 
--> dollars and quotes...
 
 -> cd is segfaulting again, in change_old_dir(), when str is null it segfaults since new_full = ft_strjoin(key_equal, str);
 		old_work_dir = null (at the start?) this is being passed as str
 		to strjoin for new_full and then segfaults
 
 -> cd "" and cd '' seems to work the same as cd .  :
+
+
+-> dollars and quotes...
+:):)
+
+minishell $echo abc""$USER
+here
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = abc$USER
+abcsmclacke 
+minishell $echo abc''$USER
+here
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = abc$USER
+abcsmclacke 
+PROBLEMMMMM
+minishell $echo abc$"USER"
+here
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = abc$USER
+abcsmclacke 
+thiiis
+echo abc$"USER"
+abcUSER
 
 
 ********************************************************************************

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 19:21:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/06 21:58:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int	next_quote(char *input, char c)
 	while (input[i] && input[i] != c)
 		i++;
 	if (input[i] != c)
-		mini_error("unclosed quotes", errno);
+		mini_error("unclosed quotes NEXT_qUOTE", errno);
 	return (i);
 }

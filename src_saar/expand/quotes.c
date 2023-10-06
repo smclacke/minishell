@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/06 17:04:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/06 21:00:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	*copy_quoteless(char *str, char *new, int q, int j)
  * @brief	finds matching sets of quotes, removes them leaving
  * 			everything inside those quotes intact
 */
-static char	*remove_quotes(char *str)
+char	*remove_quotes(char *str)
 {
 	int		j;
 	int		q;
