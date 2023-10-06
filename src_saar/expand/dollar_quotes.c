@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 23:35:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/06 17:11:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,12 @@
  * 		take what is inside the quotes literally
  * 		ignore dollar and anything after dollar outside quotes
 */
+
+char	*handle_dollar_qs(char *str)
+{
+	// if something before dollar and not quote, skip and save it
+	// if quote before dollar, single or double, closed? where?
+	// 
+	printf("handle_quotes for dollar strings\n");
+	return (str);
+}

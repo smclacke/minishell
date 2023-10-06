@@ -34,9 +34,9 @@ for in the future... don't change utils... ever.
 
 -> pwd leaks
 
--> fyi echo should be if is_flag == 0 put \n
+-> echo should be if is_flag == 0 put \n
 
--> fyi not doing anything with strs with dollars in qoute expansion
+-> not doing anything with strs with dollars in qoute expansion
 		handling separately
 
 -> dollars and quotes...

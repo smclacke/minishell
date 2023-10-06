@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/05 17:37:07 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/06 17:09:58 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRCS_SAAR		= main_saar.c					\
 					parser/parser.c				\
 					parser/parser_utils.c		\
 					expand/quotes.c				\
+					expand/dollar_quotes.c		\
 					expand/quote_utils.c
 
 SAAR_DIR		= src_saar
