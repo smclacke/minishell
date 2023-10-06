@@ -45,17 +45,7 @@ for in the future... don't change utils... ever.
 		old_work_dir = null (at the start?) this is being passed as str
 		to strjoin for new_full and then segfaults
 
-cd "" and cd '' seems to work the same as cd .
-
--> whyyyy
-➜  minishell git:(sarah) ✗ cd ""
-➜  minishell git:(sarah) ✗ cd ''
-➜  minishell git:(sarah) ✗ cd 
-➜  ~ cd .
-➜  ~ cd Desktop/minishell 
-➜  minishell git:(sarah) ✗ cd .
-➜  minishell git:(sarah) ✗ cd ""
-➜  minishell git:(sarah) ✗ cd ''
+-> cd "" and cd '' seems to work the same as cd .  :
 
 
 ********************************************************************************
