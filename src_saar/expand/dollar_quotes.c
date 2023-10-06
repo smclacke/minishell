@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/06 17:11:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/06 17:55:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // this was still expanded
 
 /**
- * "$USER"				// remove quotes, expand
+ * echo "$USER"				// remove quotes, expand
  * smclacke
  * 
  * '$USER'				// echo what is literally in the quotes
@@ -40,7 +40,19 @@
  * 
  * echo asdf$U"SER"		// echo what is literally in the quotes, ignore the dollar
  * asdfSER
+*/
 
+/**
+ * all in doubles check env for var
+ * 
+ * if single, take literally 
+ * 
+ * save everything from start without quotes up to quote, then separate after/inside quotes
+ * 
+ * find dollar, if quote before, find matching, create separate strings
+ * if dollar and quote after, ignore dollar
+ * 
+ * 
 */
 
 /**
