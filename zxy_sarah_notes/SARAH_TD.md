@@ -40,6 +40,7 @@ for in the future... don't change utils... ever.
 		handling separately
 
 
+ITS NOT SEGFAULTING ANYMORE??
 -> cd is segfaulting again, in change_old_dir(), when str is null it segfaults since new_full = ft_strjoin(key_equal, str);
 		old_work_dir = null (at the start?) this is being passed as str
 		to strjoin for new_full and then segfaults
