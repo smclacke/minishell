@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/09 17:26:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/09 19:47:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,11 @@ rm: cannot remove 'outfile.txt': No such file or directory
 ➜  src_djoy git:(djoyke) ✗ < hi.txt wc |  > outfile.txt 
 zsh: no such file or directory: hi.txt
 ➜  src_djoy git:(djoyke) ✗ rm outfile.txt   
+in executor would translate to if 
+(parser->file != NULL)
+{
+	write to parser->fd 
+}
 */
 void	redirect(t_parser *lst, t_env **env)
 {

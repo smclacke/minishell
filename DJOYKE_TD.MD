@@ -114,6 +114,17 @@ a
 
 1) infile <
 2) outfile >
+
+should we handle this in the parser?
+assigning fd to the same node the file name is in.
+do that tomorrow together
+
+how will fd work in the parser struct?
+
+-----------------------------------------------------------
 3) pipe |
+
+check how I should pipe accordingly yeah that
+-----------------------------------------------------------
 4) append >>
 5) heredoc <<
