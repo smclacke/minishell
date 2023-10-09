@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/04 13:53:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/09 15:17:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int				get_check_value(t_expand *exp, t_env **env);
 bool			check_for_meta(t_parser *lst);
 void			ft_expand(t_parser *lst, t_env **env);
 bool			check_for_builtin(t_parser *lst);
+void			save_expanded(t_expand *exp);
 void			exp_dollar(t_parser *node, t_env **env, t_expand *exp, int len);
 
 //----Environment----//

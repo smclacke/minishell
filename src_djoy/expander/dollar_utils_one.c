@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/04 14:39:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/09 15:18:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,8 @@ void	exp_dollar(t_parser *node, t_env **env, t_expand *exp, int len)
 			j = i;
 			get_compare_str(node, exp, i, j);
 			if (get_check_value(exp, env) != 0)
-				break ;
-			free(exp->comp_str);
-			reassing_before_dollar(exp);
+				exp->env_value = NULL;
+			save_expanded(exp);
 			i = j - 1;
 		}
 		i++;

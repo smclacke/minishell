@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:19:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/04 14:09:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/09 15:17:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,16 @@ void	return_exp(t_parser *node, t_expand *exp)
 	free(exp);
 }
 
+/**
+ * @param exp expander struct
+ * @brief free comp-str
+ * calls reassing_before_dollar that set's value to before_dollar
+*/
+void	save_expanded(t_expand *exp)
+{
+	if (exp->env_value != NULL)
+	{
+		free(exp->comp_str);
+		reassing_before_dollar(exp);
+	}
+}
