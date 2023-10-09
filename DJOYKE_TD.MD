@@ -41,6 +41,15 @@ SEGFAULT
 
 review the checking of the builtins because its case sensitive
 
+cd:
+
+ * relative: cd src
+ * absolute: cd src/bin/pannekoek/whatever TESTT!!!
+ * 				cd alone gives prompt back
+ * 				cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
+ * line 66: check if needs error message with exit
+ * 			give prompt back, and endline?
+
 
 -------------------$-----------------------
 

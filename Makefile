@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/05 17:37:07 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/09 19:27:27 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ SRCS_DJOY		=	main_djoy.c					\
 					builtin/ft_export.c 		\
 					builtin/ft_unset.c 			\
 					builtin/ft_env.c 			\
-					builtin/builtin_utils.c 	\
+					builtin/builtin_utils_one.c \
+					builtin/builtin_utils_two.c \
 					builtin/ft_exit.c			\
 					executor/ft_execute.c		\
 					executor/ft_make_env.c		\

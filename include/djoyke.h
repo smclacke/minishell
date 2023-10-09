@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/09 15:17:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/09 19:31:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,6 @@ void			do_builtin(t_parser *node, t_env **env);
 bool			word_check(t_parser *lst);
 void			ft_cd(t_parser *lst, t_env **env);
 void			put_custom_error(t_parser *node, char *cmd);
-void			access_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
-void			change_old_dir(t_env **env, char *str);
-void			change_current_dir(t_env **env, char *str);
-void			reassign_opwd(t_env **env, t_env *new, char *str, char *full);
 void			ft_echo(t_parser *lst);
 void			ft_env(t_env *env);
 void			ft_exit(t_parser *lst);
@@ -160,6 +156,7 @@ void			ft_export(t_parser *lst, t_env **env);
 bool			reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v);
 void			ft_unset(t_parser *lst, t_env **env);
 void			mini_remove_env(char *str, t_env **env);
+void			reasing_value(char *temp, char *str, t_env *head);
 
 //----Execution----//
 typedef struct s_execute
