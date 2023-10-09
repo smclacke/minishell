@@ -33,6 +33,11 @@ for in the future... don't change utils... ever.
 **TO DO**
 
 
+--> file fds
+
+parser->file[fd]
+int fd in struct
+
 -> not doing anything with strs with dollars in qoute expansion
 		handling separately
 

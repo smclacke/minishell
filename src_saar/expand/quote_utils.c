@@ -6,17 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/06 17:04:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/09 20:03:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-void	increment(int *len, int *i)
-{
-	(*len)++;
-	(*i)++;
-}
 
 /**
  * @brief	are there any quotes?
@@ -33,6 +27,12 @@ int	check_quotes(char *str)
 		i++;
 	}
 	return (0);
+}
+
+void	increment(int *len, int *i)
+{
+	(*len)++;
+	(*i)++;
 }
 
 /**
