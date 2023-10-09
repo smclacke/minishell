@@ -32,30 +32,36 @@ for in the future... don't change utils... ever.
 ---------------------------------------------------------------------------------
 **TO DO**
 
--> pwd leaks
 
--> fyi echo should be if is_flag == 0 put \n
-
--> fyi not doing anything with strs with dollars in qoute expansion
+-> not doing anything with strs with dollars in qoute expansion
 		handling separately
 
+-> cd "" and cd '' seems to work the same as cd .
+ because empty string
+
+
 -> dollars and quotes...
+:):)
 
--> cd is segfaulting again, in change_old_dir(), when str is null it segfaults since new_full = ft_strjoin(key_equal, str);
-		old_work_dir = null (at the start?) this is being passed as str
-		to strjoin for new_full and then segfaults
-
-cd "" and cd '' seems to work the same as cd .
-
--> whyyyy
-➜  minishell git:(sarah) ✗ cd ""
-➜  minishell git:(sarah) ✗ cd ''
-➜  minishell git:(sarah) ✗ cd 
-➜  ~ cd .
-➜  ~ cd Desktop/minishell 
-➜  minishell git:(sarah) ✗ cd .
-➜  minishell git:(sarah) ✗ cd ""
-➜  minishell git:(sarah) ✗ cd ''
+minishell $echo abc""$USER
+here
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = abc$USER
+abcsmclacke 
+minishell $echo abc''$USER
+here
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = abc$USER
+abcsmclacke 
+PROBLEMMMMM
+minishell $echo abc$"USER"
+here
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = abc$USER
+abcsmclacke 
+thiiis
+echo abc$"USER"
+abcUSER
 
 
 ********************************************************************************

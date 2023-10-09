@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/05 23:27:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/06 21:00:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_parser
 }				t_parser;
 
 // utils
-void	free_tokens(t_parser *tokens);
+void				free_tokens(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//
@@ -104,6 +104,7 @@ t_parser			*shelly_parser_print(t_parser *tokens);
 
 // expand
 //---------- quotes ----------//
+char				*remove_quotes(char *str);
 void				expand_quotes(t_parser *tokens);
 
 //-------- quote_utils --------//
@@ -111,9 +112,10 @@ void				increment(int *len, int *i);
 int					check_quotes(char *str);
 int					check_space(char *str);
 int					quote_type(int str);
+int					len_quotes(char *str);
 
 //-------- dollar_quotes --------//
-
+char				*handle_dollar_qs(char *str);
 
 //--------------------DJOYKE---------------------//
 
