@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/05 23:23:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/09 19:11:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
  * 				return ;
  *				if (mini_strcmp ("HOME", head->key == 0))
  *					means it not there so return mini_error?
+ * cd sometimes segfaults with 
+ * change_old_dir with str NULL
  * 			}
 */
 void	ft_cd(t_parser *lst, t_env **env)
@@ -48,7 +50,7 @@ void	ft_cd(t_parser *lst, t_env **env)
 		home_dir = getenv("HOME");
 		if (home_dir == NULL)
 			mini_error("getenv", errno);
-		old_work_dir = getcwd(cwd, sizeof(cwd));
+		old_work_dir = getcwd(cwd, 0);
 		while (lst)
 		{
 			access_change(env, lst, old_work_dir, cwd);
@@ -83,7 +85,7 @@ void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 				mini_error(error, errno);
 			}
 			change_old_dir(env, o_d);
-			change_current_dir(env, getcwd(c_d, sizeof(c_d)));
+			change_current_dir(env, getcwd(c_d, 0));
 		}
 		else
 			printf("cd: no such file or directory: %s\n", lst->str);
@@ -105,24 +107,32 @@ void	change_old_dir(t_env **env, char *str)
 	char	*new_full;
 	t_env	*new;
 	t_env	*head;
+	char	*temp;
 
 	key_equal = NULL;
 	full = NULL;
 	new_full = NULL;
 	new = NULL;
 	head = *env;
+	temp = NULL;
 	if (!env)
 		reassign_opwd(env, new, str, full);
-	if (mini_strcmp ("OLDPWD", head->key) != 0)
+	while (mini_strcmp ("OLDPWD", head->key) != 0)
 	{
 		head = head->next;
 		if (head == NULL)
 			return ;
 	}
+	temp = head->value;
 	head->value = str;
+	free(temp);
 	key_equal = ft_strjoin(head->key, "=");
+	temp = key_equal;
 	new_full = ft_strjoin(key_equal, str);
+	free(temp);
+	temp = head->full;
 	head->full = new_full;
+	free(temp);
 }
 
 /**
@@ -138,20 +148,27 @@ void	change_current_dir(t_env **env, char *str)
 	char	*key_equal;
 	char	*new_full;
 	t_env	*head;
+	char	*temp;
 
 	key_equal = NULL;
 	new_full = NULL;
 	head = *env;
+	temp = NULL;
 	while (mini_strcmp ("PWD", head->key) != 0)
 	{
 		head = head->next;
 		if (head == NULL)
 			return ;
 	}
+	temp = head->value;
 	head->value = str;
+	free(temp);
 	key_equal = ft_strjoin(head->key, "=");
+	temp = head->full;
 	new_full = ft_strjoin(key_equal, str);
+	free(key_equal);
 	head->full = new_full;
+	free(temp);
 }
 
 /**

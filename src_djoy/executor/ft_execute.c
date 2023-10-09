@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/04 10:01:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/09 17:29:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 void	ft_execute(t_env **env, t_parser *lst)
 {
 	// t_execute	data;
-	// // init_execute_struct(&data, env);
-	// print_parser_list(lst);
+
+	// init_execute_struct(&data, *env);
 	ft_expand(lst, env);
-	// // build(lst, env, &data);
+	// build(lst, *env, &data);
 }
 
 /**
@@ -136,10 +136,8 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data)
 */
 bool	parse_path(t_env *env, t_execute *data)
 {
-	// int		i;
 	char	*temp_path;
 
-	// i = 0;
 	temp_path = NULL;
 	while (env)
 	{

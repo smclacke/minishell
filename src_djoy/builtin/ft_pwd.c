@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/14 14:56:17 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/09 19:10:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	ft_pwd(void)
 
 	path = getcwd(NULL, 0);
 	if (path != NULL)
+	{
 		printf("Current working directory: %s\n", path);
+		free(path);
+	}
 	else
 		mini_error("getcwd()", errno);
 }

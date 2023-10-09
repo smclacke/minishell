@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/14 18:12:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/09/21 20:26:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/09 18:20:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	ft_env(t_env *env)
 			printf("%s=%s\n", head->key, head->value);
 		head = head->next;
 	}
+	// printf("---------------------------------------------------");
 	// print_list_full(env);
 }
