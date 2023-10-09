@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:17:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 23:27:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_parser
 	char				*cmd;
 	char				*meta;
 	char				*file;
-	char				*str;
+	char				*str;;
 	struct s_parser		*next;
 }				t_parser;
 
@@ -88,6 +88,7 @@ int					len_token(char *input, int len);
 //-------- token_utils --------//
 int					is_meta(char *input);
 int					space_or_meta(int c);
+int					is_same_quote(int c, char *quote_type);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
 
@@ -103,13 +104,16 @@ t_parser			*shelly_parser_print(t_parser *tokens);
 
 // expand
 //---------- quotes ----------//
-t_parser			*cmd_quotes(t_parser *tokens);
+void				expand_quotes(t_parser *tokens);
 
 //-------- quote_utils --------//
+void				increment(int *len, int *i);
 int					check_quotes(char *str);
 int					check_space(char *str);
-int					len_wo_quotes(char *str);
-char				*remove_quotes(char *str, int len);
+int					quote_type(int str);
+
+//-------- dollar_quotes --------//
+
 
 //--------------------DJOYKE---------------------//
 

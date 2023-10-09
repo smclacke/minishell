@@ -6,84 +6,123 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/02 21:54:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 19:45:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// i need a function that checks what the first quote type is, then removes
-// all of those quotes but leaves any quote that is not that type
-// e'c""h'o something
-// ec""ho: command not found
-// e'c''h'o something
-// something
-
-// strings and cmds!!
-
-
-// string quotation bulllll
-t_parser	*str_quotes(t_parser *tokens)
+/**
+ * @brief	length of string without the quotes that are going to be removed
+ * 			encounter a quote, find matching, remove both, keep everything
+ * 			inside those quotes intact
+*/
+static int	len_quotes(char *str)
 {
-	t_parser	*list;
-	// int			len;
-	
-	list = tokens;
-	while (list)
+	int	i;
+	int	q;
+	int	len;
+
+	i = 0;
+	q = 0;
+	len = 0;
+	while (str[i])
 	{
-		if (list->str)
+		while (str[i] && !ft_isquote(str[i]))
+			increment(&len, &i);
+		if (ft_isquote(str[i]))
 		{
-			if (check_quotes(list->str))
+			q = quote_type(str[i]);
+			i++;
+			while (str[i] && str[i] != q)
+				increment(&len, &i);
+		}
+		if (ft_isquote(str[i]) && str[i] == q)
+			i++;
+	}
+	return (len);
+}
+
+static char	*copy_quoteless(char *str, char *new, int q, int j)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && !ft_isquote(str[i]))
+		{
+			new[j] = str[i];
+			increment(&i, &j);
+		}
+		if (ft_isquote(str[i]))
+		{
+			q = quote_type(str[i]);
+			i++;
+			while (str[i] && str[i] != q)
 			{
-				printf("pseudo code\n");
-				// check which is the first type of quote, remove
-				// it and all of the same
-				// if other quotes, keep
-				// which_quotes
-				// remove that specific quote (from all str)
-				// keep the other type of quote
+				new[j] = str[i];
+				increment(&i, &j);
 			}
 		}
-		list = list->next;
+		if (ft_isquote(str[i]) && str[i] == q)
+			i++;
 	}
-	return (tokens);
+	new[j] = 0;
+	return (new);
 }
 
 /**
- * @brief	removes first encountered set of quotes and all of the same type
- * 			leaves inside quotes of a different type
- * 			e.g. "ec''ho" = ec''ho | "ec""ho" = echo
- * 			(i.e. cmd + str/flag), if so, leaves the quotes since the
- * 			cmd is invalid
- * @param	tokens from parser
- * @return	expanded tokens
+ * @brief	finds matching sets of quotes, removes them leaving
+ * 			everything inside those quotes intact
 */
-t_parser	*cmd_quotes(t_parser *tokens)
+static char	*remove_quotes(char *str)
+{
+	int		j;
+	int		q;
+	int		len;
+	char	*new;
+
+	j = 0;
+	q = 0;
+	len = len_quotes(str);
+	new = (char *)malloc(sizeof(char) * len + 1);
+	if (!new)
+		mini_error("malloc noped", errno);
+	new = copy_quoteless(str, new, q, j);
+	free (str);
+	return (new);
+}
+
+/**
+ * @brief	if cmd has quotes, check if there is a space inside,
+ * 			if so it's invalid. for cmds and strs remove closed 
+ * 			quotes and returns the new cmd string, don't remove 
+ * 			in case of dollar in str, expand dollar separately
+*/
+void	expand_quotes(t_parser *tokens)
 {
 	t_parser	*list;
-	int			len;
-	// char		*quote_type;
-	char		*cmd;
 
 	list = tokens;
 	while (list)
 	{
 		if (list->cmd)
 		{
-			cmd = list->cmd;
-			if (check_quotes(cmd))
+			if (check_quotes(list->cmd))
 			{
-				if (!check_space(cmd))
-				{
-					// check which is the first quote, rmove only that sort
-					// quote_type = which_quote(&cmd);
-					// printf("quote_type = %s\n", quote_type);
-					len = len_wo_quotes(cmd);
-					list->cmd = remove_quotes(cmd, len);	
-				}
+				if (!check_space(list->cmd))
+					list->cmd = remove_quotes(list->cmd);
+			}
+		}
+		if (list->str)
+		{
+			if (check_quotes(list->str))
+			{
+				if (!ft_isdollar(list->str))
+					list->str = remove_quotes(list->str);
 			}
 		}
 		list = list->next;
 	}
-	return (tokens);
 }

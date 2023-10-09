@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:09:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 19:28:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int argc, char **argv, char **envp)
 
 	while (1)
 	{
-		
 		input = readline(PROMPT);
 		add_history(input);
 
@@ -57,7 +56,10 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 
-		// cmd_quotes(tokens); // part of the expander
+		// print_the_full_thing(tokens);
+
+		expand_quotes(tokens);
+		
 		print_the_full_thing(tokens);
 
 

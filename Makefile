@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/04 14:10:35 by dreijans      ########   odam.nl          #
+#    Updated: 2023/10/05 17:37:07 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SAAR			= sarah
 MICRO_SHELL		= micro
 
 CFLAGS			= -Wall -Wextra -g -fsanitize=address
-# valgrind --leak-check=yes ./sarah 
+# valgrind --leak-check=yes
 # -Werror 
 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline

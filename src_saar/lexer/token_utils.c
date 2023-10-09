@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 12:42:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/05 19:21:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ int	space_or_meta(int c)
 	return (0);
 }
 
+int	is_same_quote(int c, char *quote_type)
+{
+	if (c == *quote_type)
+		return (1);
+	return (0);
+}
+
 char	*which_quote(char *input)
 {
 	if (ft_strnstr(input, SINGLE_Q, 1))
@@ -51,6 +58,6 @@ int	next_quote(char *input, char c)
 	while (input[i] && input[i] != c)
 		i++;
 	if (input[i] != c)
-		mini_error("unclosed quotes", STDERR_FILENO);
+		mini_error("unclosed quotes", errno);
 	return (i);
 }
