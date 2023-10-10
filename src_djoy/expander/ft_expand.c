@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 17:22:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 19:14:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	ft_expand(t_parser *lst, t_env **env)
 			str = head->str;
 		}
 		// if (head->str != NULL)
-		printf("sign = [%i]\n", sign);
-		printf("str = [%s]\n", str);
+		// printf("sign = [%i]\n", sign);
+		// printf("str = [%s]\n", str);
 		if (sign == 1 || sign == 2)
 		{
 			// len = ft_strlen(head->str);
@@ -144,7 +144,7 @@ in executor would translate to if
 	write to parser->fd 
 }
 */
-void	redirect(t_parser *lst, t_env **env)
-{
-	//check
-}
+// void	redirect(t_parser *lst, t_env **env)
+// {
+// 	//check
+// }

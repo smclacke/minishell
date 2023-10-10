@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/10 18:48:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/10 19:18:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*handle_dollar_qs(char *str)
 // 	q = 0;
 // 	dollar_str = NULL;
 // 	no_dollar = NULL;
+
 // 	while (str[i])
 // 	{
 // 		if (str[i] && !is_dollar(str[i]) && ft_isquote(str[i]))
