@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 21:02:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 21:03:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param sign int passed to check is string or command
  * @brief checks if string or command and sets str to content of parser node
 */
-char	*set_expand_string(t_parser *head, int *sign)
+static char	*set_expand_string(t_parser *head, int *sign)
 {
 	char		*str;
 
@@ -48,7 +48,7 @@ char	*set_expand_string(t_parser *head, int *sign)
  * @brief checks parser node if command or string part has something
  * to expand. assign expanded string back to command or string part of node.
 */
-void	expand_dollar(t_parser *head, t_env **env, t_expand *exp)
+static void	expand_dollar(t_parser *head, t_env **env, t_expand *exp)
 {
 	int			len;
 	int			sign;
