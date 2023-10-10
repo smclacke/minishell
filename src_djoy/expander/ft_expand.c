@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 17:22:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 19:46:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@
  * does this mean that if a process ended correctly 
  * it needs to return 0? as in EXIT_SUCCESS?
  * if >>$USER no expanding user it's a delimiter now
+ * 
+ * dreijans@f0r2s3:~$ $USER echo abc$USER
+ * dreijans: command not found
+ * make it into proper error message
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
@@ -92,24 +96,21 @@ void	ft_expand(t_parser *lst, t_env **env)
 			sign = 2;
 			str = head->str;
 		}
-		// if (head->str != NULL)
-		printf("sign = [%i]\n", sign);
-		printf("str = [%s]\n", str);
 		if (sign == 1 || sign == 2)
 		{
-			// len = ft_strlen(head->str);
 			len = ft_strlen(str);
-			// dollar(head, env, exp, len);
-			dollar(str, env, exp, len);
+			str = dollar(str, env, exp, len);
 			if (sign == 1)
 			{
 				head->cmd = str;
-				printf("head->cmd [%s]\n", head->cmd);
+				printf("head->cmd 1 = [%s]\n", head->cmd);
+				sign = 0;
 			}
 			else if (sign == 2)
 			{
 				head->str = str;
-				printf("head->str [%s]\n", head->str);
+				printf("head->str = [%s]\n", head->str);
+				sign = 0;
 			}
 		}
 		head = head->next;

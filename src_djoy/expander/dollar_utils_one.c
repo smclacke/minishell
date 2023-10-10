@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 17:07:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 19:33:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@
  * @param len lenght of node->str
  * @brief checks if $ present and needs expanding
 */
-void	dollar(char *str, t_env **env, t_expand *exp, int len)
+char	*dollar(char *str, t_env **env, t_expand *exp, int len)
 {
 	if (ft_strnstr(str, "$", len))
 	{
-		exp = malloc(sizeof (t_expand));
-		init_expand_struct(exp);
-		exp_dollar(str, env, exp, len);
+		exp = ft_calloc(1, sizeof (t_expand));
+		// init_expand_struct(exp);
+		str = exp_dollar(str, env, exp, len);
 	}
+	return (str);
 }
 
 // /**
@@ -178,7 +179,7 @@ void	get_compare_str(char *str, t_expand *exp, int i, int j)
  * expands the string to actual value
  * @todo when "" '' quotes are handled check and adjust again
 */
-void	exp_dollar(char *str, t_env **env, t_expand *exp, int len)
+char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 {
 	int			i;
 	int			j;
@@ -187,19 +188,19 @@ void	exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 	while (str[i] != '\0')
 	{
 		if (check_at_len(str, exp, i, len) != 0)
-			return ;
+			return (str);
 		else if (str[i] == '$' && (i + 1) != len)
 		{
 			get_before_dollar(str, exp, i);
 			i++;
 			j = i;
 			get_compare_str(str, exp, i, j);
-			if (get_check_value(exp, env) != 0)
-				exp->env_value = NULL;
+			get_check_value(exp, env);
 			save_expanded(exp);
 			i = j - 1;
 		}
 		i++;
 	}
-	return_exp(str, exp);
+	str = return_exp(str, exp);
+	return (str);
 }

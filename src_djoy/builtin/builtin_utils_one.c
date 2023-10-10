@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   builtin_utils.c                                    :+:    :+:            */
+/*   builtin_utils_one.c                                :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:19:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/10 19:56:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ bool	word_check(t_parser *lst)
 
 	cmd = lst->cmd;
 	temp = lst->next;
+	words = NULL;
 	words = ft_split(temp->str, '=');
 	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
 	{
@@ -126,7 +127,11 @@ bool	word_check(t_parser *lst)
 	if (words == NULL)
 		mini_error("malloc split", errno);
 	if (key_value_check(temp, words, cmd) == 1)
+	{
+		ft_free_arr(words);
 		return (true);
+	}
+	ft_free_arr(words);
 	return (false);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:19:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 17:08:39 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 19:38:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	reassing_before_dollar(t_expand *exp)
 	temp = NULL;
 	temp = exp->before_dollar;
 	exp->before_dollar = ft_strjoin(exp->before_dollar, exp->env_value);
-	free_strs(temp, exp->env_value);
+	free(temp);
 }
 
 /**
@@ -45,12 +45,19 @@ int	get_check_value(t_expand *exp, t_env **env)
 	while (head)
 	{
 		if (mini_strcmp(exp->comp_str, head->key) == 0)
+		{
+			temp = exp->env_value;
 			exp->env_value = ft_substr(head->value, 0, ft_strlen(head->value));
+			free(temp);
+			break ;
+		}
 		head = head->next;
 	}
 	if (exp->env_value == NULL)
 	{
 		free_strs(exp->comp_str, exp->env_value);
+		exp->comp_str = NULL;
+		exp->env_value = NULL;
 		return (1);
 	}
 	return (0);
@@ -80,7 +87,7 @@ int	get_check_value(t_expand *exp, t_env **env)
  * @brief replaces the node->str with expanded value and frees
  * temp, before_dollar and the entire expand struct.
 */
-void	return_exp(char *str, t_expand *exp)
+char	*return_exp(char *str, t_expand *exp)
 {
 	char	*temp;
 	int		len;
@@ -89,7 +96,11 @@ void	return_exp(char *str, t_expand *exp)
 	len = ft_strlen(exp->before_dollar);
 	str = ft_substr(exp->before_dollar, 0, len);
 	free_strs(temp, exp->before_dollar);
+	free(exp->env_value);
 	free(exp);
+	temp = NULL;
+	ft_bzero(exp, sizeof(exp));
+	return (str);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 17:13:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 19:29:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,14 @@ typedef struct s_expand
 	int					j;
 }							t_expand;
 
-void			init_expand_struct(t_expand *data);
 void			free_remain_struct(t_expand *data);
 // void			get_compare_str(t_parser *node, t_expand *exp, int i, int j);
 void			get_compare_str(char *str, t_expand *exp, int i, int j);
 void			reassing_before_dollar(t_expand *exp);
 // void			dollar(t_parser *node, t_env **env, t_expand *exp, int len);
-void			dollar(char *str, t_env **env, t_expand *exp, int len);
+char			*dollar(char *str, t_env **env, t_expand *exp, int len);
 // void			return_exp(t_parser *node, t_expand *exp);
-void			return_exp(char *str, t_expand *exp);
+char			*return_exp(char *str, t_expand *exp);
 // void			get_before_dollar(t_parser *node, t_expand *exp, int i);
 void			get_before_dollar(char *str, t_expand *exp, int i);
 int				get_check_value(t_expand *exp, t_env **env);
@@ -133,7 +132,7 @@ void			ft_expand(t_parser *lst, t_env **env);
 bool			check_for_builtin(t_parser *lst);
 void			save_expanded(t_expand *exp);
 // void			exp_dollar(t_parser *node, t_env **env, t_expand *exp, int len);
-void			exp_dollar(char *str, t_env **env, t_expand *exp, int len);
+char			*exp_dollar(char *str, t_env **env, t_expand *exp, int len);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);

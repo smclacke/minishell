@@ -6,23 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/09 15:26:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 19:29:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-
-/**
-
- * @param data expand struct
- * @brief initializes struct
-*/
-void	init_expand_struct(t_expand *data)
-{
-	data->before_dollar = NULL;
-	data->env_value = NULL;
-	data->comp_str = NULL;
-}
 
 /**
  * @param exp expand struct
@@ -30,14 +18,12 @@ void	init_expand_struct(t_expand *data)
 */
 void	free_remain_struct(t_expand *data)
 {
-	if (data->before_dollar != NULL)
-		free (data->before_dollar);
-	if (data->env_value != NULL)
-		free (data->env_value);
-	if (data->comp_str != NULL)
-		free (data->comp_str);
-	if (data != NULL)
-		free (data);
+	if (data == NULL)
+		return ;
+	free (data->before_dollar);
+	free (data->env_value);
+	free (data->comp_str);
+	free (data);
 }
 
 /**
