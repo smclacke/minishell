@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 16:40:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/04 14:16:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/10 13:17:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 // '|, . ,'\n\
 //  !_-(_|\\"RESET
 
-# define PROMPT "minishell $"
+# define PROMPT "minishell 🍌"
 
 // # define PROMPT BI_YELLOW"🍌🍌🍌🍌🍌🍌🍌🍌 Gutentag Fräulein Shelly, wie geht's?"RESET
 

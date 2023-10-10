@@ -128,3 +128,44 @@ check how I should pipe accordingly yeah that
 -----------------------------------------------------------
 4) append >>
 5) heredoc <<
+
+---------------------SARAH NOTES-------------------------------
+
+hello lovely, it will all be ok soon... hopefully.. hehe
+
+**DOLLAR QUOTES YAY**
+
+when dollar in double remove quotes
+when dollar in single take string literally
+
+else, dollar + anything not quotes - expand
+anything quoted = string to add as cmd arg
+
+->>> $USER
+expand = cmd = smclacke
+
+dollar should also be seen as cmd after expansion
+i.e. -> $USER
+[0] cmd = smclacke
+
+so that 
+export hi=echo
+-> $hi
+[0] cmd = echo
+
+
+export new_cmd=echo
+$new_cmd hello djoyke
+hello djoyke
+
+
+export sarah=echo
+export djoyke=echo
+$sarah hello
+hello
+$djoyke hi
+hi
+$djoyke $sarah
+echo
+echo echo
+echo
