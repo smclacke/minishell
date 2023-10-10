@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/10 13:48:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/10 16:43:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	cmd_str_quotes(t_parser *tokens)
 		{
 			if (check_quotes(list->cmd))
 			{
-				if (!check_space(list->cmd))
+				if (!check_space(list->cmd) && !ft_isdollar(list->cmd))
 					list->cmd = remove_quotes(list->cmd);
 			}
 		}
