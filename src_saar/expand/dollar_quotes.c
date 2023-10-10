@@ -6,76 +6,62 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/10 12:21:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/10 13:30:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// $USER
-// zsh: command not found: smclacke
-// this was still expanded
-
-/**
- * is dollar and thing after is quote then there is no dollar to expand
- * then just dollar on its own , then whatever in quotes...
-*/
-
-/**
- * echo "$USER"				// remove quotes, expand
- * smclacke
- * 
- * '$USER'				// echo what is literally in the quotes
- * $USER
- * 
- * $"USER"				// echo what is literally in the quotes, ignore the dollar
- * USER					
- * 
- * abd$"USER"			// echo what is literally in the quotes, ignore the dollar
- * abdUSER
- * 
- * echo asdf'$USER'		// echo what is literally in the quotes
- * asdf$USER
- * 
- * $U"SER"				 // echo what is literally in the quotes, ignore the dollar
- * SER
- * 
- * $U'SER'				// echo what is literally in the quotes
- * SER
- * 
- * echo asdf$U"SER"		// echo what is literally in the quotes, ignore the dollar
- * asdfSER
-*/
-
-/**
- * all in doubles check env for var
- * 
- * if single, take literally 
- * 
- * save everything from start without quotes up to quote, then separate after/inside quotes
- * 
- * find dollar, if quote before, find matching, create separate strings
- * if dollar and quote after, ignore dollar
- * 
- * 
-*/
-
-/**
- * double quotes = 
- * 		remove and expand when whole is quoted
- * 		echo what is literally in the quotes
- * 		ignore the dollar and anything after dollar outside quotes
- * 		if something before dollar, that is also echoed with the rest
- * 
- * single qoutes = 
- * 		take what is inside the quotes literally
- * 		ignore dollar and anything after dollar outside quotes
-*/
-
 static int	is_dollar(int c)
 {
 	return (c == '$');
 }
+
+char	*handle_dollar_qs(char *str)
+{
+	
+}
+
+
+// char	*handle_dollar_qs(char *str)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		k;
+// 	char	*q;
+// 	char	*dollar_str;
+// 	char	*no_dollar;
+
+// 	i = 0;
+// 	j = 0;
+// 	k = 0;
+// 	q = 0;
+// 	dollar_str = NULL;
+// 	no_dollar = NULL;
+// 	while (str[i])
+// 	{
+// 		if (str[i] && !is_dollar(str[i]) && ft_isquote(str[i]))
+// 		{
+// 			// q = quote_type(str[i]);
+// 			q = which_quote(&str[i]);
+// 			k = i + next_quote(&str[i], *q);
+// 			printf("k = %i\n", k);
+// 			printf("i = %i\n", i);
+// 			while (k > i)
+// 			{
+// 				if (is_dollar(str[i]))
+// 				{	
+// 					printf("handle_quoted_dollar\n");
+
+// 				}
+// 				k--;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	printf("str = %s\n", str);
+// 	return (str);
+// }
 
 // static char	*handle_quoted_dollar(char *str, char *quote_type, int i, int j)
 // {
@@ -89,46 +75,6 @@ static int	is_dollar(int c)
 // while str and !dollar, if quotes (all before dollar), remove closed quotes. 
 // if dollar inside quotes, handle...
 // if quotes after dollar handle...
-
-char	*handle_dollar_qs(char *str)
-{
-	int		i;
-	int		j;
-	int		k;
-	char	*q;
-	char	*dollar_str;
-	char	*no_dollar;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	q = 0;
-	dollar_str = NULL;
-	no_dollar = NULL;
-	while (str[i])
-	{
-		if (str[i] && !is_dollar(str[i]) && ft_isquote(str[i]))
-		{
-			// q = quote_type(str[i]);
-			q = which_quote(&str[i]);
-			k = i + next_quote(&str[i], *q);
-			printf("k = %i\n", k);
-			printf("i = %i\n", i);
-			while (k > i)
-			{
-				if (is_dollar(str[i]))
-				{	
-					printf("handle_quoted_dollar\n");
-
-				}
-				k--;
-			}
-		}
-		i++;
-	}
-	printf("str = %s\n", str);
-	return (str);
-}
 
 // char	*handle_dollar_qs(char *str)
 // {

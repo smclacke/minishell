@@ -117,3 +117,44 @@ a
 3) pipe |
 4) append >>
 5) heredoc <<
+
+---------------------SARAH NOTES-------------------------------
+
+hello lovely, it will all be ok soon... hopefully.. hehe
+
+**DOLLAR QUOTES YAY**
+
+when dollar in double remove quotes
+when dollar in single take string literally
+
+else, dollar + anything not quotes - expand
+anything quoted = string to add as cmd arg
+
+->>> $USER
+expand = cmd = smclacke
+
+dollar should also be seen as cmd after expansion
+i.e. -> $USER
+[0] cmd = smclacke
+
+so that 
+export hi=echo
+-> $hi
+[0] cmd = echo
+
+
+export new_cmd=echo
+smclacke@f0r1s4:~/Desktop/minishell$ $new_cmd hello djoyke
+hello djoyke
+
+
+ export sarah=echo
+smclacke@f0r1s4:~/Desktop/minishell$ export djoyke=echo
+smclacke@f0r1s4:~/Desktop/minishell$ $sarah hello
+hello
+smclacke@f0r1s4:~/Desktop/minishell$ $djoyke hi
+hi
+smclacke@f0r1s4:~/Desktop/minishell$ $djoyke $sarah
+echo
+smclacke@f0r1s4:~/Desktop/minishell$ echo echo
+echo

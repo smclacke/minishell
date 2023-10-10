@@ -1,5 +1,120 @@
 **Quote Expansion**
 
+--------------------------------------------------------------------------
+
+**DOLLAR QUOTES YAY**
+
+when dollar in double remove quotes
+when dollar in single take string literally
+
+else, dollar + anything not quotes - expand
+anything quoted = string to add as cmd arg
+
+->>> $USER
+expand = cmd = smclacke
+
+dollar should also be seen as cmd after expansion
+i.e. -> $USER
+[0] cmd = smclacke
+
+so that 
+export hi=echo
+-> $hi
+[0] cmd = echo
+
+
+export new_cmd=echo
+smclacke@f0r1s4:~/Desktop/minishell$ $new_cmd hello djoyke
+hello djoyke
+
+
+ export sarah=echo
+smclacke@f0r1s4:~/Desktop/minishell$ export djoyke=echo
+smclacke@f0r1s4:~/Desktop/minishell$ $sarah hello
+hello
+smclacke@f0r1s4:~/Desktop/minishell$ $djoyke hi
+hi
+smclacke@f0r1s4:~/Desktop/minishell$ $djoyke $sarah
+echo
+smclacke@f0r1s4:~/Desktop/minishell$ echo echo
+echo
+
+
+--------------------------------------------------------------------------
+// $USER
+// zsh: command not found: smclacke
+// this was still expanded
+
+/**
+ * is dollar and thing after is quote then there is no dollar to expand
+ * then just dollar on its own , then whatever in quotes...
+ * 
+ * 
+ * "$USER" = remove quotes, expand dollar, becomes smclacke
+ * '$USER' = literally what's in quotes
+ * 
+ * if inside quotes dollar, if double, remove double and expand
+ * if single, take as literal string
+ * 
+ * if dollar, expand anything following OUTSIDE QUOTES
+ * anything in quotes (without a dollar) is just a quoted string
+ * 
+ * 
+*/
+
+/**
+ * echo "$USER"				// remove quotes, expand
+ * smclacke
+ * 
+ * '$USER'				// echo what is literally in the quotes
+ * $USER
+ * 
+ * $"USER"				// echo what is literally in the quotes, ignore the dollar
+ * USER					
+ * 
+ * abd$"USER"			// echo what is literally in the quotes, ignore the dollar
+ * abdUSER
+ * 
+ * echo asdf'$USER'		// echo what is literally in the quotes
+ * asdf$USER
+ * 
+ * $U"SER"				 // echo what is literally in the quotes, ignore the dollar
+ * SER
+ * 
+ * $U'SER'				// echo what is literally in the quotes
+ * SER
+ * 
+ * echo asdf$U"SER"		// echo what is literally in the quotes, ignore the dollar
+ * asdfSER
+*/
+
+/**
+ * all in doubles check env for var
+ * 
+ * if single, take literally 
+ * 
+ * save everything from start without quotes up to quote, then separate after/inside quotes
+ * 
+ * find dollar, if quote before, find matching, create separate strings
+ * if dollar and quote after, ignore dollar
+ * 
+ * 
+*/
+
+/**
+ * double quotes = 
+ * 		remove and expand when whole is quoted
+ * 		echo what is literally in the quotes
+ * 		ignore the dollar and anything after dollar outside quotes
+ * 		if something before dollar, that is also echoed with the rest
+ * 
+ * single qoutes = 
+ * 		take what is inside the quotes literally
+ * 		ignore dollar and anything after dollar outside quotes
+*/
+
+--------------------------------------------------------------------------
+
 bash = 
 
 echo "something << hello >in"
