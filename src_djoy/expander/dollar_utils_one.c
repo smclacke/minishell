@@ -6,11 +6,28 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/09 15:18:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 17:07:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+
+// /**
+//  * @param node node from parser linked list
+//  * @param env environment linked list 
+//  * @param exp expander struct
+//  * @param len lenght of node->str
+//  * @brief checks if $ present and needs expanding
+// */
+// void	dollar(t_parser *node, t_env **env, t_expand *exp, int len)
+// {
+// 	if (ft_strnstr(node->str, "$", len))
+// 	{
+// 		exp = malloc(sizeof (t_expand));
+// 		init_expand_struct(exp);
+// 		exp_dollar(node, env, exp, len);
+// 	}
+// }
 
 /**
  * @param node node from parser linked list
@@ -19,15 +36,34 @@
  * @param len lenght of node->str
  * @brief checks if $ present and needs expanding
 */
-void	dollar(t_parser *node, t_env **env, t_expand *exp, int len)
+void	dollar(char *str, t_env **env, t_expand *exp, int len)
 {
-	if (ft_strnstr(node->str, "$", len))
+	if (ft_strnstr(str, "$", len))
 	{
 		exp = malloc(sizeof (t_expand));
 		init_expand_struct(exp);
-		exp_dollar(node, env, exp, len);
+		exp_dollar(str, env, exp, len);
 	}
 }
+
+// /**
+//  * @param node node from parser linked list
+//  * @param exp expander struct
+//  * @param i index
+//  * @param len lenght of node->str
+//  * @brief checks if $ is at the end of the string
+//  * @return 1 if the $ is at the end of the string
+//  * 0 if not.
+// */
+// int	check_at_len(t_parser *node, t_expand *exp, int i, int len)
+// {
+// 	if (node->str[i] == '$' && (i + 1) == len)
+// 	{
+// 		free_remain_struct(exp);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 /**
  * @param node node from parser linked list
@@ -38,15 +74,28 @@ void	dollar(t_parser *node, t_env **env, t_expand *exp, int len)
  * @return 1 if the $ is at the end of the string
  * 0 if not.
 */
-int	check_at_len(t_parser *node, t_expand *exp, int i, int len)
+int	check_at_len(char *str, t_expand *exp, int i, int len)
 {
-	if (node->str[i] == '$' && (i + 1) == len)
+	if (str[i] == '$' && (i + 1) == len)
 	{
 		free_remain_struct(exp);
 		return (1);
 	}
 	return (0);
 }
+
+// /**
+//  * @param node node from parser linked list
+//  * @param exp expander struct
+//  * @param i index
+//  * @brief replaces the before_dollar string if it's NULL with 
+//  * node->str content of i lenght.
+// */
+// void	get_before_dollar(t_parser *node, t_expand *exp, int i)
+// {
+// 	if (exp->before_dollar == NULL)
+// 		exp->before_dollar = ft_substr(node->str, 0, i);
+// }
 
 /**
  * @param node node from parser linked list
@@ -55,11 +104,25 @@ int	check_at_len(t_parser *node, t_expand *exp, int i, int len)
  * @brief replaces the before_dollar string if it's NULL with 
  * node->str content of i lenght.
 */
-void	get_before_dollar(t_parser *node, t_expand *exp, int i)
+void	get_before_dollar(char *str, t_expand *exp, int i)
 {
 	if (exp->before_dollar == NULL)
-		exp->before_dollar = ft_substr(node->str, 0, i);
+		exp->before_dollar = ft_substr(str, 0, i);
 }
+
+// /**
+//  * @param node node from parser linked list
+//  * @param exp expander struct
+//  * @param i index
+//  * @param j index at next $ sign
+//  * @brief gets the string to compare the environment key to
+// */
+// void	get_compare_str(t_parser *node, t_expand *exp, int i, int j)
+// {
+// 	while (node->str[j] != '$' && node->str[j] != '\0')
+// 		j++;
+// 	exp->comp_str = ft_substr(node->str, i, j - i);
+// }
 
 /**
  * @param node node from parser linked list
@@ -68,12 +131,45 @@ void	get_before_dollar(t_parser *node, t_expand *exp, int i)
  * @param j index at next $ sign
  * @brief gets the string to compare the environment key to
 */
-void	get_compare_str(t_parser *node, t_expand *exp, int i, int j)
+void	get_compare_str(char *str, t_expand *exp, int i, int j)
 {
-	while (node->str[j] != '$' && node->str[j] != '\0')
+	while (str[j] != '$' && str[j] != '\0')
 		j++;
-	exp->comp_str = ft_substr(node->str, i, j - i);
+	exp->comp_str = ft_substr(str, i, j - i);
 }
+
+// /**
+//  * @param node parser linked list
+//  * @param env environmet linked list
+//  * @brief checks for a $ sign in the node
+//  * expands the string to actual value
+//  * @todo when "" '' quotes are handled check and adjust again
+// */
+// void	exp_dollar(t_parser *node, t_env **env, t_expand *exp, int len)
+// {
+// 	int			i;
+// 	int			j;
+
+// 	i = 0;
+// 	while (node->str[i] != '\0')
+// 	{
+// 		if (check_at_len(node, exp, i, len) != 0)
+// 			return ;
+// 		else if (node->str[i] == '$' && (i + 1) != len)
+// 		{
+// 			get_before_dollar(node, exp, i);
+// 			i++;
+// 			j = i;
+// 			get_compare_str(node, exp, i, j);
+// 			if (get_check_value(exp, env) != 0)
+// 				exp->env_value = NULL;
+// 			save_expanded(exp);
+// 			i = j - 1;
+// 		}
+// 		i++;
+// 	}
+// 	return_exp(node, exp);
+// }
 
 /**
  * @param node parser linked list
@@ -82,22 +178,22 @@ void	get_compare_str(t_parser *node, t_expand *exp, int i, int j)
  * expands the string to actual value
  * @todo when "" '' quotes are handled check and adjust again
 */
-void	exp_dollar(t_parser *node, t_env **env, t_expand *exp, int len)
+void	exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 {
 	int			i;
 	int			j;
 
 	i = 0;
-	while (node->str[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (check_at_len(node, exp, i, len) != 0)
+		if (check_at_len(str, exp, i, len) != 0)
 			return ;
-		else if (node->str[i] == '$' && (i + 1) != len)
+		else if (str[i] == '$' && (i + 1) != len)
 		{
-			get_before_dollar(node, exp, i);
+			get_before_dollar(str, exp, i);
 			i++;
 			j = i;
-			get_compare_str(node, exp, i, j);
+			get_compare_str(str, exp, i, j);
 			if (get_check_value(exp, env) != 0)
 				exp->env_value = NULL;
 			save_expanded(exp);
@@ -105,5 +201,5 @@ void	exp_dollar(t_parser *node, t_env **env, t_expand *exp, int len)
 		}
 		i++;
 	}
-	return_exp(node, exp);
+	return_exp(str, exp);
 }

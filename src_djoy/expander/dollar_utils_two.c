@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:19:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/09 15:17:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 17:08:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,38 @@ int	get_check_value(t_expand *exp, t_env **env)
 	return (0);
 }
 
+// /**
+//  * @param node node from parser linked list
+//  * @param exp expander struct
+//  * @brief replaces the node->str with expanded value and frees
+//  * temp, before_dollar and the entire expand struct.
+// */
+// void	return_exp(t_parser *node, t_expand *exp)
+// {
+// 	char	*temp;
+// 	int		len;
+
+// 	temp = node->str;
+// 	len = ft_strlen(exp->before_dollar);
+// 	node->str = ft_substr(exp->before_dollar, 0, len);
+// 	free_strs(temp, exp->before_dollar);
+// 	free(exp);
+// }
+
 /**
  * @param node node from parser linked list
  * @param exp expander struct
  * @brief replaces the node->str with expanded value and frees
  * temp, before_dollar and the entire expand struct.
 */
-void	return_exp(t_parser *node, t_expand *exp)
+void	return_exp(char *str, t_expand *exp)
 {
 	char	*temp;
 	int		len;
 
-	temp = node->str;
+	temp = str;
 	len = ft_strlen(exp->before_dollar);
-	node->str = ft_substr(exp->before_dollar, 0, len);
+	str = ft_substr(exp->before_dollar, 0, len);
 	free_strs(temp, exp->before_dollar);
 	free(exp);
 }

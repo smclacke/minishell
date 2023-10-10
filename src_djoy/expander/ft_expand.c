@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 13:47:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 17:22:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,25 +73,44 @@ void	ft_expand(t_parser *lst, t_env **env)
 	t_parser	*head;
 	t_expand	*exp;
 	int			len;
+	int			sign;
+	char		*str;
 
 	head = lst;
 	exp = NULL;
+	sign = 0;
+	str = NULL;
 	while (head)
 	{
-		if (head->str != NULL)
+		if (head->cmd != NULL && ft_strnstr(head->cmd, "$", ft_strlen(head->cmd)))
 		{
-			len = ft_strlen(head->str);
-			dollar(head, env, exp, len);
+			sign = 1;
+			str = head->cmd;
 		}
-		head = head->next;
-	}
-	head = lst;
-	while (head)
-	{
-		if (head->cmd != NULL)
+		else if (head->str != NULL && ft_strnstr(head->str, "$", ft_strlen(head->str)))
 		{
-			len = ft_strlen(head->cmd);
-			dollar(head, env, exp, len);
+			sign = 2;
+			str = head->str;
+		}
+		// if (head->str != NULL)
+		printf("sign = [%i]\n", sign);
+		printf("str = [%s]\n", str);
+		if (sign == 1 || sign == 2)
+		{
+			// len = ft_strlen(head->str);
+			len = ft_strlen(str);
+			// dollar(head, env, exp, len);
+			dollar(str, env, exp, len);
+			if (sign == 1)
+			{
+				head->cmd = str;
+				printf("head->cmd [%s]\n", head->cmd);
+			}
+			else if (sign == 2)
+			{
+				head->str = str;
+				printf("head->str [%s]\n", head->str);
+			}
 		}
 		head = head->next;
 	}
