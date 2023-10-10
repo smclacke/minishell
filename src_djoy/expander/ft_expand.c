@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 21:05:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 21:08:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,17 @@ zsh: no such file or directory: hi.txt
 in executor would translate to if 
 (parser->file != NULL)
 {
-	write to parser->fd 
+	//check if it' a file (for error code)
+	//check if it's directory (for error code)
+	//check if it's infile or outfile
+	//permissions (write read etc)
+	//check if infile exists throw error if it's not
+	//if outfile make them all and store the fd's in new part of the node?
+	// (parser->file != NULL)
+	// {
+	// 	write to parser->fd 
+	// }
+	//return
 }
 */
 // void	redirect(t_parser *lst, t_env **env)
