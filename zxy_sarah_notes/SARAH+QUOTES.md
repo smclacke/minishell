@@ -24,20 +24,20 @@ export hi=echo
 
 
 export new_cmd=echo
-smclacke@f0r1s4:~/Desktop/minishell$ $new_cmd hello djoyke
-hello djoyke
+$new_cmd hello djoyke
+-> hello djoyke
 
 
- export sarah=echo
-smclacke@f0r1s4:~/Desktop/minishell$ export djoyke=echo
-smclacke@f0r1s4:~/Desktop/minishell$ $sarah hello
-hello
-smclacke@f0r1s4:~/Desktop/minishell$ $djoyke hi
-hi
-smclacke@f0r1s4:~/Desktop/minishell$ $djoyke $sarah
-echo
-smclacke@f0r1s4:~/Desktop/minishell$ echo echo
-echo
+export sarah=echo
+export djoyke=echo
+$sarah hello
+-> hello
+$djoyke hi
+-> hi
+$djoyke $sarah
+-> echo
+-> echo echo
+-> echo
 
 
 --------------------------------------------------------------------------
