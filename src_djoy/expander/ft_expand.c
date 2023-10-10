@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 21:03:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 21:05:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,36 +105,23 @@ void	ft_expand(t_parser *lst, t_env **env)
 
 
 /*
-	➜  minishell git:(djoyke) ✗ < hi.txt wc > outfile.txt 
-	zsh: no such file or directory: hi.txt
-	➜  minishell git:(djoyke) ✗ pwd
-	/home/dreijans/Documents/rank3/minishell
-	➜  minishell git:(djoyke) ✗ rm outfile.txt
-	rm: cannot remove 'outfile.txt': No such file or directory
-	➜  minishell git:(djoyke) ✗ cd src_djoy 
-	➜  src_djoy git:(djoyke) ✗ < hi.txt wc |  > outfile.txt 
-	zsh: no such file or directory: hi.txt
-	➜  src_djoy git:(djoyke) ✗ rm outfile.txt   
-
-		dreijans@f0r2s3:~$ < hi | echo hello
-		hello
-		dreijans@f0r2s3:~$ bash: hi: No such file or directory
-		^C
-		dreijans@f0r2s3:~$ < hi echo hello | echo hello
-		hello
-		bash: hi: No such file or directory
-
-*/
-void	redirect(t_parser *lst, t_env **env)
+➜  minishell git:(djoyke) ✗ < hi.txt wc > outfile.txt 
+zsh: no such file or directory: hi.txt
+➜  minishell git:(djoyke) ✗ pwd
+/home/dreijans/Documents/rank3/minishell
+➜  minishell git:(djoyke) ✗ rm outfile.txt
+rm: cannot remove 'outfile.txt': No such file or directory
+➜  minishell git:(djoyke) ✗ cd src_djoy 
+➜  src_djoy git:(djoyke) ✗ < hi.txt wc |  > outfile.txt 
+zsh: no such file or directory: hi.txt
+➜  src_djoy git:(djoyke) ✗ rm outfile.txt   
+in executor would translate to if 
+(parser->file != NULL)
 {
-	//check if it' a file (for error code)
-	//check if it's directory (for error code)
-	//check if it's infile or outfile
-	//permissions (write read etc)
-	//check if infile exists throw error if it's not
-	//if outfile make them all and store the fd's in new part of the node?
-	// (parser->file != NULL)
-	// {
-	// 	write to parser->fd 
-	// }
+	write to parser->fd 
 }
+*/
+// void	redirect(t_parser *lst, t_env **env)
+// {
+	//check
+// }
