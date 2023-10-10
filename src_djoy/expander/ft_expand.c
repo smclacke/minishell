@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 20:52:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 21:02:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,57 +79,7 @@ void	expand_dollar(t_parser *head, t_env **env, t_expand *exp)
  * @param env environment linked list
  * @brief checks if there's a meta or a builtin
  * @todo
- * bash-3.2$ cat $djoyke
- * cat: haaa: No such file or directory
- * cat: ggg: No such file or directory (is moeilijk maybe not)
- * 		cat $USER
- * 
- * 		char ** =	[0] cat
- * 					[1] $USER
- * 					[2] NULL
- * 
- * 		expanding handles [1]$USER (could be djoyke etc or nothing)
- * 		if it's nothing char ** after expanding should look like
- * 
- * 		char ** = [0] cat
- * 		[1] NULL
- *		give that to execve
- *		
- *		or:
- * 		
- *		char ** = [0] cat
- *				  [1] djoyke
- *				  [2] NULL
- *
- * 		[1] $USER get's removed not overwritten! (memcpy)
- * 		[2] NULL get's moved up!
- * 		
- * 		➜  ~ echo $USER
- * 		dreijans
- * 		➜  ~ echo $?
- * 		0	
- * 		➜  ~ echo ${USER}
- * 		dreijans
- * 		➜  ~ echo $?
- * 		0
- * 		➜  ~ echo "$USER"
- * 		dreijans
- * 		➜  ~ echo $?
- * 		0
- * 		➜  ~
- * 
- * 		bash-3.2$ echo hi > outfile
- * 		bash-3.2$ cat outfile
- * 		hi
- * 			
- * builtin needs to be redirected to outfile
- * does this mean that if a process ended correctly 
- * it needs to return 0? as in EXIT_SUCCESS?
- * if >>$USER no expanding user it's a delimiter now
- * 
- * dreijans@f0r2s3:~$ $USER echo abc$USER
- * dreijans: command not found
- * make it into proper error message
+ * check DJOYKE_TD.MD
 */
 void	ft_expand(t_parser *lst, t_env **env)
 {
@@ -154,27 +104,37 @@ void	ft_expand(t_parser *lst, t_env **env)
 }
 
 
-//check if it' a file (for error code)
-//check if it's directory (for error code)
-//permissions (write read etc)
 /*
-➜  minishell git:(djoyke) ✗ < hi.txt wc > outfile.txt 
-zsh: no such file or directory: hi.txt
-➜  minishell git:(djoyke) ✗ pwd
-/home/dreijans/Documents/rank3/minishell
-➜  minishell git:(djoyke) ✗ rm outfile.txt
-rm: cannot remove 'outfile.txt': No such file or directory
-➜  minishell git:(djoyke) ✗ cd src_djoy 
-➜  src_djoy git:(djoyke) ✗ < hi.txt wc |  > outfile.txt 
-zsh: no such file or directory: hi.txt
-➜  src_djoy git:(djoyke) ✗ rm outfile.txt   
-in executor would translate to if 
-(parser->file != NULL)
-{
-	write to parser->fd 
-}
+	➜  minishell git:(djoyke) ✗ < hi.txt wc > outfile.txt 
+	zsh: no such file or directory: hi.txt
+	➜  minishell git:(djoyke) ✗ pwd
+	/home/dreijans/Documents/rank3/minishell
+	➜  minishell git:(djoyke) ✗ rm outfile.txt
+	rm: cannot remove 'outfile.txt': No such file or directory
+	➜  minishell git:(djoyke) ✗ cd src_djoy 
+	➜  src_djoy git:(djoyke) ✗ < hi.txt wc |  > outfile.txt 
+	zsh: no such file or directory: hi.txt
+	➜  src_djoy git:(djoyke) ✗ rm outfile.txt   
+
+		dreijans@f0r2s3:~$ < hi | echo hello
+		hello
+		dreijans@f0r2s3:~$ bash: hi: No such file or directory
+		^C
+		dreijans@f0r2s3:~$ < hi echo hello | echo hello
+		hello
+		bash: hi: No such file or directory
+
 */
-// void	redirect(t_parser *lst, t_env **env)
-// {
-	//check
-// }
+void	redirect(t_parser *lst, t_env **env)
+{
+	//check if it' a file (for error code)
+	//check if it's directory (for error code)
+	//check if it's infile or outfile
+	//permissions (write read etc)
+	//check if infile exists throw error if it's not
+	//if outfile make them all and store the fd's in new part of the node?
+	// (parser->file != NULL)
+	// {
+	// 	write to parser->fd 
+	// }
+}
