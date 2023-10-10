@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/06 22:00:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/10 12:21:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 // this was still expanded
 
 /**
+ * is dollar and thing after is quote then there is no dollar to expand
+ * then just dollar on its own , then whatever in quotes...
+*/
+
+/**
  * echo "$USER"				// remove quotes, expand
  * smclacke
  * 
@@ -24,7 +29,7 @@
  * $USER
  * 
  * $"USER"				// echo what is literally in the quotes, ignore the dollar
- * USER
+ * USER					
  * 
  * abd$"USER"			// echo what is literally in the quotes, ignore the dollar
  * abdUSER
