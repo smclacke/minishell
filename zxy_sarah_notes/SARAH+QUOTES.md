@@ -13,6 +13,8 @@ anything quoted = string to add as cmd arg
 ->>> $USER
 expand = cmd = smclacke
 
+
+
 dollar should also be seen as cmd after expansion
 i.e. -> $USER
 [0] cmd = smclacke
@@ -23,24 +25,12 @@ export hi=echo
 [0] cmd = echo
 
 
-export new_cmd=echo
-$new_cmd hello djoyke
--> hello djoyke
 
-
-export sarah=echo
-export djoyke=echo
-$sarah hello
--> hello
-$djoyke hi
--> hi
-$djoyke $sarah
--> echo
-echo echo
--> echo
-
+**DOLLAR QUOTES YAY**
 
 --------------------------------------------------------------------------
+
+
 // $USER
 // zsh: command not found: smclacke
 // this was still expanded
