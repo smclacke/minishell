@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/10 13:36:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/10 16:43:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static	void	dollar_quotes(t_parser *tokens)
 			if (check_quotes(list->str) && ft_isdollar(list->str))
 				list->str = handle_dollar_qs(list->str);
 		}
-		else if (list->cmd)
+		if (list->cmd)
 		{
-			if (check_quotes(list->cmd && ft_isdollar(list->cmd)))
+			if (check_quotes(list->cmd) && ft_isdollar(list->cmd))
 				list->cmd = handle_dollar_qs(list->cmd);
 		}
 		list = list->next;
@@ -101,7 +101,7 @@ static void	cmd_str_quotes(t_parser *tokens)
 		{
 			if (check_quotes(list->cmd))
 			{
-				if (!check_space(list->cmd))
+				if (!check_space(list->cmd) && !ft_isdollar(list->cmd))
 					list->cmd = remove_quotes(list->cmd);
 			}
 		}
@@ -120,5 +120,5 @@ static void	cmd_str_quotes(t_parser *tokens)
 void	expand_quotes(t_parser *tokens)
 {
 	cmd_str_quotes(tokens);
-	// dollar_quotes(tokens);
+	dollar_quotes(tokens);
 }

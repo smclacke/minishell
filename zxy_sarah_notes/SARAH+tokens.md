@@ -5,6 +5,18 @@
 <br/><br/>
 
 
+processsssssssss  |    processssss1 | prcoesss2
+
+meta < > >> << |
+in/out files
+strs
+cmd (one!)
+
+echo echo
+
+
+
+
 <br/><br/>
 
 **CURRENT PROBLEMS :)**
