@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/09 19:47:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/10 13:47:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,16 @@ void	ft_expand(t_parser *lst, t_env **env)
 		if (head->str != NULL)
 		{
 			len = ft_strlen(head->str);
+			dollar(head, env, exp, len);
+		}
+		head = head->next;
+	}
+	head = lst;
+	while (head)
+	{
+		if (head->cmd != NULL)
+		{
+			len = ft_strlen(head->cmd);
 			dollar(head, env, exp, len);
 		}
 		head = head->next;
