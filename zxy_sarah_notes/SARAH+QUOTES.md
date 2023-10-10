@@ -36,7 +36,7 @@ $djoyke hi
 -> hi
 $djoyke $sarah
 -> echo
--> echo echo
+echo echo
 -> echo
 
 
