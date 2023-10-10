@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/09 19:36:31 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/10 18:51:36 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -165,7 +165,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@ mkdir -p $(OBJ_DIR)
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c
+$(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/builtin

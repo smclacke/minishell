@@ -40,8 +40,6 @@ for in the future... don't change utils... ever.
  -> cd "" and cd '' seems to work the same as cd .
 
  -> dollar + quotes
- 
- -> dollar expanded cmd
 
 
 ********************************************************************************
