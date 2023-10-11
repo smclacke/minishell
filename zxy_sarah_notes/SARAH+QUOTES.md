@@ -4,8 +4,38 @@
 
 **DOLLAR QUOTES YAY**
 
+LA'OHGUUsdlfmsadflkamslfkmlfkmlmglmglaskm
+11/10, the dollar quote bullshit day...
 
-*********************************************
+
+echo "HELLO"$USER
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = "HELLO"$USER
+HELLO 
+
+
+echo 'hello'$USER
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = 'hello'$USER
+hello 
+
+
+echo hello$USER
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = hello$USER
+hellosmclacke
+
+ *********************************************
+
+:)
+
+echo $USER"HELLO"$USER$USER"something"$PWD'wtf'
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = $USER"HELLO"$USER$USER"something"$PWD'wtf'
+smclackeHELLOsmclackesmclackesomething/home/smclacke/Desktop/minishellwtf 
+
+
+ *********************************************
 
 when dollar in double remove quotes 		-> expand
 when dollar in single take string literally -> don't expand

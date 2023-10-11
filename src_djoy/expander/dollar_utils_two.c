@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:19:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 16:49:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/11 19:50:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	get_check_value(t_expand *exp, t_env **env)
 	}
 	if (exp->env_value == NULL)
 	{
-		// free(exp->comp_str);
 		free_strs(exp->comp_str, exp->env_value);
 		exp->comp_str = NULL;
 		exp->env_value = NULL;
