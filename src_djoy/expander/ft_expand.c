@@ -6,11 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 13:45:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/11 18:14:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+#include <sys/stat.h>
 
 /**
  * @param head parser linked list
@@ -82,7 +83,6 @@ void	expand_dollar(t_parser *head, t_env **env, t_expand *exp)
 	}
 }
 
-
 /**
  * @param lst linked list from parser
  * @param env environment linked list
@@ -103,12 +103,12 @@ void	ft_expand(t_parser *lst, t_env **env)
 		head = head->next;
 	}
 	head = lst;
-	// while (head)
-	// {
-	// 	redirect(head, env);
-	// 	head = head->next;
-	// }
-	// head = lst;
+	while (head)
+	{
+		redirect(head, env);
+		head = head->next;
+	}
+	head = lst;
 	while (head)
 	{
 		check_for_meta(head);
@@ -117,7 +117,6 @@ void	ft_expand(t_parser *lst, t_env **env)
 		head = head->next;
 	}
 }
-
 
 /*
 	➜  minishell git:(djoyke) ✗ < hi.txt wc > outfile.txt 
@@ -138,31 +137,39 @@ void	ft_expand(t_parser *lst, t_env **env)
 		dreijans@f0r2s3:~$ < hi echo hello | echo hello
 		hello
 		bash: hi: No such file or directory
-
 */
-// void	redirect(t_parser *head, t_env **env)
-// {
-// 	//check if it's infile or outfile
-// 	if (ft_strcmp(head->meta, "<") == 0)
-// 	{
-// 		//check if infile exists throw error if it's not
-// 		//check if it' a file (for error code)
-// 		//check if it's directory (for error code)
-// 		//save fd somewhere
-// 		//permissions (write read etc)
-// 	}
-// 	else if (ft_strcmp(head->meta, ">") == 0)
-// 	{
-// 		//check if already exists
-// 		//save fd if it already exists
-// 		//check if it' a file (for error code)
-// 		//check if it's directory (for error code)
-// 		//permissions (write read etc)
-// 		//if outfile make them all and store the fd's in new part of the node?
-// 		// (parser->file != NULL)
-// 		// {
-// 		// 	write to parser->fd 
-// 		// }
-// 		//return
-// 	}
-// }
+void	redirect(t_parser *head, t_env **env)
+{
+	if (ft_strcmp(head->meta, "<") == 0)
+	{
+		head = head->next;
+		if (access(head->file, F_OK) != 0)
+		{
+			ft_putstr_fd("minishell: ", STDOUT_FILENO);
+			ft_putstr_fd(head->str, STDOUT_FILENO);
+			ft_putstr_fd(":", STDOUT_FILENO);
+			ft_putstr_fd(" No such file or directory\n", STDOUT_FILENO);
+		}
+	if (stat(head->file, statstruct?))
+	{
+		//check if it' a file (for error code)
+		//check if it's directory (for error code)
+		//save fd somewhere
+		//permissions (write read etc)
+	}
+	}
+	else if (ft_strcmp(head->meta, ">") == 0)
+	{
+		//check if already exists
+		//save fd if it already exists
+		//check if it' a file (for error code)
+		//check if it's directory (for error code)
+		//permissions (write read etc)
+		//if outfile make them all and store the fd's in new part of the node?
+		// (parser->file != NULL)
+		// {
+		// 	write to parser->fd 
+		// }
+		//return
+	}
+}

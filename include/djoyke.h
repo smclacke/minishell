@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 19:29:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/11 18:09:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ typedef struct s_execute
 	int		pipe_fd[2];
 	char	**path;
 	char	**env_array;
+	char	
 }				t_execute;
 
 t_parser		*mini_forks(t_parser *lst, t_env *env, t_execute *data);

@@ -8,7 +8,6 @@
 
 --------------------RANDOM-------------------------
 
-1)Does Sarah or do I handle the passing of the quotes?
 2) as soon as quotes are fixed 
     1) check exit and unset again for the quoted value etc
     2) check echo again
@@ -33,6 +32,25 @@ cd:
 
 1) infile <
 2) outfile >
+
+check stat function video youtube https://www.youtube.com/watch?v=5k0Eh1ZpT0o
+
+//    if (stat(path, &fileStat) == 0) {
+//         if (S_ISREG(fileStat.st_mode)) {
+//             printf("%s is a regular file.\n", path);
+//         } else if (S_ISDIR(fileStat.st_mode)) {
+//             printf("%s is a directory.\n", path);
+//         } else {
+//             printf("%s is neither a regular file nor a directory.\n", path);
+//         }
+//     } else {
+//         perror("stat");
+//     }
+
+- `R_OK`: Check if the file or directory is readable. XXXXX
+- `W_OK`: Check if the file or directory is writable. XXXXX
+- `X_OK`: Check if the file or directory is executable.
+- `F_OK`: Check if the file or directory exists.
 
 should we handle this in the parser?
 assigning fd to the same node the file name is in.
