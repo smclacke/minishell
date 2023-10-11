@@ -7,11 +7,12 @@
 
 *********************************************
 
-when dollar in double remove quotes
-when dollar in single take string literally
+when dollar in double remove quotes 		-> expand
+when dollar in single take string literally -> don't expand
+	!! how do we know this.... ?
 
-else, dollar + anything not quotes - expand
-anything quoted = string to add as cmd arg
+else, dollar + anything not quotes 			-> expand
+anything quoted = string to add as cmd arg	-> don't expand
 
 *********************************************
 
