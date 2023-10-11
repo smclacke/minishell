@@ -4,11 +4,18 @@
 
 **DOLLAR QUOTES YAY**
 
+
+*********************************************
+
 when dollar in double remove quotes
 when dollar in single take string literally
 
 else, dollar + anything not quotes - expand
 anything quoted = string to add as cmd arg
+
+*********************************************
+
+
 
 ->>> $USER
 expand = cmd = smclacke
