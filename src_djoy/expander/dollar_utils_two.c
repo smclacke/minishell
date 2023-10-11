@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:19:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 15:34:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/11 16:49:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	*return_exp(char *str, t_expand *exp)
 	str = ft_substr(exp->before_dollar, 0, len);
 	free_strs(temp, exp->before_dollar);
 	free(exp->env_value);
+	free(exp->var);
 	free(exp);
 	temp = NULL;
 	ft_bzero(exp, sizeof(exp));
@@ -96,6 +97,7 @@ void	save_expanded(t_expand *exp)
 	if (exp->env_value != NULL)
 	{
 		free(exp->comp_str);
+		exp->comp_str = NULL;
 		reassing_before_dollar(exp);
 	}
 }

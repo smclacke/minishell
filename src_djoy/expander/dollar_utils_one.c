@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 16:21:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/11 16:47:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	get_before_dollar(char *str, t_expand *exp, int i)
 */
 void	get_compare_str(char *str, t_expand *exp, int i, int j)
 {
+	printf("str going in compare-str = [%s]\n", str);
 	while (str[j] != '$' && !ft_isquote(str[j]) && str[j] != '\0')
 		j++;
 	exp->comp_str = ft_substr(str, i, j - i);
@@ -90,7 +91,6 @@ int	get_var_str(char *str, t_expand *exp, int i, int j)
 	while (!ft_isquote(str[j]) && str[j] != '\0')
 		j++;
 	exp->var = ft_substr(str, i, j - i);
-	printf("exp->var = [%s]\n", exp->var);
 	return (j);
 }
 
@@ -146,19 +146,17 @@ char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 		else if (((str[i] == '$') || (ft_isquote(str[i]))) && (i + 1) != len)
 		{
 			get_before_dollar(str, exp, i);
-			if (str[i] == '$' || ft_isquote(str[i]))
+			if (ft_isquote(str[i]))
 			{
-				if (ft_isquote(str[i]))
-				{
-					i = get_var_str(str, exp, i, j);
-					exp->var = remove_quotes(exp->var);
-					printf("exp->var = [%s]\n", exp->var);
-					reassing_before_dollar_with_var(exp);
-					printf("exp->before_dollar = [%s]\n", exp->before_dollar);
-				}
-				printf("i = [%i]\n", i);
-				i++;
+				i = get_var_str(str, exp, i, j);
+				exp->var = remove_quotes(exp->var);
+				printf("exp->var = [%s]\n", exp->var);
+				reassing_before_dollar_with_var(exp);
+				printf("exp->before_dollar = [%s]\n", exp->before_dollar);
+				// i++;
 			}
+			i++;
+			printf("i after increment = [%i]\n", i);
 			printf("len = [%i]\n", len);
 			j = i;
 			if (i == len)
@@ -167,9 +165,11 @@ char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 				return (str);
 			}
 			get_compare_str(str, exp, i, j);
+			printf("exp->comp_str = [%s]\n", exp->comp_str);
 			get_check_value(exp, env);
+			printf("exp->env_value = [%s]\n", exp->env_value);
 			save_expanded(exp);
-			i = j - 1;	
+			// i = j - 1;	
 		}
 		i++;
 	}
