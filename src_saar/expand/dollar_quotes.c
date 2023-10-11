@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/11 12:56:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/11 14:00:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,5 @@ char	*handle_dollar_qs(char *str)
 	return (str);
 }
 
+// expand(char *str)
+// fix_up(char *str)

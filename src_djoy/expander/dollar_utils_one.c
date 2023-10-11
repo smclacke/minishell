@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 13:49:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/11 14:00:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 	{
 		if (check_at_len(str, exp, i, len) != 0)
 			return (str);
-
-		// expand?
-		// return (str);
-		// if (str[0] == '\'')
-		// {
-		// 	//return (str without ')		abc'$USER'
-		// }
+		if (!expand(str))
+		{
+			printf("don't expand hehe\n");
+			// fix up the str for return 
+			// fix_up(str)
+			return (str);
+		}
 		else if (str[i] == '$' && (i + 1) != len)
 		{
 			get_before_dollar(str, exp, i);
