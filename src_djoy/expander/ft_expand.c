@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 21:07:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/11 13:45:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
  * @param head parser linked list
  * @param sign int passed to check is string or command
  * @brief checks if string or command and sets str to content of parser node
+ * 
+ * dollar in double, remove quotes
+ * dollar single, dont expand
+ * dollar + -> up to quote
+ * "$USER" = expanded user
+ * '$USER' = $USER
+ * $something"string" = expanded something, + string
+ * $hello'<thing' = expanded hello + <thing
+ * 
 */
 char	*set_expand_string(t_parser *head, int *sign)
 {
@@ -94,6 +103,12 @@ void	ft_expand(t_parser *lst, t_env **env)
 		head = head->next;
 	}
 	head = lst;
+	// while (head)
+	// {
+	// 	redirect(head, env);
+	// 	head = head->next;
+	// }
+	// head = lst;
 	while (head)
 	{
 		check_for_meta(head);
@@ -125,17 +140,29 @@ void	ft_expand(t_parser *lst, t_env **env)
 		bash: hi: No such file or directory
 
 */
-void	redirect(t_parser *lst, t_env **env)
-{
-	//check if it' a file (for error code)
-	//check if it's directory (for error code)
-	//check if it's infile or outfile
-	//permissions (write read etc)
-	//check if infile exists throw error if it's not
-	//if outfile make them all and store the fd's in new part of the node?
-	// (parser->file != NULL)
-	// {
-	// 	write to parser->fd 
-	// }
-	//return
-}
+// void	redirect(t_parser *head, t_env **env)
+// {
+// 	//check if it's infile or outfile
+// 	if (ft_strcmp(head->meta, "<") == 0)
+// 	{
+// 		//check if infile exists throw error if it's not
+// 		//check if it' a file (for error code)
+// 		//check if it's directory (for error code)
+// 		//save fd somewhere
+// 		//permissions (write read etc)
+// 	}
+// 	else if (ft_strcmp(head->meta, ">") == 0)
+// 	{
+// 		//check if already exists
+// 		//save fd if it already exists
+// 		//check if it' a file (for error code)
+// 		//check if it's directory (for error code)
+// 		//permissions (write read etc)
+// 		//if outfile make them all and store the fd's in new part of the node?
+// 		// (parser->file != NULL)
+// 		// {
+// 		// 	write to parser->fd 
+// 		// }
+// 		//return
+// 	}
+// }
