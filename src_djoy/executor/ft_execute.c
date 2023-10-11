@@ -3,18 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_execute.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/10/10 20:56:00 by dreijans      ########   odam.nl         */
-=======
-<<<<<<< HEAD
-/*   Updated: 2023/10/10 20:53:43 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/10 19:14:18 by smclacke      ########   odam.nl         */
->>>>>>> sarah
->>>>>>> 52ddf68d06316e70c7891b49f545ab91d8273769
+/*   Created: 2023/10/11 13:01:22 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/10/11 13:01:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
