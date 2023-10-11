@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/06 21:00:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/11 14:45:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int					quote_type(int str);
 int					len_quotes(char *str);
 
 //-------- dollar_quotes --------//
-char				*handle_dollar_qs(char *str);
+int					sarah_expand_dollar(char *str);
 
 //--------------------DJOYKE---------------------//
 

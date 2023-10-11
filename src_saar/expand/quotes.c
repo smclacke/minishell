@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/10 16:43:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/11 14:26:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,26 @@ char	*remove_quotes(char *str)
 	return (new);
 }
 
-static	void	dollar_quotes(t_parser *tokens)
-{
-	t_parser	*list;
+// static	void	dollar_quotes(t_parser *tokens)
+// {
+// 	t_parser	*list;
 
-	list = tokens;
-	while (list)
-	{
-		if (list->str)
-		{
-			if (check_quotes(list->str) && ft_isdollar(list->str))
-				list->str = handle_dollar_qs(list->str);
-		}
-		if (list->cmd)
-		{
-			if (check_quotes(list->cmd) && ft_isdollar(list->cmd))
-				list->cmd = handle_dollar_qs(list->cmd);
-		}
-		list = list->next;
-	}
-}
+// 	list = tokens;
+// 	while (list)
+// 	{
+// 		if (list->str)
+// 		{
+// 			if (check_quotes(list->str) && ft_isdollar(list->str))
+// 				list->str = handle_dollar_qs(list->str);
+// 		}
+// 		if (list->cmd)
+// 		{
+// 			if (check_quotes(list->cmd) && ft_isdollar(list->cmd))
+// 				list->cmd = handle_dollar_qs(list->cmd);
+// 		}
+// 		list = list->next;
+// 	}
+// }
 
 /**
  * @brief	if cmd has quotes, check if there is a space inside,
@@ -120,5 +120,5 @@ static void	cmd_str_quotes(t_parser *tokens)
 void	expand_quotes(t_parser *tokens)
 {
 	cmd_str_quotes(tokens);
-	dollar_quotes(tokens);
+	// dollar_quotes(tokens);
 }

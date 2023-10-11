@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 19:29:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/11 15:37:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 # include "libft/include/libft.h"
 # include "prompt.h"
 # include "colour.h"
-// # include "sarah.h"
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <sys/stat.h>
-# include <sys/ioctl.h>
-# include <errno.h>
-# include <stdbool.h>
-# include <sys/wait.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <sys/ioctl.h>
+#include <sys/wait.h>
+#include <stdbool.h>
+#include <errno.h>
 
 # define READ 0
 # define WRITE 1
@@ -37,6 +37,14 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define PIPE "|"
+# define MORE ">"
+# define MOREMORE ">>"
+# define LESS "<"
+# define LESSLESS "<<"
+# define DOUBLE_Q "\""
+# define SINGLE_Q "\'"
 
 /**
  * @brief	specifies the different variable types of tokens from the
@@ -53,45 +61,61 @@ typedef struct s_parser
 	char				*cmd;
 	char				*meta;
 	char				*file;
-	char				*str;
+	char				*str;;
 	struct s_parser		*next;
 }				t_parser;
 
 // utils
-void			free_tokens(t_parser *tokens);
+void				free_tokens(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//
-t_parser		*lexer(char *input);
+t_parser			*lexer(char *input);
 
 //-------- lexer_utils --------//
-t_parser		*lexer_listlast(t_parser *list);
-void			lexer_listadd_back(t_parser **list, t_parser *new);
-t_parser		*lexer_listnew(void *input);
-t_parser		*shelly_print_list(t_parser *token);
+t_parser			*lexer_listlast(t_parser *list);
+void				lexer_listadd_back(t_parser **list, t_parser *new);
+t_parser			*lexer_listnew(void *input);
+t_parser			*shelly_print_list(t_parser *token);
 
 //---------- token ----------//
-char			**parse_input(char *input);
+char				**parse_input(char *input);
 
 //-------- token_size --------//
-int				start_token(char *input, int old_start);
-int				len_token(char *input, int len);
+int					start_token(char *input, int old_start);
+int					len_token(char *input, int len);
 
 //-------- token_utils --------//
-int				is_meta(char *input);
-int				space_or_meta(int c);
-char			*which_quote(char *input);
-int				next_quote(char *input, char c);
+int					is_meta(char *input);
+int					space_or_meta(int c);
+int					is_same_quote(int c, char *quote_type);
+char				*which_quote(char *input);
+int					next_quote(char *input, char c);
 
 // parser
 //-------- parser --------//
-t_parser		*parser(t_parser *tokens);
+t_parser			*parser(t_parser *tokens);
 
 //-------- parser_utils --------//
-t_parser		*handle_pipe(t_parser *data, int *flag);
-int				is_pipe(void *input);
-char			*is_redirect(void *input);
-t_parser		*shelly_parser_print(t_parser *tokens);
+t_parser			*handle_pipe(t_parser *data, int *flag);
+int					is_pipe(void *input);
+char				*is_redirect(void *input);
+t_parser			*shelly_parser_print(t_parser *tokens);
+
+// expand
+//---------- quotes ----------//
+char				*remove_quotes(char *str);
+void				expand_quotes(t_parser *tokens);
+
+//-------- quote_utils --------//
+void				increment(int *len, int *i);
+int					check_quotes(char *str);
+int					check_space(char *str);
+int					quote_type(int str);
+int					len_quotes(char *str);
+
+//-------- dollar_quotes --------//
+int					sarah_expand_dollar(char *str);
 
 
 //---- Executor ----//
@@ -109,6 +133,7 @@ typedef struct s_env
 typedef struct s_expand
 {
 	char				*before_dollar;
+	char				*var;
 	char				*env_value;
 	char				*comp_str;
 	int					i;

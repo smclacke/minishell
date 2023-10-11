@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 14:00:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/11 16:21:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,44 @@ void	get_before_dollar(char *str, t_expand *exp, int i)
 */
 void	get_compare_str(char *str, t_expand *exp, int i, int j)
 {
-	while (str[j] != '$' && str[j] != '\0')
+	while (str[j] != '$' && !ft_isquote(str[j]) && str[j] != '\0')
 		j++;
 	exp->comp_str = ft_substr(str, i, j - i);
+}
+
+/**
+ * @param node node from parser linked list
+ * @param exp expander struct
+ * @param i index
+ * @param j index at next $ sign
+ * @brief gets the string to compare the environment key to
+*/
+int	get_var_str(char *str, t_expand *exp, int i, int j)
+{
+	while (ft_isquote(str[i]) && str[i] != '\0')
+		i++;
+	j = i;
+	while (!ft_isquote(str[j]) && str[j] != '\0')
+		j++;
+	exp->var = ft_substr(str, i, j - i);
+	printf("exp->var = [%s]\n", exp->var);
+	return (j);
+}
+
+/**
+ * @param exp expander struct
+ * @brief reassigns exp->before_dollar with expanded value
+ * free the string containing the value and temp string used
+ * for swapping
+*/
+void	reassing_before_dollar_with_var(t_expand *exp)
+{
+	char	*temp;
+
+	temp = NULL;
+	temp = exp->before_dollar;
+	exp->before_dollar = ft_strjoin(exp->before_dollar, exp->var);
+	free(temp);
 }
 
 /**
@@ -90,24 +125,51 @@ char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 	i = 0;
 	while (str[i] != '\0')
 	{
+		// if (!sarah_expand_dollar(str))
+		// {
+		// 	printf("don't expand hehe\n");
+		// 	// fix up the str for return 
+		// 	// str = fix_up(str);
+		// 	return (str);
+		// }
+		// else if (sarah_expand_dollar(str))
+		// {
+		// 	// printf("str[i] = %i\n", str[i]);
+		// 	printf("need expansion but also quote fix_up");
+		// 	// remove double quotes etc..?
+		// 	// these become separate if statements so we
+		// 	// can still expand...
+		// 	// str = fix_up(str);
+		// }
 		if (check_at_len(str, exp, i, len) != 0)
 			return (str);
-		if (!expand(str))
-		{
-			printf("don't expand hehe\n");
-			// fix up the str for return 
-			// fix_up(str)
-			return (str);
-		}
-		else if (str[i] == '$' && (i + 1) != len)
+		else if (((str[i] == '$') || (ft_isquote(str[i]))) && (i + 1) != len)
 		{
 			get_before_dollar(str, exp, i);
-			i++;
+			if (str[i] == '$' || ft_isquote(str[i]))
+			{
+				if (ft_isquote(str[i]))
+				{
+					i = get_var_str(str, exp, i, j);
+					exp->var = remove_quotes(exp->var);
+					printf("exp->var = [%s]\n", exp->var);
+					reassing_before_dollar_with_var(exp);
+					printf("exp->before_dollar = [%s]\n", exp->before_dollar);
+				}
+				printf("i = [%i]\n", i);
+				i++;
+			}
+			printf("len = [%i]\n", len);
 			j = i;
+			if (i == len)
+			{
+				str = return_exp(str, exp);
+				return (str);
+			}
 			get_compare_str(str, exp, i, j);
 			get_check_value(exp, env);
 			save_expanded(exp);
-			i = j - 1;
+			i = j - 1;	
 		}
 		i++;
 	}
