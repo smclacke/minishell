@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/10 20:56:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/12 20:52:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 */
 void	ft_execute(t_env **env, t_parser *lst)
 {
-	// t_execute	data;
+	t_execute	data;
 
-	// init_execute_struct(&data, *env);
+	init_execute_struct(&data, *env);
 	ft_expand(lst, env);
-	// build(lst, *env, &data);
+	build(lst, *env, &data);
 }
 
 /**
@@ -63,6 +63,9 @@ void	ft_execute(t_env **env, t_parser *lst)
 */
 void	build(t_parser *lst, t_env *env, t_execute *data)
 {
+	int i;
+
+	i = 0;
 	if (dup2(STDIN_FILENO, data->fd_in) == -1)
 		mini_error("dup2", errno);
 	if (!lst)
@@ -71,7 +74,8 @@ void	build(t_parser *lst, t_env *env, t_execute *data)
 		mini_error("pipe", errno);
 	while (lst)
 	{
-		if (lst)
+		//check for heredoc
+		if (lst->cmd || (mini_strcmp(lst->meta, "|") == 0))
 		{
 			data->fork_pid = fork();
 			if (data->fork_pid == -1)
@@ -81,6 +85,8 @@ void	build(t_parser *lst, t_env *env, t_execute *data)
 				printf("build_process:		have to get a kindergarten\n");
 				mini_forks(lst, env, data);
 			}
+			// if (data->fork_pid != 0)
+			// 	exit(1);
 		}
 		lst = lst->next;
 	}
@@ -108,17 +114,33 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data)
 	if (data->fork_pid == 0)
 	{
 		printf("mini_forks:		children made\n");
-		if (dup2(data->pipe_fd[READ], data->fd_in) == -1)
-			mini_error(" 2.... dup2", errno);
-		if (close(data->pipe_fd[READ]) == -1)
-			mini_error("close", errno);
-		close(data->pipe_fd[WRITE]);
-		executable = check_access(env, lst, data);
-		// printf("executble = [%s]\n", executable);
-		if (access(executable, X_OK) == -1)
-			mini_error(executable, errno);
-		if (execve(executable, &lst->str, data->env_array) == -1)
-			mini_error(lst->str, errno);
+		if (check_redirect(lst) == 0)
+		{
+			printf("redirect found\n");
+			redirect(lst, &env, data);// check if it needs to be redirected or not
+			//do i need to change 
+			if (dup2(data->pipe_fd[WRITE], data->outfile_fd) != 0)
+				mini_error(" 2.... dup2", errno);
+		}
+		if (check_redirect(lst) != 0)
+		{
+			if (dup2(data->pipe_fd[READ], data->fd_in) == -1)
+				mini_error(" 2.... dup2", errno);
+			if (close(data->pipe_fd[READ]) == -1)
+				mini_error("close", errno);
+			close(data->pipe_fd[WRITE]);
+			if (check_for_child_builtin(lst) == 0)
+				do_builtin(lst, &env);	
+		}
+		if (check_for_child_builtin(lst) != 0)
+		{
+			executable = check_access(env, lst, data);
+			printf("executble = [%s]\n", executable);
+			if (access(executable, X_OK) == -1)
+				mini_error(executable, errno);
+			if (execve(executable, &lst->str, data->env_array) == -1)
+				mini_error(lst->str, errno);
+		}
 	}
 	close(data->fd_in);
 	close(data->pipe_fd[WRITE]);
@@ -184,7 +206,7 @@ char	*check_access(t_env *env, t_parser *node, t_execute *data)
 			if (command == NULL)
 				mini_error("malloc", errno);
 			ok_path = ft_strjoin(data->path[i], command);
-			// printf("ok_path = [%s]\n", ok_path);
+			printf("ok_path = [%s]\n", ok_path);
 			if (command == NULL)
 				mini_error("malloc", errno);
 			free(command);

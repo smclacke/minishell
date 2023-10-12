@@ -27,6 +27,8 @@ cd:
  * line 66: check if needs error message with exit
  * 			give prompt back, and endline?
 
+export, cd , exit, unset before childprocess because you need the environment. and exit needs to exit the whole program.
+rest in the child proces. 
 
 ---------------------METAA-------------------------------
 
@@ -58,10 +60,14 @@ do that tomorrow together
 
 how will fd work in the parser struct?
 
+test echo hi > haha.txt
+
 -----------------------------------------------------------
 3) pipe |
 
 check how I should pipe accordingly yeah that
+echo | wc test that no stress or yes
+
 -----------------------------------------------------------
 4) append >>
 5) heredoc <<
@@ -123,3 +129,10 @@ bash-3.2$ cat $djoyke
  * dreijans@f0r2s3:~$ $USER echo abc$USER
  * dreijans: command not found
  * make it into proper error message
+
+
+
+
+ if no pipes and just 1 builtin single builtin executor
+
+maybe use sleep in childprocess 

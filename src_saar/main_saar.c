@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/10 19:58:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/12 17:11:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ int	main(int argc, char **argv, char **envp)
 		print_the_full_thing(tokens);
 
 		expand_quotes(tokens);
-		
-		print_the_full_thing(tokens);
+
+		// print_the_full_thing(tokens);
 
 		ft_execute(&env, tokens);
-		
+
 		free_tokens(tokens);	
 	}
 	return (0);

@@ -6,12 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 18:14:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/12 20:38:58 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-#include <sys/stat.h>
 
 /**
  * @param head parser linked list
@@ -94,28 +93,30 @@ void	ft_expand(t_parser *lst, t_env **env)
 {
 	t_parser	*head;
 	t_expand	*exp;
+	// t_execute	data;
 
 	head = lst;
-	exp = NULL;
+	// exp = NULL;
 	while (head)
 	{
 		expand_dollar(head, env, exp);
 		head = head->next;
 	}
 	head = lst;
-	while (head)
-	{
-		redirect(head, env);
-		head = head->next;
-	}
-	head = lst;
-	while (head)
-	{
-		check_for_meta(head);
-		if (check_for_builtin(head))
-			do_builtin(head, env);
-		head = head->next;
-	}
+	// while (head)
+	// {
+	// 	// init_execute_struct(&data, *env);
+	// 	redirect(head, env, &data);
+	// 	head = head->next;
+	// }
+	// head = lst;
+	// while (head)
+	// {
+	// 	// check_for_meta(head);
+	// 	if (check_for_env_builtin(head))
+	// 		do_builtin(head, env);
+	// 	head = head->next;
+	// }
 }
 
 /*
@@ -137,39 +138,69 @@ void	ft_expand(t_parser *lst, t_env **env)
 		dreijans@f0r2s3:~$ < hi echo hello | echo hello
 		hello
 		bash: hi: No such file or directory
+
+for check dir or file:
+		//save fd somewhere
+		//permissions (write read etc)
+
+//do this in the child process
+
+//if dir - `opendir`: Opens a directory stream.
+- `readdir`: Reads a directory entry.
 */
-void	redirect(t_parser *head, t_env **env)
+void	redirect(t_parser *head, t_env **env, t_execute *data)
 {
-	if (ft_strcmp(head->meta, "<") == 0)
+	struct stat	file_stat;
+
+	printf("entered redirect function\n");
+	if (mini_strcmp(head->meta, "<") == 0)
 	{
 		head = head->next;
 		if (access(head->file, F_OK) != 0)
 		{
 			ft_putstr_fd("minishell: ", STDOUT_FILENO);
-			ft_putstr_fd(head->str, STDOUT_FILENO);
+			ft_putstr_fd(head->file, STDOUT_FILENO);
 			ft_putstr_fd(":", STDOUT_FILENO);
 			ft_putstr_fd(" No such file or directory\n", STDOUT_FILENO);
 		}
-	if (stat(head->file, statstruct?))
-	{
-		//check if it' a file (for error code)
-		//check if it's directory (for error code)
-		//save fd somewhere
-		//permissions (write read etc)
+		if (stat(head->file, &file_stat) == 0)
+		{
+			if (S_ISREG(file_stat.st_mode))
+			{
+				printf("[%s] is a regular file\n", head->file);
+				data->infile_fd = open(head->file, O_RDWR);
+			}
+			if (S_ISDIR(file_stat.st_mode))
+				printf("[%s] is a directory\n", head->file);
+			else
+				printf("its not a file or directory");
+		}
 	}
-	}
-	else if (ft_strcmp(head->meta, ">") == 0)
+	else if (mini_strcmp(head->meta, ">") == 0)
 	{
-		//check if already exists
-		//save fd if it already exists
-		//check if it' a file (for error code)
-		//check if it's directory (for error code)
+		printf("> found \n");
+		head = head->next;
+		if (access(head->file, F_OK) != 0)
+		{
+			printf("data->outfile = [%i]\n", data->outfile_fd);
+			data->outfile_fd = open(head->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			printf("data->outfile = [%i]\n", data->outfile_fd);
+			printf("[%s] is outfile created \n", head->file);
+			if (data->outfile_fd == -1)
+				printf("oeps\n");
+		}
+		if (stat(head->file, &file_stat) == 0)
+		{
+			if (S_ISREG(file_stat.st_mode))
+			{
+				printf("[%s] is a regular file\n", head->file);
+				data->outfile_fd = open(head->file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			}
+			if (S_ISDIR(file_stat.st_mode))
+				printf("[%s] is a directory\n", head->file);
+			else
+				printf("its not a file or directory\n");
+		}
 		//permissions (write read etc)
-		//if outfile make them all and store the fd's in new part of the node?
-		// (parser->file != NULL)
-		// {
-		// 	write to parser->fd 
-		// }
-		//return
 	}
 }
