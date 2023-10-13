@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 22:37:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 23:09:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ void	ft_execute(t_env **env, t_parser *lst)
 	ft_expand(lst, env);
 	// single_build(lst, env, data); // only works for outfile now
 	build(lst, env, data);
-	bzero(data, sizeof(t_execute));
+	free_data(data);
 	free(data);
-	free_env(env);
 	return ;
 }
 
@@ -110,7 +109,7 @@ t_parser	*mini_forks(t_parser *lst, t_env **env, t_execute *data)
 			head = head->next;
 		}
 		head = lst;
-		// if (check_redirect(lst) != 0)
+		// if (check_redirect(lst) == 0)
 		// {
 		// 	if (dup2(data->pipe_fd[READ], data->fd_in) == -1)
 		// 		mini_error(" 2.... dup2", errno);

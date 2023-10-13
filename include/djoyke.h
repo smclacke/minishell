@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 21:50:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 23:08:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ void			single_build(t_parser *lst, t_env **env, t_execute *data);
 void			init_execute_struct(t_execute *data, t_env *env);
 bool			check_redirect(t_parser *node);
 void			build(t_parser *lst, t_env **env, t_execute *data);
+void			free_data(t_execute *data);
 
 //----Utils----//
 void			mini_error(char *string, int error);
