@@ -254,3 +254,26 @@ maybe use sleep in childprocess
 // 	close(data->pipe_fd[READ]);
 // 	return (lst);
 // }
+
+-------------------------------------------
+
+/*
+	➜  minishell git:(djoyke) ✗ < hi.txt wc > outfile.txt 
+	zsh: no such file or directory: hi.txt
+	➜  minishell git:(djoyke) ✗ pwd
+	/home/dreijans/Documents/rank3/minishell
+	➜  minishell git:(djoyke) ✗ rm outfile.txt
+	rm: cannot remove 'outfile.txt': No such file or directory
+	➜  minishell git:(djoyke) ✗ cd src_djoy 
+	➜  src_djoy git:(djoyke) ✗ < hi.txt wc |  > outfile.txt 
+	zsh: no such file or directory: hi.txt
+	➜  src_djoy git:(djoyke) ✗ rm outfile.txt   
+
+		dreijans@f0r2s3:~$ < hi | echo hello
+		hello
+		dreijans@f0r2s3:~$ bash: hi: No such file or directory
+		^C
+		dreijans@f0r2s3:~$ < hi echo hello | echo hello
+		hello
+		bash: hi: No such file or directory
+*/

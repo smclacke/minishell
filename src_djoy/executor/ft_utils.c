@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 18:26:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 22:39:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	init_execute_struct(t_execute *data, t_env *env)
 	data->pipe_fd[WRITE] = 0;
 	data->path = NULL;
 	data->env_array = list_to_string(env);
-	data->infile_fd = 0;
-	data->outfile_fd = 0;
+	data->in = 0;
+	data->out = 0;
 }
 
 /**
