@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 23:08:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 23:11:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,4 @@ void	free_strs(char *str, char *str2)
 {
 	free (str);
 	free (str2);
-}
-
-void	free_data(t_execute *data)
-{
-	data->fd_in = 0;
-	data->fork_pid = 0;
-	data->pipe_fd[READ] = 0;
-	data->pipe_fd[WRITE] = 0;
-	free(data->path);
-	ft_free_arr(data->env_array);
-	data->in = 0;
-	data->out = 0;
 }

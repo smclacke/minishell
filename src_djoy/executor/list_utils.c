@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 22:38:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 23:11:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,16 @@ void	free_env(t_env **lst)
 	}
 	free (*lst);
 	// *lst = NULL;
+}
 
+void	free_data(t_execute *data)
+{
+	data->fd_in = 0;
+	data->fork_pid = 0;
+	data->pipe_fd[READ] = 0;
+	data->pipe_fd[WRITE] = 0;
+	free(data->path);
+	ft_free_arr(data->env_array);
+	data->in = 0;
+	data->out = 0;
 }
