@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/13 18:48:24 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 20:24:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ int	main(int argc, char **argv, char **envp)
 	env = env_list(envp, env);
 	tokens = NULL;
 
+	int	og_stdout = dup(STDOUT_FILENO);
+
 	while (1)
 	{
-		write(STDERR_FILENO, "back\n", 5);
-		write(STDERR_FILENO, "stuck\n", 6);
 		input = readline(PROMPT);
-		write(STDERR_FILENO, "promt\n", 6);
 		add_history(input);
 
 		tokens = lexer(input);
@@ -65,12 +64,10 @@ int	main(int argc, char **argv, char **envp)
 
 		expand_quotes(tokens);
 
-		// print_the_full_thing(tokens);
 
 		ft_execute(&env, tokens);
-		write(STDERR_FILENO, "here6\n", 5);
 		free_tokens(tokens);
-		write(STDERR_FILENO, "here7\n", 5);
+		dup2(og_stdout, STDOUT_FILENO);
 	}
 	return (0);
 }

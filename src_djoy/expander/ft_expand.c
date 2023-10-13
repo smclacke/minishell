@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 18:45:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 20:20:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,12 @@ void	redirect_outfile(t_parser *head, t_env **env, t_execute *data)
 		{
 			printf("dup2 outfile to ST_OUT went wrong\n");
 			close(data->outfile_fd);
-			// return ;
 		}
-		close(data->outfile_fd);
-		// return ;
 	}
+	if (dup2(data->outfile_fd, STDOUT_FILENO) == 0)
+	{
+		printf("dup2 outfile to ST_OUT went wrong\n");
+		close(data->outfile_fd);
+	}
+	close(data->outfile_fd);
 }
