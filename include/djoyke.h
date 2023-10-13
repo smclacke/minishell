@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 21:01:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/13 21:42:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,6 @@ int					check_space(char *str);
 int					quote_type(int str);
 int					len_quotes(char *str);
 
-//-------- dollar_quotes --------//
-char				*sarah_expand_dollar(char *str);
-
 
 //---- Executor ----//
 typedef struct s_env
@@ -140,24 +137,31 @@ typedef struct s_expand
 	int					j;
 }							t_expand;
 
-void			free_remain_struct(t_expand *data);
-// void			get_compare_str(t_parser *node, t_expand *exp, int i, int j);
-void			get_compare_str(char *str, t_expand *exp, int i, int j);
-void			reassing_before_dollar(t_expand *exp);
-// void			dollar(t_parser *node, t_env **env, t_expand *exp, int len);
+// EXPAND //
+//------------------ expand_dollar ------------------//
 char			*dollar(char *str, t_env **env, t_expand *exp, int len);
-// void			return_exp(t_parser *node, t_expand *exp);
-char			*return_exp(char *str, t_expand *exp);
-// void			get_before_dollar(t_parser *node, t_expand *exp, int i);
+
+//-------------- expand_dollar_quotes --------------//
+int				check_at_len(char *str, t_expand *exp, int i, int len);
 void			get_before_dollar(char *str, t_expand *exp, int i);
-int				get_check_value(t_expand *exp, t_env **env);
-// int				get_check_value(char *str, t_env **env);
-bool			check_for_meta(t_parser *lst);
+void			get_compare_str(char *str, t_expand *exp, int i, int j);
+char			*sarah_expand_dollar(char *str);
+
+//------------------ ft_expand -------------------//
 void			ft_expand(t_parser *lst, t_env **env);
-bool			check_for_builtin(t_parser *lst);
+
+//------------------ dollar_utils ------------------//
+void			reassing_before_dollar(t_expand *exp);
+void			reassing_before_dollar_with_var(t_expand *exp);
+int				get_check_value(t_expand *exp, t_env **env);
+char			*return_exp(char *str, t_expand *exp);
 void			save_expanded(t_expand *exp);
-// void			exp_dollar(t_parser *node, t_env **env, t_expand *exp, int len);
-char			*exp_dollar(char *str, t_env **env, t_expand *exp, int len);
+
+//------------------ utils ------------------//
+void			free_remain_struct(t_expand *data);
+bool			check_for_builtin(t_parser *lst);
+bool			check_for_meta(t_parser *lst);
+// EXPAND //
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);

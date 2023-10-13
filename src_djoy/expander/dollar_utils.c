@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   dollar_utils_two.c                                 :+:    :+:            */
+/*   dollar_utils.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:19:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 19:50:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/13 21:32:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,21 @@ void	reassing_before_dollar(t_expand *exp)
 	temp = NULL;
 	temp = exp->before_dollar;
 	exp->before_dollar = ft_strjoin(exp->before_dollar, exp->env_value);
+	free(temp);
+}
+
+/**
+ * @param exp expander struct
+ * @brief reassigns exp->before_dollar with expanded value
+ * free the string containing the value and temp string used
+ * for swapping
+*/
+void	reassing_before_dollar_with_var(t_expand *exp)
+{
+	char	*temp;
+
+	temp = exp->before_dollar;
+	exp->before_dollar = ft_strjoin(exp->before_dollar, exp->var);
 	free(temp);
 }
 

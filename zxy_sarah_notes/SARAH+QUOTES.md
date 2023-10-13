@@ -10,7 +10,7 @@ LA'OHGUUsdlfmsadflkamslfkmlfkmlmglmglaskm
 ===========================================
  ---> leaks when ending with quote
 
- ---> need to handle "$USER" and '$USER'
+ ---> need to handle "$USER" and '$USER' YYAYAYAYYAYAYAYAYAYAA OUI GENAU
 
  ---> then norm it
 

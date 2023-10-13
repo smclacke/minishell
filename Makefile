@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/10 18:51:36 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/13 21:45:17 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,25 +52,26 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		=	main_djoy.c					\
-					builtin/ft_echo.c			\
-					builtin/ft_cd.c 			\
-					builtin/ft_pwd.c 			\
-					builtin/ft_export.c 		\
-					builtin/ft_unset.c 			\
-					builtin/ft_env.c 			\
-					builtin/builtin_utils_one.c \
-					builtin/builtin_utils_two.c \
-					builtin/ft_exit.c			\
-					executor/ft_execute.c		\
-					executor/ft_make_env.c		\
-					executor/ft_utils.c			\
-					executor/list_utils.c 		\
-					executor/print_utils.c		\
-					expander/ft_expand.c		\
-					expander/ft_utils.c			\
-					expander/dollar_utils_one.c	\
-					expander/dollar_utils_two.c	
+SRCS_DJOY		=	main_djoy.c							\
+					builtin/ft_echo.c					\
+					builtin/ft_cd.c 					\
+					builtin/ft_pwd.c 					\
+					builtin/ft_export.c 				\
+					builtin/ft_unset.c 					\
+					builtin/ft_env.c 					\
+					builtin/builtin_utils_one.c 		\
+					builtin/builtin_utils_two.c 		\
+					builtin/ft_exit.c					\
+					executor/ft_execute.c				\
+					executor/ft_make_env.c				\
+					executor/ft_utils.c					\
+					executor/list_utils.c 				\
+					executor/print_utils.c				\
+					expander/ft_expand.c				\
+					expander/ft_utils.c					\
+					expander/expand_dollar.c			\
+					expander/expand_dollar_quotes.c		\
+					expander/dollar_utils.c
 					
 
 DJOY_DIR		= src_djoy
@@ -91,7 +92,6 @@ SRCS_SAAR		= main_saar.c					\
 					parser/parser.c				\
 					parser/parser_utils.c		\
 					expand/quotes.c				\
-					expand/dollar_quotes.c		\
 					expand/quote_utils.c
 
 SAAR_DIR		= src_saar
