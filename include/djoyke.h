@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/12 19:00:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 17:33:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ bool			check_for_child_builtin(t_parser *lst);
 void			save_expanded(t_expand *exp);
 char			*exp_dollar(char *str, t_env **env, t_expand *exp, int len);
 void			redirect(t_parser *head, t_env **env, t_execute *data);
+void			redirect_outfile(t_parser *head, t_env **env, t_execute *data);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);
@@ -179,7 +180,7 @@ bool			absolute_check(t_parser *node);
 bool			parse_path(t_env *env, t_execute *data);
 char			*check_access(t_env *env, t_parser *node, t_execute *data);
 void			ft_execute(t_env **env, t_parser *list);
-void			build(t_parser *lst, t_env *env, t_execute *data);
+void			build(t_parser *lst, t_env **env, t_execute *data);
 void			init_execute_struct(t_execute *data, t_env *env);
 bool			check_redirect(t_parser *node);
 

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/12 19:11:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 16:13:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,10 @@ bool	check_for_meta(t_parser *node)
 		return (false);
 }
 
+/**
+ * @param node linked list
+ * @brief checks arguments to find output or input redirect
+*/
 bool	check_redirect(t_parser *node)
 {
 	if (!node)
