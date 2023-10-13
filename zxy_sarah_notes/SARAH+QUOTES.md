@@ -8,6 +8,74 @@ LA'OHGUUsdlfmsadflkamslfkmlfkmlmglmglaskm
 11/10, the dollar quote bullshit day...
 
 ===========================================
+HELPHELPHELPHELP WTFFFF
+
+
+echo abc$USER"something"             WORKS
+str = abc$USER"something"
+voor geld = abc
+voor geld = abcsmclacke
+str before ret = abc$USER"something"
+before_dollar = abcsmclackesomething
+str in func = abcsmclackesomething
+str ret = abcsmclackesomething
+abcsmclackesomething
+
+echo abc"$USER"something           NO WORKS
+str = abc$USERsomething
+voor geld = abc
+str before ret = abc$USERsomething
+before_dollar = abc
+str in func = abc
+str ret = abc
+abc 
+
+echo abc"$USER"                    WORKS
+str = abc$USER
+voor geld = abc
+str before ret = abc$USER
+before_dollar = abcsmclacke
+str in func = abcsmclacke
+str ret = abcsmclacke
+abcsmclacke 
+
+echo abc$USER                      WORKS
+str = abc$USER
+voor geld = abc
+str before ret = abc$USER
+before_dollar = abcsmclacke
+str in func = abcsmclacke
+str ret = abcsmclacke
+abcsmclacke 
+
+echo abc$USERsomething            NO WORKS
+str = abc$USERsomething
+voor geld = abc
+str before ret = abc$USERsomething
+before_dollar = abc
+str in func = abc
+str ret = abc
+abc 
+
+echo abc$USER"something"         WORKS
+str = abc$USER"something"
+voor geld = abc
+voor geld = abcsmclacke
+str before ret = abc$USER"something"
+before_dollar = abcsmclackesomething
+str in func = abcsmclackesomething
+str ret = abcsmclackesomething
+abcsmclackesomething 
+===========================================
+
+abc$USER"something"         WORKS         					 GOOD
+abc$USERsomething            NO WORKS    shouldn't work		 GOOD
+abc$USERsomething            NO WORKS    					 GOOD
+abc$USER                      WORKS							 GOOD
+abc"$USER"                    WORKS							 GOOD
+abc"$USER"something           NO WORKS   this should work	 BAD
+abc$USER"something"             WORKS 					     GOOD
+
 ===========================================
 
 MONDAY MERGE DAY:

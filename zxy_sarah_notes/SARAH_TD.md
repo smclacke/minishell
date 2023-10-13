@@ -33,9 +33,9 @@ for in the future... don't change utils... ever.
 
 ===========================================
 ===========================================
+===========================================
 
 **TO DO**
-
 
 MONDAY MERGE DAY:
 i changed the makefile, djoyke.h
@@ -48,7 +48,6 @@ sarah main is also a bit different but easy to change
 expand directory needs to be mine for all
 all other djoyke work needs to be the same as hers for all
 
-===========================================
 
  ---> leaks when ending with quotes (dollar quote expansion)
 
@@ -61,6 +60,24 @@ all other djoyke work needs to be the same as hers for all
  ---> cd "" cd ''
 
 
+ ---> :):):):)
+
+ echo "'$USER'"
+'smclacke'
+
+echo "'$USER'"
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = "'$USER'"
+$USER 
+
+ ---> :):):):)
+
+ abc"$USER"something           NO WORKS   this should work	 BAD
+
+-> abcsmclackesomething
+but mine see's as str abc$USERsomething and $USERsomething = nope
+
+===========================================
 ===========================================
 ===========================================
 

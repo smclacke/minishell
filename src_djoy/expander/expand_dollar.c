@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 22:06:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/14 00:10:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@ static char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 	int			j;
 
 	i = 0;
+	printf("str = %s\n", str);
 	while (str[i])
 	{
-		if (check_at_len(str, exp, i, len) != 0)
-			return (str);
-		else if (((str[i] == '$') || (ft_isquote(str[i]))) && (i + 1) != len)
+		if (((str[i] == '$') || (ft_isquote(str[i]))) && (i + 1) != len)
 		{
 			get_before_dollar(str, exp, i);
 			if (ft_isquote(str[i]) && (i + 1) != len)
@@ -65,7 +64,9 @@ static char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 		}
 		i++;
 	}
+	printf("str before ret = %s\n", str);
 	str = return_exp(str, exp);
+	printf("str ret = %s\n", str);
 	return (str);
 }
 
@@ -79,8 +80,10 @@ static char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 char	*dollar(char *str, t_env **env, t_expand *exp, int len)
 {
 	char	*exp_str;
+	int		i;
 
 	exp_str = NULL;
+	i = 0;
 	if (ft_strnstr(str, "$", len))
 	{
 		exp_str = check_if_expand(str);
@@ -90,6 +93,12 @@ char	*dollar(char *str, t_env **env, t_expand *exp, int len)
 			return (str);
 		}
 		exp = ft_calloc(1, sizeof (t_expand));
+		while (exp_str[i])
+		{
+			if (check_at_len(exp_str, exp, i, len))
+				return (exp_str);
+			i++;
+		}
 		exp_str = exp_dollar(exp_str, env, exp, len);
 	}
 	return (exp_str);
