@@ -8,14 +8,46 @@ LA'OHGUUsdlfmsadflkamslfkmlfkmlmglmglaskm
 11/10, the dollar quote bullshit day...
 
 ===========================================
- ---> leaks when ending with quote
+===========================================
 
- ---> need to handle "$USER" and '$USER' YYAYAYAYYAYAYAYAYAYAA OUI GENAU
+MONDAY MERGE DAY:
+i changed the makefile, djoyke.h
+the whole expand directory needs to be replaced with mine
 
- ---> then norm it
+makefile and djoyke.h need to be a bit from both of us
+sarah main is also a bit different but easy to change
+-- we are both using sarah main remember
+
+expand directory needs to be mine for all
+all other djoyke work needs to be the same as hers for all
 
 ===========================================
 
+ ---> leaks when ending with quotes
+
+ ---> norm
+
+ ---> SIGNALSSSS
+
+ ---> here_doc
+
+===========================================
+===========================================
+
+
+ *********************************************
+
+echo '$USER'
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = '$USER'
+$USER 
+
+echo "$USER"
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = "$USER"
+smclacke 
+
+ *********************************************
 
 echo "HELLO"$USER
 [0]	 cmd = echo	file = (null)	meta = (null)	str = (null)

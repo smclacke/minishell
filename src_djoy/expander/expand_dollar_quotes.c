@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   dollar_quotes.c                                    :+:    :+:            */
+/*   expand_dollar_quotes.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/13 21:33:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/13 21:47:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	is_dollar(char c)
  * if "$USER", return $USER and expand
  * if '$SUER', return NULL and send og str back, don't expand
 */
-char	*sarah_expand_dollar(char *str)
+char	*check_if_expand(char *str)
 {
 	int		i;
 	int		quote;

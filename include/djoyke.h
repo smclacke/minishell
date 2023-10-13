@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 21:42:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/13 21:47:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ char			*dollar(char *str, t_env **env, t_expand *exp, int len);
 int				check_at_len(char *str, t_expand *exp, int i, int len);
 void			get_before_dollar(char *str, t_expand *exp, int i);
 void			get_compare_str(char *str, t_expand *exp, int i, int j);
-char			*sarah_expand_dollar(char *str);
+char			*check_if_expand(char *str);
 
 //------------------ ft_expand -------------------//
 void			ft_expand(t_parser *lst, t_env **env);

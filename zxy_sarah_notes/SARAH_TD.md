@@ -30,19 +30,44 @@ dein computer, kein computer
 for in the future... don't change utils... ever. 
 
 ---------------------------------------------------------------------------------
+
+===========================================
+===========================================
+
 **TO DO**
 
 
---> file fds
-		parser->file[fd]
-		int fd in struct
+MONDAY MERGE DAY:
+i changed the makefile, djoyke.h
+the whole expand directory needs to be replaced with mine
 
- -> cd "" and cd '' seems to work the same as cd .
+makefile and djoyke.h need to be a bit from both of us
+sarah main is also a bit different but easy to change
+-- we are both using sarah main remember
 
- -> dollar + quotes
+expand directory needs to be mine for all
+all other djoyke work needs to be the same as hers for all
+
+===========================================
+
+ ---> leaks when ending with quotes (dollar quote expansion)
+
+ ---> norm
+
+ ---> SIGNALSSSS
+
+ ---> here_doc
+
+ ---> cd "" cd ''
 
 
-********************************************************************************
+===========================================
+===========================================
+
+
+***************************************************************************
+***************************************************************************
+***************************************************************************
 
 **MAKE SURE BUILTINS ARE CHECKED CORRETLY**
 -------------->  e"C"ho
