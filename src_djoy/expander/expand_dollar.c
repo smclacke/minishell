@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/14 00:10:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/14 00:21:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static int	get_var_str(char *str, t_expand *exp, int i, int j)
 	return (j);
 }
 
+// helaas werkt dit gewoooonnn niet, met mijn twee problemen EN norm, 
+// we hebben gewoon nieuwe logical nodig, balen
+// werkt wel echt bijna maar godver en met veel te veel funcs
 static char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 {
 	int			i;
@@ -90,6 +93,7 @@ char	*dollar(char *str, t_env **env, t_expand *exp, int len)
 		if (!exp_str)
 		{
 			str = remove_quotes(str);
+			printf("here\n");
 			return (str);
 		}
 		exp = ft_calloc(1, sizeof (t_expand));

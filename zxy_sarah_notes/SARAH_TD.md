@@ -62,12 +62,12 @@ all other djoyke work needs to be the same as hers for all
 
  ---> :):):):)
 
+BASH
  echo "'$USER'"
 'smclacke'
 
-echo "'$USER'"
-[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
-[1]	 cmd = (null)	file = (null)	meta = (null)	str = "'$USER'"
+SHELLY
+ echo "'$USER'"
 $USER 
 
  ---> :):):):)
