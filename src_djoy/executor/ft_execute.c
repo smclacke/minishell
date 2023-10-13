@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 17:52:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/13 18:53:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,18 @@
 */
 void	ft_execute(t_env **env, t_parser *lst)
 {
-	t_execute	data;
+	t_execute	*data;
 
-	init_execute_struct(&data, *env);
+	data = malloc(sizeof(t_execute));
+	init_execute_struct(data, *env);
 	ft_expand(lst, env);
-	build(lst, env, &data);
+	build(lst, env, data);
+	write(STDERR_FILENO, "here3\n", 5);
+	bzero(data, sizeof(t_execute));
+	write(STDERR_FILENO, "here4\n", 5);
+	free(data);
+	write(STDERR_FILENO, "here5\n", 5);
+	return ;
 }
 
 void	build(t_parser *lst, t_env **env, t_execute *data)
@@ -49,11 +56,22 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 		if (check_for_child_builtin(head) != 0)
 		{
 			do_builtin(head, env);
-			return ;
+			// if (dup2(data->infile_fd, STDIN_FILENO) == 0)
+			// 	printf("dup2 reset to STDIN failed");
+			if (dup2(data->outfile_fd, STDOUT_FILENO) == 0)
+				printf("dup2 reset to STDOUT failed\n");
+			// close(data->infile_fd);
+			// close(data->outfile_fd);
+			write(STDERR_FILENO, "here\n", 5);
+			close (data->outfile_fd);
+			// if (dup2(STDOUT_, 1) == 0)
+			// 	printf("dup2 reset STDOUT to 1 failed\n");
+			write(STDERR_FILENO, "here2\n", 5);
+			// return ;
 		}
 		head = head->next;
 	}
-	close (STDIN_FILENO);
+	// close (STDIN_FILENO);
 	// return ;
 }
 
