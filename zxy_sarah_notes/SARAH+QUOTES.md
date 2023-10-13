@@ -8,11 +8,11 @@ LA'OHGUUsdlfmsadflkamslfkmlfkmlmglmglaskm
 11/10, the dollar quote bullshit day...
 
 ===========================================
-leaks when ending with quote
+ ---> leaks when ending with quote
 
-need to handle "$USER" and '$USER'
+ ---> need to handle "$USER" and '$USER'
 
-then norm it
+ ---> then norm it
 
 ===========================================
 
