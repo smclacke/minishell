@@ -37,7 +37,7 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
-MONDAY MERGE DAY:
+ MERGE DAY:
 i changed the makefile, djoyke.h
 the whole expand directory needs to be replaced with mine
 

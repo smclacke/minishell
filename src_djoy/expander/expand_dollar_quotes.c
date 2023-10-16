@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/05 19:50:33 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/14 00:10:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/16 20:45:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,62 @@ static int	is_dollar(char c)
 }
 
 /**
+ * put space between "$USER" and something
+ * remove quotes from "$USER" and expand, then handle separate attached string
+*/
+static char	*handle_double_q(char *str, int quote)
+{
+	int	i = 0;
+	int	j = 0;
+	int	k = 0;
+	int	g = 0;
+	char	*tmp;
+	char	*tmp1;
+
+	tmp = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
+	tmp1 = (char *)malloc(sizeof(char) * ft_strlen(str) + 2);
+	while (str[i])
+	{
+		if (str[i] == quote)
+		{
+			str[i] = next_quote(str, (char)quote);
+			if (str[i + 1])
+			{
+				g = i;
+				printf("i = %i | g = %i\n", i, g);
+				i = 0;
+				while (str[i] && i < g)
+				{
+					tmp1[k] = str[i];
+					i++;
+					k++;
+				}
+				g++;
+				printf("str[g] = %c\n", str[g]);
+				while (str[g])
+				{
+					tmp[j] = str[g];
+					j++;
+					g++;
+				}
+				tmp1[k] = ' ';
+				k++;
+				while (tmp[j])
+				{
+					tmp1[k] = str[g];
+					k++;
+					g++;
+				}
+				printf("tmp1[k] = %c\n", tmp1[k]);
+				return (tmp1);
+			}
+		}
+		i++;
+	}
+	return (str);
+}
+
+/**
  * if "$USER", return $USER and expand
  * if '$SUER', return NULL and send og str back, don't expand
 */
@@ -87,7 +143,7 @@ char	*check_if_expand(char *str)
 					return (NULL);
 				if (is_dollar(str[i]) && quote == '\"')
 				{
-					// str = remove_quotes(str);
+					str = handle_double_q(str, quote);
 					return (str);
 				}
 				i++;
