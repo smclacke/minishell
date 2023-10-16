@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/16 18:13:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/16 19:36:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
  * @todo 
  * 1) check if decisions need to be made in here
  * env als double pointer meegeven
+ * unset is double freeing
 */
 void	ft_execute(t_env **env, t_parser *lst)
 {
@@ -31,7 +32,7 @@ void	ft_execute(t_env **env, t_parser *lst)
 	data = malloc(sizeof(t_execute));
 	if (data == NULL)
 		mini_error("malloc data", errno);
-	init_execute_struct(data, *env);
+	init_execute_struct(data);
 	ft_expand(lst, env);
 	build(lst, env, data);
 	// if (data != NULL)
@@ -67,12 +68,8 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 	{
 		if (lst->cmd)
 		{
-			if (check_for_env_builtin(lst) == 1)
-			{
-				printf("env builtin found");
-				(do_builtin(lst, env));
-			}
-			else
+			printf("hey eehm you back?\n");
+			if (!check_for_env_builtin(lst))
 			{
 				data->fork_pid = fork();
 				if (data->fork_pid == -1)
@@ -81,13 +78,20 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 				{
 					printf("build_process:		have to get a kindergarten\n");
 					mini_forks(lst, env, data);
+					printf("hi there you child?\n");
 				}
+			}
+			else if (check_for_env_builtin(lst))
+			{
+				printf("env builtin found\n");
+				(do_builtin(lst, env));
 			}
 		}
 		lst = lst->next;
 	}
 	waitpid(data->fork_pid, NULL, 0);
 	wait(NULL);
+	close (data->fd_in);
 	close(data->pipe_fd[READ]);
 }
 
@@ -126,7 +130,10 @@ t_parser	*mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		}
 		head = lst;
 		if (check_for_child_builtin(head) != 0)
+		{
 			do_builtin(head, env);
+			return (lst);
+		}
 		else if (check_for_child_builtin(head) == 0)
 		{
 			executable = check_access(*env, lst, data);
