@@ -277,3 +277,108 @@ maybe use sleep in childprocess
 		hello
 		bash: hi: No such file or directory
 */
+
+---------------------------------------------------example---------------------------------------------------------------
+
+Hi sorry for being late
+Okay I'll try to do my best to explain it with simple words as there's a lot to explain.
+
+
+1) iterate all your linked lists and check if they are built in or execute commands. If it's build in just do it as normal without forking for example if I have ls | echo hi → file it will be something like this
+
+
+typedef struct s_cmd 
+{
+    char *cmd;
+    char *file;
+    struct s_cmd *next;
+} 				t_cmd;
+
+int main() 
+{
+		// Imagine you already created your linked list
+    t_cmd cmds[] = 
+	{
+        {"ls", NULL, &cmds[1]},
+        {"echo hi", "file", &cmds[2]},
+    };
+
+    int pipefd[2] = {-1, -1};
+    int in_fd = STDIN_FILENO; 
+
+		//this is just to help yourself later on to close FD
+		// Iterate over the linked list and execute each command
+    for (t_cmd *cmd = cmds; cmd != NULL; cmd = cmd->next) 
+	{
+        int out_fd = cmd->next ? pipefd[1] : STDOUT_FILENO;
+        if (cmd->next && pipe(pipefd) == -1) 
+		{
+            perror("pipe");
+            exit(EXIT_FAILURE);
+        }
+        execute_cmd(cmd->cmd, cmd->file, in_fd, out_fd);
+        if (in_fd != STDIN_FILENO) 
+			close(in_fd);
+        if (out_fd != STDOUT_FILENO) 
+			close(out_fd);
+        in_fd = pipefd[0];
+	}
+}
+
+
+In the execute function you'll check whenever they are build in or execute cmd
+A) if the command is built in, execute it directly in the current process.
+B) if the command is not built in, you'll need to create a new process to execute it. This is where Fork() comes in.
+2) when we use Fork() to create a new child process. The child process will execute the command, while the parent process will wait for the child to complete. (I recommend you to set up the pipe communication between the processs before you Fork() look example 1 how I set up the pipe.
+The parent process should write to the write of the pipe and child process should read from the read. You can use dup2() to replace the standard input or output with the appropriate end of the pipe)
+If you have (← or →) set up the redirection before you Fork() . Use Open() to get the file descriptor for the file and dup2 to replace the standard input or output with the file descriptor
+(Sorry I'm writing with my phone and I'm kind lost with examples ahahah)
+Example
+
+
+void execute_cmd(char *cmd, char *file, int in_fd, int out_fd) 
+{
+    		// Check if the command is a built-in command
+
+   			//Do this if it's not built in
+    
+	pid_t pid = fork();
+
+    if (pid == -1) 
+	{
+        perror("fork");
+        exit(EXIT_FAILURE);
+    } 
+	else if (pid == 0) 
+	{
+        	// Child process
+        if (in_fd != STDIN_FILENO) 
+		{
+            dup2(in_fd, STDIN_FILENO);
+            close(in_fd);
+        }
+        if (out_fd != STDOUT_FILENO) 
+		{
+            dup2(out_fd, STDOUT_FILENO);
+            close(out_fd);
+        }
+			//This is only when you have a file
+        if (file) 
+		{
+            int fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            if (fd == -1) 
+			{
+                perror("open");
+                exit(EXIT_FAILURE);
+            }
+            dup2(fd, STDOUT_FILENO);
+            close(fd);
+    	}
+      	
+		}	// execute here your command
+	Else
+    		//Wait for the child process
+}
+
+
+Final note, remember that when using Fork, the child process will be the exact copy of the parent process at the point of the Fork that includes the current file descriptors which is why you need to set up pipes and redirection before the fork

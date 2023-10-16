@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 21:59:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/16 17:20:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	ft_expand(t_parser *lst, t_env **env)
 {
 	t_parser	*head;
 	t_expand	*exp;
-	// t_execute	data;
 
 	head = lst;
 	exp = NULL;
@@ -103,20 +102,6 @@ void	ft_expand(t_parser *lst, t_env **env)
 		head = head->next;
 	}
 	head = lst;
-	// while (head)
-	// {
-	// 	init_execute_struct(&data, *env);
-	// 	redirect(head, env, &data);
-	// 	head = head->next;
-	// }
-	// head = lst;
-	while (head)
-	{
-		// check_for_meta(head);
-		if (check_for_env_builtin(head))
-			do_builtin(head, env);
-		head = head->next;
-	}
 }
 
 
@@ -137,6 +122,7 @@ void	redirect_infile(t_parser *head, t_execute *data)
 
 	if (mini_strcmp(head->meta, "<") == 0)
 	{
+		printf("henlo in\n");
 		head = head->next;
 		if (access(head->file, F_OK) != 0)
 		{
@@ -179,6 +165,7 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 
 	if (mini_strcmp(head->meta, ">") == 0)
 	{
+		printf("henlo out\n");
 		head = head->next;
 		if (access(head->file, F_OK) != 0)
 		{

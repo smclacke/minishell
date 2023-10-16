@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 23:11:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/16 17:50:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,13 @@ void	free_data(t_execute *data)
 	data->pipe_fd[READ] = 0;
 	data->pipe_fd[WRITE] = 0;
 	free(data->path);
-	ft_free_arr(data->env_array);
 	data->in = 0;
 	data->out = 0;
+	// if (data->env_array != NULL)
+	// {
+	ft_free_arr(data->env_array);
+	// 	printf("just hanging arounfd\n");
+	// 	data->env_array = NULL;
+	// }
+	free (data);
 }

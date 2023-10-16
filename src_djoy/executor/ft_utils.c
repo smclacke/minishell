@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 23:11:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/16 18:12:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	init_execute_struct(t_execute *data, t_env *env)
 	data->pipe_fd[READ] = 0;
 	data->pipe_fd[WRITE] = 0;
 	data->path = NULL;
-	data->env_array = list_to_string(env);
+	// data->env_array = list_to_string(env);
+	data->env_array = NULL;
 	data->in = 0;
 	data->out = 0;
 }
@@ -85,6 +86,11 @@ bool	absolute_check(t_parser *node)
 	return (false);
 }
 
+/**
+ * @param str string to be freed
+ * @param str2 string to be freed
+ * @brief frees strings 
+*/
 void	free_strs(char *str, char *str2)
 {
 	free (str);
