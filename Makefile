@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/13 21:45:17 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/17 14:59:29 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,9 +70,10 @@ SRCS_DJOY		=	main_djoy.c							\
 					expander/ft_expand.c				\
 					expander/ft_utils.c					\
 					expander/expand_dollar.c			\
-					expander/expand_dollar_quotes.c		\
-					expander/dollar_utils.c
-					
+					expander/dollar.c
+				
+# expander/expand_dollar_quotes.c		\
+# expander/dollar_utils.c
 
 DJOY_DIR		= src_djoy
 SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 21:47:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 14:54:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ int					check_space(char *str);
 int					quote_type(int str);
 int					len_quotes(char *str);
 
-
 //---- Executor ----//
 typedef struct s_env
 {
@@ -138,6 +137,15 @@ typedef struct s_expand
 }							t_expand;
 
 // EXPAND //
+typedef struct s_exp_dol
+{
+	char	*unassed;
+	char	*expand;
+	char	*dont_expand;
+	char	*str_before_dol;
+	char	*str_after_dol; // str in quotes or dollar in quotes with str after
+}		t_exp_dol;
+
 //------------------ expand_dollar ------------------//
 char			*dollar(char *str, t_env **env, t_expand *exp, int len);
 
@@ -147,8 +155,6 @@ void			get_before_dollar(char *str, t_expand *exp, int i);
 void			get_compare_str(char *str, t_expand *exp, int i, int j);
 char			*check_if_expand(char *str);
 
-//------------------ ft_expand -------------------//
-void			ft_expand(t_parser *lst, t_env **env);
 
 //------------------ dollar_utils ------------------//
 void			reassing_before_dollar(t_expand *exp);
@@ -157,11 +163,17 @@ int				get_check_value(t_expand *exp, t_env **env);
 char			*return_exp(char *str, t_expand *exp);
 void			save_expanded(t_expand *exp);
 
+
+
+//------------------ ft_expand -------------------//
+void			ft_expand(t_parser *lst, t_env **env);
+
 //------------------ utils ------------------//
 void			free_remain_struct(t_expand *data);
 bool			check_for_builtin(t_parser *lst);
 bool			check_for_meta(t_parser *lst);
 // EXPAND //
+
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);

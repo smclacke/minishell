@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 13:52:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 14:57:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
  * $hello'<thing' = expanded hello + <thing
  * 
 */
-static char	*set_expand_string(t_parser *head, int *sign)
+static t_exp_dol	*set_expand_string(t_parser *head, int *sign)
 {
-	char		*str;
+	t_exp_dol		*str;
 
 	str = NULL;
 	if (head->cmd != NULL)
@@ -36,7 +36,7 @@ static char	*set_expand_string(t_parser *head, int *sign)
 		if (ft_strnstr(head->cmd, "$", ft_strlen(head->cmd)))
 		{
 			*sign = 1;
-			str = head->cmd;
+			str->unassed = head->cmd;
 		}
 	}
 	else if (head->str != NULL)
@@ -44,9 +44,10 @@ static char	*set_expand_string(t_parser *head, int *sign)
 		if (ft_strnstr(head->str, "$", ft_strlen(head->str)))
 		{
 			*sign = 2;
-			str = head->str;
+			str->unassed = head->str;
 		}
 	}
+	printf("unassed = %s\n", str->unassed);
 	return (str);
 }
 
@@ -61,25 +62,26 @@ static void	expand_dollar(t_parser *head, t_env **env, t_expand *exp)
 {
 	int			len;
 	int			sign;
-	char		*str;
+	t_exp_dol	*str;
 
 	sign = 0;
+	init_exp_dol_struct(str);
 	str = set_expand_string(head, &sign);
-	if (sign == 1 || sign == 2)
-	{
-		len = ft_strlen(str);
-		str = dollar(str, env, exp, len);
-		if (sign == 1)
-		{
-			head->cmd = str;
-			sign = 0;
-		}
-		else if (sign == 2)
-		{
-			head->str = str;
-			sign = 0;
-		}
-	}
+	// if (sign == 1 || sign == 2)
+	// {
+	// 	len = ft_strlen(str);
+	// 	str = dollar(str, env, exp, len);
+	// 	if (sign == 1)
+	// 	{
+	// 		head->cmd = str;
+	// 		sign = 0;
+	// 	}
+	// 	else if (sign == 2)
+	// 	{
+	// 		head->str = str;
+	// 		sign = 0;
+	// 	}
+	// }
 }
 
 
