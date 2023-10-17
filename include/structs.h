@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 18:50:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 21:43:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define DOUBLE_Q "\""
 # define SINGLE_Q "\'"
 
-/*
+/**
  * @brief	specifies the different variable types of tokens from the
  * 			lexer that are parsed and then given to the executor
  * @param	cmd: first string in each process without redirect char

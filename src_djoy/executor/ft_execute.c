@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:43:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:19:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 21:40:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,28 +111,28 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 	waitpid(data->fork_pid, NULL, 0);
 }
 
-/**
- * @param envp environment passed as 2d array
- * @param lst linked list parsed
- * @brief puts env in linked list and initializes struct
- * containing fd's and 2d arrays for later use
- * @todo 
- * unset is double freeing
-*/
-void	ft_execute(t_env **env, t_parser *lst)
-{
-	t_execute	*data;
+// /**
+//  * @param envp environment passed as 2d array
+//  * @param lst linked list parsed
+//  * @brief puts env in linked list and initializes struct
+//  * containing fd's and 2d arrays for later use
+//  * @todo 
+//  * unset is double freeing
+// */
+// void	ft_execute(t_env **env, t_parser *lst)
+// {
+// 	t_execute	*data;
 
-	data = malloc(sizeof(t_execute));
-	if (data == NULL)
-		mini_error("malloc data", errno);
-	init_execute_struct(data);
-	// ft_expand(lst, env);
-	build(lst, env, data);
-	free (data);
-	data = NULL;
-	return ;
-}
+// 	data = malloc(sizeof(t_execute));
+// 	if (data == NULL)
+// 		mini_error("malloc data", errno);
+// 	init_execute_struct(data);
+// 	// ft_expand(lst, env);
+// 	build(lst, env, data);
+// 	free (data);
+// 	data = NULL;
+// 	return ;
+// }
 
 /**
  * @param lst linked list containing commands and atributes
