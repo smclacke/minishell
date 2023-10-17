@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 15:39:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 16:26:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,7 @@ char			*dollar(char *str, t_env **env, t_expand *exp, int len);
 
 //-------------- expand_dollar_quotes --------------//
 int				check_at_len(char *str, t_expand *exp, int i, int len);
-void			get_before_dollar(char *str, t_
-expand *exp, int i);
+void			get_before_dollar(char *str, t_expand *exp, int i);
 void			get_compare_str(char *str, t_expand *exp, int i, int j);
 char			*check_if_expand(char *str);
 
@@ -198,8 +197,8 @@ void			init_expand_struct(t_expand *data);
 void			free_remain_struct(t_expand *data);
 void			get_compare_str(char *str, t_expand *exp, int i, int j);
 void			reassing_before_dollar(t_expand *exp);
-void			dollar(char *str, t_env **env, t_expand *exp, int len);
-void			return_exp(char *str, t_expand *exp);
+// void			dollar(char *str, t_env **env, t_expand *exp, int len);
+// void			return_exp(char *str, t_expand *exp);
 void			get_before_dollar(char *str, t_expand *exp, int i);
 int				get_check_value(t_expand *exp, t_env **env);
 bool			check_for_meta(t_parser *lst);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 15:44:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 16:22:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,6 @@ bool	check_for_builtin(t_parser *node)
  * @param env string or char to compare with
  * @brief checks arguments to find meta_chars: 
  * $, >>, <<, >, <, |
- * @todo 
- * 1) needs to be passed to actual process,
- * 2) MAYBE MAKE IT A BOOL?
- * 3) removing files int unlink(const char *pathname);
-	// while (lst)
-	// {
-	// 	if (lst->cmd)
-	// 	{
-	// 		check if $ expansion needed?
-	// 		(check in the environment for USER and return whats after the = sign)
-	// 			yes?
-	// 				start expanding
-	// 				if ($?)
-	// 				{
-	// 					expand to check the exit code
-	// 				}
-	// 	}
 */
 bool	check_for_meta(t_parser *node)
 {

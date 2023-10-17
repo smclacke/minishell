@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 15:44:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 16:25:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ static t_exp_dol	*set_expand_string(t_parser *head, int *sign)
  * @brief checks parser node if command or string part has something
  * to expand. assign expanded string back to command or string part of node.
 */
-static void	expand_dollar(t_parser *head, t_env **env, t_expand *exp)
+static void	expand_dollar(t_parser *head, t_env **env)
 {
-	int			len;
+	// int			len;
 	int			sign;
 	t_exp_dol	*str;
+	(void)	env;
 
 	sign = 0;
-	init_exp_dol_struct(str);
+	// init_exp_dol_struct(str);
 	str = set_expand_string(head, &sign);
 	// if (sign == 1 || sign == 2)
 	// {
@@ -84,13 +85,11 @@ static void	expand_dollar(t_parser *head, t_env **env, t_expand *exp)
 void	ft_expand(t_parser *lst, t_env **env)
 {
 	t_parser	*head;
-	t_expand	*exp;
 
 	head = lst;
-	exp = NULL;
 	while (head)
 	{
-		expand_dollar(head, env, exp);
+		expand_dollar(head, env);
 		head = head->next;
 	}
 	head = lst;
