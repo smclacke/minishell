@@ -6,7 +6,11 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
+<<<<<<< HEAD
 #    Updated: 2023/10/17 19:09:05 by dreijans      ########   odam.nl          #
+=======
+#    Updated: 2023/10/17 19:03:46 by smclacke      ########   odam.nl          #
+>>>>>>> sarah
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,19 +26,11 @@ CFLAGS			= -Wall -Wextra -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include
-HEADERS			= prompt.h djoyke.h shelly.h colour.h sarah.h minishell.h
+HEADERS			= djoyke.h structs.h shelly.h prompt.h colour.h
 IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 HEADER_DIR		= include
 HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
-
-# ifdef DEBUG
-# CFLAGS += -g
-# endif
-
-# ifdef
-# CFLAGS += -fsanitize=address,undefined
-# endif
 
 ## MINISHELL ##
 
@@ -52,26 +48,21 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		=	main_djoy.c					\
-					builtin/ft_echo.c			\
-					builtin/ft_cd.c 			\
-					builtin/ft_pwd.c 			\
-					builtin/ft_export.c 		\
-					builtin/ft_unset.c 			\
-					builtin/ft_env.c 			\
-					builtin/builtin_utils_one.c \
-					builtin/builtin_utils_two.c \
-					builtin/ft_exit.c			\
-					executor/ft_execute.c		\
-					executor/ft_make_env.c		\
-					executor/ft_utils.c			\
-					executor/list_utils.c 		\
-					executor/print_utils.c		\
-					expander/ft_expand.c		\
-					expander/ft_utils.c			\
-					expander/dollar_utils_one.c	\
-					expander/dollar_utils_two.c	
-					
+SRCS_DJOY		=	main_djoy.c							\
+					builtin/ft_echo.c					\
+					builtin/ft_cd.c 					\
+					builtin/ft_pwd.c 					\
+					builtin/ft_export.c 				\
+					builtin/ft_unset.c 					\
+					builtin/ft_env.c 					\
+					builtin/builtin_utils_one.c 		\
+					builtin/builtin_utils_two.c 		\
+					builtin/ft_exit.c					\
+					executor/ft_execute.c				\
+					executor/ft_make_env.c				\
+					executor/ft_utils.c					\
+					executor/list_utils.c 				\
+					executor/print_utils.c				\
 
 DJOY_DIR		= src_djoy
 SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))
@@ -81,18 +72,21 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 
 ## SARAH ##
 
-SRCS_SAAR		= main_saar.c					\
-					utils.c						\
-					lexer/lexer.c				\
-					lexer/lexer_utils.c			\
-					lexer/token.c				\
-					lexer/token_size.c			\
-					lexer/token_utils.c			\
-					parser/parser.c				\
-					parser/parser_utils.c		\
-					expand/quotes.c				\
-					expand/dollar_quotes.c		\
-					expand/quote_utils.c
+SRCS_SAAR		= main_saar.c							\
+					utils.c								\
+					lexer/lexer.c						\
+					lexer/lexer_utils.c					\
+					lexer/token.c						\
+					lexer/token_size.c					\
+					lexer/token_utils.c					\
+					parser/parser.c						\
+					parser/parser_utils.c				\
+					expand/expand.c						\
+					expand/quotes.c						\
+					expand/quote_utils.c				\
+					expand/dollar.c						\
+					expand/dollar_utils.c
+
 
 SAAR_DIR		= src_saar
 SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
@@ -170,9 +164,9 @@ $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/executor
-	@ mkdir -p $(OBJ_DJOY_DIR)/expander
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/lexer
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/parser
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/expand
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
@@ -183,7 +177,6 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 
@@ -191,7 +184,7 @@ $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)
 	@ mkdir -p $(OBJ_MICRO_DIR)/parser
 	@ mkdir -p $(OBJ_MICRO_DIR)/lexer
-	@ mkdir -p $(OBJ_MICRO_DIR)/expander
+	@ mkdir -p $(OBJ_MICRO_DIR)/expand
 	@ mkdir -p $(OBJ_MICRO_DIR)/executor
 	@ mkdir -p $(OBJ_MICRO_DIR)/builtin
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@

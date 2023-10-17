@@ -1,16 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   dollar_utils_two.c                                 :+:    :+:            */
+/*   dollar_utils.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:19:48 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/10/10 20:01:27 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/10 18:52:11 by smclacke      ########   odam.nl         */
->>>>>>> sarah
+/*   Updated: 2023/10/14 00:11:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +25,21 @@ void	reassing_before_dollar(t_expand *exp)
 	temp = NULL;
 	temp = exp->before_dollar;
 	exp->before_dollar = ft_strjoin(exp->before_dollar, exp->env_value);
+	free(temp);
+}
+
+/**
+ * @param exp expander struct
+ * @brief reassigns exp->before_dollar with expanded value
+ * free the string containing the value and temp string used
+ * for swapping
+*/
+void	reassing_before_dollar_with_var(t_expand *exp)
+{
+	char	*temp;
+
+	temp = exp->before_dollar;
+	exp->before_dollar = ft_strjoin(exp->before_dollar, exp->var);
 	free(temp);
 }
 
@@ -59,7 +70,6 @@ int	get_check_value(t_expand *exp, t_env **env)
 	}
 	if (exp->env_value == NULL)
 	{
-		// free(exp->comp_str);
 		free_strs(exp->comp_str, exp->env_value);
 		exp->comp_str = NULL;
 		exp->env_value = NULL;
@@ -84,6 +94,7 @@ char	*return_exp(char *str, t_expand *exp)
 	str = ft_substr(exp->before_dollar, 0, len);
 	free_strs(temp, exp->before_dollar);
 	free(exp->env_value);
+	free(exp->var);
 	free(exp);
 	temp = NULL;
 	ft_bzero(exp, sizeof(exp));
@@ -100,6 +111,7 @@ void	save_expanded(t_expand *exp)
 	if (exp->env_value != NULL)
 	{
 		free(exp->comp_str);
+		exp->comp_str = NULL;
 		reassing_before_dollar(exp);
 	}
 }

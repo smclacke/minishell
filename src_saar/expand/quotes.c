@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/10 16:43:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/11 20:03:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*copy_quoteless(char *str, char *new, int q, int j)
 		if (ft_isquote(str[i]) && str[i] == q)
 			i++;
 	}
-	new[j] = 0;
+	new[j] = '\0';
 	return (new);
 }
 
@@ -63,34 +63,13 @@ char	*remove_quotes(char *str)
 	return (new);
 }
 
-static	void	dollar_quotes(t_parser *tokens)
-{
-	t_parser	*list;
-
-	list = tokens;
-	while (list)
-	{
-		if (list->str)
-		{
-			if (check_quotes(list->str) && ft_isdollar(list->str))
-				list->str = handle_dollar_qs(list->str);
-		}
-		if (list->cmd)
-		{
-			if (check_quotes(list->cmd) && ft_isdollar(list->cmd))
-				list->cmd = handle_dollar_qs(list->cmd);
-		}
-		list = list->next;
-	}
-}
-
 /**
  * @brief	if cmd has quotes, check if there is a space inside,
  * 			if so it's invalid. for cmds and strs remove closed 
  * 			quotes and returns the new cmd string, don't remove 
  * 			in case of dollar in str, expand dollar separately
 */
-static void	cmd_str_quotes(t_parser *tokens)
+void	expand_quotes(t_parser *tokens)
 {
 	t_parser	*list;
 
@@ -115,10 +94,4 @@ static void	cmd_str_quotes(t_parser *tokens)
 		}
 		list = list->next;
 	}
-}
-
-void	expand_quotes(t_parser *tokens)
-{
-	cmd_str_quotes(tokens);
-	dollar_quotes(tokens);
 }

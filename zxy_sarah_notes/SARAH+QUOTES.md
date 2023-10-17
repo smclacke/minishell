@@ -4,14 +4,226 @@
 
 **DOLLAR QUOTES YAY**
 
+LA'OHGUUsdlfmsadflkamslfkmlfkmlmglmglaskm
+11/10, the dollar quote bullshit day...
 
-*********************************************
+===========================================
+HELPHELPHELPHELP WTFFFF
 
-when dollar in double remove quotes
-when dollar in single take string literally
 
-else, dollar + anything not quotes - expand
-anything quoted = string to add as cmd arg
+echo abc$USER"something"             WORKS
+str = abc$USER"something"
+voor geld = abc
+voor geld = abcsmclacke
+str before ret = abc$USER"something"
+before_dollar = abcsmclackesomething
+str in func = abcsmclackesomething
+str ret = abcsmclackesomething
+abcsmclackesomething
+
+echo abc"$USER"something           NO WORKS
+str = abc$USERsomething
+voor geld = abc
+str before ret = abc$USERsomething
+before_dollar = abc
+str in func = abc
+str ret = abc
+abc 
+
+echo abc"$USER"                    WORKS
+str = abc$USER
+voor geld = abc
+str before ret = abc$USER
+before_dollar = abcsmclacke
+str in func = abcsmclacke
+str ret = abcsmclacke
+abcsmclacke 
+
+echo abc$USER                      WORKS
+str = abc$USER
+voor geld = abc
+str before ret = abc$USER
+before_dollar = abcsmclacke
+str in func = abcsmclacke
+str ret = abcsmclacke
+abcsmclacke 
+
+echo abc$USERsomething            NO WORKS
+str = abc$USERsomething
+voor geld = abc
+str before ret = abc$USERsomething
+before_dollar = abc
+str in func = abc
+str ret = abc
+abc 
+
+echo abc$USER"something"         WORKS
+str = abc$USER"something"
+voor geld = abc
+voor geld = abcsmclacke
+str before ret = abc$USER"something"
+before_dollar = abcsmclackesomething
+str in func = abcsmclackesomething
+str ret = abcsmclackesomething
+abcsmclackesomething 
+===========================================
+
+abc$USER"something"         WORKS         					 GOOD
+abc$USERsomething            NO WORKS    shouldn't work		 GOOD
+abc$USERsomething            NO WORKS    					 GOOD
+abc$USER                      WORKS							 GOOD
+abc"$USER"                    WORKS							 GOOD
+abc"$USER"something           NO WORKS   this should work	 BAD
+abc$USER"something"             WORKS 					     GOOD
+
+===========================================
+
+MONDAY MERGE DAY:
+i changed the makefile, djoyke.h
+the whole expand directory needs to be replaced with mine
+
+makefile and djoyke.h need to be a bit from both of us
+sarah main is also a bit different but easy to change
+-- we are both using sarah main remember
+
+expand directory needs to be mine for all
+all other djoyke work needs to be the same as hers for all
+
+===========================================
+
+ ---> leaks when ending with quotes
+
+ ---> norm
+
+ ---> SIGNALSSSS
+
+ ---> here_doc
+
+===========================================
+===========================================
+
+
+ *********************************************
+
+echo '$USER'
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = '$USER'
+$USER 
+
+echo "$USER"
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = "$USER"
+smclacke 
+
+ *********************************************
+
+echo "HELLO"$USER
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = "HELLO"$USER
+HELLO 
+
+
+echo 'hello'$USER
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = 'hello'$USER
+hello 
+
+
+echo hello$USER
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = hello$USER
+hellosmclacke
+
+ *********************************************
+
+:)
+
+
+echo $USER"HELLO"$USER$USER"something"$PWD'wtf'
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = $USER"HELLO"$USER$USER"something"$PWD'wtf'
+smclackeHELLOsmclackesmclackesomething/home/smclacke/Desktop/minishellwtf 
+
+
+
+ *********************************************
+
+
+THE OLD ONE JUST INCASE
+
+/**
+ * @param node parser linked list
+ * @param env environmet linked list
+ * @brief checks for a $ sign in the node
+ * expands the string to actual value
+ * @todo when "" '' quotes are handled check and adjust again
+*/
+// char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
+// {
+// 	int			i;
+// 	int			j;
+
+// 	i = 0;
+// 	while (str[i] != '\0')
+// 	{
+// 		// if (!sarah_expand_dollar(str))
+// 		// {
+// 		// 	printf("don't expand hehe\n");
+// 		// 	// fix up the str for return 
+// 		// 	// str = fix_up(str);
+// 		// 	return (str);
+// 		// }
+// 		// else if expand but "$USER"
+// 		if (check_at_len(str, exp, i, len) != 0)
+// 			return (str);
+// 		else if (((str[i] == '$') || (ft_isquote(str[i]))) && (i + 1) != len)
+// 		{
+// 			get_before_dollar(str, exp, i);
+// 			if (ft_isquote(str[i]))
+// 			{
+// 				i = get_var_str(str, exp, i, j);
+// 				exp->var = remove_quotes(exp->var);
+// 				reassing_before_dollar_with_var(exp);
+// 			}
+// 			i++;
+// 			j = i;
+// 			if (i == len)
+// 			{
+// 				str = return_exp(str, exp);
+// 				return (str);
+// 			}
+// 			printf("what?\n");
+// 			printf("before-dollar = %s\n", exp->before_dollar);
+// 			printf("str = %s\n", str);
+// 			printf("str[i] = %c\n", str[i]);
+// 			// one func, call these things...
+// 			get_compare_str(str, exp, i, j);
+// 			get_check_value(exp, env);
+// 			save_expanded(exp);	
+// 			printf("str[i] 2 = %c\n", str[i]);
+// 		}
+// 		i++;
+// 	}
+// 	str = return_exp(str, exp);
+// 	return (str);
+// }
+
+
+
+
+
+ *********************************************
+ *********************************************
+ *********************************************
+ *********************************************
+ *********************************************
+
+when dollar in double remove quotes 		-> expand
+when dollar in single take string literally -> don't expand
+	!! how do we know this.... ?
+
+else, dollar + anything not quotes 			-> expand
+anything quoted = string to add as cmd arg	-> don't expand
 
 *********************************************
 

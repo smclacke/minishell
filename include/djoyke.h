@@ -6,7 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/10/17 17:25:42 by dreijans      ########   odam.nl         */
+=======
+/*   Updated: 2023/10/17 16:38:01 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +126,12 @@ typedef struct s_execute
 	int				fd_in;
 	int				fd_out;
 	int				fork_pid;
+<<<<<<< HEAD
 	int				pipe_fd_1[2];
 	int				pipe_fd_2[2];
+=======
+	int				pipe_fd[2];
+>>>>>>> sarah
 	char			**path;
 	char			**env_array;
 	int				in;
@@ -186,9 +194,15 @@ char			*check_access(t_env *env, t_parser *node, t_execute *data);
 void			ft_execute(t_env **env, t_parser *list);
 void			single_build(t_parser *lst, t_env **env, t_execute *data);
 // bool			single_build(t_parser *lst, t_env **env, t_execute *data);
+<<<<<<< HEAD
 void			init_execute_struct(t_execute *data);
 bool			check_redirect(t_parser *node);
 void			build(t_parser *lst, t_env **env, t_execute *data);
+=======
+void			init_execute_struct(t_execute *data, t_env *env);
+bool			check_redirect(t_parser *node);
+void			build(t_parser *lst, t_env *env, t_execute *data);
+>>>>>>> sarah
 void			free_data(t_execute *data);
 
 //----Utils----//

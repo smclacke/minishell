@@ -129,6 +129,7 @@ bash-3.2$ cat $djoyke
  * dreijans@f0r2s3:~$ $USER echo abc$USER
  * dreijans: command not found
  * make it into proper error message
+<<<<<<< HEAD:DJOYKE_TD.MD
 
 
 
@@ -382,3 +383,5 @@ void execute_cmd(char *cmd, char *file, int in_fd, int out_fd)
 
 
 Final note, remember that when using Fork, the child process will be the exact copy of the parent process at the point of the Fork that includes the current file descriptors which is why you need to set up pipes and redirection before the fork
+=======
+>>>>>>> sarah:zzzz_djoy_stuff/DJOYKE_TD.MD

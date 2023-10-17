@@ -30,19 +30,67 @@ dein computer, kein computer
 for in the future... don't change utils... ever. 
 
 ---------------------------------------------------------------------------------
+
+===========================================
+===========================================
+===========================================
+
 **TO DO**
 
+ MERGE DAY:
+i changed the makefile, djoyke.h
+the whole expand directory needs to be replaced with mine
 
---> file fds
-		parser->file[fd]
-		int fd in struct
+makefile and djoyke.h need to be a bit from both of us
+sarah main is also a bit different but easy to change
+-- we are both using sarah main remember
 
- -> cd "" and cd '' seems to work the same as cd .
+expand directory needs to be mine for all
+all other djoyke work needs to be the same as hers for all
 
- -> dollar + quotes
+
+ ---> leaks when ending with quotes (dollar quote expansion)
+
+ ---> norm
+
+ ---> SIGNALSSSS
+
+ ---> here_doc
+
+ ---> cd "" cd ''
 
 
-********************************************************************************
+ ---> :):):):)
+
+$USER$BRUH$USER
+str before ret = $USER$BRUH$USER
+str ret = smclackesmclackesmclacke
+smclackesmclackesmclacke
+
+
+BASH
+ echo "'$USER'"
+'smclacke'
+
+SHELLY
+ echo "'$USER'"
+$USER 
+
+ ---> :):):):)
+
+ abc"$USER"something           NO WORKS   this should work	 BAD
+
+-> abcsmclackesomething
+but mine see's as str abc$USERsomething and $USERsomething = nope
+
+===========================================
+===========================================
+===========================================
+
+
+***************************************************************************
+***************************************************************************
+***************************************************************************
 
 **MAKE SURE BUILTINS ARE CHECKED CORRETLY**
 -------------->  e"C"ho

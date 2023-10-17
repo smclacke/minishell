@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/06 21:00:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 19:03:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SHELLY_H
 
 #include "libft/include/libft.h"
+#include "structs.h"
 #include "prompt.h"
 #include "colour.h"
 #include <unistd.h>
@@ -29,44 +30,9 @@
 #include <stdbool.h>
 #include <errno.h>
 
-# define READ 0
-# define WRITE 1
-
-# define SUCCESS 0
-# define ERROR -1
-
-# define TRUE 1
-# define FALSE 0
-
-# define PIPE "|"
-# define MORE ">"
-# define MOREMORE ">>"
-# define LESS "<"
-# define LESSLESS "<<"
-# define DOUBLE_Q "\""
-# define SINGLE_Q "\'"
-
-/**
- * @brief	specifies the different variable types of tokens from the
- * 			lexer that are parsed and then given to the executor
- * @param	cmd: first string in each process without redirect char
- * @param	meta: pipe, more, less, moremore, lessless. 
- * 			**dollar is excluded and handled as a string
- * @param	file: in and out files; after more, less and moremore chars
- * @param	str:  limiter for here_doc (string after <<) and all other input
-*/
-typedef struct s_parser
-{
-	void				*input;
-	char				*cmd;
-	char				*meta;
-	char				*file;
-	char				*str;;
-	struct s_parser		*next;
-}				t_parser;
-
 // utils
 void				free_tokens(t_parser *tokens);
+int					get_no_cmds(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//
@@ -102,7 +68,8 @@ int					is_pipe(void *input);
 char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
-// expand
+
+// -------------------EXPAND--------------------//
 //---------- quotes ----------//
 char				*remove_quotes(char *str);
 void				expand_quotes(t_parser *tokens);
@@ -114,24 +81,49 @@ int					check_space(char *str);
 int					quote_type(int str);
 int					len_quotes(char *str);
 
-//-------- dollar_quotes --------//
-char				*handle_dollar_qs(char *str);
 
-//--------------------DJOYKE---------------------//
+//----------------- dollar --------------------//
 
-typedef struct s_env
-{
-	char				*key;
-	char				*value;
-	char				*full;
-	struct s_env		*next;
-	struct s_env		*previous;
-}							t_env;
 
-//---- Expander ----//
-void		ft_expand(t_parser *lst, t_env **env);
-bool		check_for_meta(t_parser *lst);
-bool		check_for_builtin(t_parser *lst);
+//------------------ expand -------------------//
+void				ft_expand(t_parser *lst, t_env **env);
+
+//------------------ dollar_utils ------------------//
+int	is_dollar(char c); // move to libft
+char				*check_if_expand(char *str);
+char				*set_expand_string(t_parser *lst, t_exp_dol *str, int *sign);
+bool				check_for_builtin(t_parser *lst);
+bool				check_for_meta(t_parser *lst);
+
+// -------------------EXPAND--------------------//
+// --------------------------------------------//
+
+
+
+// OLD DOLLAR STUFF
+// //------------------ expand_dollar ------------------//
+// char			*dollar(char *str, t_env **env, t_expand *exp, int len);
+
+// //-------------- expand_dollar_quotes --------------//
+// int				check_at_len(char *str, t_expand *exp, int i, int len);
+// void			get_before_dollar(char *str, t_
+// expand *exp, int i);
+// void			get_compare_str(char *str, t_expand *exp, int i, int j);
+// char			*check_if_expand(char *str);
+
+
+// //------------------ dollar_utils ------------------//
+// void			reassing_before_dollar(t_expand *exp);
+// void			reassing_before_dollar_with_var(t_expand *exp);
+// int				get_check_value(t_expand *exp, t_env **env);
+// char			*return_exp(char *str, t_expand *exp);
+// void			save_expanded(t_expand *exp);
+
+// djoyke uses this in builtins, for dollar i wanna use my own below
+
+
+
+
 
 //----Environment----//
 // t_env		*env_list(char **envp);
@@ -167,14 +159,6 @@ void		ft_unset(t_parser *lst, t_env **env);
 void		mini_remove_env(char *str, t_env **env);
 
 //----Execution----//
-typedef struct s_execute
-{
-	int		fd_in;
-	int		fork_pid;
-	int		pipe_fd[2];
-	char	**path;
-	char	**env_array;
-}				t_execute;
 
 t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data);
 bool		absolute_check(t_parser *node);
