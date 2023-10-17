@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 15:43:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 16:40:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,13 @@ void	ft_expand(t_parser *lst, t_env **env)
 	head = lst;
 }
 
-
 /**
  * @param head parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function
  * @todo
- * needs infile redirect function in here too?
- * check if we need to close outfile_fd, or STDOUT in here?
  * if dir - `opendir`: Opens a directory stream.
  * readdir`: Reads a directory entry.
- * do this in the child process
 */
 void	redirect_infile(t_parser *head, t_execute *data)
 {
@@ -122,7 +118,6 @@ void	redirect_infile(t_parser *head, t_execute *data)
 
 	if (mini_strcmp(head->meta, "<") == 0)
 	{
-		printf("henlo in\n");
 		head = head->next;
 		if (access(head->file, F_OK) != 0)
 		{
@@ -134,10 +129,7 @@ void	redirect_infile(t_parser *head, t_execute *data)
 		if (stat(head->file, &file_stat) == 0)
 		{
 			if (S_ISREG(file_stat.st_mode))
-			{
-				printf("opened\n");
 				data->in = open(head->file, O_RDWR, 0644);
-			}
 			if (S_ISDIR(file_stat.st_mode))
 				printf("[%s] is a directory\n", head->file);
 			else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
@@ -153,11 +145,8 @@ void	redirect_infile(t_parser *head, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function
  * @todo
- * needs infile redirect function in here too?
- * check if we need to close outfile_fd, or STDOUT in here?
  * if dir - `opendir`: Opens a directory stream.
  * readdir`: Reads a directory entry.
- * do this in the child process
 */
 void	redirect_outfile(t_parser *head, t_execute *data)
 {
@@ -170,7 +159,7 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 		{
 			data->out = open(head->file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 			if (data->out == -1)
-				printf("oeps\n");
+				mini_error("open outfile", errno);
 		}
 		if (stat(head->file, &file_stat) == 0)
 		{

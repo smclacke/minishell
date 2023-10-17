@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 15:40:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 16:53:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
  * @brief puts env in linked list and initializes struct
  * containing fd's and 2d arrays for later use
  * @todo 
- * 1) check if decisions need to be made in here
- * env als double pointer meegeven
  * unset is double freeing
 */
 void	ft_execute(t_env **env, t_parser *lst)
@@ -47,7 +45,6 @@ void	ft_execute(t_env **env, t_parser *lst)
  * pipes and makes child process
  * @todo 
  * check for heredoc before forking
- * put usleep or wait thing here so I can properlu read output.
 */
 void	build(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -73,11 +70,10 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 	}
 	while (lst)
 	{
-		if (lst->cmd && lst->next && check_for_builtin(lst))
-		{
+		if (lst->cmd && !lst->next && check_for_builtin(lst))
 			do_builtin(lst, env);
-			return ;
-		}
+		if (lst->cmd && lst->next && check_for_builtin(lst))
+			do_builtin(lst, env);
 		if (lst->cmd && lst->next && !check_for_builtin(lst))
 		{
 			data->fork_pid = fork();
@@ -110,22 +106,10 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
-	t_parser	*head;
 
-	head = lst;
 	if (data->fork_pid == 0)
 	{
 		printf("mini_forks:		children made\n");
-		while (head)
-		{
-			if (check_redirect(head) != 0)
-			{
-				redirect_infile(head, data);
-				redirect_outfile(head, data);
-			}
-			head = head->next;
-		}
-		head = lst;
 		executable = check_access(*env, lst, data);
 		printf("executble = [%s]\n", executable);
 		if (access(executable, X_OK) == -1)
@@ -142,8 +126,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks environment to find PATH put it in temp_path
  * split temp_path into 2d array and put it in the struct data->path
- * @todo 
- * 
 */
 bool	parse_path(t_env *env, t_execute *data)
 {
@@ -176,9 +158,6 @@ bool	parse_path(t_env *env, t_execute *data)
  * @param node noded from parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks is command has access
- * @todo 
- * 1) line 196: command_error(node->cmd, errno); instead of current func
- * 2) line 199; node->str? instead of node->cmd?
 */
 char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
