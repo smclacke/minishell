@@ -5,42 +5,14 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-<<<<<<< HEAD
 /*   Created: 2023/10/17 19:08:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 19:08:50 by dreijans      ########   odam.nl         */
-=======
-/*   Created: 2023/10/11 13:01:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 17:05:47 by smclacke      ########   odam.nl         */
->>>>>>> sarah
+/*   Updated: 2023/10/17 19:59:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/djoyke.h"
 // #include <assert.h>
 
-/**
- * @param envp environment passed as 2d array
- * @param lst linked list parsed
- * @brief puts env in linked list and initializes struct
- * containing fd's and 2d arrays for later use
- * @todo 
- * unset is double freeing
-*/
-void	ft_execute(t_env **env, t_parser *lst)
-{
-	t_execute	*data;
-
-	data = malloc(sizeof(t_execute));
-	if (data == NULL)
-		mini_error("malloc data", errno);
-	init_execute_struct(data);
-	ft_expand(lst, env);
-	build(lst, env, data);
-	free (data);
-	data = NULL;
-	return ;
-}
 
 void	close_check(int num)
 {
@@ -113,6 +85,29 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 	close_check(data->pipe_fd_2[READ]);
 	close_check(data->pipe_fd_2[WRITE]);
 	waitpid(data->fork_pid, NULL, 0);
+}
+
+/**
+ * @param envp environment passed as 2d array
+ * @param lst linked list parsed
+ * @brief puts env in linked list and initializes struct
+ * containing fd's and 2d arrays for later use
+ * @todo 
+ * unset is double freeing
+*/
+void	ft_execute(t_env **env, t_parser *lst)
+{
+	t_execute	*data;
+
+	data = malloc(sizeof(t_execute));
+	if (data == NULL)
+		mini_error("malloc data", errno);
+	init_execute_struct(data);
+	// ft_expand(lst, env);
+	build(lst, env, data);
+	free (data);
+	data = NULL;
+	return ;
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 19:03:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 20:02:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ void				ft_expand(t_parser *lst, t_env **env);
 int	is_dollar(char c); // move to libft
 char				*check_if_expand(char *str);
 char				*set_expand_string(t_parser *lst, t_exp_dol *str, int *sign);
-bool				check_for_builtin(t_parser *lst);
-bool				check_for_meta(t_parser *lst);
 
 // -------------------EXPAND--------------------//
 // --------------------------------------------//

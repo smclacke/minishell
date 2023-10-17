@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/17 19:26:37 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/17 19:46:58 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,9 +56,11 @@ SRCS_DJOY		=	main_djoy.c							\
 					builtin/ft_exit.c					\
 					executor/ft_execute.c				\
 					executor/ft_make_env.c				\
-					executor/ft_utils.c					\
+					executor/redirect.c					\
+					executor/utils_one.c				\
+					executor/utils_two.c				\
 					executor/list_utils.c 				\
-					executor/print_utils.c				\
+					executor/print_utils.c
 
 DJOY_DIR		= src_djoy
 SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))

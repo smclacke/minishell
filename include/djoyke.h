@@ -6,11 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/10/17 17:25:42 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/17 16:38:01 by smclacke      ########   odam.nl         */
->>>>>>> sarah
+/*   Updated: 2023/10/17 19:58:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +56,7 @@ typedef struct s_parser
 	char				*meta;
 	char				*file;
 	char				*str;
+	int					n_cmd;
 	struct s_parser		*next;
 }				t_parser;
 
@@ -126,32 +123,28 @@ typedef struct s_execute
 	int				fd_in;
 	int				fd_out;
 	int				fork_pid;
-<<<<<<< HEAD
 	int				pipe_fd_1[2];
 	int				pipe_fd_2[2];
-=======
-	int				pipe_fd[2];
->>>>>>> sarah
 	char			**path;
 	char			**env_array;
 	int				in;
 	int				out;
 }						t_execute;
 
-void			free_remain_struct(t_expand *data);
-void			get_compare_str(char *str, t_expand *exp, int i, int j);
-void			reassing_before_dollar(t_expand *exp);
-char			*dollar(char *str, t_env **env, t_expand *exp, int len);
-char			*return_exp(char *str, t_expand *exp);
-void			get_before_dollar(char *str, t_expand *exp, int i);
-int				get_check_value(t_expand *exp, t_env **env);
+// void			free_remain_struct(t_expand *data);
+// void			get_compare_str(char *str, t_expand *exp, int i, int j);
+// void			reassing_before_dollar(t_expand *exp);
+// char			*dollar(char *str, t_env **env, t_expand *exp, int len);
+// char			*return_exp(char *str, t_expand *exp);
+// void			get_before_dollar(char *str, t_expand *exp, int i);
+// int				get_check_value(t_expand *exp, t_env **env);
 bool			check_for_meta(t_parser *lst);
-void			ft_expand(t_parser *lst, t_env **env);
+// void			ft_expand(t_parser *lst, t_env **env);
 bool			check_for_builtin(t_parser *node);
 bool			check_for_env_builtin(t_parser *node);
 // bool			check_for_child_builtin(t_parser *node);
-void			save_expanded(t_expand *exp);
-char			*exp_dollar(char *str, t_env **env, t_expand *exp, int len);
+// void			save_expanded(t_expand *exp);
+// char			*exp_dollar(char *str, t_env **env, t_expand *exp, int len);
 void			redirect(t_parser *head, t_env **env, t_execute *data);
 void			redirect_outfile(t_parser *head, t_execute *data);
 void			redirect_infile(t_parser *head, t_execute *data);
@@ -194,15 +187,9 @@ char			*check_access(t_env *env, t_parser *node, t_execute *data);
 void			ft_execute(t_env **env, t_parser *list);
 void			single_build(t_parser *lst, t_env **env, t_execute *data);
 // bool			single_build(t_parser *lst, t_env **env, t_execute *data);
-<<<<<<< HEAD
 void			init_execute_struct(t_execute *data);
 bool			check_redirect(t_parser *node);
 void			build(t_parser *lst, t_env **env, t_execute *data);
-=======
-void			init_execute_struct(t_execute *data, t_env *env);
-bool			check_redirect(t_parser *node);
-void			build(t_parser *lst, t_env *env, t_execute *data);
->>>>>>> sarah
 void			free_data(t_execute *data);
 
 //----Utils----//
