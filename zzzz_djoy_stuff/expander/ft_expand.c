@@ -6,11 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD:src_djoy/expander/ft_expand.c
-/*   Updated: 2023/10/17 19:08:09 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/17 14:57:49 by smclacke      ########   odam.nl         */
->>>>>>> sarah:zzzz_djoy_stuff/expander/ft_expand.c
+/*   Updated: 2023/10/17 19:23:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
