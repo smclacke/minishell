@@ -6,17 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 19:48:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 20:14:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-// put in libft...
-int	is_dollar(char c)
-{
-	return (c == '$');
-}
 
 char	*check_if_expand(char *str)
 {
