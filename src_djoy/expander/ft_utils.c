@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/13 16:13:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 15:28:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	check_for_env_builtin(t_parser *node)
 {
 	if (!node)
 		return (false);
-	if (mini_strcmp(node->cmd, "exit") == 0)
+	else if (mini_strcmp(node->cmd, "exit") == 0)
 		return (true);
 	else if (mini_strcmp(node->cmd, "cd") == 0)
 		return (true);
@@ -48,16 +48,44 @@ bool	check_for_env_builtin(t_parser *node)
 		return (false);
 }
 
+// /**
+//  * @param node linked list
+//  * @param env string or char to compare with
+//  * @brief checks arguments to find built-ins: 
+//  * echo, cd, pwd, export, unset, env and exit
+// */
+// bool	check_for_child_builtin(t_parser *node)
+// {
+// 	if (!node)
+// 		return (false);
+// 	else if (mini_strcmp(node->cmd, "echo") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->cmd, "pwd") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->cmd, "env") == 0)
+// 		return (true);
+// 	else
+// 		return (false);
+// }
+
 /**
  * @param node linked list
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins: 
  * echo, cd, pwd, export, unset, env and exit
 */
-bool	check_for_child_builtin(t_parser *node)
+bool	check_for_builtin(t_parser *node)
 {
 	if (!node)
 		return (false);
+	else if (mini_strcmp(node->cmd, "exit") == 0)
+		return (true);
+	else if (mini_strcmp(node->cmd, "cd") == 0)
+		return (true);
+	else if (mini_strcmp(node->cmd, "export") == 0)
+		return (true);
+	else if (mini_strcmp(node->cmd, "unset") == 0)
+		return (true);
 	else if (mini_strcmp(node->cmd, "echo") == 0)
 		return (true);
 	else if (mini_strcmp(node->cmd, "pwd") == 0)

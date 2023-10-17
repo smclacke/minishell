@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/16 19:36:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 15:40:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,12 @@ void	ft_execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
 
-	// data = NULL;
 	data = malloc(sizeof(t_execute));
 	if (data == NULL)
 		mini_error("malloc data", errno);
 	init_execute_struct(data);
 	ft_expand(lst, env);
 	build(lst, env, data);
-	// if (data != NULL)
-	// {
-	// 	free_data(data);
-	// 	data = NULL;
-	// }
-	// ft_free_arr(data->env_array);
 	free (data);
 	data = NULL;
 	return ;
@@ -58,41 +51,47 @@ void	ft_execute(t_env **env, t_parser *lst)
 */
 void	build(t_parser *lst, t_env **env, t_execute *data)
 {
+	t_parser	*head;
+
+	head = lst;
 	if (dup2(STDIN_FILENO, data->fd_in) == -1)
-		mini_error("dup2", errno);
-	if (!lst)
-		mini_error("list", errno);
+		mini_error("dup2 std_in", errno);
+	if (dup2(STDOUT_FILENO, data->fd_out) == -1)
+		mini_error("dup2 std_out", errno);
 	if (pipe(data->pipe_fd) == -1)
 		mini_error("pipe", errno);
+	if (!lst)
+		mini_error("list", errno);
+	while (head)
+	{
+		if (check_redirect(head) != 0)
+		{
+			redirect_infile(head, data);
+			redirect_outfile(head, data);
+		}
+		head = head->next;
+	}
 	while (lst)
 	{
-		if (lst->cmd)
+		if (lst->cmd && lst->next && check_for_builtin(lst))
 		{
-			printf("hey eehm you back?\n");
-			if (!check_for_env_builtin(lst))
-			{
-				data->fork_pid = fork();
-				if (data->fork_pid == -1)
-					mini_error("fork", errno);
-				if (data->fork_pid == 0)
-				{
-					printf("build_process:		have to get a kindergarten\n");
-					mini_forks(lst, env, data);
-					printf("hi there you child?\n");
-				}
-			}
-			else if (check_for_env_builtin(lst))
-			{
-				printf("env builtin found\n");
-				(do_builtin(lst, env));
-			}
+			do_builtin(lst, env);
+			return ;
+		}
+		if (lst->cmd && lst->next && !check_for_builtin(lst))
+		{
+			data->fork_pid = fork();
+			if (data->fork_pid == -1)
+				mini_error("fork", errno);
+			if (data->fork_pid == 0)
+				mini_forks(lst, env, data);
 		}
 		lst = lst->next;
 	}
-	waitpid(data->fork_pid, NULL, 0);
-	wait(NULL);
 	close (data->fd_in);
+	close (data->fd_out);
 	close(data->pipe_fd[READ]);
+	waitpid(data->fork_pid, NULL, 0);
 }
 
 /**
@@ -108,7 +107,7 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 				dprintf(2, "euagegauweg\n"); (prints on standard error)
  * remember!!! int dup2(int oldfd, int newfd);
 */
-t_parser	*mini_forks(t_parser *lst, t_env **env, t_execute *data)
+void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
 	t_parser	*head;
@@ -121,67 +120,21 @@ t_parser	*mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		{
 			if (check_redirect(head) != 0)
 			{
-				printf("yes\n");
-				printf("child redirect found\n");
 				redirect_infile(head, data);
 				redirect_outfile(head, data);
 			}
 			head = head->next;
 		}
 		head = lst;
-		if (check_for_child_builtin(head) != 0)
-		{
-			do_builtin(head, env);
-			return (lst);
-		}
-		else if (check_for_child_builtin(head) == 0)
-		{
-			executable = check_access(*env, lst, data);
-			printf("executble = [%s]\n", executable);
-			if (access(executable, X_OK) == -1)
-				mini_error(executable, errno);
-			data->env_array = list_to_string(*env);
-			if (execve(executable, &lst->str, data->env_array) == -1)
-				mini_error(lst->str, errno);
-		}
+		executable = check_access(*env, lst, data);
+		printf("executble = [%s]\n", executable);
+		if (access(executable, X_OK) == -1)
+			mini_error(executable, errno);
+		data->env_array = list_to_string(*env);
+		if (execve(executable, &lst->str, data->env_array) == -1)
+			mini_error(lst->str, errno);
 	}
-	close(data->fd_in);
-	close(data->pipe_fd[WRITE]);
-	close(data->pipe_fd[READ]);
-	return (lst);
-}
-
-/**
- * @param lst parser linked list
- * @param env linked list with environment
- * @param data struct containing fd's and 2d arrays needed for execution
- * @brief checks for redirects enters redirect function
- * @todo
- * needs infile redirect function in here too?
- * check if we need to close outfile_fd, or STDOUT in here?
- * 
-*/
-// bool	single_build(t_parser *lst, t_env **env, t_execute *data)
-void	single_build(t_parser *lst, t_env **env, t_execute *data)
-{
-	t_parser	*head;
-
-	head = lst;
-	while (head)
-	{
-		if (check_redirect(head) != 0)
-			redirect_outfile(head, data);
-		head = head->next;
-	}
-	head = lst;
-	while (head)
-	{
-		if (check_for_child_builtin(head) != 0)
-			do_builtin(head, env);
-		// head = head->next;
-		// return (true);
-	}
-	// return (false);
+	return ;
 }
 
 /**

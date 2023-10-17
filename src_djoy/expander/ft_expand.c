@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/16 17:20:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 15:43:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	redirect_infile(t_parser *head, t_execute *data)
 			}
 			if (S_ISDIR(file_stat.st_mode))
 				printf("[%s] is a directory\n", head->file);
-			else
+			else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
 				printf("its not a file or directory");
 		}
 		if (dup2(data->in, STDIN_FILENO) == 0)
@@ -165,7 +165,6 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 
 	if (mini_strcmp(head->meta, ">") == 0)
 	{
-		printf("henlo out\n");
 		head = head->next;
 		if (access(head->file, F_OK) != 0)
 		{

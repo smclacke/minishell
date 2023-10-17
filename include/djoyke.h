@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/16 18:35:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 13:37:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ typedef struct s_expand
 typedef struct s_execute
 {
 	int				fd_in;
+	int				fd_out;
 	int				fork_pid;
 	int				pipe_fd[2];
 	char			**path;
@@ -137,8 +138,9 @@ void			get_before_dollar(char *str, t_expand *exp, int i);
 int				get_check_value(t_expand *exp, t_env **env);
 bool			check_for_meta(t_parser *lst);
 void			ft_expand(t_parser *lst, t_env **env);
-bool			check_for_env_builtin(t_parser *lst);
-bool			check_for_child_builtin(t_parser *lst);
+bool			check_for_builtin(t_parser *node);
+bool			check_for_env_builtin(t_parser *node);
+// bool			check_for_child_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
 char			*exp_dollar(char *str, t_env **env, t_expand *exp, int len);
 void			redirect(t_parser *head, t_env **env, t_execute *data);
@@ -176,7 +178,7 @@ void			mini_remove_env(char *str, t_env **env);
 void			reasing_value(char *temp, char *str, t_env *head);
 
 
-t_parser		*mini_forks(t_parser *lst, t_env **env, t_execute *data);
+void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
 bool			absolute_check(t_parser *node);
 bool			parse_path(t_env *env, t_execute *data);
 char			*check_access(t_env *env, t_parser *node, t_execute *data);
