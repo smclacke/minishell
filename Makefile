@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/17 15:43:36 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/17 19:03:46 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,19 +22,11 @@ CFLAGS			= -Wall -Wextra -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include
-HEADERS			= prompt.h djoyke.h shelly.h colour.h sarah.h minishell.h
+HEADERS			= djoyke.h structs.h shelly.h prompt.h colour.h
 IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 HEADER_DIR		= include
 HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
-
-# ifdef DEBUG
-# CFLAGS += -g
-# endif
-
-# ifdef
-# CFLAGS += -fsanitize=address,undefined
-# endif
 
 ## MINISHELL ##
 
@@ -85,14 +77,12 @@ SRCS_SAAR		= main_saar.c							\
 					lexer/token_utils.c					\
 					parser/parser.c						\
 					parser/parser_utils.c				\
+					expand/expand.c						\
 					expand/quotes.c						\
 					expand/quote_utils.c				\
-					expand/ft_expand.c					\
-					expand/utils.c						\
-					expand/dollar.c
-				
-# expander/expand_dollar_quotes.c		\
-# expander/dollar_utils.c
+					expand/dollar.c						\
+					expand/dollar_utils.c
+
 
 SAAR_DIR		= src_saar
 SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
@@ -172,6 +162,7 @@ $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)/executor
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/lexer
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/parser
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/expand
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)

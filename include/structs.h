@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 16:45:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 18:50:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_parser
 	char				*cmd;
 	char				*meta;
 	char				*file;
-	char				*str;;
+	char				*str;
+	int					n_cmd;
 	struct s_parser		*next;
 }				t_parser;
 
@@ -59,23 +60,24 @@ typedef struct s_env
 	int					has_value;
 }							t_env;
 
-typedef struct s_expand
-{
-	char				*before_dollar;
-	char				*var;
-	char				*env_value;
-	char				*comp_str;
-}							t_expand;
+// typedef struct s_expand
+// {
+// 	char				*before_dollar;
+// 	char				*var;
+// 	char				*env_value;
+// 	char				*comp_str;
+// }							t_expand;
 
 // str_after_dol = in quotes or dollar in quotes so string is separate
 // not viewed as part of the thing after dollar that needs to be expanded
 typedef struct s_exp_dol
 {
 	char	*unassed;
-	char	*expand;
-	char	*dont_expand;
+	char	*expand_this;
+	char	*dont_expand_this;
 	char	*str_before_dol;
 	char	*str_after_dol;
+	char	*assed;
 }		t_exp_dol;
 
 typedef struct s_execute

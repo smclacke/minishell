@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 14:05:34 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 15:44:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 17:42:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,37 +73,3 @@ static char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 	return (str);
 }
 
-/**
- * @param node node from parser linked list
- * @param env environment linked list 
- * @param exp expander struct
- * @param len lenght of node->str
- * @brief checks if $ present and needs expanding
-*/
-char	*dollar(char *str, t_env **env, t_expand *exp, int len)
-{
-	char	*exp_str;
-	int		i;
-
-	exp_str = NULL;
-	i = 0;
-	if (ft_strnstr(str, "$", len))
-	{
-		exp_str = check_if_expand(str);
-		if (!exp_str)
-		{
-			str = remove_quotes(str);
-			printf("here\n");
-			return (str);
-		}
-		exp = ft_calloc(1, sizeof (t_expand));
-		while (exp_str[i])
-		{
-			if (check_at_len(exp_str, exp, i, len))
-				return (exp_str);
-			i++;
-		}
-		exp_str = exp_dollar(exp_str, env, exp, len);
-	}
-	return (exp_str);
-}

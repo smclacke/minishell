@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 16:45:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 19:03:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 
 // utils
 void				free_tokens(t_parser *tokens);
+int					get_no_cmds(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//
@@ -81,16 +82,18 @@ int					quote_type(int str);
 int					len_quotes(char *str);
 
 
-//----------------- dollar.c --------------------//
+//----------------- dollar --------------------//
 
 
-//------------------ ft_expand -------------------//
-void			ft_expand(t_parser *lst, t_env **env);
+//------------------ expand -------------------//
+void				ft_expand(t_parser *lst, t_env **env);
 
-//------------------ utils ------------------//
-// void			free_remain_struct(t_expand *data);
-bool			check_for_builtin(t_parser *lst);
-bool			check_for_meta(t_parser *lst);
+//------------------ dollar_utils ------------------//
+int	is_dollar(char c); // move to libft
+char				*check_if_expand(char *str);
+char				*set_expand_string(t_parser *lst, t_exp_dol *str, int *sign);
+bool				check_for_builtin(t_parser *lst);
+bool				check_for_meta(t_parser *lst);
 
 // -------------------EXPAND--------------------//
 // --------------------------------------------//
