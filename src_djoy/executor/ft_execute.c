@@ -6,13 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 18:14:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 19:05:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-
-//take all the nodes until the pipe or redirect, built-in and put it in execve
+// #include <assert.h>
 
 /**
  * @param envp environment passed as 2d array
@@ -39,9 +38,9 @@ void	ft_execute(t_env **env, t_parser *lst)
 
 void	close_check(int num)
 {
-	assert(close(num) != -1);
-	// if (close(num) < 0)
-	// 	perror("close");
+	// assert(close(num) != -1);
+	if (close(num) < 0)
+		perror("close");
 }
 
 /**
@@ -81,32 +80,24 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 	}
 	while (lst)
 	{
-		if (lst->cmd && !lst->next && check_for_builtin(lst))
-			do_builtin(lst, env);
-		if (lst->cmd && lst->next && check_for_builtin(lst))
-			do_builtin(lst, env);
-		if (lst->cmd && lst->next && !check_for_builtin(lst))
+		// if (dup2(data->fd_out, data->pipe_fd_1[WRITE]) == -1)
+		// 	mini_error("pipe_fd_1", errno);
+		// // only if need to fork again
+		// if (dup2(data->pipe_fd_2[READ], data->fd_in) == -1)
+		// 	mini_error("pipe_fd_2", errno);
+		if (lst->cmd && check_for_builtin(lst))
 		{
-			if (dup2(STDOUT_FILENO, data->pipe_fd_1[WRITE]) == -1)
-				mini_error("pipe_fd_1", errno);
-			// only if need to fork again
-			if (dup2(data->pipe_fd_2[READ], STDIN_FILENO) == -1);
-				mini_error("pipe_fd_2", errno);
+			printf("executing builtin\n");
+			do_builtin(lst, env);
+		}
+		else if ((lst->cmd || mini_strcmp(lst->meta, "|") == 0) && lst->next)
+		{
 			data->fork_pid = fork();
 			if (data->fork_pid == -1)
 				mini_error("fork", errno);
 			if (data->fork_pid == 0)
 				mini_forks(lst, env, data);
 		}
-		// if ((lst->cmd || mini_strcmp(lst->meta, "|") == 0) && lst->next && !check_for_builtin(lst))
-		// {
-		// 	dup2(data->fd_out, data->pipe_fd[READ]);
-		// 	data->fork_pid = fork();
-		// 	if (data->fork_pid == -1)
-		// 		mini_error("fork", errno);
-		// 	if (data->fork_pid == 0)
-		// 		mini_forks(lst, env, data);
-		// }
 		lst = lst->next;
 	}
 	close_check(data->fd_in);
@@ -135,23 +126,29 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
 
-	if (data->fork_pid == 0)
+	if (check_for_builtin(lst))
 	{
+		do_builtin(lst, env);
+		close_check(data->pipe_fd_1[READ]);
 		close_check(data->pipe_fd_1[WRITE]);
 		close_check(data->pipe_fd_2[READ]);
-		if (dup2(STDIN_FILENO, data->pipe_fd_2[WRITE]) == -1)
-			mini_error("dup2", errno);
-		if (dup2(STDOUT_FILENO, data->pipe_fd_1[READ]) == -1)
-			mini_error("dup2", errno);
-		printf("mini_forks:		children made\n");
-		executable = check_access(*env, lst, data);
-		printf("executble = [%s]\n", executable);
-		if (access(executable, X_OK) == -1)
-			mini_error(executable, errno);
-		data->env_array = list_to_string(*env);
-		if (execve(executable, &lst->str, data->env_array) == -1)
-			mini_error(lst->str, errno);
+		close_check(data->pipe_fd_2[WRITE]);
+		return ;
 	}
+	close_check(data->pipe_fd_1[WRITE]);
+	close_check(data->pipe_fd_2[READ]);
+	if (dup2(data->fd_in, data->pipe_fd_2[WRITE]) == -1)
+		mini_error("dup2", errno);
+	if (dup2(data->fd_out, data->pipe_fd_1[READ]) == -1)
+		mini_error("dup2", errno);
+	// printf("mini_forks:		children made\n");   
+	executable = check_access(*env, lst, data);
+	// printf("executble = [%s]\n", executable);  
+	if (access(executable, X_OK) == -1)
+		mini_error(executable, errno);
+	data->env_array = list_to_string(*env);
+	if (execve(executable, &lst->str, data->env_array) == -1)
+		mini_error(lst->str, errno);
 	return ;
 }
 

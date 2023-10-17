@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:20:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 18:47:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void	ft_exit(t_parser *lst)
 	long long	error;
 	int			exit_status;
 	int			status;
+
+
+	printf("EXITING\n");
+	exit(117);
 
 	exit_status = 0;
 	status = 0;
