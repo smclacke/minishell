@@ -5,22 +5,14 @@
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/10/10 20:56:00 by dreijans      ########   odam.nl         */
-=======
-<<<<<<< HEAD
-/*   Updated: 2023/10/10 20:53:43 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/10 19:14:18 by smclacke      ########   odam.nl         */
->>>>>>> sarah
->>>>>>> 52ddf68d06316e70c7891b49f545ab91d8273769
+/*   Created: 2023/10/17 19:08:48 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/10/17 19:08:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
 
-//take all the nodes until the pipe or redirect, built-in and put it in execve
+#include "../../include/djoyke.h"
+// #include <assert.h>
 
 /**
  * @param envp environment passed as 2d array
@@ -28,16 +20,28 @@
  * @brief puts env in linked list and initializes struct
  * containing fd's and 2d arrays for later use
  * @todo 
- * 1) check if decisions need to be made in here
- * env als double pointer meegeven
+ * unset is double freeing
 */
 void	ft_execute(t_env **env, t_parser *lst)
 {
-	// t_execute	data;
+	t_execute	*data;
 
-	// init_execute_struct(&data, *env);
+	data = malloc(sizeof(t_execute));
+	if (data == NULL)
+		mini_error("malloc data", errno);
+	init_execute_struct(data);
 	ft_expand(lst, env);
-	// build(lst, *env, &data);
+	build(lst, env, data);
+	free (data);
+	data = NULL;
+	return ;
+}
+
+void	close_check(int num)
+{
+	// assert(close(num) != -1);
+	if (close(num) < 0)
+		perror("close");
 }
 
 /**
@@ -46,54 +50,64 @@ void	ft_execute(t_env **env, t_parser *lst)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief determines how many times needs to fork
  * pipes and makes child process
- * line 81 : need to wait for the individual children to return (maybe the loop)
- * line 83 : Parent process properly wait for the last child process
  * @todo 
- * 1) line 55: 	
- * 				lst_len cmd check 
- * make condition to pipe according parsed input.
- * 2) determine how many pipes need to be made
- * 3) how to keep up with the amount of pipes created
- * 4) how do redirect output from one pipe to the pipe of another child process?
- * line 70: after mini_forks
- * 				if (dup2(data->pipe_fd[READ], data->fd_in) == -1)
-				{
-					printf("build process:		you came back huh\n");
-					mini_error("1 dup2", errno);
-				}
-				close(data->pipe_fd[READ]);
-				close(data->pipe_fd[WRITE]);
- * 4) how to wait for all child processes
- * 5) how to redirect output/input? 
- * 				if redirect found for outfile dup read end to outfile 
-				close(data->pipe_fd[WRITE]);
- * pipe recursively!!! opens and closes step by step
+ * check for heredoc before forking
 */
-void	build(t_parser *lst, t_env *env, t_execute *data)
+void	build(t_parser *lst, t_env **env, t_execute *data)
 {
+	t_parser	*head;
+
+	head = lst;
 	if (dup2(STDIN_FILENO, data->fd_in) == -1)
-		mini_error("dup2", errno);
+		mini_error("dup2 std_in", errno);
+	if (dup2(STDOUT_FILENO, data->fd_out) == -1)
+		mini_error("dup2 std_out", errno);
+	if (pipe(data->pipe_fd_1) == -1)
+		mini_error("pipe_fd_1", errno);
+	if (pipe(data->pipe_fd_2) == -1)
+		mini_error("pipe_fd_2", errno);
+	close_check(data->pipe_fd_1[READ]);
+	close_check(data->pipe_fd_2[WRITE]);
 	if (!lst)
 		mini_error("list", errno);
-	if (pipe(data->pipe_fd) == -1)
-		mini_error("pipe", errno);
+	while (head)
+	{
+		if (check_redirect(head) != 0)
+		{
+			redirect_infile(head, data);
+			redirect_outfile(head, data);
+		}
+		head = head->next;
+	}
 	while (lst)
 	{
-		if (lst)
+		// if (dup2(data->fd_out, data->pipe_fd_1[WRITE]) == -1)
+		// 	mini_error("pipe_fd_1", errno);
+		// // only if need to fork again
+		// if (dup2(data->pipe_fd_2[READ], data->fd_in) == -1)
+		// 	mini_error("pipe_fd_2", errno);
+		if (lst->cmd && check_for_builtin(lst))
+		{
+			printf("executing builtin\n");
+			do_builtin(lst, env);
+		}
+		else if ((lst->cmd || mini_strcmp(lst->meta, "|") == 0) && lst->next)
 		{
 			data->fork_pid = fork();
 			if (data->fork_pid == -1)
 				mini_error("fork", errno);
 			if (data->fork_pid == 0)
-			{
-				printf("build_process:		have to get a kindergarten\n");
 				mini_forks(lst, env, data);
-			}
 		}
 		lst = lst->next;
 	}
+	close_check(data->fd_in);
+	close_check(data->fd_out);
+	close_check(data->pipe_fd_1[READ]);
+	close_check(data->pipe_fd_1[WRITE]);
+	close_check(data->pipe_fd_2[READ]);
+	close_check(data->pipe_fd_2[WRITE]);
 	waitpid(data->fork_pid, NULL, 0);
-	close(data->pipe_fd[READ]);
 }
 
 /**
@@ -109,29 +123,34 @@ void	build(t_parser *lst, t_env *env, t_execute *data)
 				dprintf(2, "euagegauweg\n"); (prints on standard error)
  * remember!!! int dup2(int oldfd, int newfd);
 */
-t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data)
+void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
-	char	*executable;
+	char		*executable;
 
-	if (data->fork_pid == 0)
+	if (check_for_builtin(lst))
 	{
-		printf("mini_forks:		children made\n");
-		if (dup2(data->pipe_fd[READ], data->fd_in) == -1)
-			mini_error(" 2.... dup2", errno);
-		if (close(data->pipe_fd[READ]) == -1)
-			mini_error("close", errno);
-		close(data->pipe_fd[WRITE]);
-		executable = check_access(env, lst, data);
-		// printf("executble = [%s]\n", executable);
-		if (access(executable, X_OK) == -1)
-			mini_error(executable, errno);
-		if (execve(executable, &lst->str, data->env_array) == -1)
-			mini_error(lst->str, errno);
+		do_builtin(lst, env);
+		close_check(data->pipe_fd_1[READ]);
+		close_check(data->pipe_fd_1[WRITE]);
+		close_check(data->pipe_fd_2[READ]);
+		close_check(data->pipe_fd_2[WRITE]);
+		return ;
 	}
-	close(data->fd_in);
-	close(data->pipe_fd[WRITE]);
-	close(data->pipe_fd[READ]);
-	return (lst);
+	close_check(data->pipe_fd_1[WRITE]);
+	close_check(data->pipe_fd_2[READ]);
+	if (dup2(data->fd_in, data->pipe_fd_2[WRITE]) == -1)
+		mini_error("dup2", errno);
+	if (dup2(data->fd_out, data->pipe_fd_1[READ]) == -1)
+		mini_error("dup2", errno);
+	// printf("mini_forks:		children made\n");   
+	executable = check_access(*env, lst, data);
+	// printf("executble = [%s]\n", executable);  
+	if (access(executable, X_OK) == -1)
+		mini_error(executable, errno);
+	data->env_array = list_to_string(*env);
+	if (execve(executable, &lst->str, data->env_array) == -1)
+		mini_error(lst->str, errno);
+	return ;
 }
 
 /**
@@ -139,8 +158,6 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks environment to find PATH put it in temp_path
  * split temp_path into 2d array and put it in the struct data->path
- * @todo 
- * 
 */
 bool	parse_path(t_env *env, t_execute *data)
 {
@@ -173,9 +190,6 @@ bool	parse_path(t_env *env, t_execute *data)
  * @param node noded from parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks is command has access
- * @todo 
- * 1) line 196: command_error(node->cmd, errno); instead of current func
- * 2) line 199; node->str? instead of node->cmd?
 */
 char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
@@ -192,7 +206,7 @@ char	*check_access(t_env *env, t_parser *node, t_execute *data)
 			if (command == NULL)
 				mini_error("malloc", errno);
 			ok_path = ft_strjoin(data->path[i], command);
-			// printf("ok_path = [%s]\n", ok_path);
+			printf("ok_path = [%s]\n", ok_path);
 			if (command == NULL)
 				mini_error("malloc", errno);
 			free(command);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/11 13:52:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 19:08:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ static void	expand_dollar(t_parser *head, t_env **env, t_expand *exp)
 	}
 }
 
-
 /**
  * @param lst linked list from parser
  * @param env environment linked list
@@ -103,66 +102,75 @@ void	ft_expand(t_parser *lst, t_env **env)
 		head = head->next;
 	}
 	head = lst;
-	// while (head)
-	// {
-	// 	redirect(head, env);
-	// 	head = head->next;
-	// }
-	// head = lst;
-	while (head)
+}
+
+/**
+ * @param head parser linked list
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @brief checks for redirects enters redirect function
+ * @todo
+ * if dir - `opendir`: Opens a directory stream.
+ * readdir`: Reads a directory entry.
+*/
+void	redirect_infile(t_parser *head, t_execute *data)
+{
+	struct stat	file_stat;
+
+	if (mini_strcmp(head->meta, "<") == 0)
 	{
-		check_for_meta(head);
-		if (check_for_builtin(head))
-			do_builtin(head, env);
 		head = head->next;
+		if (access(head->file, F_OK) != 0)
+		{
+			ft_putstr_fd("minishell: ", STDOUT_FILENO);
+			ft_putstr_fd(head->file, STDOUT_FILENO);
+			ft_putstr_fd(":", STDOUT_FILENO);
+			ft_putstr_fd(" No such file or directory\n", STDOUT_FILENO);
+		}
+		if (stat(head->file, &file_stat) == 0)
+		{
+			if (S_ISREG(file_stat.st_mode))
+				data->in = open(head->file, O_RDWR, 0644);
+			if (S_ISDIR(file_stat.st_mode))
+				printf("[%s] is a directory\n", head->file);
+			else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
+				printf("its not a file or directory");
+		}
+		if (dup2(data->in, STDIN_FILENO) == 0)
+			close(data->in);
 	}
 }
 
-
-/*
-	➜  minishell git:(djoyke) ✗ < hi.txt wc > outfile.txt 
-	zsh: no such file or directory: hi.txt
-	➜  minishell git:(djoyke) ✗ pwd
-	/home/dreijans/Documents/rank3/minishell
-	➜  minishell git:(djoyke) ✗ rm outfile.txt
-	rm: cannot remove 'outfile.txt': No such file or directory
-	➜  minishell git:(djoyke) ✗ cd src_djoy 
-	➜  src_djoy git:(djoyke) ✗ < hi.txt wc |  > outfile.txt 
-	zsh: no such file or directory: hi.txt
-	➜  src_djoy git:(djoyke) ✗ rm outfile.txt   
-
-		dreijans@f0r2s3:~$ < hi | echo hello
-		hello
-		dreijans@f0r2s3:~$ bash: hi: No such file or directory
-		^C
-		dreijans@f0r2s3:~$ < hi echo hello | echo hello
-		hello
-		bash: hi: No such file or directory
-
+/**
+ * @param head parser linked list
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @brief checks for redirects enters redirect function
+ * @todo
+ * if dir - `opendir`: Opens a directory stream.
+ * readdir`: Reads a directory entry.
 */
-// void	redirect(t_parser *head, t_env **env)
-// {
-// 	//check if it's infile or outfile
-// 	if (ft_strcmp(head->meta, "<") == 0)
-// 	{
-// 		//check if infile exists throw error if it's not
-// 		//check if it' a file (for error code)
-// 		//check if it's directory (for error code)
-// 		//save fd somewhere
-// 		//permissions (write read etc)
-// 	}
-// 	else if (ft_strcmp(head->meta, ">") == 0)
-// 	{
-// 		//check if already exists
-// 		//save fd if it already exists
-// 		//check if it' a file (for error code)
-// 		//check if it's directory (for error code)
-// 		//permissions (write read etc)
-// 		//if outfile make them all and store the fd's in new part of the node?
-// 		// (parser->file != NULL)
-// 		// {
-// 		// 	write to parser->fd 
-// 		// }
-// 		//return
-// 	}
-// }
+void	redirect_outfile(t_parser *head, t_execute *data)
+{
+	struct stat	file_stat;
+
+	if (mini_strcmp(head->meta, ">") == 0)
+	{
+		head = head->next;
+		if (access(head->file, F_OK) != 0)
+		{
+			data->out = open(head->file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+			if (data->out == -1)
+				mini_error("open outfile", errno);
+		}
+		if (stat(head->file, &file_stat) == 0)
+		{
+			if (S_ISREG(file_stat.st_mode))
+				data->out = open(head->file, O_CREAT | O_RDWR | O_TRUNC, 0644);
+			if (S_ISDIR(file_stat.st_mode))
+				printf("[%s] is a directory\n", head->file);
+			else
+				printf("its not a directory\n");
+		}
+		if (dup2(data->out, STDOUT_FILENO) == 0)
+			close(data->out);
+	}
+}

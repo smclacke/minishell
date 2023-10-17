@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/10 21:03:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 19:07:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 		printf("cmd = %s\t", list->cmd);
 		printf("file = %s\t", list->file);
 		printf("meta = %s\t", list->meta);
-		printf("str = %s\n", list->str);
+		printf("str = %s\t", list->str);
+		printf("pointer lst->next = %p\n", list->next);
 		i++;
 		list = list->next;
 	}
@@ -42,6 +43,9 @@ int	main(int argc, char **argv, char **envp)
 	env = NULL;
 	env = env_list(envp, env);
 	tokens = NULL;
+
+	int	og_stdout = dup(STDOUT_FILENO);
+	int	og_stdin = dup(STDIN_FILENO);
 
 	while (1)
 	{
@@ -61,13 +65,13 @@ int	main(int argc, char **argv, char **envp)
 		// print_the_full_thing(tokens);
 
 		expand_quotes(tokens);
-		
-		print_the_full_thing(tokens);
 
 
-		// ft_execute(&env, tokens);
-		
-		free_tokens(tokens);	
+		ft_execute(&env, tokens);
+		free_tokens(tokens);
+
+		dup2(og_stdout, STDOUT_FILENO);
+		dup2(og_stdin, STDIN_FILENO);
 	}
 	return (0);
 }
