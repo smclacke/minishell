@@ -3,18 +3,12 @@
 /*                                                        ::::::::            */
 /*   ft_execute.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-<<<<<<< HEAD
-/*   Created: 2023/10/17 19:08:48 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 19:08:50 by dreijans      ########   odam.nl         */
-=======
-/*   Created: 2023/10/11 13:01:22 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 17:05:47 by smclacke      ########   odam.nl         */
->>>>>>> sarah
+/*   Created: 2023/10/17 19:43:54 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/10/17 20:12:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/djoyke.h"
 // #include <assert.h>
@@ -35,7 +29,7 @@ void	ft_execute(t_env **env, t_parser *lst)
 	if (data == NULL)
 		mini_error("malloc data", errno);
 	init_execute_struct(data);
-	ft_expand(lst, env);
+	// ft_expand(lst, env);
 	build(lst, env, data);
 	free (data);
 	data = NULL;
@@ -61,8 +55,10 @@ void	close_check(int num)
 void	build(t_parser *lst, t_env **env, t_execute *data)
 {
 	t_parser	*head;
+	int			count;
 
 	head = lst;
+	count = lst->n_cmd;
 	if (dup2(STDIN_FILENO, data->fd_in) == -1)
 		mini_error("dup2 std_in", errno);
 	if (dup2(STDOUT_FILENO, data->fd_out) == -1)
@@ -91,12 +87,11 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 		// // only if need to fork again
 		// if (dup2(data->pipe_fd_2[READ], data->fd_in) == -1)
 		// 	mini_error("pipe_fd_2", errno);
-		if (lst->cmd && check_for_builtin(lst))
+		if (count == 1 && check_for_builtin(lst))
 		{
-			printf("executing builtin\n");
 			do_builtin(lst, env);
 		}
-		else if ((lst->cmd || mini_strcmp(lst->meta, "|") == 0) && lst->next)
+		else if (count >= 1 && lst->next)
 		{
 			data->fork_pid = fork();
 			if (data->fork_pid == -1)
@@ -104,6 +99,7 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 			if (data->fork_pid == 0)
 				mini_forks(lst, env, data);
 		}
+		count--;
 		lst = lst->next;
 	}
 	close_check(data->fd_in);
@@ -132,6 +128,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
 
+	printf("childddd\n");
 	if (check_for_builtin(lst))
 	{
 		do_builtin(lst, env);
@@ -147,9 +144,8 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		mini_error("dup2", errno);
 	if (dup2(data->fd_out, data->pipe_fd_1[READ]) == -1)
 		mini_error("dup2", errno);
-	// printf("mini_forks:		children made\n");   
 	executable = check_access(*env, lst, data);
-	// printf("executble = [%s]\n", executable);  
+	printf("executble = [%s]\n", executable);
 	if (access(executable, X_OK) == -1)
 		mini_error(executable, errno);
 	data->env_array = list_to_string(*env);
