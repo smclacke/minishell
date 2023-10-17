@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 16:36:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 16:39:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 /**
  * @param exp expand struct
  * @brief frees parts of the struct and entire struct
-*/
-void	free_remain_struct(t_expand *data)
-{
-	if (data == NULL)
-		return ;
-	free (data->before_dollar);
-	free (data->env_value);
-	free (data->comp_str);
-	free (data);
-}
+// */
+// void	free_remain_struct(t_expand *data)
+// {
+// 	if (data == NULL)
+// 		return ;
+// 	free (data->before_dollar);
+// 	free (data->env_value);
+// 	free (data->comp_str);
+// 	free (data);
+// }
 
 /**
  * @param node linked list
