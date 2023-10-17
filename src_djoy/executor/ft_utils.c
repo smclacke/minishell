@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 13:37:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 17:26:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ void	init_execute_struct(t_execute *data)
 	data->fd_in = 0;
 	data->fd_out = 0;
 	data->fork_pid = 0;
-	data->pipe_fd[READ] = 0;
-	data->pipe_fd[WRITE] = 0;
+	data->pipe_fd_1[READ] = 0;
+	data->pipe_fd_1[WRITE] = 0;
+	data->pipe_fd_2[READ] = 0;
+	data->pipe_fd_2[WRITE] = 0;
 	data->path = NULL;
 	data->env_array = NULL;
 	data->in = 0;

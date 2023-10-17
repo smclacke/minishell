@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 16:53:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 18:14:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ void	ft_execute(t_env **env, t_parser *lst)
 	return ;
 }
 
+void	close_check(int num)
+{
+	assert(close(num) != -1);
+	// if (close(num) < 0)
+	// 	perror("close");
+}
+
 /**
  * @param lst linked list from parser
  * @param env linked list with environment
@@ -55,8 +62,12 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 		mini_error("dup2 std_in", errno);
 	if (dup2(STDOUT_FILENO, data->fd_out) == -1)
 		mini_error("dup2 std_out", errno);
-	if (pipe(data->pipe_fd) == -1)
-		mini_error("pipe", errno);
+	if (pipe(data->pipe_fd_1) == -1)
+		mini_error("pipe_fd_1", errno);
+	if (pipe(data->pipe_fd_2) == -1)
+		mini_error("pipe_fd_2", errno);
+	close_check(data->pipe_fd_1[READ]);
+	close_check(data->pipe_fd_2[WRITE]);
 	if (!lst)
 		mini_error("list", errno);
 	while (head)
@@ -76,17 +87,34 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 			do_builtin(lst, env);
 		if (lst->cmd && lst->next && !check_for_builtin(lst))
 		{
+			if (dup2(STDOUT_FILENO, data->pipe_fd_1[WRITE]) == -1)
+				mini_error("pipe_fd_1", errno);
+			// only if need to fork again
+			if (dup2(data->pipe_fd_2[READ], STDIN_FILENO) == -1);
+				mini_error("pipe_fd_2", errno);
 			data->fork_pid = fork();
 			if (data->fork_pid == -1)
 				mini_error("fork", errno);
 			if (data->fork_pid == 0)
 				mini_forks(lst, env, data);
 		}
+		// if ((lst->cmd || mini_strcmp(lst->meta, "|") == 0) && lst->next && !check_for_builtin(lst))
+		// {
+		// 	dup2(data->fd_out, data->pipe_fd[READ]);
+		// 	data->fork_pid = fork();
+		// 	if (data->fork_pid == -1)
+		// 		mini_error("fork", errno);
+		// 	if (data->fork_pid == 0)
+		// 		mini_forks(lst, env, data);
+		// }
 		lst = lst->next;
 	}
-	close (data->fd_in);
-	close (data->fd_out);
-	close(data->pipe_fd[READ]);
+	close_check(data->fd_in);
+	close_check(data->fd_out);
+	close_check(data->pipe_fd_1[READ]);
+	close_check(data->pipe_fd_1[WRITE]);
+	close_check(data->pipe_fd_2[READ]);
+	close_check(data->pipe_fd_2[WRITE]);
 	waitpid(data->fork_pid, NULL, 0);
 }
 
@@ -109,6 +137,12 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 
 	if (data->fork_pid == 0)
 	{
+		close_check(data->pipe_fd_1[WRITE]);
+		close_check(data->pipe_fd_2[READ]);
+		if (dup2(STDIN_FILENO, data->pipe_fd_2[WRITE]) == -1)
+			mini_error("dup2", errno);
+		if (dup2(STDOUT_FILENO, data->pipe_fd_1[READ]) == -1)
+			mini_error("dup2", errno);
 		printf("mini_forks:		children made\n");
 		executable = check_access(*env, lst, data);
 		printf("executble = [%s]\n", executable);
