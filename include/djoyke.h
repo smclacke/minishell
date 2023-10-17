@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 14:54:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 15:39:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,14 @@ typedef struct s_parser
 	struct s_parser		*next;
 }				t_parser;
 
-// utils
+// --------------------------------------------//
+// -------------------UTILS--------------------//
 void				free_tokens(t_parser *tokens);
+// --------------------------------------------//
 
-// lexer
-//---------- lexer ----------//
+
+// -------------------LEXER--------------------//
+//-------------------- lexer -----------------//
 t_parser			*lexer(char *input);
 
 //-------- lexer_utils --------//
@@ -91,8 +94,11 @@ int					space_or_meta(int c);
 int					is_same_quote(int c, char *quote_type);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
+// -------------------LEXER--------------------//
+// --------------------------------------------//
 
-// parser
+
+// -------------------PARSER--------------------//
 //-------- parser --------//
 t_parser			*parser(t_parser *tokens);
 
@@ -101,19 +107,12 @@ t_parser			*handle_pipe(t_parser *data, int *flag);
 int					is_pipe(void *input);
 char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);
+// -------------------PARSER--------------------//
+// --------------------------------------------//
 
-// expand
-//---------- quotes ----------//
-char				*remove_quotes(char *str);
-void				expand_quotes(t_parser *tokens);
 
-//-------- quote_utils --------//
-void				increment(int *len, int *i);
-int					check_quotes(char *str);
-int					check_space(char *str);
-int					quote_type(int str);
-int					len_quotes(char *str);
-
+// --------------------------------------------//
+// --------------------------------------------//
 //---- Executor ----//
 typedef struct s_env
 {
@@ -135,8 +134,21 @@ typedef struct s_expand
 	int					i;
 	int					j;
 }							t_expand;
+// --------------------------------------------//
+// --------------------------------------------//
 
-// EXPAND //
+// -------------------EXPAND--------------------//
+//---------- quotes ----------//
+char				*remove_quotes(char *str);
+void				expand_quotes(t_parser *tokens);
+
+//-------- quote_utils --------//
+void				increment(int *len, int *i);
+int					check_quotes(char *str);
+int					check_space(char *str);
+int					quote_type(int str);
+int					len_quotes(char *str);
+
 typedef struct s_exp_dol
 {
 	char	*unassed;
@@ -151,7 +163,8 @@ char			*dollar(char *str, t_env **env, t_expand *exp, int len);
 
 //-------------- expand_dollar_quotes --------------//
 int				check_at_len(char *str, t_expand *exp, int i, int len);
-void			get_before_dollar(char *str, t_expand *exp, int i);
+void			get_before_dollar(char *str, t_
+expand *exp, int i);
 void			get_compare_str(char *str, t_expand *exp, int i, int j);
 char			*check_if_expand(char *str);
 
@@ -172,8 +185,28 @@ void			ft_expand(t_parser *lst, t_env **env);
 void			free_remain_struct(t_expand *data);
 bool			check_for_builtin(t_parser *lst);
 bool			check_for_meta(t_parser *lst);
-// EXPAND //
+// -------------------EXPAND--------------------//
+// --------------------------------------------//
 
+
+
+
+// -----------------------------------------------//
+// -----------------------------------------------//
+// -----------------------------------------------//
+void			init_expand_struct(t_expand *data);
+void			free_remain_struct(t_expand *data);
+void			get_compare_str(char *str, t_expand *exp, int i, int j);
+void			reassing_before_dollar(t_expand *exp);
+void			dollar(char *str, t_env **env, t_expand *exp, int len);
+void			return_exp(char *str, t_expand *exp);
+void			get_before_dollar(char *str, t_expand *exp, int i);
+int				get_check_value(t_expand *exp, t_env **env);
+bool			check_for_meta(t_parser *lst);
+void			ft_expand(t_parser *lst, t_env **env);
+bool			check_for_builtin(t_parser *lst);
+void			save_expanded(t_expand *exp);
+void			exp_dollar(char *str, t_env **env, t_expand *exp, int len);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);

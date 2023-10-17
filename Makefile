@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/17 14:59:29 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/17 15:43:36 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,13 +67,6 @@ SRCS_DJOY		=	main_djoy.c							\
 					executor/ft_utils.c					\
 					executor/list_utils.c 				\
 					executor/print_utils.c				\
-					expander/ft_expand.c				\
-					expander/ft_utils.c					\
-					expander/expand_dollar.c			\
-					expander/dollar.c
-				
-# expander/expand_dollar_quotes.c		\
-# expander/dollar_utils.c
 
 DJOY_DIR		= src_djoy
 SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))
@@ -83,17 +76,23 @@ OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 
 ## SARAH ##
 
-SRCS_SAAR		= main_saar.c					\
-					utils.c						\
-					lexer/lexer.c				\
-					lexer/lexer_utils.c			\
-					lexer/token.c				\
-					lexer/token_size.c			\
-					lexer/token_utils.c			\
-					parser/parser.c				\
-					parser/parser_utils.c		\
-					expand/quotes.c				\
-					expand/quote_utils.c
+SRCS_SAAR		= main_saar.c							\
+					utils.c								\
+					lexer/lexer.c						\
+					lexer/lexer_utils.c					\
+					lexer/token.c						\
+					lexer/token_size.c					\
+					lexer/token_utils.c					\
+					parser/parser.c						\
+					parser/parser_utils.c				\
+					expand/quotes.c						\
+					expand/quote_utils.c				\
+					expand/ft_expand.c					\
+					expand/utils.c						\
+					expand/dollar.c
+				
+# expander/expand_dollar_quotes.c		\
+# expander/dollar_utils.c
 
 SAAR_DIR		= src_saar
 SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
@@ -171,7 +170,6 @@ $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/executor
-	@ mkdir -p $(OBJ_DJOY_DIR)/expander
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/lexer
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/parser
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
@@ -184,7 +182,6 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 
@@ -192,7 +189,7 @@ $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)
 	@ mkdir -p $(OBJ_MICRO_DIR)/parser
 	@ mkdir -p $(OBJ_MICRO_DIR)/lexer
-	@ mkdir -p $(OBJ_MICRO_DIR)/expander
+	@ mkdir -p $(OBJ_MICRO_DIR)/expand
 	@ mkdir -p $(OBJ_MICRO_DIR)/executor
 	@ mkdir -p $(OBJ_MICRO_DIR)/builtin
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@

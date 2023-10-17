@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/13 21:47:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 15:43:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,17 @@ typedef struct s_parser
 	struct s_parser		*next;
 }				t_parser;
 
+typedef struct s_env
+{
+	char				*key;
+	char				*value;
+	char				*full;
+	struct s_env		*next;
+	struct s_env		*previous;
+	int					has_value;
+}							t_env;
+
+
 // utils
 void				free_tokens(t_parser *tokens);
 
@@ -102,7 +113,31 @@ int					is_pipe(void *input);
 char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
-// expand
+
+
+
+// -------------------EXPAND--------------------//
+
+// need this??
+// typedef struct s_expand
+// {
+// 	char				*before_dollar;
+// 	char				*var;
+// 	char				*env_value;
+// 	char				*comp_str;
+// 	int					i;
+// 	int					j;
+// }							t_expand;
+
+typedef struct s_exp_dol
+{
+	char	*unassed;
+	char	*expand;
+	char	*dont_expand;
+	char	*str_before_dol;
+	char	*str_after_dol; // str in quotes or dollar in quotes with str after
+}		t_exp_dol;
+
 //---------- quotes ----------//
 char				*remove_quotes(char *str);
 void				expand_quotes(t_parser *tokens);
@@ -114,54 +149,41 @@ int					check_space(char *str);
 int					quote_type(int str);
 int					len_quotes(char *str);
 
+// OLD DOLLAR STUFF
+// //------------------ expand_dollar ------------------//
+// char			*dollar(char *str, t_env **env, t_expand *exp, int len);
 
-//--------------------DJOYKE---------------------//
+// //-------------- expand_dollar_quotes --------------//
+// int				check_at_len(char *str, t_expand *exp, int i, int len);
+// void			get_before_dollar(char *str, t_
+// expand *exp, int i);
+// void			get_compare_str(char *str, t_expand *exp, int i, int j);
+// char			*check_if_expand(char *str);
 
-typedef struct s_env
-{
-	char				*key;
-	char				*value;
-	char				*full;
-	struct s_env		*next;
-	struct s_env		*previous;
-}							t_env;
 
-//---- Expander ----//
-typedef struct s_expand
-{
-	char				*before_dollar;
-	char				*var;
-	char				*env_value;
-	char				*comp_str;
-	int					i;
-	int					j;
-}							t_expand;
+// //------------------ dollar_utils ------------------//
+// void			reassing_before_dollar(t_expand *exp);
+// void			reassing_before_dollar_with_var(t_expand *exp);
+// int				get_check_value(t_expand *exp, t_env **env);
+// char			*return_exp(char *str, t_expand *exp);
+// void			save_expanded(t_expand *exp);
 
-// EXPAND //
-//------------------ expand_dollar ------------------//
-char			*dollar(char *str, t_env **env, t_expand *exp, int len);
+//----------------- dollar.c --------------------//
 
-//-------------- expand_dollar_quotes --------------//
-int				check_at_len(char *str, t_expand *exp, int i, int len);
-void			get_before_dollar(char *str, t_expand *exp, int i);
-void			get_compare_str(char *str, t_expand *exp, int i, int j);
-char			*check_if_expand(char *str);
 
 //------------------ ft_expand -------------------//
 void			ft_expand(t_parser *lst, t_env **env);
 
-//------------------ dollar_utils ------------------//
-void			reassing_before_dollar(t_expand *exp);
-void			reassing_before_dollar_with_var(t_expand *exp);
-int				get_check_value(t_expand *exp, t_env **env);
-char			*return_exp(char *str, t_expand *exp);
-void			save_expanded(t_expand *exp);
-
 //------------------ utils ------------------//
-void			free_remain_struct(t_expand *data);
+// void			free_remain_struct(t_expand *data);
 bool			check_for_builtin(t_parser *lst);
 bool			check_for_meta(t_parser *lst);
-// EXPAND //
+
+// -------------------EXPAND--------------------//
+// --------------------------------------------//
+
+
+
 
 //----Environment----//
 // t_env		*env_list(char **envp);
