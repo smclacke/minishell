@@ -62,6 +62,12 @@ all other djoyke work needs to be the same as hers for all
 
  ---> :):):):)
 
+$USER$BRUH$USER
+str before ret = $USER$BRUH$USER
+str ret = smclackesmclackesmclacke
+smclackesmclackesmclacke
+
+
 BASH
  echo "'$USER'"
 'smclacke'
