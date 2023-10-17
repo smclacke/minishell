@@ -6,11 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-<<<<<<< HEAD
-#    Updated: 2023/10/17 19:09:05 by dreijans      ########   odam.nl          #
-=======
-#    Updated: 2023/10/17 19:03:46 by smclacke      ########   odam.nl          #
->>>>>>> sarah
+#    Updated: 2023/10/17 19:26:37 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -188,21 +184,6 @@ $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)/executor
 	@ mkdir -p $(OBJ_MICRO_DIR)/builtin
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
-
-# debug:
-# 	$(MAKE) DEBUG=1
-# .PHONY: debug
-
-# rebug: fclean debug
-# .PHONY: rebug
-
-# fsan:
-# 	$(MAKE) DEBUG=1 FSAN=1
-# .PHONY: fsan
-
-# resan: fclean fsan
-# .PHONY: resan
-
 
 ## Colours ##
 RESET		:= \033[0m
