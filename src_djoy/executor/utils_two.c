@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_utils.c                                         :+:    :+:            */
+/*   utils_two.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 15:28:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/17 19:53:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,6 @@ void	free_remain_struct(t_expand *data)
 	free (data->comp_str);
 	free (data);
 }
-
-/**
- * @param node linked list
- * @param env string or char to compare with
- * @brief checks arguments to find built-ins: 
- * echo, cd, pwd, export, unset, env and exit
-*/
-bool	check_for_env_builtin(t_parser *node)
-{
-	if (!node)
-		return (false);
-	else if (mini_strcmp(node->cmd, "exit") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "cd") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "export") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "unset") == 0)
-		return (true);
-	else
-		return (false);
-}
-
-// /**
-//  * @param node linked list
-//  * @param env string or char to compare with
-//  * @brief checks arguments to find built-ins: 
-//  * echo, cd, pwd, export, unset, env and exit
-// */
-// bool	check_for_child_builtin(t_parser *node)
-// {
-// 	if (!node)
-// 		return (false);
-// 	else if (mini_strcmp(node->cmd, "echo") == 0)
-// 		return (true);
-// 	else if (mini_strcmp(node->cmd, "pwd") == 0)
-// 		return (true);
-// 	else if (mini_strcmp(node->cmd, "env") == 0)
-// 		return (true);
-// 	else
-// 		return (false);
-// }
 
 /**
  * @param node linked list

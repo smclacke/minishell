@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
+/*   dollar_utils.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 19:01:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 19:32:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,42 +72,42 @@ char	*set_expand_string(t_parser *lst, t_exp_dol *str, int *sign)
 	return (str->unassed);
 }
 
-bool	check_for_builtin(t_parser *node)
-{
-	if (!node)
-		return (false);
-	if (mini_strcmp(node->cmd, "exit") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "echo") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "cd") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "pwd") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "export") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "unset") == 0)
-		return (true);
-	else if (mini_strcmp(node->cmd, "env") == 0)
-		return (true);
-	else
-		return (false);
-}
+// bool	check_for_builtin(t_parser *node)
+// {
+// 	if (!node)
+// 		return (false);
+// 	if (mini_strcmp(node->cmd, "exit") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->cmd, "echo") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->cmd, "cd") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->cmd, "pwd") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->cmd, "export") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->cmd, "unset") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->cmd, "env") == 0)
+// 		return (true);
+// 	else
+// 		return (false);
+// }
 
-bool	check_for_meta(t_parser *node)
-{
-	if (!node)
-		return (false);
-	else if (mini_strcmp(node->meta, ">>") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, "<<") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, ">") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, "<") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, "|") == 0)
-		return (true);
-	else
-		return (false);
-}
+// bool	check_for_meta(t_parser *node)
+// {
+// 	if (!node)
+// 		return (false);
+// 	else if (mini_strcmp(node->meta, ">>") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, "<<") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, ">") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, "<") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, "|") == 0)
+// 		return (true);
+// 	else
+// 		return (false);
+// }
