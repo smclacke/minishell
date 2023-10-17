@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:14:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 20:16:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ char	*check_if_expand(char *str)
 			i++;
 			while (str[i] && !ft_isquote(str[i]))
 			{
-				if (is_dollar(str[i]) && quote == '\'')
+				if (ft_dollar(str[i]) && quote == '\'')
 					return (NULL);
-				if (is_dollar(str[i]) && quote == '\"')
+				if (ft_dollar(str[i]) && quote == '\"')
 					return (str);
 				i++;
 			}
