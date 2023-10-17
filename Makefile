@@ -60,11 +60,9 @@ SRCS_DJOY		=	main_djoy.c							\
 					builtin/ft_exit.c					\
 					executor/ft_execute.c				\
 					executor/ft_make_env.c				\
-					executor/utils_one.c				\
+					executor/ft_utils.c					\
 					executor/list_utils.c 				\
 					executor/print_utils.c				\
-					executor/redirect.c					\
-					executor/utils_two.c
 
 DJOY_DIR		= src_djoy
 SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))
@@ -190,21 +188,6 @@ $(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
 	@ mkdir -p $(OBJ_MICRO_DIR)/executor
 	@ mkdir -p $(OBJ_MICRO_DIR)/builtin
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
-
-# debug:
-# 	$(MAKE) DEBUG=1
-# .PHONY: debug
-
-# rebug: fclean debug
-# .PHONY: rebug
-
-# fsan:
-# 	$(MAKE) DEBUG=1 FSAN=1
-# .PHONY: fsan
-
-# resan: fclean fsan
-# .PHONY: resan
-
 
 ## Colours ##
 RESET		:= \033[0m
