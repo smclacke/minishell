@@ -6,11 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/10/17 19:07:40 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/11 12:54:38 by smclacke      ########   odam.nl         */
->>>>>>> 59a791437e287a99579cb9a0fd8f959d885a0f10
+/*   Updated: 2023/10/17 19:13:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +65,10 @@ int	main(int argc, char **argv, char **envp)
 
 
 		ft_execute(&env, tokens);
-<<<<<<< HEAD
 		free_tokens(tokens);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
-=======
-		
-		free_tokens(tokens);	
->>>>>>> 59a791437e287a99579cb9a0fd8f959d885a0f10
 	}
 	return (0);
 }
