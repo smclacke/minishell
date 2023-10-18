@@ -18,7 +18,6 @@ this is fucked
 this is fucked
 this is fucked
 
-$USER$USER
 
 **SARAH, SHIT TO DO**
 

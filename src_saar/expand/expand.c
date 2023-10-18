@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 18:05:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/18 18:20:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ static char	*save_this(t_exp_dol *str, int i)
 static char	*expand_this(t_exp_dol *str, int i)
 {
 	str->expand_this = ft_substr(str->unassed, 0, i);
-	// if (!str->expand_this) // if it fails
-	// 	return (str->unassed);
+	if (!str->expand_this)
+		return (str->unassed);
 	str->unassed = ft_strtrim(str->unassed, str->expand_this);
+	// ft_strlcat(str->assed, str->expand_this, sizeof(t_exp_dol));
+	// free (str->expand_this);
 	// now expand, add to assed, then empty expand_this
 	// printf("unassed in func = %s\n", str->unassed);
 	return (str->unassed);
@@ -107,38 +109,35 @@ static char	*check_first(t_exp_dol *str)
 	return (str->unassed);
 }
 
-static char	*check_rest(t_exp_dol *str)
+static char	*check_rest(t_exp_dol *str, int i)
 {
-	int		i = 0;
-
 	while (str->unassed[i] && !ft_dollar(str->unassed[i]))
 		i++;
 	if (ft_dollar(str->unassed[i]))
 	{
+		printf("i = HERE %i\n", i);
 		str->unassed = expand_this(str, i);
-		if (!str->unassed)
-			return (NULL);
+		// if (!str->unassed)
+		// 	return (NULL);
 	}
+	// printf("unassed after  = %s\n", str->unassed);
 	return (str->unassed);
 }
 
 static char	*dollar(t_exp_dol *str, t_env **env)
 {
 	(void)env;
-	// int		i = 0;
+	int		i = 1;
 	// quotes....
 
 	str->unassed = check_first(str);
-	// while (str->unassed)
-	// {
-		printf("unassed = %s\n", str->unassed);
-		if (str->unassed)
-		{
-			str->unassed = check_rest(str);
-			if (!str->unassed)
-				return (str->assed);
-		}
-	// }
+	while (str->unassed[i])
+	{
+		str->unassed = check_rest(str, i);
+		if (!str->unassed)
+			return (str->assed);
+		i++;
+	}
 
 	print_exp_dol_vals(str);
 
