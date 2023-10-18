@@ -6,48 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 16:32:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/18 18:05:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static char	*dollar(t_exp_dol *str, t_env **env)
-{
-	(void)env;
-	int		i = 0; // start till first dollar
-	int		j = 0; // from first dollar
-
 // do quote check and splitting before this ??
 // figuring it out without quotes down here
-
-	while (str->unassed[i] && !ft_dollar(str->unassed[i]))
-		i++;
-	if (ft_dollar(str->unassed[i])) // first dollar...
-	{
-		str->str_before_dol = ft_substr(str->unassed, 0, i);
-		str->unassed = ft_strtrim(str->unassed, str->str_before_dol);
-	}
-	j++;
-	// while (str->unassed)
-	// {
-		while (str->unassed[j] && !ft_dollar(str->unassed[j]))
-			j++;
-		if (ft_dollar(str->unassed[j]))
-		{
-			printf("unassed = %s\n", str->unassed);
-			printf("unassed[j] = %c\n", str->unassed[j]);
-			str->expand_this = ft_substr(str->unassed, 0, j);
-			str->unassed = ft_strtrim(str->unassed, str->expand_this);
-			j++;
-		}
-	// }
-
-// need to call separately and iterate, if expand_this has $USER, dont want to try 
-// adding another $USER before its expanded and added to assed var
-
-	print_exp_dol_vals(str); // print and cont 
-
+//getting a bit of the logical without quotes, but not sure about orser plus need 
+//to find expandable things, expand them, add them to assed str, 
+//then empty expand_this to keep searching through unassed
 
 	
 	// str->
@@ -69,6 +38,110 @@ static char	*dollar(t_exp_dol *str, t_env **env)
 	// {
 	// 	str->dont_expand_this = str->unassed;
 	// }
+// need to call separately and iterate, if expand_this has $USER, dont want to try 
+// adding another $USER before its expanded and added to assed var		
+	// while (str->unassed[i])
+	// {
+	// 	while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+	// 		i++;
+	// 	if (ft_dollar(str->unassed[i]))
+	// 	{
+	// 		str->unassed = expand_this(str, i);
+	// 		if (!str->unassed)
+	// 			return (str->assed);
+	// 		printf("expand = %s\n", str->expand_this);
+	// 		printf("unassed = %s\n", str->unassed);
+	// 	}
+	// 	i++;
+	// }
+	// str->unassed = expand_this(str, i);
+	// if (!str->unassed)
+	// 	return (str->assed);
+	
+	// printf("unassed[i] = %c\n", str->unassed[i]);
+	// while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+	// 	i++;
+	// 	// while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+	// 	// 	i++;
+	// if (ft_dollar(str->unassed[i])) // or quote, get the stuff between the two dollars
+	// {
+	// 	str->unassed = expand_this(str, i);
+	// 	if (!str->unassed)
+	// 		return (str->assed);
+	// 	i = 0;
+	// }
+	// str->unassed = expand_this(str, i); // or there are no quotes/dollars after first
+	// // encounter and we can iust expand the stuff we have after last dollar is found
+	// if (!str->unassed)
+	// 	return (str->assed);
+
+static char	*save_this(t_exp_dol *str, int i)
+{
+	str->str_before_dol = ft_substr(str->unassed, 0, i);
+	if (!str->str_before_dol) // if it fails or there wasnt anything before dollar
+		return (str->unassed);
+	str->unassed = ft_strtrim(str->unassed, str->str_before_dol);
+	// add str->before_dollar to assed as first bit of str
+	return (str->unassed);
+}
+
+static char	*expand_this(t_exp_dol *str, int i)
+{
+	str->expand_this = ft_substr(str->unassed, 0, i);
+	// if (!str->expand_this) // if it fails
+	// 	return (str->unassed);
+	str->unassed = ft_strtrim(str->unassed, str->expand_this);
+	// now expand, add to assed, then empty expand_this
+	// printf("unassed in func = %s\n", str->unassed);
+	return (str->unassed);
+}
+
+static char	*check_first(t_exp_dol *str)
+{
+	int		i = 0;
+	
+	while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+		i++;
+	if (ft_dollar(str->unassed[i]))
+		str->unassed = save_this(str, i);
+	return (str->unassed);
+}
+
+static char	*check_rest(t_exp_dol *str)
+{
+	int		i = 0;
+
+	while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+		i++;
+	if (ft_dollar(str->unassed[i]))
+	{
+		str->unassed = expand_this(str, i);
+		if (!str->unassed)
+			return (NULL);
+	}
+	return (str->unassed);
+}
+
+static char	*dollar(t_exp_dol *str, t_env **env)
+{
+	(void)env;
+	// int		i = 0;
+	// quotes....
+
+	str->unassed = check_first(str);
+	// while (str->unassed)
+	// {
+		printf("unassed = %s\n", str->unassed);
+		if (str->unassed)
+		{
+			str->unassed = check_rest(str);
+			if (!str->unassed)
+				return (str->assed);
+		}
+	// }
+
+	print_exp_dol_vals(str);
+
 	return (str->assed);
 }
 
