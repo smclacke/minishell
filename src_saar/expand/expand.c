@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 15:07:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/18 16:32:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,41 @@
 static char	*dollar(t_exp_dol *str, t_env **env)
 {
 	(void)env;
-	int		i = 0;
-	int		j = 0;
+	int		i = 0; // start till first dollar
+	int		j = 0; // from first dollar
+
+// do quote check and splitting before this ??
+// figuring it out without quotes down here
 
 	while (str->unassed[i] && !ft_dollar(str->unassed[i]))
 		i++;
-	if (ft_dollar(str->unassed[i]))
+	if (ft_dollar(str->unassed[i])) // first dollar...
 	{
-		j = i - 1;
-		str->str_before_dol = &str->assed[j];
+		str->str_before_dol = ft_substr(str->unassed, 0, i);
+		str->unassed = ft_strtrim(str->unassed, str->str_before_dol);
 	}
+	j++;
+	// while (str->unassed)
+	// {
+		while (str->unassed[j] && !ft_dollar(str->unassed[j]))
+			j++;
+		if (ft_dollar(str->unassed[j]))
+		{
+			printf("unassed = %s\n", str->unassed);
+			printf("unassed[j] = %c\n", str->unassed[j]);
+			str->expand_this = ft_substr(str->unassed, 0, j);
+			str->unassed = ft_strtrim(str->unassed, str->expand_this);
+			j++;
+		}
+	// }
+
+// need to call separately and iterate, if expand_this has $USER, dont want to try 
+// adding another $USER before its expanded and added to assed var
+
+	print_exp_dol_vals(str); // print and cont 
+
+
+	
 	// str->
 	// printf("before_dollar = %s\n", str->str_before_dol);
 	// assed = full things returned after expansion 
@@ -85,5 +110,4 @@ void	ft_expand(t_parser *tokens, t_env **env)
 		expand_dollar(lst, env, str);
 		lst = lst->next;
 	}
-	// print_exp_dol_vals(str); // print and cont
 }
