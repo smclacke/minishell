@@ -37,17 +37,6 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
- MERGE DAY:
-i changed the makefile, djoyke.h
-the whole expand directory needs to be replaced with mine
-
-makefile and djoyke.h need to be a bit from both of us
-sarah main is also a bit different but easy to change
--- we are both using sarah main remember
-
-expand directory needs to be mine for all
-all other djoyke work needs to be the same as hers for all
-
 
  ---> leaks when ending with quotes (dollar quote expansion)
 
@@ -59,29 +48,27 @@ all other djoyke work needs to be the same as hers for all
 
  ---> cd "" cd ''
 
+// THIS RIGHT NOW
+ ---> need to rewrite expander to handle dollars + quotes + strs etc
 
- ---> :):):):)
-
+	// PROBLEM ONE
 $USER$BRUH$USER
 str before ret = $USER$BRUH$USER
 str ret = smclackesmclackesmclacke
 smclackesmclackesmclacke
 
-
-BASH
- echo "'$USER'"
-'smclacke'
-
-SHELLY
- echo "'$USER'"
-$USER 
-
- ---> :):):):)
-
+	// PROBLEM TWO
  abc"$USER"something           NO WORKS   this should work	 BAD
 
+	// PROBLEM THREE
 -> abcsmclackesomething
 but mine see's as str abc$USERsomething and $USERsomething = nope
+
+
+	// PROBLEM FOUR
+BASH   // this is techniqually bonus handling
+ echo "'$USER'"
+'smclacke'
 
 ===========================================
 ===========================================

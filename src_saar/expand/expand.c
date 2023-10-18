@@ -6,25 +6,27 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:18:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/18 15:07:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static char	*dollar(t_exp_dol *str, t_env **env, int len)
+static char	*dollar(t_exp_dol *str, t_env **env)
 {
-	int		i;
 	(void)env;
-	(void)len;
+	int		i = 0;
+	int		j = 0;
 
-	i = 0;
-	
-
-	// leaving this bit of code just for testing right now
-
-	// don't need to check again if $
-
+	while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+		i++;
+	if (ft_dollar(str->unassed[i]))
+	{
+		j = i - 1;
+		str->str_before_dol = &str->assed[j];
+	}
+	// str->
+	// printf("before_dollar = %s\n", str->str_before_dol);
 	// assed = full things returned after expansion 
 	// concating and non expandable bits together
 
@@ -37,27 +39,23 @@ static char	*dollar(t_exp_dol *str, t_env **env, int len)
 	// separate parts of the struct
 	// check expansion if dollar part etc... (str->expand)
 
-	str->expand_this = check_if_expand(str->unassed);
-	if (!str->expand_this)
-	{
-		str->dont_expand_this = str->unassed;
-	}
+	// str->expand_this = check_if_expand(str->unassed);
+	// if (!str->expand_this)
+	// {
+	// 	str->dont_expand_this = str->unassed;
+	// }
 	return (str->assed);
 }
 
 static void	expand_dollar(t_parser *lst, t_env **env, t_exp_dol *str)
 {
-	int			len;
 	int			sign;
 
 	sign = 0;
 	str->unassed = set_expand_string(lst, str, &sign);
 	if (sign == 1 || sign == 2)
 	{
-		len = ft_strlen(str->unassed);
-		str->assed = dollar(str, env, len);
-		// call dollar() to expand, then put str back into parser struct
-		// in cmd or str
+		str->assed = dollar(str, env);
 		if (sign == 1)
 		{
 			lst->cmd = str->assed;
@@ -87,4 +85,5 @@ void	ft_expand(t_parser *tokens, t_env **env)
 		expand_dollar(lst, env, str);
 		lst = lst->next;
 	}
+	// print_exp_dol_vals(str); // print and cont
 }

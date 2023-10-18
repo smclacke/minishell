@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:15:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/18 14:59:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 // utils
 void				free_tokens(t_parser *tokens);
 int					get_no_cmds(t_parser *tokens);
+void				print_exp_dol_vals(t_exp_dol *str);
 
 // lexer
 //---------- lexer ----------//

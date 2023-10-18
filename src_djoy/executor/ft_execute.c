@@ -6,12 +6,14 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:43:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 21:40:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/18 14:48:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 // #include <assert.h>
+
+void	ft_expand(t_parser *tokens, t_env **env);
 
 /**
  * @param envp environment passed as 2d array
@@ -29,8 +31,8 @@ void	ft_execute(t_env **env, t_parser *lst)
 	if (data == NULL)
 		mini_error("malloc data", errno);
 	init_execute_struct(data);
-	// ft_expand(lst, env);
-	build(lst, env, data);
+	ft_expand(lst, env);
+	// build(lst, env, data);
 	free (data);
 	data = NULL;
 	return ;
