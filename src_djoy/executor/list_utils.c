@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 18:18:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/18 16:37:32 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,7 @@ void	free_env(t_env **lst)
 
 void	free_data(t_execute *data)
 {
-	data->fd_in = 0;
-	data->fork_pid = 0;
-	data->pipe_fd_1[READ] = 0;
-	data->pipe_fd_1[WRITE] = 0;
-	data->pipe_fd_2[READ] = 0;
-	data->pipe_fd_2[WRITE] = 0;
-	free(data->path);
-	data->in = 0;
-	data->out = 0;
-	// if (data->env_array != NULL)
-	// {
 	ft_free_arr(data->env_array);
-	// 	printf("just hanging arounfd\n");
-	// 	data->env_array = NULL;
-	// }
+	free(data->path);
 	free (data);
 }

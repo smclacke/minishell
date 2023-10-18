@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_utils.c                                         :+:    :+:            */
+/*   utils_one.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 17:26:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/18 16:35:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,15 @@ int	mini_strcmp(char *s1, char *s2)
 */
 void	init_execute_struct(t_execute *data)
 {
-	data->fd_in = 0;
-	data->fd_out = 0;
-	data->fork_pid = 0;
-	data->pipe_fd_1[READ] = 0;
-	data->pipe_fd_1[WRITE] = 0;
-	data->pipe_fd_2[READ] = 0;
-	data->pipe_fd_2[WRITE] = 0;
+	data->fork_pid = -1;
+	data->pipe_left[READ] = -1;
+	data->pipe_left[WRITE] = -1;
+	data->pipe_right[READ] = -1;
+	data->pipe_right[WRITE] = -1;
 	data->path = NULL;
 	data->env_array = NULL;
-	data->in = 0;
-	data->out = 0;
+	data->in = -1;
+	data->out = -1;
 }
 
 /**

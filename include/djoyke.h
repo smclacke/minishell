@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:00:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/18 16:25:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,9 @@ typedef struct s_expand
 //----Execution----//
 typedef struct s_execute
 {
-	int				fd_in;
-	int				fd_out;
 	int				fork_pid;
-	int				pipe_fd_1[2];
-	int				pipe_fd_2[2];
+	int				pipe_left[2];
+	int				pipe_right[2];
 	char			**path;
 	char			**env_array;
 	int				in;
