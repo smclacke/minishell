@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:43:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 17:25:17 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/18 17:41:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,11 @@ void	init_pipe(int i, int count, t_execute *data)
 	}
 	data->pipe_left[READ] = data->pipe_right[READ];
 	data->pipe_left[WRITE] = data->pipe_right[WRITE];
+	data->pipe_right[READ] = -1;
+	data->pipe_right[WRITE] = -1;
 	if (count > 1)
-	{
 		if (pipe(data->pipe_right) == -1)
 			mini_error("pipe_right", errno);
-	}
-	else
-	{
-		data->pipe_right[READ] = -1;
-		data->pipe_right[WRITE] = -1;
-	}
 }
 
 void	close_between(t_execute *data)
@@ -162,37 +157,23 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
 
-	// printf("childddd\n");
-	// printf("child reads from [%i]\n", data->pipe_left[READ]);
-	// printf("child writes to [%i]\n", data->pipe_right[WRITE]);
 	if (data->pipe_right[WRITE] != -1)
-	{
 		if (dup2(data->pipe_right[WRITE], STDOUT_FILENO) == -1)
 			printf("dup child fail 1\n");
-	}
 	if (data->pipe_left[READ] != -1)
-	{
 		if (dup2(data->pipe_left[READ], STDIN_FILENO) == -1)
 			printf("dup child fail 2\n");
-	}
-	if (data->pipe_left[WRITE] != -1)
-	{
-		if (close(data->pipe_left[WRITE]) == -1)
-			printf("close child fail 1\n");
-	}
+	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE] == -1))
+		printf("close child fail 1\n");
 	if (data->pipe_right[READ] != -1)
-	{
 		if (close(data->pipe_right[READ]) == -1)
 			printf("close child fail 2\n");
-	}
 	if (check_for_builtin(lst))
 	{
-		// printf("child builtin\n");
 		do_builtin(lst, env);
 		exit (0); // vervangen door exitstatus die we bijhouden
 	}
 	executable = check_access(*env, lst, data);
-	// printf("executble = [%s]\n", executable);
 	if (access(executable, X_OK) == -1)
 		mini_error(executable, errno);
 	data->env_array = list_to_string(*env);
@@ -217,7 +198,6 @@ bool	parse_path(t_env *env, t_execute *data)
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
 			temp_path = ft_substr(env->value, 0, ft_strlen(env->value));
-			// printf("temp_path = %s\n", temp_path);
 			if (temp_path == NULL)
 				mini_error ("malloc", errno);
 			data->path = ft_split(temp_path, ':');
@@ -250,12 +230,10 @@ char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	{
 		while (data->path && data->path[i] != NULL)
 		{
-			// printf("node->cmd = [%s]\n", node->cmd);
 			command = ft_strjoin("/", node->cmd);
 			if (command == NULL)
 				mini_error("malloc", errno);
 			ok_path = ft_strjoin(data->path[i], command);
-			// printf("ok_path = [%s]\n", ok_path);
 			if (command == NULL)
 				mini_error("malloc", errno);
 			free(command);
