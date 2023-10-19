@@ -129,3 +129,19 @@ bash-3.2$ cat $djoyke
  * dreijans@f0r2s3:~$ $USER echo abc$USER
  * dreijans: command not found
  * make it into proper error message
+
+ -----------------------SARAH MAYBE------------------------------
+
+ sarah can you when there's a redirect set the [0]cmd first in the linked list with [1]meta and [2]filename in the following
+
+ cat < infile.txt infile1.txt infile2.txt infile3.txt
+
+example:
+
+ echo hallo > file.txt | < infile cat
+
+ echo hallo > file.txt | cat < infile
+
+ can you make the cmd the first token when a new command needs to be executed? :)
+
+for now I'll do as if thats already the case in my exectuting.

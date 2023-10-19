@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:11:39 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/05 18:09:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/19 17:50:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_echo(t_parser *lst)
 		mini_error("lst->cmd", errno);
 	if (!lst->next)
 	{
-		printf("\n");
+		printf("\n"); // use write
 		return ;
 	}
 	lst = lst->next;
@@ -50,7 +50,7 @@ void	ft_echo(t_parser *lst)
 		// 1) check if the next one is a meta, 
 		//    | >> etc to see if you need to echo into something
 		// 2) or to just put the newline on the terminal
-		printf("\n");
+		printf("\n");// use write
 	}
 	while (lst)
 	{
@@ -63,12 +63,12 @@ void	ft_echo(t_parser *lst)
 			}
 			else
 			{
-				printf("%s ", lst->str);
+				printf("%s ", lst->str); // use write
 				i++;
 			}
 		}
 		lst = lst->next;
 	}
 	if (is_flag == 0)
-		printf("\n");
+		printf("\n");// use write
 }

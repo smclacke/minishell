@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:43:54 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 17:41:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 19:17:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	init_pipe(int i, int count, t_execute *data)
 {
 	if (i == 0)
 	{
+		if (count == 1)
+			return ;
 		if (pipe(data->pipe_right) == -1)
 			mini_error("pipe_right", errno);
 		return ;
@@ -85,6 +87,20 @@ void	close_all(t_execute *data)
 		mini_error("close 6", errno);
 }
 
+static void	redirect(t_parser *lst, t_execute *data)
+{
+	lst = lst->next;
+	while (lst && !lst->cmd)
+	{
+		if (check_redirect(lst) != 0)
+		{
+			redirect_infile(lst, data);
+			redirect_outfile(lst, data);
+		}
+		lst = lst->next;
+	}
+}
+
 /**
  * @param lst linked list from parser
  * @param env linked list with environment
@@ -105,19 +121,12 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 	i = 0;
 	if (!lst)
 		mini_error("list", errno);
-	while (head)
-	{
-		if (check_redirect(head) != 0)
-		{
-			redirect_infile(head, data);
-			redirect_outfile(head, data);
-			// dup2 these for the loop
-			// gives just one fd not an array.. figure it out later
-		}
-		head = head->next;
-	}
 	if (count == 1 && check_for_builtin(lst))
+	{
+		redirect(lst, data);
 		do_builtin(lst, env);
+		return ;
+	}
 	while (lst)
 	{
 		if (count >= 1 && lst->cmd)
@@ -140,6 +149,23 @@ void	build(t_parser *lst, t_env **env, t_execute *data)
 		(void)NULL;//whatever norminette
 }
 
+
+void	init_pipes_child(t_execute *data)
+{
+	if (data->pipe_right[WRITE] != -1)
+		if (dup2(data->pipe_right[WRITE], STDOUT_FILENO) == -1)
+			printf("dup child fail 1\n");
+	if (data->pipe_left[READ] != -1)
+		if (dup2(data->pipe_left[READ], STDIN_FILENO) == -1)
+			printf("dup child fail 2\n");
+	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE] == -1))
+		printf("close child fail 1\n");
+	if (data->pipe_right[READ] != -1)
+		if (close(data->pipe_right[READ]) == -1)
+			printf("close child fail 2\n");
+}
+
+
 /**
  * @param lst linked list containing commands and atributes
  * @param env linked list containing environment
@@ -157,17 +183,8 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
 
-	if (data->pipe_right[WRITE] != -1)
-		if (dup2(data->pipe_right[WRITE], STDOUT_FILENO) == -1)
-			printf("dup child fail 1\n");
-	if (data->pipe_left[READ] != -1)
-		if (dup2(data->pipe_left[READ], STDIN_FILENO) == -1)
-			printf("dup child fail 2\n");
-	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE] == -1))
-		printf("close child fail 1\n");
-	if (data->pipe_right[READ] != -1)
-		if (close(data->pipe_right[READ]) == -1)
-			printf("close child fail 2\n");
+	init_pipes_child(data);
+	redirect(lst, data);
 	if (check_for_builtin(lst))
 	{
 		do_builtin(lst, env);

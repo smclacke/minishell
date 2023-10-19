@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 19:53:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 18:35:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,17 @@ bool	check_for_meta(t_parser *node)
 */
 bool	check_redirect(t_parser *node)
 {
+	dprintf(STDERR_FILENO, "meta = [%s]\n", node->meta);
 	if (!node)
 		return (false);
 	if (mini_strcmp(node->meta, ">") == 0)
 	{
-		printf("expander:		output Redirect\n");
+		dprintf(STDERR_FILENO, "expander:		output Redirect\n");
 		return (true);
 	}
 	else if (mini_strcmp(node->meta, "<") == 0)
 	{
-		printf("expander:		Input Redirect\n");
+		dprintf(STDERR_FILENO, "expander:		Input Redirect\n");
 		return (true);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 16:25:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 18:15:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ int				get_check_value(t_expand *exp, t_env **env);
 bool			check_for_meta(t_parser *lst);
 bool			check_for_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
-void			redirect(t_parser *head, t_env **env, t_execute *data);
 void			redirect_outfile(t_parser *head, t_execute *data);
 void			redirect_infile(t_parser *head, t_execute *data);
 
@@ -175,7 +174,6 @@ bool			parse_path(t_env *env, t_execute *data);
 char			*check_access(t_env *env, t_parser *node, t_execute *data);
 void			ft_execute(t_env **env, t_parser *list);
 void			single_build(t_parser *lst, t_env **env, t_execute *data);
-// bool			single_build(t_parser *lst, t_env **env, t_execute *data);
 void			init_execute_struct(t_execute *data);
 bool			check_redirect(t_parser *node);
 void			build(t_parser *lst, t_env **env, t_execute *data);
