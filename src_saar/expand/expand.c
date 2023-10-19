@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_expand.c                                        :+:    :+:            */
+/*   expand.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 18:59:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/17 20:18:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static char	*dollar(t_exp_dol *str, t_env **env, int len)
 {
 	int		i;
+	(void)env;
+	(void)len;
 
 	i = 0;
 	
@@ -35,7 +37,7 @@ static char	*dollar(t_exp_dol *str, t_env **env, int len)
 	// separate parts of the struct
 	// check expansion if dollar part etc... (str->expand)
 
-	str->expand_this = check_if_expand(str);
+	str->expand_this = check_if_expand(str->unassed);
 	if (!str->expand_this)
 	{
 		str->dont_expand_this = str->unassed;
@@ -52,7 +54,7 @@ static void	expand_dollar(t_parser *lst, t_env **env, t_exp_dol *str)
 	str->unassed = set_expand_string(lst, str, &sign);
 	if (sign == 1 || sign == 2)
 	{
-		len = ft_strlen(str);
+		len = ft_strlen(str->unassed);
 		str->assed = dollar(str, env, len);
 		// call dollar() to expand, then put str back into parser struct
 		// in cmd or str

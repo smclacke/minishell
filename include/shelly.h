@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/10/19 22:06:27 by dreijans      ########   odam.nl         */
+=======
+/*   Updated: 2023/10/17 20:15:34 by smclacke      ########   odam.nl         */
+>>>>>>> bafe4027e8c0281e85e398570406ea12de154202
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,44 +93,14 @@ int					len_quotes(char *str);
 void				ft_expand(t_parser *lst, t_env **env);
 
 //------------------ dollar_utils ------------------//
-int	is_dollar(char c); // move to libft
 char				*check_if_expand(char *str);
 char				*set_expand_string(t_parser *lst, t_exp_dol *str, int *sign);
-bool				check_for_builtin(t_parser *lst);
-bool				check_for_meta(t_parser *lst);
 
 // -------------------EXPAND--------------------//
 // --------------------------------------------//
 
 
-
-// OLD DOLLAR STUFF
-// //------------------ expand_dollar ------------------//
-// char			*dollar(char *str, t_env **env, t_expand *exp, int len);
-
-// //-------------- expand_dollar_quotes --------------//
-// int				check_at_len(char *str, t_expand *exp, int i, int len);
-// void			get_before_dollar(char *str, t_
-// expand *exp, int i);
-// void			get_compare_str(char *str, t_expand *exp, int i, int j);
-// char			*check_if_expand(char *str);
-
-
-// //------------------ dollar_utils ------------------//
-// void			reassing_before_dollar(t_expand *exp);
-// void			reassing_before_dollar_with_var(t_expand *exp);
-// int				get_check_value(t_expand *exp, t_env **env);
-// char			*return_exp(char *str, t_expand *exp);
-// void			save_expanded(t_expand *exp);
-
-// djoyke uses this in builtins, for dollar i wanna use my own below
-
-
-
-
-
 //----Environment----//
-// t_env		*env_list(char **envp);
 t_env		*env_list(char **envp, t_env *env);
 t_env		*env_lstnew(void *key, void *value, char *full);
 void		get_key_value(char *str, char **key, char **value);
