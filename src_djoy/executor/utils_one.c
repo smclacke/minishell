@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 18:13:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 21:37:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,6 @@ void	init_execute_struct(t_execute *data)
 	data->env_array = NULL;
 	data->in = -1;
 	data->out = -1;
-}
-
-/**
- * @param node node from parser linked list
- * @brief checks node->abso if it's an absolute path
- * @return true is absolute path
- * false if no absolute path
-*/
-bool	absolute_check(t_parser *node)
-{
-	if (!node->cmd)
-		return (false);
-	if (!ft_strncmp(node->cmd, "/", 1)
-		&& access(node->cmd, F_OK) == 0)
-		return (true);
-	if (!ft_strncmp(node->cmd, "./", 2)
-		&& access(node->cmd, F_OK) == 0)
-		return (true);
-	if (!ft_strncmp(node->cmd, "../", 3)
-		&& access(node->cmd, F_OK) == 0)
-		return (true);
-	return (false);
 }
 
 /**

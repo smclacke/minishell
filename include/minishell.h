@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:20:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/08/08 15:29:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/19 22:06:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,12 @@ void		micro_print_list_key(t_env *env);
 void		micro_print_list_value(t_env *env);
 
 //---- Built-in ----//
-void		micro_cd(t_parser *lst, t_env *env);
-void		micro_echo(t_parser *lst);
+void		micro_ft_cd(t_parser *lst, t_env *env);
+void		micro_ft_echo(t_parser *lst);
 void		micro_env(t_env *env);
-void		micro_pwd(void);
-void		micro_export(t_parser *lst, t_env *env);
-void		micro_unset(t_parser *lst, t_env *env);
+void		micro_ft_pwd(void);
+void		micro_ft_export(t_parser *lst, t_env *env);
+void		micro_ft_unset(t_parser *lst, t_env *env);
 
 /*execution*/
 // t_parser	*micro_build_process(t_parser *node, t_env *env);

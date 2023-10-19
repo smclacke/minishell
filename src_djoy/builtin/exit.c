@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_exit.c                                          :+:    :+:            */
+/*   exit.c                                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/08/25 14:49:36 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 17:38:40 by dreijans      ########   odam.nl         */
+/*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/10/19 22:53:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param node parsed list
  * @brief checks if content is a digit
 */
-void	digit_check(t_parser *lst)
+static void	digit_check(t_parser *lst)
 {
 	int	i;
 
@@ -38,8 +38,9 @@ void	digit_check(t_parser *lst)
 /**
  * @param node parsed list
  * @brief checks if argument count is more than 1
+ * @todo does it need to be exit(1)?
 */
-void	arg_check(t_parser *lst)
+static void	arg_check(t_parser *lst)
 {
 	if (lst->next)
 	{
@@ -51,6 +52,7 @@ void	arg_check(t_parser *lst)
 /**
  * @param node parsed list
  * @brief exits the program and displays corresponding error number
+ * @todo check for exitstatus line 68 if it's exit status from prev child process
 */
 void	ft_exit(t_parser *lst)
 {

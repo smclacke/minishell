@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_unset.c                                         :+:    :+:            */
+/*   unset.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/14 17:53:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:21:16 by smclacke      ########   odam.nl         */
+/*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/10/19 22:56:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 
-/**
- * @param argv terminal given arguments (for now)
- * @param env pointer to environment
- * @brief unset values by deleting nodes in env linked list
-*/
-void	ft_unset(t_parser *node, t_env **env)
-{
-	if (word_check(node) == 1)
-		return ;
-	if (node != NULL)
-		node = node->next;
-	while (node)
-	{
-		mini_remove_env(node->str, env);
-		node = node->next;
-	}
-}
 
 /**
  * @param str key given as string
  * @param env pointer to environment
  * @brief loops through list and finds the key's to delete
 */
-void	mini_remove_env(char *str, t_env **env)
+static void	mini_remove_env(char *str, t_env **env)
 {
 	t_env	*previous;
 	t_env	*current;
@@ -61,5 +44,23 @@ void	mini_remove_env(char *str, t_env **env)
 			previous = current;
 			current = current->next;
 		}
+	}
+}
+
+/**
+ * @param argv terminal given arguments (for now)
+ * @param env pointer to environment
+ * @brief unset values by deleting nodes in env linked list
+*/
+void	ft_unset(t_parser *node, t_env **env)
+{
+	if (word_check(node) == 1)
+		return ;
+	if (node != NULL)
+		node = node->next;
+	while (node)
+	{
+		mini_remove_env(node->str, env);
+		node = node->next;
 	}
 }

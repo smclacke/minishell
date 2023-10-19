@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 19:17:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 22:52:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
  * check all the prints no needed prints no
  * if dir - `opendir`: Opens a directory stream.
  * readdir`: Reads a directory entry.
+ * check how to do last else statement when exiting from a builtin
 */
 void	redirect_infile(t_parser *head, t_execute *data)
 {
@@ -59,6 +60,7 @@ void	redirect_infile(t_parser *head, t_execute *data)
  * @todo
  * if dir - `opendir`: Opens a directory stream.
  * readdir`: Reads a directory entry.
+ * check how to do last else statement when exiting from a builtin
 */
 void	redirect_outfile(t_parser *head, t_execute *data)
 {

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 18:15:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 23:00:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,22 +162,24 @@ void			ft_env(t_env *env);
 void			ft_exit(t_parser *lst);
 void			ft_pwd(void);
 void			ft_export(t_parser *lst, t_env **env);
-bool			reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v);
 void			ft_unset(t_parser *lst, t_env **env);
-void			mini_remove_env(char *str, t_env **env);
 void			reasing_value(char *temp, char *str, t_env *head);
 
-
+//----Executor----//
 void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
 bool			absolute_check(t_parser *node);
-bool			parse_path(t_env *env, t_execute *data);
-char			*check_access(t_env *env, t_parser *node, t_execute *data);
-void			ft_execute(t_env **env, t_parser *list);
-void			single_build(t_parser *lst, t_env **env, t_execute *data);
+void			execute(t_env **env, t_parser *list);
 void			init_execute_struct(t_execute *data);
 bool			check_redirect(t_parser *node);
-void			build(t_parser *lst, t_env **env, t_execute *data);
 void			free_data(t_execute *data);
+void			close_all(t_execute *data);
+void			close_between(t_execute *data);
+void			init_pipe(int i, int count, t_execute *data);
+void			redirect(t_parser *lst, t_execute *data);
+void			init_pipes_child(t_execute *data);
+void			init_fork(t_parser *lst, t_env **env, t_execute *data);
+bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
+void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 
 //----Utils----//
 void			mini_error(char *string, int error);

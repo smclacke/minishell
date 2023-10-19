@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 15:51:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/19 22:06:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ int	micro_strcmp(char *s1, char *s2)
 void	micro_check_for_builtin(t_parser *lst, t_env *env)
 {
 	if (ft_strcmp(lst->cmd, "echo") == 0)
-		micro_echo(lst);
+		micro_ft_echo(lst);
 	if (ft_strcmp(lst->cmd, "cd") == 0)
-		micro_cd(lst, env);
+		micro_ft_cd(lst, env);
 	if (ft_strcmp(lst->cmd, "pwd") == 0)
-		micro_pwd();
+		micro_ft_pwd();
 	if (ft_strcmp(lst->cmd, "export") == 0)
-		micro_export(lst, env);
+		micro_ft_export(lst, env);
 	if (ft_strcmp(lst->cmd, "unset") == 0)//gives pwd not the entire path after unsetting
-		micro_unset(lst, env);
+		micro_ft_unset(lst, env);
 	if (ft_strcmp(lst->cmd, "env") == 0)
 		micro_env(env);
 }

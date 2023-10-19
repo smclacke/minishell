@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 16:37:32 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 22:51:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ int	mini_lstsize(t_env *lst)
 	return (i);
 }
 
-//acting suspicious
+/**
+ * @param env env linked list
+ * @brief loops through list and frees content
+ * plus list at end
+*/
 void	free_env(t_env **lst)
 {
 	t_env	*temp;
@@ -74,12 +78,14 @@ void	free_env(t_env **lst)
 		free((*lst)->value);
 		free((*lst)->full);
 		(*lst) = temp;
-		// free(temp);
 	}
 	free (*lst);
-	// *lst = NULL;
 }
 
+/**
+ * @param data execute struct
+ * @brief frees content of execute struct plus struct
+*/
 void	free_data(t_execute *data)
 {
 	ft_free_arr(data->env_array);

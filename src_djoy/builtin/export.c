@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_export.c                                        :+:    :+:            */
+/*   export.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/03 13:21:09 by smclacke      ########   odam.nl         */
+/*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/10/19 22:55:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @param lst  parser linked list
  * @brief checks if there's an space in the next node.
 */
-int	space_check(t_parser *lst)
+static int	space_check(t_parser *lst)
 {
 	t_parser	*temp;
 
@@ -35,7 +35,7 @@ int	space_check(t_parser *lst)
  * @brief prints linked list containing env key or value
  * with declare in front
 */
-void	export_print(t_env *env)
+static void	export_print(t_env *env)
 {
 	while (env != NULL)
 	{
@@ -49,7 +49,7 @@ void	export_print(t_env *env)
  * @param str string from the t_parser node containing export argument
  * @brief checks string if there's an equal sign present
 */
-char	*check_for_equal_sign(char *str)
+static char	*check_for_equal_sign(char *str)
 {
 	char	*comp_str;
 
@@ -57,6 +57,42 @@ char	*check_for_equal_sign(char *str)
 	if (str[ft_strlen(str) - 1] == '=')
 		comp_str = ft_substr(str, 0, (ft_strlen(str) - 1));
 	return (comp_str);
+}
+
+/**
+ * @param e double pointer to environmet list
+ * @param node pointer to node in list given in the form of a string
+ * @param n_k string to contain new key value
+ * @param n_v string to contain new value value
+ * @brief reassigns lines in the environment when export arguments is
+ * 		  is an already excisting key.
+*/
+static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
+{
+	t_env	*head;
+	int		has_value;
+	char	*str;
+	char	*comp_str;
+
+	head = *e;
+	str = node->str;
+	comp_str = check_for_equal_sign(str);
+	while (head)
+	{
+		if (mini_strcmp(comp_str, head->key) == 0)
+		{
+			if (str[ft_strlen(str) == '='])
+			{
+				head->full = node->str;
+				has_value = get_key_value(node->str, &n_k, &n_v);
+				head->value = n_v;
+				head->key = n_k;
+				return (true);
+			}
+		}
+		head = head->next;
+	}
+	return (false);
 }
 
 /**
@@ -89,40 +125,4 @@ void	ft_export(t_parser *node, t_env **env)
 	h_v = get_key_value(node->str, &new_key, &new_value);
 	new_node = env_lstnew(new_key, new_value, node->str, h_v);
 	env_lstadd_back(env, new_node);
-}
-
-/**
- * @param e double pointer to environmet list
- * @param node pointer to node in list given in the form of a string
- * @param n_k string to contain new key value
- * @param n_v string to contain new value value
- * @brief reassigns lines in the environment when export arguments is
- * 		  is an already excisting key.
-*/
-bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
-{
-	t_env	*head;
-	int		has_value;
-	char	*str;
-	char	*comp_str;
-
-	head = *e;
-	str = node->str;
-	comp_str = check_for_equal_sign(str);
-	while (head)
-	{
-		if (mini_strcmp(comp_str, head->key) == 0)
-		{
-			if (str[ft_strlen(str) == '='])
-			{
-				head->full = node->str;
-				has_value = get_key_value(node->str, &n_k, &n_v);
-				head->value = n_v;
-				head->key = n_k;
-				return (true);
-			}
-		}
-		head = head->next;
-	}
-	return (false);
 }
