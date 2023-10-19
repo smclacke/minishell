@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 14:42:33 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 15:49:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/19 22:06:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @brief export with no options
  * @todo check if varaible already exists, overwrite it.
 */
-void	micro_export(t_parser *node, t_env *env)
+void	micro_ft_export(t_parser *node, t_env *env)
 {
 	int		i;
 	char	*new_key;

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 16:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:14:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 22:05:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @todo also print the old one OLDPWD=/Users/dreijans/Documents/Rang 3/Minishell
  * needs exit status
 */
-void	micro_pwd(void)
+void	micro_ft_pwd(void)
 {
 	char	*path;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_cd.c                                            :+:    :+:            */
+/*   cd.c                                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/09 19:33:45 by dreijans      ########   odam.nl         */
+/*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/10/19 22:05:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @brief assigns full and new to their values and adds them to
  * an empty list.
 */
-static void	reassign_opwd(t_env **env, char *str)
+static void	reassign_oft_pwd(t_env **env, char *str)
 {
 	char	*full;
 	t_env	*new;
@@ -35,43 +35,6 @@ static void	reassign_opwd(t_env **env, char *str)
 	env_lstadd_back(env, new);
 	if (env == NULL)
 		mini_error("malloc", errno);
-}
-
-/**
- * @param env environment in linked list
- * @param str string containing old working directory string
- * @brief loops through environment till OLDPWD is found
- * changes env->value to value of str
- * @todo decide if I want to keep env->full
- * else need to update that everytime I update my environment
-*/
-static void	change_old_dir(t_env **env, char *str)
-{
-	char	*key_equal;
-	char	*new_full;
-	t_env	*head;
-	char	*temp;
-
-	key_equal = NULL;
-	new_full = NULL;
-	head = *env;
-	temp = NULL;
-	if (!env)
-		reassign_opwd(env, str);
-	while (mini_strcmp ("OLDPWD", head->key) != 0)
-	{
-		head = head->next;
-		if (head == NULL)
-			return ;
-	}
-	reasing_value(temp, str, head);
-	key_equal = ft_strjoin(head->key, "=");
-	temp = key_equal;
-	new_full = ft_strjoin(key_equal, str);
-	free(temp);
-	temp = head->full;
-	head->full = new_full;
-	free(temp);
 }
 
 /**
@@ -111,6 +74,43 @@ static void	change_current_dir(t_env **env, char *str)
 }
 
 /**
+ * @param env environment in linked list
+ * @param str string containing old working directory string
+ * @brief loops through environment till OLDPWD is found
+ * changes env->value to value of str
+ * @todo decide if I want to keep env->full
+ * else need to update that everytime I update my environment
+*/
+static void	change_old_dir(t_env **env, char *str)
+{
+	char	*key_equal;
+	char	*new_full;
+	t_env	*head;
+	char	*temp;
+
+	key_equal = NULL;
+	new_full = NULL;
+	head = *env;
+	temp = NULL;
+	if (!env)
+		reassign_oft_pwd(env, str);
+	while (mini_strcmp ("OLDPWD", head->key) != 0)
+	{
+		head = head->next;
+		if (head == NULL)
+			return ;
+	}
+	reasing_value(temp, str, head);
+	key_equal = ft_strjoin(head->key, "=");
+	temp = key_equal;
+	new_full = ft_strjoin(key_equal, str);
+	free(temp);
+	temp = head->full;
+	head->full = new_full;
+	free(temp);
+}
+
+/**
  * @param lst environment in linked list
  * @param env parsed linked list
  * @param opwd string containing old working directory
@@ -139,7 +139,7 @@ static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 			change_current_dir(env, getcwd(c_d, 0));
 		}
 		else
-			printf("cd: no such file or directory: %s\n", lst->str);
+			printf("cd: no such file or directory: %s\n", lst->str);//dprintf?
 	}
 }
 

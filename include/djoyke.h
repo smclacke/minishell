@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:00:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 23:00:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,9 @@ typedef struct s_expand
 //----Execution----//
 typedef struct s_execute
 {
-	int				fd_in;
-	int				fd_out;
 	int				fork_pid;
-	int				pipe_fd_1[2];
-	int				pipe_fd_2[2];
+	int				pipe_left[2];
+	int				pipe_right[2];
 	char			**path;
 	char			**env_array;
 	int				in;
@@ -136,7 +134,6 @@ int				get_check_value(t_expand *exp, t_env **env);
 bool			check_for_meta(t_parser *lst);
 bool			check_for_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
-void			redirect(t_parser *head, t_env **env, t_execute *data);
 void			redirect_outfile(t_parser *head, t_execute *data);
 void			redirect_infile(t_parser *head, t_execute *data);
 
@@ -165,23 +162,24 @@ void			ft_env(t_env *env);
 void			ft_exit(t_parser *lst);
 void			ft_pwd(void);
 void			ft_export(t_parser *lst, t_env **env);
-bool			reassign_env(t_env **env, t_parser *node, char *n_k, char *n_v);
 void			ft_unset(t_parser *lst, t_env **env);
-void			mini_remove_env(char *str, t_env **env);
 void			reasing_value(char *temp, char *str, t_env *head);
 
-
+//----Executor----//
 void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
 bool			absolute_check(t_parser *node);
-bool			parse_path(t_env *env, t_execute *data);
-char			*check_access(t_env *env, t_parser *node, t_execute *data);
-void			ft_execute(t_env **env, t_parser *list);
-void			single_build(t_parser *lst, t_env **env, t_execute *data);
-// bool			single_build(t_parser *lst, t_env **env, t_execute *data);
+void			execute(t_env **env, t_parser *list);
 void			init_execute_struct(t_execute *data);
 bool			check_redirect(t_parser *node);
-void			build(t_parser *lst, t_env **env, t_execute *data);
 void			free_data(t_execute *data);
+void			close_all(t_execute *data);
+void			close_between(t_execute *data);
+void			init_pipe(int i, int count, t_execute *data);
+void			redirect(t_parser *lst, t_execute *data);
+void			init_pipes_child(t_execute *data);
+void			init_fork(t_parser *lst, t_env **env, t_execute *data);
+bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
+void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 
 //----Utils----//
 void			mini_error(char *string, int error);

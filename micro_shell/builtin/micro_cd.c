@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 10:12:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:13:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/19 22:05:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * change pwd 
  * change oldpwd
 */
-void	micro_cd(t_parser *lst, t_env *env)
+void	micro_ft_cd(t_parser *lst, t_env *env)
 {
 	char		*home_dir;
 	char		*old_work_dir;

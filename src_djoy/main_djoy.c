@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:24:05 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/25 14:24:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/19 21:19:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 // 		if (!tokens)
 // 			continue ;
 // 		print_the_full_thing(tokens);
-// 		ft_execute(&env, tokens);
+// 		execute(&env, tokens);
 // 		// free input (readline needs to be fred at end)
 // 		// DO YOU WANT TO KEEP ENV-FULL OR NOT! IF NOT PLEASE REMOVE 
 // 		//DJOYKE

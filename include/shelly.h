@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 19:03:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/19 22:06:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void		put_custom_error(t_parser *node, char *cmd);
 void		access_and_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
 void		change_old_dir(t_env **env, char *str);
 void		change_current_dir(t_env **env, char *str);
-void		reassign_old_pwd(t_env **env, t_env *new, char *str, char *full);
+void		reassign_old_ft_pwd(t_env **env, t_env *new, char *str, char *full);
 void		ft_echo(t_parser *lst);
 void		ft_env(t_env *env);
 void		ft_exit(t_parser *node);
@@ -164,7 +164,7 @@ t_parser	*mini_forks(t_parser *lst, t_env *env, t_execute *data);
 bool		absolute_check(t_parser *node);
 bool		parse_path(t_env *env, t_execute *data);
 char		*check_access(t_env *env, t_parser *node, t_execute *data);
-void		ft_execute(t_env **env, t_parser *list);
+void		execute(t_env **env, t_parser *list);
 void		build(t_parser *lst, t_env *env, t_execute *data);
 void		init_execute_struct(t_execute *data, t_env *env);
 
