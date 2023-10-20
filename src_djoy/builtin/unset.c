@@ -6,12 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 22:56:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/20 13:32:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-
 
 /**
  * @param str key given as string

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:03 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 22:16:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/20 15:05:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ void	init_pipes_child(t_execute *data)
 {
 	if (data->pipe_right[WRITE] != -1)
 		if (dup2(data->pipe_right[WRITE], STDOUT_FILENO) == -1)
-			printf("dup child fail 1\n");
+			mini_error("dup2", errno);
 	if (data->pipe_left[READ] != -1)
 		if (dup2(data->pipe_left[READ], STDIN_FILENO) == -1)
-			printf("dup child fail 2\n");
-	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE] == -1))
-		printf("close child fail 1\n");
-	if (data->pipe_right[READ] != -1)
-		if (close(data->pipe_right[READ]) == -1)
-			printf("close child fail 2\n");
+			mini_error("dup2", errno);
+	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE]) == -1)
+		mini_error("dup2", errno);
+	if (data->pipe_right[READ] != -1 && close(data->pipe_right[READ]) == -1)
+		mini_error("dup2", errno);
 }
 
 /**
@@ -53,7 +52,7 @@ void	redirect(t_parser *lst, t_execute *data)
 
 /**
  * @param i int representing amount of times loop ran
- * @param count int representing amount of cmds in linked list
+ * @param count int representing amounhen we need to fork and check if it failed or not.t of cmds in linked list
  * @brief initialises pipes and reassings pipes after each loop.
 */
 void	init_pipe(int i, int count, t_execute *data)
@@ -82,11 +81,11 @@ void	init_pipe(int i, int count, t_execute *data)
 void	close_between(t_execute *data)
 {
 	if (data->pipe_left[READ] != -1 && close(data->pipe_left[READ]) == -1)
-		mini_error("close 1", errno);
+		mini_error("close", errno);
 	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE]) == -1)
-		mini_error("close 2", errno);
+		mini_error("close", errno);
 	if (data->pipe_right[WRITE] != -1 && close(data->pipe_right[WRITE]) == -1)
-		mini_error("close 5", errno);
+		mini_error("close", errno);
 	data->pipe_left[READ] = -1;
 	data->pipe_left[WRITE] = -1;
 	data->pipe_right[WRITE] = -1;
@@ -99,11 +98,11 @@ void	close_between(t_execute *data)
 void	close_all(t_execute *data)
 {
 	if (data->pipe_left[READ] != -1 && close(data->pipe_left[READ]) == -1)
-		mini_error("close 3", errno);
+		mini_error("close", errno);
 	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE]) == -1)
-		mini_error("close 4", errno);
+		mini_error("close", errno);
 	if (data->pipe_right[WRITE] != -1 && close(data->pipe_right[WRITE]) == -1)
-		mini_error("close 5", errno);
+		mini_error("close", errno);
 	if (data->pipe_right[READ] != -1 && close(data->pipe_right[READ]) == -1)
-		mini_error("close 6", errno);
+		mini_error("close", errno);
 }

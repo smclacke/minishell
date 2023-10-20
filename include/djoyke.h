@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 23:04:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/20 13:32:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ t_parser		*handle_pipe(t_parser *data, int *flag);
 int				is_pipe(void *input);
 char			*is_redirect(void *input);
 t_parser		*shelly_parser_print(t_parser *tokens);
-
 
 //---- Executor ----//
 typedef struct s_env
