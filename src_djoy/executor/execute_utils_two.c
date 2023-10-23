@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 22:50:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/23 21:34:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process,  calls init_pipes
  * init_forks and close_between in a while loop
+ * @todo input like only hi segfaults
 */
 void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {

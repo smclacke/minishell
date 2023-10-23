@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 21:37:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/23 21:21:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	init_execute_struct(t_execute *data)
 	data->env_array = NULL;
 	data->in = -1;
 	data->out = -1;
+	data->heredoc_fd = -1;
 }
 
 /**

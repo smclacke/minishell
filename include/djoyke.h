@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/20 13:32:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/23 21:52:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_parser
 	char				*file;
 	char				*str;
 	int					n_cmd;
+	// int					exit_code 
+	// this will be updated after each process will happen automatically
 	struct s_parser		*next;
 }				t_parser;
 
@@ -126,6 +128,7 @@ typedef struct s_execute
 	char			**env_array;
 	int				in;
 	int				out;
+	int				heredoc_fd;
 }						t_execute;
 
 void			free_remain_struct(t_expand *data);
@@ -179,6 +182,7 @@ void			init_pipes_child(t_execute *data);
 void			init_fork(t_parser *lst, t_env **env, t_execute *data);
 bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
+void			heredoc(t_parser *lst, t_execute *data);
 
 //----Utils----//
 void			mini_error(char *string, int error);

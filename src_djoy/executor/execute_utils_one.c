@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:03 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/20 15:05:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/23 22:07:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	redirect(t_parser *lst, t_execute *data)
 
 /**
  * @param i int representing amount of times loop ran
- * @param count int representing amounhen we need to fork and check if it failed or not.t of cmds in linked list
+ * @param count int representing amount of cmd's
  * @brief initialises pipes and reassings pipes after each loop.
 */
 void	init_pipe(int i, int count, t_execute *data)

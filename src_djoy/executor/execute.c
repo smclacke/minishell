@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:13:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 22:18:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/23 22:00:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @brief determines how many times needs to fork
  * pipes and makes child process
  * @todo 
- * check for heredoc before forking
+ * check for heredoc before forking because needs seperate child process
  * check the last while(wait(NULL) != -1) loop
 */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
@@ -125,6 +125,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 		mini_error("list", errno);
 	if (single_builtin_cmd(lst, env, data) == 1)
 		return ;
+	heredoc(lst, data);
 	child_builtin_cmd(lst, env, data);
 	close_all(data);
 	waitpid(data->fork_pid, NULL, 0);

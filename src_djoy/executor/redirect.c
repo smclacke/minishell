@@ -6,11 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 22:52:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/23 22:11:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+#include <dirent.h>
 
 #define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
@@ -89,3 +90,57 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 	// else
 	// 	exit(1); only when we figure out how to exit from a builtin use this :)
 }
+
+void	heredoc(t_parser *lst, t_execute *data)
+{
+	t_parser	*head;
+	char		*read_line;
+	char		*heredoc;
+	int			i;
+	char		*number;
+
+	head = lst;
+	read_line = NULL;
+	heredoc = NULL;
+	i = 0;
+	while (head)
+	{
+		if (mini_strcmp(head->meta, "<<") == 0)
+		{
+			printf("heredoc found\n");
+			i++;
+			head = head->next;
+			if (head->str != NULL)
+			{
+				number = ft_itoa(i);
+				heredoc = ft_strjoin("heredoc", number);
+				data->heredoc_fd = open(heredoc, O_CREAT | O_RDWR | O_TRUNC, 0644);// watch this
+				free(heredoc);
+				free(number);
+			}
+			while (1)
+			{
+				read_line = readline(PROMPT);
+				if (mini_strcmp(head->str, read_line) != 0)
+				{
+					write(data->heredoc_fd, read_line, ft_strlen(read_line));
+					write(data->heredoc_fd, "\n", 1);
+				}
+				if (mini_strcmp(head->str, read_line) == 0)
+				{
+					free(read_line);
+					return ;
+				}
+			}
+		}
+		head = head->next;
+	}
+	return ;
+}
+
+
+	// else if (mini_strcmp(node->meta, ">>") == 0)
+	// {
+	// 	printf("append found");
+	// 	return (true);
+	// }
