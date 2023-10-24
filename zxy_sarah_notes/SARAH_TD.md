@@ -65,8 +65,8 @@ but mine see's as str abc$USERsomething and $USERsomething = nope
 
 
 	// PROBLEM FOUR
-BASH   // this is techniqually bonus handling
- echo "'$USER'"
+BASH   // this is technically bonus handling
+echo "'$USER'"
 'smclacke'
 
 ===========================================

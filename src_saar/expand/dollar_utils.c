@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/18 14:58:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/24 16:45:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,21 @@ char	*set_expand_string(t_parser *lst, t_exp_dol *str, int *sign)
 	t_parser		*tmp;
 
 	tmp = lst;
-	while (tmp)
+	if (tmp->cmd)
 	{
-		if (tmp->cmd)
+		if (ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
 		{
-			if (ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
-			{
-				*sign = 1;
-				str->unassed = tmp->cmd;
-			}
+			*sign = 1;
+			str->unassed = tmp->cmd;
 		}
-		else if (tmp->str)
+	}
+	else if (tmp->str)
+	{
+		if (ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
 		{
-			if (ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
-			{
-				*sign = 2;
-				str->unassed = tmp->str;
-			}
+			*sign = 2;
+			str->unassed = tmp->str;
 		}
-		tmp = tmp->next;
 	}
 	return (str->unassed);
 }

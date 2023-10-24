@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/18 17:00:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/24 17:03:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ typedef struct s_exp_dol
 	char	*unassed;
 	char	*expand_this;
 	char	*dont_expand_this;
-	char	*str_before_dol;
-	char	*str_after_dol; // kinda same as dont_expand
-	// depending on how i do this, so many not necessary
 	char	*assed; // expanded
+	char	*env_val;
 }		t_exp_dol;
 
 typedef struct s_execute

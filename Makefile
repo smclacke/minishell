@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/17 21:41:40 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/24 17:22:48 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRCS_SAAR		= main_saar.c							\
 					parser/parser.c						\
 					parser/parser_utils.c				\
 					expand/expand.c						\
+					expand/expand_utils.c				\
 					expand/quotes.c						\
 					expand/quote_utils.c				\
 					expand/dollar.c						\

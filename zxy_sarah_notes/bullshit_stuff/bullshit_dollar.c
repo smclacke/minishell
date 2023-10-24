@@ -1,4 +1,69 @@
 
+// do quote check and splitting before this ??
+// figuring it out without quotes down here
+//getting a bit of the logical without quotes, but not sure about orser plus need 
+//to find expandable things, expand them, add them to assed str, 
+//then empty expand_this to keep searching through unassed
+
+	
+	// str->
+	// printf("before_dollar = %s\n", str->str_before_dol);
+	// assed = full things returned after expansion 
+	// concating and non expandable bits together
+
+	// here all the expansion needs to happen
+	
+
+
+	// break it up, then check dollar parts for expansion
+	// need to break up the string into
+	// separate parts of the struct
+	// check expansion if dollar part etc... (str->expand)
+
+	// str->expand_this = check_if_expand(str->unassed);
+	// if (!str->expand_this)
+	// {
+	// 	str->dont_expand_this = str->unassed;
+	// }
+// need to call separately and iterate, if expand_this has $USER, dont want to try 
+// adding another $USER before its expanded and added to assed var		
+	// while (str->unassed[i])
+	// {
+	// 	while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+	// 		i++;
+	// 	if (ft_dollar(str->unassed[i]))
+	// 	{
+	// 		str->unassed = expand_this(str, i);
+	// 		if (!str->unassed)
+	// 			return (str->assed);
+	// 		printf("expand = %s\n", str->expand_this);
+	// 		printf("unassed = %s\n", str->unassed);
+	// 	}
+	// 	i++;
+	// }
+	// str->unassed = expand_this(str, i);
+	// if (!str->unassed)
+	// 	return (str->assed);
+	
+	// printf("unassed[i] = %c\n", str->unassed[i]);
+	// while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+	// 	i++;
+	// 	// while (str->unassed[i] && !ft_dollar(str->unassed[i]))
+	// 	// 	i++;
+	// if (ft_dollar(str->unassed[i])) // or quote, get the stuff between the two dollars
+	// {
+	// 	str->unassed = expand_this(str, i);
+	// 	if (!str->unassed)
+	// 		return (str->assed);
+	// 	i = 0;
+	// }
+	// str->unassed = expand_this(str, i); // or there are no quotes/dollars after first
+	// // encounter and we can iust expand the stuff we have after last dollar is found
+	// if (!str->unassed)
+	// 	return (str->assed);
+
+
+
 // char	*handle_dollar_qs(char *str)
 // {
 // 	int		i;
