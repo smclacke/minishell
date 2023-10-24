@@ -5,16 +5,8 @@
 #                                                      +:+                     #
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-<<<<<<< HEAD
-<<<<<<< HEAD
-#    Updated: 2023/10/17 19:27:23 by smclacke      ########   odam.nl          #
-=======
-#    Updated: 2023/10/17 19:31:14 by dreijans      ########   odam.nl          #
->>>>>>> djoyke
-=======
-#    Updated: 2023/10/19 21:24:26 by dreijans      ########   odam.nl          #
->>>>>>> djoyke
+#    Created: 2023/10/24 16:24:21 by smclacke      #+#    #+#                  #
+#    Updated: 2023/10/24 16:24:23 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,19 +53,16 @@ SRCS_DJOY		=	main_djoy.c							\
 					builtin/env.c 						\
 					builtin/builtin_utils_one.c 		\
 					builtin/builtin_utils_two.c 		\
-<<<<<<< HEAD
 					builtin/exit.c						\
 					executor/execute.c					\
 					executor/execute_utils_one.c		\
 					executor/execute_utils_two.c		\
 					executor/make_env.c					\
 					executor/utils_one.c				\
-=======
 					builtin/ft_exit.c					\
 					executor/ft_execute.c				\
 					executor/ft_make_env.c				\
 					executor/ft_utils.c					\
->>>>>>> bafe4027e8c0281e85e398570406ea12de154202
 					executor/list_utils.c 				\
 					executor/print_utils.c				\
 
