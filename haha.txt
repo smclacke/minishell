@@ -1,1 +1,1 @@
-hi 
+executable = [/usr/bin/cat]

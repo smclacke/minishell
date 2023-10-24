@@ -6,11 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/23 21:34:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/24 23:04:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+
+#define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
 /**
  * @param lst parser linked list
@@ -96,5 +98,29 @@ void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 			i++;
 		}
 		lst = lst->next;
+	}
+}
+
+void	check_str_for_file(t_parser *node, t_execute *data)
+{
+	struct stat	file_stat;
+
+	node = node->next;
+	if (access(node->str, F_OK) != 0)
+		dprintf(STDERR_FILENO, INFILE_ERROR, node->str);
+	if (stat(node->str, &file_stat) == 0)
+	{
+		if (S_ISREG(file_stat.st_mode))
+		{
+			data->in = open(node->str, O_RDWR, 0644);
+			if (data->in == -1)
+				mini_error("open infile", errno);
+			if (dup2(data->in, STDIN_FILENO) == 0)
+				close(data->in);
+		}
+		if (S_ISDIR(file_stat.st_mode))
+			dprintf(STDERR_FILENO, "[%s] is a directory\n", node->str);
+		else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
+			dprintf(STDERR_FILENO, "its not a file or directory\n");
 	}
 }

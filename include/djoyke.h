@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/23 21:52:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/24 23:02:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+#include <dirent.h>
 
 # define READ 0
 # define WRITE 1
@@ -128,7 +129,7 @@ typedef struct s_execute
 	char			**env_array;
 	int				in;
 	int				out;
-	int				heredoc_fd;
+	int				hdoc_fd;
 }						t_execute;
 
 void			free_remain_struct(t_expand *data);
@@ -177,12 +178,13 @@ void			free_data(t_execute *data);
 void			close_all(t_execute *data);
 void			close_between(t_execute *data);
 void			init_pipe(int i, int count, t_execute *data);
-void			redirect(t_parser *lst, t_execute *data);
+int				redirect(t_parser *lst, t_execute *data);
 void			init_pipes_child(t_execute *data);
 void			init_fork(t_parser *lst, t_env **env, t_execute *data);
 bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 void			heredoc(t_parser *lst, t_execute *data);
+void			check_str_for_file(t_parser *node, t_execute *data);
 
 //----Utils----//
 void			mini_error(char *string, int error);

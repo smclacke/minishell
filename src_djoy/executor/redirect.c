@@ -6,12 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/23 22:11:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/24 23:02:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-#include <dirent.h>
+// #include <dirent.h>
 
 #define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
@@ -91,6 +91,16 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 	// 	exit(1); only when we figure out how to exit from a builtin use this :)
 }
 
+/**
+ * @param head parser linked list
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @brief checks for heredoc
+ * @todo
+ * open directory to put all the heredoc files in `opendir`: Opens a directory stream.
+ * readdir`: Reads a directory entry.
+ * how do I pass herdoc properly into childprocess for eg cat to read?
+ * NO MULTIPLES? multiples dont work now
+*/
 void	heredoc(t_parser *lst, t_execute *data)
 {
 	t_parser	*head;
@@ -114,7 +124,7 @@ void	heredoc(t_parser *lst, t_execute *data)
 			{
 				number = ft_itoa(i);
 				heredoc = ft_strjoin("heredoc", number);
-				data->heredoc_fd = open(heredoc, O_CREAT | O_RDWR | O_TRUNC, 0644);// watch this
+				data->hdoc_fd = open(heredoc, O_CREAT | O_RDWR | O_TRUNC, 0644);
 				free(heredoc);
 				free(number);
 			}
@@ -123,12 +133,14 @@ void	heredoc(t_parser *lst, t_execute *data)
 				read_line = readline(PROMPT);
 				if (mini_strcmp(head->str, read_line) != 0)
 				{
-					write(data->heredoc_fd, read_line, ft_strlen(read_line));
-					write(data->heredoc_fd, "\n", 1);
+					write(data->hdoc_fd, read_line, ft_strlen(read_line));
+					write(data->hdoc_fd, "\n", 1);
 				}
 				if (mini_strcmp(head->str, read_line) == 0)
 				{
 					free(read_line);
+					if (dup2(data->hdoc_fd, STDIN_FILENO) == -1)
+						mini_error("dup2", errno);
 					return ;
 				}
 			}
