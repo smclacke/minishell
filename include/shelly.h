@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/24 17:13:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/24 19:59:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 t_parser			*print_the_full_thing(t_parser *tokens);
 void				free_tokens(t_parser *tokens);
 int					get_no_cmds(t_parser *tokens);
-void				print_exp_dol_vals(t_exp_dol *str);
+void				print_expand_vals(t_expand *str);
 
 // lexer
 //---------- lexer ----------//
@@ -85,20 +85,20 @@ int					len_quotes(char *str);
 
 
 //----------------- dollar --------------------//
-char				*save_this(t_exp_dol *str, int i);
-char				*expand_this(t_exp_dol *str, t_env **env, int i);
-char				*check_first(t_exp_dol *str);
-char				*check_rest(t_exp_dol *str, t_env **env, int i);
+char				*save_this(t_expand *str, int i);
+char				*expand_this(t_expand *str, t_env **env, int i);
+char				*check_first(t_expand *str);
+char				*check_rest(t_expand *str, t_env **env, int i);
 
 //------------------ expand -------------------//
 void				ft_expand(t_parser *lst, t_env **env);
 
 //------------------ dollar_utils ------------------//
 char				*check_if_expand(char *str);
-char				*set_expand_string(t_parser *lst, t_exp_dol *str, int *sign);
+char				*set_expand_string(t_parser *lst, t_expand *str, int *sign);
 
 //------------------ expand_utils ------------------//
-int					get_check_value(t_exp_dol *str, t_env **env);
+int					get_check_value(t_expand *str, t_env **env);
 
 // -------------------EXPAND--------------------//
 // --------------------------------------------//

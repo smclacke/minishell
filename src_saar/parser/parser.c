@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 18:41:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/24 19:58:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,3 +133,10 @@ t_parser	*parser(t_parser *tokens)
 	tokens->n_cmd = get_no_cmds(tokens);
 	return (tokens);
 }
+
+// splitting
+// list is made
+
+// process = some thing | < more things | 
+
+

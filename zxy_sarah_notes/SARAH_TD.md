@@ -41,15 +41,13 @@ for in the future... don't change utils... ever.
 // add exit_code enum and my enumss back :)
 
 
-
+// here_doc expansion............ :0 ...... :) ...........
 
  ---> leaks when ending with quotes (dollar quote expansion)
 
  ---> norm
 
  ---> SIGNALSSSS
-
- ---> here_doc
 
  ---> cd "" cd ''
 
