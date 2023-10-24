@@ -36,6 +36,12 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
+// make it so per process the cmd comes first
+
+// add exit_code enum and my enumss back :)
+
+
+
 
  ---> leaks when ending with quotes (dollar quote expansion)
 
