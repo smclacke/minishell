@@ -1,1 +1,1 @@
-executable = [/usr/bin/cat]
+bladiebla 
