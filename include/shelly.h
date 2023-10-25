@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 15:15:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 16:17:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ t_parser			*shelly_parser_print(t_parser *tokens);
 //---------- sort ----------//
 t_parser			*sort_list(t_parser *tokens);
 
+//---------- sort_utils ----------//
+t_parser			*add_new_str(t_parser *tmp, t_parser *new_list, char *str);
+t_parser			*add_new_file(t_parser *tmp, t_parser *new_list, char *file);
+t_parser			*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
+t_parser			*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 
 // -------------------EXPAND--------------------//
 //---------- quotes ----------//
