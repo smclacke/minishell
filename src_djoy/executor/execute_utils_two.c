@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 20:42:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 20:45:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {
 	int	count;
 
-	count = get_no_cmds(lst);
+	count = lst->n_cmd;
 	if (count == 1 && check_for_builtin(lst))
 	{
 		redirect(lst, data);
@@ -85,7 +85,7 @@ void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	int	count;
 	int	i;
 
-	count = get_no_cmds(lst);
+	count = lst->n_cmd;
 	i = 0;
 	while (lst)
 	{
