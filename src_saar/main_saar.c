@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:23:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 18:36:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 		printf("cmd = %s\t", list->cmd);
 		printf("file = %s\t", list->file);
 		printf("meta = %s\t", list->meta);
-		printf("str = %s\n", list->str);
+		printf("str = %s\t", list->str);
+		printf("n_cmd = %i\n", list->n_cmd);
 		i++;
 		list = list->next;
 	}
@@ -60,10 +61,11 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-
-		print_the_full_thing(tokens);
+		tokens->n_cmd = get_no_cmds(tokens);
 
 		execute(&env, tokens);
+		print_the_full_thing(tokens);
+		printf("tokens->no cmd = %i\n", tokens->n_cmd);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
