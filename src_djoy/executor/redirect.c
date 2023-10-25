@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/24 23:02:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/25 14:30:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	heredoc(t_parser *lst, t_execute *data)
 				if (mini_strcmp(head->str, read_line) == 0)
 				{
 					free(read_line);
-					if (dup2(data->hdoc_fd, STDIN_FILENO) == -1)
+					if (dup2(data->hdoc_fd, STDIN_FILENO) == -1)// do you need STD_IN?
 						mini_error("dup2", errno);
 					return ;
 				}

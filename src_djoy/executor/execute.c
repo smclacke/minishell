@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:13:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/24 22:59:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/25 14:28:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 		return ;
 	heredoc(lst, data);
 	child_builtin_cmd(lst, env, data);
+	//if heredoc unlink or destroy??? here or in heredoc?
 	close_all(data);
 	waitpid(data->fork_pid, NULL, 0);
 	while (wait(NULL) != -1)
