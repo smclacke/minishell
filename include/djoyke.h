@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 20:41:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 21:36:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_parser
 
 // utils
 void			free_tokens(t_parser *tokens);
+t_parser			*print_the_full_thing(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//

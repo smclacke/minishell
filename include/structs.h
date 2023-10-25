@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 20:59:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 22:05:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@
 
 
 // EXITCODES
-// typedef enum e_exit
-// {
-// 	E_USAGE = 0,
-// 	E_GENERAL = 1,
-// 	E_BUILTIN = 2,
-// 	E_EXEC = 126,
-// 	E_COMMAND_NOT_FOUND = 127,
-// 	E_EXIT_INVALID_ARG = 128,
-// 	E_FATAL_SIGNAL = 128,
-// 	E_CTRL_C = 130,
-// 	E_UNKNOWN = 225
-// }					t_exit;
+typedef enum e_exit
+{
+	E_USAGE = 0,
+	E_GENERAL = 1,
+	E_BUILTIN = 2,
+	E_EXEC = 126,
+	E_COMMAND_NOT_FOUND = 127,
+	E_EXIT_INVALID_ARG = 128,
+	E_FATAL_SIGNAL = 128,
+	E_CTRL_C = 130,
+	E_UNKNOWN = 225
+}					t_exit;
 
 /**
  * @brief	specifies the different variable types of tokens from the
@@ -67,7 +67,7 @@ typedef struct s_parser
 	char				*str;
 	int					flag;
 	int					n_cmd;
-	// enum e_exit			exit_code;
+	enum e_exit			exit_code;
 	struct s_parser		*next;
 }				t_parser;
 
