@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/24 19:29:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:41:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	get_check_value(t_expand *str, t_env **env)
 	{
 		free(str->do_expand);
 		free(str->env_val);
-		// free_strs(str->do_expand, str->env_val);
 		str->do_expand = NULL;
 		str->env_val = NULL;
 		return (1);

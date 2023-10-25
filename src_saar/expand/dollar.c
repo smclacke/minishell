@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/24 19:31:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:54:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ char	*expand_this(t_expand *str, t_env **env, int i)
 	if (!str->do_expand)
 		return (str->input);
 	str->input = ft_strtrim(str->input, str->do_expand);
-	get_check_value(str, env);
-	// now expand, add to assed, then empty do_expand
-	// printf("input in func = %s\n", str->input);
+	if (!get_check_value(str, env))
+		printf("str->expanded = %s\n", str->expanded);
+	// change this so that if func rets, error
+	free (str->do_expand);
+	
+	// return input incase theres moreee
 	return (str->input);
 }
 
@@ -56,6 +59,7 @@ char	*check_rest(t_expand *str, t_env **env, int i)
 		// if (!str->input)
 		// 	return (NULL);
 	}
-	// printf("input after  = %s\n", str->input);
+	if (!str->input)
+		return (0);
 	return (str->input);
 }
