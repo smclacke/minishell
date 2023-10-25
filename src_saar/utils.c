@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 17:49:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 20:55:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ void	free_tokens(t_parser *tokens)
 		free (tokens->meta);
 		free (tokens->file);
 		free (tokens->str);
-		// free (tokens->flag); //  oui?? non??
-		// free (tokens->n_cmd);
-		// free (tokens->exit_code);
 		free (tokens);
 		tokens = tmp;
 	}
