@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 18:50:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 15:11:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,22 @@
 # define DOUBLE_Q "\""
 # define SINGLE_Q "\'"
 
-/*
+
+// EXITCODES
+typedef enum e_exit
+{
+	E_USAGE = 0,
+	E_GENERAL = 1,
+	E_BUILTIN = 2,
+	E_EXEC = 126,
+	E_COMMAND_NOT_FOUND = 127,
+	E_EXIT_INVALID_ARG = 128,
+	E_FATAL_SIGNAL = 128,
+	E_CTRL_C = 130,
+	E_UNKNOWN = 225
+}					t_exit;
+
+/**
  * @brief	specifies the different variable types of tokens from the
  * 			lexer that are parsed and then given to the executor
  * @param	cmd: first string in each process without redirect char
@@ -46,9 +61,23 @@ typedef struct s_parser
 	char				*meta;
 	char				*file;
 	char				*str;
+	int					sign;
+	int					flag;
 	int					n_cmd;
+	enum e_exit			exit_code;
 	struct s_parser		*next;
 }				t_parser;
+
+
+typedef struct s_expand
+{
+	char	*input;
+	char	*do_expand;
+	char	*dont_expand;
+	char	*env_val;
+	char	*expanded;
+}		t_expand;
+
 
 typedef struct s_env
 {
@@ -60,25 +89,6 @@ typedef struct s_env
 	int					has_value;
 }							t_env;
 
-// typedef struct s_expand
-// {
-// 	char				*before_dollar;
-// 	char				*var;
-// 	char				*env_value;
-// 	char				*comp_str;
-// }							t_expand;
-
-// str_after_dol = in quotes or dollar in quotes so string is separate
-// not viewed as part of the thing after dollar that needs to be expanded
-typedef struct s_exp_dol
-{
-	char	*unassed;
-	char	*expand_this;
-	char	*dont_expand_this;
-	char	*str_before_dol;
-	char	*str_after_dol;
-	char	*assed;
-}		t_exp_dol;
 
 typedef struct s_execute
 {
@@ -88,5 +98,14 @@ typedef struct s_execute
 	char	**path;
 	char	**env_array;
 }				t_execute;
+
+// replacing with above s_expand unless djoyke needs this
+// typedef struct s_expand
+// {
+// 	char				*before_dollar;
+// 	char				*var;
+// 	char				*env_value;
+// 	char				*comp_str;
+// }							t_expand;
 
 #endif

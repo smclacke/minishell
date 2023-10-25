@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/24 16:25:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:18:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@
 #include <errno.h>
 
 // utils
+int					shelly_strcmp(char *s1, char *s2);
 void				free_tokens(t_parser *tokens);
 int					get_no_cmds(t_parser *tokens);
+void				print_expand_vals(t_expand *str);
 
 // lexer
 //---------- lexer ----------//
@@ -68,6 +70,14 @@ int					is_pipe(void *input);
 char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
+//---------- sort ----------//
+t_parser			*sort_list(t_parser *tokens);
+
+//---------- sort_utils ----------//
+t_parser			*add_new_str(t_parser *tmp, t_parser *new_list, char *str);
+t_parser			*add_new_file(t_parser *tmp, t_parser *new_list, char *file);
+t_parser			*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
+t_parser			*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 
 // -------------------EXPAND--------------------//
 //---------- quotes ----------//
@@ -83,14 +93,20 @@ int					len_quotes(char *str);
 
 
 //----------------- dollar --------------------//
-
+char				*save_this(t_expand *str, int i);
+char				*expand_this(t_expand *str, t_env **env, int i);
+char				*check_first(t_expand *str);
+char				*check_rest(t_expand *str, t_env **env, int i);
 
 //------------------ expand -------------------//
 void				ft_expand(t_parser *lst, t_env **env);
 
 //------------------ dollar_utils ------------------//
 char				*check_if_expand(char *str);
-char				*set_expand_string(t_parser *lst, t_exp_dol *str, int *sign);
+char				*set_expand_string(t_parser *lst, t_expand *str, int *sign);
+
+//------------------ expand_utils ------------------//
+int					get_check_value(t_expand *str, t_env **env);
 
 // -------------------EXPAND--------------------//
 // --------------------------------------------//

@@ -5,8 +5,8 @@
 #                                                      +:+                     #
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2023/10/24 16:24:21 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/24 16:24:23 by smclacke      ########   odam.nl          #
+#    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
+#    Updated: 2023/10/25 17:18:22 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,9 @@ SRCS_DJOY		=	main_djoy.c							\
 					builtin/ft_exit.c					\
 					executor/ft_execute.c				\
 					executor/ft_make_env.c				\
-					executor/ft_utils.c					\
+					executor/utils_one.c				\
+					executor/utils_two.c				\
+					executor/redirect.c					\
 					executor/list_utils.c 				\
 					executor/print_utils.c				\
 
@@ -81,9 +83,12 @@ SRCS_SAAR		= main_saar.c							\
 					lexer/token.c						\
 					lexer/token_size.c					\
 					lexer/token_utils.c					\
+					parser/sort.c						\
+					parser/sort_utils.c					\
 					parser/parser.c						\
 					parser/parser_utils.c				\
 					expand/expand.c						\
+					expand/expand_utils.c				\
 					expand/quotes.c						\
 					expand/quote_utils.c				\
 					expand/dollar.c						\

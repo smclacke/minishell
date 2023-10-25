@@ -6,66 +6,51 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:18:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/24 19:30:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static char	*dollar(t_exp_dol *str, t_env **env, int len)
+static char	*dollar(t_expand *str, t_env **env)
 {
-	int		i;
 	(void)env;
-	(void)len;
+	int		i = 0;
+	// quotes....
 
-	i = 0;
-	
+// $USER$USER
 
-	// leaving this bit of code just for testing right now
-
-	// don't need to check again if $
-
-	// assed = full things returned after expansion 
-	// concating and non expandable bits together
-
-	// here all the expansion needs to happen
-	
-
-
-	// break it up, then check dollar parts for expansion
-	// need to break up the string into
-	// separate parts of the struct
-	// check expansion if dollar part etc... (str->expand)
-
-	str->expand_this = check_if_expand(str->unassed);
-	if (!str->expand_this)
+	str->input = check_first(str);
+	while (str->input[i])
 	{
-		str->dont_expand_this = str->unassed;
+		str->input = check_rest(str, env, i);
+		if (!str->input)
+			return (str->expanded);
+		i++;
 	}
-	return (str->assed);
+
+	print_expand_vals(str);
+
+	return (str->expanded);
 }
 
-static void	expand_dollar(t_parser *lst, t_env **env, t_exp_dol *str)
+static void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 {
-	int			len;
 	int			sign;
 
 	sign = 0;
-	str->unassed = set_expand_string(lst, str, &sign);
+	str->input = set_expand_string(lst, str, &sign);
 	if (sign == 1 || sign == 2)
 	{
-		len = ft_strlen(str->unassed);
-		str->assed = dollar(str, env, len);
-		// call dollar() to expand, then put str back into parser struct
-		// in cmd or str
+		str->expanded = dollar(str, env);
 		if (sign == 1)
 		{
-			lst->cmd = str->assed;
+			lst->cmd = str->expanded;
 			sign = 0;
 		}
 		else if (sign == 2)
 		{
-			lst->str = str->assed;
+			lst->str = str->expanded;
 			sign = 0;
 		}
 	}
@@ -74,13 +59,13 @@ static void	expand_dollar(t_parser *lst, t_env **env, t_exp_dol *str)
 void	ft_expand(t_parser *tokens, t_env **env)
 {
 	t_parser	*lst;
-	t_exp_dol	*str;
+	t_expand	*str;
 
 	lst = tokens;
-	str = (t_exp_dol *)malloc(sizeof(*str));
+	str = (t_expand *)malloc(sizeof(*str));
 	if (!str)
-		mini_error("malloc error exp_dol struct", errno);
-	ft_bzero(str, sizeof(t_exp_dol));
+		mini_error("malloc error expand struct", errno);
+	ft_bzero(str, sizeof(t_expand));
 	expand_quotes(lst);
 	while (lst)
 	{

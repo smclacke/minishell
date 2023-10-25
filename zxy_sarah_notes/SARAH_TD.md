@@ -19,7 +19,6 @@ this is fucked
 this is fucked
 
 
-
 **SARAH, SHIT TO DO**
 
 HELLO WHAT DE FOOK
@@ -37,17 +36,7 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
- MERGE DAY:
-i changed the makefile, djoyke.h
-the whole expand directory needs to be replaced with mine
-
-makefile and djoyke.h need to be a bit from both of us
-sarah main is also a bit different but easy to change
--- we are both using sarah main remember
-
-expand directory needs to be mine for all
-all other djoyke work needs to be the same as hers for all
-
+// shit to do when expansion is kinda ok....
 
  ---> leaks when ending with quotes (dollar quote expansion)
 
@@ -55,33 +44,34 @@ all other djoyke work needs to be the same as hers for all
 
  ---> SIGNALSSSS
 
- ---> here_doc
-
  ---> cd "" cd ''
 
 
- ---> :):):):)
+// EXPANSION YAY
 
+// dollar handling, then dollar and quotes, then here_doc...
+// then all the other bullshit edgecases
+
+	// PROBLEM ONE
 $USER$BRUH$USER
 str before ret = $USER$BRUH$USER
 str ret = smclackesmclackesmclacke
 smclackesmclackesmclacke
 
-
-BASH
- echo "'$USER'"
-'smclacke'
-
-SHELLY
- echo "'$USER'"
-$USER 
-
- ---> :):):):)
-
+	// PROBLEM TWO
  abc"$USER"something           NO WORKS   this should work	 BAD
 
+	// PROBLEM THREE
 -> abcsmclackesomething
 but mine see's as str abc$USERsomething and $USERsomething = nope
+
+	// PROBLEM FOUR
+BASH   // this is technically bonus handling
+echo "'$USER'"
+'smclacke'
+
+	// PROBLEM FIVE
+// here_doc expansion............ :0 ...... :) ...........
 
 ===========================================
 ===========================================
