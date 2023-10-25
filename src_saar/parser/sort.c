@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 17:17:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:23:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,13 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
 }
 
 /**
- * after finding the cmd per process, set it as the first node in list
- * at start and after each pipe to make it easier for the executor
+ * @brief	after identifying the cmd in each process, set it as the first 
+ * 			node in the token list, of each process
+ * 			i.e. <file cmd str | << EOF cmd str str 
+ * 					= cmd <file str | cmd << EOF str str
+ * @param	tokens once the tokens are split up and the type of 
+ * 			input is identified, list is sorted and returned to the executor
+ * @return	new_list, same parsed list of tokens, just sorted
 */
 t_parser	*sort_list(t_parser *tokens)
 {
