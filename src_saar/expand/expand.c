@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/24 19:30:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:55:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static char	*dollar(t_expand *str, t_env **env)
 	while (str->input[i])
 	{
 		str->input = check_rest(str, env, i);
-		if (!str->input)
-			return (str->expanded);
+		// if (!str->input)
+		// 	return (str->expanded);
 		i++;
 	}
-
+	if (!str->input)
+		return (0);
 	print_expand_vals(str);
 
 	return (str->expanded);

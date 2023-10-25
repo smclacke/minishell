@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 17:33:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:49:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	get_no_cmds(t_parser *tokens)
 
 void	print_expand_vals(t_expand *str)
 {
-	printf("unassed\t\t\t\t\t= [%s]\n", str->input);
-	printf("expand_this\t\t\t\t= [%s]\n", str->do_expand);
-	printf("expand_this\t\t\t\t= [%s]\n", str->dont_expand);
-	printf("assed\t\t\t\t\t= [%s]\n", str->expanded);
+	printf("input\t\t\t\t\t= [%s]\n", str->input);
+	printf("do_expand\t\t\t\t= [%s]\n", str->do_expand);
+	printf("dont_expand\t\t\t\t= [%s]\n", str->dont_expand);
+	printf("expanded\t\t\t\t\t= [%s]\n", str->expanded);
 	printf("------------------------------------------------------\n");
 }
