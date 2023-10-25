@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/24 21:05:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 15:11:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ typedef struct s_parser
 	char				*meta;
 	char				*file;
 	char				*str;
-	int					n_cmd;
+	int					sign;
 	int					flag;
+	int					n_cmd;
 	enum e_exit			exit_code;
 	struct s_parser		*next;
 }				t_parser;

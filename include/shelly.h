@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 14:47:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 15:15:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);
 
 //---------- sort ----------//
-
+t_parser			*sort_list(t_parser *tokens);
 
 
 // -------------------EXPAND--------------------//
