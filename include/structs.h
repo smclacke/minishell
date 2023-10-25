@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 15:11:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:26:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ typedef enum e_exit
  * 			**dollar is excluded and handled as a string
  * @param	file: in and out files; after more, less and moremore chars
  * @param	str:  limiter for here_doc (string after <<) and all other input
+ * @param	flag: useful util var
+ * @param	n_cmd: total amount of commands is stored in first node
+ * @param	exit_code: enums to set exitcode at different
+ * 			stages of process, saved to pass through the program
 */
 typedef struct s_parser
 {
@@ -61,13 +65,11 @@ typedef struct s_parser
 	char				*meta;
 	char				*file;
 	char				*str;
-	int					sign;
 	int					flag;
 	int					n_cmd;
 	enum e_exit			exit_code;
 	struct s_parser		*next;
 }				t_parser;
-
 
 typedef struct s_expand
 {
@@ -77,7 +79,6 @@ typedef struct s_expand
 	char	*env_val;
 	char	*expanded;
 }		t_expand;
-
 
 typedef struct s_env
 {
@@ -89,7 +90,6 @@ typedef struct s_env
 	int					has_value;
 }							t_env;
 
-
 typedef struct s_execute
 {
 	int		fd_in;
@@ -98,14 +98,5 @@ typedef struct s_execute
 	char	**path;
 	char	**env_array;
 }				t_execute;
-
-// replacing with above s_expand unless djoyke needs this
-// typedef struct s_expand
-// {
-// 	char				*before_dollar;
-// 	char				*var;
-// 	char				*env_value;
-// 	char				*comp_str;
-// }							t_expand;
 
 #endif

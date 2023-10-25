@@ -5,12 +5,8 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/10/24 16:25:24 by smclacke      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/25 15:28:46 by smclacke      ########   odam.nl         */
->>>>>>> sarah
+/*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/10/25 17:35:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +62,8 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 
 		print_the_full_thing(tokens);
-<<<<<<< HEAD
+
 		execute(&env, tokens);
-=======
-		// ft_execute(&env, tokens);
->>>>>>> sarah
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);

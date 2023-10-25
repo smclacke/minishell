@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 17:18:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:34:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@
 #include <stdbool.h>
 #include <errno.h>
 
-// utils
+
+				// utils
 int					shelly_strcmp(char *s1, char *s2);
 void				free_tokens(t_parser *tokens);
 int					get_no_cmds(t_parser *tokens);
 void				print_expand_vals(t_expand *str);
 
-// lexer
+
+				// lexer
 //---------- lexer ----------//
 t_parser			*lexer(char *input);
 
@@ -60,7 +62,8 @@ int					is_same_quote(int c, char *quote_type);
 char				*which_quote(char *input);
 int					next_quote(char *input, char c);
 
-// parser
+
+				// parser
 //-------- parser --------//
 t_parser			*parser(t_parser *tokens);
 
@@ -79,37 +82,36 @@ t_parser			*add_new_file(t_parser *tmp, t_parser *new_list, char *file);
 t_parser			*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
 t_parser			*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 
-// -------------------EXPAND--------------------//
-//---------- quotes ----------//
+
+
+				// expander
+//-------------------- quotes -------------------//
 char				*remove_quotes(char *str);
 void				expand_quotes(t_parser *tokens);
 
-//-------- quote_utils --------//
+//----------------- quote_utils ------------------//
 void				increment(int *len, int *i);
 int					check_quotes(char *str);
 int					check_space(char *str);
 int					quote_type(int str);
 int					len_quotes(char *str);
 
-
-//----------------- dollar --------------------//
+//------------------- dollar --------------------//
 char				*save_this(t_expand *str, int i);
 char				*expand_this(t_expand *str, t_env **env, int i);
 char				*check_first(t_expand *str);
 char				*check_rest(t_expand *str, t_env **env, int i);
 
-//------------------ expand -------------------//
-void				ft_expand(t_parser *lst, t_env **env);
-
 //------------------ dollar_utils ------------------//
 char				*check_if_expand(char *str);
 char				*set_expand_string(t_parser *lst, t_expand *str, int *sign);
 
+//------------------ expand -------------------//
+void				ft_expand(t_parser *lst, t_env **env);
+
 //------------------ expand_utils ------------------//
 int					get_check_value(t_expand *str, t_env **env);
 
-// -------------------EXPAND--------------------//
-// --------------------------------------------//
 
 
 //----Environment----//
