@@ -5,12 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/10/19 21:38:55 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/17 20:20:47 by smclacke      ########   odam.nl         */
->>>>>>> bafe4027e8c0281e85e398570406ea12de154202
+/*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/10/25 18:02:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +49,6 @@ bool	check_for_builtin(t_parser *node)
 	else if (mini_strcmp(node->cmd, "pwd") == 0)
 		return (true);
 	else if (mini_strcmp(node->cmd, "env") == 0)
-		return (true);
-	else
-		return (false);
-}
-
-/**
- * @param node linked list
- * @param env string or char to compare with
- * @brief checks arguments to find meta_chars: 
- * $, >>, <<, >, <, |
- * @todo 
- * 1) needs to be passed to actual process,
- * 2) MAYBE MAKE IT A BOOL?
- * 3) removing files int unlink(const char *pathname);
-*/
-bool	check_for_meta(t_parser *node)
-{
-	if (!node)
-		return (false);
-	else if (mini_strcmp(node->meta, ">>") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, "<<") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, ">") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, "<") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, "|") == 0)
 		return (true);
 	else
 		return (false);

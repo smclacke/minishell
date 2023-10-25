@@ -130,7 +130,7 @@ bash-3.2$ cat $djoyke
  * dreijans: command not found
  * make it into proper error message
 
- -----------------------SARAH MAYBE------------------------------
+ -----------------------SARAH UPDATE------------------------------
 
  sarah can you when there's a redirect set the [0]cmd first in the linked list with [1]meta and [2]filename in the following
 
@@ -145,3 +145,60 @@ example:
  can you make the cmd the first token when a new command needs to be executed? :)
 
 for now I'll do as if thats already the case in my exectuting.
+
+• Avoid using more than one global variable to indicate a received signal. Consider
+the implications: this approach ensures that your signal handler will not access your
+main data structures.
+Be carefull. This global variable cannot provide any other
+information or data access than the number of a received signal.
+Therefore it is forbidden to use "norm" type structures in global.
+
+we need to have a part in our linked list that keeps our exit codes. because we cant use the global for these.
+
+/**
+ * @brief	specifies the different variable types of tokens from the
+ * 			lexer that are parsed and then given to the executor
+ * @param	cmd: first string in each process without redirect char
+ * @param	meta: pipe, more, less, moremore, lessless. 
+ * 			**dollar is excluded and handled as a string
+ * @param	file: in and out files; after more, less and moremore chars
+ * @param	str:  limiter for here_doc (string after <<) and all other input
+*/
+typedef struct s_parser
+{
+	void				*input;
+	char				*cmd;
+	char				*meta;
+	char				*file;
+	char				*str;
+	int					n_cmd;
+	--->// int					exit_code 
+	--->// this will be updated after each process will happen automatically
+	struct s_parser		*next;
+}				t_parser;
+
+--------------------HERE_DOC---------------------------------
+
+
+kan readline/gnl gebruiken, zoeken op deilmiter\n strncmp 
+
+
+<< "DELIMAMEM"
+
+DELIMAMEMTA werkt niet.
+
+------------------TO DO----------------------------
+
+◦ << should be given a delimiter, then read the input until a line containing the
+delimiter is seen. However, it doesn’t have to update the history!
+◦ >> should redirect output in append mode.
+
+• Handle $? which should expand to the exit status of the most recently executed foreground pipeline.
+
+ Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
+• In interactive mode:
+◦ ctrl-C displays a new prompt on a new line.
+◦ ctrl-D exits the shell.
+◦ ctrl-\ does nothing.
+
+descriptions on my own structs.
