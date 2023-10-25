@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/24 19:59:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 14:47:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 #include <errno.h>
 
 // utils
-t_parser			*print_the_full_thing(t_parser *tokens);
+int					shelly_strcmp(char *s1, char *s2);
 void				free_tokens(t_parser *tokens);
 int					get_no_cmds(t_parser *tokens);
 void				print_expand_vals(t_expand *str);
@@ -69,6 +69,9 @@ t_parser			*handle_pipe(t_parser *data, int *flag);
 int					is_pipe(void *input);
 char				*is_redirect(void *input);
 t_parser			*shelly_parser_print(t_parser *tokens);
+
+//---------- sort ----------//
+
 
 
 // -------------------EXPAND--------------------//

@@ -36,12 +36,7 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
-// make it so per process the cmd comes first
-
-// add exit_code enum and my enumss back :)
-
-
-// here_doc expansion............ :0 ...... :) ...........
+// shit to do when expansion is kinda ok....
 
  ---> leaks when ending with quotes (dollar quote expansion)
 
@@ -51,8 +46,11 @@ for in the future... don't change utils... ever.
 
  ---> cd "" cd ''
 
-// THIS RIGHT NOW
- ---> need to rewrite expander to handle dollars + quotes + strs etc
+
+// EXPANSION YAY
+
+// dollar handling, then dollar and quotes, then here_doc...
+// then all the other bullshit edgecases
 
 	// PROBLEM ONE
 $USER$BRUH$USER
@@ -67,11 +65,13 @@ smclackesmclackesmclacke
 -> abcsmclackesomething
 but mine see's as str abc$USERsomething and $USERsomething = nope
 
-
 	// PROBLEM FOUR
 BASH   // this is technically bonus handling
 echo "'$USER'"
 'smclacke'
+
+	// PROBLEM FIVE
+// here_doc expansion............ :0 ...... :) ...........
 
 ===========================================
 ===========================================
