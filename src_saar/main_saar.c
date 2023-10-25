@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/24 19:23:45 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 15:28:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 17:30:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 
 		print_the_full_thing(tokens);
-		// ft_execute(&env, tokens);
+		ft_execute(&env, tokens);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
