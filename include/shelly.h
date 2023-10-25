@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 17:34:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 20:06:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int					shelly_strcmp(char *s1, char *s2);
 void				free_tokens(t_parser *tokens);
 int					get_no_cmds(t_parser *tokens);
 void				print_expand_vals(t_expand *str);
+t_parser			*print_the_full_thing(t_parser *tokens);
 
 
 				// lexer

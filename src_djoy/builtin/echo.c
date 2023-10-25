@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:25:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/25 20:37:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,40 +33,46 @@ void	ft_echo(t_parser *lst)
 {
 	int	i;
 	int	is_flag;
+	t_parser	*tmp;
 
 	i = 0;
 	is_flag = 0;
-	if (!lst->cmd)
-		mini_error("lst->cmd", errno);
-	if (!lst->next)
+	tmp = lst;
+	print_the_full_thing(lst);
+	// if (!lst->cmd)
+	// 	mini_error("lst->cmd", errno);
+	// if (!lst->next)
+	// {
+	// 	printf("we zijn er bijna...\n");
+	// 	printf("\n"); // use write
+	// 	return ;
+	// }
+	// lst = lst->next;
+	// printf("lst->cmd = %s\n", lst->cmd);
+	// printf("lst->str = %s\n", lst->str);
+	// if (!lst->str)
+	// {
+	// 	// 1) check if the next one is a meta, 
+	// 	//    | >> etc to see if you need to echo into something
+	// 	// 2) or to just put the newline on the terminal
+	// 	printf("\n");// use write
+	// }
+	while (tmp)
 	{
-		printf("\n"); // use write
-		return ;
-	}
-	lst = lst->next;
-	if (!lst->str)
-	{
-		// 1) check if the next one is a meta, 
-		//    | >> etc to see if you need to echo into something
-		// 2) or to just put the newline on the terminal
-		printf("\n");// use write
-	}
-	while (lst)
-	{
-		if (lst->str)
+		if (tmp->str)
 		{
-			if (ft_strcmp(lst->str, "-n") == 0)
+			if (ft_strcmp(tmp->str, "-n") == 0)
 			{
 				is_flag++;
 				i++;
 			}
 			else
 			{
-				printf("%s ", lst->str); // use write
+				printf("%s ", tmp->str); // use write
 				i++;
 			}
 		}
-		lst = lst->next;
+		tmp = tmp->next;
 	}
 	if (is_flag == 0)
 		printf("\n");// use write
