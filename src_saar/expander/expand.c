@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 17:47:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 18:16:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ static char	*dollar(t_expand *str, t_env **env)
 	}
 	if (!str->input)
 		return (0);
-	// print_expand_vals(str);
-	printf("str->expanded = %s\n", str->expanded);
-	printf("str->done = %s\n", str->done);
 
 	return (str->done);
 }
