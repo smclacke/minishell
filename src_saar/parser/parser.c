@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 22:04:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 13:39:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ t_parser	*parser(t_parser *tokens)
 		}
 		token_list = token_list->next;
 	}
+	free_tokens(token_list);
 	tokens = sort_list(tokens);
 	tokens->n_cmd = get_no_cmds(tokens);
 	return (tokens);

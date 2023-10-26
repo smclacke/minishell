@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/10/25 20:50:16 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/25 20:50:22 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/26 13:36:32 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,12 +83,12 @@ SRCS_SAAR		= main_saar.c							\
 					parser/sort_utils.c					\
 					parser/parser.c						\
 					parser/parser_utils.c				\
-					expand/expand.c						\
-					expand/expand_utils.c				\
-					expand/quotes.c						\
-					expand/quote_utils.c				\
-					expand/dollar.c						\
-					expand/dollar_utils.c
+					expander/expand.c					\
+					expander/expand_utils.c				\
+					expander/quotes.c					\
+					expander/quote_utils.c				\
+					expander/dollar.c					\
+					expander/dollar_utils.c
 
 
 SAAR_DIR		= src_saar
@@ -169,14 +169,14 @@ $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)/executor
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/lexer
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/parser
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/expand
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_SAAR_DIR)/parser
 	@ mkdir -p $(OBJ_SAAR_DIR)/lexer
-	@ mkdir -p $(OBJ_SAAR_DIR)/expand
+	@ mkdir -p $(OBJ_SAAR_DIR)/expander
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
