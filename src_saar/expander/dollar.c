@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 17:54:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 15:26:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@ char	*save_this(t_expand *str, int i)
 
 char	*expand_this(t_expand *str, t_env **env, int i)
 {
-	// printf
+	i++;
+	while (str->input[i] && !ft_dollar(str->input[i]))
+		i++;
 	str->do_expand = ft_substr(str->input, 0, i);
 	if (!str->do_expand)
 		return (str->input);
+	// printf("str = %s\n", str->do_expand);
+	printf("i = %i\n", i);
+	printf("str = %s\n", ft_substr(str->input, 0, i));
 	str->input = ft_strtrim(str->input, str->do_expand);
 	if (!get_check_value(str, env))
 		printf("str->expanded = %s\n", str->expanded);
@@ -56,10 +61,10 @@ char	*check_rest(t_expand *str, t_env **env, int i)
 	if (ft_dollar(str->input[i]))
 	{
 		str->input = expand_this(str, env, i);
-		// if (!str->input)
-		// 	return (NULL);
+		if (!str->input)
+			return (NULL);
 	}
 	if (!str->input)
-		return (0);
+		return (NULL);
 	return (str->input);
 }

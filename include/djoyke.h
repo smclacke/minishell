@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 21:36:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 15:19:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int				is_pipe(void *input);
 char			*is_redirect(void *input);
 t_parser		*shelly_parser_print(t_parser *tokens);
 
+
 //---- Executor ----//
 typedef struct s_env
 {
@@ -138,6 +139,7 @@ typedef struct s_expand
 	int					j;//are we using this?
 }							t_expand;
 
+void	ft_expand(t_parser *tokens, t_env **env);
 //----Execution----//
 typedef struct s_execute
 {
