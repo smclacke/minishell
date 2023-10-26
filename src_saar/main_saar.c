@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/26 14:14:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 15:15:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-
 
 		print_the_full_thing(tokens);
 		execute(&env, tokens);

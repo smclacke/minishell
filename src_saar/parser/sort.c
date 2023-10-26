@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/26 14:39:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 15:13:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 	t_parser	*lst;
 	int			sign;
 
+	if (!tmp)
+		return (NULL);
 	lst = tmp;
 	sign = 0;
 	while (lst && !sign)
@@ -36,6 +38,8 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
 	t_parser	*tmp2;
 
 	tmp2 = tmp;
+	if (!tmp2->next || !tmp)
+		return (NULL);
 	tmp2 = tmp2->next;
 	while (tmp2 && !tmp2->flag && shelly_strcmp(tmp2->meta, "|") != 0)
 	{
