@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/25 18:02:34 by dreijans      ########   odam.nl          #
+#    Updated: 2023/10/25 18:42:35 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,10 +58,6 @@ SRCS_DJOY		=	main_djoy.c							\
 					executor/execute_utils_one.c		\
 					executor/execute_utils_two.c		\
 					executor/make_env.c					\
-					executor/utils_one.c				\
-					builtin/ft_exit.c					\
-					executor/ft_execute.c				\
-					executor/ft_make_env.c				\
 					executor/utils_one.c				\
 					executor/utils_two.c				\
 					executor/redirect.c					\
