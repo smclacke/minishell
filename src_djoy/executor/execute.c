@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:13:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 20:24:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 14:27:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
 
+	printf("hello child there again\n");
 	init_pipes_child(data);
 	if (redirect(lst, data) != 1)
 		check_str_for_file(lst, data);
@@ -102,7 +103,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	if (access(executable, X_OK) == -1)
 		mini_error(executable, errno);
 	data->env_array = list_to_string(*env);
-	if (execve(executable, &lst->meta, data->env_array) == -1)
+	if (execve(executable, &lst->str, data->env_array) == -1)
 		mini_error(lst->str, errno);
 	return ;
 }
