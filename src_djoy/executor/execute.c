@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:13:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 18:55:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 23:20:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	char		*executable;
 
 	init_pipes_child(data);
-	if (redirect(lst, data) != 1)
-		check_str_for_file(lst, data);
+	redirect(lst, data);
 	if (check_for_builtin(lst))
 	{
 		do_builtin(lst, env);
@@ -102,7 +101,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	if (access(executable, X_OK) == -1)
 		mini_error(executable, errno);
 	data->env_array = list_to_string(*env);
-	if (execve(executable, &lst->str, data->env_array) == -1)
+	if (execve(executable, get_argv(lst), data->env_array) == -1)
 		mini_error(lst->str, errno);
 	return ;
 }
@@ -114,7 +113,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @brief determines how many times needs to fork
  * pipes and makes child process
  * @todo 
- * destroy/unlink heredoc in here?
  * check the last while(wait(NULL) != -1) loop
 */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
@@ -124,11 +122,10 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	head = lst;
 	if (!lst)
 		mini_error("list", errno);
+	init_heredoc(lst);
 	if (single_builtin_cmd(lst, env, data) == 1)
 		return ;
-	heredoc(lst, data);
 	child_builtin_cmd(lst, env, data);
-	//if heredoc unlink or destroy??? here or in heredoc?
 	close_all(data);
 	waitpid(data->fork_pid, NULL, 0);
 	while (wait(NULL) != -1)

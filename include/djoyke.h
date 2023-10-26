@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 14:49:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 23:27:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-#include <dirent.h>
+# include <dirent.h>
 
 # define READ 0
 # define WRITE 1
@@ -77,6 +77,7 @@ typedef struct s_parser
 	char				*str;
 	int					flag;
 	int					n_cmd;
+	int					hd_fd;//trying something out hihi "djoyke"
 	enum e_exit			exit_code;
 	struct s_parser		*next;
 }				t_parser;
@@ -133,23 +134,20 @@ typedef struct s_expand
 	char				*before_dollar;
 	char				*env_value;
 	char				*comp_str;
-	int					i;//are we using this?
-	int					j;//are we using this?
 }							t_expand;
 
 //----Execution----//
 typedef struct s_execute
 {
-	int				fork_pid;
+	pid_t			fork_pid;
 	int				pipe_left[2];
 	int				pipe_right[2];
 	char			**path;
 	char			**env_array;
 	int				in;
 	int				out;
-	int				hd_fd;
 	int				count;
-	char			*hd;
+	int				fd;
 }						t_execute;
 
 void			free_remain_struct(t_expand *data);
@@ -159,6 +157,10 @@ bool			check_for_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
 void			redirect_outfile(t_parser *head, t_execute *data);
 void			redirect_infile(t_parser *head, t_execute *data);
+void			init_heredoc(t_parser *lst);
+void			write_to_heredoc(t_parser *lst);
+void			redirect(t_parser *lst, t_execute *data);
+void			redirect_heredoc(t_parser *lst);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);
@@ -198,13 +200,11 @@ void			free_data(t_execute *data);
 void			close_all(t_execute *data);
 void			close_between(t_execute *data);
 void			init_pipe(int i, int count, t_execute *data);
-int				redirect(t_parser *lst, t_execute *data);
 void			init_pipes_child(t_execute *data);
 void			init_fork(t_parser *lst, t_env **env, t_execute *data);
 bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
-void			heredoc(t_parser *lst, t_execute *data);
-void			check_str_for_file(t_parser *node, t_execute *data);
+char			**get_argv(t_parser *lst);
 
 //----Utils----//
 void			mini_error(char *string, int error);

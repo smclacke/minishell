@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:02:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 21:37:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ bool	check_for_builtin(t_parser *node)
 /**
  * @param node linked list
  * @brief checks arguments to find output or input redirect
+ * @todo add append with O_APPEND and << 
 */
 bool	check_redirect(t_parser *node)
 {
@@ -64,8 +65,55 @@ bool	check_redirect(t_parser *node)
 		return (false);
 	if (mini_strcmp(node->meta, ">") == 0)
 		return (true);
+	else if (mini_strcmp(node->meta, "<<") == 0)
+		return (true);
 	else if (mini_strcmp(node->meta, "<") == 0)
 		return (true);
+	// else if (mini_strcmp(node->meta, "<<") == 0)
+	// 	return (true); or add append to redirect_output
 	else
 		return (false);
+}
+
+//voor commando arg at 0
+// protected malloc maken just to scare people???? maybe hmm
+char	**get_argv(t_parser *lst)
+{
+	t_parser	*temp;
+	char		**new_str;
+	int			i;
+
+	temp = lst->next;
+	i = 0;
+	while (temp)
+	{
+		if (temp->cmd)
+			break ;
+		if (temp->str)
+			i++;
+		if (temp->meta)
+			temp = temp->next;
+		temp = temp->next;
+	}
+	new_str = (char **)malloc(sizeof (char *) * (i + 2));
+	if (new_str == NULL)
+		mini_error("malloc", errno);
+	temp = lst->next;
+	new_str[0] = lst->cmd;
+	i = 1;
+	while (temp)
+	{
+		if (temp->cmd)
+			break ;
+		if (temp->str)
+		{
+			new_str[i] = temp->str;
+			i++;
+		}
+		if (temp->meta)
+			temp = temp->next;
+		temp = temp->next;
+	}
+	new_str[i] = NULL;
+	return (new_str);
 }

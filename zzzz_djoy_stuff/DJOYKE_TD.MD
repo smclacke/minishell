@@ -187,6 +187,51 @@ kan readline/gnl gebruiken, zoeken op deilmiter\n strncmp
 
 DELIMAMEMTA werkt niet.
 
+
+
+
+
+
+yoooooooooooooooooooooooooooooo
+
+minishell 🍌cat <<
+[0]      cmd = cat      file = (null)   meta = (null)  str = (null)     n_cmd = 1
+[1]      cmd = (null)   file = (null)   meta = <<      str = (null)     n_cmd = 0
+heredoc found
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==65582==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000020 (pc 0x0000004d370f bp 0x7ffdebe3f840 sp 0x7ffdebe3f770 T0)
+==65582==The signal is caused by a READ memory access.
+==65582==Hint: address points to the zero page.
+    #0 0x4d370f in heredoc /home/dreijans/Documents/rank3/minishell/src_djoy/executor/redirect.c:119:18
+    #1 0x4ce881 in build /home/dreijans/Documents/rank3/minishell/src_djoy/executor/execute.c:129:2
+    #2 0x4ce7b5 in execute /home/dreijans/Documents/rank3/minishell/src_djoy/executor/execute.c:154:2
+    #3 0x4d47d6 in main /home/dreijans/Documents/rank3/minishell/src_saar/main_saar.c:67:3
+    #4 0x7f8953958d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #5 0x7f8953958e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #6 0x41f3a4 in _start (/home/dreijans/Documents/rank3/minishell/djoyke+0x41f3a4)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV /home/dreijans/Documents/rank3/minishell/src_djoy/executor/redirect.c:119:18 in heredoc
+==65582==ABORTING
+
+parser or lexer need to throw syntax errors! :) jippie
+
+alsooooo
+
+dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
+bash: $bla: ambiguous redirect
+
+dreijans@f0r3s15:~/Documents/rank3/minishell$ cat | $bla | $bla
+dreijans@f0r3s15:~/Documents/rank3/minishell$ echo $bla (echoed empty argument)
+dreijans@f0r3s15:~/Documents/rank3/minishell$ echo $bla
+
+dreijans@f0r3s15:~/Documents/rank3/minishell$
+
+lastige zegt ruben 
+
+nice huh?
+
 ------------------TO DO----------------------------
 
 ◦ << should be given a delimiter, then read the input until a line containing the

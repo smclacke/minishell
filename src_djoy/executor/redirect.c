@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 19:03:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 23:42:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	redirect_infile(t_parser *head, t_execute *data)
  * if dir - `opendir`: Opens a directory stream.
  * readdir`: Reads a directory entry.
  * check how to do last else statement when exiting from a builtin
+ * 
 */
 void	redirect_outfile(t_parser *head, t_execute *data)
 {
@@ -92,8 +93,52 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 	// 	exit(1); only when we figure out how to exit from a builtin use this :)
 }
 
+// with signals easier if we put this in child process so parent can read exitstatus child to see if exited with CTRL+C/SIGNAL
+void	write_to_heredoc(t_parser *lst)
+{
+	char	*read_line;
+	pid_t	fork_pid;
+
+	fork_pid = fork();
+	if (fork_pid == -1)
+		mini_error("fork", errno);
+	if (fork_pid == 0)
+	{
+		while (1)
+		{
+			read_line = readline("< ");
+			if (mini_strcmp(lst->str, read_line) != 0)
+			{
+				write(lst->hd_fd, read_line, ft_strlen(read_line));
+				write(lst->hd_fd, "\n", 1);
+				free(read_line);
+			}
+			else if (mini_strcmp(lst->str, read_line) == 0)
+			{
+				free(read_line);
+				return ;
+			}
+		}
+	}
+	else
+	{
+		waitpid(fork_pid, NULL, 0);
+	}
+}
+void	redirect_heredoc(t_parser *lst)
+{
+	if (mini_strcmp(lst->meta, "<<") == 0)
+	{
+		lst = lst->next;
+		if (dup2(lst->hd_fd, STDIN_FILENO) == -1)
+			mini_error("dup2", errno);
+		if (close(lst->hd_fd) == -1)
+			mini_error("close", errno);
+	}
+}
+
 /**
- * @param head parser linked list
+ * @param lst parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for heredoc
  * @todo
@@ -103,49 +148,34 @@ void	redirect_outfile(t_parser *head, t_execute *data)
  * how do I pass herdoc properly into childprocess for eg cat to read?
  * NO MULTIPLES? multiples dont work now
 */
-void	heredoc(t_parser *lst, t_execute *data)
+void	init_heredoc(t_parser *lst)
 {
 	t_parser	*head;
 	char		*read_line;
-	// char		*heredoc;
-	// int			i;
-	// char		*number;
+	char		*heredoc;
+	int			i;
+	char		*number;
 
 	head = lst;
 	read_line = NULL;
-	// heredoc = NULL;
-	// i = 0;
+	heredoc = NULL;
+	i = 0;
 	while (head)
 	{
 		if (mini_strcmp(head->meta, "<<") == 0)
 		{
-			printf("heredoc found\n");
-			// i++;
+			i++;
 			head = head->next;
 			if (head->str != NULL)
 			{
-				// number = ft_itoa(i);
-				// heredoc = ft_strjoin("heredoc", number);
-				// data->hd_fd = open(heredoc, O_CREAT | O_RDWR | O_TRUNC, 0644);
-				data->hd_fd = open(data->hd, O_CREAT | O_RDWR | O_TRUNC, 0644);
-				// free(heredoc);
-				// free(number);
-			}
-			while (1)
-			{
-				read_line = readline(PROMPT);
-				if (mini_strcmp(head->str, read_line) != 0)
-				{
-					write(data->hd_fd, read_line, ft_strlen(read_line));
-					write(data->hd_fd, "\n", 1);
-				}
-				if (mini_strcmp(head->str, read_line) == 0)
-				{
-					free(read_line);
-					if (dup2(data->hd_fd, STDIN_FILENO) == -1)// do you need STD_IN?
-						mini_error("dup2", errno);
-					return ;
-				}
+				number = ft_itoa(i);
+				heredoc = ft_strjoin("heredoc", number);//   /temp/heredoc ervan maken  
+				head->hd_fd = open(heredoc, O_CREAT | O_RDWR | O_TRUNC, 0644);
+				unlink(heredoc);
+				write_to_heredoc(head);
+				lseek(head->hd_fd, 0, SEEK_SET);
+				free(heredoc);
+				free(number);
 			}
 		}
 		head = head->next;
@@ -153,55 +183,8 @@ void	heredoc(t_parser *lst, t_execute *data)
 	return ;
 }
 
-
 	// else if (mini_strcmp(node->meta, ">>") == 0)
 	// {
 	// 	printf("append found");
 	// 	return (true);
 	// }
-
-// void	heredoc(t_parser *lst, t_execute *data)
-// {
-// 	t_parser	*head;
-// 	char		*read_line;
-// 	// int			count;
-
-// 	head = lst;
-// 	read_line = NULL;
-// 	// count = 0;
-// 	// while (head)
-// 	// {
-// 	// 	if (mini_strcmp(head->meta, "<<") == 0)
-// 	// 		count ++;
-// 	// 	head = head->next;
-// 	// }
-// 	// printf("count = [%i]\n", count);
-// 	// head = lst;
-// 	while (head)
-// 	{
-// 		if (mini_strcmp(head->meta, "<<") == 0)
-// 		{
-// 			head = head->next;
-// 			if (head->str != NULL)
-// 				data->hd_fd = open(data->hd, O_CREAT | O_RDWR | O_TRUNC, 0644);
-// 			while (1)
-// 			{
-// 				read_line = readline(PROMPT);
-// 				if (mini_strcmp(head->str, read_line) != 0)
-// 				{
-// 					write(data->hd_fd, read_line, ft_strlen(read_line));
-// 					write(data->hd_fd, "\n", 1);
-// 				}
-// 				if (mini_strcmp(head->str, read_line) == 0)
-// 				{
-// 					if (dup2(data->hd_fd, STDIN_FILENO) == -1)
-// 						mini_error("dup2", errno);
-// 					free(read_line);
-// 					return ;
-// 				}
-// 			}
-// 		}
-// 		head = head->next;
-// 	}
-// 	return ;
-// }

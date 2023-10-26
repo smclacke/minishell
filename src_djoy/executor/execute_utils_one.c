@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:03 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 18:20:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 22:40:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,21 @@ dreijans@f0r3s15:~/Documents/rank3/minishell$ cat < haha.txt < lol < Makefile > 
 bash: lol: No such file or directory
 maakt nog test 2 aan, bash doet dat niet
 */
-int	redirect(t_parser *lst, t_execute *data)
+void	redirect(t_parser *lst, t_execute *data)
 {
-	int	sign;
-
-	sign = 0;
 	if (!lst->next)
-		mini_error("no file.. syntax error??", errno);
+		return ;
 	lst = lst->next;
 	while (lst && !lst->cmd)
 	{
 		if (check_redirect(lst) != 0)
 		{
 			redirect_infile(lst, data);
+			redirect_heredoc(lst);
 			redirect_outfile(lst, data);
-			sign = 1;
 		}
 		lst = lst->next;
 	}
-	return (sign);
 }
 
 /**
@@ -117,7 +113,6 @@ void	close_between(t_execute *data)
 	data->pipe_left[READ] = -1;
 	data->pipe_left[WRITE] = -1;
 	data->pipe_right[WRITE] = -1;
-	data->hd_fd = -1;//do we need this?
 }
 
 /**
