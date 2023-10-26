@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/26 17:41:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 18:08:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ int	get_check_value(t_expand *str, t_env **env)
 	{
 		if (mini_strcmp(str->do_expand, head->key) == 0)
 		{
+			printf("??\n");
 			temp = str->env_val;
 			str->env_val = ft_substr(head->value, 0, ft_strlen(head->value));
-			str->expanded = ft_strjoin(str->expanded, str->env_val);
+			printf("str->expanded = %s\n", str->expanded);
+			str->expanded = ft_strjoin(str->do_expand, str->env_val);
 			free(temp);
 			break ;
 		}
