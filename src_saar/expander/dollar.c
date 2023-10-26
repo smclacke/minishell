@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/26 17:20:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 17:49:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*save_this(t_expand *str, int i)
 {
-	str->expanded = ft_substr(str->input, 0, i);
-	if (!str->expanded) // if it fails or there wasnt anything before dollar
+	str->done = ft_substr(str->input, 0, i);
+	if (!str->done) // if it fails or there wasnt anything before dollar
 		return (str->input);
-	str->input = ft_strtrim(str->input, str->expanded);
+	str->input = ft_strtrim(str->input, str->done);
 	// add str->before_dollar to assed as first bit of str
 	return (str->input);
 }
@@ -30,14 +30,13 @@ char	*expand_this(t_expand *str, t_env **env, int i)
 	str->do_expand = ft_substr(str->input, 0, i);
 	if (!str->do_expand)
 		return (str->input);
-	printf("str->input = %s\n", str->input);
-	printf("str->do_expand = %s\n", str->do_expand);
-	// str->input = ft_strtrim(str->input, str->do_expand); // why??
-	if (!get_check_value(str, env))
-		printf("str->expanded = %s\n", str->expanded);
-	// change this so that if func rets, error
+	str->do_expand = ft_strtrim(str->input, "$");
+	if (get_check_value(str, env))
+		mini_error("bit fucked in expand_this()", errno);
 	free (str->do_expand);
-	
+	printf("str->expanded = %s\n", str->expanded);
+	str->done = ft_strjoin(str->done, str->expanded);
+	printf("str->done = %s\n", str->done);
 	// return input incase theres moreee
 	return (str->input);
 }

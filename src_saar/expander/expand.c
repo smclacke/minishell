@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 17:17:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 17:47:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ static char	*dollar(t_expand *str, t_env **env)
 	}
 	if (!str->input)
 		return (0);
-	print_expand_vals(str);
+	// print_expand_vals(str);
+	printf("str->expanded = %s\n", str->expanded);
+	printf("str->done = %s\n", str->done);
 
-	return (str->expanded);
+	return (str->done);
 }
 
 static void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
@@ -43,15 +45,15 @@ static void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 	str->input = set_expand_string(lst, str, &sign);
 	if (sign == 1 || sign == 2)
 	{
-		str->expanded = dollar(str, env);
+		str->done = dollar(str, env);
 		if (sign == 1)
 		{
-			lst->cmd = str->expanded;
+			lst->cmd = str->done;
 			sign = 0;
 		}
 		else if (sign == 2)
 		{
-			lst->str = str->expanded;
+			lst->str = str->done;
 			sign = 0;
 		}
 	}
