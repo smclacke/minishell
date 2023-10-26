@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 14:27:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 14:49:58 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,9 @@ typedef struct s_execute
 	char			**env_array;
 	int				in;
 	int				out;
-	int				hdoc_fd;
+	int				hd_fd;
 	int				count;
+	char			*hd;
 }						t_execute;
 
 void			free_remain_struct(t_expand *data);

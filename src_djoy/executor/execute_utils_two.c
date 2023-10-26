@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 14:27:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 19:11:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	count = lst->n_cmd;
 	if (count == 1 && check_for_builtin(lst))
 	{
-		printf("hello??\n");
 		redirect(lst, data);
 		do_builtin(lst, env);
 		return (true);
@@ -79,7 +78,6 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process,  calls init_pipes
  * init_forks and close_between in a while loop
- * @todo input like only hi segfaults
 */
 void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -92,7 +90,6 @@ void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	{
 		if (count >= 1 && lst->cmd)
 		{
-			printf("hello there again\n");
 			init_pipe(i, count, data);
 			init_fork(lst, env, data);
 			close_between(data);
@@ -102,43 +99,105 @@ void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 		lst = lst->next;
 	}
 }
-// ==62364==ERROR: LeakSanitizer: detected memory leaks
 
-// Direct leak of 7 byte(s) in 2 object(s) allocated from:
-//     #0 0x49a26d in malloc (/home/dreijans/Documents/rank3/minishell/djoyke+0x49a26d)
-//     #1 0x7fd7511aebac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+/**
+ * @param node parser linked list node
+ * @param data execute struct
+ * @brief checks for cat and heredoc if the string is existing file and opens it
+ * @todo 
+ * make norm proof, 
+ * 
+ * determine error message for mini error
+ * 
+ * leaks
+ * ==62364==ERROR: LeakSanitizer: detected memory leaks
+ * Direct leak of 7 byte(s) in 2 object(s) allocated from:
+ * #0 0x49a26d in malloc 
+ * (/home/dreijans/Documents/rank3/minishell/djoyke+0x49a26d)
+ * #1 0x7fd7511aebac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+ * SUMMARY: AddressSanitizer: 7 byte(s) leaked in 2 allocation(s).
+*/
 
-// SUMMARY: AddressSanitizer: 7 byte(s) leaked in 2 allocation(s).
 void	check_str_for_file(t_parser *node, t_execute *data)
 {
 	struct stat	file_stat;
 	char	*str;
+	int		normal_fd;
 
 	if (mini_strcmp(node->cmd, "cat") == 0)
 	{
 		node = node->next;
 		str = node->str;
 		// node = node->next;
-		if (data->hdoc_fd != -1)
+		if (data->hd_fd != -1)
 		{
-			str = "heredoc1";
-		}
-		if (access(str, F_OK) != 0)
+			str = data->hd;
+			if (access(str, F_OK) != 0)
 			dprintf(STDERR_FILENO, INFILE_ERROR, node->str);
-		if (stat(str, &file_stat) == 0)
-		{
+			if (stat(str, &file_stat) == 0)
+			{
 			if (S_ISREG(file_stat.st_mode))
 			{
-				data->hdoc_fd = open(str, O_RDWR, 0644);
-				if (data->hdoc_fd == -1)
+				data->hd_fd = open(str, O_RDWR, 0644);
+				if (data->hd_fd == -1)
 					mini_error("open infile", errno);
-				if (dup2(data->hdoc_fd, STDIN_FILENO) == 0)
-					close(data->hdoc_fd);
+				if (dup2(data->hd_fd, STDIN_FILENO) == 0)
+					close(data->hd_fd);
 			}
 			if (S_ISDIR(file_stat.st_mode))
 				dprintf(STDERR_FILENO, "[%s] is a directory\n", str);
 			else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
 				dprintf(STDERR_FILENO, "its not a file or directory\n");
+			}
+		}
+		else if (data->hd_fd == -1)
+		{
+			if (access(str, F_OK) != 0)
+				dprintf(STDERR_FILENO, INFILE_ERROR, node->str);
+			if (stat(str, &file_stat) == 0)
+			{
+				if (S_ISREG(file_stat.st_mode))
+				{
+					normal_fd = open(str, O_RDWR, 0644);
+					if (normal_fd == -1)
+						mini_error("open infile", errno);
+					if (dup2(normal_fd, STDIN_FILENO) == 0)
+						close(normal_fd);
+				}
+				if (S_ISDIR(file_stat.st_mode))
+					dprintf(STDERR_FILENO, "[%s] is a directory\n", str);
+				else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
+					dprintf(STDERR_FILENO, "its not a file or directory\n");
+			}
 		}
 	}
 }
+
+// void	check_str_for_file(t_parser *node, t_execute *data)
+// {
+// 	struct stat	file_stat;
+
+// 	if (mini_strcmp(node->cmd, "cat") == 0)
+// 	{
+// 		if (!node->next)
+// 			mini_error("no node next", errno);
+// 		node = node->next;
+// 		if (access(data->hd, F_OK) != 0)
+// 			dprintf(STDERR_FILENO, INFILE_ERROR, node->str);
+// 		if (stat(data->hd, &file_stat) == 0)
+// 		{
+// 			if (S_ISREG(file_stat.st_mode))
+// 			{
+// 				data->hd_fd = open(data->hd, O_RDWR, 0644);
+// 				if (data->hd_fd == -1)
+// 					mini_error("open infile str for file", errno);
+// 				if (dup2(data->hd_fd, STDIN_FILENO) == 0)
+// 					close(data->hd_fd);
+// 			}
+// 			if (S_ISDIR(file_stat.st_mode))
+// 				dprintf(STDERR_FILENO, "[%s] is a directory\n", data->hd);
+// 			else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
+// 				dprintf(STDERR_FILENO, "its not a file or directory\n");
+// 		}
+// 	}
+// }

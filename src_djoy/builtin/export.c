@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/24 19:46:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 14:37:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options
- * @todo why u red?
 */
 void	ft_export(t_parser *node, t_env **env)
 {

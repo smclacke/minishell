@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:13:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 14:27:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/26 18:55:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
 
-	printf("hello child there again\n");
 	init_pipes_child(data);
 	if (redirect(lst, data) != 1)
 		check_str_for_file(lst, data);
@@ -115,7 +114,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @brief determines how many times needs to fork
  * pipes and makes child process
  * @todo 
- * check for heredoc before forking because needs seperate child process
+ * destroy/unlink heredoc in here?
  * check the last while(wait(NULL) != -1) loop
 */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
