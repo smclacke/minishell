@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/26 14:27:59 by dreijans      ########   odam.nl          #
+#    Updated: 2023/10/27 18:27:07 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ DJOY			= djoyke
 SAAR			= sarah
 MICRO_SHELL		= micro
 
-CFLAGS			= -Wall -Wextra -g -fsanitize=address
+CFLAGS			= -Wall -Wextra 
+# -g 
+# -fsanitize=address
 # valgrind --leak-check=yes
 # -Werror 
 

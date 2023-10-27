@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:03 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 22:40:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/27 18:07:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,47 +29,6 @@ void	init_pipes_child(t_execute *data)
 		mini_error("dup2", errno);
 	if (data->pipe_right[READ] != -1 && close(data->pipe_right[READ]) == -1)
 		mini_error("dup2", errno);
-}
-
-/**
- * @param lst parser linked list
- * @param execute execute struct
- * @brief checks for redirects and enters redirect in or outfile function
- * @todo
- * does mini_error need to be syntax error or something elkse?
- * minishell 🍌cat < haha.txt < lol < Makefile > test2
-[0]      cmd = cat      file = (null)   meta = (null)   str = (null)    n_cmd = 1
-[1]      cmd = (null)   file = (null)   meta = <        str = (null)    n_cmd = 0
-[2]      cmd = (null)   file = haha.txt meta = (null)   str = (null)    n_cmd = 0
-[3]      cmd = (null)   file = (null)   meta = <        str = (null)    n_cmd = 0
-[4]      cmd = (null)   file = lol      meta = (null)   str = (null)    n_cmd = 0
-[5]      cmd = (null)   file = (null)   meta = <        str = (null)    n_cmd = 0
-[6]      cmd = (null)   file = Makefile meta = (null)   str = (null)    n_cmd = 0
-[7]      cmd = (null)   file = (null)   meta = >        str = (null)    n_cmd = 0
-[8]      cmd = (null)   file = test2    meta = (null)   str = (null)    n_cmd = 0
-count = [0]
-minishell: lol: No such file or directory
-minishell 🍌^C
-➜  minishell git:(djoyke) ✗ bash    
-dreijans@f0r3s15:~/Documents/rank3/minishell$ cat < haha.txt < lol < Makefile > test2
-bash: lol: No such file or directory
-maakt nog test 2 aan, bash doet dat niet
-*/
-void	redirect(t_parser *lst, t_execute *data)
-{
-	if (!lst->next)
-		return ;
-	lst = lst->next;
-	while (lst && !lst->cmd)
-	{
-		if (check_redirect(lst) != 0)
-		{
-			redirect_infile(lst, data);
-			redirect_heredoc(lst);
-			redirect_outfile(lst, data);
-		}
-		lst = lst->next;
-	}
 }
 
 /**
