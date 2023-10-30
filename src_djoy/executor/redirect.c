@@ -6,12 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/27 19:07:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/30 16:24:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-// #include <dirent.h>
 
 #define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
@@ -96,6 +95,18 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 }
 
 /**
+ * @param read_line string containing line read.
+ * @param file int with file fd.
+ * @brief writes to the heredoc frees the read_line
+*/
+static void	write_to_file(char *read_line, int file)
+{
+	write(file, read_line, ft_strlen(read_line));
+	write(file, "\n", 1);
+	free(read_line);
+}
+
+/**
  * @param lst parser linked list
  * @brief opens a child proces where it writes to open heredoc
  * until all the delimiter are found 
@@ -121,11 +132,7 @@ static void	write_to_heredoc(t_parser *lst, char *file_name)
 		{
 			read_line = readline("< ");
 			if (mini_strcmp(lst->str, read_line) != 0)
-			{
-				write(file, read_line, ft_strlen(read_line));
-				write(file, "\n", 1);
-				free(read_line);
-			}
+				write_to_file(read_line, file);
 			else if (mini_strcmp(lst->str, read_line) == 0)
 			{
 				free(read_line);
@@ -134,16 +141,12 @@ static void	write_to_heredoc(t_parser *lst, char *file_name)
 		}
 	}
 	else
-	{
 		waitpid(fork_pid, NULL, 0);
-	}
 }
 
 /**
  * @param lst parser linked list
  * @brief redirect heredoc in child process
- * @todo
- * norm proof
 */
 void	redirect_heredoc(t_parser *lst)
 {
@@ -155,6 +158,26 @@ void	redirect_heredoc(t_parser *lst)
 		if (close(lst->hd_fd) == -1)
 			mini_error("close", errno);
 	}
+}
+
+/**
+ * @param lst parser linked list
+ * @param str character string for name heredoc
+ * @param i int containing number of heredoc
+ * @brief makes name for heredoc by adding number of heredoc
+ * to the name. unlinks, frees the string and the number.
+*/
+static void	setup_heredoc(t_parser *lst, char *str, int i)
+{
+	char		*number;
+		
+	number = ft_itoa(i);
+	str = ft_strjoin("heredoc", number);
+	write_to_heredoc(lst, str);
+	lst->hd_fd = open(str, O_RDONLY);
+	unlink(str);
+	free(str);
+	free(number);
 }
 
 /**
@@ -176,7 +199,6 @@ void	init_heredoc(t_parser *lst)
 	t_parser	*head;
 	char		*heredoc;
 	int			i;
-	char		*number;
 
 	head = lst;
 	heredoc = NULL;
@@ -189,15 +211,7 @@ void	init_heredoc(t_parser *lst)
 			i++;
 			head = head->next;
 			if (head->str != NULL)
-			{
-				number = ft_itoa(i);
-				heredoc = ft_strjoin("heredoc", number);
-				write_to_heredoc(head, heredoc);
-				head->hd_fd = open(heredoc, O_RDONLY);
-				unlink(heredoc);
-				free(heredoc);
-				free(number);
-			}
+				setup_heredoc(head, heredoc, i);
 		}
 		head = head->next;
 	}
