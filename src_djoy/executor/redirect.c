@@ -6,20 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 18:34:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/30 18:35:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-
-// #define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
 /**
  * @param head parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function
  * @todo
- * check all the prints no needed prints no
  * if dir - `opendir`: Opens a directory stream.
  * readdir`: Reads a directory entry.
  * check how to do last else statement when exiting from a builtin
@@ -97,7 +94,6 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 /**
  * @param node linked list
  * @brief checks arguments to find output or input redirect
- * @todo add append with O_APPEND and << 
 */
 bool	check_redirect(t_parser *node)
 {

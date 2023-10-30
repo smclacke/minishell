@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 18:32:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/30 18:38:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ void	free_strs(char *str, char *str2)
 	free (str2);
 }
 
+/**
+ * @param head parser linked list
+ * @brief throws error message and exits 
+*/
 void	infile_error(t_parser *head)
 {
 	dprintf(STDERR_FILENO, INFILE_ERROR, head->file);
