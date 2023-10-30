@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 17:06:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/30 18:33:58 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ bool			check_for_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
 void			redirect_outfile(t_parser *head, t_execute *data);
 void			redirect_infile(t_parser *head, t_execute *data);
+void			redirect_append(t_parser *head, t_execute *data);
 void			init_heredoc(t_parser *lst);
 void			redirect(t_parser *lst, t_execute *data);
 void			redirect_heredoc(t_parser *lst);
@@ -164,6 +165,7 @@ char			*set_heredoc_name(int i);
 void			setup_heredoc(t_parser *lst, char *str, int i);
 void			write_to_heredoc(t_parser *lst, char *file_name);
 void			write_to_file(char *read_line, int file);
+void			infile_error(t_parser *head);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);

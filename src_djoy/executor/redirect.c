@@ -6,13 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 16:38:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/30 18:34:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 
-#define INFILE_ERROR "minishell: %s: No such file or directory\n"
+// #define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
 /**
  * @param head parser linked list
@@ -37,7 +37,7 @@ void	redirect_infile(t_parser *head, t_execute *data)
 	{
 		head = head->next;
 		if (access(head->file, F_OK) != 0)
-			dprintf(STDERR_FILENO, INFILE_ERROR, head->file);
+			infile_error(head);
 		if (stat(head->file, &file_stat) == 0)
 		{
 			if (S_ISREG(file_stat.st_mode))
@@ -109,16 +109,42 @@ bool	check_redirect(t_parser *node)
 		return (true);
 	else if (mini_strcmp(node->meta, "<") == 0)
 		return (true);
-	// else if (mini_strcmp(node->meta, "<<") == 0)
-	// 	return (true); or add append to redirect_output
+	else if (mini_strcmp(node->meta, ">>") == 0)
+		return (true);
 	else
 		return (false);
 }
 
+/**
+ * @param head parser linked list
+ * @param data execute struct
+ * @brief appends to outfile instead of overwriting it
+ * if file does not exist, it will be created. 
+ * if it does exist, the output of command is appended 
+ * to the end of the file, preserving the existing content.
+*/
+void	redirect_append(t_parser *head, t_execute *data)
+{
+	struct stat	file_stat;
 
-
-	// else if (mini_strcmp(node->meta, ">>") == 0)
-	// {
-	// 	printf("append found");
-	// 	return (true);
-	// }
+	if (mini_strcmp(head->meta, ">>") == 0)
+	{
+		head = head->next;
+		if (access(head->file, F_OK) != 0)
+		{
+			data->out = open(head->file, O_CREAT | O_RDWR | O_APPEND, 0644);
+			if (data->out == -1)
+				mini_error("open outfile", errno);
+		}
+		if (stat(head->file, &file_stat) == 0)
+		{
+			if (S_ISREG(file_stat.st_mode))
+				data->out = open(head->file, O_CREAT | O_RDWR | O_APPEND, 0644);
+			if (S_ISDIR(file_stat.st_mode))
+				dprintf(STDERR_FILENO, "[%s] is a directory\n", head->file);
+		}
+		if (dup2(data->out, STDOUT_FILENO) == 0)
+			close(data->out);
+		return ;
+	}
+}
