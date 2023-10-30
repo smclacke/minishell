@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/27 18:55:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/27 19:07:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ static void	write_to_heredoc(t_parser *lst, char *file_name)
 		file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		while (1)
 		{
-			printf("hello from write to heredoc\n");
 			read_line = readline("< ");
 			if (mini_strcmp(lst->str, read_line) != 0)
 			{
@@ -150,7 +149,6 @@ void	redirect_heredoc(t_parser *lst)
 {
 	if (mini_strcmp(lst->meta, "<<") == 0)
 	{
-		printf("hi from redirect heredoc\n");
 		lst = lst->next;
 		if (dup2(lst->hd_fd, STDIN_FILENO) == -1)
 			mini_error("dup2", errno);
