@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 18:33:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/30 19:06:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,16 @@ int				is_pipe(void *input);
 char			*is_redirect(void *input);
 t_parser		*shelly_parser_print(t_parser *tokens);
 
-//---- Executor ----//
+/**
+ * @brief	linked list containing the environment
+ * @param	key: string containing the key part of the environment
+ * @param	value: string containing the value part of the environment
+ * @param	full: string containing full line of the environment
+ * 			including semicolon.
+ * @param	next: env struct pointing to the next node in the linked list
+ * 			if no next then it points to NULL.
+ * @param	has_value: int used as checkpoint if the key has a value
+*/
 typedef struct s_env
 {
 	char				*key;
@@ -136,7 +145,19 @@ typedef struct s_expand
 	char				*comp_str;
 }							t_expand;
 
-//----Execution----//
+/**
+ * @brief	struct containing variables needed for execution process
+ * @param	fork_pid: int to store fork_pid in
+ * @param	pipe_left: pipe used to read and write to in process
+ * @param	pipe_right: pipe used to read and write to in process
+ * @param	path: 2d array storing the path to a command.
+ * @param	env_array: 2d array storing environment from environment linked list
+ * @param	in: int storing fd for infile
+ * @param	out: int storing fd for outfile
+ * @param	count: int storing amount of commands in parser linked list
+ * @param	fd: int storing a fd
+ * @todo	do I need fd?
+*/
 typedef struct s_execute
 {
 	pid_t			fork_pid;

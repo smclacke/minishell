@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 18:38:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/30 19:06:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	mini_strcmp(char *s1, char *s2)
  * @param data struct to be updated with fd's and 2d arrays for later use
  * @param env 
  * @brief intitializes struct before further use
+ * @todo
+ * do I need data->fd?
 */
 void	init_execute_struct(t_execute *data)
 {
