@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   main_saar.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/30 18:16:33 by dreijans      ########   odam.nl         */
+/*   Created: 2023/10/30 19:16:43 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/10/30 19:16:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,12 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 
 		print_the_full_thing(tokens);
-
 		execute(&env, tokens);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
 
-		free_tokens(tokens);	
+		free_tokens(tokens);
 	}
 	return (0);
 }

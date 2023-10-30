@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 17:54:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/26 18:20:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,35 @@
 
 char	*save_this(t_expand *str, int i)
 {
-	str->expanded = ft_substr(str->input, 0, i);
-	if (!str->expanded) // if it fails or there wasnt anything before dollar
+	str->done = ft_substr(str->input, 0, i);
+	if (!str->done) // if it fails or there wasnt anything before dollar
 		return (str->input);
-	str->input = ft_strtrim(str->input, str->expanded);
+	str->input = ft_strtrim(str->input, str->done);
 	// add str->before_dollar to assed as first bit of str
 	return (str->input);
 }
 
 char	*expand_this(t_expand *str, t_env **env, int i)
 {
-	// printf
+	i++;
+	while (str->input[i] && !ft_dollar(str->input[i]))
+		i++;
 	str->do_expand = ft_substr(str->input, 0, i);
 	if (!str->do_expand)
 		return (str->input);
+	str->do_expand = ft_strtrim(str->input, "$");
+	printf("str->do_expand HERE = %s\n", str->do_expand);
+	str->input = ft_strtrim(str->input, "$");
 	str->input = ft_strtrim(str->input, str->do_expand);
-	if (!get_check_value(str, env))
-		printf("str->expanded = %s\n", str->expanded);
-	// change this so that if func rets, error
+	printf("str->input HERE = %s\n", str->input);
+	if (get_check_value(str, env))
+		mini_error("bit fucked in expand_this()", errno); // this fails with two dollars
 	free (str->do_expand);
-	
-	// return input incase theres moreee
+	printf("epxanded = %s\n", str->expanded);
+	printf("done = %s\n", str->done);
+	str->done = ft_strjoin(str->done, str->expanded);
+	printf("str->done = %s\n", str->done);
+	printf("str->input = %s\n", str->input);
 	return (str->input);
 }
 
@@ -56,10 +64,10 @@ char	*check_rest(t_expand *str, t_env **env, int i)
 	if (ft_dollar(str->input[i]))
 	{
 		str->input = expand_this(str, env, i);
-		// if (!str->input)
-		// 	return (NULL);
+		if (!str->input)
+			return (NULL);
 	}
 	if (!str->input)
-		return (0);
+		return (NULL);
 	return (str->input);
 }
