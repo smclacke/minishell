@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 21:37:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/29 16:10:27 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,10 @@ bool	check_redirect(t_parser *node)
 		return (false);
 }
 
-//voor commando arg at 0
-// protected malloc maken just to scare people???? maybe hmm
-char	**get_argv(t_parser *lst)
+static int	count_words(t_parser *temp)
 {
-	t_parser	*temp;
-	char		**new_str;
-	int			i;
+	int i;
 
-	temp = lst->next;
 	i = 0;
 	while (temp)
 	{
@@ -95,6 +90,22 @@ char	**get_argv(t_parser *lst)
 			temp = temp->next;
 		temp = temp->next;
 	}
+	return (i);
+}
+
+/**
+ * @param lst parser linked list
+ * @brief set's linked list from cmd to next cmd to 2d array
+ * cmd at 0, plus args at 1 , 2 etc.
+*/
+char	**get_argv(t_parser *lst)
+{
+	t_parser	*temp;
+	char		**new_str;
+	int			i;
+
+	temp = lst->next;
+	i = count_words(temp);
 	new_str = (char **)malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
 		mini_error("malloc", errno);

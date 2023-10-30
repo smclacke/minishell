@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:13:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/27 19:02:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/29 15:48:47 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
-	char		**argv;
 
 	init_pipes_child(data);
 	redirect(lst, data);
@@ -101,7 +100,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	executable = check_access(*env, lst, data);
 	if (access(executable, X_OK) == -1)
 		mini_error(executable, errno);
-	argv = get_argv(lst);
 	data->env_array = list_to_string(*env);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
 		mini_error(lst->str, errno);
@@ -119,9 +117,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
-	t_parser	*head;
-
-	head = lst;
 	if (!lst)
 		mini_error("list", errno);
 	init_heredoc(lst);

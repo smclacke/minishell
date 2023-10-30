@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/27 17:58:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/29 15:32:58 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ void	redirect(t_parser *lst, t_execute *data)
 	lst = lst->next;
 	while (lst && !lst->cmd)
 	{
-		printf("hi from redirect function\n");
 		if (check_redirect(lst) != 0)
 		{
 			redirect_infile(lst, data);
