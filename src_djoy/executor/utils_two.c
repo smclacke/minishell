@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/29 16:10:27 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/10/30 16:41:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,29 +55,13 @@ bool	check_for_builtin(t_parser *node)
 }
 
 /**
- * @param node linked list
- * @brief checks arguments to find output or input redirect
- * @todo add append with O_APPEND and << 
+ * @param temp parser linked list
+ * @brief count's amount of words including cmd for 2d array
+ * @return returns int representing word count.
 */
-bool	check_redirect(t_parser *node)
-{
-	if (!node)
-		return (false);
-	if (mini_strcmp(node->meta, ">") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, "<<") == 0)
-		return (true);
-	else if (mini_strcmp(node->meta, "<") == 0)
-		return (true);
-	// else if (mini_strcmp(node->meta, "<<") == 0)
-	// 	return (true); or add append to redirect_output
-	else
-		return (false);
-}
-
 static int	count_words(t_parser *temp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (temp)
@@ -91,6 +75,32 @@ static int	count_words(t_parser *temp)
 		temp = temp->next;
 	}
 	return (i);
+}
+
+/**
+ * @param temp parser linked list
+ * @param new_str 2d array containing command + strings and flags
+ * @param i int representing index of new_str
+ * @brief fill's 2d array with content of temp->str
+ * @return returns int representing word count.
+*/
+static char	**fill_array(t_parser *temp, char **new_str, int i)
+{
+	while (temp)
+	{
+		if (temp->cmd)
+			break ;
+		if (temp->str)
+		{
+			new_str[i] = temp->str;
+			i++;
+		}
+		if (temp->meta)
+			temp = temp->next;
+		temp = temp->next;
+	}
+	new_str[i] = NULL;
+	return (new_str);
 }
 
 /**
@@ -112,19 +122,6 @@ char	**get_argv(t_parser *lst)
 	temp = lst->next;
 	new_str[0] = lst->cmd;
 	i = 1;
-	while (temp)
-	{
-		if (temp->cmd)
-			break ;
-		if (temp->str)
-		{
-			new_str[i] = temp->str;
-			i++;
-		}
-		if (temp->meta)
-			temp = temp->next;
-		temp = temp->next;
-	}
-	new_str[i] = NULL;
+	new_str = fill_array(temp, new_str, i);
 	return (new_str);
 }
