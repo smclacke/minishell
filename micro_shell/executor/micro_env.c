@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   env.c                                              :+:    :+:            */
+/*   micro_env.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:22:10 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/07/27 14:25:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:44:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
  * @brief malloc's and init node for linked list containing: 
  * key, value and next
  * @return node made
- * @todo 
- * 1) needs to add previous in case of doubly linked list
 */
 t_env	*micro_env_lstnew(void *key, void *value)
 {
@@ -73,7 +71,6 @@ t_env	*micro_env_lstlast(t_env *lst)
  * @param lst linked list
  * @param new new node to be added to linked list 
  * @brief loops through list to add the new node to the back
- * @todo adding previous in case of doubly linked list
 */
 void	micro_env_lstadd_back(t_env **lst, t_env *new)
 {

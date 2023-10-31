@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 22:51:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:39:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_env	*env_lstlast(t_env *lst)
  * @param lst linked list
  * @param new new node to be added to linked list 
  * @brief loops through list to add the new node to the back
- * @todo adding previous in case of doubly linked list
 */
 void	env_lstadd_back(t_env **lst, t_env *new)
 {

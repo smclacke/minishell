@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:28:45 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 22:06:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:44:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,6 @@ int	micro_strcmp(char *s1, char *s2)
  * @brief checks arguments to find built-ins: 
  * echo, cd, pwd, export, unset, env and exit
  * @return EXIT_FAILURE if no built-in was found
- * @todo 
- * 1) needs to be passed to actual process,
- * 2) exit(EXIT_FAILURE) is it really neccesary?
- * 3) MAYBE MAKE IT A BOOL?
 */
 void	micro_check_for_builtin(t_parser *lst, t_env *env)
 {

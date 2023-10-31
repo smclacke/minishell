@@ -156,7 +156,7 @@ THE OLD ONE JUST INCASE
  * @param env environmet linked list
  * @brief checks for a $ sign in the node
  * expands the string to actual value
- * @todo when "" '' quotes are handled check and adjust again
+  when "" '' quotes are handled check and adjust again
 */
 // char	*exp_dollar(char *str, t_env **env, t_expand *exp, int len)
 // {

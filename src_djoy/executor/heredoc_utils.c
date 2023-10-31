@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 14:59:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:40:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ void	setup_heredoc(t_parser *lst, char *str, int i)
 /**
  * @param lst parser linked list
  * @brief initializes one or multiple heredoc in parent process
- * @todo
- * norm proof
- * heredoc = ft_strjoin("/temp/heredoc", number);// or heredoc
- * INODE (into files deeeep)
+ * INODE (files)
  * when opening file and writing to it it changes te position.
  * within that fd there's info about the position in the file 
  * until content ends.

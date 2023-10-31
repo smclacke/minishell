@@ -6,12 +6,18 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 18:31:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:35:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 
+/**
+ * @param temp t_parser linked list
+ * @brief checks for '-' and 'n' in sequence in string
+ * @return returns true if sequence is -n(or multiple n)
+ * returns false if [0] is not '-' and sequence is not 'n'
+*/
 static bool	is_all_n(t_parser *temp)
 {
 	int	j;
@@ -28,6 +34,10 @@ static bool	is_all_n(t_parser *temp)
 	return (true);
 }
 
+/**
+ * @param temp t_parser linked list
+ * @brief writes string and space to the terminal
+*/
 static void	write_line(t_parser *temp)
 {
 	while (temp && temp->str)
@@ -41,10 +51,11 @@ static void	write_line(t_parser *temp)
 }
 
 /**
- * @param node string to echo
+ * @param lst t_parser linked list
  * @brief writes node after command on standart output followed by /n char
- * -n TBA that eliminates the endline char in output 
+ * -n that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
+ * @todo mimic the same return values?
 */
 void	ft_echo(t_parser *lst)
 {
