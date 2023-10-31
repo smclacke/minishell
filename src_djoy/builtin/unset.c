@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 18:58:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 23:40:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * @param str key given as string
  * @param env pointer to environment
  * @brief loops through list and finds the key's to delete
+ * @todo are we leaking here?
 */
 static void	mini_remove_env(char *str, t_env **env)
 {
