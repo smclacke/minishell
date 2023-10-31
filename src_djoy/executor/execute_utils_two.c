@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 19:18:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/30 19:16:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	count = lst->n_cmd;
 	if (count == 1 && check_for_builtin(lst))
 	{
-		printf("hello??\n");
 		redirect(lst, data);
 		do_builtin(lst, env);
 		return (true);
@@ -41,6 +40,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param env  environment linked list
  * @param data execute struct
  * @brief forks, checks if it didnt fail, enters child process
+ * @todo cat << EOF forked niet 
 */
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -79,7 +79,6 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process,  calls init_pipes
  * init_forks and close_between in a while loop
- * @todo input like only hi segfaults
 */
 void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -92,7 +91,6 @@ void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	{
 		if (count >= 1 && lst->cmd)
 		{
-			printf("hello there again\n");
 			init_pipe(i, count, data);
 			init_fork(lst, env, data);
 			close_between(data);
@@ -102,43 +100,28 @@ void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 		lst = lst->next;
 	}
 }
-// ==62364==ERROR: LeakSanitizer: detected memory leaks
 
-// Direct leak of 7 byte(s) in 2 object(s) allocated from:
-//     #0 0x49a26d in malloc (/home/dreijans/Documents/rank3/minishell/djoyke+0x49a26d)
-//     #1 0x7fd7511aebac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
-
-// SUMMARY: AddressSanitizer: 7 byte(s) leaked in 2 allocation(s).
-void	check_str_for_file(t_parser *node, t_execute *data)
+/**
+ * @param lst parser linked list
+ * @param execute execute struct
+ * @brief checks for redirects and enters redirect in or outfile function
+ * @todo
+ * single redirects do nothing or segfault.
+*/
+void	redirect(t_parser *lst, t_execute *data)
 {
-	struct stat	file_stat;
-	char	*str;
-
-	if (mini_strcmp(node->cmd, "cat") == 0)
+	if (!lst->next)
+		return ;
+	lst = lst->next;
+	while (lst && !lst->cmd)
 	{
-		node = node->next;
-		str = node->str;
-		// node = node->next;
-		if (data->hdoc_fd != -1)
+		if (check_redirect(lst) != 0)
 		{
-			str = "heredoc1";
+			redirect_infile(lst, data);
+			redirect_heredoc(lst);
+			redirect_outfile(lst, data);
+			redirect_append(lst, data);
 		}
-		if (access(str, F_OK) != 0)
-			dprintf(STDERR_FILENO, INFILE_ERROR, node->str);
-		if (stat(str, &file_stat) == 0)
-		{
-			if (S_ISREG(file_stat.st_mode))
-			{
-				data->hdoc_fd = open(str, O_RDWR, 0644);
-				if (data->hdoc_fd == -1)
-					mini_error("open infile", errno);
-				if (dup2(data->hdoc_fd, STDIN_FILENO) == 0)
-					close(data->hdoc_fd);
-			}
-			if (S_ISDIR(file_stat.st_mode))
-				dprintf(STDERR_FILENO, "[%s] is a directory\n", str);
-			else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
-				dprintf(STDERR_FILENO, "its not a file or directory\n");
-		}
+		lst = lst->next;
 	}
 }

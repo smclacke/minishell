@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 22:04:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/30 19:16:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_parser	*lexer_listnew(void *input)
 		mini_error("malloc error listnew", errno);
 	ft_bzero(new, sizeof(t_parser));
 	new->input = input;
+	new->hd_fd = -1;//trying something out hihi "djoyke"
 	new->next = NULL;
 	return (new);
 }

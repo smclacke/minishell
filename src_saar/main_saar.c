@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   main_saar.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
+/*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 15:05:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 15:26:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 		printf("file = %s\t", list->file);
 		printf("meta = %s\t", list->meta);
 		printf("str = %s\t", list->str);
-		printf("n_cmd = %i\n", list->n_cmd);
+		printf("n_cmd = %i\t", list->n_cmd);
+		printf("hd_fd = %i\n", list->hd_fd);
 		i++;
 		list = list->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 19:18:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/30 19:14:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-#include <dirent.h>
+# include <dirent.h>
 
 # define READ 0
 # define WRITE 1
@@ -77,6 +77,7 @@ typedef struct s_parser
 	char				*str;
 	int					flag;
 	int					n_cmd;
+	int					hd_fd;//trying something out hihi "djoyke"
 	enum e_exit			exit_code;
 	struct s_parser		*next;
 }				t_parser;
@@ -118,8 +119,21 @@ int				is_pipe(void *input);
 char			*is_redirect(void *input);
 t_parser		*shelly_parser_print(t_parser *tokens);
 
+<<<<<<< HEAD
+/**
+ * @brief	linked list containing the environment
+ * @param	key: string containing the key part of the environment
+ * @param	value: string containing the value part of the environment
+ * @param	full: string containing full line of the environment
+ * 			including semicolon.
+ * @param	next: env struct pointing to the next node in the linked list
+ * 			if no next then it points to NULL.
+ * @param	has_value: int used as checkpoint if the key has a value
+*/
+=======
 
 //---- Executor ----//
+>>>>>>> ce7c77caa6505be6a1df0d7feb1f6b4ac2900190
 typedef struct s_env
 {
 	char				*key;
@@ -135,23 +149,37 @@ typedef struct s_expand
 	char				*before_dollar;
 	char				*env_value;
 	char				*comp_str;
-	int					i;//are we using this?
-	int					j;//are we using this?
 }							t_expand;
 
+<<<<<<< HEAD
+/**
+ * @brief	struct containing variables needed for execution process
+ * @param	fork_pid: int to store fork_pid in
+ * @param	pipe_left: pipe used to read and write to in process
+ * @param	pipe_right: pipe used to read and write to in process
+ * @param	path: 2d array storing the path to a command.
+ * @param	env_array: 2d array storing environment from environment linked list
+ * @param	in: int storing fd for infile
+ * @param	out: int storing fd for outfile
+ * @param	count: int storing amount of commands in parser linked list
+ * @param	fd: int storing a fd
+ * @todo	do I need fd?
+*/
+=======
 void	ft_expand(t_parser *tokens, t_env **env);
 //----Execution----//
+>>>>>>> ce7c77caa6505be6a1df0d7feb1f6b4ac2900190
 typedef struct s_execute
 {
-	int				fork_pid;
+	pid_t			fork_pid;
 	int				pipe_left[2];
 	int				pipe_right[2];
 	char			**path;
 	char			**env_array;
 	int				in;
 	int				out;
-	int				hdoc_fd;
 	int				count;
+	int				fd;
 }						t_execute;
 
 void			free_remain_struct(t_expand *data);
@@ -161,6 +189,15 @@ bool			check_for_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
 void			redirect_outfile(t_parser *head, t_execute *data);
 void			redirect_infile(t_parser *head, t_execute *data);
+void			redirect_append(t_parser *head, t_execute *data);
+void			init_heredoc(t_parser *lst);
+void			redirect(t_parser *lst, t_execute *data);
+void			redirect_heredoc(t_parser *lst);
+char			*set_heredoc_name(int i);
+void			setup_heredoc(t_parser *lst, char *str, int i);
+void			write_to_heredoc(t_parser *lst, char *file_name);
+void			write_to_file(char *read_line, int file);
+void			infile_error(t_parser *head);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);
@@ -200,13 +237,11 @@ void			free_data(t_execute *data);
 void			close_all(t_execute *data);
 void			close_between(t_execute *data);
 void			init_pipe(int i, int count, t_execute *data);
-int				redirect(t_parser *lst, t_execute *data);
 void			init_pipes_child(t_execute *data);
 void			init_fork(t_parser *lst, t_env **env, t_execute *data);
 bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
-void			heredoc(t_parser *lst, t_execute *data);
-void			check_str_for_file(t_parser *node, t_execute *data);
+char			**get_argv(t_parser *lst);
 
 //----Utils----//
 void			mini_error(char *string, int error);

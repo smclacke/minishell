@@ -6,11 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:17:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/30 19:06:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+
+#define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
 /**
  * @param string argument given to perror
@@ -50,6 +52,8 @@ int	mini_strcmp(char *s1, char *s2)
  * @param data struct to be updated with fd's and 2d arrays for later use
  * @param env 
  * @brief intitializes struct before further use
+ * @todo
+ * do I need data->fd?
 */
 void	init_execute_struct(t_execute *data)
 {
@@ -62,8 +66,8 @@ void	init_execute_struct(t_execute *data)
 	data->env_array = NULL;
 	data->in = -1;
 	data->out = -1;
-	data->hdoc_fd = -1;
 	data->count = 0;
+	data->fd = -1;
 }
 
 /**
@@ -75,4 +79,14 @@ void	free_strs(char *str, char *str2)
 {
 	free (str);
 	free (str2);
+}
+
+/**
+ * @param head parser linked list
+ * @brief throws error message and exits 
+*/
+void	infile_error(t_parser *head)
+{
+	dprintf(STDERR_FILENO, INFILE_ERROR, head->file);
+	exit (0);
 }
