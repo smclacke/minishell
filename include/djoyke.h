@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 19:14:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 15:54:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_parser
 }				t_parser;
 
 // utils
-void			free_tokens(t_parser *tokens);
+void				free_tokens(t_parser *tokens);
 t_parser			*print_the_full_thing(t_parser *tokens);
 
 // lexer
@@ -119,7 +119,6 @@ int				is_pipe(void *input);
 char			*is_redirect(void *input);
 t_parser		*shelly_parser_print(t_parser *tokens);
 
-<<<<<<< HEAD
 /**
  * @brief	linked list containing the environment
  * @param	key: string containing the key part of the environment
@@ -130,10 +129,6 @@ t_parser		*shelly_parser_print(t_parser *tokens);
  * 			if no next then it points to NULL.
  * @param	has_value: int used as checkpoint if the key has a value
 */
-=======
-
-//---- Executor ----//
->>>>>>> ce7c77caa6505be6a1df0d7feb1f6b4ac2900190
 typedef struct s_env
 {
 	char				*key;
@@ -144,6 +139,7 @@ typedef struct s_env
 }							t_env;
 
 //---- Expander ----//
+void				ft_expand(t_parser *lst, t_env **env);
 typedef struct s_expand
 {
 	char				*before_dollar;
@@ -151,7 +147,6 @@ typedef struct s_expand
 	char				*comp_str;
 }							t_expand;
 
-<<<<<<< HEAD
 /**
  * @brief	struct containing variables needed for execution process
  * @param	fork_pid: int to store fork_pid in
@@ -165,10 +160,6 @@ typedef struct s_expand
  * @param	fd: int storing a fd
  * @todo	do I need fd?
 */
-=======
-void	ft_expand(t_parser *tokens, t_env **env);
-//----Execution----//
->>>>>>> ce7c77caa6505be6a1df0d7feb1f6b4ac2900190
 typedef struct s_execute
 {
 	pid_t			fork_pid;

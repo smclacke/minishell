@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/24 19:31:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 15:42:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*check_if_expand(char *str)
 	}
 	return (str);
 }
-
+// AND FILLEEESSSSSSS
 char	*set_expand_string(t_parser *lst, t_expand *str, int *sign)
 {
 	t_parser		*tmp;
