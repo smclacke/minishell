@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 20:23:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 20:27:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,8 +202,6 @@ void			print_list(t_env *env);
 void			print_list_key(t_env *env);
 void			print_list_value(t_env *env);
 char			**list_to_string(t_env *env);
-void			print_env_list(t_env *lst);
-void			print_list_full(t_env *env);
 void			free_env(t_env **lst);
 
 //---- Built-in ----//
@@ -240,7 +238,6 @@ char			**get_argv(t_parser *lst);
 void			mini_error(char *string, int error);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
-void			print_parser_list(t_parser *lst);
 void			free_strs(char *str, char *str2);
 
 //------------ Minishell -----------//
