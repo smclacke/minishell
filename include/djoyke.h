@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 19:06:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 14:50:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_parser
 	char				*str;
 	int					flag;
 	int					n_cmd;
-	int					hd_fd;//trying something out hihi "djoyke"
+	int					hd_fd;
 	enum e_exit			exit_code;
 	struct s_parser		*next;
 }				t_parser;

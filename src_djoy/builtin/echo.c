@@ -6,11 +6,42 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 21:28:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:13:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
+
+static bool	is_all_n(t_parser *temp)
+{
+	int	j;
+
+	j = 1;
+	if (temp->str[0] != '-')
+		return (false);
+	while (temp && temp->str[0] == '-' && temp->str[j] != '\0')
+	{
+		if (temp->str[j] != 'n')
+		{
+			// printf("helloi?\n");
+			return (false);
+		}
+		j++;
+	}
+	return (true);
+}
+
+static void	write_line(t_parser *temp)
+{
+	while (temp && temp->str)
+	{
+		if (temp->str)
+			write(1, temp->str, ft_strlen(temp->str));
+		if (temp->next)
+			write(1, " ", 1);
+		temp = temp->next;
+	}
+}
 
 /**
  * @param node string to echo
@@ -42,13 +73,9 @@
 void	ft_echo(t_parser *lst)
 {
 	t_parser	*temp;
-	int			i;
-	int			j;
 	int			is_flag;
 
 	temp = lst;
-	i = 0;
-	j = 0;
 	is_flag = 0;
 	if (!temp->cmd)
 		mini_error("temp->cmd", errno);
@@ -63,43 +90,13 @@ void	ft_echo(t_parser *lst)
 		write(1, "\n", 1);
 		return ;
 	}
-	while (temp)
+	while (temp && is_all_n(temp))
 	{
-		if (temp->str[0] == '-')
-		{
-			j = 1;
-			while (temp->str[j] && temp->str[j] == 'n')
-				j++;
-			if (temp->str[j] && temp->str[j] != 'n')
-			{
-				while (temp && temp->str)
-				{
-					write(1, temp->str, ft_strlen(temp->str));
-					write(1, " ", 1);
-					temp = temp->next;
-				}
-			}
-			if (!temp)
-				break ;
-		}
-		if (temp->str[0] != '-')
-		{
-			while (temp && temp->str)
-			{
-				write(1, temp->str, ft_strlen(temp->str));
-				write(1, " ", 1);
-				temp = temp->next;
-			}
-			if (!temp)
-				break ;
-		}
-		if (temp->str[0] != '-' && !temp->next)
-		{
-			write(1, temp->str, ft_strlen(temp->str));
-			is_flag++;
-		}
 		temp = temp->next;
+		is_flag++;
 	}
+	write_line(temp);
+	if (temp)
 	if (is_flag == 0)
 		write(1, "\n", 1);
 }

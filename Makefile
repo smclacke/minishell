@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/30 21:09:15 by dreijans      ########   odam.nl          #
+#    Updated: 2023/10/31 17:55:26 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,7 @@ OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
-SRCS_DJOY		=	main_djoy.c							\
-					builtin/echo.c						\
+SRCS_DJOY		=	builtin/echo.c						\
 					builtin/cd.c 						\
 					builtin/pwd.c 						\
 					builtin/export.c 					\
