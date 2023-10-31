@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/26 18:20:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 15:38:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*save_this(t_expand *str, int i)
 	if (!str->done) // if it fails or there wasnt anything before dollar
 		return (str->input);
 	str->input = ft_strtrim(str->input, str->done);
-	// add str->before_dollar to assed as first bit of str
 	return (str->input);
 }
 
