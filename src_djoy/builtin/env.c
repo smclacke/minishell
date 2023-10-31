@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:16:24 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 18:55:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:35:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 /**
  * @param env environment stored in linked list
  * @brief prints linked list containing env key and value
- * @todo remove what the shell printf
 */
 void	ft_env(t_env *env)
 {
 	t_env	*head;
 
 	head = env;
-	printf("what the shell env\n");
 	while (head != NULL)
 	{
 		if (head->has_value)

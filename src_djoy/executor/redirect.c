@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 18:35:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 15:01:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	redirect_infile(t_parser *head, t_execute *data)
 
 	if (mini_strcmp(head->meta, "<") == 0)
 	{
-		head = head->next;
+		if (head->next)
+			head = head->next;
 		if (access(head->file, F_OK) != 0)
 			infile_error(head);
 		if (stat(head->file, &file_stat) == 0)
@@ -71,7 +72,8 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 
 	if (mini_strcmp(head->meta, ">") == 0)
 	{
-		head = head->next;
+		if (head->next)
+			head = head->next;
 		if (access(head->file, F_OK) != 0)
 		{
 			data->out = open(head->file, O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -125,7 +127,8 @@ void	redirect_append(t_parser *head, t_execute *data)
 
 	if (mini_strcmp(head->meta, ">>") == 0)
 	{
-		head = head->next;
+		if (head->next)
+			head = head->next;
 		if (access(head->file, F_OK) != 0)
 		{
 			data->out = open(head->file, O_CREAT | O_RDWR | O_APPEND, 0644);

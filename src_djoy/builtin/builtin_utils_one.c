@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:26:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:47:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ void	free_all(t_env *env)
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins: 
  * echo, cd, pwd, export, unset, env and exit
- * @return EXIT_FAILURE if no built-in was found
- * @todo 
- * 1) needs to be passed to actual process,
- * 2) exit(EXIT_FAILURE) is it really neccesary?
- * 3) MAYBE MAKE IT A BOOL?
- * 4) former line 73: gives pwd not the entire path after unsetting
 */
 void	do_builtin(t_parser *node, t_env **env)
 {
@@ -102,12 +96,10 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * same for unset
  * @return true if nothing wrong found with the words
  * @todo 
- * HANDLE QUOTES WHEN IT'S FIXED IN THE PARSER, you're doing great honey
  * bash-3.2$ export djoyke="gek gggg" (two words if it's in quotations)
  * bash-3.2$ env
  * env part:
  * djoyke=gek gggg
- * bash-3.2$
 */
 bool	word_check(t_parser *lst)
 {

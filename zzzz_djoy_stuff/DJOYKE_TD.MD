@@ -1,5 +1,4 @@
-
- -----------------------SARAH UPDATE------------------------------
+-----------------------SARAH UPDATE------------------------------
 
 1) 
     Avoid using more than one global variable to indicate a received signal. Consider
@@ -33,7 +32,6 @@
         struct s_parser		*next;
     }				t_parser;
 
-
 2) 
     minishell 🍌cat <<
     [0]      cmd = cat      file = (null)   meta = (null)   str = (null)    n_cmd = 1  hd_fd = -1
@@ -41,7 +39,6 @@
     [1]    765848 segmentation fault (core dumped)  ./djoyke
 
     parser or lexer need to throw syntax errors!
-
 
 3) 
     dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
@@ -58,7 +55,7 @@
 ------------------------------TO DO----------------------------
 
 1) 
-    Handle $? which should expand to the exit status of the most recently executed foreground pipeline.
+    Handle $? which should expand to the exit status of the most recently executed foreground pipeline. (no signals)
 
 2) 
     Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
@@ -84,3 +81,7 @@
 
 4) 
     check all the to do's in code
+
+5) 
+    ls |
+    multiple times? does that fail?

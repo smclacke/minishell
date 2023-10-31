@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:03 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 19:15:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:50:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	init_pipe(int i, int count, t_execute *data)
 /**
  * @param data execute struct
  * @brief closes pipes when value is not -1. sets to -1 after closing
- * @todo
- * check if we need to close data->hdoc_fd
 */
 void	close_between(t_execute *data)
 {

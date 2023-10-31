@@ -6,69 +6,78 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/25 20:46:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:35:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 
 /**
- * @param node string to echo
+ * @param temp t_parser linked list
+ * @brief checks for '-' and 'n' in sequence in string
+ * @return returns true if sequence is -n(or multiple n)
+ * returns false if [0] is not '-' and sequence is not 'n'
+*/
+static bool	is_all_n(t_parser *temp)
+{
+	int	j;
+
+	j = 1;
+	if (temp->str[0] != '-')
+		return (false);
+	while (temp && temp->str[0] == '-' && temp->str[j] != '\0')
+	{
+		if (temp->str[j] != 'n')
+			return (false);
+		j++;
+	}
+	return (true);
+}
+
+/**
+ * @param temp t_parser linked list
+ * @brief writes string and space to the terminal
+*/
+static void	write_line(t_parser *temp)
+{
+	while (temp && temp->str)
+	{
+		if (temp->str)
+			write(1, temp->str, ft_strlen(temp->str));
+		if (temp->next)
+			write(1, " ", 1);
+		temp = temp->next;
+	}
+}
+
+/**
+ * @param lst t_parser linked list
  * @brief writes node after command on standart output followed by /n char
- * -n TBA that eliminates the endline char in output 
+ * -n that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
- * @todo 
- * bash-3.2$ echo -nnnnnnn hi
- * hibash-3.2$ echo -----n hi
- * -----n hi
- * bash-3.2$ echo hi -n
- * hi -n
- * bash-3.2$ echo "hi" -n
- * hi -n
- * fix it!!!!!!!!!
- * make a part that when it encouters $random_name to go in 
- * env and take whats after the random_name = sign
+ * @todo mimic the same return values?
 */
 void	ft_echo(t_parser *lst)
 {
-	int	i;
-	int	is_flag;
+	t_parser	*temp;
+	int			is_flag;
 
-
-	i = 0;
+	temp = lst;
 	is_flag = 0;
-	if (!lst->cmd)
-		mini_error("lst->cmd", errno);
-	if (!lst->next)
+	if (!temp->cmd)
+		mini_error("temp->cmd", errno);
+	if (!temp->next)
 	{
-		printf("\n"); // use write
+		write(1, "\n", 1);
 		return ;
 	}
-	lst = lst->next;
-	if (!lst->str)
+	temp = temp->next;
+	while (temp && is_all_n(temp))
 	{
-		// 1) check if the next one is a meta, 
-		//    | >> etc to see if you need to echo into something
-		// 2) or to just put the newline on the terminal
-		printf("\n");// use write
+		temp = temp->next;
+		is_flag++;
 	}
-	while (lst)
-	{
-		if (lst->str)
-		{
-			if (ft_strcmp(lst->str, "-n") == 0)
-			{
-				is_flag++;
-				i++;
-			}
-			else
-			{
-				printf("%s ", lst->str); // use write
-				i++;
-			}
-		}
-		lst = lst->next;
-	}
-	if (is_flag == 0)
-		printf("\n");// use write
+	write_line(temp);
+	if (is_flag == 0 || !temp->str)
+		write(1, "\n", 1);
 }

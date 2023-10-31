@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 19:16:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:51:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param env  environment linked list
  * @param data execute struct
  * @brief forks, checks if it didnt fail, enters child process
- * @todo cat << EOF forked niet 
 */
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -105,8 +104,6 @@ void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param lst parser linked list
  * @param execute execute struct
  * @brief checks for redirects and enters redirect in or outfile function
- * @todo
- * single redirects do nothing or segfault.
 */
 void	redirect(t_parser *lst, t_execute *data)
 {

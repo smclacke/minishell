@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/26 15:13:43 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/08/03 17:30:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:36:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	micro_build(t_parser *lst, t_env *env)
  * @param env string or char to compare with
  * @brief checks arguments to find meta_chars: 
  * $, >>, <<, >, <, |
- * @todo 
- * 1) needs to be passed to actual process,
- * 2) MAYBE MAKE IT A BOOL?
 */
 void	micro_check_for_meta(t_parser *lst)
 {
