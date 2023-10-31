@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:34:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 20:47:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 		return (NULL);
 	new->key = key;
 	new->value = value;
-	// new->full = full;
+	new->full = full;
 	new->next = NULL;
 	new->has_value = has_value;
 	return (new);

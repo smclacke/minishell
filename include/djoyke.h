@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 20:27:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 23:00:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ typedef struct s_parser
 }				t_parser;
 
 // utils
-void				free_tokens(t_parser *tokens);
-t_parser			*print_the_full_thing(t_parser *tokens);
+void			free_tokens(t_parser *tokens);
+t_parser		*print_the_full_thing(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//
@@ -139,7 +139,7 @@ typedef struct s_env
 }							t_env;
 
 //---- Expander ----//
-void				ft_expand(t_parser *lst, t_env **env);
+void			ft_expand(t_parser *lst, t_env **env);
 
 typedef struct s_expand
 {
@@ -217,6 +217,7 @@ void			ft_pwd(void);
 void			ft_export(t_parser *lst, t_env **env);
 void			ft_unset(t_parser *lst, t_env **env);
 void			reasing_value(char *temp, char *str, t_env *head);
+void			dash_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
 
 //----Executor----//
 void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
@@ -239,6 +240,8 @@ void			mini_error(char *string, int error);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
 void			free_strs(char *str, char *str2);
+char			*ft_getenv(t_env *env, char *str);
+int				list_iter(t_parser *lst);
 
 //------------ Minishell -----------//
 /**

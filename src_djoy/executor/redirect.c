@@ -6,24 +6,22 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 15:01:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 21:11:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
 
+#define DIR_MESSAGE "minishell: %s: Is a directory\n"
+#define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"
+
 /**
  * @param head parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
- * @brief checks for redirects enters redirect function
+ * @brief checks for redirects enters redirect function 
  * @todo
- * if dir - `opendir`: Opens a directory stream.
- * readdir`: Reads a directory entry.
- * check how to do last else statement when exiting from a builtin
- *  * check how to do else statement at the end when exiting from a builtin
- * 	// else
-	// 	exit(1); only when we figure out how to exit from a builtin use this :)
- * when infile does not exist dont continue opening files thats for in
+ * check how to do else statement at the end when exiting from a builtin
+ * exit(1); only when we figure out how to exit from a builtin use this :)
  * 
 */
 void	redirect_infile(t_parser *head, t_execute *data)
@@ -47,9 +45,9 @@ void	redirect_infile(t_parser *head, t_execute *data)
 					close(data->in);
 			}
 			if (S_ISDIR(file_stat.st_mode))
-				dprintf(STDERR_FILENO, "[%s] is a directory\n", head->file);
+				dprintf(STDERR_FILENO, DIR_MESSAGE, head->file);
 			else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
-				dprintf(STDERR_FILENO, "its not a file or directory\n");
+				dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->file);
 		}
 	}
 }
@@ -59,12 +57,8 @@ void	redirect_infile(t_parser *head, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function
  * @todo
- * if dir - `opendir`: Opens a directory stream.
- * readdir`: Reads a directory entry.
  * check how to do else statement at the end when exiting from a builtin
- * 	// else
-	// 	exit(1); only when we figure out how to exit from a builtin use this :)
- * 
+ * exit(1); only when we figure out how to exit from a builtin use this :)
 */
 void	redirect_outfile(t_parser *head, t_execute *data)
 {
@@ -85,7 +79,7 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 			if (S_ISREG(file_stat.st_mode))
 				data->out = open(head->file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 			if (S_ISDIR(file_stat.st_mode))
-				dprintf(STDERR_FILENO, "[%s] is a directory\n", head->file);
+				dprintf(STDERR_FILENO, DIR_MESSAGE, head->file);
 		}
 		if (dup2(data->out, STDOUT_FILENO) == 0)
 			close(data->out);

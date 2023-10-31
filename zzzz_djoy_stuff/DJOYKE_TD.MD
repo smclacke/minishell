@@ -97,3 +97,6 @@
     cd ""
     cd ''
     is equivalent of cd_. (cd .)
+
+9) 
+    find solid evidence for allowing dprintf, if not just change it you lazy bum
