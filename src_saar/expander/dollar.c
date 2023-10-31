@@ -5,69 +5,95 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/26 18:20:36 by smclacke      ########   odam.nl         */
+/*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/10/31 16:14:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-char	*save_this(t_expand *str, int i)
+// TOO LONGGGGGGG
+/**
+ * dollar could be cmd, str or file.. need to save which to return expanded 
+ * back to correct var in parser struct
+*/
+static char	*set_expand_string(t_parser *lst, t_expand *str)
 {
-	str->done = ft_substr(str->input, 0, i);
-	if (!str->done) // if it fails or there wasnt anything before dollar
-		return (str->input);
-	str->input = ft_strtrim(str->input, str->done);
-	// add str->before_dollar to assed as first bit of str
-	return (str->input);
-}
+	t_parser		*tmp;
 
-char	*expand_this(t_expand *str, t_env **env, int i)
-{
-	i++;
-	while (str->input[i] && !ft_dollar(str->input[i]))
-		i++;
-	str->do_expand = ft_substr(str->input, 0, i);
-	if (!str->do_expand)
-		return (str->input);
-	str->do_expand = ft_strtrim(str->input, "$");
-	printf("str->do_expand HERE = %s\n", str->do_expand);
-	str->input = ft_strtrim(str->input, "$");
-	str->input = ft_strtrim(str->input, str->do_expand);
-	printf("str->input HERE = %s\n", str->input);
-	if (get_check_value(str, env))
-		mini_error("bit fucked in expand_this()", errno); // this fails with two dollars
-	free (str->do_expand);
-	printf("epxanded = %s\n", str->expanded);
-	printf("done = %s\n", str->done);
-	str->done = ft_strjoin(str->done, str->expanded);
-	printf("str->done = %s\n", str->done);
-	printf("str->input = %s\n", str->input);
-	return (str->input);
-}
-
-char	*check_first(t_expand *str)
-{
-	int		i = 0;
-	
-	while (str->input[i] && !ft_dollar(str->input[i]))
-		i++;
-	if (ft_dollar(str->input[i]))
-		str->input = save_this(str, i);
-	return (str->input);
-}
-
-char	*check_rest(t_expand *str, t_env **env, int i)
-{
-	while (str->input[i] && !ft_dollar(str->input[i]))
-		i++;
-	if (ft_dollar(str->input[i]))
+	tmp = lst;
+	if (tmp->cmd)
 	{
-		str->input = expand_this(str, env, i);
+		if (ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
+		{
+			str->sign = 1;
+			str->input = tmp->cmd;
+		}
+	}
+	else if (tmp->str)
+	{
+		if (ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
+		{
+			str->sign = 2;
+			str->input = tmp->str;
+		}
+	}
+	else if (tmp->file)
+	{
+		if (ft_strnstr(tmp->file, "$", ft_strlen(tmp->file)))
+		{
+			str->sign = 3;
+			str->input = tmp->file;
+		}
+	}
+	return (str->input);
+}
+
+/**
+ * get first part of string, then loop through separating dollars and quotes...
+*/
+static char	*dollar(t_expand *str, t_env **env)
+{
+	(void)env;
+	int		i = 0;
+
+	str->input = check_first(str);
+	while (str->input[i])
+	{
+		str->input = check_rest(str, env, i);
 		if (!str->input)
-			return (NULL);
+			return (str->done);
+		i++;
 	}
 	if (!str->input)
-		return (NULL);
-	return (str->input);
+		return (0);
+
+	return (str->done);
+}
+
+/**
+ * adding expanded str back into correct parser struct var
+*/
+void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
+{
+	str->input = set_expand_string(lst, str);
+	if (str->sign == 1 || str->sign == 2 || str->sign == 3)
+	{
+		str->done = dollar(str, env);
+		if (str->sign == 1)
+		{
+			lst->cmd = str->done;
+			str->sign = 0;
+		}
+		else if (str->sign == 2)
+		{
+			lst->str = str->done;
+			str->sign = 0;
+		}
+		else if (str->sign == 3)
+		{
+			lst->file = str->done;
+			str->sign = 0;
+		}
+	}
 }

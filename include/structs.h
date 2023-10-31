@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/30 19:13:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 16:04:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,14 @@ typedef struct s_parser
 	char				*str;
 	int					flag;
 	int					n_cmd;
-	int					hd_fd;//trying something out hihi "djoyke"
+	int					hd_fd;
 	enum e_exit			exit_code;
 	struct s_parser		*next;
 }				t_parser;
 
+/**
+ * expanding is soooooo much fun
+*/
 typedef struct s_expand
 {
 	char	*input;
@@ -80,25 +83,52 @@ typedef struct s_expand
 	char	*env_val;
 	char	*expanded;
 	char	*done;
+	int		sign; // gimme a sign..........
 }		t_expand;
 
+/**
+ * @brief	linked list containing the environment
+ * @param	key: string containing the key part of the environment
+ * @param	value: string containing the value part of the environment
+ * @param	full: string containing full line of the environment
+ * 			including semicolon.
+ * @param	next: env struct pointing to the next node in the linked list
+ * 			if no next then it points to NULL.
+ * @param	has_value: int used as checkpoint if the key has a value
+*/
 typedef struct s_env
 {
 	char				*key;
 	char				*value;
 	char				*full;
 	struct s_env		*next;
-	struct s_env		*previous;
 	int					has_value;
 }							t_env;
 
+/**
+ * @brief	struct containing variables needed for execution process
+ * @param	fork_pid: int to store fork_pid in
+ * @param	pipe_left: pipe used to read and write to in process
+ * @param	pipe_right: pipe used to read and write to in process
+ * @param	path: 2d array storing the path to a command.
+ * @param	env_array: 2d array storing environment from environment linked list
+ * @param	in: int storing fd for infile
+ * @param	out: int storing fd for outfile
+ * @param	count: int storing amount of commands in parser linked list
+ * @param	fd: int storing a fd
+ * @todo	do I need fd?
+*/
 typedef struct s_execute
 {
-	int		fd_in;
-	int		fork_pid;
-	int		pipe_fd[2];
-	char	**path;
-	char	**env_array;
-}				t_execute;
+	pid_t			fork_pid;
+	int				pipe_left[2];
+	int				pipe_right[2];
+	char			**path;
+	char			**env_array;
+	int				in;
+	int				out;
+	int				count;
+	int				fd;
+}						t_execute;
 
 #endif
