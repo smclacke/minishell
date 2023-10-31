@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 17:35:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:45:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+/**
+ * @todo errors
+*/
 
 /**
  * @brief	sorting all tokens from one process together
@@ -112,6 +116,7 @@ static t_parser	*handle_all(t_parser *data, int *flag)
  * @return	tokens: all the tokens given by the lexer have been
  * 			sorted into the parser struct variables making
  * 			them more managable for the executor
+ * @todo 	norm
 */
 t_parser	*parser(t_parser *tokens)
 {
@@ -143,7 +148,7 @@ t_parser	*parser(t_parser *tokens)
 		token_list = token_list->next;
 	}
 	free_tokens(token_list);
-	tokens->n_cmd = get_no_cmds(tokens);
 	tokens = sort_list(tokens);
+	tokens->n_cmd = get_no_cmds(tokens);
 	return (tokens);
 }

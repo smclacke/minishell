@@ -6,12 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 16:16:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:46:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo all of this shitt...
+*/
 static char	*expand_this(t_expand *str, t_env **env, int i)
 {
 	printf("something needs to be expanded\n");
@@ -37,6 +40,9 @@ static char	*expand_this(t_expand *str, t_env **env, int i)
 	return (str->input);
 }
 
+/**
+ * @todo all of this shitt...
+*/
 char	*check_rest(t_expand *str, t_env **env, int i)
 {
 	while (str->input[i] && !ft_dollar(str->input[i])) // OR QUOTES ('''')
@@ -52,6 +58,10 @@ char	*check_rest(t_expand *str, t_env **env, int i)
 	return (str->input);
 }
 
+
+/**
+ * @todo how to use both these but in my loopyyloopy
+*/
 static char	*save_this(t_expand *str, int i)
 {
 	str->done = ft_substr(str->input, 0, i);

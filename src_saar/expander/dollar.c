@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 16:14:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:41:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// TOO LONGGGGGGG
 /**
+ * @todo TOO LONGGGGGGG
  * dollar could be cmd, str or file.. need to save which to return expanded 
  * back to correct var in parser struct
 */
@@ -51,6 +51,7 @@ static char	*set_expand_string(t_parser *lst, t_expand *str)
 
 /**
  * get first part of string, then loop through separating dollars and quotes...
+ * @todo fix this
 */
 static char	*dollar(t_expand *str, t_env **env)
 {
@@ -73,6 +74,7 @@ static char	*dollar(t_expand *str, t_env **env)
 
 /**
  * adding expanded str back into correct parser struct var
+ * @todo comment
 */
 void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 {

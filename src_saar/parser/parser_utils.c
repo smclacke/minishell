@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 17:33:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:44:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+/**
+ * @todo errors
+*/
 
 t_parser	*handle_pipe(t_parser *data, int *flag)
 {
@@ -44,6 +48,9 @@ char	*is_redirect(void *input)
 	return (NULL);
 }
 
+/**
+ * @todo comment this out
+*/
 t_parser	*shelly_parser_print(t_parser *tokens)
 {
 	t_parser	*list;

@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/25 22:04:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:44:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+/**
+ * @todo errors
+*/
 
 /**
  * @brief	add new tokens to linked list of the t_parser struct

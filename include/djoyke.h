@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   djoyke.h                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:06:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 20:23:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

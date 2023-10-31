@@ -6,14 +6,14 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 16:00:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:39:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * don't think this is necessary anymore...
+ * @todo don't think this is necessary anymore...
 */
 char	*check_if_expand(char *str)
 {

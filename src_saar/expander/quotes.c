@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/11 20:03:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:47:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+/**
+ * @todo errors
+*/
 
 static char	*copy_quoteless(char *str, char *new, int q, int j)
 {

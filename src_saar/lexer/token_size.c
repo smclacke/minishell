@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/03 12:51:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:43:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+/**
+ * @todo errors??????????
+*/
 
 /**
  * @brief	find the start position of each token

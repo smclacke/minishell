@@ -6,14 +6,13 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/31 18:54:45 by smclacke      ########   odam.nl          #
+#    Updated: 2023/10/31 19:37:08 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
-MICRO_SHELL		= micro
 
 CFLAGS			= -Wall -Wextra -g -fsanitize=address
 # valgrind --leak-check=yes
@@ -27,20 +26,6 @@ IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 HEADER_DIR		= include
 HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
-
-## MINISHELL ##
-
-SRCS		=	main.c			\
-				executor.c		\
-				expander.c		\
-				lexer.c			\
-				parser.c
-
-SRC_DIR			= mini_src
-SRC				= $(addprefix $(SRC_DIR)/, $(SRCS))
-
-OBJ_DIR			= obj
-OBJ				= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
@@ -99,32 +84,6 @@ SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
 OBJ_SAAR_DIR	= obj_saar
 OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 
-## MICRO_SHELL ##
-
-SRCS_MICRO		= main.c						\
-					lexer/lexer.c				\
-					lexer/lexer_utils.c			\
-					parser/parser.c				\
-					lexer/parser_utils.c		\
-					parser/parser_quotes.c		\
-					builtin/micro_cd.c			\
-					builtin/micro_echo.c		\
-					builtin/micro_env.c			\
-					builtin/micro_export.c		\
-					builtin/micro_pwd.c			\
-					builtin/micro_unset.c		\
-					executor/micro_env.c 		\
-					executor/micro_execute.c	\
-					executor/micro_utils.c		\
-					expander/micro_expand.c 
-					
-
-MICRO_DIR		= micro_shell
-SRC_MICRO		= $(addprefix $(MICRO_DIR)/, $(SRCS_MICRO))
-
-OBJ_MICRO_DIR	= obj_micro
-OBJ_MICRO		= $(addprefix $(OBJ_MICRO_DIR)/, $(SRCS_MICRO:%.c=%.o))
-
 all				: libft $(NAME)
 
 djoy			: libft $(DJOY)
@@ -133,7 +92,6 @@ saar			: libft $(SAAR)
 
 libft			:
 	@ make -C include/libft
-
 
 ## EXECUTABLES
 
@@ -151,11 +109,6 @@ $(SAAR)			:	$(OBJ_SAAR) $(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
 	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
 	@ ./sarah
-
-$(MICRO_SHELL)	:	$(OBJ_MICRO)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(MICRO_SHELL)
-	@ echo "${WHITE}our micro mini shell${RESET}"
-	# @ ./micro
 
 ## OBJECTS
 
@@ -183,16 +136,6 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
-
-$(OBJ_MICRO_DIR)/%.o: $(MICRO_DIR)/%.c
-	@ mkdir -p $(OBJ_MICRO_DIR)
-	@ mkdir -p $(OBJ_MICRO_DIR)/parser
-	@ mkdir -p $(OBJ_MICRO_DIR)/lexer
-	@ mkdir -p $(OBJ_MICRO_DIR)/expand
-	@ mkdir -p $(OBJ_MICRO_DIR)/executor
-	@ mkdir -p $(OBJ_MICRO_DIR)/builtin
-	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
-
 ## Colours ##
 RESET		:= \033[0m
 RED			:= \033[1;91m
@@ -209,7 +152,6 @@ clean		:
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(OBJ_DJOY_DIR)
 	@rm -rf $(OBJ_SAAR_DIR)
-	@rm -rf $(OBJ_MICRO_DIR)
 
 fclean		:
 	@make -C include/libft fclean
@@ -219,9 +161,8 @@ fclean		:
 	@rm -rf $(NAME)
 	@rm -rf $(DJOY)
 	@rm -rf $(SAAR)
-	@rm -rf $(MICRO_SHELL)
 	@echo "${YELLOW} // Minishell fCleaned!${RESET}"
 
 re			: fclean all
 
-.PHONY: all clean fclean re libft sarah djoyke micro_shell
+.PHONY: all clean fclean re libft sarah djoyke
