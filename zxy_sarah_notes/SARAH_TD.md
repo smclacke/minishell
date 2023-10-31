@@ -36,7 +36,9 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
- ---> check if the parser syntax error thing is actually ok, check cmds too!
+ ---> leaks from lexer but like waaaa?
+
+ ---> check if the parser syntax error thing is actually ok
 
  ---> if here_doc, don't expand dollar, str is literal
 i.e. 
@@ -61,6 +63,11 @@ i.e.
  ---> leaks when ending with quotes
  ---> leaks if quotes aren't closed?
  ---> norm
+
+ Djoyke...
+
+ ---> outfile not created when only "> outfile"
+ ---> echo | echo ...
 
 
 ===========================================

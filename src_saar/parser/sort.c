@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:45:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 22:35:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,19 @@ static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 	if (!tmp)
 		return (NULL);
 	lst = tmp;
+	if (!lst)
+		mini_error("la la la, how you like it", errno);
 	sign = 0;
 	while (lst && !sign)
 	{
 		if (lst->cmd)
 		{
 			new_list = add_new_cmd(lst, new_list, lst->cmd);
+			if (!new_list)
+				mini_error("what a jokkkeeee", errno);
 			sign = 42;
 		}
 		lst = lst->next;
-	}
-	if (!sign)
-	{
-		printf("syntax error no cmd D:\n");
-		return (NULL);
 	}
 	return (new_list);
 }
@@ -45,9 +44,7 @@ static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
 {
 	t_parser	*tmp2;
-	int			sign;
 
-	sign = 0;
 	tmp2 = tmp;
 	if (!tmp2->next || !tmp)
 		return (NULL);
@@ -57,14 +54,10 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
 		if (tmp2->cmd)
 		{
 			new_list = add_new_cmd(tmp2, new_list, tmp2->cmd);
-			sign = 42;
+			if (!new_list)
+				mini_error("nein man", errno);
 		}
 		tmp2 = tmp2->next;
-	}
-	if (!sign)
-	{
-		printf("syntax error no cmd after pipe\n");
-		return (NULL);
 	}
 	return (new_list);
 }
@@ -77,7 +70,7 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
  * @param	tokens once the tokens are split up and the type of 
  * 			input is identified, list is sorted and returned to the executor
  * @return	new_list, same parsed list of tokens, just sorted
- * @todo	norm
+ * @todo	norm :):):):):):):):):):):):):):)
 */
 t_parser	*sort_list(t_parser *tokens)
 {
@@ -87,10 +80,12 @@ t_parser	*sort_list(t_parser *tokens)
 
 	sign = 0;
 	tmp = tokens;
+	if (!tmp)
+		mini_error("this is getting totally out of hand", errno);
 	new_list = NULL;
 	new_list = find_first_cmd(tmp, new_list);
 	if (!new_list)
-		return (NULL);
+		mini_error("godver", errno);
 	while (tmp)
 	{
 		if (!tmp->flag && shelly_strcmp(tmp->meta, "|") == 0)
@@ -98,16 +93,30 @@ t_parser	*sort_list(t_parser *tokens)
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
 			new_list = cmd_after_pipe(tmp, new_list);
 			if (!new_list)
-				return (NULL);
+				mini_error("booooooo you whore 0", errno);
 		}
 		else if (!tmp->flag && tmp->file)
+		{
 			new_list = add_new_file(tmp, new_list, tmp->file);
+			if (!new_list)
+				mini_error("booooooo you whore 1", errno);
+		}
 		else if (!tmp->flag && tmp->str)
+		{
 			new_list = add_new_str(tmp, new_list, tmp->str);
+			if (!new_list)
+				mini_error("booooooo you whore 2", errno);
+		}
 		else if (!tmp->flag && tmp->meta)
+		{
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
+			if (!new_list)
+				mini_error("booooooo you whore 3", errno);
+		}
 		tmp = tmp->next;
 	}
 	free_tokens(tmp);
+	if (!new_list)
+		mini_error("ohhhhh noooooooo", errno);
 	return (new_list);
 }

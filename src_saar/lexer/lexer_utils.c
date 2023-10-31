@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:44:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 22:20:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ t_parser	*lexer_listlast(t_parser *list)
 {
 	if (!list)
 		mini_error("uhoh error, lstlast", errno);
-	while (list->next)
-		list = list->next;
+	if (list->next)
+	{
+		while (list->next)
+			list = list->next;
+	}
 	return (list);
 }
 
@@ -43,7 +46,7 @@ t_parser	*lexer_listnew(void *input)
 	t_parser	*new;
 
 	new = (t_parser *)malloc(sizeof(*new));
-	if (!new)
+	if (!new || !input)
 		mini_error("malloc error listnew", errno);
 	ft_bzero(new, sizeof(t_parser));
 	new->input = input;
@@ -52,15 +55,15 @@ t_parser	*lexer_listnew(void *input)
 	return (new);
 }
 
-t_parser	*shelly_print_list(t_parser *token)
-{
-	t_parser	*list;
+// t_parser	*shelly_print_list(t_parser *token)
+// {
+// 	t_parser	*list;
 
-	list = token;
-	while (list)
-	{
-		printf("lexer list: [%s]\n", (char *)list->input);
-		list = list->next;
-	}
-	return (token);
-}
+// 	list = token;
+// 	while (list)
+// 	{
+// 		printf("lexer list: [%s]\n", (char *)list->input);
+// 		list = list->next;
+// 	}
+// 	return (token);
+// }
