@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 16:09:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 17:35:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 static t_parser	*handle_next(t_parser *data, char *type)
 {
 	if (is_meta(data->input))
-		data->meta = data->input;
+	{
+		printf("syntax error double meta\n");
+		return (NULL);
+	}
 	else if (ft_strcmp(type, LESSLESS) == 0)
 		data->str = data->input;
 	else
@@ -123,16 +126,20 @@ t_parser	*parser(t_parser *tokens)
 	{
 		type = is_redirect(token_list->input);
 		token_list = handle_all(token_list, &flag);
+		if (!token_list)
+			return (NULL);
 		if (type && token_list->next)
 		{
 			token_list = token_list->next;
 			token_list = handle_next(token_list, type);
+			if (!token_list)
+				return (NULL);
 		}
-		// else		// check this...
-		// {
-		// 	printf("syntax error\n");
-		// 	exit(EXIT_FAILURE);
-		// }
+		else if (type && !token_list->next)
+		{
+			printf("syntax error, nothing after meta\n");
+			return (NULL);
+		}
 		token_list = token_list->next;
 	}
 	free_tokens(token_list);

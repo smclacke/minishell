@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/26 15:13:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 17:54:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,20 @@ static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 		}
 		lst = lst->next;
 	}
+	if (!sign)
+	{
+		printf("syntax error no cmd D:\n");
+		return (NULL);
+	}
 	return (new_list);
 }
 
 static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
 {
 	t_parser	*tmp2;
+	int			sign;
 
+	sign = 0;
 	tmp2 = tmp;
 	if (!tmp2->next || !tmp)
 		return (NULL);
@@ -44,8 +51,16 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
 	while (tmp2 && !tmp2->flag && shelly_strcmp(tmp2->meta, "|") != 0)
 	{
 		if (tmp2->cmd)
+		{
 			new_list = add_new_cmd(tmp2, new_list, tmp2->cmd);
+			sign = 42;
+		}
 		tmp2 = tmp2->next;
+	}
+	if (!sign)
+	{
+		printf("syntax error no cmd after pipe\n");
+		return (NULL);
 	}
 	return (new_list);
 }
@@ -69,18 +84,22 @@ t_parser	*sort_list(t_parser *tokens)
 	tmp = tokens;
 	new_list = NULL;
 	new_list = find_first_cmd(tmp, new_list);
+	if (!new_list)
+		return (NULL);
 	while (tmp)
 	{
 		if (!tmp->flag && shelly_strcmp(tmp->meta, "|") == 0)
-		{
+		{	
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
 			new_list = cmd_after_pipe(tmp, new_list);
+			if (!new_list)
+				return (NULL);
 		}
-		if (!tmp->flag && tmp->file)
+		else if (!tmp->flag && tmp->file)
 			new_list = add_new_file(tmp, new_list, tmp->file);
-		if (!tmp->flag && tmp->str)
+		else if (!tmp->flag && tmp->str)
 			new_list = add_new_str(tmp, new_list, tmp->str);
-		if (!tmp->flag && tmp->meta)
+		else if (!tmp->flag && tmp->meta)
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
 		tmp = tmp->next;
 	}

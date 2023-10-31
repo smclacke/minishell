@@ -36,6 +36,8 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
+ ---> check if the parser syntax error thing is actually ok
+
  ---> if here_doc, don't expand dollar, str is literal
 i.e. 
 		export sarah=EOF
