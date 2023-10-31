@@ -85,3 +85,7 @@
 5) 
     ls |
     multiple times? does that fail?
+
+6) 
+    static void	build(t_parser *lst, t_env **env, t_execute *data)
+     * check the last while(wait(NULL) != -1) loop

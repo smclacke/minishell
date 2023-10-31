@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 14:50:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:02:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ typedef struct s_expand
  * @param	out: int storing fd for outfile
  * @param	count: int storing amount of commands in parser linked list
  * @param	fd: int storing a fd
- * @todo	do I need fd?
 */
 typedef struct s_execute
 {
@@ -168,7 +167,6 @@ typedef struct s_execute
 	int				in;
 	int				out;
 	int				count;
-	int				fd;
 }						t_execute;
 
 void			free_remain_struct(t_expand *data);
