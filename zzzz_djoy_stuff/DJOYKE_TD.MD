@@ -89,3 +89,14 @@
 6) 
     static void	build(t_parser *lst, t_env **env, t_execute *data)
      * check the last while(wait(NULL) != -1) loop
+
+7) 
+    fix double free in unset
+
+8) 
+    firgure out if env->full is really needyyyyiii
+
+9) 
+    cd ""
+    cd ''
+    is equivalent of cd_. (cd .)
