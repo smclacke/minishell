@@ -3,18 +3,10 @@
 /*                                                        ::::::::            */
 /*   djoyke.h                                           :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/28 14:04:53 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2023/10/30 19:14:08 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/10/31 14:50:37 by dreijans      ########   odam.nl         */
->>>>>>> djoyke
-=======
-/*   Updated: 2023/10/31 15:54:09 by smclacke      ########   odam.nl         */
->>>>>>> sarah
+/*   Created: 2023/10/31 18:55:56 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/10/31 18:56:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +83,8 @@ typedef struct s_parser
 }				t_parser;
 
 // utils
-<<<<<<< HEAD
-void			free_tokens(t_parser *tokens);
-t_parser		*print_the_full_thing(t_parser *tokens);
-=======
 void				free_tokens(t_parser *tokens);
 t_parser			*print_the_full_thing(t_parser *tokens);
->>>>>>> sarah
 
 // lexer
 //---------- lexer ----------//

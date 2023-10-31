@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 18:51:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:01:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	int	count;
 
 	count = lst->n_cmd;
+	printf("count = %i\n", count);
 	if (count == 1 && check_for_builtin(lst))
 	{
 		redirect(lst, data);
