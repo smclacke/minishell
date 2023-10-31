@@ -6,12 +6,15 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 15:42:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 16:00:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * don't think this is necessary anymore...
+*/
 char	*check_if_expand(char *str)
 {
 	int		i;
@@ -37,27 +40,4 @@ char	*check_if_expand(char *str)
 	}
 	return (str);
 }
-// AND FILLEEESSSSSSS
-char	*set_expand_string(t_parser *lst, t_expand *str, int *sign)
-{
-	t_parser		*tmp;
 
-	tmp = lst;
-	if (tmp->cmd)
-	{
-		if (ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
-		{
-			*sign = 1;
-			str->input = tmp->cmd;
-		}
-	}
-	else if (tmp->str)
-	{
-		if (ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
-		{
-			*sign = 2;
-			str->input = tmp->str;
-		}
-	}
-	return (str->input);
-}

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 15:48:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 15:56:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void				print_expand_vals(t_expand *str);
 t_parser			*print_the_full_thing(t_parser *tokens);
 
 
+
 				// lexer
 //---------- lexer ----------//
 t_parser			*lexer(char *input);
@@ -64,6 +65,7 @@ char				*which_quote(char *input);
 int					next_quote(char *input, char c);
 
 
+
 				// parser
 //-------- parser --------//
 t_parser			*parser(t_parser *tokens);
@@ -82,6 +84,7 @@ t_parser			*add_new_str(t_parser *tmp, t_parser *new_list, char *str);
 t_parser			*add_new_file(t_parser *tmp, t_parser *new_list, char *file);
 t_parser			*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
 t_parser			*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
+
 
 
 				// expander
@@ -114,6 +117,7 @@ void				ft_expand(t_parser *lst, t_env **env);
 
 //------------------ expand_utils ------------------//
 int					get_check_value(t_expand *str, t_env **env);
+
 
 
 				// ALL DJOYKE PROTOS //
