@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 16:12:50 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/26 15:13:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:45:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+/**
+ * @todo errors
+*/
 
 t_parser	*add_new_str(t_parser *tmp, t_parser *new_list, char *str)
 {
