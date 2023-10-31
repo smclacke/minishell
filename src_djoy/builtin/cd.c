@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 18:38:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:33:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ static void	reassign_oft_pwd(t_env **env, char *str)
  * @param str string containing new working directory string
  * @brief loops through environment till PWD is found
  * changes env->value to value of str
- * @todo decide if I want to keep env->full
- * else need to update that everytime I update my environment
 */
 static void	change_current_dir(t_env **env, char *str)
 {
@@ -78,8 +76,6 @@ static void	change_current_dir(t_env **env, char *str)
  * @param str string containing old working directory string
  * @brief loops through environment till OLDPWD is found
  * changes env->value to value of str
- * @todo decide if I want to keep env->full
- * else need to update that everytime I update my environment
 */
 static void	change_old_dir(t_env **env, char *str)
 {

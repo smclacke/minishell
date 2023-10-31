@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 21:15:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 19:34:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 		return (NULL);
 	new->key = key;
 	new->value = value;
-	new->full = full;
+	// new->full = full;
 	new->next = NULL;
 	new->has_value = has_value;
 	return (new);
@@ -86,7 +86,6 @@ char	*get_full(char *str)
  * @param env linked list containing key and env
  * @brief putting the envp content into a linked list seperated by key and value
  * @return linked list
- * @todo do i want to keep full??
 */
 t_env	*env_list(char **envp, t_env *env)
 {

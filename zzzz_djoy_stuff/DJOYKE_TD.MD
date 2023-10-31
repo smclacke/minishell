@@ -94,9 +94,6 @@
     fix double free in unset
 
 8) 
-    firgure out if env->full is really needyyyyiii
-
-9) 
     cd ""
     cd ''
     is equivalent of cd_. (cd .)
