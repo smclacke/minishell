@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/26 14:37:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 18:58:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	mini_remove_env(char *str, t_env **env)
  * @param argv terminal given arguments (for now)
  * @param env pointer to environment
  * @brief unset values by deleting nodes in env linked list
- * @todo resolve double free
 */
 void	ft_unset(t_parser *node, t_env **env)
 {
