@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 15:05:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 16:09:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,11 @@ t_parser	*parser(t_parser *tokens)
 			token_list = token_list->next;
 			token_list = handle_next(token_list, type);
 		}
-		else
-		{
-			printf("syntax error\n");
-			exit(EXIT_FAILURE);
-		}
+		// else		// check this...
+		// {
+		// 	printf("syntax error\n");
+		// 	exit(EXIT_FAILURE);
+		// }
 		token_list = token_list->next;
 	}
 	free_tokens(token_list);

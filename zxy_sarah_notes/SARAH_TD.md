@@ -36,17 +36,39 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
-// shit to do when expansion is kinda ok....
-
- ---> leaks when ending with quotes (dollar quote expansion)
-
- ---> norm
+ ---> if here_doc, don't expand dollar, str is literal
+i.e. 
+		export sarah=EOF
+		<< $sarah
+		exits
+		<< EOF
+		conts
+		
+ ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
+    bash: $bla: ambiguous redirect
 
  ---> SIGNALSSSS
 
  ---> cd "" cd ''
 
+ ---> here_doc expansion      :)
 
+
+**CHECKKKKKK**
+
+ ---> leaks when ending with quotes
+ ---> leaks if quotes aren't closed?
+ ---> norm
+
+
+===========================================
+===========================================
+===========================================
+
+
+***************************************************************************
+***************************************************************************
+***************************************************************************
 // EXPANSION YAY
 
 // dollar handling, then dollar and quotes, then here_doc...
@@ -72,15 +94,6 @@ echo "'$USER'"
 
 	// PROBLEM FIVE
 // here_doc expansion............ :0 ...... :) ...........
-
-===========================================
-===========================================
-===========================================
-
-
-***************************************************************************
-***************************************************************************
-***************************************************************************
 
 **MAKE SURE BUILTINS ARE CHECKED CORRETLY**
 -------------->  e"C"ho

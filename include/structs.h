@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 15:49:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 16:04:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_expand
 	char	*env_val;
 	char	*expanded;
 	char	*done;
+	int		sign; // gimme a sign..........
 }		t_expand;
 
 /**

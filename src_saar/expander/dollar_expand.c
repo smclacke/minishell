@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   dollar.c                                           :+:    :+:            */
+/*   dollar_expand.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 15:41:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/10/31 16:16:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-char	*expand_this(t_expand *str, t_env **env, int i)
+static char	*expand_this(t_expand *str, t_env **env, int i)
 {
+	printf("something needs to be expanded\n");
 	i++;
 	while (str->input[i] && !ft_dollar(str->input[i]))
 		i++;
@@ -38,20 +39,20 @@ char	*expand_this(t_expand *str, t_env **env, int i)
 
 char	*check_rest(t_expand *str, t_env **env, int i)
 {
-	while (str->input[i] && !ft_dollar(str->input[i]))
+	while (str->input[i] && !ft_dollar(str->input[i])) // OR QUOTES ('''')
 		i++;
-	if (ft_dollar(str->input[i]))
+	if (ft_dollar(str->input[i])) // OR QUOTES (dllar could still be in quotes)
 	{
 		str->input = expand_this(str, env, i);
 		if (!str->input)
 			return (NULL);
 	}
-	if (!str->input)
+	if (!str->input) // why this?
 		return (NULL);
 	return (str->input);
 }
 
-char	*save_this(t_expand *str, int i)
+static char	*save_this(t_expand *str, int i)
 {
 	str->done = ft_substr(str->input, 0, i);
 	if (!str->done)
