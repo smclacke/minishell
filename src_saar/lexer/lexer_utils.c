@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/03 15:40:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 17:08:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 17:15:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 t_parser	*lexer_listlast(t_parser *list)
 {
 	if (!list)
+	{
+		free(list);
 		mini_error("uhoh error, lstlast", errno);
+	}
 	if (list->next)
 	{
 		while (list->next)
@@ -47,7 +50,10 @@ t_parser	*lexer_listnew(void *input)
 
 	new = (t_parser *)malloc(sizeof(*new));
 	if (!new || !input)
+	{
+		free(input);
 		mini_error("malloc error listnew", errno);
+	}
 	ft_bzero(new, sizeof(t_parser));
 	new->input = input;
 	new->hd_fd = -1;
