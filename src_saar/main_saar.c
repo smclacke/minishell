@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 16:56:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 17:10:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 
 		tokens = lexer(input);
-		free (input);
 		if (!tokens)
 			continue ;
 
@@ -67,11 +66,11 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 
 		execute(&env, parsed);
+		free_tokens(parsed);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
 
-		free_tokens(parsed);
 	}
 	return (0);
 }

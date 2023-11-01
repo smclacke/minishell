@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 16:54:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 17:02:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_parser	*lexer(char *input)
 	char			**parsed_input;
 
 	parsed_input = parse_input(input);
+	free(input);
 	if (!parsed_input)
 		mini_error("malloc error lexer", errno);
 	tokens = make_token_list(parsed_input);
