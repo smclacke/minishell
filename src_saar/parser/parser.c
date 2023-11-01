@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 17:10:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 19:33:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 {
 	if (!*flag)
 	{
-		if (is_redirect(data->input))
+		if (is_meta_no_pipe(data->input))
 			data->meta = data->input;
 		else
 		{
@@ -44,7 +44,7 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 	}
 	else if (*flag)
 	{
-		if (is_redirect(data->input))
+		if (is_meta_no_pipe(data->input))
 			data->meta = data->input;
 		else
 			data->str = data->input;
@@ -67,11 +67,8 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 static t_parser	*handle_next(t_parser *data, char *type)
 {
 	if (is_meta(data->input))
-	{
-		printf("syntax error double meta\n");
-		return (NULL);
-	}
-	else if (ft_strcmp(type, LESSLESS) == 0)
+		mini_error("syntax error, meta after meta", errno);
+	if (ft_strcmp(type, LESSLESS) == 0)
 		data->str = data->input;
 	else
 		data->file = data->input;
@@ -141,13 +138,9 @@ t_parser	*parser(t_parser *tokens)
 				return (NULL);
 		}
 		else if (type && !token_list->next)
-		{
-			printf("syntax error, nothing after meta\n");
-			return (NULL);
-		}
+			mini_error("syntax error, nothing after meta", errno);
 		token_list = token_list->next;
 	}
-	free_tokens(token_list);
 	tokens = sort_list(tokens);
 	tokens->n_cmd = get_n_cmds(tokens);
 	return (tokens);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 16:00:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 19:22:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_parser			*lexer(char *input);
 //-------- lexer_utils --------//
 t_parser			*lexer_listlast(t_parser *list);
 void				lexer_listadd_back(t_parser **list, t_parser *new);
-t_parser			*lexer_listnew(void *input);
+t_parser			*lexer_listnew(char *input);
 t_parser			*shelly_print_list(t_parser *token);
 
 //---------- token ----------//
@@ -59,6 +59,7 @@ int					len_token(char *input, int len);
 
 //-------- token_utils --------//
 int					is_meta(char *input);
+int					is_meta_no_pipe(char *input);
 int					space_or_meta(int c);
 int					is_same_quote(int c, char *quote_type);
 char				*which_quote(char *input);

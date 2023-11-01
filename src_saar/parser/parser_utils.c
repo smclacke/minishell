@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 15:27:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 19:26:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ t_parser	*handle_pipe(t_parser *data, int *flag)
 {
 	data->meta = data->input;
 	if (!data->next)
-	{
-		printf("syntax error nothing after pipe\n");
-		return (NULL);
-	}
+		mini_error("syntax error, nothing after pipe", errno);
 	*flag = 0;
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 17:55:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 19:47:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	while (list)
 	{
 		printf("[%i]\t ", i);
+		printf("input = %s\t", list->input);
 		printf("cmd = %s\t", list->cmd);
 		printf("file = %s\t", list->file);
 		printf("meta = %s\t", list->meta);
@@ -37,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_parser	*tokens;
-	t_parser	*parsed;
+	// t_parser	*parsed;
 	t_env		*env;
 
 
@@ -46,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 	env = NULL;
 	env = env_list(envp, env);
 	tokens = NULL;
-	parsed = NULL;
+	// parsed = NULL;
 
 	int	og_stdout = dup(STDOUT_FILENO);
 	int	og_stdin = dup(STDIN_FILENO);
@@ -58,20 +59,17 @@ int	main(int argc, char **argv, char **envp)
 
 		tokens = lexer(input);
 		free(input);
-		free_tokens(tokens);
-		exit(0);
-		// free(input);
+		if (!tokens)
+			continue ;
+		shelly_print_list(tokens);
+		free(tokens);
+		// tokens = parser(tokens);
 		// if (!tokens)
 		// 	continue ;
 
-
-
-		// parsed = parser(tokens);
+		// print_the_full_thing(tokens);
 		// free(tokens);
-		// if (!parsed)
-		// 	continue ;
-		// // print_the_full_thing(parsed);
-
+		exit(0);
 		// execute(&env, parsed);
 		// free_tokens(parsed);
 
