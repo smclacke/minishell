@@ -6,32 +6,32 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 17:10:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 17:55:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-// t_parser	*print_the_full_thing(t_parser *tokens)
-// {
-// 	t_parser	*list;
-// 	int			i = 0;
+t_parser	*print_the_full_thing(t_parser *tokens)
+{
+	t_parser	*list;
+	int			i = 0;
 
-// 	list = tokens;
-// 	while (list)
-// 	{
-// 		printf("[%i]\t ", i);
-// 		printf("cmd = %s\t", list->cmd);
-// 		printf("file = %s\t", list->file);
-// 		printf("meta = %s\t", list->meta);
-// 		printf("str = %s\n", list->str);
-//		 printf("n_cmd = %i\t", list->n_cmd);
-// 		printf("hd_fd = %i\n", list->hd_fd);
-// 		i++;
-// 		list = list->next;
-// 	}
-// 	return (tokens);
-// }
+	list = tokens;
+	while (list)
+	{
+		printf("[%i]\t ", i);
+		printf("cmd = %s\t", list->cmd);
+		printf("file = %s\t", list->file);
+		printf("meta = %s\t", list->meta);
+		printf("str = %s\n", list->str);
+		//  printf("n_cmd = %i\t", list->n_cmd);
+		// printf("hd_fd = %i\n", list->hd_fd);
+		i++;
+		list = list->next;
+	}
+	return (tokens);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -57,19 +57,26 @@ int	main(int argc, char **argv, char **envp)
 		add_history(input);
 
 		tokens = lexer(input);
-		if (!tokens)
-			continue ;
+		free(input);
+		free_tokens(tokens);
+		exit(0);
+		// free(input);
+		// if (!tokens)
+		// 	continue ;
 
-		parsed = parser(tokens);
-		free(tokens);
-		if (!parsed)
-			continue ;
 
-		execute(&env, parsed);
-		free_tokens(parsed);
 
-		dup2(og_stdout, STDOUT_FILENO);
-		dup2(og_stdin, STDIN_FILENO);
+		// parsed = parser(tokens);
+		// free(tokens);
+		// if (!parsed)
+		// 	continue ;
+		// // print_the_full_thing(parsed);
+
+		// execute(&env, parsed);
+		// free_tokens(parsed);
+
+		// dup2(og_stdout, STDOUT_FILENO);
+		// dup2(og_stdin, STDIN_FILENO);
 
 	}
 	return (0);
