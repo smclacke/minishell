@@ -36,6 +36,16 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
+ ---> fix makefile
+
+ ---> change files
+
+ ---> change token var names to be easier to follow... like evrywhere....
+
+ ---> a LOAD of functions are a complete mess
+
+---> fix all exit codes asap cause maybe lots of problems...
+
  ---> leaks from lexer but like waaaa?
 
  ---> check if the parser syntax error thing is actually ok
