@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 16:01:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 16:28:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void	free_tokens(t_parser *tokens)
 		free (tokens);
 		tokens = tmp;
 	}
+	free(tokens);
 }
 
 // find out how many cmds there are total for pipe purposes
-int	get_no_cmds(t_parser *tokens)
+int	get_n_cmds(t_parser *tokens)
 {
 	t_parser	*tmp;
 	int			i = 0;

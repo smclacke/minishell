@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 15:28:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 16:29:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
 {
 	t_parser	*tmp2;
 
+	if (!tmp)
+		return (NULL);
 	tmp2 = tmp;
-	if (!tmp2->next || !tmp)
+	if (!tmp2->next)
 		return (NULL);
 	tmp2 = tmp2->next;
 	while (tmp2 && !tmp2->flag && shelly_strcmp(tmp2->meta, "|") != 0)
@@ -94,25 +96,25 @@ t_parser	*sort_list(t_parser *tokens)
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
 			new_list = cmd_after_pipe(tmp, new_list);
 			if (!new_list)
-				mini_error("booooooo you whore 0", errno);
+				mini_error("nein 0", errno);
 		}
 		else if (!tmp->flag && tmp->file)
 		{
 			new_list = add_new_file(tmp, new_list, tmp->file);
 			if (!new_list)
-				mini_error("booooooo you whore 1", errno);
+				mini_error("nein 1", errno);
 		}
 		else if (!tmp->flag && tmp->str)
 		{
 			new_list = add_new_str(tmp, new_list, tmp->str);
 			if (!new_list)
-				mini_error("booooooo you whore 2", errno);
+				mini_error("nein 2", errno);
 		}
 		else if (!tmp->flag && tmp->meta)
 		{
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
 			if (!new_list)
-				mini_error("booooooo you whore 3", errno);
+				mini_error("nein 3", errno);
 		}
 		tmp = tmp->next;
 	}

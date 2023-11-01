@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:38:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 16:17:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_parser	*tokens;
+	t_parser	*parsed;
 	t_env		*env;
 
 
@@ -45,6 +46,7 @@ int	main(int argc, char **argv, char **envp)
 	env = NULL;
 	env = env_list(envp, env);
 	tokens = NULL;
+	parsed = NULL;
 
 	int	og_stdout = dup(STDOUT_FILENO);
 	int	og_stdin = dup(STDIN_FILENO);
@@ -59,16 +61,17 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 
-		tokens = parser(tokens);
-		if (!tokens)
+		parsed = parser(tokens);
+		free(tokens);
+		if (!parsed)
 			continue ;
 
-		execute(&env, tokens);
+		execute(&env, parsed);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
 
-		free_tokens(tokens);
+		free_tokens(parsed);
 	}
 	return (0);
 }
