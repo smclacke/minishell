@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 20:39:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 22:21:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,31 @@ int	main(int argc, char **argv, char **envp)
 
 	int	og_stdout = dup(STDOUT_FILENO);
 	int	og_stdin = dup(STDIN_FILENO);
-
+	
 	while (1)
 	{
 		input = readline(PROMPT);
+		if (!input)
+			exit(EXIT_FAILURE);
 		add_history(input);
 
 		tokens = lexer(input);
 		free(input);
 		if (!tokens)
 			continue ;
-		shelly_print_list(tokens);
+		// shelly_print_list(tokens);
+
+		tokens = parser(tokens);
+
+		if (!tokens)
+			continue ;
+
+		print_the_full_thing(tokens);
+		execute(&env, tokens);
 		free_tokens(tokens);
-		exit(0);
 
-		// tokens = parser(tokens);
-		// if (!tokens)
-		// 	continue ;
-
-		// print_the_full_thing(tokens);
-		// free(tokens);
-		// execute(&env, parsed);
-		// free_tokens(parsed);
-
-		// dup2(og_stdout, STDOUT_FILENO);
-		// dup2(og_stdin, STDIN_FILENO);
+		dup2(og_stdout, STDOUT_FILENO);
+		dup2(og_stdin, STDIN_FILENO);
 
 	}
 	return (0);

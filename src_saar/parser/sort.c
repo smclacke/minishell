@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 16:53:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 22:39:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,14 @@ t_parser	*sort_list(t_parser *tokens)
 		}
 		tmp = tmp->next;
 	}
-	free_tokens(tmp);
+	while (tokens)
+	{
+		tmp = tokens->next;
+		// free (tokens->input);
+		free (tokens);
+		tokens = tmp;
+	}
+	// free(tokens); // free all tokens in list
 	if (!new_list)
 		mini_error("ohhhhh noooooooo", errno);
 	return (new_list);
