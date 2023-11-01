@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 19:48:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 20:24:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static char	*split_tokens(char *input, int len)
 {
 	char	*token;
 
+	if (!input)
+		return (NULL);
 	token = ft_substr(input, 0, len);
 	if (!token)
 		mini_error("malloc error split_tokens", errno);

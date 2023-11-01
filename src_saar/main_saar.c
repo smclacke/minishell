@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 19:47:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 20:39:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,15 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 		shelly_print_list(tokens);
-		free(tokens);
+		free_tokens(tokens);
+		exit(0);
+
 		// tokens = parser(tokens);
 		// if (!tokens)
 		// 	continue ;
 
 		// print_the_full_thing(tokens);
 		// free(tokens);
-		exit(0);
 		// execute(&env, parsed);
 		// free_tokens(parsed);
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 19:10:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 20:33:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,10 @@ void	free_tokens(t_parser *tokens)
 	while (tokens)
 	{
 		tmp = tokens->next;
-		free (tokens->cmd);
-		free (tokens->meta);
-		free (tokens->file);
-		free (tokens->str);
+		free (tokens->input);
 		free (tokens);
 		tokens = tmp;
 	}
-	free(tokens);
 }
 
 // find out how many cmds there are total for pipe purposes
