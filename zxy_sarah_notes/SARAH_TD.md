@@ -40,7 +40,7 @@ for in the future... don't change utils... ever.
 
  ---> check if the parser syntax error thing is actually ok
 
- ---> if here_doc, don't expand dollar, str is literal
+ ---> if here_doc, don't expand dollar, delmiter str is literal
 i.e. 
 		export sarah=EOF
 		<< $sarah
@@ -48,10 +48,14 @@ i.e.
 		<< EOF
 		conts
 		
+ ---> leaks in expansion when it's finished...
+
  ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
     bash: $bla: ambiguous redirect
 
  ---> SIGNALSSSS
+
+ ---> error codes
 
  ---> cd "" cd ''
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 22:35:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 15:28:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
  * 			input is identified, list is sorted and returned to the executor
  * @return	new_list, same parsed list of tokens, just sorted
  * @todo	norm :):):):):):):):):):):):):):)
+ * 			LEAKS
 */
 t_parser	*sort_list(t_parser *tokens)
 {

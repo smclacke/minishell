@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 21:57:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 15:27:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,18 @@ char	*is_redirect(void *input)
 	return (NULL);
 }
 
-/**
- * @todo comment this out
-*/
-t_parser	*shelly_parser_print(t_parser *tokens)
-{
-	t_parser	*list;
-	int			i;
+// t_parser	*shelly_parser_print(t_parser *tokens)
+// {
+// 	t_parser	*list;
+// 	int			i;
 
-	i = 0;
-	list = tokens;
-	while (list)
-	{
-		printf("parser list: index [%i] | node [%s]\n", i, (char *)list->input);
-		i++;
-		list = list->next;
-	}
-	return (tokens);
-}
+// 	i = 0;
+// 	list = tokens;
+// 	while (list)
+// 	{
+// 		printf("parser list: index [%i] | node [%s]\n", i, (char *)list->input);
+// 		i++;
+// 		list = list->next;
+// 	}
+// 	return (tokens);
+// }
