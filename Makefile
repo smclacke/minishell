@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/31 19:37:08 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/01 14:24:57 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= minishell
 DJOY			= djoyke
 SAAR			= sarah
 
-CFLAGS			= -Wall -Wextra -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -g
 # valgrind --leak-check=yes
 # -Werror 
 

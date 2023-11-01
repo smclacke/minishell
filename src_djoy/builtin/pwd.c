@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:15:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/01 14:22:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
  * @brief get's current working firectory
  * @return node made
  * @todo needs exit status
+ * dprintf?
 */
 void	ft_pwd(void)
 {

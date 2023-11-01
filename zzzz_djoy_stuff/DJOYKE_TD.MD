@@ -66,19 +66,6 @@
 
 3) 
     review the checking of the builtins because its case sensitive
-
-    cd:
-
-    * relative: cd src
-    * absolute: cd src/bin/pannekoek/whatever TESTT!!!
-    * 				cd alone gives prompt back
-    * 				cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
-    * line 66: check if needs error message with exit
-    * 			give prompt back, and endline?
-
-    export, cd , exit, unset before childprocess because you need the environment. and exit needs to exit the whole program.
-    rest in the child proces.
-
 4) 
     check all the to do's in code
 
@@ -100,3 +87,9 @@
 
 9) 
     find solid evidence for allowing dprintf, if not just change it you lazy bum
+
+10) 
+        dreijans@f0r1s5:~$ Echo hi
+    Command 'Echo' not found, did you mean:
+    command 'echo' from deb coreutils (8.32-4.1ubuntu1)
+    Try: apt install <deb name>
