@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 16:29:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/01 16:53:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ t_parser	*sort_list(t_parser *tokens)
 		if (!tmp->flag && shelly_strcmp(tmp->meta, "|") == 0)
 		{	
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
+			// if (!new_list)
+			// 	mini_error("lost", errno);
 			new_list = cmd_after_pipe(tmp, new_list);
 			if (!new_list)
 				mini_error("nein 0", errno);
