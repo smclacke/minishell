@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 18:51:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 19:24:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 			data->str = data->input;
 	}
 	if (!data)
-		mini_error("neined", errno);
+		mini_error("general: handle_vars()", E_GENERAL);
 	return (data);
 }
 
@@ -69,13 +69,13 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 static t_parser	*handle_next(t_parser *data, char *type)
 {
 	if (is_meta(data->input))
-		mini_error("syntax error, meta after meta", errno);
+		mini_error("syntax error: meta after meta", E_SYNTAX);
 	if (ft_strcmp(type, LESSLESS) == 0)
 		data->str = data->input;
 	else
 		data->file = data->input;
 	if (!data)
-		mini_error("oopies daisyyy 2", errno);
+		mini_error("general: handle_next()", E_GENERAL);
 	return (data);
 }
 
@@ -96,7 +96,7 @@ static t_parser	*handle_input(t_parser *data, int *flag)
 	else if (data && is_pipe(data->input))
 		data = handle_pipe(data, flag);
 	if (!data)
-		mini_error("oopies daisyyy", errno);
+		mini_error("general: handle_input()", E_GENERAL);
 	return (data);
 }
 
@@ -140,7 +140,7 @@ t_parser	*parser(t_parser *tokens)
 			tmp = handle_next(tmp, type);
 		}
 		else if (type && !tmp->next)
-			mini_error("syntax error, nothing after meta", errno);
+			mini_error("syntax error: nothing after meta", E_SYNTAX);
 		tmp = tmp->next;
 	}
 	tokens = sort_list(tokens);

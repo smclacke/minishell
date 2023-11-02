@@ -37,8 +37,7 @@ for in the future... don't change utils... ever.
 **TO DO**
 
  ---> fix all errors and exit codes
-
- ---> check if the parser syntax error thing is actually ok
+		which exit code for malloc failure? + error message?
 
  ---> expansionionionyy
 
@@ -72,7 +71,8 @@ i.e.
  Djoyke...
 
  ---> outfile not created when only "> outfile"
- ---> echo | echo ...
+ ---> echo | echo is leaky and segfaults
+ ---> cd | cd is leaky af
 
  --->
  smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out

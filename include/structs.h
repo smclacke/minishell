@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 18:22:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 19:16:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@
 typedef enum e_exit
 {
 	E_USAGE = 0,
+	E_MALLOC = -1,
 	E_GENERAL = 1,
-	E_BUILTIN = 2,
+	E_SYNTAX = 2,
 	E_EXEC = 126,
 	E_COMMAND_NOT_FOUND = 127,
 	E_EXIT_INVALID_ARG = 128,

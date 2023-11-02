@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 20:24:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 19:20:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char	*split_tokens(char *input, int len)
 		return (NULL);
 	token = ft_substr(input, 0, len);
 	if (!token)
-		mini_error("malloc error split_tokens", errno);
+		mini_error("general: split_tokens()", E_GENERAL);
 	input += len;
 	return (token);
 }
@@ -118,7 +118,7 @@ static char	**parser_split(char *input)
 	no_tokens = amount_tokens(input);
 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 	if (!array)
-		mini_error("malloc error parser_split", errno);
+		mini_error("malloc error: parser_split()", E_MALLOC);
 	while (i < no_tokens)
 	{
 		start = start_token(input, (start + len));
@@ -142,6 +142,6 @@ char	**parse_input(char *input)
 
 	array = parser_split(input);
 	if (!array)
-		mini_error("malloc error parse_input", errno);
+		mini_error("general: parse_input()", E_GENERAL);
 	return (array);
 }
