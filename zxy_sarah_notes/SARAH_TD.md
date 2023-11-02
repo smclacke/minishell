@@ -36,8 +36,6 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
- ---> fix makefile
-
  ---> change files
 
  ---> change token var names to be easier to follow... like evrywhere....

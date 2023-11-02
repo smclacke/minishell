@@ -6,13 +6,13 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/01 21:47:53 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/02 15:41:21 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= minishell
+NAME			= mini
 DJOY			= djoyke
-SAAR			= sarah
+# SAAR			= sarah
 
 CFLAGS			= -Wall -Wextra -g -fsanitize=address
 # valgrind --leak-check=yes
@@ -26,34 +26,6 @@ IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 HEADER_DIR		= include
 HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
-
-## DJOYKE ##
-
-SRCS_DJOY		=	builtin/echo.c						\
-					builtin/cd.c 						\
-					builtin/pwd.c 						\
-					builtin/export.c 					\
-					builtin/unset.c 					\
-					builtin/env.c 						\
-					builtin/builtin_utils_one.c 		\
-					builtin/builtin_utils_two.c 		\
-					builtin/exit.c						\
-					executor/execute.c					\
-					executor/execute_utils_one.c		\
-					executor/execute_utils_two.c		\
-					executor/make_env.c					\
-					executor/utils_one.c				\
-					executor/utils_two.c				\
-					executor/redirect.c					\
-					executor/list_utils.c 				\
-					executor/print_utils.c				\
-					executor/heredoc_utils.c			
-
-DJOY_DIR		= src_djoy
-SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))
-
-OBJ_DJOY_DIR	= obj_djoy
-OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
 
 ## SARAH ##
 
@@ -84,47 +56,63 @@ SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
 OBJ_SAAR_DIR	= obj_saar
 OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
 
+## DJOYKE ##
+
+SRCS_DJOY		=	builtin/echo.c						\
+					builtin/cd.c 						\
+					builtin/pwd.c 						\
+					builtin/export.c 					\
+					builtin/unset.c 					\
+					builtin/env.c 						\
+					builtin/builtin_utils_one.c 		\
+					builtin/builtin_utils_two.c 		\
+					builtin/exit.c						\
+					executor/execute.c					\
+					executor/execute_utils_one.c		\
+					executor/execute_utils_two.c		\
+					executor/make_env.c					\
+					executor/utils_one.c				\
+					executor/utils_two.c				\
+					executor/redirect.c					\
+					executor/list_utils.c 				\
+					executor/print_utils.c				\
+					executor/heredoc_utils.c			
+
+DJOY_DIR		= src_djoy
+SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))
+
+OBJ_DJOY_DIR	= obj_djoy
+OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
+
+
 all				: libft $(NAME)
 
 djoy			: libft $(DJOY)
 
-saar			: libft $(SAAR)
+# saar			: libft $(SAAR)
 
 libft			:
 	@ make -C include/libft
 
 ## EXECUTABLES
 
-$(NAME)			:	$(OBJ)
+$(NAME)			:	$(OBJ_SAAR) $(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
-	@ echo "${GREEN} ---> Minishell Made!${RESET}"
-	@ ./minishell
+	@ echo "${PURPLE} ---> Made!${RESET}"
+	@ ./mini
+
+# $(NAME)			:	$(OBJ)
+# 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
+# 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
+# 	@ ./minishell
 
 $(DJOY)			:	$(OBJ_DJOY) $(OBJ_SAAR)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 # @ ./djoyke
 
-$(SAAR)			:	$(OBJ_SAAR) $(OBJ_DJOY)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(SAAR)
-	@ echo "${PURPLE} ---> Sarah Made!${RESET}"
-	@ ./sarah
 
 ## OBJECTS
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@ mkdir -p $(OBJ_DIR)
-	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
-
-$(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
-	@ mkdir -p $(OBJ_DJOY_DIR)
-	@ mkdir -p $(OBJ_SAAR_DIR)
-	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
-	@ mkdir -p $(OBJ_DJOY_DIR)/executor
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/lexer
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/parser
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/expander
-	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_SAAR_DIR)
@@ -134,6 +122,20 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
+	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
+
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+# 	@ mkdir -p $(OBJ_DIR)
+# 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
+	@ mkdir -p $(OBJ_DJOY_DIR)
+	@ mkdir -p $(OBJ_SAAR_DIR)
+	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
+	@ mkdir -p $(OBJ_DJOY_DIR)/executor
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/lexer
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/parser
+	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 ## Colours ##
@@ -160,7 +162,7 @@ fclean		:
 	@rm -rf $(OBJ_SAAR_DIR)
 	@rm -rf $(NAME)
 	@rm -rf $(DJOY)
-	@rm -rf $(SAAR)
+# @rm -rf $(SAAR)
 	@echo "${YELLOW} // Minishell fCleaned!${RESET}"
 
 re			: fclean all
