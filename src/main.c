@@ -6,33 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 18:19:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 18:58:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
-
-t_parser	*print_the_full_thing(t_parser *tokens)
-{
-	t_parser	*list;
-	int			i = 0;
-
-	list = tokens;
-	while (list)
-	{
-		printf("[%i]\t ", i);
-		// printf("input = %s\t", list->input);
-		printf("cmd = %s\t", list->cmd);
-		printf("file = %s\t", list->file);
-		printf("meta = %s\t", list->meta);
-		printf("str = %s\n", list->str);
-		//  printf("n_cmd = %i\t", list->n_cmd);
-		// printf("hd_fd = %i\n", list->hd_fd);
-		i++;
-		list = list->next;
-	}
-	return (tokens);
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -69,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 
 		print_the_full_thing(tokens);
-		execute(&env, tokens);
+		// execute(&env, tokens);
 		free_tokens(tokens);
 
 		dup2(og_stdout, STDOUT_FILENO);

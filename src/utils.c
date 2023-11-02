@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 21:30:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 19:00:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ int	shelly_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (0);
+}
+
+void	free_only_tokens(t_parser *tokens)
+{
+	t_parser	*tmp;
+
+	while (tokens)
+	{
+		tmp = tokens->next;
+		free (tokens);
+		tokens = tmp;
+	}
 }
 
 void	free_tokens(t_parser *tokens)
@@ -56,14 +68,4 @@ int	get_n_cmds(t_parser *tokens)
 	}
 	free_tokens(tmp);
 	return (i);
-}
-
-void	print_expand_vals(t_expand *str)
-{
-	printf("input\t\t\t\t\t= [%s]\n", str->input);
-	printf("do_expand\t\t\t\t= [%s]\n", str->do_expand);
-	printf("dont_expand\t\t\t\t= [%s]\n", str->dont_expand);
-	printf("expanded\t\t\t\t\t= [%s]\n", str->expanded);
-	printf("done\t\t\t\t\t= [%s]\n", str->done);
-	printf("------------------------------------------------------\n");
 }

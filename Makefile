@@ -6,14 +6,14 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/02 17:46:08 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/02 18:57:54 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= mini
 DJOY			= djoyke
-# SAAR			= sarah
 
+MAKEFLAGS		= --no-print-directory
 CFLAGS			= -Wall -Wextra -g -fsanitize=address
 # valgrind --leak-check=yes
 # -Werror 
@@ -27,10 +27,11 @@ IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 HEADER_DIR		= include
 HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
 
-## SARAH ##
+## SARAH / MAIN SHIT ##
 
 SRCS			= main.c								\
 					utils.c								\
+					print.c								\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
 					lexer/token.c						\
@@ -89,7 +90,6 @@ all				: libft $(NAME)
 
 djoy			: libft $(DJOY)
 
-# saar			: libft $(SAAR)
 
 libft			:
 	@ make -C include/libft
@@ -100,11 +100,6 @@ $(NAME)			:	$(OBJ) $(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
 	@ echo "${PURPLE} ---> Made!${RESET}"
 	@ ./mini
-
-# $(NAME)			:	$(OBJ)
-# 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
-# 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
-# 	@ ./minishell
 
 $(DJOY)			:	$(OBJ_DJOY) $(OBJ)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
@@ -123,10 +118,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
-
-# $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-# 	@ mkdir -p $(OBJ_DIR)
-# 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)
@@ -149,19 +140,16 @@ WHITE		:= \033[1;97m
 BLACK		:= \033[1;90m
 
 clean		:
-	@make -C include/libft clean
+	@make $(MAKEFLAGS) -C include/libft clean
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(OBJ_DJOY_DIR)
-# @rm -rf $(OBJ_SAAR_DIR)
 
 fclean		:
-	@make -C include/libft fclean
+	@make $(MAKEFLAGS) -C include/libft fclean
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(OBJ_DJOY_DIR)
-# @rm -rf $(OBJ_SAAR_DIR)
 	@rm -rf $(NAME)
 	@rm -rf $(DJOY)
-# @rm -rf $(SAAR)
 	@echo "${YELLOW} // Minishell fCleaned!${RESET}"
 
 re			: fclean all

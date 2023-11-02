@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 15:56:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 18:52:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,14 @@ int	is_meta_no_pipe(char *input)
 
 t_parser	*handle_pipe(t_parser *data, int *flag)
 {
+	t_parser	*tmp;
+
 	data->meta = data->input;
 	if (!data->next)
 		mini_error("syntax error, nothing after pipe", errno);
+	tmp = data->next;
+	if (ft_strcmp(tmp->input, PIPE) == 0)
+		mini_error("pipe after pipe", errno);
 	*flag = 0;
 	return (data);
 }
@@ -57,19 +62,3 @@ char	*is_redirect(void *input)
 		return (LESS);
 	return (NULL);
 }
-
-// t_parser	*shelly_parser_print(t_parser *tokens)
-// {
-// 	t_parser	*list;
-// 	int			i;
-
-// 	i = 0;
-// 	list = tokens;
-// 	while (list)
-// 	{
-// 		printf("parser list: index [%i] | node [%s]\n", i, (char *)list->input);
-// 		i++;
-// 		list = list->next;
-// 	}
-// 	return (tokens);
-// }
