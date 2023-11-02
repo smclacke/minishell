@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:41:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 21:00:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,29 @@ static char	*set_expand_string(t_parser *lst, t_expand *str)
 /**
  * get first part of string, then loop through separating dollars and quotes...
  * @todo fix this
+ * 
+ * og_str ....... iterate
+ * if dollar/quote/NULL
+ * substr + strjoin everything before found thing ^ into snd_str
+ * look at OG_str .... iterate until found thing ^
+ * what is the first thing?
+ * call function on it, return 
+ * 
+ * while (og_str)
+ * {
+ * 		while (!$ || !QUOTE || !NULL)
+ * 			i++;
+ *		if ($)
+			substr(i (-1?)) -> 2nd_str
+			
+ * }
+ * 
+ * // find expanable part func?
+ * abc$USER"something"$USER
+ * 
+ * abc is already saved... then, dollar - > ? = find_expanable()
+ * 
+ * // expandable will always be at start... so cut away once other thing is found
 */
 static char	*dollar(t_expand *str, t_env **env)
 {
@@ -61,15 +84,29 @@ static char	*dollar(t_expand *str, t_env **env)
 	str->input = check_first(str);
 	while (str->input[i])
 	{
-		str->input = check_rest(str, env, i);
-		if (!str->input)
-			return (str->done);
+		if (ft_dollar(str->input[i]))
+		{
+			str->input = save_dollar(str->input);
+
+		}
+		// if quote, call find next quote immediately...
+		
+		// if (ft_isdquote(str->input[i]))
+		// 	printf("expand d_quotes\n");
+		// if (ft_issquote(str->input[i]))
+		// 	printf("expand s_quotes\n");
+		// if ($)
+			// dollar_expand, ret any input left
+		// if (D_QUOTE)
+			// D_DUOTE_expand, ret any input left
+		// if (S_QUOTE)
+			// S_QUOTE EXPAND, ret any input left
+		// if (!str->input)
+		// 	return (str->done);
 		i++;
 	}
-	if (!str->input)
-		return (0);
-
-	return (str->done);
+	return (str->input);
+	// return (str->done);
 }
 
 /**

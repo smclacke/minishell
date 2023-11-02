@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 19:24:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 19:52:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 static t_parser	*handle_next(t_parser *data, char *type)
 {
 	if (is_meta(data->input))
-		mini_error("syntax error: meta after meta", E_SYNTAX);
+		mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
 	if (ft_strcmp(type, LESSLESS) == 0)
 		data->str = data->input;
 	else
@@ -140,7 +140,7 @@ t_parser	*parser(t_parser *tokens)
 			tmp = handle_next(tmp, type);
 		}
 		else if (type && !tmp->next)
-			mini_error("syntax error: nothing after meta", E_SYNTAX);
+			mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
 		tmp = tmp->next;
 	}
 	tokens = sort_list(tokens);

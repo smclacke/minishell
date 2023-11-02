@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 19:24:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 19:53:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ t_parser	*handle_pipe(t_parser *data, int *flag)
 
 	data->meta = data->input;
 	if (!data->next)
-		mini_error("syntax error: nothing after pipe", E_SYNTAX);
+		mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
 	tmp = data->next;
 	if (ft_strcmp(tmp->input, PIPE) == 0)
-		mini_error("syntax error: pipe after pipe", E_SYNTAX);
+		mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
 	*flag = 0;
 	return (data);
 }

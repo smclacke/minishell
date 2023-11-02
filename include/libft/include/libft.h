@@ -6,7 +6,7 @@
 /*   By: SarahLouise <SarahLouise@student.42.fr>      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 19:21:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:14:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 20:36:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,10 @@ void	ft_error(char *str);
 void	ft_free_arr(char **arr);
 
 int		ft_isquote(int c);
+
+int		ft_isdquote(int c);
+
+int		ft_issquote(int c);
 
 bool	ft_ispipe(int c);
 

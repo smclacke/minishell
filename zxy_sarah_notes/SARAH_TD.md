@@ -38,6 +38,7 @@ for in the future... don't change utils... ever.
 
  ---> fix all errors and exit codes
 		which exit code for malloc failure? + error message?
+		func(s) with template to handle all... keep it uniform, what we doing with exit codes?
 
  ---> expansionionionyy
 
@@ -60,6 +61,20 @@ i.e.
 
  ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
     bash: $bla: ambiguous redirect
+
+***
+$? in export is expanded as expected in/out quotes
+export dol=$?
+$dol
+0: command not found
+
+touch $?
+opens file '0'
+if '0' exists (?)
+opens file '1' ...
+
+cd $?
+looks for expanded (dus the number) as dir
 
 
 **CHECKKKKKK**

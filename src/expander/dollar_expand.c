@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:46:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 21:03:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,54 +15,13 @@
 /**
  * @todo all of this shitt...
 */
-static char	*expand_this(t_expand *str, t_env **env, int i)
-{
-	printf("something needs to be expanded\n");
-	i++;
-	while (str->input[i] && !ft_dollar(str->input[i]))
-		i++;
-	str->do_expand = ft_substr(str->input, 0, i);
-	if (!str->do_expand)
-		return (str->input);
-	str->do_expand = ft_strtrim(str->input, "$");
-	printf("str->do_expand HERE = %s\n", str->do_expand);
-	str->input = ft_strtrim(str->input, "$");
-	str->input = ft_strtrim(str->input, str->do_expand);
-	printf("str->input HERE = %s\n", str->input);
-	if (get_check_value(str, env))
-		mini_error("bit fucked in expand_this()", errno); // this fails with two dollars
-	free (str->do_expand);
-	printf("epxanded = %s\n", str->expanded);
-	printf("done = %s\n", str->done);
-	str->done = ft_strjoin(str->done, str->expanded);
-	printf("str->done = %s\n", str->done);
-	printf("str->input = %s\n", str->input);
-	return (str->input);
-}
 
-/**
- * @todo all of this shitt...
-*/
-char	*check_rest(t_expand *str, t_env **env, int i)
-{
-	while (str->input[i] && !ft_dollar(str->input[i])) // OR QUOTES ('''')
-		i++;
-	if (ft_dollar(str->input[i])) // OR QUOTES (dllar could still be in quotes)
-	{
-		str->input = expand_this(str, env, i);
-		if (!str->input)
-			return (NULL);
-	}
-	if (!str->input) // why this?
-		return (NULL);
-	return (str->input);
-}
 
 
 /**
  * @todo how to use both these but in my loopyyloopy
 */
-static char	*save_this(t_expand *str, int i)
+static char	*save_input(t_expand *str, int i)
 {
 	str->done = ft_substr(str->input, 0, i);
 	if (!str->done)
@@ -71,13 +30,65 @@ static char	*save_this(t_expand *str, int i)
 	return (str->input);
 }
 
+// dollar_expand
+char	*dollar_expand(char *str)
+{
+	int		i;
+
+	i = 0;
+	
+	str->input = save_input(str, i);
+	return (str->input);
+}
+
+// // dollar_expand
+// char	*dollar_expand(char *str)
+// {
+	
+// }
+
+char	*save_dollar(t_expand *str, int i)
+{
+	str->do_expand =
+
+	// expand_dollar() 
+	// return rest of input
+}
+
 char	*check_first(t_expand *str)
 {
 	int		i = 0;
 	
-	while (str->input[i] && !ft_dollar(str->input[i]))
+	while (str->input[i] && !ft_dollar(str->input[i])\
+		&& !ft_isquote(str->input[i]))
 		i++;
-	if (ft_dollar(str->input[i]))
-		str->input = save_this(str, i);
+	if (ft_dollar(str->input[i]) || ft_isquote(str->input[i]))
+		str->input = save_input(str, i);
 	return (str->input);
 }
+
+// dquote_expand
+
+// squote_expand
+
+// call save_this on expanded strs to add them to done_str, 
+// and ret left over input to dollar()
+
+// is dollar or quote func....
+
+// int		is_dollar_or_quote(int c)
+// {
+	
+// }
+
+
+// char	*expandable(t_expand *str)
+// {
+// 	int		i = 1;
+
+// 	while (str->input[i] && !ft_dollar(str->input[i])\
+// 		&& !ft_isquote(str->input[i]))
+// 		i++;
+// 	if (ft_dollar(str->input[i]) || ft_isquote(str->input[i]))
+// 		str->do_expand = 
+// }

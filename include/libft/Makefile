@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/05/12 14:53:21 by smclacke      #+#    #+#                  #
-#    Updated: 2023/10/17 20:15:08 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/02 20:37:00 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SRCS		=	is_func/ft_ispipe.c				\
     			is_func/ft_isdigit.c			\
     			is_func/ft_isprint.c			\
 				is_func/ft_isquote.c			\
+				is_func/ft_isdquote.c			\
+				is_func/ft_issquote.c			\
 				is_func/ft_isspace.c			\
 				is_func/ft_ismeta.c				\
 				is_func/ft_isdollar.c			\
