@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 18:24:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 18:37:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,21 @@
 */
 static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 {
-	t_parser	*lst;
 	int			sign;
 
-	if (!tmp)
-		return (NULL);
-	lst = tmp;
-	if (!lst)
-		mini_error("la la la, how you like it", errno);
 	sign = 0;
-	while (lst && !sign)
+	if (!tmp)
+		mini_error("some thing is maybe wrong", errno);
+	while (tmp && !sign)
 	{
-		if (lst->cmd)
+		if (tmp->cmd)
 		{
-			new_list = add_new_cmd(lst, new_list, lst->cmd);
+			new_list = add_new_cmd(tmp, new_list, tmp->cmd);
 			if (!new_list)
 				mini_error("what a jokkkeeee", errno);
 			sign = 42;
 		}
-		lst = lst->next;
+		tmp = tmp->next;
 	}
 	if (!new_list)
 		mini_error("some thing is terribly wrong", errno);
@@ -103,9 +99,9 @@ t_parser	*sort_list(t_parser *tokens)
 	t_parser	*tmp;
 	t_parser	*new_list;
 
+	if (!tokens)
+		return (NULL);
 	tmp = tokens;
-	if (!tmp)
-		mini_error("this is getting totally out of hand", errno);
 	new_list = NULL;
 	new_list = find_first_cmd(tmp, new_list);
 	while (tmp)

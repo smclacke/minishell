@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 15:54:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 18:33:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * @todo errors and norm
+ * @todo errors
 */
 
 int	is_meta(char *input)

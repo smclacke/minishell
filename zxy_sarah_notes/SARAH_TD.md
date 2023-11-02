@@ -36,9 +36,6 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
- ---> sort()
-		smaller, better, and good, and norm, and readable
-
  ---> change token var names to be easier to follow... like evrywhere....
 		lexer, parser + sort + main....
 
@@ -46,7 +43,7 @@ for in the future... don't change utils... ever.
 
  ---> check if the parser syntax error thing is actually ok
 
- ---> 
+ ---> expansionionionyy
 
  ---> leaks in expansion when it's finished...
 
@@ -67,6 +64,7 @@ i.e.
 
  ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
     bash: $bla: ambiguous redirect
+
 
 **CHECKKKKKK**
 

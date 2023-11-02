@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 21:58:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 18:30:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 		else
 			data->str = data->input;
 	}
+	if (!data)
+		mini_error("neined", errno);
 	return (data);
 }
 
@@ -72,6 +74,8 @@ static t_parser	*handle_next(t_parser *data, char *type)
 		data->str = data->input;
 	else
 		data->file = data->input;
+	if (!data)
+		mini_error("oopies daisyyy 2", errno);
 	return (data);
 }
 
@@ -85,12 +89,14 @@ static t_parser	*handle_next(t_parser *data, char *type)
  * @param	flag int to check whether the cmd of the process has been found
  * @return	tokens with correctly assigned varibales
 */
-static t_parser	*handle_all(t_parser *data, int *flag)
+static t_parser	*handle_input(t_parser *data, int *flag)
 {
 	if (data && !is_pipe(data->input))
 		data = handle_vars(data, flag);
 	else if (data && is_pipe(data->input))
 		data = handle_pipe(data, flag);
+	if (!data)
+		mini_error("oopies daisyyy", errno);
 	return (data);
 }
 
@@ -117,29 +123,25 @@ static t_parser	*handle_all(t_parser *data, int *flag)
 */
 t_parser	*parser(t_parser *tokens)
 {
-	t_parser	*token_list;
+	t_parser	*tmp;
 	char		*type;
 	int			flag;
 
+	tmp = tokens;
 	type = NULL;
-	token_list = tokens;
 	flag = 0;
-	while (token_list)
+	while (tmp)
 	{
-		type = is_redirect(token_list->input);
-		token_list = handle_all(token_list, &flag);
-		if (!token_list)
-			return (NULL);
-		if (type && token_list->next)
+		type = is_redirect(tmp->input);
+		tmp = handle_input(tmp, &flag);
+		if (type && tmp->next)
 		{
-			token_list = token_list->next;
-			token_list = handle_next(token_list, type);
-			if (!token_list)
-				return (NULL);
+			tmp = tmp->next;
+			tmp = handle_next(tmp, type);
 		}
-		else if (type && !token_list->next)
+		else if (type && !tmp->next)
 			mini_error("syntax error, nothing after meta", errno);
-		token_list = token_list->next;
+		tmp = tmp->next;
 	}
 	tokens = sort_list(tokens);
 	tokens->n_cmd = get_n_cmds(tokens);
