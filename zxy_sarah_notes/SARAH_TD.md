@@ -36,17 +36,20 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
- ---> change files
+ ---> sort()
+		smaller, better, and good, and norm, and readable
 
  ---> change token var names to be easier to follow... like evrywhere....
+		lexer, parser + sort + main....
 
- ---> a LOAD of functions are a complete mess
-
----> fix all exit codes asap cause maybe lots of problems...
-
- ---> leaks from lexer but like waaaa?
+ ---> fix all errors and exit codes
 
  ---> check if the parser syntax error thing is actually ok
+
+ ---> 
+
+ ---> leaks in expansion when it's finished...
+
 
  ---> if here_doc, don't expand dollar, delmiter str is literal
 i.e. 
@@ -55,20 +58,15 @@ i.e.
 		exits
 		<< EOF
 		conts
-		
- ---> leaks in expansion when it's finished...
-
- ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
-    bash: $bla: ambiguous redirect
 
  ---> SIGNALSSSS
-
- ---> error codes
 
  ---> cd "" cd ''
 
  ---> here_doc expansion      :)
 
+ ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
+    bash: $bla: ambiguous redirect
 
 **CHECKKKKKK**
 

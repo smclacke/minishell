@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 19:23:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 15:54:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ int	is_meta(char *input)
 	else if (ft_strnstr(input, LESS, 1))
 		return (1);
 	else if (ft_strnstr(input, PIPE, 1))
-		return (1);
-	return (0);
-}
-
-int	is_meta_no_pipe(char *input)
-{
-	if (ft_strnstr(input, MOREMORE, 2))
-		return (2);
-	else if (ft_strnstr(input, LESSLESS, 2))
-		return (2);
-	else if (ft_strnstr(input, MORE, 1))
-		return (1);
-	else if (ft_strnstr(input, LESS, 1))
 		return (1);
 	return (0);
 }

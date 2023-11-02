@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/01 19:26:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 15:56:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 /**
  * @todo errors
 */
+
+int	is_meta_no_pipe(char *input)
+{
+	if (ft_strnstr(input, MOREMORE, 2))
+		return (2);
+	else if (ft_strnstr(input, LESSLESS, 2))
+		return (2);
+	else if (ft_strnstr(input, MORE, 1))
+		return (1);
+	else if (ft_strnstr(input, LESS, 1))
+		return (1);
+	return (0);
+}
 
 t_parser	*handle_pipe(t_parser *data, int *flag)
 {

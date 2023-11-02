@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/02 15:41:21 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/02 15:50:35 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CFLAGS			= -Wall -Wextra -g -fsanitize=address
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
 INCLUDES		= -Iinclude -Iinclude/libft/include
-HEADERS			= djoyke.h structs.h shelly.h prompt.h colour.h
+HEADERS			= djoyke.h shelly.h structs.h prompt.h colour.h
 IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 
 HEADER_DIR		= include
@@ -29,7 +29,7 @@ HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
 
 ## SARAH ##
 
-SRCS_SAAR		= main_saar.c							\
+SRCS			= main.c								\
 					utils.c								\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
@@ -49,12 +49,12 @@ SRCS_SAAR		= main_saar.c							\
 					expander/dollar_utils.c
 
 
-SAAR_DIR		= src_saar
-SRC_SAAR		= ($(addprefix $(SAAR_DIR)/, $(SRCS_SAAR)) $(SRC_DJOY))
+SRC_DIR		= src
+SRC		= ($(addprefix $(SRC_DIR)/, $(SRCS)) $(SRC_DJOY))
 
 
-OBJ_SAAR_DIR	= obj_saar
-OBJ_SAAR		= $(addprefix $(OBJ_SAAR_DIR)/, $(SRCS_SAAR:%.c=%.o))
+OBJ_DIR	= obj
+OBJ		= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 ## DJOYKE ##
 
@@ -79,7 +79,7 @@ SRCS_DJOY		=	builtin/echo.c						\
 					executor/heredoc_utils.c			
 
 DJOY_DIR		= src_djoy
-SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC_SAAR))
+SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC))
 
 OBJ_DJOY_DIR	= obj_djoy
 OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
@@ -96,7 +96,7 @@ libft			:
 
 ## EXECUTABLES
 
-$(NAME)			:	$(OBJ_SAAR) $(OBJ_DJOY)
+$(NAME)			:	$(OBJ) $(OBJ_DJOY)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
 	@ echo "${PURPLE} ---> Made!${RESET}"
 	@ ./mini
@@ -106,7 +106,7 @@ $(NAME)			:	$(OBJ_SAAR) $(OBJ_DJOY)
 # 	@ echo "${GREEN} ---> Minishell Made!${RESET}"
 # 	@ ./minishell
 
-$(DJOY)			:	$(OBJ_DJOY) $(OBJ_SAAR)
+$(DJOY)			:	$(OBJ_DJOY) $(OBJ)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
 	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
 # @ ./djoyke
@@ -114,11 +114,11 @@ $(DJOY)			:	$(OBJ_DJOY) $(OBJ_SAAR)
 
 ## OBJECTS
 
-$(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
-	@ mkdir -p $(OBJ_SAAR_DIR)
-	@ mkdir -p $(OBJ_SAAR_DIR)/parser
-	@ mkdir -p $(OBJ_SAAR_DIR)/lexer
-	@ mkdir -p $(OBJ_SAAR_DIR)/expander
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
+	@ mkdir -p $(OBJ_DIR)
+	@ mkdir -p $(OBJ_DIR)/parser
+	@ mkdir -p $(OBJ_DIR)/lexer
+	@ mkdir -p $(OBJ_DIR)/expander
 	@ mkdir -p $(OBJ_DJOY_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
@@ -130,12 +130,11 @@ $(OBJ_SAAR_DIR)/%.o: $(SAAR_DIR)/%.c $(HEADER)
 
 $(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DJOY_DIR)
-	@ mkdir -p $(OBJ_SAAR_DIR)
 	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
 	@ mkdir -p $(OBJ_DJOY_DIR)/executor
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/lexer
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/parser
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_saar/expander
+	@ mkdir -p $(OBJ_DJOY_DIR)/src/lexer
+	@ mkdir -p $(OBJ_DJOY_DIR)/src/parser
+	@ mkdir -p $(OBJ_DJOY_DIR)/src/expander
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 ## Colours ##
@@ -153,13 +152,13 @@ clean		:
 	@make -C include/libft clean
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(OBJ_DJOY_DIR)
-	@rm -rf $(OBJ_SAAR_DIR)
+# @rm -rf $(OBJ_SAAR_DIR)
 
 fclean		:
 	@make -C include/libft fclean
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(OBJ_DJOY_DIR)
-	@rm -rf $(OBJ_SAAR_DIR)
+# @rm -rf $(OBJ_SAAR_DIR)
 	@rm -rf $(NAME)
 	@rm -rf $(DJOY)
 # @rm -rf $(SAAR)
