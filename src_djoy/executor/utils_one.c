@@ -6,13 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:02:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/02 15:15:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/djoyke.h"
-
-#define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
 /**
  * @param string argument given to perror
@@ -65,6 +63,7 @@ void	init_execute_struct(t_execute *data)
 	data->in = -1;
 	data->out = -1;
 	data->count = 0;
+	data->error = true;
 }
 
 /**
@@ -78,12 +77,3 @@ void	free_strs(char *str, char *str2)
 	free (str2);
 }
 
-/**
- * @param head parser linked list
- * @brief throws error message and exits 
-*/
-void	infile_error(t_parser *head)
-{
-	dprintf(STDERR_FILENO, INFILE_ERROR, head->file);
-	exit (0);
-}

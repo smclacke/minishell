@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 21:11:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/02 16:56:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
  * @param head parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function 
- * @todo
- * check how to do else statement at the end when exiting from a builtin
+ * @todo 
+ * 1)norm it
+ * 2)check how to do else statement at the end when exiting from a builtin
  * exit(1); only when we figure out how to exit from a builtin use this :)
- * 
 */
-void	redirect_infile(t_parser *head, t_execute *data)
+bool	redirect_infile(t_parser *head, t_execute *data)
 {
 	struct stat	file_stat;
 
@@ -33,14 +33,20 @@ void	redirect_infile(t_parser *head, t_execute *data)
 		if (head->next)
 			head = head->next;
 		if (access(head->file, F_OK) != 0)
-			infile_error(head);
+		{
+			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->file);
+			return (false);
+		}
 		if (stat(head->file, &file_stat) == 0)
 		{
 			if (S_ISREG(file_stat.st_mode))
 			{
 				data->in = open(head->file, O_RDWR, 0644);
 				if (data->in == -1)
-					mini_error("open infile", errno);
+				{
+					dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->file);
+					return (false); //needs to be a false?
+				}
 				if (dup2(data->in, STDIN_FILENO) == 0)
 					close(data->in);
 			}
@@ -50,6 +56,7 @@ void	redirect_infile(t_parser *head, t_execute *data)
 				dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->file);
 		}
 	}
+	return (true);
 }
 
 /**
@@ -59,6 +66,7 @@ void	redirect_infile(t_parser *head, t_execute *data)
  * @todo
  * check how to do else statement at the end when exiting from a builtin
  * exit(1); only when we figure out how to exit from a builtin use this :)
+ * does this need to be bool too?
 */
 void	redirect_outfile(t_parser *head, t_execute *data)
 {
@@ -72,7 +80,7 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 		{
 			data->out = open(head->file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 			if (data->out == -1)
-				mini_error("open outfile", errno);
+				return ;
 		}
 		if (stat(head->file, &file_stat) == 0)
 		{
@@ -85,6 +93,7 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 			close(data->out);
 		return ;
 	}
+	return ;
 }
 
 /**
@@ -127,7 +136,7 @@ void	redirect_append(t_parser *head, t_execute *data)
 		{
 			data->out = open(head->file, O_CREAT | O_RDWR | O_APPEND, 0644);
 			if (data->out == -1)
-				mini_error("open outfile", errno);
+				return ;
 		}
 		if (stat(head->file, &file_stat) == 0)
 		{
@@ -140,4 +149,5 @@ void	redirect_append(t_parser *head, t_execute *data)
 			close(data->out);
 		return ;
 	}
+	return ;
 }

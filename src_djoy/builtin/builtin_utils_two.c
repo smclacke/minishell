@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 23:13:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/02 17:06:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,26 @@ int	list_iter(t_parser *lst)
 		lst = lst->next;
 	}
 	return (i);
+}
+
+/**
+ * @param node node in linked list
+ * @param cmd either unset or export
+ * @brief puts custom error message on STDOUT_FILENO
+*/
+void	put_execute_error(t_parser *node)
+{
+	ft_putstr_fd(node->cmd, STDERR_FILENO);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+}
+
+/**
+ * @param node node in linked list
+ * @param cmd either unset or export
+ * @brief puts custom error message on STDOUT_FILENO
+*/
+void	put_permission_error(t_parser *node)
+{
+	ft_putstr_fd(node->cmd, STDERR_FILENO);
+	ft_putstr_fd(": permission denied\n", STDERR_FILENO);
 }

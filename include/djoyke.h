@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 23:00:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/02 17:08:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct s_execute
 	int				in;
 	int				out;
 	int				count;
+	bool			error;
 }						t_execute;
 
 void			free_remain_struct(t_expand *data);
@@ -178,8 +179,11 @@ bool			check_for_meta(t_parser *lst);
 bool			check_for_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
 void			redirect_outfile(t_parser *head, t_execute *data);
-void			redirect_infile(t_parser *head, t_execute *data);
+// bool			redirect_outfile(t_parser *head, t_execute *data);
+// void			redirect_infile(t_parser *head, t_execute *data);
+bool			redirect_infile(t_parser *head, t_execute *data);
 void			redirect_append(t_parser *head, t_execute *data);
+// bool			redirect_append(t_parser *head, t_execute *data);
 void			init_heredoc(t_parser *lst);
 void			redirect(t_parser *lst, t_execute *data);
 void			redirect_heredoc(t_parser *lst);
@@ -234,6 +238,9 @@ void			init_fork(t_parser *lst, t_env **env, t_execute *data);
 bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 char			**get_argv(t_parser *lst);
+void			put_execute_error(t_parser *node);
+void			put_permission_error(t_parser *node);
+
 
 //----Utils----//
 void			mini_error(char *string, int error);

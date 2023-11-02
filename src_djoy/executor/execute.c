@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/10/19 21:13:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 23:35:55 by dreijans      ########   odam.nl         */
+/*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/11/02 17:14:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 			free(ok_path);
 			i++;
 		}
-		mini_error(node->cmd, errno);
+		put_execute_error(node);
+		data->error = false;
 	}
 	return (node->cmd);
 }
@@ -85,6 +86,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks parser input for executable and executes with execve
  * @todo replace exit int with the existatus global we pass on
+ * norminette
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -92,17 +94,24 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 
 	init_pipes_child(data);
 	redirect(lst, data);
+	if (data->error == false)
+		exit (0);
 	if (check_for_builtin(lst))
 	{
 		do_builtin(lst, env);
 		exit (0);
 	}
 	executable = check_access(*env, lst, data);
+	if (data->error == false)
+		exit (0);
 	if (access(executable, X_OK) == -1)
-		mini_error(executable, errno);
+	{
+		put_permission_error(lst);
+		exit (0);
+	}
 	data->env_array = list_to_string(*env);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
-		mini_error(lst->str, errno);
+		mini_error("execve", errno);
 	return ;
 }
 
@@ -118,7 +127,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	if (!lst)
 		mini_error("list", errno);
 	init_heredoc(lst);
-	if (single_builtin_cmd(lst, env, data) == 1)
+	if (single_builtin_cmd(lst, env, data) == false)
 		return ;
 	child_builtin_cmd(lst, env, data);
 	close_all(data);

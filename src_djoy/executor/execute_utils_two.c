@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:13:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 16:55:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,17 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	int	count;
 
 	count = lst->n_cmd;
-	if (count == 1 && check_for_builtin(lst))
+	if (count == 1)
 	{
-		redirect(lst, data);
-		do_builtin(lst, env);
-		return (true);
+		if (check_for_builtin(lst))
+		{
+			redirect(lst, data);
+			if (data->error == false)
+				return (false);
+			do_builtin(lst, env);
+		}
+		else
+			return (true);
 	}
 	return (false);
 }
@@ -114,7 +120,8 @@ void	redirect(t_parser *lst, t_execute *data)
 	{
 		if (check_redirect(lst) != 0)
 		{
-			redirect_infile(lst, data);
+			if (!redirect_infile(lst, data))
+				data->error = false;
 			redirect_heredoc(lst);
 			redirect_outfile(lst, data);
 			redirect_append(lst, data);

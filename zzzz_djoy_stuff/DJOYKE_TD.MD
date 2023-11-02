@@ -89,7 +89,32 @@
     find solid evidence for allowing dprintf, if not just change it you lazy bum
 
 10) 
-        dreijans@f0r1s5:~$ Echo hi
-    Command 'Echo' not found, did you mean:
-    command 'echo' from deb coreutils (8.32-4.1ubuntu1)
-    Try: apt install <deb name>
+    1)  
+        echi hi < infile > outfile
+        check infile first
+        infile does not exist so error
+        no such file or directory
+    2)  
+        echi hi > outfile
+        outfile created and stop the process
+        command not found
+    3) 
+        echo hi < infile
+        check file first
+        no such file or directory
+
+    4) this still happens
+        minishell 🍌echi hi < uhuha > out
+[0]      cmd = echi     file = (null)   meta = (null)   str = (null)
+[1]      cmd = (null)   file = (null)   meta = (null)   str = hi
+[2]      cmd = (null)   file = (null)   meta = <        str = (null)
+[3]      cmd = (null)   file = uhuha    meta = (null)   str = (null)
+[4]      cmd = (null)   file = (null)   meta = >        str = (null)
+[5]      cmd = (null)   file = out      meta = (null)   str = (null)
+minishell: uhuha: No such file or directory
+minishell 🍌^C
+
+outfile does not need to be created in this case, fix it
+
+exit does not work, does not go in single builtin
+
