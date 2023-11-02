@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 21:03:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 21:34:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,41 +21,44 @@
 /**
  * @todo how to use both these but in my loopyyloopy
 */
-static char	*save_input(t_expand *str, int i)
+static char	*save_first_input(t_expand *str, int i)
 {
-	str->done = ft_substr(str->input, 0, i);
-	if (!str->done)
+	str->expanded = ft_substr(str->input, 0, i);
+	if (!str->expanded)
 		return (str->input);
-	str->input = ft_strtrim(str->input, str->done);
+	str->input = ft_strtrim(str->input, str->expanded);
 	return (str->input);
 }
 
+static void	dollar_expand(t_expand *str, char *dollar)
+{
+	str->expanded = str;
+	// just expand the strrrrrrrrrrrr
+}
+
 // dollar_expand
-char	*dollar_expand(char *str)
+char	*remove_dollar_bit(t_expand *str)
 {
 	int		i;
 
 	i = 0;
-	
-	str->input = save_input(str, i);
+	while (str->input[i] && !ft_dollar(str->input[i])\
+		&& !ft_isquote(str->input[i]))
+		i++;
+	if (ft_dollar(str->input[i]) || ft_isquote(str->input[i]))
+	{
+		str->dollar = ft_substr(str->input, 0, i);
+		if (!str->dollar)
+			mini_error("some thing is wrong", errno);
+	}
+	str->input = ft_strtrim(str->input, str->dollar);
+	if (!str->input)
+		return (NULL);
+	dollar_expand(str, str->dollar);
 	return (str->input);
 }
 
-// // dollar_expand
-// char	*dollar_expand(char *str)
-// {
-	
-// }
-
-char	*save_dollar(t_expand *str, int i)
-{
-	str->do_expand =
-
-	// expand_dollar() 
-	// return rest of input
-}
-
-char	*check_first(t_expand *str)
+char	*remove_first_bit(t_expand *str)
 {
 	int		i = 0;
 	
@@ -63,7 +66,7 @@ char	*check_first(t_expand *str)
 		&& !ft_isquote(str->input[i]))
 		i++;
 	if (ft_dollar(str->input[i]) || ft_isquote(str->input[i]))
-		str->input = save_input(str, i);
+		str->input = save_first_input(str, i);
 	return (str->input);
 }
 

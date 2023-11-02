@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 18:59:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 21:29:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	print_expand_vals(t_expand *str)
 {
 	printf("input\t\t\t\t\t= [%s]\n", str->input);
-	printf("do_expand\t\t\t\t= [%s]\n", str->do_expand);
-	printf("dont_expand\t\t\t\t= [%s]\n", str->dont_expand);
+	printf("dollar\t\t\t\t= [%s]\n", str->dollar);
 	printf("expanded\t\t\t\t\t= [%s]\n", str->expanded);
-	printf("done\t\t\t\t\t= [%s]\n", str->done);
 	printf("------------------------------------------------------\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 21:00:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 21:34:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,12 @@ static char	*dollar(t_expand *str, t_env **env)
 	(void)env;
 	int		i = 0;
 
-	str->input = check_first(str);
+	str->input = remove_first_bit(str);
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
-		{
-			str->input = save_dollar(str->input);
+			str->input = remove_dollar_bit(str);
 
-		}
 		// if quote, call find next quote immediately...
 		
 		// if (ft_isdquote(str->input[i]))
@@ -101,12 +99,11 @@ static char	*dollar(t_expand *str, t_env **env)
 			// D_DUOTE_expand, ret any input left
 		// if (S_QUOTE)
 			// S_QUOTE EXPAND, ret any input left
-		// if (!str->input)
-		// 	return (str->done);
+		if (!str->input)
+			return (str->expanded);
 		i++;
 	}
-	return (str->input);
-	// return (str->done);
+	return (str->expanded);
 }
 
 /**
@@ -118,20 +115,22 @@ void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 	str->input = set_expand_string(lst, str);
 	if (str->sign == 1 || str->sign == 2 || str->sign == 3)
 	{
-		str->done = dollar(str, env);
+		str->expanded = dollar(str, env);
+		if (!str->expanded)
+			mini_error("str->expanded noped", errno);
 		if (str->sign == 1)
 		{
-			lst->cmd = str->done;
+			lst->cmd = str->expanded;
 			str->sign = 0;
 		}
 		else if (str->sign == 2)
 		{
-			lst->str = str->done;
+			lst->str = str->expanded;
 			str->sign = 0;
 		}
 		else if (str->sign == 3)
 		{
-			lst->file = str->done;
+			lst->file = str->expanded;
 			str->sign = 0;
 		}
 	}
