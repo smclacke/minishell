@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 15:58:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 18:24:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 /**
  * @todo errors
 */
-
+/**
+ * commmentntntntntnt
+*/
 static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 {
 	t_parser	*lst;
@@ -38,13 +40,19 @@ static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 		}
 		lst = lst->next;
 	}
+	if (!new_list)
+		mini_error("some thing is terribly wrong", errno);
 	return (new_list);
 }
 
-static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
+/**
+ * comment?
+*/
+static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list, char *meta)
 {
 	t_parser	*tmp2;
 
+	new_list = add_new_meta(tmp, new_list, meta);
 	if (!tmp)
 		return (NULL);
 	tmp2 = tmp;
@@ -61,7 +69,24 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
 		}
 		tmp2 = tmp2->next;
 	}
+	if (!new_list)
+		mini_error("some thing is terribly wrong again", errno);
 	return (new_list);
+}
+
+/**
+ * commennttttttt
+*/
+static void	free_only_tokens(t_parser *tokens)
+{
+	t_parser	*tmp;
+
+	while (tokens)
+	{
+		tmp = tokens->next;
+		free (tokens);
+		tokens = tmp;
+	}
 }
 
 /**
@@ -72,62 +97,31 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list)
  * @param	tokens once the tokens are split up and the type of 
  * 			input is identified, list is sorted and returned to the executor
  * @return	new_list, same parsed list of tokens, just sorted
- * @todo	norm :):):):):):):):):):):):):):) + wtf?
 */
 t_parser	*sort_list(t_parser *tokens)
 {
 	t_parser	*tmp;
 	t_parser	*new_list;
-	int			sign;
 
-	sign = 0;
 	tmp = tokens;
 	if (!tmp)
 		mini_error("this is getting totally out of hand", errno);
 	new_list = NULL;
 	new_list = find_first_cmd(tmp, new_list);
-	if (!new_list)
-		mini_error("godver", errno);
 	while (tmp)
 	{
 		if (!tmp->flag && shelly_strcmp(tmp->meta, "|") == 0)
-		{	
-			new_list = add_new_meta(tmp, new_list, tmp->meta);
-			// if (!new_list)
-			// 	mini_error("lost", errno);
-			new_list = cmd_after_pipe(tmp, new_list);
-			if (!new_list)
-				mini_error("nein 0", errno);
-		}
+			new_list = cmd_after_pipe(tmp, new_list, tmp->meta);
 		else if (!tmp->flag && tmp->file)
-		{
 			new_list = add_new_file(tmp, new_list, tmp->file);
-			if (!new_list)
-				mini_error("nein 1", errno);
-		}
 		else if (!tmp->flag && tmp->str)
-		{
 			new_list = add_new_str(tmp, new_list, tmp->str);
-			if (!new_list)
-				mini_error("nein 2", errno);
-		}
 		else if (!tmp->flag && tmp->meta)
-		{
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
-			if (!new_list)
-				mini_error("nein 3", errno);
-		}
 		tmp = tmp->next;
 	}
-	while (tokens)
-	{
-		tmp = tokens->next;
-		// free (tokens->input);
-		free (tokens);
-		tokens = tmp;
-	}
-	// free(tokens); // free all tokens in list
 	if (!new_list)
 		mini_error("ohhhhh noooooooo", errno);
+	free_only_tokens(tokens);
 	return (new_list);
 }

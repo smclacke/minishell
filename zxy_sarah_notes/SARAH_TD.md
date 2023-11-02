@@ -79,6 +79,17 @@ i.e.
  ---> outfile not created when only "> outfile"
  ---> echo | echo ...
 
+ --->
+ smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out
+bash: out: Permission denied
+smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > outthing
+Command 'echi' not found, did you mean:
+  command 'echo' from deb coreutils (8.32-4.1ubuntu1)
+Try: apt install <deb name>
+smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out >outer
+bash: out: Permission denied
+
+
 
 ===========================================
 ===========================================

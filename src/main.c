@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 15:51:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/02 18:19:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	while (list)
 	{
 		printf("[%i]\t ", i);
-		printf("input = %s\t", list->input);
+		// printf("input = %s\t", list->input);
 		printf("cmd = %s\t", list->cmd);
 		printf("file = %s\t", list->file);
 		printf("meta = %s\t", list->meta);
@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 		free(input);
 		if (!tokens)
 			continue ;
-		// shelly_print_list(tokens);
+
 
 		tokens = parser(tokens);
 
