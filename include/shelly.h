@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 21:34:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/03 22:16:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int					len_quotes(char *str);
 void				expand_dollar(t_parser *lst, t_env **env, t_expand *str);
 
 //----------------- dollar_expand ------------------//
-char				*remove_dollar_bit(t_expand *str);
+int					remove_dollar_bit(t_expand *str, t_env **env, int i);
 char				*remove_first_bit(t_expand *str);
 
 //------------------ dollar_utils ------------------//

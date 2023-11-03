@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/03 18:59:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/03 22:29:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,16 @@ static char	*set_expand_string(t_parser *lst, t_expand *str)
 */
 static char	*dollar(t_expand *str, t_env **env)
 {
-	(void)env;
+	// (void)env;
 	int		i = 0;
 
 	str->input = remove_first_bit(str);
 	while (str->input[i])
 	{
+		while (str->input[i] && !ft_dollar(str->input[i]))
+			i++;
 		if (ft_dollar(str->input[i]))
-			str->input = remove_dollar_bit(str);
+			i = remove_dollar_bit(str, env, (i + 1));
 
 		// if quote, call find next quote immediately...
 		
@@ -101,9 +103,7 @@ static char	*dollar(t_expand *str, t_env **env)
 			// S_QUOTE EXPAND, ret any input left
 		if (!str->input)
 			return (str->expanded);
-		i++;
 	}
-	print_expand_vals(str);
 	return (str->expanded);
 }
 
