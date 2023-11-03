@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/03 23:20:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/03 23:22:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,6 @@
 /**
  * @todo make it do the thing, norm it, leak proof it, comment it, error it
 */
-
-static char	*save_first_input(t_expand *str, int i)
-{
-	str->expanded = ft_substr(str->input, 0, i);
-	if (!str->expanded)
-		return (str->input);
-	str->input = ft_strtrim(str->input, str->expanded);
-	return (str->input);
-}
-
-char	*remove_first_bit(t_expand *str)
-{
-	int		i = 0;
-	
-	while (str->input[i] && !ft_dollar(str->input[i])\
-		&& !ft_isquote(str->input[i]))
-		i++;
-	if (ft_dollar(str->input[i]) || ft_isquote(str->input[i]))
-		str->input = save_first_input(str, i);
-	return (str->input);
-}
-
 static void	dollar_expand(t_expand *str, t_env **env)
 {
 	str->dollar = ft_strtrim(str->dollar, "$");
@@ -61,6 +39,28 @@ int	remove_dollar_bit(t_expand *str, t_env **env, int i)
 	dollar_expand(str, env);
 	return (i);
 }
+
+static char	*save_first_input(t_expand *str, int i)
+{
+	str->expanded = ft_substr(str->input, 0, i);
+	if (!str->expanded)
+		return (str->input);
+	str->input = ft_strtrim(str->input, str->expanded);
+	return (str->input);
+}
+
+char	*remove_first_bit(t_expand *str)
+{
+	int		i = 0;
+	
+	while (str->input[i] && !ft_dollar(str->input[i])\
+		&& !ft_isquote(str->input[i]))
+		i++;
+	if (ft_dollar(str->input[i]) || ft_isquote(str->input[i]))
+		str->input = save_first_input(str, i);
+	return (str->input);
+}
+
 
 
 // dquote_expand
