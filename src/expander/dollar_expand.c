@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/03 22:28:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/03 23:20:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ char	*remove_first_bit(t_expand *str)
 	return (str->input);
 }
 
-
-
-
 static void	dollar_expand(t_expand *str, t_env **env)
 {
 	str->dollar = ft_strtrim(str->dollar, "$");
@@ -49,7 +46,6 @@ static void	dollar_expand(t_expand *str, t_env **env)
 		str->dollar = NULL;
 }
 
-// dollar_expand
 int	remove_dollar_bit(t_expand *str, t_env **env, int i)
 {
 	int		start;
@@ -60,10 +56,7 @@ int	remove_dollar_bit(t_expand *str, t_env **env, int i)
 	while (str->input[i] && !ft_dollar(str->input[i])\
 		&& !ft_isquote(str->input[i]))
 		i++;
-	if (ft_dollar(str->input[i]) || ft_isquote(str->input[i]))
-		end = i;
-	else 
-		end = i;
+	end = i - start;
 	str->dollar = ft_substr(str->input, start, end);
 	dollar_expand(str, env);
 	return (i);

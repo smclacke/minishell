@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/03 22:29:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/03 23:20:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,6 @@ static char	*set_expand_string(t_parser *lst, t_expand *str)
  * look at OG_str .... iterate until found thing ^
  * what is the first thing?
  * call function on it, return 
- * 
- * while (og_str)
- * {
- * 		while (!$ || !QUOTE || !NULL)
- * 			i++;
- *		if ($)
-			substr(i (-1?)) -> 2nd_str
-			
- * }
- * 
- * // find expanable part func?
- * abc$USER"something"$USER
- * 
- * abc is already saved... then, dollar - > ? = find_expanable()
- * 
- * // expandable will always be at start... so cut away once other thing is found
 */
 static char	*dollar(t_expand *str, t_env **env)
 {
@@ -82,25 +66,18 @@ static char	*dollar(t_expand *str, t_env **env)
 	int		i = 0;
 
 	str->input = remove_first_bit(str);
-	while (str->input[i])
+	while (str->input[i]) // while i != || > 0 ? ||| what best to usE??
 	{
-		while (str->input[i] && !ft_dollar(str->input[i]))
-			i++;
 		if (ft_dollar(str->input[i]))
 			i = remove_dollar_bit(str, env, (i + 1));
 
-		// if quote, call find next quote immediately...
-		
-		// if (ft_isdquote(str->input[i]))
-		// 	printf("expand d_quotes\n");
-		// if (ft_issquote(str->input[i]))
-		// 	printf("expand s_quotes\n");
-		// if ($)
-			// dollar_expand, ret any input left
+
+		// if quote, call find next quote immediately... ?
+
 		// if (D_QUOTE)
-			// D_DUOTE_expand, ret any input left
+			// D_DUOTE_expand, ret pos, i
 		// if (S_QUOTE)
-			// S_QUOTE EXPAND, ret any input left
+			// S_QUOTE EXPAND, ret pos, i
 		if (!str->input)
 			return (str->expanded);
 	}
