@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 21:34:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/03 18:57:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*save_first_input(t_expand *str, int i)
 
 static void	dollar_expand(t_expand *str, char *dollar)
 {
-	str->expanded = str;
+	str->expanded = dollar;
 	// just expand the strrrrrrrrrrrr
 }
 
