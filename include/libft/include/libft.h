@@ -6,7 +6,7 @@
 /*   By: SarahLouise <SarahLouise@student.42.fr>      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/11 19:21:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 20:36:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 17:27:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,6 @@ int		ft_ismeta(int c);
 
 int		ft_isdollar(char *str);
 
-int		ft_dollar(char c);
+int		ft_dollar(int c);
 
 #endif

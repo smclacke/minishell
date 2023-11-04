@@ -36,6 +36,8 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
+ ---> export key start alpha not num... check this
+
  ---> fix all errors and exit codes
 		which exit code for malloc failure? + error message?
 		func(s) with template to handle all... keep it uniform, what we doing with exit codes?

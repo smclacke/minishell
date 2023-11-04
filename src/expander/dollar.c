@@ -6,46 +6,29 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/03 23:20:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 17:30:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo TOO LONGGGGGGG
- * dollar could be cmd, str or file.. need to save which to return expanded 
- * back to correct var in parser struct
-*/
-static char	*set_expand_string(t_parser *lst, t_expand *str)
+static char	*save_first_input(t_expand *str, int i)
 {
-	t_parser		*tmp;
+	str->expanded = ft_substr(str->input, 0, i);
+	if (!str->expanded)
+		return (str->input);
+	str->input = ft_strtrim(str->input, str->expanded);
+	return (str->input);
+}
 
-	tmp = lst;
-	if (tmp->cmd)
-	{
-		if (ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
-		{
-			str->sign = 1;
-			str->input = tmp->cmd;
-		}
-	}
-	else if (tmp->str)
-	{
-		if (ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
-		{
-			str->sign = 2;
-			str->input = tmp->str;
-		}
-	}
-	else if (tmp->file)
-	{
-		if (ft_strnstr(tmp->file, "$", ft_strlen(tmp->file)))
-		{
-			str->sign = 3;
-			str->input = tmp->file;
-		}
-	}
+static char	*remove_first_bit(t_expand *str)
+{
+	int		i = 0;
+	
+	while (str->input[i] && !is_dollar_or_quote(str->input[i]))
+		i++;
+	if (is_dollar_or_quote(str->input[i]))
+		str->input = save_first_input(str, i);
 	return (str->input);
 }
 
@@ -60,13 +43,12 @@ static char	*set_expand_string(t_parser *lst, t_expand *str)
  * what is the first thing?
  * call function on it, return 
 */
-static char	*dollar(t_expand *str, t_env **env)
+char	*dollar(t_expand *str, t_env **env)
 {
-	// (void)env;
 	int		i = 0;
 
 	str->input = remove_first_bit(str);
-	while (str->input[i]) // while i != || > 0 ? ||| what best to usE??
+	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
 			i = remove_dollar_bit(str, env, (i + 1));
@@ -84,32 +66,3 @@ static char	*dollar(t_expand *str, t_env **env)
 	return (str->expanded);
 }
 
-/**
- * adding expanded str back into correct parser struct var
- * @todo comment
-*/
-void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
-{
-	str->input = set_expand_string(lst, str);
-	if (str->sign == 1 || str->sign == 2 || str->sign == 3)
-	{
-		str->expanded = dollar(str, env);
-		if (!str->expanded)
-			mini_error("str->expanded noped", errno);
-		if (str->sign == 1)
-		{
-			lst->cmd = str->expanded;
-			str->sign = 0;
-		}
-		else if (str->sign == 2)
-		{
-			lst->str = str->expanded;
-			str->sign = 0;
-		}
-		else if (str->sign == 3)
-		{
-			lst->file = str->expanded;
-			str->sign = 0;
-		}
-	}
-}

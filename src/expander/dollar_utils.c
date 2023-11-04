@@ -3,41 +3,45 @@
 /*                                                        ::::::::            */
 /*   dollar_utils.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
+/*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/10/04 12:18:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:39:36 by smclacke      ########   odam.nl         */
+/*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/11/04 17:30:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * @todo don't think this is necessary anymore...
+ * @todo make it do the thing, norm it, leak proof it, comment it, error it
 */
-char	*check_if_expand(char *str)
+static void	dollar_expand(t_expand *str, t_env **env)
 {
-	int		i;
-	int		quote;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isquote(str[i]))
-		{
-			quote = quote_type(str[i]);
-			i++;
-			while (str[i] && !ft_isquote(str[i]))
-			{
-				if (ft_dollar(str[i]) && quote == '\'')
-					return (NULL);
-				if (ft_dollar(str[i]) && quote == '\"')
-					return (str);
-				i++;
-			}
-		}
-		i++;
-	}
-	return (str);
+	str->dollar = ft_strtrim(str->dollar, "$");
+	if (!get_check_value(str, env))
+		str->expanded = ft_strjoin(str->expanded, str->dollar);
+	else
+		str->dollar = NULL;
 }
+
+int	remove_dollar_bit(t_expand *str, t_env **env, int i)
+{
+	int		start;
+	int		end;
+
+	start = i;
+	end = 0;
+	while (str->input[i] && !is_dollar_or_quote(str->input[i]))
+		i++;
+	end = i - start;
+	str->dollar = ft_substr(str->input, start, end);
+	dollar_expand(str, env);
+	return (i);
+}
+
+
+// dquote_expand
+
+// squote_expand
+
 

@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 20:14:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/17 20:14:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 17:27:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-int	ft_dollar(char c)
+int	ft_dollar(int c)
 {
 	return (c == '$');
 }

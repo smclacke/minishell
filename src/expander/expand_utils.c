@@ -6,11 +6,16 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/03 22:25:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 17:29:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/shelly.h"
+
+int		is_dollar_or_quote(int c)
+{
+	return (ft_dollar(c) || ft_isquote(c));
+}
 
 /**
  * @param env expander struct
@@ -36,4 +41,30 @@ int	get_check_value(t_expand *str, t_env **env)
 		head = head->next;
 	}
 	return (1);
+}
+
+/**
+ * @todo commmennntttt
+*/
+char	*set_expand_string(t_parser *lst, t_expand *str)
+{
+	t_parser		*tmp;
+
+	tmp = lst;
+	if (tmp->cmd && ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
+	{
+		str->sign = 1;
+		str->input = tmp->cmd;
+	}
+	else if (tmp->str && ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
+	{
+		str->sign = 2;
+		str->input = tmp->str;
+	}
+	else if (tmp->file && ft_strnstr(tmp->file, "$", ft_strlen(tmp->file)))
+	{
+		str->sign = 3;
+		str->input = tmp->file;
+	}
+	return (str->input);
 }
