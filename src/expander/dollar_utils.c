@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 21:59:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 22:45:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,48 +27,45 @@ int	save_extra_string(t_expand *str, int i)
 	return (i);
 }
 
-// dquote_expand
+static char	*quote_dollar(t_expand *str, t_env **env)
+{
+	int		i;
+	int		start;
+	int		end;
+
+	i = 0;
+	start = 0;
+	end = 0;
+	printf("d_quote = %s\n", str->d_quote);
+	while (str->d_quote[i])
+	{
+		// if (ft_dollar(str->d_quote[i]))
+		i++;
+	}
+	return (str->d_quote);
+}
+
 int	dquote_bit(t_expand *str, t_env **env, int i)
 {
 	int		start;
 	int		end;
-	int		dq_start;
-	
+	char	*temp;
+
 	start = i;
-	dq_start = 0;
-	while (str->input[i])
+	end = 0;
+	temp = NULL;
+	while(str->input[i])
 	{
 		if (ft_isdquote(str->input[i]))
 		{
-			end = i - start;
+			end = i - 1;
 			str->d_quote = ft_substr(str->input, start, end);
-			printf("str->d_quote = %s\n", str->d_quote);
-			while (str->d_quote[dq_start])
-			{
-				if (ft_dollar(str->d_quote[dq_start]))
-				{
-					dq_start = dollar_bit(str, env, dq_start);
-					str->d_quote = ft_substr(str->d_quote, dq_start, (ft_strlen(str->d_quote) - dq_start));
-				}
-				
-				dq_start++;
-			}
+			temp = quote_dollar(str, env);
+			printf("temp = %s\n", temp);
+			str->expanded = ft_strjoin(str->expanded, temp);
+			printf("expanded = %s\n", str->expanded);
+			return (i + 1);
 		}
-		// 	end = i - start;
-		// 	str->d_quote = ft_substr(str->input, start, end);
-		// 	str->d_quote = first_bit(str);
-		// 	while (str->d_quote[dq_start])
-		// 	{
-		// 		if (ft_dollar(str->d_quote[dq_start]))
-		// 		{
-		// 			dq_start = dollar_bit(str, env, dq_start);
-		// 			str->d_quote = ft_substr(str->d_quote, dq_start, (ft_strlen(str->d_quote) - dq_start));
-		// 		}
-		// 		dq_start++;
-		// 	}
-		// 	str->expanded = ft_strjoin(str->expanded, str->d_quote);
-		// 	return (i + 1);
-		// }
 		i++;
 	}
 	return (i + 1);

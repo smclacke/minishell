@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 19:26:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 22:44:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,7 @@ char	*dollar(t_expand *str, t_env **env)
 				i = save_extra_string(str, i);
 		}
 		if (ft_isdquote(str->input[i]))
-		{
 			i = dquote_bit(str, env, (i + 1));
-		}
-
-		// if quote, call find next quote immediately... ?
-
-		// if (D_QUOTE)
-			// D_DUOTE_expand, ret pos, i
-
 		if (!str->input)
 			return (str->expanded);
 	}
