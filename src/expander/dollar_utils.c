@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 23:30:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 23:48:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ static void	quote_dollar(t_expand *str, t_env **env)
 	{
 		if (ft_dollar(str->input[i]))
 			i = dollar_bit(str, env, (i + 1));
-		if (ft_issquote(str->input[i]))
-		{
-			i = squote_bit(str, i);
-			if (str->input[i] && !is_dollar_or_quote(str->input[i]))
-				i = save_extra_string(str, i);
-		}
+		// if (ft_issquote(str->input[i]))
+		// {
+		// 	i = squote_bit(str, i);
+		// 	if (str->input[i] && !is_dollar_or_quote(str->input[i]))
+		// 		i = save_extra_string(str, i);
+		// }
+		if (!str->input[i])
+			break ;
 	}
 }
 
@@ -69,14 +71,12 @@ int	dquote_bit(t_expand *str, t_env **env, int i)
 			end = i - 1;
 			str->d_quote = ft_substr(str->input, start, end);
 			quote_dollar(str, env);
-			printf("str->Expanded = %s\n", str->expanded);
-			// printf("temp = %s\n", temp);
-			// str->expanded = ft_strjoin(str->expanded, temp);
-			// printf("expanded = %s\n", str->expanded);
 			return (i + 1);
 		}
 		i++;
 	}
+	str->d_quote = ft_substr(str->input, start, i - start);
+	str->expanded = ft_strjoin(str->expanded, str->d_quote);
 	return (i + 1);
 }
 

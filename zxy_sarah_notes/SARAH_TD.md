@@ -36,18 +36,23 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
+ ---> fix makefile
+
+ ---> double quotes in dollar
+
+ ---> quote expansion, TEST, check, norm...
+
  ---> export key start alpha not num... check this
 
  ---> fix all errors and exit codes
 		which exit code for malloc failure? + error message?
 		func(s) with template to handle all... keep it uniform, what we doing with exit codes?
 
- ---> expansionionionyy
-
  ---> leaks in expansion when it's finished...
 
 
- ---> if here_doc, don't expand dollar, delmiter str is literal
+ ---> here_doc - check HERE_DOC IS A BITCH below for notes...
+ 		if here_doc don't expand dollar, delmiter str is literal
 i.e. 
 		export sarah=EOF
 		<< $sarah
@@ -58,8 +63,6 @@ i.e.
  ---> SIGNALSSSS
 
  ---> cd "" cd ''
-
- ---> here_doc expansion      :)
 
  ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
     bash: $bla: ambiguous redirect
