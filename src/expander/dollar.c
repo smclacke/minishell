@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 17:40:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 19:26:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*save_first_input(t_expand *str, int i)
 	return (str->input);
 }
 
-static char	*remove_first_bit(t_expand *str)
+char	*first_bit(t_expand *str)
 {
 	int		i = 0;
 	
@@ -41,23 +41,29 @@ char	*dollar(t_expand *str, t_env **env)
 {
 	int		i = 0;
 
-	str->input = remove_first_bit(str);
+	str->input = first_bit(str);
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
-			i = remove_dollar_bit(str, env, (i + 1));
-		// if (ft_issquote(str->input[i]))
-		// 	i = remove_squote_bit(str, (i + 1));
+			i = dollar_bit(str, env, (i + 1));
+		if (ft_issquote(str->input[i]))
+		{
+			i = squote_bit(str, (i + 1));
+			if (str->input[i] && !is_dollar_or_quote(str->input[i]))
+				i = save_extra_string(str, i);
+		}
+		if (ft_isdquote(str->input[i]))
+		{
+			i = dquote_bit(str, env, (i + 1));
+		}
 
 		// if quote, call find next quote immediately... ?
 
 		// if (D_QUOTE)
 			// D_DUOTE_expand, ret pos, i
-		// if (S_QUOTE)
-			// S_QUOTE EXPAND, ret pos, i
+
 		if (!str->input)
 			return (str->expanded);
 	}
 	return (str->expanded);
 }
-

@@ -111,6 +111,7 @@ HERE_DOC IS A BITCH
 smclacke@f0r3s17:~/Desktop/minishell$ << eof
 > '$USER'
 > eof
+
 smclacke@f0r3s17:~/Desktop/minishell$ echo << eof
 > '$USER'
 > eof
@@ -119,20 +120,24 @@ smclacke@f0r3s17:~/Desktop/minishell$ cat << eof
 > '$USER'
 > eof
 'smclacke'
+
 smclacke@f0r3s17:~/Desktop/minishell$ cat << eof
 > "$USER"
 > '$USER'
 > eof
 "smclacke"
 'smclacke'
+
 smclacke@f0r3s17:~/Desktop/minishell$ cat << "eof"
 > something
 > eof
 something
+
 smclacke@f0r3s17:~/Desktop/minishell$ cat << "eof"
 > $USER
 > eof
 $USER
+
 smclacke@f0r3s17:~/Desktop/minishell$ cat << eof
 > $USER
 > eof
@@ -141,22 +146,34 @@ smclacke@f0r3s17:~/Desktop/minishell$ cat << 'eof'
 > $USER
 > eof
 $USER
+
 smclacke@f0r3s17:~/Desktop/minishell$ cat << 'eof'
 > "$USER"
 > '$USER'
 > eof
 "$USER"
 '$USER'
+
 smclacke@f0r3s17:~/Desktop/minishell$ cat << "eof"
 > "$USER"
 > '$USER'
 > eof
 "$USER"
 '$USER'
+
 smclacke@f0r3s17:~/Desktop/minishell$ cat << $USER
 > smclacke
 > $USER
 
+smclacke@f0r3s17:~/Desktop/minishell$ cat << "$USER"
+> smclacke
+> $USER
+smclacke
+
+smclacke@f0r3s17:~/Desktop/minishell$ cat << '$USER'
+> smclacke
+> $USER
+smclacke
 
 
 
