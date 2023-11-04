@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/04 17:17:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 17:36:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,11 @@ static void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 		if (!str->expanded)
 			mini_error("str->expanded noped", errno);
 		if (str->sign == 1)
-		{
 			lst->cmd = str->expanded;
-			str->sign = 0;
-		}
 		else if (str->sign == 2)
-		{
 			lst->str = str->expanded;
-			str->sign = 0;
-		}
 		else if (str->sign == 3)
-		{
 			lst->file = str->expanded;
-			str->sign = 0;
-		}
 	}
 }
 

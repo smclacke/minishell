@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 17:29:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 17:39:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/shelly.h"
 
-int		is_dollar_or_quote(int c)
+int	is_dollar_or_quote(int c)
 {
 	return (ft_dollar(c) || ft_isquote(c));
 }
@@ -51,6 +51,7 @@ char	*set_expand_string(t_parser *lst, t_expand *str)
 	t_parser		*tmp;
 
 	tmp = lst;
+	str->sign = 0;
 	if (tmp->cmd && ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
 	{
 		str->sign = 1;

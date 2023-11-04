@@ -6,11 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 17:30:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 17:40:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+
+// dquote_expand
+
+
+// squote_expand
+// int	remove_squote_bit(t_expand *str, )
 
 /**
  * @todo make it do the thing, norm it, leak proof it, comment it, error it
@@ -38,10 +45,3 @@ int	remove_dollar_bit(t_expand *str, t_env **env, int i)
 	dollar_expand(str, env);
 	return (i);
 }
-
-
-// dquote_expand
-
-// squote_expand
-
-

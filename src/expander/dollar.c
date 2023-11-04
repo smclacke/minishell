@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 17:30:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 17:40:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,8 @@ static char	*remove_first_bit(t_expand *str)
 
 /**
  * get first part of string, then loop through separating dollars and quotes...
- * @todo fix this
- * 
- * og_str ....... iterate
- * if dollar/quote/NULL
- * substr + strjoin everything before found thing ^ into snd_str
- * look at OG_str .... iterate until found thing ^
- * what is the first thing?
- * call function on it, return 
+ * @todo fix this, leaks, norm, test test test...
+ * write version (or have func for here_doc and only edit that bit)
 */
 char	*dollar(t_expand *str, t_env **env)
 {
@@ -52,7 +46,8 @@ char	*dollar(t_expand *str, t_env **env)
 	{
 		if (ft_dollar(str->input[i]))
 			i = remove_dollar_bit(str, env, (i + 1));
-
+		// if (ft_issquote(str->input[i]))
+		// 	i = remove_squote_bit(str, (i + 1));
 
 		// if quote, call find next quote immediately... ?
 
