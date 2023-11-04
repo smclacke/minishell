@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 22:45:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 23:30:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,43 +27,52 @@ int	save_extra_string(t_expand *str, int i)
 	return (i);
 }
 
-static char	*quote_dollar(t_expand *str, t_env **env)
+// if single in double, keep quotes and still expand
+static void	quote_dollar(t_expand *str, t_env **env)
 {
 	int		i;
 	int		start;
 	int		end;
+	// char	*temp;
 
 	i = 0;
 	start = 0;
 	end = 0;
-	printf("d_quote = %s\n", str->d_quote);
-	while (str->d_quote[i])
+	str->input = str->d_quote;
+	str->input = first_bit(str);
+	printf("str->input = %s\n", str->input);
+	while (str->input[i])
 	{
-		// if (ft_dollar(str->d_quote[i]))
-		i++;
+		if (ft_dollar(str->input[i]))
+			i = dollar_bit(str, env, (i + 1));
+		if (ft_issquote(str->input[i]))
+		{
+			i = squote_bit(str, i);
+			if (str->input[i] && !is_dollar_or_quote(str->input[i]))
+				i = save_extra_string(str, i);
+		}
 	}
-	return (str->d_quote);
 }
 
 int	dquote_bit(t_expand *str, t_env **env, int i)
 {
 	int		start;
 	int		end;
-	char	*temp;
+	// char	*temp;
 
 	start = i;
 	end = 0;
-	temp = NULL;
 	while(str->input[i])
 	{
 		if (ft_isdquote(str->input[i]))
 		{
 			end = i - 1;
 			str->d_quote = ft_substr(str->input, start, end);
-			temp = quote_dollar(str, env);
-			printf("temp = %s\n", temp);
-			str->expanded = ft_strjoin(str->expanded, temp);
-			printf("expanded = %s\n", str->expanded);
+			quote_dollar(str, env);
+			printf("str->Expanded = %s\n", str->expanded);
+			// printf("temp = %s\n", temp);
+			// str->expanded = ft_strjoin(str->expanded, temp);
+			// printf("expanded = %s\n", str->expanded);
 			return (i + 1);
 		}
 		i++;
