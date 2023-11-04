@@ -6,21 +6,31 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/10/31 19:47:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 21:58:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * @todo errors
+ * @todo errors NORMMMMMMMMM
 */
 
-static char	*copy_quoteless(char *str, char *new, int q, int j)
+static void	remove_quotes(char *str)
 {
-	int		i;
+	int			i;
+	int			j;
+	int			q;
+	size_t		len;
+	char		*new;	
 
 	i = 0;
+	j = 0;
+	q = 0;
+	len = (ft_strlen(str) - 2);
+	new = (char *)malloc(sizeof(char) * (len + 1));
+	if (!new)
+		mini_error("malloc noped", errno);
 	while (str[i])
 	{
 		while (str[i] && !ft_isquote(str[i]))
@@ -37,34 +47,13 @@ static char	*copy_quoteless(char *str, char *new, int q, int j)
 				new[j] = str[i];
 				increment(&i, &j);
 			}
+			if (ft_isquote(str[i]) && str[i] == q)
+				i++;
 		}
-		if (ft_isquote(str[i]) && str[i] == q)
-			i++;
 	}
 	new[j] = '\0';
-	return (new);
-}
-
-/**
- * @brief	finds matching sets of quotes, removes them leaving
- * 			everything inside those quotes intact
-*/
-char	*remove_quotes(char *str)
-{
-	int		j;
-	int		q;
-	int		len;
-	char	*new;
-
-	j = 0;
-	q = 0;
-	len = len_quotes(str);
-	new = (char *)malloc(sizeof(char) * len + 1);
-	if (!new)
-		mini_error("malloc noped", errno);
-	new = copy_quoteless(str, new, q, j);
-	free (str);
-	return (new);
+	str = ft_strcpy(str, new);
+	free(new);
 }
 
 /**
@@ -85,16 +74,14 @@ void	expand_quotes(t_parser *tokens)
 			if (check_quotes(list->cmd))
 			{
 				if (!check_space(list->cmd) && !ft_isdollar(list->cmd))
-					list->cmd = remove_quotes(list->cmd);
+					remove_quotes(list->cmd);
 			}
 		}
 		else if (list->str)
 		{
 			if (check_quotes(list->str))
-			{
 				if (!ft_isdollar(list->str))
-					list->str = remove_quotes(list->str);
-			}
+					remove_quotes(list->str);
 		}
 		list = list->next;
 	}

@@ -1,16 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lexer_quotes.c                                     :+:    :+:            */
+/*   quote_bullshit.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/12 17:07:01 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/09/12 16:56:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 21:13:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+
+/**
+ * @brief	length of string without the quotes that are going to be removed
+ * 			encounter a quote, find matching, remove both, keep everything
+ * 			inside those quotes intact
+*/
+int	len_quotes(char *str)
+{
+	int	i;
+	int	q;
+	int	len;
+
+	i = 0;
+	q = 0;
+	len = 0;
+	while (str[i])
+	{
+		while (str[i] && !ft_isquote(str[i]))
+			increment(&len, &i);
+		if (ft_isquote(str[i]))
+		{
+			q = quote_type(str[i]);
+			i++;
+			while (str[i] && str[i] != q)
+				increment(&len, &i);
+		}
+		if (ft_isquote(str[i]) && str[i] == q)
+			i++;
+	}
+	return (len);
+}
 
 /**
  * @brief	if a single quotation is found, the string to searched to find the corresponding single qutation

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 19:29:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 21:59:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,17 @@ int	dquote_bit(t_expand *str, t_env **env, int i)
 		{
 			end = i - start;
 			str->d_quote = ft_substr(str->input, start, end);
-			str->d_quote = remove_quotes(str->input);
 			printf("str->d_quote = %s\n", str->d_quote);
+			while (str->d_quote[dq_start])
+			{
+				if (ft_dollar(str->d_quote[dq_start]))
+				{
+					dq_start = dollar_bit(str, env, dq_start);
+					str->d_quote = ft_substr(str->d_quote, dq_start, (ft_strlen(str->d_quote) - dq_start));
+				}
+				
+				dq_start++;
+			}
 		}
 		// 	end = i - start;
 		// 	str->d_quote = ft_substr(str->input, start, end);

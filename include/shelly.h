@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 19:27:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/04 21:45:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_parser			*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 
 				// expander
 //-------------------- quotes -------------------//
-char				*remove_quotes(char *str);
+// char				*remove_quotes(char *str);
 void				expand_quotes(t_parser *tokens);
 
 //----------------- quote_utils ------------------//
@@ -101,7 +101,6 @@ void				increment(int *len, int *i);
 int					check_quotes(char *str);
 int					check_space(char *str);
 int					quote_type(int str);
-int					len_quotes(char *str);
 
 //------------------- dollar --------------------//
 char				*first_bit(t_expand *str);
