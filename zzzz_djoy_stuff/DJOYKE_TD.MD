@@ -65,25 +65,34 @@
     ◦ ctrl-\ does nothing.
 
 3) 
-    review the checking of the builtins because its case sensitive
-4) 
     check all the to do's in code
 
-5) 
-    ls |
-    multiple times? does that fail?
-
-6) 
+4) 
     static void	build(t_parser *lst, t_env **env, t_execute *data)
      * check the last while(wait(NULL) != -1) loop
 
-7) 
+5) 
     fix double free in unset
 
-8) 
+6) 
     cd ""
     cd ''
     is equivalent of cd_. (cd .)
 
-9) 
+7) 
     find solid evidence for allowing dprintf, if not just change it you lazy bum
+
+8) 
+    1)  
+        echi hi < infile > outfile
+        check infile first
+        infile does not exist so error
+        no such file or directory
+    2)  
+        echi hi > outfile
+        outfile created and stop the process
+        command not found
+    3) 
+        echo hi < infile
+        check file first
+        no such file or directory
