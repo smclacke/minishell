@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 19:00:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 16:34:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ typedef struct s_env
  * @param	out: int storing fd for outfile
  * @param	count: int storing amount of commands in parser linked list
  * @param	fd: int storing a fd
- * @todo	do I need fd?
 */
 typedef struct s_execute
 {

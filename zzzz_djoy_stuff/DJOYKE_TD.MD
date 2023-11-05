@@ -65,27 +65,34 @@
     ◦ ctrl-\ does nothing.
 
 3) 
-    review the checking of the builtins because its case sensitive
-
-    cd:
-
-    * relative: cd src
-    * absolute: cd src/bin/pannekoek/whatever TESTT!!!
-    * 				cd alone gives prompt back
-    * 				cd jfhjvhs gives: cd: no such file or directory: jfhjvhs
-    * line 66: check if needs error message with exit
-    * 			give prompt back, and endline?
-
-    export, cd , exit, unset before childprocess because you need the environment. and exit needs to exit the whole program.
-    rest in the child proces.
-
-4) 
     check all the to do's in code
 
-5) 
-    ls |
-    multiple times? does that fail?
-
-6) 
+4) 
     static void	build(t_parser *lst, t_env **env, t_execute *data)
      * check the last while(wait(NULL) != -1) loop
+
+5) 
+    fix double free in unset
+
+6) 
+    cd ""
+    cd ''
+    is equivalent of cd_. (cd .)
+
+7) 
+    find solid evidence for allowing dprintf, if not just change it you lazy bum
+
+8) 
+    1)  
+        echi hi < infile > outfile
+        check infile first
+        infile does not exist so error
+        no such file or directory
+    2)  
+        echi hi > outfile
+        outfile created and stop the process
+        command not found
+    3) 
+        echo hi < infile
+        check file first
+        no such file or directory

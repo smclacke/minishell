@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 20:24:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 15:04:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,26 @@
 /**
  * @param env pointer to environment
  * @brief free's content plus node.
+ * @todo 
+ * Unset PATH:
+ * Direct leak of 171 byte(s) in 1 object(s) allocated from:
+    #0 0x49a26d in malloc (/home/dreijans/Documents/rank3/minishell/djoyke+0x49a26d)
+    #1 0x4dd462 in ft_substr (/home/dreijans/Documents/rank3/minishell/djoyke+0x4dd462)
+    #2 0x4d0d5d in get_full /home/dreijans/Documents/rank3/minishell/src_djoy/executor/make_env.c:78:13
+    #3 0x4d101c in env_list /home/dreijans/Documents/rank3/minishell/src_djoy/executor/make_env.c:104:10
+    #4 0x4d495f in main /home/dreijans/Documents/rank3/minishell/src_saar/main_saar.c:46:8
+    #5 0x7f54d5772d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+	this you again?
+* disappears if I put free env->full
+* but then when I export djoyke=gek 
+* if I want to unset djoyke I get a double free.
 */
 void	free_all(t_env *env)
 {
 	free(env->value);
 	free(env->key);
-	free(env->full);
+	if (env->full != NULL)
+		free(env->full);
 	free(env);
 }
 
@@ -95,11 +109,6 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
  * @return true if nothing wrong found with the words
- * @todo 
- * bash-3.2$ export djoyke="gek gggg" (two words if it's in quotations)
- * bash-3.2$ env
- * env part:
- * djoyke=gek gggg
 */
 bool	word_check(t_parser *lst)
 {

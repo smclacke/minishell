@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/10/19 21:13:53 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/02 20:39:31 by smclacke      ########   odam.nl         */
+/*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
+/*   Updated: 2023/11/05 16:35:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static bool	parse_path(t_env *env, t_execute *data)
  * @param node noded from parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks is command has access
- * @todo check is i need to give errno to mini_error
- * check if need to return node->cmd when it's absolute check etc
 */
 static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
@@ -74,7 +72,8 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 			free(ok_path);
 			i++;
 		}
-		mini_error(node->cmd, errno);
+		put_execute_error(node);
+		data->error = false;
 	}
 	return (node->cmd);
 }
@@ -85,6 +84,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks parser input for executable and executes with execve
  * @todo replace exit int with the existatus global we pass on
+ * norminette
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -92,17 +92,24 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 
 	init_pipes_child(data);
 	redirect(lst, data);
+	if (data->error == false)
+		exit (0);
 	if (check_for_builtin(lst))
 	{
 		do_builtin(lst, env);
 		exit (0);
 	}
 	executable = check_access(*env, lst, data);
+	if (data->error == false)
+		exit (0);
 	if (access(executable, X_OK) == -1)
-		mini_error(executable, errno);
+	{
+		put_permission_error(lst);
+		exit (0);
+	}
 	data->env_array = list_to_string(*env);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
-		mini_error(lst->str, errno);
+		mini_error("execve", errno);
 	return ;
 }
 
@@ -118,7 +125,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	if (!lst)
 		mini_error("list", errno);
 	init_heredoc(lst);
-	if (single_builtin_cmd(lst, env, data) == 1)
+	if (single_builtin_cmd(lst, env, data) == false)
 		return ;
 	child_builtin_cmd(lst, env, data);
 	close_all(data);
@@ -142,10 +149,9 @@ void	execute(t_env **env, t_parser *lst)
 	if (data == NULL)
 		mini_error("malloc data", errno);
 	init_execute_struct(data);
-	ft_expand(lst, env);
+	// ft_expand(lst, env);
 	build(lst, env, data);
 	free (data);
 	data = NULL;
 	return ;
 }
-

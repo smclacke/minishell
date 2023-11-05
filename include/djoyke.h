@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 20:23:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 16:28:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ typedef struct s_parser
 }				t_parser;
 
 // utils
-void				free_tokens(t_parser *tokens);
-t_parser			*print_the_full_thing(t_parser *tokens);
+void			free_tokens(t_parser *tokens);
+t_parser		*print_the_full_thing(t_parser *tokens);
 
 // lexer
 //---------- lexer ----------//
@@ -139,7 +139,7 @@ typedef struct s_env
 }							t_env;
 
 //---- Expander ----//
-void				ft_expand(t_parser *lst, t_env **env);
+void			ft_expand(t_parser *lst, t_env **env);
 
 typedef struct s_expand
 {
@@ -170,6 +170,7 @@ typedef struct s_execute
 	int				in;
 	int				out;
 	int				count;
+	bool			error;
 }						t_execute;
 
 void			free_remain_struct(t_expand *data);
@@ -178,7 +179,7 @@ bool			check_for_meta(t_parser *lst);
 bool			check_for_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
 void			redirect_outfile(t_parser *head, t_execute *data);
-void			redirect_infile(t_parser *head, t_execute *data);
+bool			redirect_infile(t_parser *head, t_execute *data);
 void			redirect_append(t_parser *head, t_execute *data);
 void			init_heredoc(t_parser *lst);
 void			redirect(t_parser *lst, t_execute *data);
@@ -202,8 +203,6 @@ void			print_list(t_env *env);
 void			print_list_key(t_env *env);
 void			print_list_value(t_env *env);
 char			**list_to_string(t_env *env);
-void			print_env_list(t_env *lst);
-void			print_list_full(t_env *env);
 void			free_env(t_env **lst);
 
 //---- Built-in ----//
@@ -219,6 +218,7 @@ void			ft_pwd(void);
 void			ft_export(t_parser *lst, t_env **env);
 void			ft_unset(t_parser *lst, t_env **env);
 void			reasing_value(char *temp, char *str, t_env *head);
+void			dash_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
 
 //----Executor----//
 void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
@@ -235,13 +235,17 @@ void			init_fork(t_parser *lst, t_env **env, t_execute *data);
 bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 char			**get_argv(t_parser *lst);
+void			put_execute_error(t_parser *node);
+void			put_permission_error(t_parser *node);
+
 
 //----Utils----//
 void			mini_error(char *string, int error);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
-void			print_parser_list(t_parser *lst);
 void			free_strs(char *str, char *str2);
+char			*ft_getenv(t_env *env, char *str);
+int				list_iter(t_parser *lst);
 
 //------------ Minishell -----------//
 /**

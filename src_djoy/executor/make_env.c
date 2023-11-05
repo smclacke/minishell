@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 21:15:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/10/31 23:29:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char	*get_full(char *str)
  * @param env linked list containing key and env
  * @brief putting the envp content into a linked list seperated by key and value
  * @return linked list
- * @todo do i want to keep full??
 */
 t_env	*env_list(char **envp, t_env *env)
 {
