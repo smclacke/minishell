@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 16:34:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:34:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,10 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 
-		shelly_parser_print(tokens);
-
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		print_the_full_thing(tokens);
 
-		print_the_full_thing(tokens);
 		execute(&env, tokens);
 		free_tokens(tokens);
 

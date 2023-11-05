@@ -36,8 +36,6 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
- ---> fix makefile
-
  ---> double quotes in dollar
 
  ---> quote expansion, TEST, check, norm...
@@ -88,7 +86,8 @@ looks for expanded (dus the number) as dir
  ---> leaks if quotes aren't closed?
  ---> norm
 
- Djoyke...
+
+**Djoyke...**
 
  ---> outfile not created when only "> outfile"
  ---> echo | echo is leaky and segfaults

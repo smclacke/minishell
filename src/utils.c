@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 19:25:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:30:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void	free_tokens(t_parser *tokens)
 int	get_n_cmds(t_parser *tokens)
 {
 	t_parser	*tmp;
-	int			i = 0;
+	int			i;
 
+	i = 0;
 	tmp = tokens;
 	while (tmp)
 	{

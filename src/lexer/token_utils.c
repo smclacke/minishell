@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 19:18:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:31:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * @todo errors
+ * @todo errors, 54 return needs error
 */
 
 int	is_meta(char *input)
@@ -51,7 +51,7 @@ char	*which_quote(char *input)
 		return (SINGLE_Q);
 	else if (ft_strnstr(input, DOUBLE_Q, 1))
 		return (DOUBLE_Q);
-	return (0); // error
+	return (0);
 }
 
 int	next_quote(char *input, char c)
