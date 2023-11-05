@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 16:41:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:09:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @param env linked list containing environment
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks parser input for executable and executes with execve
- * @todo replace exit int with the existatus global we pass on
+ *  replace exit int with the existatus global we pass on
  * norminette
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
@@ -138,8 +138,6 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
  * @param env environment linked list
  * @param lst linked list parsed
  * @brief calls functions needed to start executing process
- * @todo 
- * unset is double freeing
 */
 void	execute(t_env **env, t_parser *lst)
 {
