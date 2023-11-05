@@ -39,19 +39,30 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
- ---> double quotes in dollar
+SIGNALSSSS
+ ---> CTRL D
+ ---> here_doc exiting is not smooth 
+ ---> exit_codes (and errors?)
 
+EXPANSION
+ ---> double quotes in dollar expansion
+ ---> here_doc expansion *****
+ ---> $? ***
+ ---> leaks  :) :)
  ---> quote expansion, TEST, check, norm...
 
- ---> export key start alpha not num... check this
-
+EXIT AND ERRORS
  ---> fix all errors and exit codes
 		which exit code for malloc failure? + error message?
 		func(s) with template to handle all... keep it uniform, what we doing with exit codes?
 
- ---> leaks in expansion when it's finished...
+OTHERRRR
+ ---> there's a leak in the parser (testing here_Doc signals)
+ ---> cd "" cd ''
+ ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
+    bash: $bla: ambiguous redirect
 
-
+*****
  ---> here_doc - check HERE_DOC IS A BITCH below for notes...
  		if here_doc don't expand dollar, delmiter str is literal
 i.e. 
@@ -61,12 +72,8 @@ i.e.
 		<< EOF
 		conts
 
- ---> SIGNALSSSS
-
- ---> cd "" cd ''
-
- ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
-    bash: $bla: ambiguous redirect
+	++ notes below
+*****
 
 ***
 $? in export is expanded as expected in/out quotes
@@ -81,7 +88,7 @@ opens file '1' ...
 
 cd $?
 looks for expanded (dus the number) as dir
-
+***
 
 **CHECKKKKKK**
 
@@ -95,6 +102,7 @@ looks for expanded (dus the number) as dir
  ---> outfile not created when only "> outfile"
  ---> echo | echo is leaky and segfaults
  ---> cd | cd is leaky af
+ ---> export key start alpha not num... check this
 
  --->
  smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out
