@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 21:26:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 21:51:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define PARENT 1
 # define CHILD 2
 # define HERE_DOC 3
-
 
 // EXITCODES
 typedef enum e_exit
