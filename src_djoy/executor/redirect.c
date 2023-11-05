@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/02 16:56:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 14:33:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,9 @@
  * @param head parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function 
- * @todo 
- * 1)norm it
- * 2)check how to do else statement at the end when exiting from a builtin
- * exit(1); only when we figure out how to exit from a builtin use this :)
 */
 bool	redirect_infile(t_parser *head, t_execute *data)
 {
-	struct stat	file_stat;
 
 	if (mini_strcmp(head->meta, "<") == 0)
 	{
@@ -37,24 +32,8 @@ bool	redirect_infile(t_parser *head, t_execute *data)
 			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->file);
 			return (false);
 		}
-		if (stat(head->file, &file_stat) == 0)
-		{
-			if (S_ISREG(file_stat.st_mode))
-			{
-				data->in = open(head->file, O_RDWR, 0644);
-				if (data->in == -1)
-				{
-					dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->file);
-					return (false); //needs to be a false?
-				}
-				if (dup2(data->in, STDIN_FILENO) == 0)
-					close(data->in);
-			}
-			if (S_ISDIR(file_stat.st_mode))
-				dprintf(STDERR_FILENO, DIR_MESSAGE, head->file);
-			else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
-				dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->file);
-		}
+		if (check_infile_stat(head, data) == false)
+			return (false);
 	}
 	return (true);
 }
@@ -63,10 +42,6 @@ bool	redirect_infile(t_parser *head, t_execute *data)
  * @param head parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function
- * @todo
- * check how to do else statement at the end when exiting from a builtin
- * exit(1); only when we figure out how to exit from a builtin use this :)
- * does this need to be bool too?
 */
 void	redirect_outfile(t_parser *head, t_execute *data)
 {
@@ -150,4 +125,34 @@ void	redirect_append(t_parser *head, t_execute *data)
 		return ;
 	}
 	return ;
+}
+
+/**
+ * @param node parser linked list
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @brief checks stats of the infile 
+*/
+bool	check_infile_stat(t_parser *node, t_execute *data)
+{
+	struct stat	file_stat;
+
+	if (stat(node->file, &file_stat) == 0)
+	{
+		if (S_ISREG(file_stat.st_mode))
+		{
+			data->in = open(node->file, O_RDWR, 0644);
+			if (data->in == -1)
+			{
+				dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, node->file);
+				return (false);
+			}
+			if (dup2(data->in, STDIN_FILENO) == 0)
+				close(data->in);
+		}
+		if (S_ISDIR(file_stat.st_mode))
+			dprintf(STDERR_FILENO, DIR_MESSAGE, node->file);
+		else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
+			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, node->file);
+	}
+	return (true);
 }

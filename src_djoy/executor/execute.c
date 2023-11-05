@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 13:16:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 14:22:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static bool	parse_path(t_env *env, t_execute *data)
  * @param node noded from parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks is command has access
- * @todo check is i need to give errno to mini_error
- * check if need to return node->cmd when it's absolute check etc
 */
 static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {

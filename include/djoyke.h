@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/02 17:08:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 14:30:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,11 +179,8 @@ bool			check_for_meta(t_parser *lst);
 bool			check_for_builtin(t_parser *node);
 void			save_expanded(t_expand *exp);
 void			redirect_outfile(t_parser *head, t_execute *data);
-// bool			redirect_outfile(t_parser *head, t_execute *data);
-// void			redirect_infile(t_parser *head, t_execute *data);
 bool			redirect_infile(t_parser *head, t_execute *data);
 void			redirect_append(t_parser *head, t_execute *data);
-// bool			redirect_append(t_parser *head, t_execute *data);
 void			init_heredoc(t_parser *lst);
 void			redirect(t_parser *lst, t_execute *data);
 void			redirect_heredoc(t_parser *lst);
@@ -192,6 +189,7 @@ void			setup_heredoc(t_parser *lst, char *str, int i);
 void			write_to_heredoc(t_parser *lst, char *file_name);
 void			write_to_file(char *read_line, int file);
 void			infile_error(t_parser *head);
+bool			check_infile_stat(t_parser *node, t_execute *data);
 
 //------------------ expand -------------------//
 void			ft_expand(t_parser *lst, t_env **env);
