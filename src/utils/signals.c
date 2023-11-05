@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 20:02:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 20:58:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	sig_child_q(int signum)
 {	
 	if (signum == SIGQUIT)
 	{
-		printf("Quit\n");
+		printf("Quit\n"); // why do we exit here without exiting?
 		// set exit code to 131 (signum + 128)
 	}
 }
@@ -69,7 +69,7 @@ static void	sig_hd(int signum)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_on_new_line();
 		rl_redisplay();
-		// set exit code to 1
+		exit(1);
 	}
 }
 
@@ -93,8 +93,8 @@ void	handle_signals(int proc)
 	}
 	else if (proc == HERE_DOC)
 	{
-		// tcgetattr(STDIN_FILENO, &term);
-		// tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
+		tcgetattr(STDIN_FILENO, &term);
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 		signal(SIGINT, sig_hd);
 		signal(SIGQUIT, SIG_IGN);
 	}
