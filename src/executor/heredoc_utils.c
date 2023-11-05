@@ -6,11 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/11/05 17:29:14 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/11/05 20:59:44 by smclacke      ########   odam.nl         */
->>>>>>> main
+/*   Updated: 2023/11/05 21:37:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +29,64 @@ void	redirect_heredoc(t_parser *lst)
 }
 
 /**
+ * @param read_line string containing line read.
+ * @param file int with file fd.
+ * @brief writes to the heredoc frees the read_line
+*/
+static void	write_to_file(char *read_line, int file)
+{
+	write(file, read_line, ft_strlen(read_line));
+	write(file, "\n", 1);
+	free(read_line);
+}
+
+/**
+ * @param lst parser linked list
+ * @brief opens a child proces where it writes to open heredoc
+ * until all the delimiter are found 
+ * waits for it to finish and exits.
+ * @todo
+ * with signals easier if we put this in child process
+ *  so parent can read exitstatus child to see if exited 
+ * with CTRL+C/SIGNAL
+*/
+static void	write_to_heredoc(t_parser *lst, char *file_name)
+{
+	char	*read_line;
+	pid_t	fork_pid;
+	int		file;
+
+	fork_pid = fork();
+	if (fork_pid == -1)
+		mini_error("fork", errno);
+	if (fork_pid == 0)
+	{
+		file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		while (1)
+		{
+			handle_signals(HERE_DOC);
+			read_line = readline("> ");
+			if (mini_strcmp(lst->str, read_line) != 0)
+				write_to_file(read_line, file);
+			else if (mini_strcmp(lst->str, read_line) == 0)
+			{
+				free(read_line);
+				exit (0);
+			}
+		}
+	}
+	else
+		waitpid(fork_pid, NULL, 0);
+}
+
+/**
  * @param lst parser linked list
  * @param str character string for name heredoc
  * @param i int containing number of heredoc
  * @brief makes name for heredoc by adding number of heredoc
  * to the name. unlinks, frees the string and the number.
 */
-void	setup_heredoc(t_parser *lst, char *str, int i)
+static void	setup_heredoc(t_parser *lst, char *str, int i)
 {
 	char		*number;
 
@@ -87,55 +134,4 @@ void	init_heredoc(t_parser *lst)
 		head = head->next;
 	}
 	return ;
-}
-
-/**
- * @param lst parser linked list
- * @brief opens a child proces where it writes to open heredoc
- * until all the delimiter are found 
- * waits for it to finish and exits.
- * @todo
- * with signals easier if we put this in child process
- *  so parent can read exitstatus child to see if exited 
- * with CTRL+C/SIGNAL
-*/
-void	write_to_heredoc(t_parser *lst, char *file_name)
-{
-	char	*read_line;
-	pid_t	fork_pid;
-	int		file;
-
-	fork_pid = fork();
-	if (fork_pid == -1)
-		mini_error("fork", errno);
-	if (fork_pid == 0)
-	{
-		file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		while (1)
-		{
-			handle_signals(HERE_DOC);
-			read_line = readline("> ");
-			if (mini_strcmp(lst->str, read_line) != 0)
-				write_to_file(read_line, file);
-			else if (mini_strcmp(lst->str, read_line) == 0)
-			{
-				free(read_line);
-				exit (0);
-			}
-		}
-	}
-	else
-		waitpid(fork_pid, NULL, 0);
-}
-
-/**
- * @param read_line string containing line read.
- * @param file int with file fd.
- * @brief writes to the heredoc frees the read_line
-*/
-void	write_to_file(char *read_line, int file)
-{
-	write(file, read_line, ft_strlen(read_line));
-	write(file, "\n", 1);
-	free(read_line);
 }

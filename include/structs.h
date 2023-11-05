@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:20:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 21:26:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ typedef enum e_exit
 }					t_exit;
 
 /**
+ * @brief	struct containing variables needed for exit
+ * @param	stat: int carrying exit status throughout program 
+ * @param	code: enums to set exitcode at different
+ * 			stages of process, saved to pass through the program
+*/
+typedef struct s_estat
+{
+	int				stat;
+	enum e_exit		code;
+}				t_estat;
+
+/**
  * @brief	specifies the different variable types of tokens from the
  * 			lexer that are parsed and then given to the executor
  * @param	cmd: first string in each process without redirect char
@@ -74,6 +86,7 @@ typedef struct s_parser
 	int					n_cmd;
 	int					hd_fd;
 	enum e_exit			exit_code;
+	int					exit_stat;
 	struct s_parser		*next;
 }				t_parser;
 

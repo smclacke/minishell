@@ -6,11 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/11/05 17:34:01 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/11/05 19:26:02 by smclacke      ########   odam.nl         */
->>>>>>> main
+/*   Updated: 2023/11/05 21:39:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +112,7 @@ t_env	*env_list(char **envp, t_env *env)
 /**
  * @param env linked list containing environment
  * @brief turns environment linked list into 2d array
+ * @todo do we need to free full?
 */
 char	**list_to_string(t_env *env)
 {

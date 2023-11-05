@@ -6,11 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/11/05 17:34:42 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/11/05 20:55:34 by smclacke      ########   odam.nl         */
->>>>>>> main
+/*   Updated: 2023/11/05 21:28:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
