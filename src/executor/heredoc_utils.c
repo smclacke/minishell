@@ -6,11 +6,15 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/11/05 17:29:14 by dreijans      ########   odam.nl         */
+=======
+/*   Updated: 2023/11/05 20:59:44 by smclacke      ########   odam.nl         */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 /**
  * @param lst parser linked list
@@ -109,7 +113,8 @@ void	write_to_heredoc(t_parser *lst, char *file_name)
 		file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		while (1)
 		{
-			read_line = readline("< ");
+			handle_signals(HERE_DOC);
+			read_line = readline("> ");
 			if (mini_strcmp(lst->str, read_line) != 0)
 				write_to_file(read_line, file);
 			else if (mini_strcmp(lst->str, read_line) == 0)

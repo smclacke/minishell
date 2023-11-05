@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 17:12:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 19:20:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define LESSLESS "<<"
 # define DOUBLE_Q "\""
 # define SINGLE_Q "\'"
+
+# define PARENT 1
+# define CHILD 2
+# define HERE_DOC 3
 
 
 // EXITCODES
@@ -129,7 +133,7 @@ typedef struct s_execute
 	int				in;
 	int				out;
 	int				count;
-	int				fd;
+	bool			error;
 }						t_execute;
 
 #endif

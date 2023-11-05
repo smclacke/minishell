@@ -7,6 +7,9 @@ my brain is fried and i hate this project :)
 Holy mother of fuckidy fuck
 here we gooo
 
+// # define PROMPT BI_YELLOW"🍌🍌🍌🍌🍌🍌🍌🍌
+	 Gutentag Fräulein Shelly, wie geht's?"RESET
+
 mehmehmehmeh
      __
  .--()°'.'
@@ -35,8 +38,6 @@ for in the future... don't change utils... ever.
 ===========================================
 
 **TO DO**
-
- ---> fix makefile
 
  ---> double quotes in dollar
 
@@ -88,7 +89,8 @@ looks for expanded (dus the number) as dir
  ---> leaks if quotes aren't closed?
  ---> norm
 
- Djoyke...
+
+**Djoyke...**
 
  ---> outfile not created when only "> outfile"
  ---> echo | echo is leaky and segfaults

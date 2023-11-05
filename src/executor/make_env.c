@@ -6,11 +6,15 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/11/05 17:34:01 by dreijans      ########   odam.nl         */
+=======
+/*   Updated: 2023/11/05 19:26:02 by smclacke      ########   odam.nl         */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 /**
  * @param key data passed from environment before = sign
@@ -128,7 +132,7 @@ char	**list_to_string(t_env *env)
 		i++;
 		env = env->next;
 	}
-	free(env->full);
+	// free(env->full);
 	env_array[i] = NULL;
 	return (env_array);
 }

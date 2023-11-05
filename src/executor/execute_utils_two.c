@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 14:15:36 by djoyke        ########   odam.nl         */
+/*   Updated: 2023/11/05 20:43:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 #define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
@@ -50,6 +50,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
 	data->fork_pid = fork();
+	handle_signals(CHILD);
 	if (data->fork_pid == -1)
 		mini_error("fork", errno);
 	if (data->fork_pid == 0)

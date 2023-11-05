@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 19:20:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:32:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 /**
  * @todo errors
  * 			need to check tmp?? and new_list again??
+	// if (!tmp) line 26
+	// 	mini_error("some thing is maybe wrong", errno);
+	// if (!new_list) line 36
+	// 	mini_error("some thing is terribly wrong", errno);
 */
 static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 {
 	int			sign;
 
 	sign = 0;
-	// if (!tmp)
-	// 	mini_error("some thing is maybe wrong", errno);
 	while (tmp && !sign)
 	{
 		if (tmp->cmd)
@@ -32,19 +34,18 @@ static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 		}
 		tmp = tmp->next;
 	}
-	// if (!new_list)
-	// 	mini_error("some thing is terribly wrong", errno);
 	return (new_list);
 }
+
 /**
- * @todo check tmp? and new_list again?
+ * @todo check tmp line 49? and new_list again 58?
 */
 static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list, char *meta)
 {
 	t_parser	*tmp2;
 
 	new_list = add_new_meta(tmp, new_list, meta);
-	tmp2 = tmp; // check if tmp?
+	tmp2 = tmp;
 	if (!tmp2->next)
 		mini_error("general: cmd_after_pipe()", E_GENERAL);
 	tmp2 = tmp2->next;
@@ -54,8 +55,6 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list, char *meta)
 			new_list = add_new_cmd(tmp2, new_list, tmp2->cmd);
 		tmp2 = tmp2->next;
 	}
-	// if (!new_list)
-	// 	mini_error("some thing is terribly wrong again", errno);
 	return (new_list);
 }
 
@@ -67,7 +66,9 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list, char *meta)
  * @param	tokens once the tokens are split up and the type of 
  * 			input is identified, list is sorted and returned to the executor
  * @return	new_list, same parsed list of tokens, just sorted
- * @todo	is comment even necessary if before all returns, errors handled?
+ * @todo	is this even necessary if before all returns, errors handled?
+	// if (!new_list) line 95
+	// 	mini_error("ohhhhh noooooooo", errno);
 */
 t_parser	*sort_list(t_parser *tokens)
 {
@@ -91,8 +92,6 @@ t_parser	*sort_list(t_parser *tokens)
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
 		tmp = tmp->next;
 	}
-	// if (!new_list)
-	// 	mini_error("ohhhhh noooooooo", errno);
 	free_only_tokens(tokens);
 	return (new_list);
 }

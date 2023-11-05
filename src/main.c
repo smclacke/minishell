@@ -6,7 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2023/11/05 17:34:42 by dreijans      ########   odam.nl         */
+=======
+/*   Updated: 2023/11/05 20:55:34 by smclacke      ########   odam.nl         */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +33,7 @@ int	main(int argc, char **argv, char **envp)
 	int	og_stdin = dup(STDIN_FILENO);
 	while (1)
 	{
+		handle_signals(PARENT);
 		input = readline(PROMPT);
 		if (!input)
 			exit(EXIT_FAILURE);
@@ -39,14 +44,10 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 
-		shelly_parser_print(tokens);
-
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		print_the_full_thing(tokens);
 
-		print_the_full_thing(tokens);
 		execute(&env, tokens);
 		free_tokens(tokens);
 

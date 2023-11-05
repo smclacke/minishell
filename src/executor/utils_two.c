@@ -6,25 +6,25 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/30 16:41:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 19:20:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 /**
  * @param exp expand struct
  * @brief frees parts of the struct and entire struct
 */
-void	free_remain_struct(t_expand *data)
-{
-	if (data == NULL)
-		return ;
-	free (data->before_dollar);
-	free (data->env_value);
-	free (data->comp_str);
-	free (data);
-}
+// void	free_remain_struct(t_expand *data)
+// {
+// 	if (data == NULL)
+// 		return ;
+// 	free (data->before_dollar);
+// 	free (data->env_value);
+// 	free (data->comp_str);
+// 	free (data);
+// }
 
 /**
  * @param node linked list
