@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 16:34:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:12:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_parser
 }				t_parser;
 
 /**
- * expanding is soooooo much fun
+ * comment on the way
 */
 typedef struct s_expand
 {

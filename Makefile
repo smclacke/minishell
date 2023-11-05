@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/05 16:39:38 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/05 17:12:18 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ IFLAGS			= -I$(HOME)/.brew/Cellar/readline/8.2.1/include
 HEADER_DIR		= include
 HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
 
-## SARAH / MAIN SHIT ##
+## SRC FILES ##
 
 SRCS			= main.c								\
 					utils.c								\
@@ -79,7 +79,7 @@ all				: libft $(NAME)
 libft			:
 	@ make -C include/libft
 
-## EXECUTABLES
+## EXECUTABLE
 
 $(NAME)			:	$(OBJ)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
@@ -99,7 +99,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DIR)/executor
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
-## Colours ##
+## COLOURS ##
+
 RESET		:= \033[0m
 RED			:= \033[1;91m
 GREEN		:= \033[1;92m
