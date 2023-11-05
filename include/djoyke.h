@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 16:28:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:30:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,6 @@ void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
 char			**get_argv(t_parser *lst);
 void			put_execute_error(t_parser *node);
 void			put_permission_error(t_parser *node);
-
 
 //----Utils----//
 void			mini_error(char *string, int error);

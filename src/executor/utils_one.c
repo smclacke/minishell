@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/02 15:15:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:30:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,3 @@ void	free_strs(char *str, char *str2)
 	free (str);
 	free (str2);
 }
-

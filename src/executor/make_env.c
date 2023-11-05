@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 17:06:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:34:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,15 @@ t_env	*env_list(char **envp, t_env *env)
 	char	*key;
 	char	*value;
 	char	*full;
-	t_env	*node;
 
 	i = 0;
-	node = NULL;
 	if (envp[i] == NULL)
 		mini_error("env", errno);
 	while (envp[i] != NULL)
 	{
 		has_value = get_key_value(envp[i], &key, &value);
 		full = get_full(envp[i]);
-		node = env_lstnew(key, value, full, has_value);
-		env_lstadd_back(&env, node);
-		// env_lstadd_back(&env, env_lstnew(key, value, full, has_value));
+		env_lstadd_back(&env, env_lstnew(key, value, full, has_value));
 		free(full);
 		i++;
 	}

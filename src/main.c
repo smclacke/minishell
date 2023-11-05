@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 16:34:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:34:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int argc, char **argv, char **envp)
 
 	int	og_stdout = dup(STDOUT_FILENO);
 	int	og_stdin = dup(STDIN_FILENO);
-	
 	while (1)
 	{
 		input = readline(PROMPT);

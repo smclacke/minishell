@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 18:40:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 17:29:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	init_heredoc(t_parser *lst)
 	i = 0;
 	while (head)
 	{
-
 		if (mini_strcmp(head->meta, "<<") == 0)
 		{
 			i++;
