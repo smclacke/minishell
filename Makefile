@@ -6,12 +6,11 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/05 16:33:38 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/05 16:39:38 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= mini
-DJOY			= djoyke
+NAME			= minishell
 
 MAKEFLAGS		= --no-print-directory
 CFLAGS			= -Wall -Wextra -g -fsanitize=address
@@ -46,19 +45,8 @@ SRCS			= main.c								\
 					expander/quotes.c					\
 					expander/quote_utils.c				\
 					expander/dollar.c					\
-					expander/dollar_utils.c
-
-
-SRC_DIR		= src
-SRC		= ($(addprefix $(SRC_DIR)/, $(SRCS)) $(SRC_DJOY))
-
-
-OBJ_DIR	= obj
-OBJ		= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
-
-## DJOYKE ##
-
-SRCS_DJOY		=	builtin/echo.c						\
+					expander/dollar_utils.c				\
+					builtin/echo.c						\
 					builtin/cd.c 						\
 					builtin/pwd.c 						\
 					builtin/export.c 					\
@@ -78,33 +66,27 @@ SRCS_DJOY		=	builtin/echo.c						\
 					executor/print_utils.c				\
 					executor/heredoc_utils.c			
 
-DJOY_DIR		= src_djoy
-SRC_DJOY		= ($(addprefix $(DJOY_DIR)/, $(SRCS_DJOY)) $(SRC))
 
-OBJ_DJOY_DIR	= obj_djoy
-OBJ_DJOY		= $(addprefix $(OBJ_DJOY_DIR)/, $(SRCS_DJOY:%.c=%.o))
+SRC_DIR		= src
+SRC		= ($(addprefix $(SRC_DIR)/, $(SRCS)))
 
+
+OBJ_DIR	= obj
+OBJ		= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 all				: libft $(NAME)
-
-djoy			: libft $(DJOY)
-
 
 libft			:
 	@ make -C include/libft
 
 ## EXECUTABLES
 
-$(NAME)			:	$(OBJ) $(OBJ_DJOY)
+$(NAME)			:	$(OBJ)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
 	@ echo "${PURPLE} ---> Made!${RESET}"
-	@ ./mini
 
-$(DJOY)			:	$(OBJ_DJOY) $(OBJ)
-	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(DJOY)
-	@ echo "${PURPLE} ---> Djoyke Made!${RESET}"
-# @ ./djoyke
-
+run:	$(NAME)
+	@ ./$(NAME)
 
 ## OBJECTS
 
@@ -113,18 +95,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DIR)/parser
 	@ mkdir -p $(OBJ_DIR)/lexer
 	@ mkdir -p $(OBJ_DIR)/expander
-	@ mkdir -p $(OBJ_DJOY_DIR)
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/builtin
-	@ mkdir -p $(OBJ_DJOY_DIR)/src_djoy/executor
-	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
-
-$(OBJ_DJOY_DIR)/%.o: $(DJOY_DIR)/%.c $(HEADER)
-	@ mkdir -p $(OBJ_DJOY_DIR)
-	@ mkdir -p $(OBJ_DJOY_DIR)/builtin
-	@ mkdir -p $(OBJ_DJOY_DIR)/executor
-	@ mkdir -p $(OBJ_DJOY_DIR)/src/lexer
-	@ mkdir -p $(OBJ_DJOY_DIR)/src/parser
-	@ mkdir -p $(OBJ_DJOY_DIR)/src/expander
+	@ mkdir -p $(OBJ_DIR)/builtin
+	@ mkdir -p $(OBJ_DIR)/executor
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 ## Colours ##
@@ -141,16 +113,13 @@ BLACK		:= \033[1;90m
 clean		:
 	@make $(MAKEFLAGS) -C include/libft clean
 	@rm -rf $(OBJ_DIR)
-	@rm -rf $(OBJ_DJOY_DIR)
 
 fclean		:
 	@make $(MAKEFLAGS) -C include/libft fclean
 	@rm -rf $(OBJ_DIR)
-	@rm -rf $(OBJ_DJOY_DIR)
 	@rm -rf $(NAME)
-	@rm -rf $(DJOY)
 	@echo "${YELLOW} // Minishell fCleaned!${RESET}"
 
 re			: fclean all
 
-.PHONY: all clean fclean re libft sarah djoyke
+.PHONY: all clean fclean re libft
