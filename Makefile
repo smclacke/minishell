@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/05 17:12:18 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/05 17:20:55 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,12 +74,12 @@ SRC		= ($(addprefix $(SRC_DIR)/, $(SRCS)))
 OBJ_DIR	= obj
 OBJ		= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
+
 all				: libft $(NAME)
 
 libft			:
 	@ make -C include/libft
 
-## EXECUTABLE
 
 $(NAME)			:	$(OBJ)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
@@ -87,6 +87,9 @@ $(NAME)			:	$(OBJ)
 
 run:	$(NAME)
 	@ ./$(NAME)
+
+norm:
+	@ norminette $(SRC_DIR) $(HEADER_DIR)
 
 ## OBJECTS
 
@@ -123,4 +126,4 @@ fclean		:
 
 re			: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re libft norminette
