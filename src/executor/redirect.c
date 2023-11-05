@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 16:27:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 #define DIR_MESSAGE "minishell: %s: Is a directory\n"
 #define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"

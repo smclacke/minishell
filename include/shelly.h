@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 18:06:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 19:39:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 # include <sys/wait.h>
 # include <stdbool.h>
 # include <errno.h>
+# include <fcntl.h>
+# include <dirent.h>
+# include <termios.h>
 
 				// utils
 int					shelly_strcmp(char *s1, char *s2);
@@ -116,72 +119,77 @@ char				*set_expand_string(t_parser *lst, t_expand *str);
 //------------------ signals ------------------//
 void				handle_signals(int proc);
 
+
 				// ALL DJOYKE PROTOS //
-void				free_remain_struct(t_expand *data);
-int					get_check_value(t_expand *exp, t_env **env);
-bool				check_for_meta(t_parser *lst);
-bool				check_for_builtin(t_parser *node);
-void				save_expanded(t_expand *exp);
-void				redirect_outfile(t_parser *head, t_execute *data);
-void				redirect_infile(t_parser *head, t_execute *data);
-void				redirect_append(t_parser *head, t_execute *data);
-void				init_heredoc(t_parser *lst);
-void				redirect(t_parser *lst, t_execute *data);
-void				redirect_heredoc(t_parser *lst);
-char				*set_heredoc_name(int i);
-void				setup_heredoc(t_parser *lst, char *str, int i);
-void				write_to_heredoc(t_parser *lst, char *file_name);
-void				write_to_file(char *read_line, int file);
-void				infile_error(t_parser *head);
+bool			check_for_meta(t_parser *lst);
+bool			check_for_builtin(t_parser *node);
+void			redirect_outfile(t_parser *head, t_execute *data);
+bool			redirect_infile(t_parser *head, t_execute *data);
+void			redirect_append(t_parser *head, t_execute *data);
+void			init_heredoc(t_parser *lst);
+void			redirect(t_parser *lst, t_execute *data);
+void			redirect_heredoc(t_parser *lst);
+char			*set_heredoc_name(int i);
+void			setup_heredoc(t_parser *lst, char *str, int i);
+void			write_to_heredoc(t_parser *lst, char *file_name);
+void			write_to_file(char *read_line, int file);
+void			infile_error(t_parser *head);
+
+//------------------ expand -------------------//
+void			ft_expand(t_parser *lst, t_env **env);
 
 //----Environment----//
-t_env				*env_list(char **envp, t_env *env);
-t_env				*env_lstnew(void *key, void *value, char *full, int h_v);
-int					get_key_value(char *str, char **key, char **value);
-t_env				*env_lstlast(t_env *lst);
-void				env_lstadd_back(t_env **lst, t_env *new);
-void				print_list(t_env *env);
-void				print_list_key(t_env *env);
-void				print_list_value(t_env *env);
-char				**list_to_string(t_env *env);
-void				print_list_full(t_env *env);
-void				free_env(t_env **lst);
+t_env			*env_list(char **envp, t_env *env);
+t_env			*env_lstnew(void *key, void *value, char *full, int h_v);
+int				get_key_value(char *str, char **key, char **value);
+t_env			*env_lstlast(t_env *lst);
+void			env_lstadd_back(t_env **lst, t_env *new);
+void			print_list(t_env *env);
+void			print_list_key(t_env *env);
+void			print_list_value(t_env *env);
+char			**list_to_string(t_env *env);
+void			free_env(t_env **lst);
 
 //---- Built-in ----//
-void				free_all(t_env *env);
-void				do_builtin(t_parser *node, t_env **env);
-bool				word_check(t_parser *lst);
-void				ft_cd(t_parser *lst, t_env **env);
-void				put_custom_error(t_parser *node, char *cmd);
-void				ft_echo(t_parser *lst);
-void				ft_env(t_env *env);
-void				ft_exit(t_parser *lst);
-void				ft_pwd(void);
-void				ft_export(t_parser *lst, t_env **env);
-void				ft_unset(t_parser *lst, t_env **env);
-void				reasing_value(char *temp, char *str, t_env *head);
+void			free_all(t_env *env);
+void			do_builtin(t_parser *node, t_env **env);
+bool			word_check(t_parser *lst);
+void			ft_cd(t_parser *lst, t_env **env);
+void			put_custom_error(t_parser *node, char *cmd);
+void			ft_echo(t_parser *lst);
+void			ft_env(t_env *env);
+void			ft_exit(t_parser *lst);
+void			ft_pwd(void);
+void			ft_export(t_parser *lst, t_env **env);
+void			ft_unset(t_parser *lst, t_env **env);
+void			reasing_value(char *temp, char *str, t_env *head);
+void			dash_change(t_env **env, t_parser *lst, char *o_d, char *c_d);
 
 //----Executor----//
-void				mini_forks(t_parser *lst, t_env **env, t_execute *data);
-bool				absolute_check(t_parser *node);
-void				execute(t_env **env, t_parser *list);
-void				init_execute_struct(t_execute *data);
-bool				check_redirect(t_parser *node);
-void				free_data(t_execute *data);
-void				close_all(t_execute *data);
-void				close_between(t_execute *data);
-void				init_pipe(int i, int count, t_execute *data);
-void				init_pipes_child(t_execute *data);
-void				init_fork(t_parser *lst, t_env **env, t_execute *data);
-bool				single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
-void				child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
-char				**get_argv(t_parser *lst);
+void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
+bool			absolute_check(t_parser *node);
+void			execute(t_env **env, t_parser *list);
+void			init_execute_struct(t_execute *data);
+bool			check_redirect(t_parser *node);
+void			free_data(t_execute *data);
+void			close_all(t_execute *data);
+void			close_between(t_execute *data);
+void			init_pipe(int i, int count, t_execute *data);
+void			init_pipes_child(t_execute *data);
+void			init_fork(t_parser *lst, t_env **env, t_execute *data);
+bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
+void			child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
+char			**get_argv(t_parser *lst);
+void			put_execute_error(t_parser *node);
+void			put_permission_error(t_parser *node);
+
 
 //----Utils----//
-void				mini_error(char *string, int error);
-int					mini_strcmp(char *s1, char *s2);
-int					mini_lstsize(t_env *lst);
-void				print_parser_list(t_parser *lst);
-void				free_strs(char *str, char *str2);
+void			mini_error(char *string, int error);
+int				mini_strcmp(char *s1, char *s2);
+int				mini_lstsize(t_env *lst);
+void			free_strs(char *str, char *str2);
+char			*ft_getenv(t_env *env, char *str);
+int				list_iter(t_parser *lst);
 
 #endif

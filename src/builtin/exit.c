@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/19 22:53:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 #include <limits.h>
 
 #define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"

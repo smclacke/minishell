@@ -6,11 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 23:21:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/djoyke.h"
+#include "../../include/shelly.h"
 
 #define ARG_ERROR "minishell: %s: too many arguments\n"
 #define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"

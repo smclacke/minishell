@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 16:28:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 19:19:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "libft/include/libft.h"
 # include "prompt.h"
 # include "colour.h"
-// # include "sarah.h"
+# include "structs.h"
+// # include "shelly.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -42,18 +43,18 @@
 # define FALSE 0
 
 // EXITCODES
-typedef enum e_exit
-{
-	E_USAGE = 0,
-	E_GENERAL = 1,
-	E_BUILTIN = 2,
-	E_EXEC = 126,
-	E_COMMAND_NOT_FOUND = 127,
-	E_EXIT_INVALID_ARG = 128,
-	E_FATAL_SIGNAL = 128,
-	E_CTRL_C = 130,
-	E_UNKNOWN = 225
-}					t_exit;
+// typedef enum e_exit
+// {
+// 	E_USAGE = 0,
+// 	E_GENERAL = 1,
+// 	E_BUILTIN = 2,
+// 	E_EXEC = 126,
+// 	E_COMMAND_NOT_FOUND = 127,
+// 	E_EXIT_INVALID_ARG = 128,
+// 	E_FATAL_SIGNAL = 128,
+// 	E_CTRL_C = 130,
+// 	E_UNKNOWN = 225
+// }					t_exit;
 
 /**
  * @brief	specifies the different variable types of tokens from the
@@ -68,19 +69,19 @@ typedef enum e_exit
  * @param	exit_code: enums to set exitcode at different
  * 			stages of process, saved to pass through the program
 */
-typedef struct s_parser
-{
-	void				*input;
-	char				*cmd;
-	char				*meta;
-	char				*file;
-	char				*str;
-	int					flag;
-	int					n_cmd;
-	int					hd_fd;
-	enum e_exit			exit_code;
-	struct s_parser		*next;
-}				t_parser;
+// typedef struct s_parser
+// {
+// 	void				*input;
+// 	char				*cmd;
+// 	char				*meta;
+// 	char				*file;
+// 	char				*str;
+// 	int					flag;
+// 	int					n_cmd;
+// 	int					hd_fd;
+// 	enum e_exit			exit_code;
+// 	struct s_parser		*next;
+// }				t_parser;
 
 // utils
 void			free_tokens(t_parser *tokens);
@@ -129,24 +130,24 @@ t_parser		*shelly_parser_print(t_parser *tokens);
  * 			if no next then it points to NULL.
  * @param	has_value: int used as checkpoint if the key has a value
 */
-typedef struct s_env
-{
-	char				*key;
-	char				*value;
-	char				*full;
-	struct s_env		*next;
-	int					has_value;
-}							t_env;
+// typedef struct s_env
+// {
+// 	char				*key;
+// 	char				*value;
+// 	char				*full;
+// 	struct s_env		*next;
+// 	int					has_value;
+// }							t_env;
 
 //---- Expander ----//
 void			ft_expand(t_parser *lst, t_env **env);
 
-typedef struct s_expand
-{
-	char				*before_dollar;
-	char				*env_value;
-	char				*comp_str;
-}							t_expand;
+// typedef struct s_expand
+// {
+// 	char				*before_dollar;
+// 	char				*env_value;
+// 	char				*comp_str;
+// }							t_expand;
 
 /**
  * @brief	struct containing variables needed for execution process
@@ -160,24 +161,24 @@ typedef struct s_expand
  * @param	count: int storing amount of commands in parser linked list
  * @param	fd: int storing a fd
 */
-typedef struct s_execute
-{
-	pid_t			fork_pid;
-	int				pipe_left[2];
-	int				pipe_right[2];
-	char			**path;
-	char			**env_array;
-	int				in;
-	int				out;
-	int				count;
-	bool			error;
-}						t_execute;
+// typedef struct s_execute
+// {
+// 	pid_t			fork_pid;
+// 	int				pipe_left[2];
+// 	int				pipe_right[2];
+// 	char			**path;
+// 	char			**env_array;
+// 	int				in;
+// 	int				out;
+// 	int				count;
+// 	bool			error;
+// }						t_execute;
 
-void			free_remain_struct(t_expand *data);
-int				get_check_value(t_expand *exp, t_env **env);
+// void			free_remain_struct(t_expand *data);
+// int				get_check_value(t_expand *exp, t_env **env);
+// void			save_expanded(t_expand *exp);
 bool			check_for_meta(t_parser *lst);
 bool			check_for_builtin(t_parser *node);
-void			save_expanded(t_expand *exp);
 void			redirect_outfile(t_parser *head, t_execute *data);
 bool			redirect_infile(t_parser *head, t_execute *data);
 void			redirect_append(t_parser *head, t_execute *data);
@@ -246,18 +247,5 @@ int				mini_lstsize(t_env *lst);
 void			free_strs(char *str, char *str2);
 char			*ft_getenv(t_env *env, char *str);
 int				list_iter(t_parser *lst);
-
-//------------ Minishell -----------//
-/**
- * everything that we share
- * add our structs that hold the info that we need to share/
- * for minishell as a whole 
-*/
-
-typedef struct s_mini
-{
-	struct s_parser		tokens;
-	struct s_env		environ;
-}	t_mini;
 
 #endif
