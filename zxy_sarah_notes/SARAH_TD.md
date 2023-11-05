@@ -62,7 +62,10 @@ OTHERRRR
  ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
     bash: $bla: ambiguous redirect
 
-*****
+***************************************************************************
+***************************************************************************
+***************************************************************************
+*****!!
  ---> here_doc - check HERE_DOC IS A BITCH below for notes...
  		if here_doc don't expand dollar, delmiter str is literal
 i.e. 
@@ -73,9 +76,9 @@ i.e.
 		conts
 
 	++ notes below
-*****
+*****!!
 
-***
+***!!
 $? in export is expanded as expected in/out quotes
 export dol=$?
 $dol
@@ -88,7 +91,10 @@ opens file '1' ...
 
 cd $?
 looks for expanded (dus the number) as dir
-***
+***!!
+***************************************************************************
+***************************************************************************
+***************************************************************************
 
 **CHECKKKKKK**
 
@@ -113,8 +119,6 @@ Command 'echi' not found, did you mean:
 Try: apt install <deb name>
 smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out >outer
 bash: out: Permission denied
-
-
 
 ===========================================
 ===========================================
@@ -188,11 +192,11 @@ smclacke@f0r3s17:~/Desktop/minishell$ cat << '$USER'
 > $USER
 smclacke
 
+---------------------------------------------------------------------------------
 
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
 
-***************************************************************************
-***************************************************************************
-***************************************************************************
+-----------------------------------------------------------------------------
 // EXPANSION YAY
 
 // dollar handling, then dollar and quotes, then here_doc...
@@ -247,11 +251,6 @@ len = 8
 [8]	 cmd = (null)	file = something	meta = (null)	str = (null)
 
 
----------------------------------------------------------------------------------
-
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
-
------------------------------------------------------------------------------
 
 Current :)
 
