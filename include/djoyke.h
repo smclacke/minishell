@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 19:05:55 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 14:30:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 16:28:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,6 @@ void			setup_heredoc(t_parser *lst, char *str, int i);
 void			write_to_heredoc(t_parser *lst, char *file_name);
 void			write_to_file(char *read_line, int file);
 void			infile_error(t_parser *head);
-bool			check_infile_stat(t_parser *node, t_execute *data);
 
 //------------------ expand -------------------//
 void			ft_expand(t_parser *lst, t_env **env);

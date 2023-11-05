@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/10/31 23:36:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 15:04:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
  * @param env pointer to environment
  * @brief free's content plus node.
  * @todo 
+ * Unset PATH:
  * Direct leak of 171 byte(s) in 1 object(s) allocated from:
     #0 0x49a26d in malloc (/home/dreijans/Documents/rank3/minishell/djoyke+0x49a26d)
     #1 0x4dd462 in ft_substr (/home/dreijans/Documents/rank3/minishell/djoyke+0x4dd462)
@@ -27,12 +28,16 @@
     #4 0x4d495f in main /home/dreijans/Documents/rank3/minishell/src_saar/main_saar.c:46:8
     #5 0x7f54d5772d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
 	this you again?
+* disappears if I put free env->full
+* but then when I export djoyke=gek 
+* if I want to unset djoyke I get a double free.
 */
 void	free_all(t_env *env)
 {
 	free(env->value);
 	free(env->key);
-	// free(env->full);
+	if (env->full != NULL)
+		free(env->full);
 	free(env);
 }
 
