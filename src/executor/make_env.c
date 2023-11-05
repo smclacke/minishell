@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:26:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 21:39:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,15 @@ t_env	*env_list(char **envp, t_env *env)
 	char	*key;
 	char	*value;
 	char	*full;
-	t_env	*node;
 
 	i = 0;
-	node = NULL;
 	if (envp[i] == NULL)
 		mini_error("env", errno);
 	while (envp[i] != NULL)
 	{
 		has_value = get_key_value(envp[i], &key, &value);
 		full = get_full(envp[i]);
-		node = env_lstnew(key, value, full, has_value);
-		env_lstadd_back(&env, node);
-		// env_lstadd_back(&env, env_lstnew(key, value, full, has_value));
+		env_lstadd_back(&env, env_lstnew(key, value, full, has_value));
 		free(full);
 		i++;
 	}
@@ -116,6 +112,7 @@ t_env	*env_list(char **envp, t_env *env)
 /**
  * @param env linked list containing environment
  * @brief turns environment linked list into 2d array
+ * @todo do we need to free full?
 */
 char	**list_to_string(t_env *env)
 {

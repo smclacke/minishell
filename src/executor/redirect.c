@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 21:40:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ bool	check_infile_stat(t_parser *node, t_execute *data)
 */
 bool	redirect_infile(t_parser *head, t_execute *data)
 {
-
 	if (mini_strcmp(head->meta, "<") == 0)
 	{
 		if (head->next)
@@ -156,4 +155,3 @@ void	redirect_append(t_parser *head, t_execute *data)
 	}
 	return ;
 }
-

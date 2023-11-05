@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 21:38:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #define ARG_ERROR "minishell: %s: too many arguments\n"
 #define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
-
 
 /**
  * @param env environment in linked list which is NULL
