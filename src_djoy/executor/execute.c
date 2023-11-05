@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/02 17:14:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/05 13:16:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,4 +157,3 @@ void	execute(t_env **env, t_parser *lst)
 	data = NULL;
 	return ;
 }
-

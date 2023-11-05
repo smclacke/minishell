@@ -65,30 +65,24 @@
     ◦ ctrl-\ does nothing.
 
 3) 
-    review the checking of the builtins because its case sensitive
-4) 
     check all the to do's in code
 
-5) 
-    ls |
-    multiple times? does that fail?
-
-6) 
+4) 
     static void	build(t_parser *lst, t_env **env, t_execute *data)
      * check the last while(wait(NULL) != -1) loop
 
-7) 
+5) 
     fix double free in unset
 
-8) 
+6) 
     cd ""
     cd ''
     is equivalent of cd_. (cd .)
 
-9) 
+7) 
     find solid evidence for allowing dprintf, if not just change it you lazy bum
 
-10) 
+8) 
     1)  
         echi hi < infile > outfile
         check infile first
@@ -102,19 +96,3 @@
         echo hi < infile
         check file first
         no such file or directory
-
-    4) this still happens
-        minishell 🍌echi hi < uhuha > out
-[0]      cmd = echi     file = (null)   meta = (null)   str = (null)
-[1]      cmd = (null)   file = (null)   meta = (null)   str = hi
-[2]      cmd = (null)   file = (null)   meta = <        str = (null)
-[3]      cmd = (null)   file = uhuha    meta = (null)   str = (null)
-[4]      cmd = (null)   file = (null)   meta = >        str = (null)
-[5]      cmd = (null)   file = out      meta = (null)   str = (null)
-minishell: uhuha: No such file or directory
-minishell 🍌^C
-
-outfile does not need to be created in this case, fix it
-
-exit does not work, does not go in single builtin
-
