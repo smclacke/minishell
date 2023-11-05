@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 17:37:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 18:06:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ void				ft_expand(t_parser *lst, t_env **env);
 int					is_dollar_or_quote(int c);
 int					get_check_value(t_expand *str, t_env **env);
 char				*set_expand_string(t_parser *lst, t_expand *str);
+
+//------------------ signals ------------------//
+void				handle_signals(int proc);
 
 				// ALL DJOYKE PROTOS //
 void				free_remain_struct(t_expand *data);

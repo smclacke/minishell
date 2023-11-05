@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/05 17:20:55 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/05 18:30:39 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,8 @@ SRCS			= main.c								\
 					executor/redirect.c					\
 					executor/list_utils.c 				\
 					executor/print_utils.c				\
-					executor/heredoc_utils.c			
+					executor/heredoc_utils.c			\
+					signals/signals.c
 
 
 SRC_DIR		= src
@@ -100,6 +101,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 	@ mkdir -p $(OBJ_DIR)/expander
 	@ mkdir -p $(OBJ_DIR)/builtin
 	@ mkdir -p $(OBJ_DIR)/executor
+	@ mkdir -p $(OBJ_DIR)/signals
 	@ $(CC) $(CFLAGS) $(IFLAGS) $(INCLUDES) -c $< -o $@
 
 ## COLOURS ##

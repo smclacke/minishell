@@ -7,6 +7,9 @@ my brain is fried and i hate this project :)
 Holy mother of fuckidy fuck
 here we gooo
 
+// # define PROMPT BI_YELLOW"🍌🍌🍌🍌🍌🍌🍌🍌
+	 Gutentag Fräulein Shelly, wie geht's?"RESET
+
 mehmehmehmeh
      __
  .--()°'.'

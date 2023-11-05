@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 17:34:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/05 18:31:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	
 	while (1)
 	{
+		handle_signals(1);
 		input = readline(PROMPT);
 		if (!input)
 			exit(EXIT_FAILURE);
