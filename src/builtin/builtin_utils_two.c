@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/06 15:52:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ void	reasing_value(char *temp, char *str, t_env *env)
 	env->value = str;
 }
 
+/**
+ * @param env environment in linked list
+ * @param str string to compare to key value env
+ * @brief finds key value of env in the env list
+ * @return returns NULL if nothing found,
+ * returns value if key is found
+*/
 char	*ft_getenv(t_env *env, char *str)
 {
 	while (env)

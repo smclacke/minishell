@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 21:38:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/06 16:00:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #define ARG_ERROR "minishell: %s: too many arguments\n"
 #define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
+#define NO_HOME "minishell: cd: HOME not set\n"
 
 /**
  * @param env environment in linked list which is NULL
@@ -152,25 +153,27 @@ static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
  * @param lst parsed linked list
  * @param env environment in linked list
  * @brief changes directory with an absolute and relative path as argument
- * @todo 
- * 		home_dir = ft_getenv(*env, "HOME");
-		if (home_dir == NULL)
-			mini_error("getenv", errno);
-	this is an unset thing, do we handle this?
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
 	char		*old_work_dir;
 	char		*cwd;
 	int			i;
+	char		*home_dir;
 
 	cwd = NULL;
 	old_work_dir = NULL;
+	home_dir = NULL;
 	i = list_iter(lst);
-	printf("i = [%i]\n", i);
 	if (i > 2)
 	{
 		dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
+		return ;
+	}
+	home_dir = ft_getenv(*env, "HOME");
+	if (home_dir == NULL)
+	{
+		dprintf(STDERR_FILENO, NO_HOME);
 		return ;
 	}
 	if (env)
