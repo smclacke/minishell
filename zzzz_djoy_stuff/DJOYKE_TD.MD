@@ -38,5 +38,13 @@
 4) 
     find solid evidence for allowing dprintf, if not just change it you lazy bum
 
-5)
+5) 
     handle exit codes
+
+minishell 🍌cd src
+minishell 🍌pwd
+Current working directory: /home/dreijans/Documents/rank3/minishell/src
+minishell 🍌cd ,.
+minishell: cd: ,.: No such file or directory
+minishell 🍌cd ..
+minishell 🍌exit
