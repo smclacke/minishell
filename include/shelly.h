@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 21:50:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/06 15:33:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,6 @@ void			init_heredoc(t_parser *lst);
 void			redirect(t_parser *lst, t_execute *data);
 void			redirect_heredoc(t_parser *lst);
 void			infile_error(t_parser *head);
-
-//------------------ expand -------------------//
-void			ft_expand(t_parser *lst, t_env **env);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);
