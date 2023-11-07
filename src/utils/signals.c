@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 20:58:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/07 17:59:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static void	sig_hd(int signum)
 {
 	if (signum == SIGINT)
 	{
-		rl_replace_line("", 0);
-		ft_putchar_fd('\n', STDOUT_FILENO);
-		rl_on_new_line();
-		rl_redisplay();
+		// rl_replace_line("", 0);
+		printf("\n");
+		// rl_on_new_line();
+		// rl_redisplay();
 		exit(1);
 	}
 }
@@ -93,8 +93,8 @@ void	handle_signals(int proc)
 	}
 	else if (proc == HERE_DOC)
 	{
-		tcgetattr(STDIN_FILENO, &term);
-		tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
+	// 	// tcgetattr(STDIN_FILENO, &term);
+	// 	// tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 		signal(SIGINT, sig_hd);
 		signal(SIGQUIT, SIG_IGN);
 	}
