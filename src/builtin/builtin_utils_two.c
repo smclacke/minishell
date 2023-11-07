@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/06 15:52:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/07 17:47:58 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 */
 void	reasing_value(char *temp, char *str, t_env *env)
 {
-	temp = env->value;
+	temp = NULL;
+	free(env->value);
 	env->value = str;
+	// temp = env->value;
 }
 
 /**

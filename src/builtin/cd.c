@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/06 16:00:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/07 17:49:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ static void	change_current_dir(t_env **env, char *str)
 		if (head == NULL)
 			return ;
 	}
-	temp = head->value;
+	// temp = head->value;
+	free(head->value);
 	head->value = str;
-	free(temp);
+	// free(temp);
 	key_equal = ft_strjoin(head->key, "=");
 	temp = head->full;
 	new_full = ft_strjoin(key_equal, str);
@@ -185,4 +186,5 @@ void	ft_cd(t_parser *lst, t_env **env)
 			lst = lst->next;
 		}
 	}
+	// free(old_work_dir);
 }
