@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/07 18:04:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@
 */
 void	free_all(t_env *env)
 {
-	free(env->value);
-	free(env->key);
+	if (env->value)
+		free(env->value);
+	if (env->key)
+		free(env->key);
+	if (env->full)
+		free(env->full);
 	free(env);
 }
 

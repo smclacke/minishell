@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/07 15:17:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/07 18:58:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
  * key, value and next
  * @return node made
 */
+// t_env	*env_lstnew(t_parser *node, void *key, void *value, char *full, int has_value)
 t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 {
 	t_env	*new;
@@ -29,8 +30,10 @@ t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 	new->key = key;
 	new->value = value;
 	new->full = full;
+	// new->full = get_full(node->str);
 	new->next = NULL;
 	new->has_value = has_value;
+	// has_value = NULL;
 	return (new);
 }
 

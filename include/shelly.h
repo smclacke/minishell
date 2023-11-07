@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/06 15:33:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/07 18:58:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,9 @@ void			print_list_key(t_env *env);
 void			print_list_value(t_env *env);
 char			**list_to_string(t_env *env);
 void			free_env(t_env **lst);
+char			*get_full(char *str);
+// t_env			*env_lstnew(t_parser *node, void *key, void *value, char *full, int has_value);
+
 
 //---- Built-in ----//
 void			free_all(t_env *env);

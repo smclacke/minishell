@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/07 17:49:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/07 17:56:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ static void	change_current_dir(t_env **env, char *str)
 	head->value = str;
 	// free(temp);
 	key_equal = ft_strjoin(head->key, "=");
-	temp = head->full;
+	// temp = head->full;
 	new_full = ft_strjoin(key_equal, str);
 	free(key_equal);
+	free(head->full);
 	head->full = new_full;
-	free(temp);
+	// free(temp);
 }
 
 /**
@@ -103,12 +104,14 @@ static void	change_old_dir(t_env **env, char *str)
 	}
 	reasing_value(temp, str, head);
 	key_equal = ft_strjoin(head->key, "=");
-	temp = key_equal;
+	// temp = key_equal;
 	new_full = ft_strjoin(key_equal, str);
-	free(temp);
-	temp = head->full;
+	free(key_equal);
+	// free(temp);
+	// temp = head->full;
+	free(head->full);
 	head->full = new_full;
-	free(temp);
+	// free(temp);
 }
 
 /**

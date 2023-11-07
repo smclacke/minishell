@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/07 18:59:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 	{
 		if (mini_strcmp(comp_str, head->key) == 0)
 		{
+			printf("\n\nhi\n\n");
 			if (str[ft_strlen(str) == '='])
 			{
 				head->full = node->str;
@@ -99,16 +100,20 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options
+ * @todo I think i dont proper set the full part of my environment in here
+ * check make env.
 */
 void	ft_export(t_parser *node, t_env **env)
 {
 	char	*new_key;
 	char	*new_value;
 	int		h_v;
+	// char	*full_str;
 	t_env	*new_node;
 
 	new_key = NULL;
 	new_value = NULL;
+	// full_str = node->str;
 	h_v = 0;
 	if (!node->next)
 	{
@@ -123,6 +128,7 @@ void	ft_export(t_parser *node, t_env **env)
 	if (reassign_env(env, node, new_key, new_value) == 1)
 		return ;
 	h_v = get_key_value(node->str, &new_key, &new_value);
+	// (*env)->full = get_full(full_str);
 	new_node = env_lstnew(new_key, new_value, node->str, h_v);
 	env_lstadd_back(env, new_node);
 }
