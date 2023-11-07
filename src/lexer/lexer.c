@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 19:14:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/07 18:56:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static t_parser	*make_token_list(char **parsed_input)
 
 	tokens = NULL;
 	i = 0;
+	if (!*parsed_input)
+		return (NULL);
 	while (parsed_input[i])
 	{
 		node = lexer_listnew(parsed_input[i]);
@@ -38,6 +40,7 @@ static t_parser	*make_token_list(char **parsed_input)
 		lexer_listadd_back(&tokens, node);
 		i++;
 	}
+	free(parsed_input);
 	return (tokens);
 }
 
@@ -52,12 +55,16 @@ t_parser	*lexer(char *input)
 	t_parser		*tokens;
 	char			**parsed_input;
 
+	if (!input)
+		return (NULL);
 	parsed_input = parse_input(input);
 	if (!parsed_input)
+	{
+		free(input);
 		mini_error("malloc error: lexer()", E_MALLOC);
+	}
 	tokens = make_token_list(parsed_input);
 	if (!tokens)
 		return (NULL);
-	free(parsed_input);
 	return (tokens);
 }

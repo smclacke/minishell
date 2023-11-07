@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/07 15:59:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/07 18:55:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
-	t_parser	*tokens;
+	t_parser	*lexer_tokens;
+	t_parser	*parser_tokens;
 	t_env		*env;
 
 
@@ -23,7 +24,8 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	env = NULL;
 	env = env_list(envp, env);
-	tokens = NULL;
+	lexer_tokens = NULL;
+	parser_tokens = NULL;
 
 	int	og_stdout = dup(STDOUT_FILENO);
 	int	og_stdin = dup(STDIN_FILENO);
@@ -35,17 +37,17 @@ int	main(int argc, char **argv, char **envp)
 			exit(EXIT_FAILURE);
 		add_history(input);
 
-		tokens = lexer(input);
+		lexer_tokens = lexer(input);
 		free(input);
-		if (!tokens)
+		if (!lexer_tokens)
 			continue ;
 
-		tokens = parser(tokens);
-		if (!tokens)
+		parser_tokens = parser(lexer_tokens);
+		if (!parser_tokens)
 			continue ;
 
-		execute(&env, tokens);
-		free_tokens(tokens);
+		execute(&env, parser_tokens);
+		free_tokens(parser_tokens);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
