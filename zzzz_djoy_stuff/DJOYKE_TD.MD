@@ -48,3 +48,6 @@ minishell 🍌cd ,.
 minishell: cd: ,.: No such file or directory
 minishell 🍌cd ..
 minishell 🍌exit
+
+whenever I export a=a and unset a i free full when it doesnt consist a=a
+I need to pass full properly in export.
