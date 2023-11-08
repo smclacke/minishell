@@ -64,7 +64,7 @@ OTHERRRR
 
 
 
-This is for sure readline when input is empty? right??
+This is a readline leak ? right??
 
 ==3153142==ERROR: LeakSanitizer: detected memory leaks
 
