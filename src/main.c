@@ -6,11 +6,24 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/09 17:28:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/09 22:25:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
+
+static bool	is_space(char *input)
+{
+	int	i = 0;
+
+	while (input[i])
+	{
+		if (!ft_isspace(input[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -35,7 +48,8 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		if (!input)
 			exit(0);
-		add_history(input);
+		if (!is_space(input))
+			add_history(input);
 
 
 		lexer_tokens = lexer(input);
