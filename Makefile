@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/09 12:43:44 by smclacke      ########   odam.nl          #
+#    Updated: 2023/11/09 16:13:29 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,8 @@ $(NAME)			:	$(OBJ)
 	@ echo "${PURPLE} ---> Made!${RESET}"
 
 run:	$(NAME)
-	@ valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup.supp ./$(NAME)
+	@ ./$(NAME)
+# @ valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup.supp ./$(NAME)
 
 norm:
 	@ norminette $(SRC_DIR) $(HEADER_DIR)

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/07 18:55:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/09 17:28:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ int	main(int argc, char **argv, char **envp)
 		handle_signals(PARENT);
 		input = readline(PROMPT);
 		if (!input)
-			exit(EXIT_FAILURE);
+			exit(0);
 		add_history(input);
+
 
 		lexer_tokens = lexer(input);
 		free(input);
 		if (!lexer_tokens)
 			continue ;
+		shelly_print_list(lexer_tokens);
 
 		parser_tokens = parser(lexer_tokens);
 		if (!parser_tokens)
