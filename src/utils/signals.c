@@ -6,21 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/09 21:54:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/09 21:56:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
-
-/**
- * SIGINT	
- * SIGQUIT
- * SIG_IGN	signal is ignored
- * 
- * Ctrl-D: is no signal. 
- * Ctrl-D tells the terminal that it should register a EOF on standard input, 
- * which bash interprets as a desire to exit
-*/
 
 	// For the main:
 	// 	Ctrl-C: Displays a new prompt, exits with code 1.
@@ -64,21 +54,13 @@ static void	sig_child_q(int signum)
 static void	sig_hd(int signum)
 {
 	if (signum == SIGINT)
-	{
-		// printf("\n");
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
-		// rl_redisplay();
 		exit(1);
-	}
 }
 
 void	handle_signals(int proc)
 {
 	struct termios	term;
 
-	// tcgetattr(STDIN_FILENO, &term);
-	// tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 	if (proc == PARENT)
 	{
 		signal(SIGINT, sig_parent);
@@ -93,16 +75,7 @@ void	handle_signals(int proc)
 	}
 	else if (proc == HERE_DOC)
 	{
-	// 	// tcgetattr(STDIN_FILENO, &term);
-	// 	// tcsetattr(STDIN_FILENO, TCSAFLUSH, &term);
 		signal(SIGINT, sig_hd);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }
-
-// in parent? - main
-// in child? - func
-// in here_doc? - func
-
-// when signals in child, ignore in parent
-

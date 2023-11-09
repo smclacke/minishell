@@ -39,9 +39,7 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
-SIGNALSSSS
- ---> CTRL D
- ---> here_doc exiting is not smooth 
+SIGNALSSSSh 
  ---> exit_codes (and errors?)
 
 EXPANSION
