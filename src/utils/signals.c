@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/09 21:46:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/09 21:54:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ static void	sig_hd(int signum)
 {
 	if (signum == SIGINT)
 	{
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
+		// printf("\n");
+		// rl_replace_line("", 0);
+		// rl_on_new_line();
 		// rl_redisplay();
 		exit(1);
 	}
