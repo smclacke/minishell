@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/07 17:55:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/09 21:45:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ static void	write_to_heredoc(t_parser *lst, char *file_name)
 		mini_error("fork", errno);
 	if (fork_pid == 0)
 	{
+		handle_signals(HERE_DOC);
 		file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		while (1)
 		{
-			handle_signals(HERE_DOC);
-			read_line = readline("> ");
+			read_line = readline("< ");
 			if (mini_strcmp(lst->str, read_line) != 0)
 				write_to_file(read_line, file);
 			else if (mini_strcmp(lst->str, read_line) == 0)
