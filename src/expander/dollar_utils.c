@@ -6,28 +6,28 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/15 19:18:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/15 23:15:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// extra string ayyayyayya
 int	save_extra_string(t_expand *str, char *input, int i)
 {
 	int	start;
 	int	end;
+	int	len;
 
 	start = i;
 	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
-	end = i - start;
-	str->string = ft_substr(input, start, end);
+	end = i;
+	len = end - start;
+	str->string = ft_substr(input, start, (len + 1));
 	str->expanded = ft_strjoin(str->expanded, str->string);
 	return (i);
 }
 
-// squote_expand
 int	squote_bit(t_expand *str, char *input, int i)
 {
 	int		start;
