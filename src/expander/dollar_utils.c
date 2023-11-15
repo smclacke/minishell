@@ -6,40 +6,40 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/15 16:25:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/15 19:18:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 // extra string ayyayyayya
-int	save_extra_string(t_expand *str, int i)
+int	save_extra_string(t_expand *str, char *input, int i)
 {
 	int	start;
 	int	end;
 
 	start = i;
-	while (str->input[i] && !is_dollar_or_quote(str->input[i]))
+	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
 	end = i - start;
-	str->string = ft_substr(str->input, start, end);
+	str->string = ft_substr(input, start, end);
 	str->expanded = ft_strjoin(str->expanded, str->string);
 	return (i);
 }
 
 // squote_expand
-int	squote_bit(t_expand *str, int i)
+int	squote_bit(t_expand *str, char *input, int i)
 {
 	int		start;
 	int		end;
 	
 	start = i;
-	while (str->input[i])
+	while (input[i])
 	{
-		if (ft_issquote(str->input[i]))
+		if (ft_issquote(input[i]))
 		{
 			end = i - start;
-			str->s_quote = ft_substr(str->input, start, end);	
+			str->s_quote = ft_substr(input, start, end);	
 			str->expanded = ft_strjoin(str->expanded, str->s_quote);
 			return (i + 1);
 		}
@@ -60,17 +60,17 @@ void	dollar_expand(t_expand *str, t_env **env)
 		str->dollar = NULL;
 }
 
-int	dollar_bit(t_expand *str, t_env **env, int i)
+int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 {
 	int		start;
 	int		end;
 
 	start = i;
 	end = 0;
-	while (str->input[i] && !is_dollar_or_quote(str->input[i]))
+	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
 	end = i - start;
-	str->dollar = ft_substr(str->input, start, end);
+	str->dollar = ft_substr(input, start, end);
 	dollar_expand(str, env);
 	return (i);
 }
