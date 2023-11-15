@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/15 15:33:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/15 21:20:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_parser
 typedef struct s_expand
 {
 	char	*input;
+	char	*tmp;
 	char	*string;
 	char	*dollar;
 	char	*s_quote;
