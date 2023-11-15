@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/15 15:54:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/15 16:25:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	squote_bit(t_expand *str, int i)
 /**
  * @todo make it do the thing, norm it, leak proof it, comment it, error it
 */
-static void	dollar_expand(t_expand *str, t_env **env)
+void	dollar_expand(t_expand *str, t_env **env)
 {
 	str->dollar = ft_strtrim(str->dollar, "$");
 	if (!get_check_value(str, env))
