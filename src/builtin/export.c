@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/07 18:59:17 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/28 22:06:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	export_print(t_env *env)
 	{
 		if (env->has_value)
 			printf("declare -x %s=\"%s\"\n", env->key, env->value);
+		else
+			printf("declare -x %s\n", env->key);
 		env = env->next;
 	}
 }
@@ -52,10 +54,13 @@ static void	export_print(t_env *env)
 static char	*check_for_equal_sign(char *str)
 {
 	char	*comp_str;
+	int		i;
 
 	comp_str = NULL;
-	if (str[ft_strlen(str) - 1] == '=')
-		comp_str = ft_substr(str, 0, (ft_strlen(str) - 1));
+	i = 0;
+	while (str[i] != '\0' && str[i] != '=')
+		i++;
+	comp_str = ft_substr(str, 0, i);
 	return (comp_str);
 }
 
@@ -71,28 +76,35 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 {
 	t_env	*head;
 	int		has_value;
-	char	*str;
 	char	*comp_str;
+	char	*temp_full;
+	char	*temp_value;
+	char	*temp_key;
 
 	head = *e;
-	str = node->str;
-	comp_str = check_for_equal_sign(str);
+	comp_str = check_for_equal_sign(node->str);
 	while (head)
 	{
 		if (mini_strcmp(comp_str, head->key) == 0)
 		{
-			printf("\n\nhi\n\n");
-			if (str[ft_strlen(str) == '='])
+			if (node->str[ft_strlen(node->str) == '='])
 			{
-				head->full = node->str;
+				temp_full = head->full;
+				head->full = comp_str;
+				free(temp_full);
 				has_value = get_key_value(node->str, &n_k, &n_v);
+				temp_value = head->value;
 				head->value = n_v;
+				free(temp_value);
+				temp_key = head->key;
 				head->key = n_k;
+				free(temp_key);
 				return (true);
 			}
 		}
 		head = head->next;
 	}
+	free(comp_str);
 	return (false);
 }
 
@@ -100,20 +112,22 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options
- * @todo I think i dont proper set the full part of my environment in here
- * check make env.
+ * @todo free things i think and norm proof also double free 
+ * with freeing in an unrelated spot 
+ * might be overwriting a pointer and not allocating a new string yey.
+ * NORM DEZE HELE PAGE
+ * 
 */
 void	ft_export(t_parser *node, t_env **env)
 {
 	char	*new_key;
 	char	*new_value;
 	int		h_v;
-	// char	*full_str;
 	t_env	*new_node;
+	char	*new_full;
 
 	new_key = NULL;
 	new_value = NULL;
-	// full_str = node->str;
 	h_v = 0;
 	if (!node->next)
 	{
@@ -128,7 +142,9 @@ void	ft_export(t_parser *node, t_env **env)
 	if (reassign_env(env, node, new_key, new_value) == 1)
 		return ;
 	h_v = get_key_value(node->str, &new_key, &new_value);
-	// (*env)->full = get_full(full_str);
-	new_node = env_lstnew(new_key, new_value, node->str, h_v);
+	new_full = ft_strdup(node->str);
+	if (new_full == NULL)
+		return ;//really?? error message 
+	new_node = env_lstnew(new_key, new_value, new_full, h_v);
 	env_lstadd_back(env, new_node);
 }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 20:43:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/28 22:05:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 		{
 			redirect(lst, data);
 			if (data->error == false)
-				return (false);
+				return (true);
 			do_builtin(lst, env);
-		}
-		else
 			return (true);
+		}
 	}
 	return (false);
 }
@@ -86,7 +85,7 @@ bool	absolute_check(t_parser *node)
  * @brief child execution process,  calls init_pipes
  * init_forks and close_between in a while loop
 */
-void	child_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
+void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
 	int	count;
 	int	i;

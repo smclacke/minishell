@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/07 17:56:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/28 22:17:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 		}
 		else
 			dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
+			// free(o_d);
 	}
 }
 
@@ -157,6 +158,25 @@ static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
  * @param lst parsed linked list
  * @param env environment in linked list
  * @brief changes directory with an absolute and relative path as argument
+ * dreijans@f0r1s10:~$ cd Downloads Music
+bash: cd: too many arguments
+dreijans@f0r1s10:~$ unset HOME
+dreijans@f0r1s10:/home/dreijans$ cd Downloads
+dreijans@f0r1s10:/home/dreijans/Downloads$ cd
+bash: cd: HOME not set
+
+miniberry 🍓unset HOME
+lexer list: [unset]
+lexer list: [HOME]
+miniberry 🍓cd src
+lexer list: [cd]
+lexer list: [src]
+minishell: cd: HOME not set
+miniberry 🍓cd
+lexer list: [cd]
+minishell: cd: HOME not set
+miniberry 🍓^C
+
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
@@ -180,7 +200,7 @@ void	ft_cd(t_parser *lst, t_env **env)
 		dprintf(STDERR_FILENO, NO_HOME);
 		return ;
 	}
-	if (env)
+	if (*env)
 	{
 		old_work_dir = getcwd(cwd, 0);
 		while (lst)

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/07 18:58:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/28 21:14:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,19 @@
  * key, value and next
  * @return node made
 */
-// t_env	*env_lstnew(t_parser *node, void *key, void *value, char *full, int has_value)
 t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 {
 	t_env	*new;
 
 	new = (t_env *)malloc(sizeof(t_env));
+	ft_bzero(new, sizeof(new));
 	if (!new)
 		return (NULL);
 	new->key = key;
 	new->value = value;
 	new->full = full;
-	// new->full = get_full(node->str);
 	new->next = NULL;
 	new->has_value = has_value;
-	// has_value = NULL;
 	return (new);
 }
 
@@ -134,7 +132,6 @@ char	**list_to_string(t_env *env)
 		i++;
 		env = env->next;
 	}
-	// free(env->full);
 	env_array[i] = NULL;
 	return (env_array);
 }

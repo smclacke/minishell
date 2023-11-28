@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/10 18:44:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/28 22:05:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	data->env_array = list_to_string(*env);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
 		mini_error("execve", errno);
-	return ;
+	exit (0);
 }
 
 /**
@@ -125,9 +125,9 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	if (!lst)
 		mini_error("list", errno);
 	init_heredoc(lst);
-	if (single_builtin_cmd(lst, env, data) == false)
+	if (single_builtin_cmd(lst, env, data) == true)
 		return ;
-	child_builtin_cmd(lst, env, data);
+	pipeline(lst, env, data);
 	close_all(data);
 	waitpid(data->fork_pid, NULL, 0);
 	while (wait(NULL) != -1)
@@ -150,6 +150,4 @@ void	execute(t_env **env, t_parser *lst)
 	// ft_expand(lst, env);
 	build(lst, env, data);
 	free (data);
-	data = NULL;
-	return ;
 }

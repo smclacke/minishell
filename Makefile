@@ -6,17 +6,15 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/28 14:31:23 by dreijans      ########   odam.nl          #
+#    Updated: 2023/11/28 21:44:39 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
 MAKEFLAGS		= --no-print-directory
-CFLAGS			= -Wall -Wextra -g 
-# -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 # valgrind --leak-check=yes
-# -Werror 
 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
@@ -54,6 +52,7 @@ SRCS			= main.c								\
 					builtin/export.c 					\
 					builtin/unset.c 					\
 					builtin/env.c 						\
+					builtin/errors.c					\
 					builtin/builtin_utils_one.c 		\
 					builtin/builtin_utils_two.c 		\
 					builtin/exit.c						\

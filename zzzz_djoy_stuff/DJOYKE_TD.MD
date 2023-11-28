@@ -41,6 +41,8 @@
 5) 
     handle exit codes
 
+6) 
+
 minishell 🍌cd src
 minishell 🍌pwd
 Current working directory: /home/dreijans/Documents/rank3/minishell/src
@@ -49,5 +51,37 @@ minishell: cd: ,.: No such file or directory
 minishell 🍌cd ..
 minishell 🍌exit
 
-whenever I export a=a and unset a i free full when it doesnt consist a=a
-I need to pass full properly in export.
+bash doet:
+
+dreijans@f0r1s10:~$ cd Downloads Music
+bash: cd: too many arguments
+dreijans@f0r1s10:~$ unset HOME
+dreijans@f0r1s10:/home/dreijans$ cd Downloads
+dreijans@f0r1s10:/home/dreijans/Downloads$ cd
+bash: cd: HOME not set
+
+ik doe:
+handle too many arguments niet
+
+miniberry 🍓unset HOME
+lexer list: [unset]
+lexer list: [HOME]
+miniberry 🍓cd src
+lexer list: [cd]
+lexer list: [src]
+minishell: cd: HOME not set
+miniberry 🍓cd
+lexer list: [cd]
+minishell: cd: HOME not set
+miniberry 🍓^C
+
+Direct leak of 41 byte(s) in 1 object(s) allocated from:
+    #0 0x49a5c9 in realloc (/home/dreijans/Documents/rank3/minishell/minishell+0x49a5c9)
+    #1 0x7ff06bbdc9ac in getcwd io/../sysdeps/unix/sysv/linux/getcwd.c:86:8
+    #2 0x4d38e2 in ft_cd /home/dreijans/Documents/rank3/minishell/src/builtin/cd.c:188:18
+    #3 0x4d5b00 in do_builtin /home/dreijans/Documents/rank3/minishell/src/builtin/builtin_utils_one.c:41:3
+    #4 0x4d8498 in single_builtin_cmd /home/dreijans/Documents/rank3/minishell/src/executor/execute_utils_two.c:36:4
+    #5 0x4d6f1b in build /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:128:6
+    #6 0x4d6e75 in execute /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:151:2
+    #7 0x4cb4f0 in main /home/dreijans/Documents/rank3/minishell/src/main.c:65:3
+    #8 0x7ff06baf0d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
