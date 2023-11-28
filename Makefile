@@ -6,18 +6,16 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/07 17:32:15 by dreijans      ########   odam.nl          #
+#    Updated: 2023/11/28 14:31:23 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
 MAKEFLAGS		= --no-print-directory
-# CFLAGS			= -Wall -Wextra -g -fsanitize=address
-CFLAGS			= -Wall -Wextra -g
-#valgrind 
-#--leak-check=yes
-#-g -fsanitize=address
+CFLAGS			= -Wall -Wextra -g 
+# -fsanitize=address
+# valgrind --leak-check=yes
 # -Werror 
 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
@@ -91,6 +89,7 @@ $(NAME)			:	$(OBJ)
 
 run:	$(NAME)
 	@ ./$(NAME)
+# @ valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup.supp ./$(NAME)
 
 norm:
 	@ norminette $(SRC_DIR) $(HEADER_DIR)

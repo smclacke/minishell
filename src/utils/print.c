@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 17:35:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/28 00:59:44 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 	list = tokens;
 	while (list)
 	{
-		printf("[%i]\t ", i);
 		// printf("input = %s\t", list->input);
+	
+		printf("[%i]\t ", i);
 		printf("cmd = %s\t", list->cmd);
 		printf("file = %s\t", list->file);
 		printf("meta = %s\t", list->meta);
 		printf("str = %s\n", list->str);
+		
 		//  printf("n_cmd = %i\t", list->n_cmd);
 		// printf("hd_fd = %i\n", list->hd_fd);
 		i++;

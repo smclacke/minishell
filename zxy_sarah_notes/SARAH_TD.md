@@ -39,9 +39,7 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
-SIGNALSSSS
- ---> CTRL D
- ---> here_doc exiting is not smooth 
+SIGNALSSSSh 
  ---> exit_codes (and errors?)
 
 EXPANSION
@@ -61,6 +59,7 @@ OTHERRRR
  ---> cd "" cd ''
  ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
     bash: $bla: ambiguous redirect
+
 
 ***************************************************************************
 ***************************************************************************
