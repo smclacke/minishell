@@ -41,6 +41,7 @@ for in the future... don't change utils... ever.
 
 SIGNALSSSSh 
  ---> exit_codes (and errors?)
+ ---> heredoc still weird
 
 EXPANSION
  ---> double quotes in dollar expansion
