@@ -51,30 +51,6 @@ minishell: cd: ,.: No such file or directory
 minishell 🍌cd ..
 minishell 🍌exit
 
-bash doet:
-
-dreijans@f0r1s10:~$ cd Downloads Music
-bash: cd: too many arguments
-dreijans@f0r1s10:~$ unset HOME
-dreijans@f0r1s10:/home/dreijans$ cd Downloads
-dreijans@f0r1s10:/home/dreijans/Downloads$ cd
-bash: cd: HOME not set
-
-ik doe:
-handle too many arguments niet
-
-miniberry 🍓unset HOME
-lexer list: [unset]
-lexer list: [HOME]
-miniberry 🍓cd src
-lexer list: [cd]
-lexer list: [src]
-minishell: cd: HOME not set
-miniberry 🍓cd
-lexer list: [cd]
-minishell: cd: HOME not set
-miniberry 🍓^C
-
 Direct leak of 41 byte(s) in 1 object(s) allocated from:
     #0 0x49a5c9 in realloc (/home/dreijans/Documents/rank3/minishell/minishell+0x49a5c9)
     #1 0x7ff06bbdc9ac in getcwd io/../sysdeps/unix/sysv/linux/getcwd.c:86:8
