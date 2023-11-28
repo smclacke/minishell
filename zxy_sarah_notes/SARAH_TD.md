@@ -61,23 +61,6 @@ OTHERRRR
     bash: $bla: ambiguous redirect
 
 
-
-This is a readline leak ? right??
-
-==3153142==ERROR: LeakSanitizer: detected memory leaks
-
-Direct leak of 200 byte(s) in 25 object(s) allocated from:
-    #0 0x49a2ad in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a2ad)
-    #1 0x4cc83e in parser_split /home/smclacke/Desktop/minishell/src/lexer/token.c:119:19
-    #2 0x4cc7c4 in parse_input /home/smclacke/Desktop/minishell/src/lexer/token.c:143:10
-    #3 0x4cc113 in lexer /home/smclacke/Desktop/minishell/src/lexer/lexer.c:60:17
-    #4 0x4cb492 in main /home/smclacke/Desktop/minishell/src/main.c:40:18
-    #5 0x7f68cfcf8d8f  (/home/smclacke/.capt/root/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
-
-SUMMARY: AddressSanitizer: 200 byte(s) leaked in 25 allocation(s).
-make: *** [Makefile:90: run] Error 1
-
-
 ***************************************************************************
 ***************************************************************************
 ***************************************************************************
