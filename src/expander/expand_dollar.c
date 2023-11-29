@@ -6,11 +6,30 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/15 21:02:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 11:28:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+/**
+ * string after closed quotes that needs to be added to expanded string
+*/
+static int	save_extra_string(t_expand *str, char *input, int i)
+{
+	int	start;
+	int	end;
+	int	len;
+
+	start = i;
+	while (input[i] && !is_dollar_or_quote(input[i]))
+		i++;
+	end = i;
+	len = end - start;
+	str->string = ft_substr(input, start, (len + 1));
+	str->expanded = ft_strjoin(str->expanded, str->string);
+	return (i);
+}
 
 static char	*save_first_input(t_expand *str, char *input, int i)
 {
@@ -21,6 +40,9 @@ static char	*save_first_input(t_expand *str, char *input, int i)
 	return (input);
 }
 
+/**
+ * before any dollar or quotes, just save the string
+*/
 char	*first_bit(t_expand *str, char *input)
 {
 	int		i = 0;
@@ -37,7 +59,7 @@ char	*first_bit(t_expand *str, char *input)
  * @todo fix this, leaks, norm, test test test...
  * write version (or have func for here_doc and only edit that bit)
 */
-char	*dollar(t_expand *str, t_env **env)
+static char	*dollar(t_expand *str, t_env **env)
 {
 	int		i = 0;
 
@@ -58,4 +80,25 @@ char	*dollar(t_expand *str, t_env **env)
 			return (str->expanded);
 	}
 	return (str->expanded);
+}
+
+/**
+ * adding expanded str back into correct parser struct var
+ * @todo comment
+*/
+void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
+{
+	str->input = set_expand_string(lst, str);
+	if (str->sign == 1 || str->sign == 2 || str->sign == 3)
+	{
+		str->expanded = dollar(str, env);
+		if (!str->expanded)
+			mini_error("str->expanded noped", errno);
+		if (str->sign == 1)
+			lst->cmd = str->expanded;
+		else if (str->sign == 2)
+			lst->str = str->expanded;
+		else if (str->sign == 3)
+			lst->file = str->expanded;
+	}
 }
