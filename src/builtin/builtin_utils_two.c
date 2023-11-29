@@ -6,11 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 14:08:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:27:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+#define ARG_ERROR "minishell: %s: too many arguments\n"
 
 /**
  * @param temp temporary placeholder
@@ -61,4 +63,22 @@ int	list_iter(t_parser *lst)
 		lst = lst->next;
 	}
 	return (i);
+}
+
+/**
+ * @param lst parser linked list
+ * @brief checks if arguments are more than one
+ * throws error message if true.
+*/
+bool	check_args(t_parser *lst)
+{
+	int			i;
+
+	i = list_iter(lst);
+	if (i > 2)
+	{
+		dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
+		return (true);
+	}
+	return (false);
 }

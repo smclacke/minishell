@@ -6,13 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 14:10:17 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:38:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-#define ARG_ERROR "minishell: %s: too many arguments\n"
 #define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
 #define NO_HOME "minishell: cd: HOME not set\n"
 
@@ -114,7 +113,6 @@ static void	change_old_dir(t_env **env, char *str)
 */
 static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 {
-	char		*error;
 	char		*old_pwd;
 
 	if (!lst->str)
@@ -129,11 +127,7 @@ static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 		if (access(lst->str, F_OK) == 0)
 		{
 			if (chdir(lst->str) == -1)
-			{
-				error = ft_strjoin("minishell: cd: ", lst->str);
-				free(o_d);
-				mini_error(error, errno);
-			}
+				no_such_file(lst, o_d);
 			change_old_dir(env, o_d);
 			change_current_dir(env, getcwd(c_d, 0));
 		}
@@ -155,18 +149,13 @@ void	ft_cd(t_parser *lst, t_env **env)
 {
 	char		*old_work_dir;
 	char		*cwd;
-	int			i;
 	char		*home_dir;
 
 	cwd = NULL;
 	old_work_dir = NULL;
 	home_dir = NULL;
-	i = list_iter(lst);
-	if (i > 2)
-	{
-		dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
+	if (check_args(lst) == true)
 		return ;
-	}
 	home_dir = ft_getenv(*env, "HOME");
 	if (*env)
 	{

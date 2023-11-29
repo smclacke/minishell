@@ -6,12 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/28 21:47:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:35:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-// #include <limits.h>
 
 /**
  * @param env pointer to environment

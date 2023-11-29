@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/28 21:40:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:40:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,19 @@ void	put_permission_error(t_parser *node)
 {
 	ft_putstr_fd(node->cmd, STDERR_FILENO);
 	ft_putstr_fd(": permission denied\n", STDERR_FILENO);
+}
+
+/**
+ * @param lst node in linked list
+ * @param o_d char string containing old working dir
+ * @brief puts custom error message on STDOUT_FILENO
+ * frees o_d and exits.
+*/
+void	no_such_file(t_parser *lst, char *o_d)
+{
+	char	*error;
+
+	error = ft_strjoin("minishell: cd: ", lst->str);
+	free(o_d);
+	mini_error(error, errno);
 }
