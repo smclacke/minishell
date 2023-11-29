@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 17:31:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 18:25:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ static void	dollar_expand(t_expand *str, t_env **env)
 		else
 			str->expanded = ft_strjoin(str->expanded, str->env_val);
 	}
+	
+	printf("dollar = %s\n", str->dollar);
+	printf("env_val = %s\n", str->env_val);
 	free(str->tmp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 17:27:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 18:27:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,31 @@ int	is_dollar_or_quote(int c)
  * @return 1 if there is no value, 0 if value is found and assigned
  * @todo triple check protection, norm and sooo when less tired
 */
+
+/**
+ * THIS DOESNT LEAK
+ * minibleh:echo $USE
+dollar = USE
+env_val = (null)
+
+minibleh:echo $USER
+dollar = USER
+env_val = smclacke
+smclacke
+minibleh:exit
+exit
+
+BUT
+ONLY echo $USER DOES??!?
+
+*/
 int	get_check_value(t_expand *str, t_env **env)
 {
 	t_env	*head;
 	int		len;
 
 	head = *env;
+	str->env_val = NULL;
 	while (head)
 	{
 		if (shelly_strcmp(str->dollar, head->key) == 0)
