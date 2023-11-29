@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 13:15:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 13:20:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static char	*dollar(t_expand *str, t_env **env)
 	int		i;
 
 	i = first_bit(str, str->input);
-	printf("first bit = %s\n", str->expanded);
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))

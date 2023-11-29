@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 13:19:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 13:33:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	first_str_bit(t_expand *str, char *input)
 	{
 		str->tmp = ft_substr(input, 0, i);
 		str->expanded = ft_strjoin(str->expanded, str->tmp);
+		free(str->tmp);
 		if (!str->expanded)
 			return (0);
 	}
@@ -32,22 +33,25 @@ static int	first_str_bit(t_expand *str, char *input)
 static void	handle_double(t_expand *str, char *input, t_env **env)
 {
 	int		i;
+	int		start;
 
 	i = first_str_bit(str, input);
-	printf("input = %s\n", input);
-	printf("i = %i\n", i);
-	printf("input[i] = %c\n", input[i]);
-	
+	start = 0;
 	while (input[i])
 	{
 		if (ft_dollar(input[i]))
 			i = dollar_bit(str, input, env, (i + 1));
 		if (ft_issquote(input[i]))
 		{
-			str->s_quote = ft_substr(input, i, 1);
-			str->expanded = ft_strjoin(str->expanded, str->s_quote);
+			start = i;
 			i++;
+			while (!ft_issquote(input[i]))
+				i++;
+			str->tmp = ft_substr(input, start, i);
+			str->expanded = ft_strjoin(str->expanded, str->tmp);
+			free(str->tmp);
 		}
+		i++;
 		if (input[i] && !is_dollar_or_quote(input[i]))
 			i = save_extra_string(str, input, i);
 		if (!input[i])
@@ -68,7 +72,6 @@ int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 		{
 			end = i - start;
 			str->d_quote = ft_substr(input, start, end);
-			printf("d_quote full = %s\n", str->d_quote);
 			handle_double(str, str->d_quote, env);
 			return (i + 1);
 		}
