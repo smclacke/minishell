@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:29:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:33:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ static int	first_str_bit(t_expand *str, char *input)
 	return (i);
 }
 
-/**
-	echo "something'$LESS'hello$USER'hi'"something
-	
-	something'-R'hello$smclacke'hi''something
-*/
 static void	handle_double(t_expand *str, char *input, t_env **env)
 {
 	int		i;

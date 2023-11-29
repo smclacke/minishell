@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:29:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:56:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,19 @@ int	squote_bit(t_expand *str, char *input, int i)
 */
 static void	dollar_expand(t_expand *str, t_env **env)
 {
-	str->dollar = ft_strtrim(str->dollar, "$");
+	str->tmp = ft_strtrim(str->dollar, "$");
+	free(str->dollar);
+	if (!str->tmp)
+		return ;
+	str->dollar = str->tmp;
 	if (!get_check_value(str, env))
 	{
-		str->expanded = ft_strjoin(str->expanded, str->dollar);
-		free(str->dollar); // check
+		if (!str->expanded)
+			str->expanded = str->dollar;
+		else
+			str->expanded = ft_strjoin(str->expanded, str->dollar);		
 	}
-	else
-		str->dollar = NULL;
+	free(str->tmp);
 }
 
 /**
@@ -63,5 +68,6 @@ int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 	end = i - start;
 	str->dollar = ft_substr(input, start, end);
 	dollar_expand(str, env);
+	free(str->dollar);
 	return (i);
 }

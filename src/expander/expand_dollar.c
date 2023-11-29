@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:29:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:03:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,7 @@ static char	*dollar(t_expand *str, t_env **env)
 			if (str->input[i] && !is_dollar_or_quote(str->input[i]))
 				i = save_extra_string(str, str->input, i);
 		}
-		if (!str->input[i])
-		{
-			// free(str->input); // check	
-			return (str->expanded);
-		}
 	}
-	// free(str->input); // check	
 	return (str->expanded);
 }
 

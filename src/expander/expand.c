@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 11:40:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:35:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void	ft_expand(t_parser *tokens, t_env **env)
 		expand_dollar(lst, env, str);
 		lst = lst->next;
 	}
-	// when free expand struct vars, need to??
+	free(str);
 }
