@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/28 22:33:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 14:08:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@
  * @param env environment in linked list
  * @brief replaces the value of set key in the environment
 */
-void	reasing_value(char *temp, char *str, t_env *env)
+void	reasing_value(char *str, t_env *env)
 {
+	char	*temp;
+
 	temp = NULL;
-	free(env->value);
+	temp = env->value;
 	env->value = str;
-	// temp = env->value;
+	free(temp);
 }
 
 /**
@@ -60,4 +62,3 @@ int	list_iter(t_parser *lst)
 	}
 	return (i);
 }
-

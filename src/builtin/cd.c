@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/28 22:29:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 14:10:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,23 @@ static void	change_current_dir(t_env **env, char *str)
 	char	*key_equal;
 	char	*new_full;
 	t_env	*head;
-	char	*temp;
 
 	key_equal = NULL;
 	new_full = NULL;
 	head = *env;
-	temp = NULL;
 	while (mini_strcmp ("PWD", head->key) != 0)
 	{
 		head = head->next;
 		if (head == NULL)
 			return ;
 	}
-	// temp = head->value;
 	free(head->value);
 	head->value = str;
-	// free(temp);
 	key_equal = ft_strjoin(head->key, "=");
-	// temp = head->full;
 	new_full = ft_strjoin(key_equal, str);
 	free(key_equal);
 	free(head->full);
 	head->full = new_full;
-	// free(temp);
 }
 
 /**
@@ -88,12 +82,10 @@ static void	change_old_dir(t_env **env, char *str)
 	char	*key_equal;
 	char	*new_full;
 	t_env	*head;
-	char	*temp;
 
 	key_equal = NULL;
 	new_full = NULL;
 	head = *env;
-	temp = NULL;
 	if (!env)
 		reassign_oft_pwd(env, str);
 	while (mini_strcmp ("OLDPWD", head->key) != 0)
@@ -102,16 +94,12 @@ static void	change_old_dir(t_env **env, char *str)
 		if (head == NULL)
 			return ;
 	}
-	reasing_value(temp, str, head);
+	reasing_value(str, head);
 	key_equal = ft_strjoin(head->key, "=");
-	// temp = key_equal;
 	new_full = ft_strjoin(key_equal, str);
 	free(key_equal);
-	// free(temp);
-	// temp = head->full;
 	free(head->full);
 	head->full = new_full;
-	// free(temp);
 }
 
 /**
@@ -143,24 +131,25 @@ static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
 			if (chdir(lst->str) == -1)
 			{
 				error = ft_strjoin("minishell: cd: ", lst->str);
+				free(o_d);
 				mini_error(error, errno);
 			}
 			change_old_dir(env, o_d);
 			change_current_dir(env, getcwd(c_d, 0));
 		}
 		else
+		{
 			dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
-			// free(o_d);
+			free(o_d);
+		}
 	}
-	free(o_d);
-	free(c_d);
 }
 
 /**
  * @param lst parsed linked list
  * @param env environment in linked list
  * @brief changes directory with an absolute and relative path as argument
- * @todo fix leaks
+ * @todo norm it
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
@@ -193,5 +182,4 @@ void	ft_cd(t_parser *lst, t_env **env)
 			lst = lst->next;
 		}
 	}
-	// free(old_work_dir);
 }
