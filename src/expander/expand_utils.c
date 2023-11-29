@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:53:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:19:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	is_dollar_or_quote(int c)
 int	get_check_value(t_expand *str, t_env **env)
 {
 	t_env	*head;
+	int		len;
 
 	head = *env;
 	if (!str->dollar || !head->key)
@@ -36,7 +37,10 @@ int	get_check_value(t_expand *str, t_env **env)
 	{
 		if (mini_strcmp(str->dollar, head->key) == 0)
 		{
-			str->env_val = ft_substr(head->value, 0, ft_strlen(head->value));
+			if (!head->value)
+				return (1);
+			len = ft_strlen(head->value);
+			str->env_val = ft_substr(head->value, 0, len);
 			if (!str->env_val)
 				return (1);
 			str->dollar = str->env_val;

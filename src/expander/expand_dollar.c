@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:03:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:14:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	first_bit(t_expand *str, char *input)
 		i++;
 	if (is_dollar_or_quote(input[i]))
 	{
+		if (i == 0)
+			return (0);
 		str->expanded = ft_substr(input, 0, i);
 		if (!str->expanded)
 			return (0);
@@ -91,7 +93,7 @@ void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 	{
 		str->expanded = dollar(str, env);
 		if (!str->expanded)
-			mini_error("str->expanded noped", errno);
+			str->expanded = "";
 		if (str->sign == 1)
 			lst->cmd = str->expanded;
 		else if (str->sign == 2)
