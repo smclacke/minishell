@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 12:49:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 13:15:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ static char	*dollar(t_expand *str, t_env **env)
 			i = dquote_bit(str, str->input, env, (i + 1));
 			if (str->input[i] && !is_dollar_or_quote(str->input[i]))
 				i = save_extra_string(str, str->input, i);
-			// doing this here or in dquote func?
 		}
 		if (!str->input[i])
 		{

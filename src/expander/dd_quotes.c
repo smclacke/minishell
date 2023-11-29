@@ -6,39 +6,38 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 12:55:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 13:19:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// static char	*save_first_bit(t_expand *str, char *input, int i)
-// {
-// 	str->tmp = ft_substr(input, 0, i);
-// 	if (!str->tmp)
-// 		return (input);
-// 	input = ft_strtrim(input, str->tmp);
-// 	str->expanded = ft_strjoin(str->expanded, str->tmp);
-// 	return (input);
-// }
-
-static int	first_str_bit(t_expand *str, char *input, int i)
+static int	first_str_bit(t_expand *str, char *input)
 {
+	int	i;
+
+	i = 0;
 	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
 	if (is_dollar_or_quote(input[i]))
 	{
-		str->expanded = ft_strjoin(str->expanded, str->input);
+		str->tmp = ft_substr(input, 0, i);
+		str->expanded = ft_strjoin(str->expanded, str->tmp);
 		if (!str->expanded)
 			return (0);
 	}
 	return (i);
 }
 
-static void	handle_double(t_expand *str, char *input, t_env **env, int i)
+static void	handle_double(t_expand *str, char *input, t_env **env)
 {
-	i = first_str_bit(str, input, i);
-	printf("input[i] = %c\n", input[i]); // lost my input...
+	int		i;
+
+	i = first_str_bit(str, input);
+	printf("input = %s\n", input);
+	printf("i = %i\n", i);
+	printf("input[i] = %c\n", input[i]);
+	
 	while (input[i])
 	{
 		if (ft_dollar(input[i]))
@@ -70,7 +69,7 @@ int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 			end = i - start;
 			str->d_quote = ft_substr(input, start, end);
 			printf("d_quote full = %s\n", str->d_quote);
-			handle_double(str, str->d_quote, env, i);
+			handle_double(str, str->d_quote, env);
 			return (i + 1);
 		}
 		i++;
