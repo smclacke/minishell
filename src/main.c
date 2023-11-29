@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/28 19:31:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:55:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static bool	is_space(char *input)
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
-	t_parser	*lexer_tokens;
-	t_parser	*parser_tokens;
+	t_parser	*tokens;
 	t_env		*env;
 
 
@@ -37,8 +36,6 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	env = NULL;
 	env = env_list(envp, env);
-	lexer_tokens = NULL;
-	parser_tokens = NULL;
 
 	int	og_stdout = dup(STDOUT_FILENO);
 	int	og_stdin = dup(STDIN_FILENO);
@@ -52,18 +49,17 @@ int	main(int argc, char **argv, char **envp)
 			add_history(input);
 
 
-		lexer_tokens = lexer(input);
+		tokens = lexer(input);
 		free(input);
-		if (!lexer_tokens)
-			continue ;
-		shelly_print_list(lexer_tokens);
-
-		parser_tokens = parser(lexer_tokens);
-		if (!parser_tokens)
+		if (!tokens)
 			continue ;
 
-		execute(&env, parser_tokens);
-		free_tokens(parser_tokens);
+		tokens = parser(tokens);
+		if (!tokens)
+			continue ;
+
+		execute(&env, tokens);
+		free_tokens(tokens);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);

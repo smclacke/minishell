@@ -6,9 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:30:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:55:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef SHELLY_H
 # define SHELLY_H
@@ -88,33 +89,34 @@ t_parser		*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
 t_parser		*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 
 				// expander
-//-------------------- quotes -------------------//
-// char				*remove_quotes(char *str);
-void			expand_quotes(t_parser *tokens);
+//------------------- dd_quotes --------------------//
+int				dquote_bit(t_expand *str, char *input, t_env **env, int i);
 
-//----------------- quote_utils ------------------//
-void			increment(int *len, int *i);
+//----------------- dollar_s_quote ------------------//
+int				squote_bit(t_expand *str, char *input, int i);
+int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
+
+//------------------- expand_dollar --------------------//
+int				save_extra_string(t_expand *str, char *input, int i);
+int				first_bit(t_expand *str, char *input);
+void			expand_dollar(t_parser *lst, t_env **env, t_expand *str);
+
+//----------------- expand_quote_utils ------------------//
 int				check_quotes(char *str);
+void			increment(int *len, int *i);
 int				check_space(char *str);
 int				quote_type(int str);
 
-//------------------- dollar --------------------//
-char			*first_bit(t_expand *str);
-char			*dollar(t_expand *str, t_env **env);
-
-//----------------- dollar_utils ------------------//
-int				save_extra_string(t_expand *str, int i);
-int				dquote_bit(t_expand *str, t_env **env, int i);
-int				squote_bit(t_expand *str, int i);
-int				dollar_bit(t_expand *str, t_env **env, int i);
-
-//------------------ expand -------------------//
-void			ft_expand(t_parser *lst, t_env **env);
+//-------------------- expand_quotes -------------------//
+void			expand_quotes(t_parser *tokens);
 
 //------------------ expand_utils ------------------//
 int				is_dollar_or_quote(int c);
 int				get_check_value(t_expand *str, t_env **env);
 char			*set_expand_string(t_parser *lst, t_expand *str);
+
+//------------------ expand -------------------//
+void			ft_expand(t_parser *lst, t_env **env);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);

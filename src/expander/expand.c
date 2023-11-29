@@ -6,35 +6,15 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/04 17:36:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:35:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * adding expanded str back into correct parser struct var
  * @todo comment
-*/
-static void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
-{
-	str->input = set_expand_string(lst, str);
-	if (str->sign == 1 || str->sign == 2 || str->sign == 3)
-	{
-		str->expanded = dollar(str, env);
-		if (!str->expanded)
-			mini_error("str->expanded noped", errno);
-		if (str->sign == 1)
-			lst->cmd = str->expanded;
-		else if (str->sign == 2)
-			lst->str = str->expanded;
-		else if (str->sign == 3)
-			lst->file = str->expanded;
-	}
-}
-
-/**
- * @todo comment
+ * handle quotes without dollars, then handle any string with dollars
 */
 void	ft_expand(t_parser *tokens, t_env **env)
 {
@@ -52,4 +32,5 @@ void	ft_expand(t_parser *tokens, t_env **env)
 		expand_dollar(lst, env, str);
 		lst = lst->next;
 	}
+	free(str);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 16:40:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/06 15:47:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/15 14:53:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@
 
 // # define PROMPT "minishell 🍌"
 
-# define PROMPT "miniberry 🍓"
+// # define PROMPT "miniberry 🍓"
+
+# define PROMPT "minibleh:"
 
 #endif

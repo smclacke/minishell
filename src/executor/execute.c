@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/28 22:05:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:55:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	execute(t_env **env, t_parser *lst)
 	if (data == NULL)
 		mini_error("malloc data", errno);
 	init_execute_struct(data);
-	// ft_expand(lst, env);
+	ft_expand(lst, env);
 	build(lst, env, data);
 	free (data);
 }

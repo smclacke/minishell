@@ -41,6 +41,7 @@ for in the future... don't change utils... ever.
 
 SIGNALSSSSh 
  ---> exit_codes (and errors?)
+ ---> heredoc still weird
 
 EXPANSION
  ---> double quotes in dollar expansion
@@ -112,10 +113,12 @@ looks for expanded (dus the number) as dir
  --->
  smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out
 bash: out: Permission denied
+
 smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > outthing
 Command 'echi' not found, did you mean:
   command 'echo' from deb coreutils (8.32-4.1ubuntu1)
 Try: apt install <deb name>
+
 smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out >outer
 bash: out: Permission denied
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 21:51:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/15 21:20:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ typedef enum e_exit
  * @param	code: enums to set exitcode at different
  * 			stages of process, saved to pass through the program
 */
-typedef struct s_estat
-{
-	int				stat;
-	enum e_exit		code;
-}				t_estat;
+// typedef struct s_estat
+// {
+// 	int				stat;
+// 	enum e_exit		code;
+// }				t_estat;
 
 /**
  * @brief	specifies the different variable types of tokens from the
@@ -95,6 +95,7 @@ typedef struct s_parser
 typedef struct s_expand
 {
 	char	*input;
+	char	*tmp;
 	char	*string;
 	char	*dollar;
 	char	*s_quote;

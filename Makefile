@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2023/11/28 21:44:39 by dreijans      ########   odam.nl          #
+#    Updated: 2023/11/29 16:54:54 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,11 @@ SRCS			= main.c								\
 					parser/parser_utils.c				\
 					expander/expand.c					\
 					expander/expand_utils.c				\
-					expander/quotes.c					\
-					expander/quote_utils.c				\
-					expander/dollar.c					\
-					expander/dollar_utils.c				\
+					expander/expand_quotes.c			\
+					expander/expand_quote_utils.c		\
+					expander/expand_dollar.c			\
+					expander/dollar_s_quotes.c			\
+					expander/dd_quotes.c				\
 					builtin/echo.c						\
 					builtin/cd.c 						\
 					builtin/pwd.c 						\
