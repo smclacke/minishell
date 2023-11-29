@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 13:20:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:29:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	save_extra_string(t_expand *str, char *input, int i)
 		i++;
 	end = i;
 	len = end - start;
-	str->string = ft_substr(input, start, (len + 1));
+	str->string = ft_substr(input, start, len);
 	str->expanded = ft_strjoin(str->expanded, str->string);
 	return (i);
 }
