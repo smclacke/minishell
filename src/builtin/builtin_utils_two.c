@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:06:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 17:08:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ bool	check_args(t_parser *lst)
 	i = list_iter(lst);
 	if (i > 2)
 	{
+		lst = lst->next;
+		if (lst->meta)
+			return (true);
 		dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
 		return (true);
 	}

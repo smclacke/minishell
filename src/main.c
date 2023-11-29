@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:55:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 17:10:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static bool	is_space(char *input)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (input[i])
 	{
 		if (!ft_isspace(input[i]))
