@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 11:41:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 12:34:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,23 @@ static int	save_extra_string(t_expand *str, char *input, int i)
 	return (i);
 }
 
-static char	*save_first_input(t_expand *str, char *input, int i)
-{
-	str->expanded = ft_substr(input, 0, i);
-	if (!str->expanded)
-		return (input);
-	input = ft_strtrim(input, str->expanded);
-	return (input);
-}
-
 /**
  * before any dollar or quotes, just save the string
 */
-char	*first_bit(t_expand *str, char *input)
+int	first_bit(t_expand *str, char *input)
 {
-	int		i = 0;
-	
+	int		i;
+
+	i = 0;
 	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
 	if (is_dollar_or_quote(input[i]))
-		input = save_first_input(str, input, i);
-	return (input);
+	{
+		str->expanded = ft_substr(input, 0, i);
+		if (!str->expanded)
+			return (0);
+	}
+	return (i);
 }
 
 /**
@@ -61,9 +57,9 @@ char	*first_bit(t_expand *str, char *input)
 */
 static char	*dollar(t_expand *str, t_env **env)
 {
-	int		i = 0;
+	int		i;
 
-	str->input = first_bit(str, str->input);
+	i = first_bit(str, str->input);
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
@@ -77,8 +73,8 @@ static char	*dollar(t_expand *str, t_env **env)
 		if (ft_isdquote(str->input[i]))
 		{
 			i = dquote_bit(str, str->input, env, (i + 1));
-			// if (str->input[i] && !is_dollar_or_quote(str->input[i]))
-			// 	i = save_extra_string(str, str->input, i);
+			if (str->input[i] && !is_dollar_or_quote(str->input[i]))
+				i = save_extra_string(str, str->input, i);
 			// doing this here or in dquote func?
 		}
 		if (!str->input[i])

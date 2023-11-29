@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 11:41:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 12:33:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	handle_double(t_expand *str, char *input, t_env **env)
 
 	i = 0;
 	tmp = 0;
-	input = first_str_bit(str, input);
+	// input = first_str_bit(str, input);
 	while (input[i])
 	{
 		if (ft_dollar(input[i]))
