@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 12:34:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 12:49:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * string after closed quotes that needs to be added to expanded string
 */
-static int	save_extra_string(t_expand *str, char *input, int i)
+int	save_extra_string(t_expand *str, char *input, int i)
 {
 	int	start;
 	int	end;
@@ -60,6 +60,7 @@ static char	*dollar(t_expand *str, t_env **env)
 	int		i;
 
 	i = first_bit(str, str->input);
+	printf("first bit = %s\n", str->expanded);
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))

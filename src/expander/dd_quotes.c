@@ -6,58 +6,53 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 12:33:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 12:55:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static char	*save_first_bit(t_expand *str, char *input, int i)
-{
-	str->tmp = ft_substr(input, 0, i);
-	if (!str->tmp)
-		return (input);
-	input = ft_strtrim(input, str->tmp);
-	printf("str->tmp = %s\n", str->tmp);
-	printf("input here = %s\n", input);
-	str->expanded = ft_strjoin(str->expanded, str->tmp);
-	return (input);
-}
+// static char	*save_first_bit(t_expand *str, char *input, int i)
+// {
+// 	str->tmp = ft_substr(input, 0, i);
+// 	if (!str->tmp)
+// 		return (input);
+// 	input = ft_strtrim(input, str->tmp);
+// 	str->expanded = ft_strjoin(str->expanded, str->tmp);
+// 	return (input);
+// }
 
-static char *first_str_bit(t_expand *str, char *input)
+static int	first_str_bit(t_expand *str, char *input, int i)
 {
-	int	i = 0;
-
 	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
-	printf("input[i] %c\n", input[i]);
 	if (is_dollar_or_quote(input[i]))
-		input = save_first_bit(str, input, i);
-	return (input);
+	{
+		str->expanded = ft_strjoin(str->expanded, str->input);
+		if (!str->expanded)
+			return (0);
+	}
+	return (i);
 }
 
-static void	handle_double(t_expand *str, char *input, t_env **env)
+static void	handle_double(t_expand *str, char *input, t_env **env, int i)
 {
-	int		i;
-	int		tmp;
-
-	i = 0;
-	tmp = 0;
-	// input = first_str_bit(str, input);
+	i = first_str_bit(str, input, i);
+	printf("input[i] = %c\n", input[i]); // lost my input...
 	while (input[i])
 	{
 		if (ft_dollar(input[i]))
 			i = dollar_bit(str, input, env, (i + 1));
-		// if (ft_issquote(input[i]))
-		// {
-		// 	str->s_quote = ft_substr(input, i, 1);
-		// 	str->expanded = ft_strjoin(str->expanded, str->s_quote);
-		// 	i++;
-		// }
-		// if (input[i] && !is_dollar_or_quote(input[i]))
-		// 	i = save_extra_string(str, input, i);
-		// if (!input[i])
-		// 	break ;
+		if (ft_issquote(input[i]))
+		{
+			str->s_quote = ft_substr(input, i, 1);
+			str->expanded = ft_strjoin(str->expanded, str->s_quote);
+			i++;
+		}
+		if (input[i] && !is_dollar_or_quote(input[i]))
+			i = save_extra_string(str, input, i);
+		if (!input[i])
+			break ;
 	}
 }
 
@@ -72,13 +67,13 @@ int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 	{
 		if (ft_isdquote(input[i]))
 		{
-			end = i - 1;
+			end = i - start;
 			str->d_quote = ft_substr(input, start, end);
-			printf("str->d_quote = %s\n", str->d_quote);
-			handle_double(str, str->d_quote, env);
+			printf("d_quote full = %s\n", str->d_quote);
+			handle_double(str, str->d_quote, env, i);
 			return (i + 1);
 		}
 		i++;
 	}
-	return (0);
+	return (i); //error
 }
