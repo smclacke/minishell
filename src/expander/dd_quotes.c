@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 13:33:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 13:51:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,16 @@ static void	handle_double(t_expand *str, char *input, t_env **env)
 		{
 			start = i;
 			i++;
-			while (!ft_issquote(input[i]))
+			while (input[i] && !ft_issquote(input[i]) && !ft_dollar(input[i]))
 				i++;
-			str->tmp = ft_substr(input, start, i);
-			str->expanded = ft_strjoin(str->expanded, str->tmp);
-			free(str->tmp);
+			if (ft_dollar(input[i]))
+				i = dollar_bit(str, input, env, (i + 1));
+			if (input[i] && ft_issquote(input[i]))
+			{	
+				str->tmp = ft_substr(input, start, ((i + 1) - start));
+				str->expanded = ft_strjoin(str->expanded, str->tmp);
+				free(str->tmp);
+			}
 		}
 		i++;
 		if (input[i] && !is_dollar_or_quote(input[i]))
