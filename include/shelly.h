@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:34:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:30:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ void			ft_env(t_env *env);
 void			ft_exit(t_parser *lst);
 void			ft_pwd(void);
 void			ft_export(t_parser *lst, t_env **env);
+void			make_node(t_parser *node, t_env **env, char *n_k, char *n_v);
+void			replace_str(t_env *head, t_parser *node, char *n_k, char *n_v);
 void			ft_unset(t_parser *lst, t_env **env);
 void			reasing_value(char *str, t_env *head);
 void			dash_change(t_env **env, t_parser *lst, char *o_d, char *c_d);

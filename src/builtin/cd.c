@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:38:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 15:45:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
  * @param lst parsed linked list
  * @param env environment in linked list
  * @brief changes directory with an absolute and relative path as argument
- * @todo norm it
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {

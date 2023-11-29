@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/28 22:06:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:30:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,8 @@ static char	*check_for_equal_sign(char *str)
 static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 {
 	t_env	*head;
-	int		has_value;
 	char	*comp_str;
-	char	*temp_full;
-	char	*temp_value;
-	char	*temp_key;
+	char	*temp;
 
 	head = *e;
 	comp_str = check_for_equal_sign(node->str);
@@ -89,16 +86,10 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 		{
 			if (node->str[ft_strlen(node->str) == '='])
 			{
-				temp_full = head->full;
+				temp = head->full;
 				head->full = comp_str;
-				free(temp_full);
-				has_value = get_key_value(node->str, &n_k, &n_v);
-				temp_value = head->value;
-				head->value = n_v;
-				free(temp_value);
-				temp_key = head->key;
-				head->key = n_k;
-				free(temp_key);
+				free(temp);
+				replace_str(head, node, n_k, n_v);
 				return (true);
 			}
 		}
@@ -111,24 +102,17 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 /**
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
- * @brief export with no options
- * @todo free things i think and norm proof also double free 
+ * @brief export with no options, learned that double free 
  * with freeing in an unrelated spot 
- * might be overwriting a pointer and not allocating a new string yey.
- * NORM DEZE HELE PAGE
- * 
+ * might be overwriting a pointer and not allocating a new string.
 */
 void	ft_export(t_parser *node, t_env **env)
 {
 	char	*new_key;
 	char	*new_value;
-	int		h_v;
-	t_env	*new_node;
-	char	*new_full;
 
 	new_key = NULL;
 	new_value = NULL;
-	h_v = 0;
 	if (!node->next)
 	{
 		export_print(*env);
@@ -141,10 +125,5 @@ void	ft_export(t_parser *node, t_env **env)
 	node = node->next;
 	if (reassign_env(env, node, new_key, new_value) == 1)
 		return ;
-	h_v = get_key_value(node->str, &new_key, &new_value);
-	new_full = ft_strdup(node->str);
-	if (new_full == NULL)
-		return ;//really?? error message 
-	new_node = env_lstnew(new_key, new_value, new_full, h_v);
-	env_lstadd_back(env, new_node);
+	make_node(node, env, new_key, new_value);
 }

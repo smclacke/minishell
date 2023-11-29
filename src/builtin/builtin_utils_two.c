@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:27:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/29 16:06:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,27 @@ bool	check_args(t_parser *lst)
 		return (true);
 	}
 	return (false);
+}
+
+/**
+ * @param node node from parser linked list
+ * @param env environment linked list
+ * @param new_k char str containing new key
+ * @param new_v char str containing new value
+ * @brief makes all components for new node and adds to env linked list
+ * @todo check return here
+*/
+void	make_node(t_parser *node, t_env **env, char *n_k, char *n_v)
+{
+	int		h_v;
+	t_env	*new_node;
+	char	*new_full;
+
+	h_v = 0;
+	h_v = get_key_value(node->str, &n_k, &n_v);
+	new_full = ft_strdup(node->str);
+	if (new_full == NULL)
+		return ;//really?? error message 
+	new_node = env_lstnew(n_k, n_v, new_full, h_v);
+	env_lstadd_back(env, new_node);
 }
