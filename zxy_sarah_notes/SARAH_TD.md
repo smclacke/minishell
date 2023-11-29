@@ -44,11 +44,10 @@ SIGNALSSSSh
  ---> heredoc still weird
 
 EXPANSION
- ---> double quotes in dollar expansion
+
  ---> here_doc expansion *****
  ---> $? ***
  ---> leaks  :) :)
- ---> quote expansion, TEST, check, norm...
 
 EXIT AND ERRORS
  ---> fix all errors and exit codes
@@ -102,30 +101,14 @@ looks for expanded (dus the number) as dir
  ---> leaks if quotes aren't closed?
  ---> norm
 
-
-**Djoyke...**
-
- ---> outfile not created when only "> outfile"
  ---> echo | echo is leaky and segfaults
- ---> cd | cd is leaky af
- ---> export key start alpha not num... check this
+ ---> cd | cd 
 
- --->
- smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out
-bash: out: Permission denied
-
-smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > outthing
-Command 'echi' not found, did you mean:
-  command 'echo' from deb coreutils (8.32-4.1ubuntu1)
-Try: apt install <deb name>
-
-smclacke@f0r1s8:~/Desktop/minishell$ echi < Makefile > out >outer
-bash: out: Permission denied
 
 ===========================================
 ===========================================
 ===========================================
-HERE_DOC IS A BITCH
+HERE_DOC IS A BITCH NO THANK YOU
 
 smclacke@f0r3s17:~/Desktop/minishell$ << eof
 > '$USER'

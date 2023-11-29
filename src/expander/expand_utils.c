@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:50:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 17:27:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	get_check_value(t_expand *str, t_env **env)
 		{
 			len = ft_strlen(head->value);
 			str->env_val = ft_substr(head->value, 0, len);
-			str->dollar = NULL;
-			str->dollar = str->env_val;
+			if (!str->env_val)
+				return (1);
 			return (0);
 		}
 		head = head->next;

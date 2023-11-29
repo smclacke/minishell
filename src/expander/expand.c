@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:35:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/11/29 17:19:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /**
  * @todo comment
- * handle quotes without dollars, then handle any string with dollars
 */
 void	ft_expand(t_parser *tokens, t_env **env)
 {
