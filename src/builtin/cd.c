@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/30 19:42:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 19:58:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,9 @@ static void	access_change(t_env **env, t_parser *lst)
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
-	// if (too_many_args(lst) == true) // wrtkt niet! 
-	// 	return ;
+	if (too_many_args(lst) == true)
+		return ;
 	lst = lst->next;
-	// while (lst)
 	access_change(env, lst);
 }
 

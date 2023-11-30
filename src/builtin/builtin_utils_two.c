@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/30 19:41:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 19:57:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,17 @@ bool	too_many_args(t_parser *lst)
 
 	temp = lst;
 	temp = temp->next;
-	if (temp && temp->str)
+	while (temp)
 	{
-		dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
-		return (true);
+		if (temp->str)
+		{
+			if (temp->next && temp->next->str)
+			{
+				dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
+				return (true);
+			}
+		}
+		return (false);
 	}
 	return (false);
 }
