@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:40:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 18:25:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void	put_permission_error(t_parser *node)
  * @param o_d char string containing old working dir
  * @brief puts custom error message on STDOUT_FILENO
  * frees o_d and exits.
+ * @todo do i need to say that it doesnt exist
 */
-void	no_such_file(t_parser *lst, char *o_d)
+void	no_such_file(t_parser *lst)
 {
 	char	*error;
 
 	error = ft_strjoin("minishell: cd: ", lst->str);
-	free(o_d);
 	mini_error(error, errno);
 }

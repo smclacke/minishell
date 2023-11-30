@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 18:03:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 19:41:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,27 @@
  * @param env environment in linked list
  * @brief replaces the value of set key in the environment
 */
-void	reasing_value(char *str, t_env *env)
+void	reassign_values(char *cwd, t_env *node)
 {
-	char	*temp;
+	char	*key_equal;
+	char	*new_full;
 
-	temp = NULL;
-	temp = env->value;
-	env->value = str;
-	free(temp);
+	free(node->value);
+	node->value = ft_strdup(cwd);
+	if (!node->value)
+		mini_error("bababooey", 69); // ole shenanigans
+
+	key_equal = ft_strjoin(node->key, "=");
+	if (!key_equal)
+		mini_error("bababooey2", 69); // ole shenanigans
+
+	new_full = ft_strjoin(key_equal, cwd);
+	if (!key_equal)
+		mini_error("bababooey3", 69); // ole shenanigans
+
+	free(key_equal);
+	free(node->full);
+	node->full = new_full;
 }
 
 /**
@@ -70,16 +83,14 @@ int	list_iter(t_parser *lst)
  * @brief checks if arguments are more than one
  * throws error message if true.
 */
-bool	check_args(t_parser *lst)
+bool	too_many_args(t_parser *lst)
 {
-	int			i;
+	t_parser	*temp;
 
-	i = list_iter(lst);
-	if (i > 2)
+	temp = lst;
+	temp = temp->next;
+	if (temp && temp->str)
 	{
-		lst = lst->next;
-		if (lst->meta)
-			return (true);
 		dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
 		return (true);
 	}

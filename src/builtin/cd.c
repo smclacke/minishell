@@ -6,11 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 17:23:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 19:42:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+#include <limits.h>
 
 #define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
 #define NO_HOME "minishell: cd: HOME not set\n"
@@ -23,16 +24,15 @@
  * @brief assigns full and new to their values and adds them to
  * an empty list.
 */
-static void	reassign_oft_pwd(t_env **env, char *str)
+static void	reassign_old_pwd(t_env **env, char *cwd)
 {
 	char	*full;
 	t_env	*new;
 
-	full = ft_strjoin("OLDPWD=", str);
-	printf("full = [%s]\n", full);
+	full = ft_strjoin("OLDPWD=", cwd);
 	if (full == NULL)
 		mini_error("malloc", errno);
-	new = env_lstnew("OLDPWD", str, full, (*env)->has_value);
+	new = env_lstnew("OLDPWD", cwd, full, true);
 	if (new == NULL)
 		mini_error("malloc", errno);
 	env_lstadd_back(env, new);
@@ -42,63 +42,56 @@ static void	reassign_oft_pwd(t_env **env, char *str)
 
 /**
  * @param env environment in linked list
- * @param str string containing new working directory string
- * @brief loops through environment till PWD is found
- * changes env->value to value of str
-*/
-static void	change_current_dir(t_env **env, char *str)
-{
-	char	*key_equal;
-	char	*new_full;
-	t_env	*head;
-
-	key_equal = NULL;
-	new_full = NULL;
-	head = *env;
-	while (mini_strcmp ("PWD", head->key) != 0)
-	{
-		head = head->next;
-		if (head == NULL)
-			return ;
-	}
-	free(head->value);
-	head->value = str;
-	key_equal = ft_strjoin(head->key, "=");
-	new_full = ft_strjoin(key_equal, str);
-	free(key_equal);
-	free(head->full);
-	head->full = new_full;
-}
-
-/**
- * @param env environment in linked list
  * @param str string containing old working directory string
  * @brief loops through environment till OLDPWD is found
  * changes env->value to value of str
+ * @todo norm it
 */
-static void	change_old_dir(t_env **env, char *str)
+static void	update_env(t_env **env, char *cwd, char *id)
 {
-	char	*key_equal;
-	char	*new_full;
-	t_env	*head;
+	t_env	*node;
 
-	key_equal = NULL;
-	new_full = NULL;
-	head = *env;
-	if (!env)
-		reassign_oft_pwd(env, str);
-	while (mini_strcmp ("OLDPWD", head->key) != 0)
+	node = env[0];
+	while (node && mini_strcmp(id, node->key) != 0)
+		node = node->next;
+	if (node == NULL)
 	{
-		head = head->next;
-		if (head == NULL)
-			return ;
+		reassign_old_pwd(env, cwd);
+		return ;
 	}
-	reasing_value(str, head);
-	key_equal = ft_strjoin(head->key, "=");
-	new_full = ft_strjoin(key_equal, str);
-	free(key_equal);
-	free(head->full);
-	head->full = new_full;
+	reassign_values(cwd, node);
+}
+
+void	home_dir(t_parser *lst, t_env **env)
+{
+	char		*home_dir;
+
+	home_dir = ft_getenv(*env, "HOME");
+	if (home_dir == NULL)
+	{
+		if (!lst->next)
+		{
+			dprintf(STDERR_FILENO, NO_HOME);
+			return ;
+		}
+	}
+	if (chdir(home_dir) == -1)
+		no_such_file(lst);// fix this?
+}
+
+void	old_pwd(t_parser *lst, t_env **env)
+{
+	char		*old_pwd;
+
+	old_pwd = ft_getenv(*env, "OLDPWD");
+	if (old_pwd == NULL)
+	{
+		printf("yo OLDPWD NOT SET HAHAHAHHAHA\n");
+		return ;
+	}
+	lst->str = old_pwd;
+	if (chdir(lst->str) == -1)
+		no_such_file(lst);// fix this?
 }
 
 /**
@@ -110,62 +103,48 @@ static void	change_old_dir(t_env **env, char *str)
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
  * cd: no such file or directory: %s\n", lst->str
+ * @todo fix OLDPWD error message
 */
-static void	access_change(t_env **env, t_parser *lst, char *o_d, char *c_d)
+static void	access_change(t_env **env, t_parser *lst)
 {
-	char		*old_pwd;
+	char		cwd[PATH_MAX];
 
-	if (!lst->str)
-		return ;
-	else if (lst->str != NULL)
+	getcwd(cwd, PATH_MAX);
+	if (!lst || mini_strcmp(lst->str, "~") == 0)
 	{
-		if (mini_strcmp(lst->str, "-") == 0)
-		{
-			old_pwd = ft_getenv(*env, "OLDPWD");
-			lst->str = old_pwd;
-		}
-		if (access(lst->str, F_OK) == 0)
-		{
-			if (chdir(lst->str) == -1)
-				no_such_file(lst, o_d);
-			change_old_dir(env, o_d);
-			change_current_dir(env, getcwd(c_d, 0));
-		}
-		else
-		{
-			dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
-			free(o_d);
-		}
+		home_dir(lst, env);
 	}
+	else if (mini_strcmp(lst->str, "-") == 0)
+	{
+		old_pwd(lst, env);
+	}
+	else if (access(lst->str, F_OK) == 0)
+	{
+		if (chdir(lst->str) == -1)
+			no_such_file(lst);
+	}
+	else
+	{
+		dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
+		return ;
+	}
+	update_env(env, cwd, "OLDPWD");
+	getcwd(cwd, PATH_MAX);
+	update_env(env, cwd, "PWD");
 }
 
 /**
  * @param lst parsed linked list
  * @param env environment in linked list
  * @brief changes directory with an absolute and relative path as argument
+ * @todo cd ~ home, cd (null) home, cd - old_pwd
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
-	char		*old_work_dir;
-	char		*cwd;
-	char		*home_dir;
-
-	if (check_args(lst) == true)
-		return ;
-	home_dir = ft_getenv(*env, "HOME");
-	if (*env)
-	{
-		if (home_dir == NULL)
-		{
-			if (!lst->next)
-				dprintf(STDERR_FILENO, NO_HOME);
-		}
-		cwd = NULL;
-		old_work_dir = getcwd(cwd, 0);
-		while (lst)
-		{
-			access_change(env, lst, old_work_dir, cwd);
-			lst = lst->next;
-		}
-	}
+	// if (too_many_args(lst) == true) // wrtkt niet! 
+	// 	return ;
+	lst = lst->next;
+	// while (lst)
+	access_change(env, lst);
 }
+

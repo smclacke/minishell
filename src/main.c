@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 17:10:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 16:51:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,29 @@ static bool	is_space(char *input)
 		i++;
 	}
 	return (1);
+}
+
+/**
+ * @param env environment stored in linked list
+ * @brief prints linked list containing env key or value
+*/
+void	print_parser_list(t_parser *lst)
+{
+	int i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		printf("||\n");
+		printf("index = [%d], cmd = [%s]\n", i, lst->cmd);
+		printf("index = [%d], str = [%s]\n", i, lst->str);
+		printf("index = [%d], meta = [%s]\n", i, lst->meta);
+		printf("next node\n");
+		if (lst->next == NULL)
+			printf("NULL\n");
+		lst = lst->next;
+		i++;
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -58,7 +81,8 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-
+		
+		print_parser_list(tokens);
 		execute(&env, tokens);
 		free_tokens(tokens);
 
