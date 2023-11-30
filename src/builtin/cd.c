@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/30 19:58:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 20:58:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ void	home_dir(t_parser *lst, t_env **env)
 		}
 	}
 	if (chdir(home_dir) == -1)
+	{
 		no_such_file(lst);// fix this?
+	}
 }
 
 void	old_pwd(t_parser *lst, t_env **env)
@@ -91,7 +93,9 @@ void	old_pwd(t_parser *lst, t_env **env)
 	}
 	lst->str = old_pwd;
 	if (chdir(lst->str) == -1)
+	{
 		no_such_file(lst);// fix this?
+	}
 }
 
 /**
@@ -103,13 +107,14 @@ void	old_pwd(t_parser *lst, t_env **env)
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
  * cd: no such file or directory: %s\n", lst->str
- * @todo fix OLDPWD error message
+ * @todo fix cd | cd error message shouldnt display
 */
 static void	access_change(t_env **env, t_parser *lst)
 {
 	char		cwd[PATH_MAX];
 
 	getcwd(cwd, PATH_MAX);
+	dprintf(STDERR_FILENO, "[%p]\n", lst);
 	if (!lst || mini_strcmp(lst->str, "~") == 0)
 	{
 		home_dir(lst, env);
@@ -121,10 +126,13 @@ static void	access_change(t_env **env, t_parser *lst)
 	else if (access(lst->str, F_OK) == 0)
 	{
 		if (chdir(lst->str) == -1)
+		{
 			no_such_file(lst);
+		}
 	}
 	else
 	{
+		write(2, "here2\n", 7);
 		dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
 		return ;
 	}

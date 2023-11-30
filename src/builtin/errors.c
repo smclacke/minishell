@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/30 18:25:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 20:43:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	put_permission_error(t_parser *node)
 
 /**
  * @param lst node in linked list
- * @param o_d char string containing old working dir
  * @brief puts custom error message on STDOUT_FILENO
  * frees o_d and exits.
  * @todo do i need to say that it doesnt exist

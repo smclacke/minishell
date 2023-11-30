@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/30 19:57:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/11/30 20:34:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ bool	too_many_args(t_parser *lst)
 {
 	t_parser	*temp;
 
-	temp = lst;
-	temp = temp->next;
+	temp = lst->next;
 	while (temp)
 	{
 		if (temp->str)
