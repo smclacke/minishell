@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/01 17:50:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/01 20:05:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,17 @@ static bool	is_space(char *input)
 	return (1);
 }
 
-/**
- * @param env environment stored in linked list
- * @brief prints linked list containing env key or value
-*/
-void	print_parser_list(t_parser *lst)
+t_parser	*lexing(char *input)
 {
-	int i;
+	t_parser	*tokens;
 
-	i = 0;
-	while (lst != NULL)
-	{
-		printf("||\n");
-		printf("index = [%d], cmd = [%s]\n", i, lst->cmd);
-		printf("index = [%d], str = [%s]\n", i, lst->str);
-		printf("index = [%d], meta = [%s]\n", i, lst->meta);
-		printf("next node\n");
-		if (lst->next == NULL)
-			printf("NULL\n");
-		lst = lst->next;
-		i++;
-	}
+	if (!input)
+		exit(0);
+	if (!is_space(input))
+		add_history(input);
+	tokens = lexer(input);
+	free(input);
+	return (tokens);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -54,40 +44,30 @@ int	main(int argc, char **argv, char **envp)
 	char		*input;
 	t_parser	*tokens;
 	t_env		*env;
+	int			og_stdout;
+	int			og_stdin;
 
 
 	(void) argc;
 	(void) argv;
 	env = NULL;
 	env = env_list(envp, env);
-
-	int	og_stdout = dup(STDOUT_FILENO);
-	int	og_stdin = dup(STDIN_FILENO);
+	og_stdout = dup(STDOUT_FILENO);
+	og_stdin = dup(STDIN_FILENO);
 	while (1)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
-		if (!input)
-			exit(0);
-		if (!is_space(input))
-			add_history(input);
-
-
-		tokens = lexer(input);
-		free(input);
+		tokens = lexing(input);
 		if (!tokens)
 			continue ;
-
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		print_parser_list(tokens);
 		execute(&env, tokens);
 		free_tokens(tokens);
-
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
-
 	}
 	return (0);
 }
