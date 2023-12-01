@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/01 18:36:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	arg_check(t_parser *lst)
  * @param node parsed list
  * @brief exits the program and displays corresponding error number
  * @todo check for exitstatus line 68 if it's exit status from prev child process
+ * minishell: exit: 7767: positive numeric argument 255 or below required
+ * make: *** [Makefile:91: run] Error 255
 */
 void	ft_exit(t_parser *lst)
 {
@@ -62,6 +64,8 @@ void	ft_exit(t_parser *lst)
 
 	exit_status = 0;
 	status = 0;
+	if (lst->next && lst->next->meta)
+		return ;
 	if (!lst->next && lst->cmd)
 	{
 		write(STDOUT_FILENO, "exit\n", 5);

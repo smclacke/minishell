@@ -37,54 +37,6 @@
 
 4) 
 
-                    cd
-dreijans@f0r1s4:~$ cd Music Downloads | cat out
-bash: cd: too many arguments
-cat: out: No such file or directory
-dreijans@f0r1s4:~$ cd Music Downloads
-bash: cd: too many arguments
-dreijans@f0r1s4:~$ cd | cd
-dreijans@f0r1s4:~$ cd Music Downloads | cat out 
-bash: cd: too many arguments
-cat: out: No such file or directory
-dreijans@f0r1s4:~$ cd Music | cat out 
-cat: out: No such file or directory
-
-minibleh:cd | cd
-||
-index = [0], cmd = [cd]
-index = [0], str = [(null)]
-index = [0], meta = [(null)]
-next node
-||
-index = [1], cmd = [(null)]
-index = [1], str = [(null)]
-index = [1], meta = [|]
-next node
-||
-index = [2], cmd = [cd]
-index = [2], str = [(null)]
-index = [2], meta = [(null)]
-next node
-NULL
-minishell: cd: too many arguments
-
-=================================================================
-==1021805==ERROR: LeakSanitizer: detected memory leaks
-
-Direct leak of 41 byte(s) in 1 object(s) allocated from:
-    #0 0x49a5c9 in realloc (/home/dreijans/Documents/rank3/minishell/minishell+0x49a5c9)
-    #1 0x7f499987a9ac in getcwd io/../sysdeps/unix/sysv/linux/getcwd.c:86:8
-    #2 0x4d3e25 in ft_cd /home/dreijans/Documents/rank3/minishell/src/builtin/cd.c:165:18
-    #3 0x4d5a00 in do_builtin /home/dreijans/Documents/rank3/minishell/src/builtin/builtin_utils_one.c:40:3
-    #4 0x4d6e3c in mini_forks /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:99:3
-    #5 0x4d8dc3 in init_fork /home/dreijans/Documents/rank3/minishell/src/executor/execute_utils_two.c:56:3
-    #6 0x4d90ad in pipeline /home/dreijans/Documents/rank3/minishell/src/executor/execute_utils_two.c:100:4
-    #7 0x4d751f in build /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:130:2
-    #8 0x4d7452 in execute /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:151:2
-    #9 0x4cb680 in main /home/dreijans/Documents/rank3/minishell/src/main.c:86:3
-    #10 0x7f499978ed8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-
 SUMMARY: AddressSanitizer: 41 byte(s) leaked in 1 allocation(s).
 
                             unset
