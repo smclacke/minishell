@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/01 19:26:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/01 19:44:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,24 @@ static void	arg_check(t_parser *lst)
 }
 
 /**
- * @param node parsed list
+ * @param exit_status int containing exit status from previous child process
+ * @param status int containing exit status
+ * @brief exits the program and displays corresponding error number
+*/
+void	exit_with_stat(int exit_status, int status)
+{
+	write(STDOUT_FILENO, "exit\n", 5);
+	if (WIFEXITED(status))
+		exit_status = WEXITSTATUS(status);
+	exit(exit_status);
+}
+
+/**
+ * @param lst parsed list
  * @brief exits the program and displays corresponding error number
  * @todo check for exitstatus line 68 if it's exit status from prev child process
  * minishell: exit: 7767: positive numeric argument 255 or below required
  * make: *** [Makefile:91: run] Error 255
- * norm it
 */
 void	ft_exit(t_parser *lst)
 {
@@ -68,12 +80,7 @@ void	ft_exit(t_parser *lst)
 	if (lst->n_cmd != 1)
 		return ;
 	if (!lst->next && lst->cmd)
-	{
-		write(STDOUT_FILENO, "exit\n", 5);
-		if (WIFEXITED(status))
-			exit_status = WEXITSTATUS(status);//exit from prev child process
-		exit(exit_status);
-	}
+		exit_with_stat(exit_status, status);
 	lst = lst->next;
 	digit_check(lst);
 	arg_check(lst);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/01 18:23:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/01 19:35:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void	reassign_old_pwd(t_env **env, char *cwd)
  * @param str string containing old working directory string
  * @brief loops through environment till OLDPWD is found
  * changes env->value to value of str
- * @todo norm it
 */
 static void	update_env(t_env **env, char *cwd, char *id)
 {
