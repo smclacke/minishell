@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/30 20:58:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/01 18:07:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	home_dir(t_parser *lst, t_env **env)
 	}
 	if (chdir(home_dir) == -1)
 	{
+		write(2, "4\n", 2);
 		no_such_file(lst);// fix this?
 	}
 }
@@ -94,6 +95,7 @@ void	old_pwd(t_parser *lst, t_env **env)
 	lst->str = old_pwd;
 	if (chdir(lst->str) == -1)
 	{
+		write(2, "3\n", 2);
 		no_such_file(lst);// fix this?
 	}
 }
@@ -114,28 +116,17 @@ static void	access_change(t_env **env, t_parser *lst)
 	char		cwd[PATH_MAX];
 
 	getcwd(cwd, PATH_MAX);
-	dprintf(STDERR_FILENO, "[%p]\n", lst);
 	if (!lst || mini_strcmp(lst->str, "~") == 0)
-	{
 		home_dir(lst, env);
-	}
 	else if (mini_strcmp(lst->str, "-") == 0)
-	{
 		old_pwd(lst, env);
-	}
 	else if (access(lst->str, F_OK) == 0)
 	{
 		if (chdir(lst->str) == -1)
-		{
 			no_such_file(lst);
-		}
 	}
-	else
-	{
-		write(2, "here2\n", 7);
-		dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
-		return ;
-	}
+	else if (lst->str != NULL)
+		no_such_file(lst);
 	update_env(env, cwd, "OLDPWD");
 	getcwd(cwd, PATH_MAX);
 	update_env(env, cwd, "PWD");
