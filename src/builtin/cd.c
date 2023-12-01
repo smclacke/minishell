@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/01 18:07:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/01 18:23:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,12 @@ static void	update_env(t_env **env, char *cwd, char *id)
 	reassign_values(cwd, node);
 }
 
+/**
+ * @param lst parser linked list
+ * @param env environment in linked list
+ * @brief stores home directory and changes to it
+ * @todo do I need use no such file?
+*/
 void	home_dir(t_parser *lst, t_env **env)
 {
 	char		*home_dir;
@@ -76,12 +82,15 @@ void	home_dir(t_parser *lst, t_env **env)
 		}
 	}
 	if (chdir(home_dir) == -1)
-	{
-		write(2, "4\n", 2);
-		no_such_file(lst);// fix this?
-	}
+		no_such_file(lst);
 }
 
+/**
+ * @param lst parser linked list
+ * @param env environment in linked list
+ * @brief stores old working dir and changes to it
+ * @todo do I need use no such file?
+*/
 void	old_pwd(t_parser *lst, t_env **env)
 {
 	char		*old_pwd;
@@ -89,32 +98,30 @@ void	old_pwd(t_parser *lst, t_env **env)
 	old_pwd = ft_getenv(*env, "OLDPWD");
 	if (old_pwd == NULL)
 	{
-		printf("yo OLDPWD NOT SET HAHAHAHHAHA\n");
+		printf("minishell: cd: OLDPWD not set\n");
 		return ;
 	}
 	lst->str = old_pwd;
 	if (chdir(lst->str) == -1)
-	{
-		write(2, "3\n", 2);
-		no_such_file(lst);// fix this?
-	}
+		no_such_file(lst);
 }
 
 /**
- * @param lst environment in linked list
- * @param env parsed linked list
- * @param opwd string containing old working directory
- * @param cwd string containing new working directory
- * @brief checks acces of lst->str, changes directory
+ * @param lst parsed linked list
+ * @param env environment in linked list
+ * @brief changes directory with an absolute and relative path as argument
+ * checks access of lst->str, changes directory
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
- * cd: no such file or directory: %s\n", lst->str
- * @todo fix cd | cd error message shouldnt display
+ * @todo PATH_MAX not defined?
 */
-static void	access_change(t_env **env, t_parser *lst)
+void	ft_cd(t_parser *lst, t_env **env)
 {
 	char		cwd[PATH_MAX];
 
+	if (too_many_args(lst) == true)
+		return ;
+	lst = lst->next;
 	getcwd(cwd, PATH_MAX);
 	if (!lst || mini_strcmp(lst->str, "~") == 0)
 		home_dir(lst, env);
@@ -131,18 +138,3 @@ static void	access_change(t_env **env, t_parser *lst)
 	getcwd(cwd, PATH_MAX);
 	update_env(env, cwd, "PWD");
 }
-
-/**
- * @param lst parsed linked list
- * @param env environment in linked list
- * @brief changes directory with an absolute and relative path as argument
- * @todo cd ~ home, cd (null) home, cd - old_pwd
-*/
-void	ft_cd(t_parser *lst, t_env **env)
-{
-	if (too_many_args(lst) == true)
-		return ;
-	lst = lst->next;
-	access_change(env, lst);
-}
-
