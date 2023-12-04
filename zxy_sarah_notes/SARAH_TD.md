@@ -37,6 +37,10 @@ for in the future... don't change utils... ever.
 ===========================================
 ===========================================
 
+**
+heredoc limiter will be expanded when it shouldnt be...
+
+
 **TO DO**
 
 SIGNALSSSSh 

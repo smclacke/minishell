@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/15 14:58:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 08:03:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	redirect_heredoc(t_parser *lst)
 */
 static void	write_to_file(char *read_line, int file)
 {
+	// dont expand dollar but remove quotes
+	// expand
+	// if quoted limited.. different expansion
 	write(file, read_line, ft_strlen(read_line));
 	write(file, "\n", 1);
 	free(read_line);
