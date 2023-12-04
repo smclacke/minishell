@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 12:48:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:10:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef enum e_exit
 // 	int				stat;
 // 	enum e_exit		code;
 // }				t_estat;
+
 
 /**
  * @brief	specifies the different variable types of tokens from the

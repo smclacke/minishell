@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 15:16:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 15:50:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	ft_expand(t_parser *tokens, t_env **env)
 		expand_dollar(lst, env, str);
 		lst = lst->next;
 	}
+	tokens = lst;
 	free(str);
+	free(lst);
 }
