@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 13:22:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 15:25:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	first_bit(t_expand *str, char *input)
  * @todo fix this, leaks, norm, test test test...
  * write version (or have func for here_doc and only edit that bit)
 */
-static char	*dollar(t_expand *str, t_env **env)
+static void	dollar(t_expand *str, t_env **env)
 {
 	int		i;
 
@@ -88,7 +88,8 @@ static char	*dollar(t_expand *str, t_env **env)
 				i = save_extra_string(str, str->input, i);
 		}
 	}
-	return (str->expanded);
+	if (!str->expanded)
+		str->expanded = ft_strdup("");
 }
 
 /**
@@ -100,14 +101,16 @@ void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 	str->input = set_expand_string(lst, str);
 	if (str->sign == 1 || str->sign == 2 || str->sign == 3)
 	{
-		str->expanded = dollar(str, env);
+		dollar(str, env);
 		if (!str->expanded)
-			str->expanded = "";
+			str->expanded = ft_strdup("");
 		if (str->sign == 1)
-			lst->cmd = str->expanded;
+			lst->cmd = ft_strdup(str->expanded);
 		else if (str->sign == 2)
-			lst->str = str->expanded;
+			lst->str = ft_strdup(str->expanded);
 		else if (str->sign == 3)
-			lst->file = str->expanded;
+			lst->file = ft_strdup(str->expanded);
 	}
+	// free(str->input);
+	free(str->expanded);
 }

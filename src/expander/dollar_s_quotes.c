@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 14:16:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 15:05:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,45 +17,49 @@ int	squote_bit(t_expand *str, char *input, int i)
 	int		start;
 	int		end;
 	char	*tmp;
+	char	*tmp_input;
 	
 	start = i;
 	tmp = str->expanded;
-	while (input[i])
+	tmp_input = input;
+	while (tmp_input[i])
 	{
-		if (ft_issquote(input[i]))
+		if (ft_issquote(tmp_input[i]))
 		{
 			end = i - start;
-			str->s_quote = ft_substr(input, start, end);
+			str->s_quote = ft_substr(tmp_input, start, end);
 			if (!str->s_quote)
 				mini_error("squote", errno);
-			if (!str->expanded)
-				str->expanded = ft_strdup(str->s_quote);
-			else
+			if (str->expanded)
 				str->expanded = ft_strjoin(tmp, str->s_quote);
+			else
+				str->expanded = ft_strdup(str->s_quote);
+			if (!str->expanded)
+				mini_error("squote", errno);
 			free(tmp);
 			free(str->s_quote);
 			return (i + 1);
 		}
 		i++;
 	}
-	free(str->s_quote);
+	free(str);
 	return (i);
 }
 
-static void	handle_dq(t_expand *str, t_env **env)
-{	
-	(void)  env; // probs dont need you
+// static void	handle_dq(t_expand *str, t_env **env)
+// {	
+// 	(void)  env; // probs dont need you
 
-	str->exit->exit_str = ft_itoa(str->exit->exit_code);
-	str->expanded = ft_strjoin(str->expanded, str->exit->exit_str);
-}
+// 	str->exit->exit_str = ft_itoa(str->exit->exit_code);
+// 	str->expanded = ft_strjoin(str->expanded, str->exit->exit_str);
+// }
 
 /**
  * @todo make it do the thing, norm it, leak proof it, comment it, error it
 */
 void	dollar_expand(t_expand *str, t_env **env)
 {
-	char	*tmp;
+	char		*tmp;
 
 	tmp = str->expanded;
 	str->tmp = ft_strtrim(str->dollar, "$");
@@ -63,17 +67,21 @@ void	dollar_expand(t_expand *str, t_env **env)
 	if (!str->tmp)
 		return ;
 	str->dollar = str->tmp;
-	if (ft_strcmp(str->dollar, "?") == 0)
-		handle_dq(str, env);
+	// if (ft_strcmp(str->dollar, "?") == 0)
+	// 	handle_dq(str, env);
 	if (get_check_value(str, env) == 0)
 	{
-		if (!str->expanded)
-			str->expanded = ft_strdup(str->env_val);
-		else
+		if (str->env_val)
 		{
-			str->expanded = ft_strjoin(tmp, str->env_val);
+			if (str->expanded)
+				str->expanded = ft_strjoin(tmp, str->env_val);
+			else
+				str->expanded = ft_strdup(str->env_val);
+			free(str->env_val);
 			free(tmp);
 		}
+		if (!str->expanded)
+			mini_error("dolllarrrr", errno);
 	}
 	free(str->tmp);
 }
