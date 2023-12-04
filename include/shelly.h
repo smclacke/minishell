@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 10:08:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 10:55:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int				get_check_value(t_expand *str, t_env **env);
 char			*set_expand_string(t_parser *lst, t_expand *str);
 
 //------------------ expand -------------------//
+void			free_expand_struct(t_expand *str);
 void			ft_expand(t_parser *lst, t_env **env);
 
 //------------------ signals ------------------//

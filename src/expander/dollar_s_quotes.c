@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 10:33:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 11:28:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,26 @@ int	squote_bit(t_expand *str, char *input, int i)
 		{
 			end = i - start;
 			str->s_quote = ft_substr(input, start, end);
-			str->expanded = ft_strjoin(str->expanded, str->s_quote);
-			free(str->s_quote); // check
+			if (!str->s_quote)
+				return (0);
+			if (!str->expanded)
+				str->expanded = str->s_quote;
+			else
+				str->expanded = ft_strjoin(str->expanded, str->s_quote);
 			return (i + 1);
 		}
 		i++;
 	}
-	return (i); // error
+	free(str->s_quote);
+	return (i);
+}
+
+static void	handle_dq(t_expand *str, t_env **env)
+{	
+	(void)  env; // probs dont need you
+
+	str->exit->exit_str = ft_itoa(str->exit->exit_code);
+	str->expanded = ft_strjoin(str->expanded, str->exit->exit_str);
 }
 
 /**
@@ -43,6 +56,8 @@ void	dollar_expand(t_expand *str, t_env **env)
 	if (!str->tmp)
 		return ;
 	str->dollar = str->tmp;
+	if (ft_strcmp(str->dollar, "?") == 0)
+		handle_dq(str, env);
 	if (!get_check_value(str, env))
 	{
 		if (!str->expanded)
@@ -50,7 +65,7 @@ void	dollar_expand(t_expand *str, t_env **env)
 		else
 			str->expanded = ft_strjoin(str->expanded, str->env_val);
 	}
-	free(str->tmp);
+	// free(str->tmp);
 }
 
 /**
@@ -68,6 +83,6 @@ int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 	end = i - start;
 	str->dollar = ft_substr(input, start, end);
 	dollar_expand(str, env);
-	str->env_val = NULL;
+	// str->env_val = NULL;
 	return (i);
 }

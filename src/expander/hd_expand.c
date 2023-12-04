@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/04 09:29:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 10:42:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 11:04:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ char		*hd_expand(t_env **env, char *read_line)
 	}
 	read_line = str->expanded;
 	free(str);
+	// free_expand_struct(str);
 	return (read_line);
 }

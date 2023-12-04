@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 10:32:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 10:58:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	first_str_bit(t_expand *str, char *input)
 			return (0);
 		str->tmp = ft_substr(input, 0, i);
 		str->expanded = ft_strjoin(str->expanded, str->tmp);
-		free(str->tmp);
+		// free(str->tmp);
 		if (!str->expanded)
 			return (0);
 	}

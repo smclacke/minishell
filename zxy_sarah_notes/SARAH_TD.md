@@ -44,8 +44,6 @@ SIGNALSSSSh
  ---> heredoc still weird
 
 EXPANSION
-
- ---> here_doc expansion *****
  ---> $? ***
  ---> leaks  :) :)
 
@@ -53,10 +51,6 @@ EXIT AND ERRORS
  ---> fix all errors and exit codes
 		which exit code for malloc failure? + error message?
 		func(s) with template to handle all... keep it uniform, what we doing with exit codes?
-
-OTHERRRR
- ---> there's a leak in the parser (testing here_Doc signals)
-
 
 ***************************************************************************
 ***************************************************************************
@@ -75,6 +69,117 @@ opens file '1' ...
 ***************************************************************************
 ***************************************************************************
 ***************************************************************************
+LEAKKKKSSSSSSS
+
+
+minibleh:echo '$USER'
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+hd_limit = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = '$USER'
+hd_limit = (null)
+<!-- $USER -->
+minibleh:exit
+[0]	 cmd = exit	file = (null)	meta = (null)	str = (null)
+hd_limit = (null)
+exit
+
+Direct leak of 6 byte(s) in 1 object(s) allocated from:
+	malloc (/home/smclacke/Desktop/minishell/minishell+0x49a2ad)
+    #1 0x4de6de in ft_substr (/home/smclacke/Desktop/minishell/minishell+0x4de6de)
+    #2 0x4d2fb6 in squote_bit /home/smclacke/Desktop/minishell/src/expander/dollar_s_quotes.c:26:19
+    #3 0x4d2a6b in dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:74:8
+    #4 0x4d24cb in expand_dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:97:19
+    #5 0x4d00c6 in ft_expand /home/smclacke/Desktop/minishell/src/expander/expand.c:53:3
+    #6 0x4d82b1 in execute /home/smclacke/Desktop/minishell/src/executor/execute.c:150:2
+    #7 0x4cb4e0 in main /home/smclacke/Desktop/minishell/src/main.c:61:3
+    #8 0x7f7232160d8f  (/home/smclacke/.capt/root/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+
+SUMMARY: AddressSanitizer: 6 byte(s) leaked in 1 allocation(s).
+make: [Makefile:92: run] Error 1
+
+=================================================================
+
+/**
+ * THIS DOESNT LEAK
+ * minibleh:echo $USE
+dollar = USE
+env_val = (null)
+
+minibleh:echo $USER
+dollar = USER
+env_val = smclacke
+smclacke
+minibleh:exit
+exit
+
+BUT
+ONLY echo $USER DOES??!?
+
+*/
+
+=================================================================
+minibleh:echo $USe
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+hd_limit = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = $USe
+hd_limit = (null)
+
+minibleh:exit
+[0]	 cmd = exit	file = (null)	meta = (null)	str = (null)
+hd_limit = (null)
+exit
+
+==2360819==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 4 byte(s) in 1 object(s) allocated from:
+    #0 0x49a2ad in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a2ad)
+    #1 0x4de6de in ft_substr (/home/smclacke/Desktop/minishell/minishell+0x4de6de)
+    #2 0x4de7cf in ft_strtrim (/home/smclacke/Desktop/minishell/minishell+0x4de7cf)
+    #3 0x4d325e in dollar_expand /home/smclacke/Desktop/minishell/src/expander/dollar_s_quotes.c:46:13
+    #4 0x4d3628 in dollar_bit /home/smclacke/Desktop/minishell/src/expander/dollar_s_quotes.c:75:2
+    #5 0x4d299f in dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:71:8
+    #6 0x4d24cb in expand_dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:97:19
+    #7 0x4d00c6 in ft_expand /home/smclacke/Desktop/minishell/src/expander/expand.c:53:3
+    #8 0x4d82b1 in execute /home/smclacke/Desktop/minishell/src/executor/execute.c:150:2
+    #9 0x4cb4e0 in main /home/smclacke/Desktop/minishell/src/main.c:61:3
+    #10 0x7fd4338aad8f  (/home/smclacke/.capt/root/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+
+SUMMARY: AddressSanitizer: 4 byte(s) leaked in 1 allocation(s).
+make: *** [Makefile:92: run] Error 1
+
+
+=================================================================
+
+LOADS OF LEAKS
+JUST SAVED ONE HERE FOR NOW
+
+minibleh:echo "$USER'things'$LESS"
+[0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
+hd_limit = (null)
+[1]	 cmd = (null)	file = (null)	meta = (null)	str = "$USER'things'$LESS"
+hd_limit = (null)
+smclacke'things'-R
+minibleh:exit
+[0]	 cmd = exit	file = (null)	meta = (null)	str = (null)
+hd_limit = (null)
+exit
+
+
+Direct leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x49a2ad in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a2ad)
+    #1 0x4de6de in ft_substr (/home/smclacke/Desktop/minishell/minishell+0x4de6de)
+    #2 0x4d2044 in save_extra_string /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:29:16
+    #3 0x4d3afb in handle_double /home/smclacke/Desktop/minishell/src/expander/dd_quotes.c:52:8
+    #4 0x4d37e5 in dquote_bit /home/smclacke/Desktop/minishell/src/expander/dd_quotes.c:71:4
+    #5 0x4d2ccf in dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:80:8
+    #6 0x4d24cb in expand_dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:97:19
+    #7 0x4d00c6 in ft_expand /home/smclacke/Desktop/minishell/src/expander/expand.c:53:3
+    #8 0x4d82b1 in execute /home/smclacke/Desktop/minishell/src/executor/execute.c:150:2
+    #9 0x4cb4e0 in main /home/smclacke/Desktop/minishell/src/main.c:61:3
+    #10 0x7f6930097d8f  (/home/smclacke/.capt/root/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+
+SUMMARY: AddressSanitizer: 110 byte(s) leaked in 10 allocation(s).
+make: *** [Makefile:92: run] Error 1
 
 ===========================================
 ===========================================

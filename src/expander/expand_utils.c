@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 18:27:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 11:12:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,6 @@ int	is_dollar_or_quote(int c)
  * if there is no value it free's the comp_str and env_value.
  * @return 1 if there is no value, 0 if value is found and assigned
  * @todo triple check protection, norm and sooo when less tired
-*/
-
-/**
- * THIS DOESNT LEAK
- * minibleh:echo $USE
-dollar = USE
-env_val = (null)
-
-minibleh:echo $USER
-dollar = USER
-env_val = smclacke
-smclacke
-minibleh:exit
-exit
-
-BUT
-ONLY echo $USER DOES??!?
-
 */
 int	get_check_value(t_expand *str, t_env **env)
 {
