@@ -6,10 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 18:19:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:27:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -57,14 +56,14 @@ typedef enum e_exit
 	E_FATAL_SIGNAL = 128,
 	E_CTRL_C = 130,
 	E_UNKNOWN = 225
-}					t_exit;
+}						t_exit;
 
-/**
- * @brief	struct containing variables needed for exit
- * @param	stat: int carrying exit status throughout program 
- * @param	code: enums to set exitcode at different
- * 			stages of process, saved to pass through the program
-*/
+// /**
+//  * @brief	struct containing variables needed for exit
+//  * @param	stat: int carrying exit status throughout program 
+//  * @param	code: enums to set exitcode at different
+//  * 			stages of process, saved to pass through the program
+// */
 // typedef struct s_estat
 // {
 // 	int				stat;
@@ -105,7 +104,7 @@ typedef struct s_parser
 	enum e_exit			exit_code;
 	int					exit_stat;
 	struct s_parser		*next;
-}				t_parser;
+}							t_parser;
 
 /**
  * comment on the way
@@ -123,7 +122,7 @@ typedef struct s_expand
 	char				*h_d;
 	int					sign;
 	struct s_parser		*exit;
-}		t_expand;
+}							t_expand;
 
 /**
  * @brief	linked list containing the environment
@@ -158,15 +157,15 @@ typedef struct s_env
 */
 typedef struct s_execute
 {
-	pid_t			fork_pid;
-	int				pipe_left[2];
-	int				pipe_right[2];
-	char			**path;
-	char			**env_array;
-	int				in;
-	int				out;
-	int				count;
-	bool			error;
-}						t_execute;
+	pid_t				fork_pid;
+	int					pipe_left[2];
+	int					pipe_right[2];
+	char				**path;
+	char				**env_array;
+	int					in;
+	int					out;
+	int					count;
+	bool				error;
+}							t_execute;
 
 #endif
