@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 15:33:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 10:32:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	first_str_bit(t_expand *str, char *input)
 		i++;
 	if (is_dollar_or_quote(input[i]))
 	{
+		if (i == 0)
+			return (0);
 		str->tmp = ft_substr(input, 0, i);
 		str->expanded = ft_strjoin(str->expanded, str->tmp);
 		free(str->tmp);
