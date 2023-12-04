@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/28 21:19:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/01 19:26:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static void	mini_remove_env(char *str, t_env **env)
 */
 void	ft_unset(t_parser *node, t_env **env)
 {
-
+	if (node->n_cmd != 1)
+		return ;
 	if (word_check(node) == 1)
 		return ;
 	if (node != NULL)

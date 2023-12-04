@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:30:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/01 19:33:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_export(t_parser *node, t_env **env)
 
 	new_key = NULL;
 	new_value = NULL;
-	if (!node->next)
+	if (!node->next || node->n_cmd != 1)
 	{
 		export_print(*env);
 		return ;
