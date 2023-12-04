@@ -40,31 +40,16 @@ for in the future... don't change utils... ever.
 **TO DO**
 
 SIGNALSSSSh 
- ---> exit_codes
- ---> heredoc still weird
+ ---> heredoc still weird, two prompt with signal
 
 EXPANSION
- ---> $? ***
+ ---> $? ***, test once exit codes are good
  ---> leaks  :) :)
 
 EXIT AND ERRORS
  ---> fix all errors and exit codes
 		which exit code for malloc failure? + error message?
 		func(s) with template to handle all... keep it uniform, what we doing with exit codes?
-
-***************************************************************************
-***************************************************************************
-***************************************************************************
-
-$? in export is expanded as expected in/out quotes
-export dol=$?
-$dol
-0: command not found
-
-touch $?
-opens file '0'
-if '0' exists (?)
-opens file '1' ...
 
 ***************************************************************************
 ***************************************************************************
@@ -184,6 +169,35 @@ make: *** [Makefile:92: run] Error 1
 ===========================================
 ===========================================
 ===========================================
+
+minibleh:echo hi
+hi
+minibleh:cd
+minibleh:cd ..
+minibleh:cd minishell/
+minibleh:pwd
+Current working directory: /home/smclacke/Desktop/minishell
+minibleh:exit
+exit
+
+==2372431==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 33 byte(s) in 1 object(s) allocated from:
+    #0 0x49a5c9 in realloc (/home/smclacke/Desktop/minishell/minishell+0x49a5c9)
+    #1 0x7f4afc84796c in getcwd (/home/smclacke/.capt/root/lib/x86_64-linux-gnu/libc.so.6+0x11596c)
+    #2 0x4d4b4d in ft_cd /home/smclacke/Desktop/minishell/src/builtin/cd.c:166:18
+    #3 0x4d6720 in do_builtin /home/smclacke/Desktop/minishell/src/builtin/builtin_utils_one.c:40:3
+    #4 0x4d9798 in single_builtin_cmd /home/smclacke/Desktop/minishell/src/executor/execute_utils_two.c:36:4
+    #5 0x4d821f in build /home/smclacke/Desktop/minishell/src/executor/execute.c:128:6
+    #6 0x4d8172 in execute /home/smclacke/Desktop/minishell/src/executor/execute.c:151:2
+    #7 0x4cb4d7 in main /home/smclacke/Desktop/minishell/src/main.c:61:3
+    #8 0x7f4afc75bd8f  (/home/smclacke/.capt/root/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+
+SUMMARY: AddressSanitizer: 33 byte(s) leaked in 1 allocation(s).
+make: *** [Makefile:92: run] Error 1
+
+=================================================================
+
 
 ---------------------------------------------------------------------------------
 

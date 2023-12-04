@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 11:28:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 12:30:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	dollar_expand(t_expand *str, t_env **env)
 		else
 			str->expanded = ft_strjoin(str->expanded, str->env_val);
 	}
-	// free(str->tmp);
+	free(str->tmp);
 }
 
 /**
@@ -83,6 +83,5 @@ int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 	end = i - start;
 	str->dollar = ft_substr(input, start, end);
 	dollar_expand(str, env);
-	// str->env_val = NULL;
 	return (i);
 }
