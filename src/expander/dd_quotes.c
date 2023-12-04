@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:53:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:56:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	first_str_bit(t_expand *str, char *input)
 		free(str->tmp);
 		if (!str->expanded)
 			return (0);
-			// mini_error("dquote", errno);
 	}
 	return (i);
 }
@@ -50,7 +49,7 @@ static int	dollar_double(t_expand *str, char *input, t_env **env, int i)
 	str->dollar = ft_substr(input, start, end);
 	dollar_expand(str, env);
 	if (!str->expanded)
-		mini_error("dquote", errno);
+		return (ERROR);
 	return (i);
 }
 
@@ -71,13 +70,13 @@ static void	handle_double(t_expand *str, char *input, t_env **env)
 			{
 				str->expanded = ft_strjoin(str->expanded, SINGLE_Q);
 				if (!str->expanded)
-					mini_error("oh no", errno);
+					return ;
 			}
 			else
 			{
 				str->expanded = ft_strdup(SINGLE_Q);
 				if (!str->expanded)
-					mini_error("oh no", errno);
+					return ;
 			}
 			i++;
 		}

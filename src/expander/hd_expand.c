@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/04 09:29:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:53:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:57:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ char		*hd_expand(t_env **env, char *read_line)
 			end = i - start;
 			str->string = ft_substr(read_line, start, end);
 			if (!str->string)
-				mini_error("poo", errno);
+				return (NULL);
 			if (str->expanded)
 			{
 				str->expanded = ft_strjoin(str->expanded, str->string);
 				if (!str->expanded)
-					mini_error("oh no", errno);
+					return (NULL);
 			}
 			else
 			{
 				str->expanded = ft_strdup(str->string);
 				if (!str->expanded)
-					mini_error("oh no", errno);
+					return (NULL);
 			}
 		}
 	}
