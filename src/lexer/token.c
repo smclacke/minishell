@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 19:20:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 14:50:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ static int	amount_tokens(char *input)
  * @param	input from the command line
  * @param	len length, desired section of input str
  * @return	token string to add to the array of tokens
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 static char	*split_tokens(char *input, int len)
 {
@@ -91,7 +93,8 @@ static char	*split_tokens(char *input, int len)
 		return (NULL);
 	token = ft_substr(input, 0, len);
 	if (!token)
-		mini_error("general: split_tokens()", E_GENERAL);
+		// mini_error("general: split_tokens()", E_GENERAL);
+		return (0);
 	input += len;
 	return (token);
 }
@@ -103,6 +106,8 @@ static char	*split_tokens(char *input, int len)
  * 			on spaces and meta characters
  * @param	input from the command line
  * @return	array of strs to be tokenized
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 static char	**parser_split(char *input)
 {
@@ -118,7 +123,8 @@ static char	**parser_split(char *input)
 	no_tokens = amount_tokens(input);
 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 	if (!array)
-		mini_error("malloc error: parser_split()", E_MALLOC);
+		// mini_error("malloc error: parser_split()", E_MALLOC);
+		return (0);
 	while (i < no_tokens)
 	{
 		start = start_token(input, (start + len));
@@ -135,6 +141,8 @@ static char	**parser_split(char *input)
  * @param	input from the command line
  * @return	2D array of separated strings made from the input
  * 			ready to be passed into the parser struct list of tokens
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 char	**parse_input(char *input)
 {
@@ -142,6 +150,7 @@ char	**parse_input(char *input)
 
 	array = parser_split(input);
 	if (!array)
-		mini_error("general: parse_input()", E_GENERAL);
+		// mini_error("general: parse_input()", E_GENERAL);
+		return (0);
 	return (array);
 }

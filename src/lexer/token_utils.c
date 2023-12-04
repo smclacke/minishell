@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 17:31:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 14:51:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ char	*which_quote(char *input)
 	return (0);
 }
 
+/**
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
+*/
 int	next_quote(char *input, char c)
 {
 	int	i;
@@ -62,6 +66,7 @@ int	next_quote(char *input, char c)
 	while (input[i] && input[i] != c)
 		i++;
 	if (input[i] != c)
-		mini_error("unclosed quotes", E_SYNTAX);
+		// mini_error("unclosed quotes", E_SYNTAX);
+		return (0);
 	return (i);
 }

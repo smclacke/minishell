@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/30 19:20:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:36:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,8 @@ void			env_lstadd_back(t_env **lst, t_env *new);
 void			print_list(t_env *env);
 void			print_list_key(t_env *env);
 void			print_list_value(t_env *env);
-char			**list_to_string(t_env *env);
+// char			**list_to_string(t_env *env);
+char			**list_to_string(t_env *env, t_parser *lst);
 void			free_env(t_env **lst);
 char			*get_full(char *str);
 
@@ -156,12 +157,14 @@ void			put_custom_error(t_parser *node, char *cmd);
 void			ft_echo(t_parser *lst);
 void			ft_env(t_env *env);
 void			ft_exit(t_parser *lst);
-void			ft_pwd(void);
+// void			ft_pwd(void);
+void			ft_pwd(t_parser *head);
 void			ft_export(t_parser *lst, t_env **env);
 void			make_node(t_parser *node, t_env **env, char *n_k, char *n_v);
 void			replace_str(t_env *head, t_parser *node, char *n_k, char *n_v);
 void			ft_unset(t_parser *lst, t_env **env);
-void			reassign_values(char *cwd, t_env *node);
+// void			reassign_values(char *cwd, t_env *node);
+void			reassign_values(char *cwd, t_env *node, t_parser *head);
 
 //----Executor----//
 void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
@@ -170,19 +173,26 @@ void			execute(t_env **env, t_parser *list);
 void			init_execute_struct(t_execute *data);
 bool			check_redirect(t_parser *node);
 void			free_data(t_execute *data);
-void			close_all(t_execute *data);
-void			close_between(t_execute *data);
-void			init_pipe(int i, int count, t_execute *data);
-void			init_pipes_child(t_execute *data);
-void			init_fork(t_parser *lst, t_env **env, t_execute *data);
+// void			close_all(t_execute *data);
+void			close_all(t_execute *data, t_parser *lst);
+// void			close_between(t_execute *data);
+void			close_between(t_execute *data, t_parser *lst);
+// void			init_pipe(int i, int count, t_execute *data);
+void			init_pipe(int i, int count, t_execute *data, t_parser *lst);
+// void			init_pipes_child(t_execute *data);
+void			init_pipes_child(t_execute *data, t_parser *lst);
+// void			init_fork(t_parser *lst, t_env **env, t_execute *data);
+void			init_fork(t_parser *lst, t_execute *data);
 bool			single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data);
-void			pipeline(t_parser *lst, t_env **env, t_execute *data);
+// void			pipeline(t_parser *lst, t_env **env, t_execute *data);
+void			pipeline(t_parser *lst, t_execute *data);
 char			**get_argv(t_parser *lst);
 void			put_execute_error(t_parser *node);
 void			put_permission_error(t_parser *node);
 
 //----Utils----//
-void			mini_error(char *string, int error);
+// void			mini_error(char *string, int error);
+void			mini_error(char *error, char *exit_enum, t_parser *lst);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
 void			free_strs(char *str, char *str2);

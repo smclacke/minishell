@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:55:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:35:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks environment to find PATH put it in temp_path
  * split temp_path into 2d array and put it in the struct data->path
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
-static bool	parse_path(t_env *env, t_execute *data)
+// static bool	parse_path(t_env *env, t_execute *data)
+static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 {
 	char	*temp_path;
 
@@ -29,13 +32,16 @@ static bool	parse_path(t_env *env, t_execute *data)
 		{
 			temp_path = ft_substr(env->value, 0, ft_strlen(env->value));
 			if (temp_path == NULL)
-				mini_error ("malloc", errno);
+				mini_error ("", "E_MALLOC", node);
+				// mini_error ("malloc", errno);
 			data->path = ft_split(temp_path, ':');
 			if (data->path == NULL)
-				mini_error ("malloc", errno);
+				mini_error ("", "E_MALLOC", node);
+				// mini_error ("malloc", errno);
 			free (temp_path);
 			if (data->path == NULL)
-				mini_error ("malloc", errno);
+				mini_error ("", "E_MALLOC", node);
+				// mini_error ("malloc", errno);
 			return (true);
 		}
 		env = env->next;
@@ -48,6 +54,8 @@ static bool	parse_path(t_env *env, t_execute *data)
  * @param node noded from parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks is command has access
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
@@ -56,16 +64,18 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	int		i;
 
 	i = 0;
-	if (!absolute_check(node) && parse_path(env, data))
+	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
 		{
 			command = ft_strjoin("/", node->cmd);
 			if (command == NULL)
-				mini_error("malloc", errno);
+				mini_error ("", "E_MALLOC", node);
+				// mini_error("malloc", errno);
 			ok_path = ft_strjoin(data->path[i], command);
 			if (command == NULL)
-				mini_error("malloc", errno);
+				mini_error ("", "E_MALLOC", node);
+				// mini_error("malloc", errno);
 			free(command);
 			if (access(ok_path, F_OK) == 0)
 				return (ok_path);
@@ -85,12 +95,15 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @brief checks parser input for executable and executes with execve
  *  replace exit int with the existatus global we pass on
  * norminette
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
 
-	init_pipes_child(data);
+	// init_pipes_child(data);
+	init_pipes_child(data, lst);
 	redirect(lst, data);
 	if (data->error == false)
 		exit (0);
@@ -107,9 +120,11 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		put_permission_error(lst);
 		exit (0);
 	}
-	data->env_array = list_to_string(*env);
+	// data->env_array = list_to_string(*env);
+	data->env_array = list_to_string(*env, lst);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
-		mini_error("execve", errno);
+		mini_error ("execve", "E_GENERAL", lst);
+		// mini_error("execve", errno);
 	exit (0);
 }
 
@@ -119,16 +134,21 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief determines how many times needs to fork
  * pipes and makes child process
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
 	if (!lst)
-		mini_error("list", errno);
+		mini_error ("", "E_GENERAL", lst);
+		// mini_error("list", errno);
 	init_heredoc(lst);
 	if (single_builtin_cmd(lst, env, data) == true)
 		return ;
-	pipeline(lst, env, data);
-	close_all(data);
+	// pipeline(lst, env, data);
+	pipeline(lst, data);
+	// close_all(data);
+	close_all(data, lst);
 	waitpid(data->fork_pid, NULL, 0);
 	while (wait(NULL) != -1)
 		(void)NULL;
@@ -138,6 +158,8 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
  * @param env environment linked list
  * @param lst linked list parsed
  * @brief calls functions needed to start executing process
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 void	execute(t_env **env, t_parser *lst)
 {
@@ -145,7 +167,8 @@ void	execute(t_env **env, t_parser *lst)
 
 	data = malloc(sizeof(t_execute));
 	if (data == NULL)
-		mini_error("malloc data", errno);
+		mini_error ("execve", "E_GENERAL", lst);
+		// mini_error("malloc data", errno);
 	init_execute_struct(data);
 	ft_expand(lst, env);
 	build(lst, env, data);

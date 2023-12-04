@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/01 20:05:46 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 12:45:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	main(int argc, char **argv, char **envp)
 	t_env		*env;
 	int			og_stdout;
 	int			og_stdin;
-
 
 	(void) argc;
 	(void) argv;

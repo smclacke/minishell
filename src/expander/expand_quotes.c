@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   quotes.c                                           :+:    :+:            */
+/*   expand_quotes.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 21:58:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 14:58:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 /**
  * @todo errors NORMMMMMMMMM
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 
 static void	remove_quotes(char *str)
@@ -30,7 +32,8 @@ static void	remove_quotes(char *str)
 	len = (ft_strlen(str) - 2);
 	new = (char *)malloc(sizeof(char) * (len + 1));
 	if (!new)
-		mini_error("malloc noped", errno);
+		// mini_error("malloc noped", errno);
+		return ;
 	while (str[i])
 	{
 		while (str[i] && !ft_isquote(str[i]))

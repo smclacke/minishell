@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 17:32:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 14:52:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 
 /**
  * @todo check tmp line 49? and new_list again 58?
+ *		 norm proof, djoyke changed some things regarding mini_error
+ * 		 parser is not made yet so can't use mini_error function
 */
 static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list, char *meta)
 {
@@ -47,7 +49,8 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list, char *meta)
 	new_list = add_new_meta(tmp, new_list, meta);
 	tmp2 = tmp;
 	if (!tmp2->next)
-		mini_error("general: cmd_after_pipe()", E_GENERAL);
+		// mini_error("general: cmd_after_pipe()", E_GENERAL);
+		return (0);
 	tmp2 = tmp2->next;
 	while (tmp2 && !tmp2->flag && shelly_strcmp(tmp2->meta, "|") != 0)
 	{

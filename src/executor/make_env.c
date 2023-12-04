@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/28 21:14:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:37:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ char	*get_full(char *str)
  * @param env linked list containing key and env
  * @brief putting the envp content into a linked list seperated by key and value
  * @return linked list
+* @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 t_env	*env_list(char **envp, t_env *env)
 {
@@ -101,7 +103,8 @@ t_env	*env_list(char **envp, t_env *env)
 	value = NULL;
 	full = NULL;
 	if (envp[i] == NULL)
-		mini_error("env", errno);
+		return (0);
+		// mini_error("env", errno);
 	while (envp[i] != NULL)
 	{
 		has_value = get_key_value(envp[i], &key, &value);
@@ -116,8 +119,10 @@ t_env	*env_list(char **envp, t_env *env)
  * @param env linked list containing environment
  * @brief turns environment linked list into 2d array
  * @todo do we need to free full?
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
-char	**list_to_string(t_env *env)
+char	**list_to_string(t_env *env, t_parser *lst)
 {
 	char	**env_array;
 	int		i;
@@ -125,7 +130,8 @@ char	**list_to_string(t_env *env)
 	i = 0;
 	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
 	if (!env_array)
-		mini_error("malloc", errno);
+		mini_error("malloc", "E_MALLOC", lst);
+		// mini_error("malloc", errno);
 	while (env)
 	{
 		env_array[i] = env->full;

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/30 20:34:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:04:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
  * @param str old working directory string
  * @param env environment in linked list
  * @brief replaces the value of set key in the environment
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
-void	reassign_values(char *cwd, t_env *node)
+void	reassign_values(char *cwd, t_env *node, t_parser *head)
 {
 	char	*key_equal;
 	char	*new_full;
@@ -28,16 +30,16 @@ void	reassign_values(char *cwd, t_env *node)
 	free(node->value);
 	node->value = ft_strdup(cwd);
 	if (!node->value)
-		mini_error("bababooey", 69); // ole shenanigans
-
+		mini_error("no value", "E_GENERAL", head);
+		// mini_error("bababooey", 69); // ole shenanigans?
 	key_equal = ft_strjoin(node->key, "=");
 	if (!key_equal)
-		mini_error("bababooey2", 69); // ole shenanigans
-
+		mini_error("no value", "E_GENERAL", head);
+		// mini_error("bababooey2", 69); // ole shenanigans
 	new_full = ft_strjoin(key_equal, cwd);
 	if (!key_equal)
-		mini_error("bababooey3", 69); // ole shenanigans
-
+		mini_error("no value", "E_GENERAL", head);
+		// mini_error("bababooey3", 69); // ole shenanigans
 	free(key_equal);
 	free(node->full);
 	node->full = new_full;
