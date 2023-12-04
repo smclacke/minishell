@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 08:57:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 09:22:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ typedef enum e_exit
  * @param	n_cmd: total amount of commands is stored in first node
  * @param	exit_code: enums to set exitcode at different
  * 			stages of process, saved to pass through the program
+ * @param	hd_limit: save the limiter string, check if it's quoted or not
+ * 			do not expand dollar in this case
+ * @param	hd_flag: 1 = quoted, quotes are removed but if flag is set, 
+ * 			don't expand anything inside here_doc input for both
+ * 			single and double quotes
 */
 typedef struct s_parser
 {

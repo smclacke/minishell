@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 09:04:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 09:22:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,10 @@ static void	remove_quotes(char *str)
 
 void		handle_hd_quote(t_parser *list)
 {
-	int			i;
-
-	i = 0;
 	if (check_quotes(list->hd_limit))
 	{
-		while (list->hd_limit[i])
-		{	
-			if (ft_issquote(list->hd_limit[i]))	
-				list->hd_flag = 1;
-			else if (ft_isdquote(list->hd_limit[i]))
-				list->hd_flag = 2;
-			i++;
-		}
-		if (!ft_isdollar(list->str))
+		list->hd_flag = 1;
+		if (!ft_isdollar(list->hd_limit))
 			remove_quotes(list->hd_limit);
 	}
 }
