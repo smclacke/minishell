@@ -38,6 +38,7 @@ for in the future... don't change utils... ever.
 ===========================================
 
 **TO DO**
+L
 
 SIGNALSSSSh 
  ---> heredoc still weird, two prompt with signal

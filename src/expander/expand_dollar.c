@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:34:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:02:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	save_extra_string(t_expand *str, char *input, int i)
 		free(tmp);
 		return (0);
 	}
-	str->expanded = ft_strjoin(tmp, str->string);
+	if (tmp && str->string)
+		str->expanded = ft_strjoin(tmp, str->string); // leakyyyy
 	free(tmp);
 	free(str->string);
 	return (i);
@@ -88,8 +89,6 @@ static void	dollar(t_expand *str, t_env **env)
 				i = save_extra_string(str, str->input, i);
 		}
 	}
-	if (!str->expanded)
-		str->expanded = ft_strdup("");
 }
 
 /**
@@ -107,15 +106,21 @@ void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 	if (str->sign == 1 || str->sign == 2 || str->sign == 3)
 	{
 		dollar(str, env);
-		if (!str->expanded)
-			str->expanded = ft_strdup("");
 		if (str->sign == 1)
-			tmp->cmd = ft_strdup(str->expanded); // leakkkkyyyy
+		{
+			tmp->cmd = ft_strdup(str->expanded);
+			free(str->expanded);
+		}
 		else if (str->sign == 2)
-			tmp->str = ft_strdup(str->expanded); // leakkkkyyyy
+		{
+			tmp->str = ft_strdup(str->expanded);
+			free(str->expanded);
+		}
 		else if (str->sign == 3)
-			tmp->file = ft_strdup(str->expanded); // leakkkkyyyy
-		free(str->expanded);
+		{	
+			tmp->file = ft_strdup(str->expanded);
+			free(str->expanded);
+		}
 	}
 	lst = tmp;
 }

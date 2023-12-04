@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:56:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:01:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	dollar_expand(t_expand *str, t_env **env)
 			if (tmp)
 				str->expanded = ft_strjoin(tmp, str->env_val); // leakkkyyy
 			else
-				str->expanded = ft_strdup(str->env_val);
+				str->expanded = ft_strdup(str->env_val); // leakyyyyy
 		}
 		if (!str->expanded)
 		{
@@ -89,8 +89,9 @@ void	dollar_expand(t_expand *str, t_env **env)
 			return ;
 		}
 	}
+	if (!str->env_val)
+		str->expanded = ft_strdup(" ");
 	free(str->env_val);
-	free(tmp);
 	free(str->tmp);
 }
 
