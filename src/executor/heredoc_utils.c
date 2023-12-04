@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:44:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:04:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 /**
  * @param lst parser linked list
  * @brief redirect heredoc in child process
- * @todo norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
+ * @todo exit errors
 */
 void	redirect_heredoc(t_parser *lst)
 {
@@ -25,10 +24,8 @@ void	redirect_heredoc(t_parser *lst)
 		lst = lst->next;
 		if (dup2(lst->hd_fd, STDIN_FILENO) == -1)
 			mini_error("dup2", "E_GENERAL", lst);
-			// mini_error("dup2", errno);
 		if (close(lst->hd_fd) == -1)
 			mini_error("close", "E_GENERAL", lst);
-			// mini_error("close", errno);
 	}
 }
 
@@ -61,8 +58,7 @@ static void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
  * with signals easier if we put this in child process
  *  so parent can read exitstatus child to see if exited 
  * with CTRL+C/SIGNAL
- * @todo norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
+ * exit codes
 */
 static void	write_to_heredoc(t_parser *lst, t_env **env, char *file_name)
 {
@@ -73,7 +69,6 @@ static void	write_to_heredoc(t_parser *lst, t_env **env, char *file_name)
 	fork_pid = fork();
 	if (fork_pid == -1)
 		mini_error("fork", "E_GENERAL", lst);
-		// mini_error("fork", errno);
 	if (fork_pid == 0)
 	{
 		handle_signals(HERE_DOC);

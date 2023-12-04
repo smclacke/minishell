@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:01:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:12:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ void	free_all(t_env *env)
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins:
  * echo, cd, pwd, export, unset, env and exit
- * @todo norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
+ * @todo exit codes
 */
 void	do_builtin(t_parser *node, t_env **env)
 {
 	if (!node->cmd)
-	//exit code is 1?
 		mini_error("parser", "E_GENERAL", node);
 	else if (mini_strcmp(node->cmd, "echo") == 0)
 		ft_echo(node);
@@ -95,8 +93,7 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
  * @return true if nothing wrong found with the words
- * @todo norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
+ * @todo error code
 */
 bool	word_check(t_parser *lst)
 {

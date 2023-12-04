@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:10:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:19:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@
 # define CHILD 2
 # define HERE_DOC 3
 
+# define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
+# define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
+# define NO_HOME "minishell: cd: HOME not set\n"
+# define ARG_ERROR "minishell: %s: too many arguments\n"
+# define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
+# define INFILE_ERROR "minishell: %s: No such file or directory\n"
+# define DIR_MESSAGE "minishell: %s: Is a directory\n"
+# define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"
+
 // EXITCODES
 typedef enum e_exit
 {
@@ -61,7 +70,6 @@ typedef enum e_exit
 // 	int				stat;
 // 	enum e_exit		code;
 // }				t_estat;
-
 
 /**
  * @brief	specifies the different variable types of tokens from the

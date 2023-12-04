@@ -6,13 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 15:59:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 17:48:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-#define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
 
 /**
  * @param node node in linked list
@@ -67,21 +65,9 @@ void	put_permission_error(t_parser *node)
 /**
  * @param lst node in linked list
  * @brief puts custom error message on STDOUT_FILENO
- * frees o_d and exits.
- * @todo do i need to say that it doesnt exist
- * norm it
 */
-// void			no_such_file(t_parser *lst);
 void	no_such_file(t_parser *lst)
 {
-	char	*error;
-
-	error = ft_strjoin("minishell: cd: ", lst->str);
-	mini_error(error, "E_MALLOC", lst);
-
-	//old one
-	// char	*error;
-
-	// error = ft_strjoin("minishell: cd: ", lst->str);
-	// mini_error(error, errno);
+	dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
+	mini_error("", "E_MALLOC", lst);
 }

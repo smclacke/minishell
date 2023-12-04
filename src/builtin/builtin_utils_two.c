@@ -6,21 +6,18 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:04:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 17:49:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-#define ARG_ERROR "minishell: %s: too many arguments\n"
 
 /**
  * @param temp temporary placeholder
  * @param str old working directory string
  * @param env environment in linked list
  * @brief replaces the value of set key in the environment
- * @todo norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
+ * @todo exit codes
 */
 void	reassign_values(char *cwd, t_env *node, t_parser *head)
 {
@@ -31,15 +28,12 @@ void	reassign_values(char *cwd, t_env *node, t_parser *head)
 	node->value = ft_strdup(cwd);
 	if (!node->value)
 		mini_error("no value", "E_GENERAL", head);
-		// mini_error("bababooey", 69); // ole shenanigans?
 	key_equal = ft_strjoin(node->key, "=");
 	if (!key_equal)
 		mini_error("no value", "E_GENERAL", head);
-		// mini_error("bababooey2", 69); // ole shenanigans
 	new_full = ft_strjoin(key_equal, cwd);
 	if (!key_equal)
 		mini_error("no value", "E_GENERAL", head);
-		// mini_error("bababooey3", 69); // ole shenanigans
 	free(key_equal);
 	free(node->full);
 	node->full = new_full;
@@ -111,7 +105,7 @@ bool	too_many_args(t_parser *lst)
  * @param new_k char str containing new key
  * @param new_v char str containing new value
  * @brief makes all components for new node and adds to env linked list
- * @todo check return here
+ * @todo check return / need exit code?
 */
 void	make_node(t_parser *node, t_env **env, char *n_k, char *n_v)
 {
@@ -123,7 +117,7 @@ void	make_node(t_parser *node, t_env **env, char *n_k, char *n_v)
 	h_v = get_key_value(node->str, &n_k, &n_v);
 	new_full = ft_strdup(node->str);
 	if (new_full == NULL)
-		return ;//really?? error message 
+		return ;
 	new_node = env_lstnew(n_k, n_v, new_full, h_v);
 	env_lstadd_back(env, new_node);
 }
