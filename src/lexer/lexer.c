@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/07 18:56:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 14:47:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
  * @param	parsed_input an array created but separating the input string into 
  * 			tokenizable bites
  * @return	list of tokens
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 static t_parser	*make_token_list(char **parsed_input)
 {
@@ -36,7 +38,8 @@ static t_parser	*make_token_list(char **parsed_input)
 	{
 		node = lexer_listnew(parsed_input[i]);
 		if (!node)
-			mini_error("malloc error: make_token_list()", E_MALLOC);
+			// mini_error("malloc error: make_token_list()", E_MALLOC);
+			return (0);
 		lexer_listadd_back(&tokens, node);
 		i++;
 	}
@@ -49,6 +52,8 @@ static t_parser	*make_token_list(char **parsed_input)
  * 			and quotations, creating tokens
  * @param	input from the commandline
  * @return	t_parser tokens
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 t_parser	*lexer(char *input)
 {
@@ -61,7 +66,8 @@ t_parser	*lexer(char *input)
 	if (!parsed_input)
 	{
 		free(input);
-		mini_error("malloc error: lexer()", E_MALLOC);
+		// mini_error("malloc error: lexer()", E_MALLOC);
+		return (0);
 	}
 	tokens = make_token_list(parsed_input);
 	if (!tokens)
