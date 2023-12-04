@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   quotes.c                                           :+:    :+:            */
+/*   expand_quotes.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 21:58:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 09:04:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ static void	remove_quotes(char *str)
 	free(new);
 }
 
+void		handle_hd_quote(t_parser *list)
+{
+	int			i;
+
+	i = 0;
+	if (check_quotes(list->hd_limit))
+	{
+		while (list->hd_limit[i])
+		{	
+			if (ft_issquote(list->hd_limit[i]))	
+				list->hd_flag = 1;
+			else if (ft_isdquote(list->hd_limit[i]))
+				list->hd_flag = 2;
+			i++;
+		}
+		if (!ft_isdollar(list->str))
+			remove_quotes(list->hd_limit);
+	}
+}
+
 /**
  * @brief	if cmd has quotes, check if there is a space inside,
  * 			if so it's invalid. for cmds and strs remove closed 
@@ -69,19 +89,20 @@ void	expand_quotes(t_parser *tokens)
 	list = tokens;
 	while (list)
 	{
-		if (list->cmd)
+		if (list->cmd && check_quotes(list->cmd))
 		{
-			if (check_quotes(list->cmd))
-			{
-				if (!check_space(list->cmd) && !ft_isdollar(list->cmd))
-					remove_quotes(list->cmd);
-			}
+			if (!check_space(list->cmd) && !ft_isdollar(list->cmd))
+				remove_quotes(list->cmd);
 		}
-		else if (list->str)
+		else if (list->str || list->hd_limit)
 		{
-			if (check_quotes(list->str))
-				if (!ft_isdollar(list->str))
-					remove_quotes(list->str);
+			if (list->hd_limit)
+				handle_hd_quote(list);
+			else if (list->str)
+			{
+				if (check_quotes(list->str) && (!ft_isdollar(list->str)))
+						remove_quotes(list->str);
+			}
 		}
 		list = list->next;
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   quote_utils.c                                      :+:    :+:            */
+/*   expand_quote_utils.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/04 21:59:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 09:03:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_quotes(char *str)
 {
 	int	i;
 
-	i = 0;
+	i = 0;	
 	while (str[i])
 	{
 		if (ft_isquote(str[i]))
