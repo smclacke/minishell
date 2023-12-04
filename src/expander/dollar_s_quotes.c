@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 14:16:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:49:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	squote_bit(t_expand *str, char *input, int i)
 			end = i - start;
 			str->s_quote = ft_substr(input, start, end);
 			if (!str->s_quote)
-				mini_error("squote", errno);
+				return (0);
+				// mini_error("squote", errno);
 			if (!str->expanded)
 				str->expanded = ft_strdup(str->s_quote);
 			else

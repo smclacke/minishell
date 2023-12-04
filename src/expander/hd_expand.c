@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/04 09:29:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 11:04:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:49:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ char		*hd_expand(t_env **env, char *read_line)
 
 	str = (t_expand *)malloc(sizeof(*str));
 	if (!str)
-		mini_error("malloc error expand dollar HD", errno);
+		return (0);
+		// mini_error("malloc error expand dollar HD", errno);
 	ft_bzero(str, sizeof(t_expand));
 	i = save_first(str, read_line);
 	start = 0;

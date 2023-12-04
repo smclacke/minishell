@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 13:24:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:49:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	first_str_bit(t_expand *str, char *input)
 		str->expanded = ft_strjoin(str->expanded, str->tmp);
 		free(str->tmp);
 		if (!str->expanded)
-			mini_error("dquote", errno);
+			return (0);
+			// mini_error("dquote", errno);
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:43:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:50:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	if (!lst)
 		mini_error ("", "E_GENERAL", lst);
 		// mini_error("list", errno);
-	init_heredoc(lst);
+	// init_heredoc(lst);
+	init_heredoc(lst, env);
 	if (single_builtin_cmd(lst, env, data) == true)
 		return ;
 	// pipeline(lst, env, data);
