@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 12:30:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 13:17:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	squote_bit(t_expand *str, char *input, int i)
 {
 	int		start;
 	int		end;
+	char	*tmp;
 	
 	start = i;
+	tmp = str->expanded;
 	while (input[i])
 	{
 		if (ft_issquote(input[i]))
@@ -25,11 +27,13 @@ int	squote_bit(t_expand *str, char *input, int i)
 			end = i - start;
 			str->s_quote = ft_substr(input, start, end);
 			if (!str->s_quote)
-				return (0);
+				mini_error("squote", errno);
 			if (!str->expanded)
-				str->expanded = str->s_quote;
+				str->expanded = ft_strdup(str->s_quote);
 			else
-				str->expanded = ft_strjoin(str->expanded, str->s_quote);
+				str->expanded = ft_strjoin(tmp, str->s_quote);
+			free(tmp);
+			free(str->s_quote);
 			return (i + 1);
 		}
 		i++;

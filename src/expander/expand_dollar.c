@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 12:38:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 13:22:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,23 @@ int	save_extra_string(t_expand *str, char *input, int i)
 	int	start;
 	int	end;
 	int	len;
+	char	*tmp;
 
 	start = i;
+	tmp = str->expanded;
 	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
 	end = i;
 	len = end - start;
 	str->string = ft_substr(input, start, len);
 	if (!str->string)
+	{
+		free(tmp);
 		return (0);
-	str->expanded = ft_strjoin(str->expanded, str->string);
-	// free(str->string);
+	}
+	str->expanded = ft_strjoin(tmp, str->string);
+	free(tmp);
+	free(str->string);
 	return (i);
 }
 
