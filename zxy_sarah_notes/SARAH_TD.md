@@ -39,6 +39,10 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
+ONLY FOR DOUBLE QUOTES THOOOOOOOO, JUST CHECK IF THERES A SPACE AFTER A DOLLLLARR STR
+HEHEHHE YAYAYYAYA = 
+			echo "$USER hello" -> smclacke hello :) :) :) :) 
+
 SIGNALSSSSh 
  ---> heredoc still weird, two prompt with signal
 

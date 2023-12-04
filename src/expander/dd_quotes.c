@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:24:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:32:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,23 @@ static int	first_str_bit(t_expand *str, char *input)
 	return (i);
 }
 
+static int	dollar_double(t_expand *str, char *input, t_env **env, int i)
+{
+	int	start;
+	int	end;
+
+	start = i;
+	end = 0;
+	while (input[i] && !is_dollar_or_quote(input[i]) && !ft_isspace(input[i]))
+		i++;
+	end = i - start;
+	str->dollar = ft_substr(input, start, end);
+	dollar_expand(str, env);
+	if (!str->expanded)
+		mini_error("dquote", errno);
+	return (i);
+}
+
 static void	handle_double(t_expand *str, char *input, t_env **env)
 {
 	int		i;
@@ -45,18 +62,18 @@ static void	handle_double(t_expand *str, char *input, t_env **env)
 	while (input[i])
 	{
 		if (ft_dollar(input[i]))
-			i = dollar_bit(str, input, env, (i + 1));
+			i = dollar_double(str, input, env, (i + 1));
 		if (input[i] && ft_issquote(input[i]))
 		{
 			if (str->expanded)
 			{
-				str->expanded = ft_strjoin(str->expanded, "\'");
+				str->expanded = ft_strjoin(str->expanded, SINGLE_Q);
 				if (!str->expanded)
 					mini_error("oh no", errno);
 			}
 			else
 			{
-				str->expanded = ft_strdup("\'");
+				str->expanded = ft_strdup(SINGLE_Q);
 				if (!str->expanded)
 					mini_error("oh no", errno);
 			}
