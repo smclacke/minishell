@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 13:17:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 14:16:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ static void	handle_dq(t_expand *str, t_env **env)
 */
 void	dollar_expand(t_expand *str, t_env **env)
 {
+	char	*tmp;
+
+	tmp = str->expanded;
 	str->tmp = ft_strtrim(str->dollar, "$");
 	free(str->dollar);
 	if (!str->tmp)
@@ -62,12 +65,15 @@ void	dollar_expand(t_expand *str, t_env **env)
 	str->dollar = str->tmp;
 	if (ft_strcmp(str->dollar, "?") == 0)
 		handle_dq(str, env);
-	if (!get_check_value(str, env))
+	if (get_check_value(str, env) == 0)
 	{
 		if (!str->expanded)
-			str->expanded = str->env_val;
+			str->expanded = ft_strdup(str->env_val);
 		else
-			str->expanded = ft_strjoin(str->expanded, str->env_val);
+		{
+			str->expanded = ft_strjoin(tmp, str->env_val);
+			free(tmp);
+		}
 	}
 	free(str->tmp);
 }
