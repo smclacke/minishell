@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:55:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 08:34:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char			*is_redirect(void *input);
 t_parser		*sort_list(t_parser *tokens);
 
 //---------- sort_utils ----------//
+t_parser		*add_new_limit(t_parser *tmp, t_parser *new_list, char *str);
 t_parser		*add_new_str(t_parser *tmp, t_parser *new_list, char *str);
 t_parser		*add_new_file(t_parser *tmp, t_parser *new_list, char *file);
 t_parser		*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);

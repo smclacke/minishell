@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 16:35:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 08:28:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ static t_parser	*handle_next(t_parser *data, char *type)
 	if (is_meta(data->input))
 		mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
 	if (ft_strcmp(type, LESSLESS) == 0)
-		data->str = data->input;
+	{
+		printf("here\n");
+		data->hd_limit = data->input;
+	}
 	else
 		data->file = data->input;
 	if (!data)

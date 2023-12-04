@@ -37,14 +37,10 @@ for in the future... don't change utils... ever.
 ===========================================
 ===========================================
 
-**
-heredoc limiter will be expanded when it shouldnt be...
-
-
 **TO DO**
 
 SIGNALSSSSh 
- ---> exit_codes (and errors?)
+ ---> exit_codes
  ---> heredoc still weird
 
 EXPANSION
@@ -60,28 +56,12 @@ EXIT AND ERRORS
 
 OTHERRRR
  ---> there's a leak in the parser (testing here_Doc signals)
- ---> cd "" cd ''
- ---> dreijans@f0r3s15:~/Documents/rank3/minishell$ cat Makefile > $bla
-    bash: $bla: ambiguous redirect
 
 
 ***************************************************************************
 ***************************************************************************
 ***************************************************************************
-*****!!
- ---> here_doc - check HERE_DOC IS A BITCH below for notes...
- 		if here_doc don't expand dollar, delmiter str is literal
-i.e. 
-		export sarah=EOF
-		<< $sarah
-		exits
-		<< EOF
-		conts
 
-	++ notes below
-*****!!
-
-***!!
 $? in export is expanded as expected in/out quotes
 export dol=$?
 $dol
@@ -92,94 +72,13 @@ opens file '0'
 if '0' exists (?)
 opens file '1' ...
 
-cd $?
-looks for expanded (dus the number) as dir
-***!!
 ***************************************************************************
 ***************************************************************************
 ***************************************************************************
 
-**CHECKKKKKK**
-
- ---> leaks when ending with quotes
- ---> leaks if quotes aren't closed?
- ---> norm
-
- ---> echo | echo is leaky and segfaults
- ---> cd | cd 
-
-
 ===========================================
 ===========================================
 ===========================================
-HERE_DOC IS A BITCH NO THANK YOU
-
-smclacke@f0r3s17:~/Desktop/minishell$ << eof
-> '$USER'
-> eof
-
-smclacke@f0r3s17:~/Desktop/minishell$ echo << eof
-> '$USER'
-> eof
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << eof
-> '$USER'
-> eof
-'smclacke'
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << eof
-> "$USER"
-> '$USER'
-> eof
-"smclacke"
-'smclacke'
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << "eof"
-> something
-> eof
-something
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << "eof"
-> $USER
-> eof
-$USER
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << eof
-> $USER
-> eof
-smclacke
-smclacke@f0r3s17:~/Desktop/minishell$ cat << 'eof'
-> $USER
-> eof
-$USER
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << 'eof'
-> "$USER"
-> '$USER'
-> eof
-"$USER"
-'$USER'
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << "eof"
-> "$USER"
-> '$USER'
-> eof
-"$USER"
-'$USER'
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << $USER
-> smclacke
-> $USER
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << "$USER"
-> smclacke
-> $USER
-smclacke
-
-smclacke@f0r3s17:~/Desktop/minishell$ cat << '$USER'
-> smclacke
-> $USER
-smclacke
 
 ---------------------------------------------------------------------------------
 

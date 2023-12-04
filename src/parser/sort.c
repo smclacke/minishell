@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/05 17:32:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 08:31:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ t_parser	*sort_list(t_parser *tokens)
 			new_list = add_new_str(tmp, new_list, tmp->str);
 		else if (!tmp->flag && tmp->meta)
 			new_list = add_new_meta(tmp, new_list, tmp->meta);
+		else if (!tmp->flag && tmp->hd_limit)
+			new_list = add_new_limit(tmp, new_list, tmp->hd_limit);
 		tmp = tmp->next;
 	}
 	free_only_tokens(tokens);

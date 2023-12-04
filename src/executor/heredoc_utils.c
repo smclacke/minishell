@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 08:03:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 08:23:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ static void	write_to_heredoc(t_parser *lst, char *file_name)
 		while (1)
 		{
 			read_line = readline("heredoc> ");
-			if (mini_strcmp(lst->str, read_line) != 0)
+			if (mini_strcmp(lst->hd_limit, read_line) != 0)
 				write_to_file(read_line, file);
-			else if (mini_strcmp(lst->str, read_line) == 0)
+			else if (mini_strcmp(lst->hd_limit, read_line) == 0)
 			{
 				free(read_line);
 				exit (0);
@@ -131,7 +131,7 @@ void	init_heredoc(t_parser *lst)
 			i++;
 			if (head->next)
 				head = head->next;
-			if (head->str != NULL)
+			if (head->hd_limit != NULL)
 				setup_heredoc(head, heredoc, i);
 		}
 		head = head->next;
