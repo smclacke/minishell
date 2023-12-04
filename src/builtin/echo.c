@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 17:36:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 15:48:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	write_line(t_parser *temp)
  * @brief writes node after command on standart output followed by /n char
  * -n that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
- * @todo mimic the same return values?
+ * @todo mimic the same return values? NORM IT
 */
 void	ft_echo(t_parser *lst)
 {
@@ -65,7 +65,9 @@ void	ft_echo(t_parser *lst)
 	temp = lst;
 	is_flag = 0;
 	if (!temp->cmd)
-		mini_error("temp->cmd", errno);
+		// mini_error("temp->cmd", errno);
+		//needs to return 0?
+		mini_error("temp->cmd", "E_USAGE", lst);
 	if (!temp->next || temp->next->meta)
 	{
 		write(1, "\n", 1);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 15:58:32 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
  * @return node made
  * @todo needs exit status
  * dprintf?
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
-void	ft_pwd(void)
+// void	ft_pwd(void)
+void	ft_pwd(t_parser *head)
 {
 	char	*path;
 
@@ -30,5 +33,7 @@ void	ft_pwd(void)
 		free(path);
 	}
 	else
-		mini_error("getcwd()", errno);
+		// mini_error("getcwd()", errno);
+		//should it be 1?
+		mini_error("", "E_GENERAL", head);
 }

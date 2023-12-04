@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/25 01:18:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/11/02 19:53:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 14:56:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,22 @@ int	is_meta_no_pipe(char *input)
 	return (0);
 }
 
+/**
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
+*/
 t_parser	*handle_pipe(t_parser *data, int *flag)
 {
 	t_parser	*tmp;
 
 	data->meta = data->input;
 	if (!data->next)
-		mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
+		// mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
+		return (0);
 	tmp = data->next;
 	if (ft_strcmp(tmp->input, PIPE) == 0)
-		mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
+		// mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
+		return (0);
 	*flag = 0;
 	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 10:20:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:45:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
  * 			after varibales have been assigned correctly
  * @return	tokens passed from the data struct into the parser struct
  * 			tokens with correctly assigned varibales
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 static t_parser	*handle_vars(t_parser *data, int *flag)
 {
@@ -50,7 +52,8 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
 			data->str = data->input;
 	}
 	if (!data)
-		mini_error("general: handle_vars()", E_GENERAL);
+		// mini_error("general: handle_vars()", E_GENERAL);
+		return (0);
 	return (data);
 }
 
@@ -65,17 +68,21 @@ static t_parser	*handle_vars(t_parser *data, int *flag)
  * @param	type the previous tokens type of meta character
  * @return	tokens->data passed from the data struct into the parser struct
  * 			tokens with correctly assigned varibales
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 static t_parser	*handle_next(t_parser *data, char *type)
 {
 	if (is_meta(data->input))
-		mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
+		// mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
+		return (0);
 	if (ft_strcmp(type, LESSLESS) == 0)
 		data->hd_limit = data->input;
 	else
 		data->file = data->input;
 	if (!data)
-		mini_error("general: handle_next()", E_GENERAL);
+		// mini_error("general: handle_next()", E_GENERAL);
+		return (0);
 	return (data);
 }
 
@@ -88,6 +95,8 @@ static t_parser	*handle_next(t_parser *data, char *type)
  * @param	data tokens
  * @param	flag int to check whether the cmd of the process has been found
  * @return	tokens with correctly assigned varibales
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 static t_parser	*handle_input(t_parser *data, int *flag)
 {
@@ -96,7 +105,8 @@ static t_parser	*handle_input(t_parser *data, int *flag)
 	else if (data && is_pipe(data->input))
 		data = handle_pipe(data, flag);
 	if (!data)
-		mini_error("general: handle_input()", E_GENERAL);
+		// mini_error("general: handle_input()", E_GENERAL);
+		return (0);
 	return (data);
 }
 
@@ -119,7 +129,8 @@ static t_parser	*handle_input(t_parser *data, int *flag)
  * @return	tokens: all the tokens given by the lexer have been
  * 			sorted into the parser struct variables making
  * 			them more managable for the executor
- * @todo 	norm
+ * @todo	norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 t_parser	*parser(t_parser *tokens)
 {
@@ -140,7 +151,8 @@ t_parser	*parser(t_parser *tokens)
 			tmp = handle_next(tmp, type);
 		}
 		else if (type && !tmp->next)
-			mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
+			// mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
+			return (0);
 		tmp = tmp->next;
 	}
 	tokens = sort_list(tokens);

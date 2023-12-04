@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/29 16:30:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 16:01:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,20 @@ void	free_all(t_env *env)
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins:
  * echo, cd, pwd, export, unset, env and exit
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 void	do_builtin(t_parser *node, t_env **env)
 {
 	if (!node->cmd)
-		mini_error("parser", errno);
+	//exit code is 1?
+		mini_error("parser", "E_GENERAL", node);
 	else if (mini_strcmp(node->cmd, "echo") == 0)
 		ft_echo(node);
 	else if (mini_strcmp(node->cmd, "cd") == 0)
 		ft_cd(node, env);
 	else if (mini_strcmp(node->cmd, "pwd") == 0)
-		ft_pwd();
+		ft_pwd(node);
 	else if (mini_strcmp(node->cmd, "export") == 0)
 		ft_export(node, env);
 	else if (mini_strcmp(node->cmd, "unset") == 0)
@@ -92,6 +95,8 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
  * @return true if nothing wrong found with the words
+ * @todo norm proof, djoyke changed some things regarding mini_error
+ * 			parser is not made yet so can't use mini_error function
 */
 bool	word_check(t_parser *lst)
 {
@@ -109,7 +114,7 @@ bool	word_check(t_parser *lst)
 		return (true);
 	}
 	if (words == NULL)
-		mini_error("malloc split", errno);
+		mini_error("malloc split", "E_GENERAL", lst);
 	if (key_value_check(temp, words, cmd) == 1)
 	{
 		ft_free_arr(words);
