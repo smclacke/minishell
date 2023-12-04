@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 08:23:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 10:16:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,19 @@ void	redirect_heredoc(t_parser *lst)
  * @param file int with file fd.
  * @brief writes to the heredoc frees the read_line
 */
-static void	write_to_file(char *read_line, int file)
+static void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
 {
-	// dont expand dollar but remove quotes
-	// expand
-	// if quoted limited.. different expansion
-	write(file, read_line, ft_strlen(read_line));
+	if (lst->hd_flag == 0)
+	{
+		if (ft_isdollar(readline))
+			readline = hd_expand(env, readline);
+	}
+	if (readline)
+	{
+		write(file, readline, ft_strlen(readline));
+		free(readline);
+	}
 	write(file, "\n", 1);
-	free(read_line);
 }
 
 /**
@@ -53,7 +58,7 @@ static void	write_to_file(char *read_line, int file)
  *  so parent can read exitstatus child to see if exited 
  * with CTRL+C/SIGNAL
 */
-static void	write_to_heredoc(t_parser *lst, char *file_name)
+static void	write_to_heredoc(t_parser *lst, t_env **env, char *file_name)
 {
 	char	*read_line;
 	pid_t	fork_pid;
@@ -70,7 +75,7 @@ static void	write_to_heredoc(t_parser *lst, char *file_name)
 		{
 			read_line = readline("heredoc> ");
 			if (mini_strcmp(lst->hd_limit, read_line) != 0)
-				write_to_file(read_line, file);
+				write_to_file(lst, read_line, env, file);
 			else if (mini_strcmp(lst->hd_limit, read_line) == 0)
 			{
 				free(read_line);
@@ -89,13 +94,13 @@ static void	write_to_heredoc(t_parser *lst, char *file_name)
  * @brief makes name for heredoc by adding number of heredoc
  * to the name. unlinks, frees the string and the number.
 */
-static void	setup_heredoc(t_parser *lst, char *str, int i)
+static void	setup_heredoc(t_parser *lst, t_env **env, char *str, int i)
 {
 	char		*number;
 
 	number = ft_itoa(i);
 	str = ft_strjoin("heredoc", number);
-	write_to_heredoc(lst, str);
+	write_to_heredoc(lst, env, str);
 	lst->hd_fd = open(str, O_RDONLY);
 	unlink(str);
 	free(str);
@@ -115,7 +120,7 @@ static void	setup_heredoc(t_parser *lst, char *str, int i)
  * check these by using lseek(fd, 0, SEEK_CUR) before and 
  * after writing to the file.
 */
-void	init_heredoc(t_parser *lst)
+void	init_heredoc(t_parser *lst, t_env **env)
 {
 	t_parser	*head;
 	char		*heredoc;
@@ -132,7 +137,7 @@ void	init_heredoc(t_parser *lst)
 			if (head->next)
 				head = head->next;
 			if (head->hd_limit != NULL)
-				setup_heredoc(head, heredoc, i);
+				setup_heredoc(head, env, heredoc, i);
 		}
 		head = head->next;
 	}

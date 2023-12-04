@@ -6,10 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 08:34:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 10:08:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef SHELLY_H
 # define SHELLY_H
@@ -90,11 +89,15 @@ t_parser		*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
 t_parser		*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 
 				// expander
+//------------------- hd_expand --------------------//
+char			*hd_expand(t_env **env, char *read_line);
+
 //------------------- dd_quotes --------------------//
 int				dquote_bit(t_expand *str, char *input, t_env **env, int i);
 
 //----------------- dollar_s_quote ------------------//
 int				squote_bit(t_expand *str, char *input, int i);
+void			dollar_expand(t_expand *str, t_env **env);
 int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
 
 //------------------- expand_dollar --------------------//
@@ -122,13 +125,14 @@ void			ft_expand(t_parser *lst, t_env **env);
 //------------------ signals ------------------//
 void			handle_signals(int proc);
 
+
 				// ALL DJOYKE PROTOS //
 bool			check_for_meta(t_parser *lst);
 bool			check_for_builtin(t_parser *node);
 void			redirect_outfile(t_parser *head, t_execute *data);
 bool			redirect_infile(t_parser *head, t_execute *data);
 void			redirect_append(t_parser *head, t_execute *data);
-void			init_heredoc(t_parser *lst);
+void			init_heredoc(t_parser *lst, t_env **env);
 void			redirect(t_parser *lst, t_execute *data);
 void			redirect_heredoc(t_parser *lst);
 void			infile_error(t_parser *head);

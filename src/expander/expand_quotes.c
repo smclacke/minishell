@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 09:22:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 09:25:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	remove_quotes(char *str)
 	free(new);
 }
 
-void		handle_hd_quote(t_parser *list)
+static void		handle_hd_quote(t_parser *list)
 {
 	if (check_quotes(list->hd_limit))
 	{
