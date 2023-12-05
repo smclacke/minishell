@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 19:29:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 19:41:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,16 @@ void	free_tokens(t_parser *tokens)
 	while (tokens)
 	{
 		tmp = tokens->next;
+		if (tokens->cmd != tokens->input)
+			free(tokens->cmd);
+		if (tokens->meta != tokens->input)
+			free(tokens->meta);
+		if (tokens->file != tokens->input)
+			free(tokens->file);
 		if (tokens->str != tokens->input)
 			free(tokens->str);
+		if (tokens->hd_limit != tokens->input)
+			free(tokens->hd_limit);
 		free (tokens->input);
 		free (tokens);
 		tokens = tmp;

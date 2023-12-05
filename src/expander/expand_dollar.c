@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 19:12:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 19:43:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
 			return ;
 		if (str->sign == CMD_X)
 		{
-			tmp->cmd = ft_strdup(str->expanded);
+			tmp->cmd = str->expanded;
+			// tmp->cmd = ft_strdup(str->expanded);
 			// free(str->expanded);
 		}
 		else if (str->sign == STR_X)
@@ -133,7 +134,8 @@ void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
 		}
 		else if (str->sign == FILE_X)
 		{
-			tmp->file = ft_strdup(str->expanded);
+			tmp->file = str->expanded;
+			// tmp->file = ft_strdup(str->expanded);
 			// free(str->expanded);
 		}
 		if (!tmp->cmd || !tmp->str || !tmp->file)
