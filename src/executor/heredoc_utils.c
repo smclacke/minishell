@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 18:04:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 15:54:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	redirect_heredoc(t_parser *lst)
 	{
 		lst = lst->next;
 		if (dup2(lst->hd_fd, STDIN_FILENO) == -1)
-			mini_error("dup2", "E_GENERAL", lst);
+			mini_error("dup2", E_GENERAL, lst);
 		if (close(lst->hd_fd) == -1)
-			mini_error("close", "E_GENERAL", lst);
+			mini_error("close", E_GENERAL, lst);
 	}
 }
 
@@ -68,7 +68,7 @@ static void	write_to_heredoc(t_parser *lst, t_env **env, char *file_name)
 
 	fork_pid = fork();
 	if (fork_pid == -1)
-		mini_error("fork", "E_GENERAL", lst);
+		mini_error("fork", E_GENERAL, lst);
 	if (fork_pid == 0)
 	{
 		handle_signals(HERE_DOC);

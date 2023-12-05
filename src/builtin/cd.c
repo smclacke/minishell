@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 17:50:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 15:51:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 
 	full = ft_strjoin("OLDPWD=", cwd);
 	if (full == NULL)
-		mini_error("", "E_MALLOC", head);
+		mini_error("", E_MALLOC, head);
 	new = env_lstnew("OLDPWD", cwd, full, true);
 	if (new == NULL)
-		mini_error("", "E_MALLOC", head);
+		mini_error("", E_MALLOC, head);
 	env_lstadd_back(env, new);
 	if (env == NULL)
-		mini_error("", "E_MALLOC", head);
+		mini_error("", E_MALLOC, head);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 18:14:24 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 15:50:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_echo(t_parser *lst)
 	temp = lst;
 	is_flag = 0;
 	if (!temp->cmd)
-		mini_error("temp->cmd", "E_USAGE", lst);
+		mini_error("temp->cmd", E_USAGE, lst);
 	if (!temp->next || temp->next->meta)
 	{
 		write(1, "\n", 1);

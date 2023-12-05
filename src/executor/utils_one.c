@@ -6,23 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 18:18:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 15:11:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-/**
- * @param string argument given to perror
- * @param error int errno given to exit
- * @brief provides correct error message and exits
- * @todo is this function okay?
-*/
-void	mini_error(char *error, char *exit_enum, t_parser *lst)
-{
-	ft_putstr(error);
-	lst->exit_code = ft_atoi(exit_enum);
-}
 
 /**
  * @param s1 string to compare
