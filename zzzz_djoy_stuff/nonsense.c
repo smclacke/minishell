@@ -146,3 +146,18 @@
 // 	}
 // 	return (0);
 // }
+
+
+
+/*
+echo code instead of input check
+*/
+
+	// if (!temp->cmd)
+	// 	mini_error("temp->cmd", E_USAGE, lst);
+	// if (!temp->next || temp->next->meta)
+	// {
+	// 	write(1, "\n", 1);
+	// 	lst->exit_code = E_USAGE;
+	// 	return ;
+	// }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:17:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 16:00:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	put_permission_error(t_parser *node)
 void	no_such_file(t_parser *lst)
 {
 	dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
-	mini_error("", E_MALLOC, lst);
+	mini_error("", E_GENERAL, lst);
 }
 
 /**

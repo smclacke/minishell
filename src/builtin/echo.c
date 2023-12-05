@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:50:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 17:25:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,60 @@ static void	write_line(t_parser *temp)
 
 /**
  * @param lst t_parser linked list
+ * @param env environment linked list
+ * @brief checks if str is "~" replaces it by HOME str
+*/
+static void	home_check(t_parser *lst, t_env **env)
+{
+	char		*new_str;
+
+	if (mini_strcmp(lst->next->str, "~") == 0)
+	{
+		new_str = ft_getenv(*env, "HOME");
+		lst->next->str = new_str;
+	}
+}
+
+/**
+ * @param lst t_parser linked list
+ * @brief checks if cmd exist, and if there is a str input after it
+*/
+static bool	input_check(t_parser *lst)
+{
+	t_parser	*temp;
+
+	temp = lst;
+	if (!temp->cmd)
+	{
+		mini_error("temp->cmd", E_USAGE, lst);
+		return (false);
+	}
+	if (!temp->next || temp->next->meta)
+	{
+		write(1, "\n", 1);
+		lst->exit_code = E_USAGE;
+		return (false);
+	}
+	return (true);
+}
+
+/**
+ * @param lst t_parser linked list
  * @brief writes node after command on standart output followed by /n char
  * -n that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
- * @todo error code 
+ * @todo error code, check if input function actually works
 */
-void	ft_echo(t_parser *lst)
+void	ft_echo(t_parser *lst, t_env **env)
 {
 	t_parser	*temp;
 	int			is_flag;
 
 	temp = lst;
 	is_flag = 0;
-	if (!temp->cmd)
-		mini_error("temp->cmd", E_USAGE, lst);
-	if (!temp->next || temp->next->meta)
-	{
-		write(1, "\n", 1);
+	if (!input_check(lst))
 		return ;
-	}
+	home_check(temp, env);
 	temp = temp->next;
 	while (temp && is_all_n(temp))
 	{
@@ -78,6 +113,12 @@ void	ft_echo(t_parser *lst)
 		is_flag++;
 	}
 	write_line(temp);
+	if (is_flag != 0)
+	{
+		lst->exit_code = E_USAGE;
+		return ;
+	}
 	if (is_flag == 0 || !temp->str)
 		write(1, "\n", 1);
+	lst->exit_code = E_USAGE;
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:56:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 17:24:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void			ft_cd(t_parser *lst, t_env **env);
 bool			too_many_args(t_parser *lst);
 void			no_such_file(t_parser *lst);
 void			put_custom_error(t_parser *node, char *cmd);
-void			ft_echo(t_parser *lst);
+void			ft_echo(t_parser *lst, t_env **env);
 void			ft_env(t_env *env, t_parser *lst);
 void			ft_exit(t_parser *lst);
 void			ft_pwd(t_parser *head);

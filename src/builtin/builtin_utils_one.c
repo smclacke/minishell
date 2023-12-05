@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:52:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 16:41:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	do_builtin(t_parser *node, t_env **env)
 	if (!node->cmd)
 		mini_error("parser", E_GENERAL, node);
 	else if (mini_strcmp(node->cmd, "echo") == 0)
-		ft_echo(node);
+		ft_echo(node, env);
+		// ft_echo(node);
 	else if (mini_strcmp(node->cmd, "cd") == 0)
 		ft_cd(node, env);
 	else if (mini_strcmp(node->cmd, "pwd") == 0)
