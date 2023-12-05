@@ -6,29 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/01 19:33:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 20:40:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-/**
- * @param lst  parser linked list
- * @brief checks if there's an space in the next node.
-*/
-static int	space_check(t_parser *lst)
-{
-	t_parser	*temp;
-
-	temp = lst->next;
-	if (temp->next)
-	{
-		temp = temp->next;
-		put_custom_error(temp, "export");
-		return (1);
-	}
-	return (0);
-}
 
 /**
  * @param env environment stored in linked list
@@ -105,6 +87,12 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * @brief export with no options, learned that double free 
  * with freeing in an unrelated spot 
  * might be overwriting a pointer and not allocating a new string.
+ * @todo minibleh:export var
+ * minibleh:export var=test
+ * minibleh:export
+ * var="test"
+ * als nieuwe value heeft overschrijven
+ * als nieuwe geen value heeft niet overschrijven
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -118,12 +106,15 @@ void	ft_export(t_parser *node, t_env **env)
 		export_print(*env);
 		return ;
 	}
-	if (space_check(node) == 1)
-		return ;
-	if (word_check(node) == 1)
-		return ;
 	node = node->next;
-	if (reassign_env(env, node, new_key, new_value) == 1)
-		return ;
-	make_node(node, env, new_key, new_value);
+	while (node && node->str)
+	{
+		if (word_check(node) == 1)
+			return ;
+		if (reassign_env(env, node, new_key, new_value) == 1)
+			return ;
+		make_node(node, env, new_key, new_value);
+		node->exit_code = E_USAGE;
+		node = node->next;
+	}
 }

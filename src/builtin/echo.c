@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 17:25:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 17:39:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static bool	input_check(t_parser *lst)
 	if (!temp->next || temp->next->meta)
 	{
 		write(1, "\n", 1);
-		lst->exit_code = E_USAGE;
 		return (false);
 	}
 	return (true);

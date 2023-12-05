@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 16:41:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 20:30:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	do_builtin(t_parser *node, t_env **env)
 		mini_error("parser", E_GENERAL, node);
 	else if (mini_strcmp(node->cmd, "echo") == 0)
 		ft_echo(node, env);
-		// ft_echo(node);
 	else if (mini_strcmp(node->cmd, "cd") == 0)
 		ft_cd(node, env);
 	else if (mini_strcmp(node->cmd, "pwd") == 0)
@@ -48,7 +47,6 @@ void	do_builtin(t_parser *node, t_env **env)
 		ft_unset(node, env);
 	else if (mini_strcmp(node->cmd, "env") == 0)
 		ft_env(*env, node);
-		// ft_env(*env);
 	else if (mini_strcmp(node->cmd, "exit") == 0)
 		ft_exit(node);
 }
@@ -95,7 +93,6 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
  * @return true if nothing wrong found with the words
- * @todo error code
 */
 bool	word_check(t_parser *lst)
 {
@@ -104,16 +101,16 @@ bool	word_check(t_parser *lst)
 	char		*cmd;
 
 	cmd = lst->cmd;
-	temp = lst->next;
-	words = NULL;
-	words = ft_split(temp->str, '=');
+	// temp = lst->next;
+	temp = lst;
+	words = null_check(temp);
+	if (!words)
+		return (true);
 	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
 	{
 		put_custom_error(temp, cmd);
 		return (true);
 	}
-	if (words == NULL)
-		mini_error("malloc split", E_GENERAL, lst);
 	if (key_value_check(temp, words, cmd) == 1)
 	{
 		ft_free_arr(words);

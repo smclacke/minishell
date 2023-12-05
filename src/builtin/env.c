@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:16:24 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:57:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 17:40:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	ft_env(t_env *env, t_parser *lst)
 			printf("%s=%s\n", head->key, head->value);
 		head = head->next;
 	}
+	lst->exit_code = E_USAGE;
 }

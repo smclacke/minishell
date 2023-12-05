@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:11:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 19:59:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,25 @@ void	free_strs(char *str, char *str2)
 {
 	free (str);
 	free (str2);
+}
+
+/**
+ * @param str string to be freed
+ * @param str2 string to be freed
+ * @brief frees strings 
+*/
+char	**null_check(t_parser *temp)
+{
+	char		**words;
+
+	words = NULL;
+	words = ft_split(temp->str, '=');
+	if (words == NULL)
+		mini_error("malloc split", E_GENERAL, temp);
+	if (words[0] == NULL)
+	{
+		ft_free_arr(words);
+		return (NULL);
+	}
+	return (words);
 }
