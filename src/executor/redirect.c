@@ -6,14 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 21:40:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:07:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-#define DIR_MESSAGE "minishell: %s: Is a directory\n"
-#define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"
 
 /**
  * @param node parser linked list
@@ -127,6 +124,7 @@ bool	check_redirect(t_parser *node)
  * if file does not exist, it will be created. 
  * if it does exist, the output of command is appended 
  * to the end of the file, preserving the existing content.
+ * @todo check the dprintf message
 */
 void	redirect_append(t_parser *head, t_execute *data)
 {
@@ -147,7 +145,7 @@ void	redirect_append(t_parser *head, t_execute *data)
 			if (S_ISREG(file_stat.st_mode))
 				data->out = open(head->file, O_CREAT | O_RDWR | O_APPEND, 0644);
 			if (S_ISDIR(file_stat.st_mode))
-				dprintf(STDERR_FILENO, "[%s] is a directory\n", head->file);
+				dprintf(STDERR_FILENO, "%s is a directory\n", head->file);
 		}
 		if (dup2(data->out, STDOUT_FILENO) == 0)
 			close(data->out);

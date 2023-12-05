@@ -6,13 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:32:17 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:09:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-#define INFILE_ERROR "minishell: %s: No such file or directory\n"
 
 /**
  * @param lst parser linked list
@@ -45,21 +43,16 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param env  environment linked list
  * @param data execute struct
  * @brief forks, checks if it didnt fail, enters child process
- * @todo norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
- * env not needed
+ * @todo exit code
 */
-// void	init_fork(t_parser *lst, t_env **env, t_execute *data)
-void	init_fork(t_parser *lst, t_execute *data)
+void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
 	data->fork_pid = fork();
 	handle_signals(CHILD);
 	if (data->fork_pid == -1)
 		mini_error("fork", "E_GENERAL", lst);
-		// mini_error("fork", errno);
 	if (data->fork_pid == 0)
-		mini_error("fork", "E_GENERAL", lst);
-		// mini_forks(lst, env, data);
+		mini_forks(lst, env, data);
 }
 
 /**
@@ -88,14 +81,10 @@ bool	absolute_check(t_parser *node)
  * @param lst parser linked list
  * @param env  environment linked list
  * @param data execute struct
- * @brief child execution process,  calls init_pipes
+ * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
- * @todo norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
- * env not needed?
 */
-// void	pipeline(t_parser *lst, t_env **env, t_execute *data)
-void	pipeline(t_parser *lst, t_execute *data)
+void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
 	int	count;
 	int	i;
@@ -106,11 +95,8 @@ void	pipeline(t_parser *lst, t_execute *data)
 	{
 		if (count >= 1 && lst->cmd)
 		{
-			// init_pipe(i, count, data);
 			init_pipe(i, count, data, lst);
-			// init_fork(lst, env, data);
-			init_fork(lst, data);
-			// close_between(data);
+			init_fork(lst, env, data);
 			close_between(data, lst);
 			count--;
 			i++;

@@ -6,14 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/01 19:44:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 17:52:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-#include <limits.h>
-
-#define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
 
 /**
  * @param node parsed list
@@ -68,6 +65,7 @@ void	exit_with_stat(int exit_status, int status)
  * @todo check for exitstatus line 68 if it's exit status from prev child process
  * minishell: exit: 7767: positive numeric argument 255 or below required
  * make: *** [Makefile:91: run] Error 255
+ * check it thouroughly
 */
 void	ft_exit(t_parser *lst)
 {

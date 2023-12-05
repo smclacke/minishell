@@ -6,15 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:04:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/04 17:50:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-#include <limits.h>
-
-#define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
-#define NO_HOME "minishell: cd: HOME not set\n"
 
 /**
  * @param env environment in linked list which is NULL
@@ -23,8 +19,7 @@
  * @param full NULL string to be filled with old_pwd=str
  * @brief assigns full and new to their values and adds them to
  * an empty list.
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
+ * @todo exit codes
 */
 static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 {
@@ -33,15 +28,12 @@ static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 
 	full = ft_strjoin("OLDPWD=", cwd);
 	if (full == NULL)
-		// mini_error("malloc", errno);
 		mini_error("", "E_MALLOC", head);
 	new = env_lstnew("OLDPWD", cwd, full, true);
 	if (new == NULL)
-		// mini_error("malloc", errno);
 		mini_error("", "E_MALLOC", head);
 	env_lstadd_back(env, new);
 	if (env == NULL)
-		// mini_error("malloc", errno);
 		mini_error("", "E_MALLOC", head);
 }
 
@@ -50,8 +42,6 @@ static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
  * @param str string containing old working directory string
  * @brief loops through environment till OLDPWD is found
  * changes env->value to value of str
- *  * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
 */
 static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
 {
@@ -62,7 +52,6 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
 		node = node->next;
 	if (node == NULL)
 	{
-		// reassign_old_pwd(env, cwd);
 		reassign_old_pwd(env, cwd, head);
 		return ;
 	}
@@ -75,9 +64,7 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
  * @brief stores home directory and changes to it
  * @todo do I need use no such file?
  * if !lst->next is uncommented it segfaults
- *  * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
- * 
+ * do I need the if statement?
 */
 void	home_dir(t_parser *lst, t_env **env)
 {
@@ -125,10 +112,6 @@ void	old_pwd(t_parser *lst, t_env **env)
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
  * @todo PATH_MAX not defined?
- * exits if no such file should pass exit code, goes to mini error
- * norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
- * 
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {

@@ -6,10 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:10:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/04 18:27:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -35,6 +34,15 @@
 # define CHILD 2
 # define HERE_DOC 3
 
+# define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
+# define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
+# define NO_HOME "minishell: cd: HOME not set\n"
+# define ARG_ERROR "minishell: %s: too many arguments\n"
+# define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
+# define INFILE_ERROR "minishell: %s: No such file or directory\n"
+# define DIR_MESSAGE "minishell: %s: Is a directory\n"
+# define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"
+
 // EXITCODES
 typedef enum e_exit
 {
@@ -48,20 +56,19 @@ typedef enum e_exit
 	E_FATAL_SIGNAL = 128,
 	E_CTRL_C = 130,
 	E_UNKNOWN = 225
-}					t_exit;
+}						t_exit;
 
-/**
- * @brief	struct containing variables needed for exit
- * @param	stat: int carrying exit status throughout program 
- * @param	code: enums to set exitcode at different
- * 			stages of process, saved to pass through the program
-*/
+// /**
+//  * @brief	struct containing variables needed for exit
+//  * @param	stat: int carrying exit status throughout program 
+//  * @param	code: enums to set exitcode at different
+//  * 			stages of process, saved to pass through the program
+// */
 // typedef struct s_estat
 // {
 // 	int				stat;
 // 	enum e_exit		code;
 // }				t_estat;
-
 
 /**
  * @brief	specifies the different variable types of tokens from the
@@ -97,7 +104,7 @@ typedef struct s_parser
 	enum e_exit			exit_code;
 	int					exit_stat;
 	struct s_parser		*next;
-}				t_parser;
+}							t_parser;
 
 /**
  * comment on the way
@@ -115,7 +122,7 @@ typedef struct s_expand
 	char				*h_d;
 	int					sign;
 	struct s_parser		*exit;
-}		t_expand;
+}							t_expand;
 
 /**
  * @brief	linked list containing the environment
@@ -150,15 +157,15 @@ typedef struct s_env
 */
 typedef struct s_execute
 {
-	pid_t			fork_pid;
-	int				pipe_left[2];
-	int				pipe_right[2];
-	char			**path;
-	char			**env_array;
-	int				in;
-	int				out;
-	int				count;
-	bool			error;
-}						t_execute;
+	pid_t				fork_pid;
+	int					pipe_left[2];
+	int					pipe_right[2];
+	char				**path;
+	char				**env_array;
+	int					in;
+	int					out;
+	int					count;
+	bool				error;
+}							t_execute;
 
 #endif
