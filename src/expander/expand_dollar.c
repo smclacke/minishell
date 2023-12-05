@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 13:36:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 15:11:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ int	save_extra_string(t_expand *str, char *input, int i)
 	}
 	if (tmp && str->string)
 		str->expanded = ft_strjoin(tmp, str->string); // leakyyyy
+	/**
+	 * if (tmp && str->string)
+	 * 		str->expanded = ft_strjoin(tmp, str->string);
+	 * 		if (!str->expanded)
+	 * 			free(tmp);
+	 * 			return (0);
+	 * possible fix to check later for quotes
+	*/
 	free(tmp);
 	free(str->string);
 	return (i);
@@ -72,6 +80,7 @@ static void	dollar(t_expand *str, t_env **env)
 	int		i;
 
 	i = first_bit(str, str->input);
+	i = 0;
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
@@ -102,27 +111,29 @@ void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 	t_parser	*tmp;
 
 	tmp = lst;
-	str->input = set_expand_string(lst, str);
-	if (!str->input)
+	if (!set_expand_string(tmp, str))
 		return ;
-	if (str->sign == 1 || str->sign == 2 || str->sign == 3)
+	if (str->sign == CMD_X || str->sign == STR_X || str->sign == FILE_X)
 	{
+		str->expanded = NULL;
 		dollar(str, env);
-		if (str->sign == 1)
+		if (str->sign == CMD_X && str->expanded)
 		{
 			tmp->cmd = ft_strdup(str->expanded);
 			free(str->expanded);
 		}
-		else if (str->sign == 2)
+		else if (str->sign == STR_X && str->expanded)
 		{
 			tmp->str = ft_strdup(str->expanded);
 			free(str->expanded);
 		}
-		else if (str->sign == 3)
-		{	
+		else if (str->sign == FILE_X && str->expanded)
+		{
 			tmp->file = ft_strdup(str->expanded);
 			free(str->expanded);
 		}
+		if (!tmp->cmd || !tmp->str || !tmp->file || !str->expanded)
+			return ; // error || ??
 	}
-	lst = tmp;
+	free(tmp);
 }

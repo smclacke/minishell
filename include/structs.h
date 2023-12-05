@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 18:27:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 15:08:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@
 # define PARENT 1
 # define CHILD 2
 # define HERE_DOC 3
+
+# define CMD_X 1
+# define STR_X 2
+# define FILE_X 3
 
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
 # define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"

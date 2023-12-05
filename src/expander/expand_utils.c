@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 13:37:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 15:11:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,29 @@ int	get_check_value(t_expand *str, t_env **env)
 /**
  * @todo commmennntttt
 */
-char	*set_expand_string(t_parser *lst, t_expand *str)
+int	set_expand_string(t_parser *tmp, t_expand *str)
 {
-	t_parser		*tmp;
-
-	tmp = lst;
 	str->sign = 0;
+	str->input = NULL;
+	if (!tmp)
+		return (0);
 	if (tmp->cmd && ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
 	{
-		str->sign = 1;
+		str->sign = CMD_X;
 		str->input = tmp->cmd;
+		return (1);
 	}
 	else if (tmp->str && ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
 	{
-		str->sign = 2;
+		str->sign = STR_X;
 		str->input = tmp->str;
+		return (1);
 	}
 	else if (tmp->file && ft_strnstr(tmp->file, "$", ft_strlen(tmp->file)))
 	{
-		str->sign = 3;
+		str->sign = FILE_X;
 		str->input = tmp->file;
+		return (1);
 	}
-	return (str->input);
+	return (0);
 }
