@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/04 09:29:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 17:26:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 18:10:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,10 @@ char		*hd_expand(t_env **env, char *read_line)
 			str->string = ft_substr(read_line, start, end);
 			if (!str->string)
 				return (NULL);
-			if (str->expanded)
+			if (add_to_expand(str, str->string) == -1)
 			{
-				str->expanded = ft_strjoin(str->expanded, str->string);
-				if (!str->expanded)
-					return (NULL);
-			}
-			else
-			{
-				str->expanded = ft_strdup(str->string);
-				if (!str->expanded)
-					return (NULL);
+				printf("errorrrrrrr\n");
+				return (NULL);
 			}
 		}
 	}

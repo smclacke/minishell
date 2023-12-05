@@ -6,11 +6,40 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:11:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 18:06:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/shelly.h"
+
+int		add_to_expand(t_expand *str, char *copy_str)
+{
+	char	*tmp;
+
+	if (!copy_str)
+		return (-1);
+	tmp = str->expanded;
+	if (tmp)
+		str->expanded = ft_strjoin(tmp, copy_str);
+	else
+		str->expanded = ft_strdup(copy_str);
+	free(copy_str);
+	free(tmp);
+	if (!str->expanded)
+		return (-1);
+	return (0);
+}
+
+/**
+ * specifically for checking the values after dollar sign
+ * need to check if expandable if not another dollar, quote or space
+*/
+int	expandable_str(int c)
+{
+	if (!is_dollar_or_quote(c) && !ft_isspace(c))
+		return (1);
+	return (0);
+}
 
 int	is_dollar_or_quote(int c)
 {

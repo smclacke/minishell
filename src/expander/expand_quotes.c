@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:44:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 18:05:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	remove_quotes(char *str)
 	len = (ft_strlen(str) - 2);
 	new = (char *)malloc(sizeof(char) * (len + 1));
 	if (!new)
-		// mini_error("malloc noped", errno);
 		return ;
 	while (str[i])
 	{

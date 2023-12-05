@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 14:05:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 18:08:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,10 @@ int	squote_bit(t_expand *str, char *input, int i)
 			str->s_quote = ft_substr(tmp_input, start, end);
 			if (!str->s_quote)
 				return (0);
-			if (!str->expanded)
-				str->expanded = ft_strdup(str->s_quote);
-			else
-				str->expanded = ft_strjoin(tmp, str->s_quote);
-			if (!str->expanded)
+			if (add_to_expand(str, str->s_quote) == -1)
 			{
-				free(tmp);
-				free(str->s_quote);
-				return (0);
+				printf("errorrrrrrr\n");
+				return (-1);
 			}
 			return (i + 1);
 		}
@@ -60,39 +55,29 @@ int	squote_bit(t_expand *str, char *input, int i)
 /**
  * @todo make it do the thing, norm it, leak proof it, comment it, error it
 */
-void	dollar_expand(t_expand *str, t_env **env)
+int	dollar_expand(t_expand *str, t_env **env)
 {
 	char		*tmp;
 
 	str->tmp = ft_strtrim(str->dollar, "$");
 	free(str->dollar);
 	str->dollar = str->tmp;
-	// if (!str->tmp)
-	// 	return ;
 	// if (ft_strcmp(str->dollar, "?") == 0)
 	// 	handle_dq(str, env);
 	tmp = str->expanded;
-	if (get_check_value(str, env) == 0)
+	if ((get_check_value(str, env) == 0) && str->env_val)
 	{
-		if (str->env_val)
+		if (add_to_expand(str, str->env_val) == -1)
 		{
-			if (tmp)
-				str->expanded = ft_strjoin(tmp, str->env_val); // leakkkyyy
-			else
-				str->expanded = ft_strdup(str->env_val); // leakyyyyy
-			if (!str->expanded)
-			{
-				free(str->env_val);
-				free(tmp);
-				free(str->tmp);
-				return ;
-			}
+			printf("errorrrrrrr\n");
+			return (-1);
 		}
 	}
 	if (!str->env_val)
 		str->expanded = ft_strdup(" ");
 	free(str->env_val);
 	free(str->tmp);
+	return (0);
 }
 
 /**
@@ -105,10 +90,22 @@ int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 
 	start = i;
 	end = 0;
-	while (input[i] && !is_dollar_or_quote(input[i]))
-		i++;
-	end = i - start;
-	str->dollar = ft_substr(input, start, end);
-	dollar_expand(str, env);
+	if (input[i] && expandable_str(input[i]))
+	{
+		while (input[i] && expandable_str(input[i]))
+			i++;
+		end = i - start;
+		str->dollar = ft_substr(input, start, end);
+		if (dollar_expand(str, env) == -1)
+			return (-1);
+	}
+	else
+	{
+		if (add_to_expand(str, "$") == -1)
+		{
+			printf("errorrrrrrr\n");
+			return (-1);
+		}
+	}
 	return (i);
 }

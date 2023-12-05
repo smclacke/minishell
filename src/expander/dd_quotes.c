@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:56:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 18:09:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ static int	first_str_bit(t_expand *str, char *input)
 		if (i == 0)
 			return (0);
 		str->tmp = ft_substr(input, 0, i);
-		if (str->tmp && str->expanded)
-			str->expanded = ft_strjoin(str->expanded, str->tmp);
-		else if (str->tmp && !str->expanded)
-			str->expanded = ft_strdup(str->tmp);
+		if (add_to_expand(str, str->tmp) == -1)
+		{
+			printf("errorrrrrrr\n");
+			return (-1);
+		}
 		free(str->tmp);
 		if (!str->expanded)
 			return (0);
@@ -36,24 +37,7 @@ static int	first_str_bit(t_expand *str, char *input)
 	return (i);
 }
 
-static int	dollar_double(t_expand *str, char *input, t_env **env, int i)
-{
-	int	start;
-	int	end;
-
-	start = i;
-	end = 0;
-	while (input[i] && !is_dollar_or_quote(input[i]) && !ft_isspace(input[i]))
-		i++;
-	end = i - start;
-	str->dollar = ft_substr(input, start, end);
-	dollar_expand(str, env);
-	if (!str->expanded)
-		return (ERROR);
-	return (i);
-}
-
-static void	handle_double(t_expand *str, char *input, t_env **env)
+static int	handle_double(t_expand *str, char *input, t_env **env)
 {
 	int		i;
 	int		start;
@@ -63,20 +47,13 @@ static void	handle_double(t_expand *str, char *input, t_env **env)
 	while (input[i])
 	{
 		if (ft_dollar(input[i]))
-			i = dollar_double(str, input, env, (i + 1));
+			i = dollar_bit(str, input, env, (i + 1));
 		if (input[i] && ft_issquote(input[i]))
 		{
-			if (str->expanded)
+			if (add_to_expand(str, SINGLE_Q) == -1)
 			{
-				str->expanded = ft_strjoin(str->expanded, SINGLE_Q);
-				if (!str->expanded)
-					return ;
-			}
-			else
-			{
-				str->expanded = ft_strdup(SINGLE_Q);
-				if (!str->expanded)
-					return ;
+				printf("errorrrrrrr\n");
+				return (-1);
 			}
 			i++;
 		}
@@ -85,6 +62,7 @@ static void	handle_double(t_expand *str, char *input, t_env **env)
 		if (!input[i])
 			break ;
 	}
+	return (0);
 }
 
 int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
@@ -100,11 +78,12 @@ int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 		{
 			end = i - start;
 			str->d_quote = ft_substr(input, start, end);
-			handle_double(str, str->d_quote, env);
+			if (handle_double(str, str->d_quote, env) == -1)
+				return (-1);
 			free(str->d_quote);
 			return (i + 1);
 		}
 		i++;
 	}
-	return (i); //error oder?
+	return (-1); //error oder?
 }

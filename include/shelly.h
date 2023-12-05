@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:12:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 18:08:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int				dquote_bit(t_expand *str, char *input, t_env **env, int i);
 
 //----------------- dollar_s_quote ------------------//
 int				squote_bit(t_expand *str, char *input, int i);
-void			dollar_expand(t_expand *str, t_env **env);
+int				dollar_expand(t_expand *str, t_env **env);
 int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
 
 //------------------- expand_dollar --------------------//
@@ -117,6 +117,8 @@ int				quote_type(int str);
 void			expand_quotes(t_parser *tokens);
 
 //------------------ expand_utils ------------------//
+int				add_to_expand(t_expand *str, char *copy_str);
+int				expandable_str(int c);
 int				is_dollar_or_quote(int c);
 int				get_check_value(t_expand *str, t_env **env);
 int				set_expand_string(t_parser *tmp, t_expand *str);
