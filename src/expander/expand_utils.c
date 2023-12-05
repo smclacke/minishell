@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 18:06:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 19:17:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ int		add_to_expand(t_expand *str, char *copy_str)
 
 	if (!copy_str)
 		return (-1);
-	tmp = str->expanded;
-	if (tmp)
-		str->expanded = ft_strjoin(tmp, copy_str);
+	// tmp = str->expanded;
+	if (str->expanded)
+		tmp = ft_strjoin(str->expanded, copy_str);
 	else
-		str->expanded = ft_strdup(copy_str);
+		tmp = ft_strdup(copy_str);
+	free(str->expanded);
+	str->expanded = tmp;
 	free(copy_str);
-	free(tmp);
+	// free(tmp);
 	if (!str->expanded)
 		return (-1);
 	return (0);
@@ -70,7 +72,10 @@ int	get_check_value(t_expand *str, t_env **env)
 			len = ft_strlen(head->value);
 			str->env_val = ft_substr(head->value, 0, len);
 			if (!str->env_val)
+			{
+				free(str->env_val);
 				return (1);
+			}
 			return (0);
 		}
 		head = head->next;
@@ -81,10 +86,13 @@ int	get_check_value(t_expand *str, t_env **env)
 /**
  * @todo commmennntttt
 */
-int	set_expand_string(t_parser *tmp, t_expand *str)
+int	set_expand_string(t_parser *lst, t_expand *str)
 {
+	t_parser	*tmp;
+
 	str->sign = 0;
 	str->input = NULL;
+	tmp = lst;
 	if (!tmp)
 		return (0);
 	if (tmp->cmd && ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))

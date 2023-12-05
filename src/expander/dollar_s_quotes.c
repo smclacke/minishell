@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 18:08:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 19:23:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int	squote_bit(t_expand *str, char *input, int i)
 */
 int	dollar_expand(t_expand *str, t_env **env)
 {
-	char		*tmp;
-
+	// if (ft_strcmp(str->dollar, "$?") == 0)
+	// {
+	// 	handle_dq(str, env);
+	// 	return (0);
+	// }
 	str->tmp = ft_strtrim(str->dollar, "$");
 	free(str->dollar);
 	str->dollar = str->tmp;
-	// if (ft_strcmp(str->dollar, "?") == 0)
-	// 	handle_dq(str, env);
-	tmp = str->expanded;
 	if ((get_check_value(str, env) == 0) && str->env_val)
 	{
 		if (add_to_expand(str, str->env_val) == -1)
@@ -74,8 +74,7 @@ int	dollar_expand(t_expand *str, t_env **env)
 		}
 	}
 	if (!str->env_val)
-		str->expanded = ft_strdup(" ");
-	free(str->env_val);
+		str->expanded = ft_strdup(""); // add to expand
 	free(str->tmp);
 	return (0);
 }

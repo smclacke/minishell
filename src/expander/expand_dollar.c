@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 17:21:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 19:12:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static void	dollar(t_expand *str, t_env **env)
 	int		i;
 
 	i = first_bit(str, str->input);
-	i = 0;
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
@@ -106,33 +105,38 @@ static void	dollar(t_expand *str, t_env **env)
  * @todo	when expanding a non expandable... need an empty string but this was 
  * causing problems...
 */
-void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
+void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
 {
 	t_parser	*tmp;
 
 	tmp = lst;
-	if (!set_expand_string(tmp, str))
+	if (!tmp)
+		return ; // error, idgaf
+	if (!set_expand_string(lst, str))
 		return ;
 	if (str->sign == CMD_X || str->sign == STR_X || str->sign == FILE_X)
 	{
 		str->expanded = NULL;
 		dollar(str, env);
-		if (str->sign == CMD_X && str->expanded)
+		if (!str->expanded)
+			return ;
+		if (str->sign == CMD_X)
 		{
 			tmp->cmd = ft_strdup(str->expanded);
-			free(str->expanded);
+			// free(str->expanded);
 		}
-		else if (str->sign == STR_X && str->expanded)
+		else if (str->sign == STR_X)
 		{
-			tmp->str = ft_strdup(str->expanded);
-			free(str->expanded);
+			tmp->str = str->expanded;
+			// tmp->str = ft_strdup(str->expanded);
+			// free(str->expanded);
 		}
-		else if (str->sign == FILE_X && str->expanded)
+		else if (str->sign == FILE_X)
 		{
 			tmp->file = ft_strdup(str->expanded);
-			free(str->expanded);
+			// free(str->expanded);
 		}
-		if (!tmp->cmd || !tmp->str || !tmp->file || !str->expanded)
+		if (!tmp->cmd || !tmp->str || !tmp->file)
 			return ; // error || ??
 	}
 	free(tmp);
