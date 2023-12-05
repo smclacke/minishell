@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 18:02:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 13:36:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ static void	dollar(t_expand *str, t_env **env)
 /**
  * adding expanded str back into correct parser struct var
  * @todo comment
+ * @todo	when expanding a non expandable... need an empty string but this was 
+ * causing problems...
 */
 void	expand_dollar(t_parser *lst, t_env **env, t_expand *str)
 {

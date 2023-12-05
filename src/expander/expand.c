@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 17:59:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/05 13:39:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	ft_expand(t_parser *tokens, t_env **env)
 	t_parser	*lst;
 	t_expand	*str;
 
-	print_the_full_thing(tokens);
-	printf("\n\n\n");
 	lst = tokens;
 	str = (t_expand *)malloc(sizeof(*str));
 	if (!str)
@@ -37,7 +35,6 @@ void	ft_expand(t_parser *tokens, t_env **env)
 		expand_dollar(lst, env, str);
 		lst = lst->next;
 	}
-	print_the_full_thing(tokens);
 	tokens = lst;
 	free(str);
 	free(lst);
