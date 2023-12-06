@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 17:39:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 19:45:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void	home_check(t_parser *lst, t_env **env)
 /**
  * @param lst t_parser linked list
  * @brief checks if cmd exist, and if there is a str input after it
+ * @todo check error
 */
 static bool	input_check(t_parser *lst)
 {
@@ -77,7 +78,8 @@ static bool	input_check(t_parser *lst)
 	temp = lst;
 	if (!temp->cmd)
 	{
-		mini_error("temp->cmd", E_USAGE, lst);
+		// mini_error("temp->cmd", E_USAGE, lst);
+		mini_error(E_USAGE, lst);
 		return (false);
 	}
 	if (!temp->next || temp->next->meta)

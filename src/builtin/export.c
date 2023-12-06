@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 16:26:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 18:05:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,17 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * var="test"
  * als nieuwe value heeft overschrijven
  * als nieuwe geen value heeft niet overschrijven
+ * 
+ * export test3=$HOME
+ * should not be expanded when only export but shows
+ * test3="$HOME"
+ * 
+ * env does show the expanded version.
+ * 
+ * export ls="ls -l"
+ * $ls
+ * Executes $ls to ls -l and executes it (wait for sarah)
+ * 
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -107,7 +118,7 @@ void	ft_export(t_parser *node, t_env **env)
 		return ;
 	}
 	node = node->next;
-	while (node && node->str)
+	while (node && node->str != NULL)
 	{
 		if (word_check(node) == 1)
 			return ;

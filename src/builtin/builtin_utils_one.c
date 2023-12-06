@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 20:30:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 19:44:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_all(t_env *env)
 void	do_builtin(t_parser *node, t_env **env)
 {
 	if (!node->cmd)
-		mini_error("parser", E_GENERAL, node);
+		mini_error(E_GENERAL, node);
 	else if (mini_strcmp(node->cmd, "echo") == 0)
 		ft_echo(node, env);
 	else if (mini_strcmp(node->cmd, "cd") == 0)
@@ -92,7 +92,15 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * else give error export d@@=haha
  * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
- * @return true if nothing wrong found with the words
+ * @return true if wrong found with the words
+ * @todo the !word error part is for this edge case :
+ * export "" test=a
+ * 
+ * but comprimises this edge case which didnt work before
+ * but now doesnt work in a different way:
+ * export var=a
+ * export $var=test
+ * echo $var $a
 */
 bool	word_check(t_parser *lst)
 {
@@ -101,17 +109,20 @@ bool	word_check(t_parser *lst)
 	char		*cmd;
 
 	cmd = lst->cmd;
-	// temp = lst->next;
 	temp = lst;
 	words = null_check(temp);
 	if (!words)
+	{
+		put_custom_error(lst, "export");
+		mini_error(E_GENERAL, lst);
 		return (true);
+	}
 	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
 	{
 		put_custom_error(temp, cmd);
 		return (true);
 	}
-	if (key_value_check(temp, words, cmd) == 1)
+	if (key_value_check(temp, words, "export") == 1)
 	{
 		ft_free_arr(words);
 		return (true);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 17:51:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 20:22:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,29 @@ void	put_permission_error(t_parser *node)
 void	no_such_file(t_parser *lst)
 {
 	dprintf(STDERR_FILENO, NO_SUCH_THING, lst->str);
-	mini_error("", E_GENERAL, lst);
+	mini_error(E_GENERAL, lst);
 }
 
 /**
- * @param string argument given to perror
  * @param error int errno given to exit
  * @brief provides correct error message and exits
- * @todo is this function okay?
+ * @todo is this function okay? do I need to exit?
 */
-void	mini_error(char *error, int exit_enum, t_parser *lst)
+void	mini_error(int exit_enum, t_parser *lst)
 {
-	ft_putstr(error);
 	lst->exit_code = exit_enum;
+	exit(exit_enum);
 }
+
+// /**
+//  * @param string argument given to perror
+//  * @param error int errno given to exit
+//  * @brief provides correct error message and exits
+//  * @todo is this function okay?
+// */
+// void	mini_error_(char *error, int exit_enum, t_parser *lst)
+// {
+// 	printf("here?\n");
+// 	// ft_putstr(error);
+// 	lst->exit_code = exit_enum;
+// }

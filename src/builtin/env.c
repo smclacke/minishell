@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:16:24 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 17:40:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 19:51:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	ft_env(t_env *env, t_parser *lst)
 	head = env;
 	if (lst->next && lst->next->str)
 	{
-		mini_error(NOT_POSSIBLE, E_COMMAND_NOT_FOUND, lst);
+		ft_putstr(NOT_POSSIBLE);
+		mini_error(E_COMMAND_NOT_FOUND, lst);
 		return ;
 	}
 	while (head != NULL)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 16:23:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 19:43:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ void			put_execute_error(t_parser *node);
 void			put_permission_error(t_parser *node);
 
 //----Utils----//
-void			mini_error(char *error, int exit_enum, t_parser *lst);
+void			mini_error(int exit_enum, t_parser *lst);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
 void			free_strs(char *str, char *str2);

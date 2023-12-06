@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:54:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 21:24:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 	data->fork_pid = fork();
 	handle_signals(CHILD);
 	if (data->fork_pid == -1)
-		mini_error("fork", E_GENERAL, lst);
+		mini_error(E_GENERAL, lst);
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
 }
@@ -83,6 +83,8 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
+ * @todo printte niet de hoi met de oude if statement
+ * nu gaat het mis in check_access, strange want het is een redirect
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -93,8 +95,10 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 	i = 0;
 	while (lst)
 	{
-		if (count >= 1 && lst->cmd)
+		// if (count >= 1 && lst->cmd)
+		if ((count >= 1 && lst->cmd) || (count == 0 && lst->meta))
 		{
+			printf("hoi\n");
 			init_pipe(i, count, data, lst);
 			init_fork(lst, env, data);
 			close_between(data, lst);

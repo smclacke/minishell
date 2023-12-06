@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 19:59:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 19:47:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**null_check(t_parser *temp)
 	words = NULL;
 	words = ft_split(temp->str, '=');
 	if (words == NULL)
-		mini_error("malloc split", E_GENERAL, temp);
+		mini_error(E_GENERAL, temp);
 	if (words[0] == NULL)
 	{
 		ft_free_arr(words);

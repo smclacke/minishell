@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 18:07:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 21:13:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@ bool	check_infile_stat(t_parser *node, t_execute *data)
 			if (data->in == -1)
 			{
 				dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, node->file);
-				return (false);
+				// return (false);
 			}
 			if (dup2(data->in, STDIN_FILENO) == 0)
 				close(data->in);
 		}
 		if (S_ISDIR(file_stat.st_mode))
 			dprintf(STDERR_FILENO, DIR_MESSAGE, node->file);
+			// return (false);
 		else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
 			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, node->file);
+			// return (false);
 	}
 	return (true);
 }
@@ -56,7 +58,7 @@ bool	redirect_infile(t_parser *head, t_execute *data)
 		if (access(head->file, F_OK) != 0)
 		{
 			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->file);
-			return (false);
+			// return (false);
 		}
 		if (check_infile_stat(head, data) == false)
 			return (false);
@@ -68,6 +70,7 @@ bool	redirect_infile(t_parser *head, t_execute *data)
  * @param head parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function
+ * @todo check returns
 */
 void	redirect_outfile(t_parser *head, t_execute *data)
 {
@@ -89,6 +92,7 @@ void	redirect_outfile(t_parser *head, t_execute *data)
 				data->out = open(head->file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 			if (S_ISDIR(file_stat.st_mode))
 				dprintf(STDERR_FILENO, DIR_MESSAGE, head->file);
+				// return ;
 		}
 		if (dup2(data->out, STDOUT_FILENO) == 0)
 			close(data->out);
@@ -124,7 +128,7 @@ bool	check_redirect(t_parser *node)
  * if file does not exist, it will be created. 
  * if it does exist, the output of command is appended 
  * to the end of the file, preserving the existing content.
- * @todo check the dprintf message
+ * @todo check the dprintf message and returns
 */
 void	redirect_append(t_parser *head, t_execute *data)
 {
@@ -146,6 +150,7 @@ void	redirect_append(t_parser *head, t_execute *data)
 				data->out = open(head->file, O_CREAT | O_RDWR | O_APPEND, 0644);
 			if (S_ISDIR(file_stat.st_mode))
 				dprintf(STDERR_FILENO, "%s is a directory\n", head->file);
+				// return ;
 		}
 		if (dup2(data->out, STDOUT_FILENO) == 0)
 			close(data->out);

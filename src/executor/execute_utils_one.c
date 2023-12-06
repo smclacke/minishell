@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:03 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:53:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 19:47:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	init_pipes_child(t_execute *data, t_parser *lst)
 {
 	if (data->pipe_right[WRITE] != -1)
 		if (dup2(data->pipe_right[WRITE], STDOUT_FILENO) == -1)
-			mini_error("dup2", E_GENERAL, lst);
+			mini_error(E_GENERAL, lst);
 	if (data->pipe_left[READ] != -1)
 		if (dup2(data->pipe_left[READ], STDIN_FILENO) == -1)
-			mini_error("dup2", E_GENERAL, lst);
+			mini_error(E_GENERAL, lst);
 	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE]) == -1)
-		mini_error("dup2", E_GENERAL, lst);
+		mini_error(E_GENERAL, lst);
 	if (data->pipe_right[READ] != -1 && close(data->pipe_right[READ]) == -1)
-		mini_error("dup2", E_GENERAL, lst);
+		mini_error(E_GENERAL, lst);
 }
 
 /**
@@ -45,7 +45,7 @@ void	init_pipe(int i, int count, t_execute *data, t_parser *lst)
 		if (count == 1)
 			return ;
 		if (pipe(data->pipe_right) == -1)
-			mini_error("pipe_right", E_GENERAL, lst);
+			mini_error(E_GENERAL, lst);
 		return ;
 	}
 	data->pipe_left[READ] = data->pipe_right[READ];
@@ -54,7 +54,7 @@ void	init_pipe(int i, int count, t_execute *data, t_parser *lst)
 	data->pipe_right[WRITE] = -1;
 	if (count > 1)
 		if (pipe(data->pipe_right) == -1)
-			mini_error("pipe_right", E_GENERAL, lst);
+			mini_error(E_GENERAL, lst);
 }
 
 /**
@@ -65,11 +65,11 @@ void	init_pipe(int i, int count, t_execute *data, t_parser *lst)
 void	close_between(t_execute *data, t_parser *lst)
 {
 	if (data->pipe_left[READ] != -1 && close(data->pipe_left[READ]) == -1)
-		mini_error("close", E_GENERAL, lst);
+		mini_error(E_GENERAL, lst);
 	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE]) == -1)
-		mini_error("close", E_GENERAL, lst);
+		mini_error(E_GENERAL, lst);
 	if (data->pipe_right[WRITE] != -1 && close(data->pipe_right[WRITE]) == -1)
-		mini_error("close", E_GENERAL, lst);
+		mini_error(E_GENERAL, lst);
 	data->pipe_left[READ] = -1;
 	data->pipe_left[WRITE] = -1;
 	data->pipe_right[WRITE] = -1;
@@ -83,11 +83,11 @@ void	close_between(t_execute *data, t_parser *lst)
 void	close_all(t_execute *data, t_parser *lst)
 {
 	if (data->pipe_left[READ] != -1 && close(data->pipe_left[READ]) == -1)
-		mini_error ("close", E_GENERAL, lst);
+		mini_error (E_GENERAL, lst);
 	if (data->pipe_left[WRITE] != -1 && close(data->pipe_left[WRITE]) == -1)
-		mini_error ("close", E_GENERAL, lst);
+		mini_error (E_GENERAL, lst);
 	if (data->pipe_right[WRITE] != -1 && close(data->pipe_right[WRITE]) == -1)
-		mini_error ("close", E_GENERAL, lst);
+		mini_error (E_GENERAL, lst);
 	if (data->pipe_right[READ] != -1 && close(data->pipe_right[READ]) == -1)
-		mini_error ("close", E_GENERAL, lst);
+		mini_error (E_GENERAL, lst);
 }
