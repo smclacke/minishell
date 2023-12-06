@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 19:43:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 14:47:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	save_extra_string(t_expand *str, char *input, int i)
 
 	start = i;
 	tmp = str->expanded;
+	printf("are you the problem?\n");
 	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
 	end = i;
@@ -111,7 +112,7 @@ void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
 
 	tmp = lst;
 	if (!tmp)
-		return ; // error, idgaf
+		return ; // error oder??
 	if (!set_expand_string(lst, str))
 		return ;
 	if (str->sign == CMD_X || str->sign == STR_X || str->sign == FILE_X)
@@ -121,23 +122,11 @@ void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
 		if (!str->expanded)
 			return ;
 		if (str->sign == CMD_X)
-		{
 			tmp->cmd = str->expanded;
-			// tmp->cmd = ft_strdup(str->expanded);
-			// free(str->expanded);
-		}
 		else if (str->sign == STR_X)
-		{
 			tmp->str = str->expanded;
-			// tmp->str = ft_strdup(str->expanded);
-			// free(str->expanded);
-		}
 		else if (str->sign == FILE_X)
-		{
 			tmp->file = str->expanded;
-			// tmp->file = ft_strdup(str->expanded);
-			// free(str->expanded);
-		}
 		if (!tmp->cmd || !tmp->str || !tmp->file)
 			return ; // error || ??
 	}
