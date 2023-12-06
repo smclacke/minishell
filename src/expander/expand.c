@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 19:27:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 14:02:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_expand(t_parser *tokens, t_env **env)
 	t_expand	str;
 
 
-	print_the_full_thing(tokens);
-	printf("\n\n\n\n");
+	// print_the_full_thing(tokens);
+	// printf("\n\n\n\n");
 	
 	
 	tmp_tokens = tokens;
@@ -44,5 +44,5 @@ void	ft_expand(t_parser *tokens, t_env **env)
 	free(tmp_tokens);
 
 	
-	print_the_full_thing(tokens);
+	// print_the_full_thing(tokens);
 }

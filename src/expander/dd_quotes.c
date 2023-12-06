@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 18:09:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 14:06:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	handle_double(t_expand *str, char *input, t_env **env)
 			i = dollar_bit(str, input, env, (i + 1));
 		if (input[i] && ft_issquote(input[i]))
 		{
-			if (add_to_expand(str, SINGLE_Q) == -1)
+			if (add_to_expand(str, "\'") == -1)
 			{
 				printf("errorrrrrrr\n");
 				return (-1);

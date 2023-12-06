@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 19:17:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 14:09:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		add_to_expand(t_expand *str, char *copy_str)
 
 	if (!copy_str)
 		return (-1);
-	// tmp = str->expanded;
 	if (str->expanded)
 		tmp = ft_strjoin(str->expanded, copy_str);
 	else
@@ -26,7 +25,6 @@ int		add_to_expand(t_expand *str, char *copy_str)
 	free(str->expanded);
 	str->expanded = tmp;
 	free(copy_str);
-	// free(tmp);
 	if (!str->expanded)
 		return (-1);
 	return (0);
@@ -97,18 +95,21 @@ int	set_expand_string(t_parser *lst, t_expand *str)
 		return (0);
 	if (tmp->cmd && ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
 	{
+		// set_input and sign()
 		str->sign = CMD_X;
 		str->input = tmp->cmd;
 		return (1);
 	}
 	else if (tmp->str && ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
 	{
+		// set_input and sign()
 		str->sign = STR_X;
 		str->input = tmp->str;
 		return (1);
 	}
 	else if (tmp->file && ft_strnstr(tmp->file, "$", ft_strlen(tmp->file)))
 	{
+		// set_input and sign()
 		str->sign = FILE_X;
 		str->input = tmp->file;
 		return (1);
