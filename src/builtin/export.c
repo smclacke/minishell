@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 20:40:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/06 16:26:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,3 +118,13 @@ void	ft_export(t_parser *node, t_env **env)
 		node = node->next;
 	}
 }
+
+
+/*
+
+if key already exists but has no value
+and that key is adjusted treat it as if it has no value but print the value in declare x
+
+adjust in print function?
+
+*/
