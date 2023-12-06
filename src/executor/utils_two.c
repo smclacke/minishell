@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/04 18:08:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/05 15:54:32 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	**get_argv(t_parser *lst)
 	i = count_words(temp);
 	new_str = (char **)malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
-		mini_error("malloc", "E_MALLOC", lst);
+		mini_error("malloc", E_MALLOC, lst);
 	temp = lst->next;
 	new_str[0] = lst->cmd;
 	i = 1;

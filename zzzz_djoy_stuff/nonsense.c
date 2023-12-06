@@ -146,3 +146,70 @@
 // 	}
 // 	return (0);
 // }
+
+
+
+/*
+echo code instead of input check
+*/
+
+	// if (!temp->cmd)
+	// 	mini_error("temp->cmd", E_USAGE, lst);
+	// if (!temp->next || temp->next->meta)
+	// {
+	// 	write(1, "\n", 1);
+	// 	lst->exit_code = E_USAGE;
+	// 	return ;
+	// }
+
+
+
+
+// /**
+//  * @param node pointer to node in list given in the form of a string
+//  * @param env pointer to linked list
+//  * @brief export with no options, learned that double free 
+//  * with freeing in an unrelated spot 
+//  * might be overwriting a pointer and not allocating a new string.
+// */
+// void	ft_export(t_parser *node, t_env **env)
+// {
+// 	char	*new_key;
+// 	char	*new_value;
+
+// 	new_key = NULL;
+// 	new_value = NULL;
+// 	if (!node->next || node->n_cmd != 1)
+// 	{
+// 		export_print(*env);
+// 		return ;
+// 	}
+// 	if (space_check(node) == 1)
+// 		return ;
+// 	if (word_check(node) == 1)
+// 		return ;
+// 	node = node->next;
+// 	if (reassign_env(env, node, new_key, new_value) == 1)
+// 		return ;
+// 	make_node(node, env, new_key, new_value);
+// }
+
+
+// /**
+//  * @param lst  parser linked list
+//  * @brief checks if there's an space in the next node.
+// */
+// static int	space_check(t_parser *lst)
+// {
+// 	t_parser	*temp;
+
+// 	// temp = lst->next;
+// 	temp = lst;
+// 	if (temp->next)
+// 	{
+// 		temp = temp->next;
+// 		put_custom_error(temp, "export");
+// 		return (1);
+// 	}
+// 	return (0);
+// }

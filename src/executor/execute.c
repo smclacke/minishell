@@ -6,9 +6,10 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/05 14:22:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 16:24:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/shelly.h"
 
@@ -30,13 +31,13 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 		{
 			temp_path = ft_substr(env->value, 0, ft_strlen(env->value));
 			if (temp_path == NULL)
-				mini_error ("", "E_MALLOC", node);
+				mini_error ("", E_MALLOC, node);
 			data->path = ft_split(temp_path, ':');
 			if (data->path == NULL)
-				mini_error ("", "E_MALLOC", node);
+				mini_error ("", E_MALLOC, node);
 			free (temp_path);
 			if (data->path == NULL)
-				mini_error ("", "E_MALLOC", node);
+				mini_error ("", E_MALLOC, node);
 			return (true);
 		}
 		env = env->next;
@@ -64,10 +65,10 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 		{
 			command = ft_strjoin("/", node->cmd);
 			if (command == NULL)
-				mini_error ("", "E_MALLOC", node);
+				mini_error ("", E_MALLOC, node);
 			ok_path = ft_strjoin(data->path[i], command);
 			if (command == NULL)
-				mini_error ("", "E_MALLOC", node);
+				mini_error ("", E_MALLOC, node);
 			free(command);
 			if (access(ok_path, F_OK) == 0)
 				return (ok_path);
@@ -111,7 +112,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	}
 	data->env_array = list_to_string(*env, lst);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
-		mini_error ("execve", "E_GENERAL", lst);
+		mini_error ("execve", E_GENERAL, lst);
 	exit (0);
 }
 
@@ -126,7 +127,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
 	if (!lst)
-		mini_error ("", "E_GENERAL", lst);
+		mini_error ("", E_GENERAL, lst);
 	init_heredoc(lst, env);
 	if (single_builtin_cmd(lst, env, data) == true)
 		return ;
@@ -149,7 +150,7 @@ void	execute(t_env **env, t_parser *lst)
 
 	data = malloc(sizeof(t_execute));
 	if (data == NULL)
-		mini_error ("execve", "E_GENERAL", lst);
+		mini_error ("execve", E_GENERAL, lst);
 	init_execute_struct(data);
 	ft_expand(lst, env);
 	build(lst, env, data);

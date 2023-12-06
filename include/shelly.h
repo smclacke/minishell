@@ -6,9 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 18:32:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 16:23:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #ifndef SHELLY_H
@@ -159,11 +160,12 @@ void			ft_cd(t_parser *lst, t_env **env);
 bool			too_many_args(t_parser *lst);
 void			no_such_file(t_parser *lst);
 void			put_custom_error(t_parser *node, char *cmd);
-void			ft_echo(t_parser *lst);
-void			ft_env(t_env *env);
+void			ft_echo(t_parser *lst, t_env **env);
+void			ft_env(t_env *env, t_parser *lst);
 void			ft_exit(t_parser *lst);
 void			ft_pwd(t_parser *head);
 void			ft_export(t_parser *lst, t_env **env);
+char			**null_check(t_parser *temp);
 void			make_node(t_parser *node, t_env **env, char *n_k, char *n_v);
 void			replace_str(t_env *head, t_parser *node, char *n_k, char *n_v);
 void			ft_unset(t_parser *lst, t_env **env);
@@ -188,7 +190,7 @@ void			put_execute_error(t_parser *node);
 void			put_permission_error(t_parser *node);
 
 //----Utils----//
-void			mini_error(char *error, char *exit_enum, t_parser *lst);
+void			mini_error(char *error, int exit_enum, t_parser *lst);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
 void			free_strs(char *str, char *str2);

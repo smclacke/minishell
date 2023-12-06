@@ -6,9 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 15:08:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 16:23:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -38,6 +39,7 @@
 # define STR_X 2
 # define FILE_X 3
 
+# define NOT_POSSIBLE "minishell: env: no such file or directory\n"
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
 # define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
 # define NO_HOME "minishell: cd: HOME not set\n"
