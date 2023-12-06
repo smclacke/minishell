@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 14:48:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 15:06:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ int	squote_bit(t_expand *str, char *input, int i)
 // 	str->expanded = ft_strjoin(str->expanded, str->exit->exit_str);
 // }
 
-/**
- * @todo make it do the thing, norm it, leak proof it, comment it, error it
-*/
 int	dollar_expand(t_expand *str, t_env **env)
 {
 	// if (ft_strcmp(str->dollar, "$?") == 0)
@@ -79,9 +76,6 @@ int	dollar_expand(t_expand *str, t_env **env)
 	return (0);
 }
 
-/**
- * dollar_bit, if dollar not in quotations
-*/
 int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 {
 	int		start;

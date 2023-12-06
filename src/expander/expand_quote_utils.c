@@ -6,15 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 09:03:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 15:06:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @brief	are there any quotes?
-*/
 int	check_quotes(char *str)
 {
 	int	i;

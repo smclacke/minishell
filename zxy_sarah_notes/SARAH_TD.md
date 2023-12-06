@@ -39,23 +39,49 @@ for in the future... don't change utils... ever.
 
 **TO DO**
 
+-> minibleh:echo something'$USER$LESS'"hi"whatwhat
+	something$USER$LESSwhatwhat
+	 // where did hi go??
+-> stress testing the expander + checking all for leaks
+
 SIGNALSSSSh 
  ---> heredoc still weird, two prompt with signal
 
 EXPANSION
  ---> $? ***, test once exit codes are good
- ---> leaks  :) :)
 
-EXIT AND ERRORS
- ---> fix all errors and exit codes
-		which exit code for malloc failure? + error message?
-		func(s) with template to handle all... keep it uniform, what we doing with exit codes?
+=================================================================
+
+**PROBLEM**
+
+minibleh:echo '$USER'"hi"hehe'
+
+==3355238==ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffc1c4bcd60 in thread T0
+    #0 0x49a032 in free (/home/smclacke/Desktop/minishell/minishell+0x49a032)
+    #1 0x4d3421 in squote_bit /home/smclacke/Desktop/minishell/src/expander/dollar_s_quotes.c:43:2
+    #2 0x4d2deb in dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:89:8
+    #3 0x4d27ff in expand_dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:120:3
+    #4 0x4d009c in ft_expand /home/smclacke/Desktop/minishell/src/expander/expand.c:31:3
+    #5 0x4d865b in execute /home/smclacke/Desktop/minishell/src/executor/execute.c:154:2
+    #6 0x4cb5dd in main /home/smclacke/Desktop/minishell/src/main.c:66:3
+    #7 0x7f9b6a623d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #8 0x7f9b6a623e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #9 0x41f3d4 in _start (/home/smclacke/Desktop/minishell/minishell+0x41f3d4)
 
 ***************************************************************************
 ***************************************************************************
 ***************************************************************************
-LEAKKKKSSSSSSS
+**LEAKKKKSSSSSSS**
 
+
+===========================================
+
+
+---------------------------------------------------------------------------------
+=================================================================
+
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
+=================================================================
 
 minibleh:echo '$USER'
 [0]	 cmd = echo	file = (null)	meta = (null)	str = (null)
@@ -165,19 +191,8 @@ Direct leak of 7 byte(s) in 1 object(s) allocated from:
 
 SUMMARY: AddressSanitizer: 110 byte(s) leaked in 10 allocation(s).
 make: *** [Makefile:92: run] Error 1
-
-===========================================
-===========================================
-===========================================
-
-=================================================================
-
-
----------------------------------------------------------------------------------
-
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
-
 -----------------------------------------------------------------------------
+===========================================
 // EXPANSION YAY
 
 // dollar handling, then dollar and quotes, then here_doc...

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 14:58:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 15:16:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	first_str_bit(t_expand *str, char *input)
 	i = 0;
 	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
+	
 	if (is_dollar_or_quote(input[i]))
 	{
 		if (i == 0)
@@ -29,10 +30,15 @@ static int	first_str_bit(t_expand *str, char *input)
 			printf("errorrrrrrr\n");
 			return (-1);
 		}
-		free(str->tmp); // i think double freeing here
 		if (!str->expanded)
 			return (0);
 	}
+	else
+		if (add_to_expand(str, input) == -1)
+		{
+			printf("errorrrrrrr\n");
+			return (-1);
+		}
 	return (i);
 }
 

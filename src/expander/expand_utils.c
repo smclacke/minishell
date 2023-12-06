@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 14:09:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/06 15:07:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,6 @@ int	get_check_value(t_expand *str, t_env **env)
 	return (1);
 }
 
-/**
- * @todo commmennntttt
-*/
 int	set_expand_string(t_parser *lst, t_expand *str)
 {
 	t_parser	*tmp;
