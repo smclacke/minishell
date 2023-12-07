@@ -6,11 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:43:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/07 18:19:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef SHELLY_H
 # define SHELLY_H
@@ -128,7 +126,6 @@ void			ft_expand(t_parser *lst, t_env **env);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);
-
 
 				// ALL DJOYKE PROTOS //
 bool			check_for_builtin(t_parser *node);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 15:06:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 18:13:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ int	squote_bit(t_expand *str, char *input, int i)
 		{
 			end = i - start;
 			str->s_quote = ft_substr(tmp_input, start, end);
-			if (!str->s_quote)
-				return (0);
 			if (add_to_expand(str, str->s_quote) == -1)
 			{
 				printf("errorrrrrrr\n");
-				return (-1);
+				return (-1); // need proper error like
 			}
 			return (i + 1);
 		}
@@ -67,7 +65,7 @@ int	dollar_expand(t_expand *str, t_env **env)
 		if (add_to_expand(str, str->env_val) == -1)
 		{
 			printf("errorrrrrrr\n");
-			return (-1);
+			return (-1); // need proper error like
 		}
 	}
 	if (!str->env_val)
@@ -90,14 +88,14 @@ int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 		end = i - start;
 		str->dollar = ft_substr(input, start, end);
 		if (dollar_expand(str, env) == -1)
-			return (-1);
+			return (-1); // need proper error like
 	}
 	else
 	{
 		if (add_to_expand(str, "$") == -1)
 		{
 			printf("errorrrrrrr\n");
-			return (-1);
+			return (-1); // need proper error like
 		}
 	}
 	return (i);
