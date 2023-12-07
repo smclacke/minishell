@@ -38,11 +38,22 @@ for in the future... don't change utils... ever.
 ===========================================
 
 **TO DO**
+**PROBLEM**
+**FOOOOOOOOOK**
+
+
+-> export ls="ls -l"
+	$ls - SHOULD WORK as ls -l, but im looking at cmd, and ls -l is not
+		valid cmd.....
+
 
 -> minibleh:echo something'$USER$LESS'"hi"whatwhat
 	something$USER$LESSwhatwhat
 	 // where did hi go??
+
+
 -> stress testing the expander + checking all for leaks
+
 
 SIGNALSSSSh 
  ---> heredoc still weird, two prompt with signal
@@ -50,10 +61,7 @@ SIGNALSSSSh
 EXPANSION
  ---> $? ***, test once exit codes are good
 
-=================================================================
-
-**PROBLEM**
-
+--->>>
 minibleh:echo '$USER'"hi"hehe'
 
 ==3355238==ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffc1c4bcd60 in thread T0
@@ -71,6 +79,7 @@ minibleh:echo '$USER'"hi"hehe'
 ***************************************************************************
 ***************************************************************************
 ***************************************************************************
+=================================================================
 **LEAKKKKSSSSSSS**
 
 
