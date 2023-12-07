@@ -62,14 +62,64 @@ EXPANSION
 ***************************************************************************
 ***************************************************************************
 ***************************************************************************
-=================================================================
-**LEAKKKKSSSSSSS**
+**PROBLEEEEEEMMMMMM**
 
+➜  minishell git:(sarah) make run
+ ---> Made!
+minibleh:cat << eof
+heredoc> $USER
+heredoc> hehe
+heredoc> $LESS$USER
+heredoc> "$USER"
+heredoc> '$USER'
+heredoc> eof
+
+==978642==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 33 byte(s) in 4 object(s) allocated from:
+    #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
+    #1 0x7ff9abc22bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+SUMMARY: AddressSanitizer: 33 byte(s) leaked in 4 allocation(s).
+hoi
+hoi
+AddressSanitizer:DEADLYSIGNAL
+==978648==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x0000004dddc9 bp 0x7ffd73f086e0 sp 0x7ffd73f086e0 T0)
+==978648==The signal is caused by a READ memory access.
+==978648==Hint: address points to the zero page.
+smclacke
+hehe
+-Rsmclacke
+"smclacke"
+'smclacke'
+    #0 0x4dddc9 in ft_strlen (/home/smclacke/Desktop/minishell/minishell+0x4dddc9)
+    #1 0x4de411 in ft_strjoin (/home/smclacke/Desktop/minishell/minishell+0x4de411)
+    #2 0x4d869a in check_access /home/smclacke/Desktop/minishell/src/executor/execute.c:66:14
+    #3 0x4d83f2 in mini_forks /home/smclacke/Desktop/minishell/src/executor/execute.c:106:15
+    #4 0x4d9bfe in init_fork /home/smclacke/Desktop/minishell/src/executor/execute_utils_two.c:55:3
+    #5 0x4d9f40 in pipeline /home/smclacke/Desktop/minishell/src/executor/execute_utils_two.c:103:4
+    #6 0x4d88fe in build /home/smclacke/Desktop/minishell/src/executor/execute.c:135:2
+    #7 0x4d887d in execute /home/smclacke/Desktop/minishell/src/executor/execute.c:157:2
+    #8 0x4cb5dd in main /home/smclacke/Desktop/minishell/src/main.c:66:3
+    #9 0x7ff9ab8e3d8f  (/home/smclacke/.capt/root/lib/x86_64-linux-gnu/libc.so.6+0x29d8f)
+    #10 0x7ff9ab8e3e3f in __libc_start_main (/home/smclacke/.capt/root/lib/x86_64-linux-gnu/libc.so.6+0x29e3f)
+    #11 0x41f3d4 in _start (/home/smclacke/Desktop/minishell/minishell+0x41f3d4)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/home/smclacke/Desktop/minishell/minishell+0x4dddc9) in ft_strlen
+==978648==ABORTING
 
 ===========================================
 
+**LEAKKKKSSSSSSS**
+
+
+
 
 ---------------------------------------------------------------------------------
+=================================================================
+=================================================================
+=================================================================
 =================================================================
 
 **OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
