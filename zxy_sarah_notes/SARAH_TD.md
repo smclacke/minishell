@@ -47,11 +47,6 @@ for in the future... don't change utils... ever.
 		valid cmd.....
 
 
--> minibleh:echo something'$USER$LESS'"hi"whatwhat
-	something$USER$LESSwhatwhat
-	 // where did hi go??
-
-
 -> stress testing the expander + checking all for leaks
 
 
