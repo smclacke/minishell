@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 18:11:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:31:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	first_str_bit(t_expand *str, char *input)
 	return (i);
 }
 
-static int		add_single_quote(t_expand *str, char *c)
+static int	add_single_quote(t_expand *str, char *c)
 {
 	char	*tmp;
 
@@ -83,7 +83,7 @@ int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 
 	start = i;
 	end = 0;
-	while(input[i])
+	while (input[i])
 	{
 		if (ft_isdquote(input[i]))
 		{

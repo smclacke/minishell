@@ -6,10 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 18:13:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:28:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/shelly.h"
 
@@ -19,7 +18,7 @@ int	squote_bit(t_expand *str, char *input, int i)
 	int		end;
 	char	*tmp;
 	char	*tmp_input;
-	
+
 	start = i;
 	tmp = str->expanded;
 	tmp_input = input;

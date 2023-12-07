@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 18:15:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:28:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 */
 int	save_extra_string(t_expand *str, char *input, int i)
 {
-	int	start;
-	int	end;
-	int	len;
+	int		start;
+	int		end;
+	int		len;
 	char	*tmp;
 
 	start = i;

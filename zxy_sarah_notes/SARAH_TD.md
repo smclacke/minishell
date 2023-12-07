@@ -41,7 +41,9 @@ for in the future... don't change utils... ever.
 **PROBLEM**
 **FOOOOOOOOOK**
 
-->> NORM: expand_quotes.c expand_utils.c hd_expand.c
+---->> check and test here_doc expansion
+
+->> NORM: expand_quotes.c expand_utils.c
 
 --->> add malloc func to libft with protection, change all malloc in
 		libft, no longer need wrapers in main files..
@@ -64,8 +66,7 @@ EXPANSION
 ***************************************************************************
 **PROBLEEEEEEMMMMMM**
 
-➜  minishell git:(sarah) make run
- ---> Made!
+
 minibleh:cat << eof
 heredoc> $USER
 heredoc> hehe

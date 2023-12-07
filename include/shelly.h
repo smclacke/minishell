@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 18:19:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:23:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,17 @@ int				quote_type(int str);
 //-------------------- expand_quotes -------------------//
 void			expand_quotes(t_parser *tokens);
 
+//------------------ expand_is_utils ------------------//
+int				expandable_str(int c);
+int				is_dollar_or_quote(int c);
+
 //------------------ expand_utils ------------------//
 int				add_to_expand(t_expand *str, char *copy_str);
 int				expandable_str(int c);
 int				is_dollar_or_quote(int c);
 int				get_check_value(t_expand *str, t_env **env);
 int				set_expand_string(t_parser *tmp, t_expand *str);
+
 //------------------ expand -------------------//
 void			ft_expand(t_parser *lst, t_env **env);
 

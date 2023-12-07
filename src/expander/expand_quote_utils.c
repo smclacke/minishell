@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 15:06:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:29:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_quotes(char *str)
 {
 	int	i;
 
-	i = 0;	
+	i = 0;
 	while (str[i])
 	{
 		if (ft_isquote(str[i]))
@@ -32,7 +32,6 @@ int	check_quotes(char *str)
 */
 void	increment(int *len, int *i)
 {
-
 	(*len)++;
 	(*i)++;
 }

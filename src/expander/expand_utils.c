@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 17:48:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:32:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../include/shelly.h"
+#include "../../include/shelly.h"
 
-int		add_to_expand(t_expand *str, char *copy_str)
+int	add_to_expand(t_expand *str, char *copy_str)
 {
 	char	*tmp;
 
@@ -28,22 +28,6 @@ int		add_to_expand(t_expand *str, char *copy_str)
 	if (!str->expanded)
 		return (-1);
 	return (0);
-}
-
-/**
- * specifically for checking the values after dollar sign
- * need to check if expandable if not another dollar, quote or space
-*/
-int	expandable_str(int c)
-{
-	if (!is_dollar_or_quote(c) && !ft_isspace(c))
-		return (1);
-	return (0);
-}
-
-int	is_dollar_or_quote(int c)
-{
-	return (ft_dollar(c) || ft_isquote(c));
 }
 
 /**
@@ -81,6 +65,12 @@ int	get_check_value(t_expand *str, t_env **env)
 	return (1);
 }
 
+static void	set_input_and_sign(t_expand *str, char *input_type, int type)
+{
+	str->sign = type;
+	str->input = input_type;
+}
+
 int	set_expand_string(t_parser *lst, t_expand *str)
 {
 	t_parser	*tmp;
@@ -92,23 +82,17 @@ int	set_expand_string(t_parser *lst, t_expand *str)
 		return (0);
 	if (tmp->cmd && ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
 	{
-		// set_input and sign()
-		str->sign = CMD_X;
-		str->input = tmp->cmd;
+		set_input_and_sign(str, tmp->cmd, CMD_X);
 		return (1);
 	}
 	else if (tmp->str && ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
 	{
-		// set_input and sign()
-		str->sign = STR_X;
-		str->input = tmp->str;
+		set_input_and_sign(str, tmp->str, STR_X);
 		return (1);
 	}
 	else if (tmp->file && ft_strnstr(tmp->file, "$", ft_strlen(tmp->file)))
 	{
-		// set_input and sign()
-		str->sign = FILE_X;
-		str->input = tmp->file;
+		set_input_and_sign(str, tmp->file, FILE_X);
 		return (1);
 	}
 	return (0);
