@@ -41,12 +41,15 @@ for in the future... don't change utils... ever.
 **PROBLEM**
 **FOOOOOOOOOK**
 
+------>> put ft_malloc into libft, use for all malloc in libft, 
+		forget about protection hawhaw
+		--->> add malloc func to libft with protection, change all malloc in
+				libft, no longer need wrapers in main files..
+
 ---->> check and test here_doc expansion
 
 ->> NORM: expand_quotes.c
 
---->> add malloc func to libft with protection, change all malloc in
-		libft, no longer need wrapers in main files..
 
 -> export ls="ls -l"
 	$ls - SHOULD WORK as ls -l, but im looking at cmd, and ls -l is not

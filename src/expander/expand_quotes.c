@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 20:04:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 20:13:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,23 @@ static char	*copy_back_and_free(char *new, char *str, int *j)
 	new[(*j)] = '\0';
 	str = ft_strcpy(str, new);
 	return (str);
+}
+
+/**
+ * buildt in protection
+ * len is always given with one for the null!!
+*/
+static char	*ft_char_malloc(int len)
+{
+	char	*var;
+
+	var = (char *)malloc(sizeof(char) * len);
+	if (!var)
+	{
+		printf("malloc noped oh no!\n");
+		exit(EXIT_FAILURE);
+	}
+	return (var);
 }
 
 /**
@@ -37,7 +54,7 @@ static void	remove_quotes(char *str)
 	i = 0;
 	j = 0;
 	q = 0;
-	new = (char *)malloc(sizeof(char) * (ft_strlen(str) - 1)); // use own malloc with protection
+	new = ft_char_malloc(ft_strlen(str) - 1);
 	while (str[i])
 	{
 		while (str[i] && !ft_isquote(str[i]))
