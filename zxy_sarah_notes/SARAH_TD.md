@@ -43,7 +43,7 @@ for in the future... don't change utils... ever.
 
 ---->> check and test here_doc expansion
 
-->> NORM: expand_quotes.c expand_utils.c
+->> NORM: expand_quotes.c
 
 --->> add malloc func to libft with protection, change all malloc in
 		libft, no longer need wrapers in main files..

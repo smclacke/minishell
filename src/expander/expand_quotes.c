@@ -6,55 +6,53 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 19:30:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 20:04:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+static char	*copy_back_and_free(char *new, char *str, int *j)
+{
+	new[(*j)] = '\0';
+	str = ft_strcpy(str, new);
+	return (str);
+}
+
 /**
  * @todo errors NORMMMMMMMMM
  * @todo	norm proof, djoyke changed some things regarding mini_error
  * 			parser is not made yet so can't use mini_error function
+ * 
+ * minus one for malloc cause - 2 for quotes for str size then plus one
+ * for null dus - 1 uiteindelijk
 */
-
 static void	remove_quotes(char *str)
 {
 	int			i;
 	int			j;
 	int			q;
-	size_t		len;
 	char		*new;	
 
 	i = 0;
 	j = 0;
 	q = 0;
-	len = (ft_strlen(str) - 2);
-	new = (char *)malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return ;
+	new = (char *)malloc(sizeof(char) * (ft_strlen(str) - 1)); // use own malloc with protection
 	while (str[i])
 	{
 		while (str[i] && !ft_isquote(str[i]))
-		{
-			new[j] = str[i];
-			increment(&i, &j);
-		}
+			copy_and_increment(new, str, &i, &j);
 		if (ft_isquote(str[i]))
 		{
 			q = quote_type(str[i]);
 			i++;
 			while (str[i] && str[i] != q)
-			{
-				new[j] = str[i];
-				increment(&i, &j);
-			}
+				copy_and_increment(new, str, &i, &j);
 			if (ft_isquote(str[i]) && str[i] == q)
 				i++;
 		}
 	}
-	new[j] = '\0';
-	str = ft_strcpy(str, new);
+	str = copy_back_and_free(new, str, &j);
 	free(new);
 }
 

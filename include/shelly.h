@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 19:23:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:40:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void			expand_dollar(t_parser *lst, t_expand *str, t_env **env);
 
 //----------------- expand_quote_utils ------------------//
 int				check_quotes(char *str);
-void			increment(int *len, int *i);
+void			copy_and_increment(char *new_str, char *str, int *i, int *j);
 int				check_space(char *str);
 int				quote_type(int str);
 
