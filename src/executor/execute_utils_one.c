@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:03 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:47:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/08 21:12:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @param data execute struct
  * @brief dup2 pipes to STDIN_FILENO and STDOUT_FILENO
  * closes pipes that arent used in child process
- * @todo exit codes
+ * @todo exit codes, < file goes wrong in line 24 why??? god knows, yeah no
 */
 void	init_pipes_child(t_execute *data, t_parser *lst)
 {

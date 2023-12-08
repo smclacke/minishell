@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 21:24:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/08 22:03:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	int	count;
 
 	count = lst->n_cmd;
-	if (count == 1)
+	if (count <= 1)
 	{
-		if (check_for_builtin(lst))
+		if (check_for_builtin(lst) || lst->meta)
 		{
 			redirect(lst, data);
 			if (data->error == false)
@@ -43,7 +43,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param env  environment linked list
  * @param data execute struct
  * @brief forks, checks if it didnt fail, enters child process
- * @todo exit code
+ * @todo exit code NORM do I need to WAIT here?
 */
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -53,6 +53,7 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 		mini_error(E_GENERAL, lst);
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
+	// wait(NULL);
 }
 
 /**
@@ -83,8 +84,7 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
- * @todo printte niet de hoi met de oude if statement
- * nu gaat het mis in check_access, strange want het is een redirect
+ * @todo which version if statement?
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -95,10 +95,10 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 	i = 0;
 	while (lst)
 	{
+		// if (count >= 0)
 		// if (count >= 1 && lst->cmd)
 		if ((count >= 1 && lst->cmd) || (count == 0 && lst->meta))
 		{
-			printf("hoi\n");
 			init_pipe(i, count, data, lst);
 			init_fork(lst, env, data);
 			close_between(data, lst);
@@ -113,12 +113,14 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
  * @param lst parser linked list
  * @param execute execute struct
  * @brief checks for redirects and enters redirect in or outfile function
+ * @todo remove printf statement
 */
 void	redirect(t_parser *lst, t_execute *data)
 {
 	if (!lst->next)
 		return ;
-	lst = lst->next;
+	if (!lst->meta)
+		lst = lst->next;
 	while (lst && !lst->cmd)
 	{
 		if (check_redirect(lst) != 0)

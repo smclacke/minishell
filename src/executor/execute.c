@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 21:26:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/08 22:36:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	int		i;
 
 	i = 0;
+	if (!node->cmd)//
+		return (node->cmd);//
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
@@ -87,8 +89,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks parser input for executable and executes with execve
  *  replace exit int with the existatus global we pass on
- * @todo exit codes plus exit at last line
- * ""> file" segfaults in check access vreemd want is redirect
+ * @todo added id !lst->cmd to stop segfault NORM IT
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -103,9 +104,16 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		do_builtin(lst, env);
 		exit (0);
 	}
+	if (!lst->cmd)
+		exit (0);
 	executable = check_access(*env, lst, data);
 	if (data->error == false)
 		exit (0);
+	if (access(executable, F_OK) == -1)
+	{
+		put_execute_error(lst);
+		exit (0);
+	}
 	if (access(executable, X_OK) == -1)
 	{
 		put_permission_error(lst);

@@ -13,17 +13,7 @@
 
     handle exit codes
 
-4) EXECUTION
-
-    ./file_that_is_not_an_executable
-    bash: ./file_that_is_not_an_executable: Permission denied
-    
-
-    mine does:
-
-    ./file_that_is_not_an_executable: command not found
-
-5) PIPE
+4) WAIT?
 
     minibleh:cat Makefile | grep pr | head -n 5 | cd file_not_exit
     minishell: cd: file_not_exit: No such file or directory
@@ -38,7 +28,7 @@
 
     bash: cd: file_not_exit: No such file or directory
 
-6) PIPE
+6) WAIT?
 
     minibleh:cat Makefile | grep pr | head -n 5 | hello
     cat: pr: No such file or directory
@@ -50,76 +40,32 @@
 
     bash: hello: command not found
 
-7) ECHO
+7) REDIR
 
-    minibleh:> test | echo blabla
-    minibleh:
-
-    should do:
-
-    blabla
-    Creates file called "test"
+    > file
+    makefile error
 
 8) REDIR
 
-    > file
-
-    doesnt do anything
-
-    should do:
-
-    creates file
-
-9) REDIR
-
-    minibleh:Non_exist_cmd > test
-    Non_exist_cmd: command not found
-
-    should do:
-
-    bash: Non_exist_cmd: command not found
-    
-    need to put minishell: infront of the message
-
-10) REDIR
-
     minibleh:< does_not_exist
-    minibleh:
+    makefile error
 
-    it should do:
-
-    bash: does: No such file or directory
-
-11) REDIR
-
-    minibleh:< does_not_exist | echo blabla > test6
-    minishell: does_not_exist: No such file or directory
-
-    should do:
-
-    bash: does: No such file or directory
-    Creates file called "test6" with blabla as content
-
-13) EXPORT
+9) EXPORT OR EXPANDER
 
     export var=a
     export $var=test
     echo $var $a
     a test
 
-14) EXPORT
+10) EXPORT OR EXPANDER
 
     export var
     export var=test
     export
     var="test"
 
-15) EXPORT
+11) EXECUTE 
 
-    export test3=$HOME
-    test3="$HOME" (when just do export)
-
-16) 
     bash does:
 
     dreijans@f0r1s11:~$ cat Makefile | cd file_not_exit
@@ -131,6 +77,14 @@
     minibleh:cat Makefile | cd file_not_exit
     minishell: cd: file_not_exit: No such file or directory
     cat: file_not_exit: No such file or directory
+
+
+
+
+
+
+
+
 
 
 
@@ -163,7 +117,7 @@
     ours:
 
     minibleh:""
-    execveminibleh:dollar.c:86:8
+    minibleh:dollar.c:86:8
         #5 0x4d27ff in expand_dollar /home/dreijans/Documents/ra        minibleh:> test | echo blabla
         ||
         index = [0], cmd = [echo]
@@ -282,7 +236,6 @@
     ours:
 
     minibleh:$LESS$VAR
-    execve
     =================================================================
     ==1804358==ERROR: LeakSanitizer: detected memory leaks
 
@@ -308,8 +261,6 @@
     bash: ..: command not found
 
     minibleh:..
-    execve
-
     =================================================================
     ==1804519==ERROR: LeakSanitizer: detected memory    minishell: cd: file_not_exit: No such file or directory
         cat: pr: No such file or directory
@@ -369,3 +320,27 @@
         index = [4], file = [(null)]
         next node
         NULL
+
+9) PARSER
+
+    scrambled parser list
+    
+    minibleh:< does_not_exist | echo blabla > test6
+    minishell: does_not_exist: No such file or directory
+
+    should do:
+
+    bash: does: No such file or directory
+    Creates file called "test6" with blabla as content
+
+10) PARSER
+    
+    parser list is scrambled here
+
+    minibleh:> test | echo blabla
+    minibleh:
+
+    should do:
+
+    blabla
+    Creates file called "test"
