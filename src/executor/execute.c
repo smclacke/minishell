@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/08 22:36:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/08 22:47:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief determines how many times needs to fork
  * pipes and makes child process
- * @todo exit codes
+ * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -143,8 +143,8 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	pipeline(lst, env, data);
 	close_all(data, lst);
 	waitpid(data->fork_pid, NULL, 0);
-	while (wait(NULL) != -1)
-		(void)NULL;
+	// while (wait(NULL) != -1)
+	// 	(void)NULL;
 }
 
 /**
