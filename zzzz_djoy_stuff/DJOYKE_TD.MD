@@ -70,39 +70,20 @@
 
 9) NORM here-doc
 
+10) PARSER is this me?
+    ..
+    bash: ..: command not found
+
+    minibleh:..
+
 
  
 
 
 
-
-
-
-
-
-
-
-
-
 ----------------------------for sarah-------------------------
 
-1) EXPANSION
-
-    ./minishell
-    $SHLVL
-
-    bash: 2: command not found
-    Needs to increment once per new shell session
-
-    minibleh:$SHLVL
-    1: command not found
-    minibleh:./minishell
-    minibleh:$SHLVL
-    1: command not found
-
-----------------------------------------------------------
-
-2) PARSER
+1) PARSER
 
     "" 
 
@@ -131,7 +112,7 @@
 
 ----------------------------------------------------------
 
-4) PARSING
+2) PARSING
 
     $
     bash: $: command not found
@@ -213,16 +194,7 @@
 
 -----------------------------------------------------------
 
-5) EXPANSION
-    export ls="ls -l"
-    $ls
-
-    Executes $ls to ls -l and executes it
-
-
-------------------------------------------------------------
-
-6) PARSER
+3) PARSER
 
     $LESS$VAR
     bash: -R: command not found
@@ -250,13 +222,7 @@
 
 ---------------------------------------------------------------------
 
-7) PARSER
-    ..
-    bash: ..: command not found
-
-    minibleh:..
-
-8) PARSER
+5) PARSER
 
     hi Sarah! I was testing something that went wrong in redirect but when
     I print the parser linked list it looks a bit scrambled. our minishell only makes the file but doesnt echo.
@@ -295,7 +261,7 @@
         next node
         NULL
 
-9) PARSER
+6) PARSER
 
     scrambled parser list
     
@@ -307,7 +273,7 @@
     bash: does: No such file or directory
     Creates file called "test6" with blabla as content
 
-10) PARSER
+7) PARSER
     
     parser list is scrambled here
 
