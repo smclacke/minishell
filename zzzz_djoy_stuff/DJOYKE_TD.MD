@@ -28,6 +28,7 @@
 
     bash: cd: file_not_exit: No such file or directory
 
+
 6) WAIT?
 
     minibleh:cat Makefile | grep pr | head -n 5 | hello
@@ -77,6 +78,8 @@
     minibleh:cat Makefile | cd file_not_exit
     minishell: cd: file_not_exit: No such file or directory
     cat: file_not_exit: No such file or directory
+
+12) NORM here-doc
 
 
 

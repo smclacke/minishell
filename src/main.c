@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/08 22:35:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 18:10:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,24 @@ void	print_parser_list(t_parser *lst)
 		lst = lst->next;
 		i++;
 	}
+}
+
+void	print_array(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr && arr[i])
+	{
+		// if (arr[i] == NULL)
+		// {
+		// 	printf("NULL\n");
+		// 	break ;
+		// }
+		//printf("arr = [%s]\n", arr[i]);
+		i++;
+	}
+	printf("empty wieeh\n");
 }
 
 int	main(int argc, char **argv, char **envp)
