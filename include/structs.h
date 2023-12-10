@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 20:17:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:55:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_parser
 	char				*file;
 	char				*str;
 	int					flag;
+	int					flag_42;
 	int					n_cmd;
 	int					n_pipe;
 	int					hd_fd;
@@ -99,6 +100,13 @@ typedef struct s_parser
 	int					exit_stat;
 	struct s_parser		*next;
 }							t_parser;
+
+// typedef	struct	s_process
+// {
+// 	char					**process;
+// 	struct s_parser			*lst;
+// 	struct s_process		*next;
+// }				t_process;
 
 /**
  * comment on the way
