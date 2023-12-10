@@ -6,11 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:43:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:40:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef SHELLY_H
 # define SHELLY_H
@@ -110,12 +108,16 @@ void			expand_dollar(t_parser *lst, t_expand *str, t_env **env);
 
 //----------------- expand_quote_utils ------------------//
 int				check_quotes(char *str);
-void			increment(int *len, int *i);
+void			copy_and_increment(char *new_str, char *str, int *i, int *j);
 int				check_space(char *str);
 int				quote_type(int str);
 
 //-------------------- expand_quotes -------------------//
 void			expand_quotes(t_parser *tokens);
+
+//------------------ expand_is_utils ------------------//
+int				expandable_str(int c);
+int				is_dollar_or_quote(int c);
 
 //------------------ expand_utils ------------------//
 int				add_to_expand(t_expand *str, char *copy_str);
@@ -123,12 +125,12 @@ int				expandable_str(int c);
 int				is_dollar_or_quote(int c);
 int				get_check_value(t_expand *str, t_env **env);
 int				set_expand_string(t_parser *tmp, t_expand *str);
+
 //------------------ expand -------------------//
 void			ft_expand(t_parser *lst, t_env **env);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);
-
 
 				// ALL DJOYKE PROTOS //
 bool			check_for_builtin(t_parser *node);

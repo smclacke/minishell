@@ -6,10 +6,9 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 16:23:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 18:22:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
@@ -63,18 +62,6 @@ typedef enum e_exit
 	E_CTRL_C = 130,
 	E_UNKNOWN = 225
 }						t_exit;
-
-// /**
-//  * @brief	struct containing variables needed for exit
-//  * @param	stat: int carrying exit status throughout program 
-//  * @param	code: enums to set exitcode at different
-//  * 			stages of process, saved to pass through the program
-// */
-// typedef struct s_estat
-// {
-// 	int				stat;
-// 	enum e_exit		code;
-// }				t_estat;
 
 /**
  * @brief	specifies the different variable types of tokens from the

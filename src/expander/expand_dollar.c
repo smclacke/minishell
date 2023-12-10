@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 15:14:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:28:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 */
 int	save_extra_string(t_expand *str, char *input, int i)
 {
-	int	start;
-	int	end;
-	int	len;
+	int		start;
+	int		end;
+	int		len;
 	char	*tmp;
 
 	start = i;
@@ -29,21 +29,13 @@ int	save_extra_string(t_expand *str, char *input, int i)
 	end = i;
 	len = end - start;
 	str->string = ft_substr(input, start, len);
-	if (!str->string)
-	{
-		free(tmp);
-		return (0);
-	}
+	// if (!str->string)
+	// {
+	// 	free(tmp);
+	// 	return (0);
+	// }
 	if (tmp && str->string)
-		str->expanded = ft_strjoin(tmp, str->string); // leakyyyy
-	/**
-	 * if (tmp && str->string)
-	 * 		str->expanded = ft_strjoin(tmp, str->string);
-	 * 		if (!str->expanded)
-	 * 			free(tmp);
-	 * 			return (0);
-	 * possible fix to check later for quotes
-	*/
+		str->expanded = ft_strjoin(tmp, str->string);
 	free(tmp);
 	free(str->string);
 	return (i);

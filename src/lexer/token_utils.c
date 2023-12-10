@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 14:51:17 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/07 18:08:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ int	next_quote(char *input, char c)
 	while (input[i] && input[i] != c)
 		i++;
 	if (input[i] != c)
-		// mini_error("unclosed quotes", E_SYNTAX);
-		return (0);
+	{
+		printf("ERROR UNCLOSED QUOTES\n"); // need to change to proper error func
+		exit(1);
+	}
 	return (i);
 }

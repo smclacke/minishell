@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 15:06:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 20:06:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_quotes(char *str)
 {
 	int	i;
 
-	i = 0;	
+	i = 0;
 	while (str[i])
 	{
 		if (ft_isquote(str[i]))
@@ -29,12 +29,14 @@ int	check_quotes(char *str)
 /**
  * just ignore this func....
  * don't mind me....
+ * 
+ * it now at least doesnt only increment i and j... hawhaw
 */
-void	increment(int *len, int *i)
+void	copy_and_increment(char *new_str, char *str, int *i, int *j)
 {
-
-	(*len)++;
+	new_str[(*j)] = str[(*i)];
 	(*i)++;
+	(*j)++;
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 15:16:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:31:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,23 @@ static int	first_str_bit(t_expand *str, char *input)
 	i = 0;
 	while (input[i] && !is_dollar_or_quote(input[i]))
 		i++;
-	
 	if (is_dollar_or_quote(input[i]))
 	{
 		if (i == 0)
 			return (0);
 		str->tmp = ft_substr(input, 0, i);
-		if (add_to_expand(str, str->tmp) == -1)
-		{
-			printf("errorrrrrrr\n");
-			return (-1);
-		}
-		if (!str->expanded)
-			return (0);
 	}
 	else
-		if (add_to_expand(str, input) == -1)
-		{
-			printf("errorrrrrrr\n");
-			return (-1);
-		}
+		str->tmp = ft_strdup(input);
+	if (add_to_expand(str, str->tmp) == -1)
+	{
+		printf("errorrrrrrr\n");
+		return (-1); // need proper error like
+	}
 	return (i);
 }
 
-static int		add_single_quote(t_expand *str, char *c)
+static int	add_single_quote(t_expand *str, char *c)
 {
 	char	*tmp;
 
@@ -54,7 +47,7 @@ static int		add_single_quote(t_expand *str, char *c)
 	free(str->expanded);
 	str->expanded = tmp;
 	if (!str->expanded)
-		return (-1);
+		return (-1); // need proper error like
 	return (0);
 }
 
@@ -72,7 +65,7 @@ static int	handle_double(t_expand *str, char *input, t_env **env)
 		if (input[i] && ft_issquote(input[i]))
 		{
 			if (add_single_quote(str, "\'"))
-				return (-1);
+				return (-1); // need proper error like
 			i++;
 		}
 		if (input[i] && !is_dollar_or_quote(input[i]))
@@ -90,14 +83,14 @@ int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 
 	start = i;
 	end = 0;
-	while(input[i])
+	while (input[i])
 	{
 		if (ft_isdquote(input[i]))
 		{
 			end = i - start;
 			str->d_quote = ft_substr(input, start, end);
 			if (handle_double(str, str->d_quote, env) == -1)
-				return (-1);
+				return (-1); // need proper error like
 			free(str->d_quote);
 			return (i + 1);
 		}
