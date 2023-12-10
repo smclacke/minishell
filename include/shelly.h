@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 19:40:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/10 17:53:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ t_parser		*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 //------------------- hd_expand --------------------//
 char			*hd_expand(t_env **env, char *read_line);
 
-//------------------- dd_quotes --------------------//
+//------------------- s_quotes --------------------//
+int				squote_bit(t_expand *str, char *input, int i);
+
+//------------------- d_quotes --------------------//
 int				dquote_bit(t_expand *str, char *input, t_env **env, int i);
 
-//----------------- dollar_s_quote ------------------//
-int				squote_bit(t_expand *str, char *input, int i);
+//----------------- dollars ------------------//
 int				dollar_expand(t_expand *str, t_env **env);
 int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
 
@@ -121,8 +123,6 @@ int				is_dollar_or_quote(int c);
 
 //------------------ expand_utils ------------------//
 int				add_to_expand(t_expand *str, char *copy_str);
-int				expandable_str(int c);
-int				is_dollar_or_quote(int c);
 int				get_check_value(t_expand *str, t_env **env);
 int				set_expand_string(t_parser *tmp, t_expand *str);
 

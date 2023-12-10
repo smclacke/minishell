@@ -92,7 +92,10 @@
 
 ----------------------------for sarah-------------------------
 
-1) EXPANSION
+1) EXPANSION 
+
+		-- im not sure what the expander should do with this
+		the expander doesn't know what shell level we are....
 
     ./minishell
     $SHLVL
@@ -108,8 +111,10 @@
 
 ----------------------------------------------------------
 
-2) PARSER
-
+2) PARSER  
+			--	the export var test is fixed
+			-- .., "", '', all don't do anything... 
+					need to error on command not found
     "" 
 
     bash: : command not found
@@ -137,7 +142,7 @@
 
 ----------------------------------------------------------
 
-4) PARSING
+4) PARSING   -- fixed
 
     $
     bash: $: command not found
@@ -219,7 +224,7 @@
 
 -----------------------------------------------------------
 
-5) EXPANSION
+5) EXPANSION -- NOPE.
     export ls="ls -l"
     $ls
 
@@ -228,7 +233,7 @@
 
 ------------------------------------------------------------
 
-6) PARSER
+6) PARSER -- fixed
 
     $LESS$VAR
     bash: -R: command not found
@@ -248,20 +253,10 @@
         #5 0x4d2d1f in dollar /home/dreijans/Documents/rank3/minishell/src/expander/expand_dollar.c:86:8
         #6 0x4d27ff in expand_dollar /home/dreijans/Documents/rank3/minishell/src/expander/expand_dollar.c:120:3
         #7 0x4d009c in ft_expand /home/dreijans/Documents/rank3/minishell/src/expander/expand.c:24:3
-        #8 0x4d8a06 in execute /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:155:2
-        #9 0x4cb5dd in main /home/dreijans/Documents/rank3/minishell/src/main.c:66:3
-        #10 0x7f18ef93fd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-
-    SUMMARY: AddressSanitizer: 3 byte(s) leaked in 1 allocation(s).
-
----------------------------------------------------------------------
-
-7) PARSER
-    ..
-    bash: ..: command not found
-
-    minibleh:..
-    =================================================================
+        #8 0x4d8a06 in execute /home/
+Direct leak of 33 byte(s) in 4 object(s) allocated from:
+    #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
+    #1 0x7fba8cca3bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)================================
     ==1804519==ERROR: LeakSanitizer: detected memory    minishell: cd: file_not_exit: No such file or directory
         cat: pr: No such file or directory
         cat: 5: No such file or directory
@@ -282,7 +277,7 @@
 
     SUMMARY: AddressSanitizer: 3 byte(s) leaked in 1 allocation(s).
 
-8) PARSER
+8) PARSER    --- 8 + 9 + 10 all the same.
 
     hi Sarah! I was testing something that went wrong in redirect but when
     I print the parser linked list it looks a bit scrambled. our minishell only makes the file but doesnt echo.
