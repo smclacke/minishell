@@ -36,6 +36,7 @@ heredoc> eof
 
 ***LETS GO FROM HERE***
 *TODO 3* ME
+THE WHOLE PARSER IS FUCKED
  ----->>> first process before pipe doesnt need cmd, 
 	because of sorting, input is getting messed up
 			> test | echo blabla
@@ -47,39 +48,32 @@ heredoc> eof
 
 
 *TODO 4* ME
------>>>> pipe count
-
-
-*TODO 5* US
- --->>> ".." not erroring... not leaking either
-		same with "''" and """"
-need to give no command error
-
-
-*TODO 6* ME
  ------>> put ft_malloc into libft, use for all malloc in libft, 
 		forget about protection hawhaw
 		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
 
 
-*TODO 7* ME
+*TODO 5* ME
  ---->> check and test here_doc expansion
  +++ -----> stress testing the expander + checking all for leaks
 
 
-*TODO 8* ME
+*TODO 6* ME
  ---->> NORM: expand_quotes.c
 
 
-*TODO 9* US
+*TODO 7* US
 SIGNALSSSSh 
  ---> heredoc still weird, two prompt with signal
 
 
-*TODO 10* ME
+*TODO 8* ME
 EXPANSION
  ---> $? ***, test once exit codes are good
 
+
+*TODO 9* ME
+---> literally all errors
 
 --------------------------------------------------------------------
 
