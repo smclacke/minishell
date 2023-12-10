@@ -6,6 +6,12 @@ JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
 **FOOOOOOOOOK**
 
 
+ok so everything is fucked, 
+take "sorted" parser list, do something with it
+outside (after) the sort functions. Just take what i have 
+give djoyke what she needss...
+
+
 *TODO 1* US
  ---->>>>  ?? why we exiting??
 
