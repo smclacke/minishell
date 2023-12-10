@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 21:56:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/10 22:13:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,11 @@ typedef struct s_parser
 	char				*file;
 	char				*str;
 	int					flag;
-	int					flag_42;
-	int					n_cmd;
-	int					n_pipe;
+	// int					n_cmd;
+	// int					n_pipe; NOT NECESSARY BYEBYE
 	int					hd_fd;
 	char				*hd_limit;
-	int					hd_flag;
+	int					hd_flag; // ??
 	char				*exit_str;
 	enum e_exit			exit_code;
 	int					exit_stat;
