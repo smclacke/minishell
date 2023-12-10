@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:45:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:22:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,22 @@ static t_parser	*handle_input(t_parser *data, int *flag)
 	return (data);
 }
 
+static int	get_n_pipe(t_parser *tokens)
+{
+	t_parser	*tmp;
+	int			i;
+
+	i = 0;
+	tmp = tokens;
+	while (tmp)
+	{
+		if (tmp->meta && shelly_strcmp(tmp->meta, "|") == 0)
+			i += 1;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
 /**
  * @brief	main parser func:
  * 			If there's a redirect, the type is saved
@@ -151,11 +167,11 @@ t_parser	*parser(t_parser *tokens)
 			tmp = handle_next(tmp, type);
 		}
 		else if (type && !tmp->next)
-			// mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
-			return (0);
+			return (0); // errror
 		tmp = tmp->next;
 	}
 	tokens = sort_list(tokens);
 	tokens->n_cmd = get_n_cmds(tokens);
+	tokens->n_pipe = get_n_pipe(tokens);
 	return (tokens);
 }
