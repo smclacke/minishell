@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 20:25:17 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:53:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ void	print_array(char **arr)
 	i = 0;
 	while (arr && arr[i])
 	{
-		// if (arr[i] == NULL)
-		// {
-		// 	printf("NULL\n");
-		// 	break ;
-		// }
-		//printf("arr = [%s]\n", arr[i]);
+		if (arr[i] == NULL)
+		{
+			printf("NULL\n");
+			break ;
+		}
+		printf("arr = [%s]\n", arr[i]);
 		i++;
 	}
-	printf("empty wieeh\n");
+	// printf("end of array\n");
 }
 
 int	main(int argc, char **argv, char **envp)

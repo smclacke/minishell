@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 18:11:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 21:02:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
+	char		**test;
 
+	test = NULL;
 	init_pipes_child(data, lst);
 	redirect(lst, data);
 	if (data->error == false)
@@ -102,24 +104,24 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	if (check_for_builtin(lst))
 	{
 		do_builtin(lst, env);
-		exit (0);
+		// exit (0);
 	}
 	if (!lst->cmd)
 		exit (0);
 	executable = check_access(*env, lst, data);
-	if (data->error == false)
-		exit (0);
 	if (access(executable, F_OK) == -1)
 	{
 		put_execute_error(lst);
-		exit (0);
+		// exit (0);
 	}
 	if (access(executable, X_OK) == -1)
 	{
 		put_permission_error(lst);
-		exit (0);
+		// exit (0);
 	}
 	data->env_array = list_to_string(*env, lst);
+	test = get_argv(lst);
+	print_array(test);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
 	exit (0);
