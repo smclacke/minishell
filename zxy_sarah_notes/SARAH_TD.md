@@ -6,7 +6,7 @@ JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
 **FOOOOOOOOOK**
 
 
-*TODO 1* 
+*TODO 1* US
  ---->>>>  ?? why we exiting??
 
 EXAMPLE:
@@ -18,11 +18,7 @@ heredoc> eof
 make: *** [Makefile:95: run] Error 1
 
 
-*TODO 2* 
- ---->>>>> if signal used/ error when in h_d, what happens to here_Doc input? ... i think we be leaking
-
-
-*TODO 3* 
+*TODO 2*  ME
  ---->>>>> THIS LEAK... comes in here_doc and i think somewhere else too..
 Direct leak of 33 byte(s) in 4 object(s) allocated from:
     #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
@@ -38,40 +34,45 @@ heredoc> '$USER'
 heredoc> eof
 
 
-*TODO 4* 
+***LETS GO FROM HERE***
+*TODO 3* ME
  ----->>> first process before pipe doesnt need cmd, 
 	because of sorting, input is getting messed up
 			> test | echo blabla
 	probably same for is no cmd after/between pipes...
 
 
-*TODO 5* 
+*TODO 4* ME
+----->>>> pipe count
+
+
+*TODO 5* US
  --->>> ".." not erroring... not leaking either
 		same with "''" and """"
 need to give no command error
 
 
-*TODO 6* 
+*TODO 6* ME
  ------>> put ft_malloc into libft, use for all malloc in libft, 
 		forget about protection hawhaw
 		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
 
 
-*TODO 7* 
+*TODO 7* ME
  ---->> check and test here_doc expansion
  +++ -----> stress testing the expander + checking all for leaks
 
 
-*TODO 8* 
+*TODO 8* ME
  ---->> NORM: expand_quotes.c
 
 
-*TODO 9* 
+*TODO 9* US
 SIGNALSSSSh 
  ---> heredoc still weird, two prompt with signal
 
 
-*TODO 10* 
+*TODO 10* ME
 EXPANSION
  ---> $? ***, test once exit codes are good
 
