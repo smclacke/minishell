@@ -6,11 +6,25 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/06 14:47:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/10 18:21:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
+
+bool	is_space(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (!ft_isspace(input[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	shelly_strcmp(char *s1, char *s2)
 {

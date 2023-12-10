@@ -1,4 +1,88 @@
 ---------------------------------------------------------------------------------
+JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
+
+**TO DO**
+**PROBLEM**
+**FOOOOOOOOOK**
+
+
+*TODO 1* US
+ ---->>>>  ?? why we exiting??
+
+EXAMPLE:
+minibleh:<< eof
+heredoc> hi
+heredoc> hello
+heredoc> exit
+heredoc> eof
+make: *** [Makefile:95: run] Error 1
+
+
+*TODO 2*  ME
+ ---->>>>> THIS LEAK... comes in here_doc and i think somewhere else too..
+Direct leak of 33 byte(s) in 4 object(s) allocated from:
+    #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
+    #1 0x7fba8cca3bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+EXAMPLE:
+minibleh:cat << eof
+heredoc> $USER
+heredoc> hehe
+heredoc> $LESS$USER
+heredoc> "$USER"
+heredoc> '$USER'
+heredoc> eof
+
+
+***LETS GO FROM HERE***
+*TODO 3* ME
+ ----->>> first process before pipe doesnt need cmd, 
+	because of sorting, input is getting messed up
+			> test | echo blabla
+	probably same for is no cmd after/between pipes...
+
+
+*TODO 4* ME
+----->>>> pipe count
+
+
+*TODO 5* US
+ --->>> ".." not erroring... not leaking either
+		same with "''" and """"
+need to give no command error
+
+
+*TODO 6* ME
+ ------>> put ft_malloc into libft, use for all malloc in libft, 
+		forget about protection hawhaw
+		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
+
+
+*TODO 7* ME
+ ---->> check and test here_doc expansion
+ +++ -----> stress testing the expander + checking all for leaks
+
+
+*TODO 8* ME
+ ---->> NORM: expand_quotes.c
+
+
+*TODO 9* US
+SIGNALSSSSh 
+ ---> heredoc still weird, two prompt with signal
+
+
+*TODO 10* ME
+EXPANSION
+ ---> $? ***, test once exit codes are good
+
+
+--------------------------------------------------------------------
+
+=================================================================
+=================================================================
+**RANDOM NOTES ...**
+
 
 **THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 
@@ -30,66 +114,16 @@ Gutentag Frälein Shelly, wie geht's?
 dein computer, kein computer
 
 for in the future... don't change utils... ever. 
-
----------------------------------------------------------------------------------
-
-===========================================
-===========================================
-===========================================
-
-**TO DO**
-**PROBLEM**
-**FOOOOOOOOOK**
-
-
--> export ls="ls -l"
-	$ls - SHOULD WORK as ls -l, but im looking at cmd, and ls -l is not
-		valid cmd.....
-
-
--> minibleh:echo something'$USER$LESS'"hi"whatwhat
-	something$USER$LESSwhatwhat
-	 // where did hi go??
-
-
--> stress testing the expander + checking all for leaks
-
-
-SIGNALSSSSh 
- ---> heredoc still weird, two prompt with signal
-
-EXPANSION
- ---> $? ***, test once exit codes are good
-
---->>>
-minibleh:echo '$USER'"hi"hehe'
-
-==3355238==ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7ffc1c4bcd60 in thread T0
-    #0 0x49a032 in free (/home/smclacke/Desktop/minishell/minishell+0x49a032)
-    #1 0x4d3421 in squote_bit /home/smclacke/Desktop/minishell/src/expander/dollar_s_quotes.c:43:2
-    #2 0x4d2deb in dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:89:8
-    #3 0x4d27ff in expand_dollar /home/smclacke/Desktop/minishell/src/expander/expand_dollar.c:120:3
-    #4 0x4d009c in ft_expand /home/smclacke/Desktop/minishell/src/expander/expand.c:31:3
-    #5 0x4d865b in execute /home/smclacke/Desktop/minishell/src/executor/execute.c:154:2
-    #6 0x4cb5dd in main /home/smclacke/Desktop/minishell/src/main.c:66:3
-    #7 0x7f9b6a623d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-    #8 0x7f9b6a623e3f in __libc_start_main csu/../csu/libc-start.c:392:3
-    #9 0x41f3d4 in _start (/home/smclacke/Desktop/minishell/minishell+0x41f3d4)
-
-***************************************************************************
-***************************************************************************
-***************************************************************************
 =================================================================
-**LEAKKKKSSSSSSS**
-
-
-===========================================
-
-
----------------------------------------------------------------------------------
 =================================================================
+
+
+-----------------------------------------------------------------
 
 **OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
+
+=================================================================
+=================================================================
 =================================================================
 
 minibleh:echo '$USER'

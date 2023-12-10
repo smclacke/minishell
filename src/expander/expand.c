@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/27 16:39:23 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 15:07:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:28:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_expand(t_parser *tokens, t_env **env)
 {
 	t_parser	*tmp_tokens;
 	t_expand	str;
-	
+
 	tmp_tokens = tokens;
 	expand_quotes(tmp_tokens);
 	while (tmp_tokens)

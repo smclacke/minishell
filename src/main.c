@@ -6,25 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 18:10:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 19:57:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../include/shelly.h"
-
-static bool	is_space(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (!ft_isspace(input[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 t_parser	*lexing(char *input)
 {
@@ -106,7 +93,7 @@ int	main(int argc, char **argv, char **envp)
 		tokens = parser(tokens);
 		if (!tokens)
 			continue ;
-		print_parser_list(tokens);
+		// print_the_full_thing(tokens);
 		execute(&env, tokens);
 		free_tokens(tokens);
 		dup2(og_stdout, STDOUT_FILENO);
