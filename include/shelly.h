@@ -6,13 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2023/12/10 16:33:32 by dreijans      ########   odam.nl         */
-=======
-/*   Updated: 2023/12/10 18:21:56 by smclacke      ########   odam.nl         */
->>>>>>> main
+/*   Updated: 2023/12/10 20:26:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef SHELLY_H
 # define SHELLY_H

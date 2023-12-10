@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 16:52:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:28:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void	ft_cd(t_parser *lst, t_env **env)
 	t_parser	*head;
 
 	head = lst;
-	printf("cmd = [%s]\n", lst->cmd);
 	if (too_many_args(lst) == true)
 		return ;
 	lst = lst->next;
