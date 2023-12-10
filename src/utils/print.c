@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/05 16:37:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:22:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_parser	*print_the_full_thing(t_parser *tokens)
 		printf("cmd = %s\t", list->cmd);
 		printf("file = %s\t", list->file);
 		printf("meta = %s\t", list->meta);
+		printf("n_pipe = %i\t", list->n_pipe);
 		printf("str = %s\n", list->str);
 		// printf("hd_limit = %s\n", list->hd_limit);
 		

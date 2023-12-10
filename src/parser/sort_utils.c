@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 16:12:50 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:48:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:15:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
  * @todo norm proof, djoyke changed some things regarding mini_error
  * 			parser is not made yet so can't use mini_error function
 */
-
 t_parser	*add_new_limit(t_parser *tmp, t_parser *new_list, char *str)
 {
 	t_parser	*new_node;

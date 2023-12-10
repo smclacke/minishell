@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:45:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:17:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ t_parser	*sort_list(t_parser *tokens)
 	new_list = find_first_cmd(tmp, new_list);
 	while (tmp)
 	{
-		if (!tmp->flag && shelly_strcmp(tmp->meta, "|") == 0)
+		if (shelly_strcmp(tmp->meta, "|") == 0)
 			new_list = cmd_after_pipe(tmp, new_list, tmp->meta);
 		else if (!tmp->flag && tmp->file)
 			new_list = add_new_file(tmp, new_list, tmp->file);
