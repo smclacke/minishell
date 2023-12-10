@@ -96,6 +96,7 @@
 
 		-- im not sure what the expander should do with this
 		the expander doesn't know what shell level we are....
+		executor needs to see what level and add to the SHLVL var
 
     ./minishell
     $SHLVL
@@ -112,7 +113,7 @@
 ----------------------------------------------------------
 
 2) PARSER  
-			--	the export var test is fixed
+			--	the second thing, export var test is fixed
 			-- .., "", '', all don't do anything... 
 					need to error on command not found
     "" 
