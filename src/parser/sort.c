@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 20:02:42 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 16:45:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:56:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_parser	*find_first_cmd(t_parser *tmp, t_parser *new_list)
 	int			sign;
 
 	sign = 0;
-	while (tmp && !sign)
+	while (tmp && !sign && shelly_strcmp(tmp->meta, "|") != 0)
 	{
 		if (tmp->cmd)
 		{
@@ -49,8 +49,7 @@ static t_parser	*cmd_after_pipe(t_parser *tmp, t_parser *new_list, char *meta)
 	new_list = add_new_meta(tmp, new_list, meta);
 	tmp2 = tmp;
 	if (!tmp2->next)
-		// mini_error("general: cmd_after_pipe()", E_GENERAL);
-		return (0);
+		return (0); // error
 	tmp2 = tmp2->next;
 	while (tmp2 && !tmp2->flag && shelly_strcmp(tmp2->meta, "|") != 0)
 	{
@@ -85,7 +84,7 @@ t_parser	*sort_list(t_parser *tokens)
 	new_list = find_first_cmd(tmp, new_list);
 	while (tmp)
 	{
-		if (!tmp->flag && shelly_strcmp(tmp->meta, "|") == 0)
+		if (shelly_strcmp(tmp->meta, "|") == 0)
 			new_list = cmd_after_pipe(tmp, new_list, tmp->meta);
 		else if (!tmp->flag && tmp->file)
 			new_list = add_new_file(tmp, new_list, tmp->file);

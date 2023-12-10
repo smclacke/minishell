@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 21:02:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 21:11:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 				mini_error (E_MALLOC, node);
 			free (temp_path);
 			if (data->path == NULL)
-				mini_error (E_MALLOC, node);
+		src/expander		mini_error (E_MALLOC, node);
 			return (true);
 		}
 		env = env->next;
@@ -51,8 +51,6 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks is command has access
  * @todo exit codes
- * 	if (!node->cmd)//
- * 		return (node->cmd);//
 */
 static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
@@ -61,6 +59,8 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	int		i;
 
 	i = 0;
+	if (!node->cmd)//
+		return (node->cmd);//
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
@@ -71,7 +71,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 			ok_path = ft_strjoin(data->path[i], command);
 			if (command == NULL)
 				mini_error (E_MALLOC, node);
-			free(command);
+		src/expander	free(command);
 			if (access(ok_path, F_OK) == 0)
 				return (ok_path);
 			free(ok_path);
@@ -89,14 +89,12 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks parser input for executable and executes with execve
  *  replace exit int with the existatus global we pass on
- * @todo added id !lst->cmd to stop segfault NORM IT remove printf statements
+ * @todo added id !lst->cmd to stop segfault NORM IT
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
-	char		**test;
 
-	test = NULL;
 	init_pipes_child(data, lst);
 	redirect(lst, data);
 	if (data->error == false)
@@ -104,24 +102,24 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	if (check_for_builtin(lst))
 	{
 		do_builtin(lst, env);
-		// exit (0);
+		exit (0);
 	}
 	if (!lst->cmd)
 		exit (0);
 	executable = check_access(*env, lst, data);
+	if (data->error == false)
+		exit (0);
 	if (access(executable, F_OK) == -1)
 	{
 		put_execute_error(lst);
-		// exit (0);
+		exit (0);
 	}
 	if (access(executable, X_OK) == -1)
 	{
 		put_permission_error(lst);
-		// exit (0);
+		exit (0);
 	}
 	data->env_array = list_to_string(*env, lst);
-	test = get_argv(lst);
-	print_array(test);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
 	exit (0);
@@ -133,7 +131,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief determines how many times needs to fork
  * pipes and makes child process
- * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE rmeove printf statement
+ * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -145,8 +143,8 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	pipeline(lst, env, data);
 	close_all(data, lst);
 	waitpid(data->fork_pid, NULL, 0);
-	while (wait(NULL) != -1)
-		(void)NULL;
+	// while (wait(NULL) != -1)
+	// 	(void)NULL;
 }
 
 /**

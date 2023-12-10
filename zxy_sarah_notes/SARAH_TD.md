@@ -41,6 +41,10 @@ heredoc> eof
 			> test | echo blabla
 	probably same for is no cmd after/between pipes...
 
+	TESTS:
+	> test | echo blabla
+	< does_not_exist | echo blabla > test6
+
 
 *TODO 4* ME
 ----->>>> pipe count
@@ -116,8 +120,6 @@ dein computer, kein computer
 for in the future... don't change utils... ever. 
 =================================================================
 =================================================================
-
-
 -----------------------------------------------------------------
 
 **OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
