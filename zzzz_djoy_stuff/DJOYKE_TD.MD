@@ -41,31 +41,22 @@
 
     bash: hello: command not found
 
-7) REDIR
 
-    > file
-    makefile error
-
-8) REDIR
-
-    minibleh:< does_not_exist
-    makefile error
-
-9) EXPORT OR EXPANDER
+6) EXPORT OR EXPANDER
 
     export var=a
     export $var=test
     echo $var $a
     a test
 
-10) EXPORT OR EXPANDER
+7) EXPORT OR EXPANDER
 
     export var
     export var=test
     export
     var="test"
 
-11) EXECUTE 
+8) EXECUTE 
 
     bash does:
 
@@ -79,8 +70,10 @@
     minishell: cd: file_not_exit: No such file or directory
     cat: file_not_exit: No such file or directory
 
-12) NORM here-doc
+10) NORM here-doc
 
+
+ 
 
 
 
@@ -264,26 +257,6 @@
     bash: ..: command not found
 
     minibleh:..
-    =================================================================
-    ==1804519==ERROR: LeakSanitizer: detected memory    minishell: cd: file_not_exit: No such file or directory
-        cat: pr: No such file or directory
-        cat: 5: No such file or directory
-        cat: file_not_exit: No such file or directory
-        grep: 5: No such file or directory
-        grep: file_not_exit: No such file or directory
-        head: cannot open 'file_not_exit' for reading: No such file or directory
-        #1 0x4de9c9 in ft_strdup (/home/dreijans/Documents/rank3/minishell/minishell+0x4de9c9)
-        #2 0x4d0239 in add_to_expand /home/dreijans/Documents/rank3/minishell/src/expander/expand_utils.c:24:9
-        #3 0x4d35df in dollar_expand /home/dreijans/Documents/rank3/minishell/src/expander/dollar_s_quotes.c:67:7
-        #4 0x4d38d3 in dollar_bit /home/dreijans/Documents/rank3/minishell/src/expander/dollar_s_quotes.c:92:7
-        #5 0x4d2d1f in dollar /home/dreijans/Documents/rank3/minishell/src/expander/expand_dollar.c:86:8but at all the other redirect tests it does fine.
-        #6 0x4d27ff in expand_dollar /home/dreijans/Documents/rank3/minishell/src/expander/expand_dollar.c:120:3
-        #7 0x4d009c in ft_expand /home/dreijans/Documents/rank3/minishell/src/expander/expand.c:24:3
-        #8 0x4d8a06 in execute /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:155:2
-        #9 0x4cb5dd in main /home/dreijans/Documents/rank3/minishell/src/main.c:66:3
-        #10 0x7f18ef93fd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-
-    SUMMARY: AddressSanitizer: 3 byte(s) leaked in 1 allocation(s).
 
 8) PARSER
 
