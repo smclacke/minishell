@@ -28,8 +28,7 @@
 
     bash: cd: file_not_exit: No such file or directory
 
-
-6) WAIT?
+5) WAIT?
 
     minibleh:cat Makefile | grep pr | head -n 5 | hello
     cat: pr: No such file or directory
@@ -40,7 +39,6 @@
     it should do:
 
     bash: hello: command not found
-
 
 6) EXPORT OR EXPANDER
 
@@ -70,7 +68,7 @@
     minishell: cd: file_not_exit: No such file or directory
     cat: file_not_exit: No such file or directory
 
-10) NORM here-doc
+9) NORM here-doc
 
 
  
