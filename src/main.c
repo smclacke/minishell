@@ -6,25 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 18:02:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/10 18:22:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
-
-static bool	is_space(char *input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (!ft_isspace(input[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 t_parser	*lexing(char *input)
 {

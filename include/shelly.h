@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 17:53:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/10 18:21:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include <limits.h>
 
 				// utils
+bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
 void			free_only_tokens(t_parser *tokens);
 void			free_tokens(t_parser *tokens);
