@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 22:15:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 22:32:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	int		i;
 
 	i = 0;
-	if (!node->cmd)//
-		return (node->cmd);//
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
@@ -89,15 +87,13 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks parser input for executable and executes with execve
  *  replace exit int with the existatus global we pass on
- * @todo added id !lst->cmd to stop segfault NORM IT
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
-	char		**test;
+	char		**array;
 
-	test = get_argv(lst);
-	// print_array(test);
+	array = get_argv(lst);
 	data->env_array = list_to_string(*env, lst);
 	init_pipes_child(data, lst);
 	redirect(lst, data);
@@ -111,22 +107,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	if (!lst->cmd)
 		exit (0);
 	executable = check_access(*env, lst, data);
-	// if (data->error == false)
-	// 	exit (0);
-	// if (access(executable, F_OK) == -1)
-	// {
-	// 	put_execute_error(lst);
-	// 	// exit (0);
-	// 	// return ;
-	// }
-	// if (access(executable, X_OK) == -1)
-	// {
-	// 	put_permission_error(lst);
-	// 	// exit (0);
-	// 	// return ;
-	// }
-	// if (execve(executable, get_argv(lst), data->env_array) == -1)
-	if (execve(executable, test, data->env_array) == -1)
+	if (execve(executable, array, data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
 	exit (0);
 }
@@ -137,7 +118,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief determines how many times needs to fork
  * pipes and makes child process
- * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
+ * @todo exit codes
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {

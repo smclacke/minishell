@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 22:00:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 22:30:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
- * @todo which version if statement? remove printf statement
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -94,9 +93,6 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 	i = 0;
 	while (lst)
 	{
-		// if (count >= 0)
-		// if ((count >= 1 && lst->cmd) || (count == 0 && lst->meta))
-		// if (count >= 1)
 		if (count >= 1 && lst->cmd)
 		{
 			init_pipe(i, count, data, lst);

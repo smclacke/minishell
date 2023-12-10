@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 22:06:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 22:32:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ static int	count_words(t_parser *temp)
  * @param i int representing index of new_str
  * @brief fill's 2d array with content of temp->str
  * @return returns int representing word count.
- * @todo remove print statement maak string tot pipe
- * need to SAVE UNTIL PIPE MAYBE USE NUMBER OF pipes
 */
 static char	**fill_array(t_parser *temp, char **new_str, int i)
 {
@@ -96,7 +94,6 @@ static char	**fill_array(t_parser *temp, char **new_str, int i)
  * @brief set's linked list from cmd to next cmd to 2d array
  * cmd at 0, plus args at 1 , 2 etc.
  * @todo error code
- * need to SAVE UNTIL PIPE MAYBE USE NUMBER OF CMDS
 */
 char	**get_argv(t_parser *lst)
 {
@@ -106,15 +103,11 @@ char	**get_argv(t_parser *lst)
 
 	temp = lst->next;
 	i = count_words(temp);
-	// i = count_words(lst);
-	// printf("i = [%d]\n", i);
 	new_str = (char **)malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
 		mini_error(E_MALLOC, lst);
-	// temp = lst->next;
 	new_str[0] = lst->cmd;
 	i = 1;
 	new_str = fill_array(temp, new_str, i);
-	// new_str = fill_array(lst, new_str, i);
 	return (new_str);
 }
