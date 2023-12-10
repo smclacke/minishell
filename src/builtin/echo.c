@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:45:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 21:19:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static bool	input_check(t_parser *lst)
 	temp = lst;
 	if (!temp->cmd)
 	{
-		// mini_error("temp->cmd", E_USAGE, lst);
 		mini_error(E_USAGE, lst);
 		return (false);
 	}

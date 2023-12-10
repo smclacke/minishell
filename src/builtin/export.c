@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 18:05:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 21:23:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,8 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * @brief export with no options, learned that double free 
  * with freeing in an unrelated spot 
  * might be overwriting a pointer and not allocating a new string.
- * @todo minibleh:export var
- * minibleh:export var=test
- * minibleh:export
- * var="test"
- * als nieuwe value heeft overschrijven
- * als nieuwe geen value heeft niet overschrijven
- * 
- * export test3=$HOME
- * should not be expanded when only export but shows
- * test3="$HOME"
- * 
+ * @todo 
  * env does show the expanded version.
- * 
- * export ls="ls -l"
- * $ls
- * Executes $ls to ls -l and executes it (wait for sarah)
  * 
 */
 void	ft_export(t_parser *node, t_env **env)
@@ -129,13 +115,3 @@ void	ft_export(t_parser *node, t_env **env)
 		node = node->next;
 	}
 }
-
-
-/*
-
-if key already exists but has no value
-and that key is adjusted treat it as if it has no value but print the value in declare x
-
-adjust in print function?
-
-*/

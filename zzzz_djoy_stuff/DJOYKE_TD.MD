@@ -13,68 +13,28 @@
 
     handle exit codes
 
-4) WAIT?
-
-    minibleh:cat Makefile | grep pr | head -n 5 | cd file_not_exit
-    minishell: cd: file_not_exit: No such file or directory
-    cat: pr: No such file or directory
-    cat: 5: No such file or directory
-    cat: file_not_exit: No such file or directory
-    head: cannot open 'file_not_exit' for reading: No such file or directory
-    grep: 5: No such file or directory
-    grep: file_not_exit: No such file or directory
-
-    it should do just:
-
-    bash: cd: file_not_exit: No such file or directory
-
-5) WAIT?
-
-    minibleh:cat Makefile | grep pr | head -n 5 | hello
-    cat: pr: No such file or directory
-    cat: 5: No such file or directory
-    hello: command not found
-    grep: 5: No such file or directory
-
-    it should do:
-
-    bash: hello: command not found
-
-6) EXPORT OR EXPANDER
+4) EXPORT OR EXPANDER
 
     export var=a
     export $var=test
     echo $var $a
     a test
 
-7) EXPORT OR EXPANDER
+5) NORM here-doc
 
-    export var
-    export var=test
-    export
-    var="test"
-
-8) EXECUTE 
-
-    bash does:
-
-    dreijans@f0r1s11:~$ cat Makefile | cd file_not_exit
-    bash: cd: file_not_exit: No such file or directory
-    cat: Makefile: No such file or directory
-
-    mine does:
-
-    minibleh:cat Makefile | cd file_not_exit
-    minishell: cd: file_not_exit: No such file or directory
-    cat: file_not_exit: No such file or directory
-
-9) NORM here-doc
-
-10) PARSER is this me?
+6) PARSER is this me?
     ..
     bash: ..: command not found
 
     minibleh:..
+
+7) ECHO??
+
+    minibleh:< testfile.txt echo hi
+
+    minibleh:echo < testfile.txt hi
+
+    minibleh:
 
 
 **------------------ hello from sarah -------------------------**

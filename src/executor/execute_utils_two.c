@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 20:58:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 22:00:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 	while (lst)
 	{
 		// if (count >= 0)
-		// if (count >= 1 && lst->cmd)
-		if ((count >= 1 && lst->cmd) || (count == 0 && lst->meta))
+		// if ((count >= 1 && lst->cmd) || (count == 0 && lst->meta))
+		// if (count >= 1)
+		if (count >= 1 && lst->cmd)
 		{
 			init_pipe(i, count, data, lst);
 			init_fork(lst, env, data);
