@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 22:13:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/10 22:31:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_parser
 	char				*str;
 	int					flag;
 	// int					n_cmd;
-	// int					n_pipe; NOT NECESSARY BYEBYE
+	// int					n_pipe; // NOT NECESSARY BYEBYE
 	int					hd_fd;
 	char				*hd_limit;
 	int					hd_flag; // ??
