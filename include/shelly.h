@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 18:00:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 18:28:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ int				get_n_cmds(t_parser *tokens);
 
 				// print
 void			print_expand_vals(t_expand *str);
-void			shelly_print_list(t_lexer *token);
+void			shelly_print_list(t_parser *token);
 t_parser		*shelly_parser_print(t_parser *tokens);
 t_parser		*print_the_full_thing(t_parser *tokens);
 
 				// lexer
 //---------- lexer ----------//
-t_lexer			*lexer(char *input);
+t_parser		*lexer(char *input);
 
 //-------- lexer_utils --------//
-t_lexer			*lexer_listlast(t_lexer *list);
-void			lexer_listadd_back(t_lexer **list, t_lexer *new);
-t_lexer			*lexer_listnew(char *input);
+t_parser		*lexer_listlast(t_parser *list);
+void			lexer_listadd_back(t_parser **list, t_parser *new);
+t_parser		*lexer_listnew(char *input);
 
 //---------- token ----------//
 char			**parse_input(char *input);
@@ -80,15 +80,20 @@ t_parser		*handle_pipe(t_parser *data, int *flag);
 int				is_pipe(void *input);
 char			*is_redirect(void *input);
 
-//---------- sort ----------//
-t_parser		*sort_list(t_parser *tokens);
+//---------- parser_sort ----------//
+t_parser		*handle_vars(t_parser *data, int *flag);
+t_parser		*handle_next(t_parser *data, char *type);
+t_parser		*handle_input(t_parser *data, int *flag);
 
-//---------- sort_utils ----------//
-t_parser		*add_new_limit(t_parser *tmp, t_parser *new_list, char *str);
-t_parser		*add_new_str(t_parser *tmp, t_parser *new_list, char *str);
-t_parser		*add_new_file(t_parser *tmp, t_parser *new_list, char *file);
-t_parser		*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
-t_parser		*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
+// //---------- sort ----------//
+// t_parser		*sort_list(t_parser *tokens);
+
+// //---------- sort_utils ----------//
+// t_parser		*add_new_limit(t_parser *tmp, t_parser *new_list, char *str);
+// t_parser		*add_new_str(t_parser *tmp, t_parser *new_list, char *str);
+// t_parser		*add_new_file(t_parser *tmp, t_parser *new_list, char *file);
+// t_parser		*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
+// t_parser		*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 
 				// expander
 //------------------ expand -------------------//

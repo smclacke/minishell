@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 17:51:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 18:18:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,6 @@ typedef enum e_exit
  * 			don't expand anything inside here_doc input for both
  * 			single and double quotes
 */
-	// int					n_cmd;  // NOT NECESSARY BYEBYE
-	// int					n_pipe; // NOT NECESSARY BYEBYE
-	// int					hd_flag; // ??
-typedef struct s_lexer
-{
-	void				*input;
-	struct s_lexer		*next;
-}							t_lexer;
 
 /**
  * proc_id is basically process count, can iterate through
@@ -99,7 +91,7 @@ typedef struct s_lexer
 */
 typedef	struct	s_parser
 {
-	char					*strs;
+	void					*input;
 	int						proc_id;
 	char					*cmd;
 	char					*str;
@@ -107,8 +99,7 @@ typedef	struct	s_parser
 	char					*file;
 	char					*hd_limit;	
 	int						flag;
-	struct s_lexer			*lst;
-	// struct s_parser			*next;
+	struct s_parser			*next;
 }							t_parser;
 
 /**
@@ -122,8 +113,7 @@ typedef struct s_process
 	enum e_exit				exit_code;  //do we need all of these?
 	int						exit_stat;  //do we need all of these?
 	int						hd_fd; // check which struct this should below to
-	t_lexer					*tokens;
-	t_parser				*proc;
+	t_parser				*parser;
 	int						proc_count;
 }							t_process;
 

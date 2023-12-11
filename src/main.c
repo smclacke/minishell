@@ -6,30 +6,27 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 17:42:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 18:33:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-void	print_new_parser(t_process *procs)
-{
-	int		i = 0;
-	int		j = 0;
+// void	print_new_parser(t_process *proc)
+// {
+// 	int		i = 0;
+// 	int		j = 0;
 
-	while (i < procs->proc->proc_id)
-	{
-		printf("[%i]\t", procs->proc->proc_id);
-		while (procs->proc->strs)
-		{
-			printf("strs in parser = [%s]\t\n", procs->proc->strs[j]);
-			j++;
-		}
-		// printf("cmd = [%s]\t", procs->cmd);
-		// printf("str = [%s]\t\n", procs->str);
-		i++;
-	}
-}
+// 	while (i < proc->parser->proc_id)
+// 	{
+// 		printf("[%i]\t", proc->parser->proc_id);
+// 		while ()
+// 		printf("input = %s\n", proc->parser->input);
+// 		// printf("cmd = [%s]\t", procs->cmd);
+// 		// printf("str = [%s]\t\n", procs->str);
+// 		i++;
+// 	}
+// }
 
 void	lexing(t_process *data, char *input)
 {
@@ -37,9 +34,14 @@ void	lexing(t_process *data, char *input)
 		exit(0);
 	if (!is_space(input))
 		add_history(input);
-	data->tokens = lexer(input);
+	data->parser = lexer(input);
 	free(input);
 	// return (tokens);
+}
+
+void	print_parser(t_process *data)
+{
+	
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -64,11 +66,12 @@ int	main(int argc, char **argv, char **envp)
 		handle_signals(PARENT);
 		input = readline(PROMPT);
 		lexing(&data, input); // add wrapper protection
-		shelly_print_list(data.tokens);
+		shelly_print_list(data.parser);
 		parser(&data); // add wrapper
+		print_parser(&data);
 		// if (!procs)
 		// 	continue ;
-		print_new_parser(&data);
+		// print_new_parser(&data);
 		exit(EXIT_SUCCESS);
 		// print_the_full_thing(tokens);
 		// execute(&env, tokens);

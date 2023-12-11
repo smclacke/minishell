@@ -6,78 +6,73 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/10 22:11:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 17:58:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 18:31:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * VERY FUCKING SIMPLE
- * 
- * i have tokens.... yay
- * find pipe 
- * take everything up to pipe
- * put in mini linked list
- * make array of mini linked lists
- * 
- * die in the hell that is mini
- * bye
-*/
-
-static t_parser	sort_data(t_lexer *tokens)
+static t_parser	sort_data(t_parser *tokens)
 {
-	t_lexer		*tmp;
-	char		*type;
-	int			flag;
+	t_parser		*tmp;
+	t_parser		single_process;
+	char			*type;
+	int				flag;
 
 	tmp = tokens;
 	while (tmp)
 	{
 		type = is_redirect(tmp->input);
-		
+		single_process = *handle_input(tmp, &flag);
+		if (type && tmp->next)
+		{
+			tmp = tmp->next;
+			single_process = *handle_next(tmp, type);
+		}
+		else if (type && !tmp->next)
+			exit(EXIT_FAILURE); //error
+		tmp = tmp->next;
 	}
+	return (single_process);
 }
 
 static t_parser *init_parser_structs(t_process *data, t_parser *parser_array)
 {
-	int			i;
-	t_lexer		*tmp;
-	t_parser	single_process;
-	int			count;
+	int				i;
+	int				count;
+	t_parser		*tmp;
+	t_parser		single_process;
 
 	i = 0;
-	tmp = data->tokens;
 	count = data->proc_count;
+	tmp = data->parser;
 	while (tmp)
 	{
 		while (i < count)
 		{
-			if (shello_strcmp(tmp->input, "|") == 0)
+			single_process.proc_id = i;
+			while (tmp && !is_pipe(tmp->input))
 			{
-				tmp = tmp->next;
-				free(tmp);
-			}
-			while (shelly_strcmp(tmp->input, "|") != 0)
-			{
-				single_process.proc_id = i;
 				single_process = sort_data(tmp);
 				tmp = tmp->next;
-				free(tmp);
 				parser_array[i] = single_process;
 			}
+			if (tmp && is_pipe(tmp->input))
+				tmp = tmp->next;
 			i++;
 		}
 	}
+	free(tmp);
+	// free input somewhere
 	return (parser_array);
 }	
 
 static void	get_proc_count(t_process *data)
 {
-	t_lexer		*tmp;
-	int			proc_count;
+	t_parser		*tmp;
+	int				proc_count;
 
-	tmp = data->tokens;
+	tmp = data->parser;
 	proc_count = 1;
 	while (tmp)
 	{
@@ -102,7 +97,9 @@ void	parser(t_process *data)
 	get_proc_count(data);
 	parser_array = malloc(sizeof(t_parser) * data->proc_count); // protect
 	parser_array = init_parser_structs(data, parser_array); // protect
-	data->proc = parser_array;
+	free_input(data);
+	// freeeeeee lexer token list, here or main??
+	data->parser = parser_array;
 }
 
 
