@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 22:31:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 16:30:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,12 @@ typedef	struct	s_process
 	char					**process;
 	struct s_parser			*lst;
 	struct s_process		*next;
-}				t_process;
+}							t_process;
+
+typedef struct s_input
+{
+	
+}							t_input;
 
 /**
  * comment on the way
