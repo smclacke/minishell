@@ -75,12 +75,9 @@ bool	shelly_check_quotes(char *tokens)
 	}
 	return (false);
 }
-<<<<<<< HEAD
 /**
  * need to check for flags somewhere!
 */
-=======
->>>>>>> sarah
 
 /**
  * @brief	takes the input string from the command line, iterates through it. While there
@@ -149,14 +146,14 @@ static t_parser	*make_token_list(char **parsed_input)
  * @param	input from the commandline
  * @return	t_lexer token_list to pass to the parser
 */
-t_parser	*lexer(char *input)
+t_lexer	*lexer(char *input)
 {
-	t_parser		*tokens;
+	t_lexer		*tokens;
 	char			**parsed_input = NULL;
 	int				i;
 
 	i  = 0;
-	tokens = (t_parser *)malloc(sizeof(t_parser));
+	tokens = (t_lexer *)malloc(sizeof(t_lexer));
 	if (!tokens)
 		return (0);
 	init_parser(tokens);

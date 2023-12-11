@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 18:07:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 17:09:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
  * @todo	norm proof, djoyke changed some things regarding mini_error
  * 			parser is not made yet so can't use mini_error function
 */
-static t_parser	*make_token_list(char **parsed_input)
+static t_lexer	*make_token_list(char **parsed_input)
 {
-	t_parser		*tokens;
-	t_parser		*node;
+	t_lexer		*tokens;
+	t_lexer		*node;
 	int				i;
 
 	tokens = NULL;
@@ -55,9 +55,9 @@ static t_parser	*make_token_list(char **parsed_input)
  * @todo	norm proof, djoyke changed some things regarding mini_error
  * 			parser is not made yet so can't use mini_error function
 */
-t_parser	*lexer(char *input)
+t_lexer	*lexer(char *input)
 {
-	t_parser		*tokens;
+	t_lexer			*tokens;
 	char			**parsed_input;
 
 	if (!input)

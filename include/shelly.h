@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 18:21:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 18:00:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ int				get_n_cmds(t_parser *tokens);
 
 				// print
 void			print_expand_vals(t_expand *str);
-void			shelly_print_list(t_parser *token);
+void			shelly_print_list(t_lexer *token);
 t_parser		*shelly_parser_print(t_parser *tokens);
 t_parser		*print_the_full_thing(t_parser *tokens);
 
 				// lexer
 //---------- lexer ----------//
-t_parser		*lexer(char *input);
+t_lexer			*lexer(char *input);
 
 //-------- lexer_utils --------//
-t_parser		*lexer_listlast(t_parser *list);
-void			lexer_listadd_back(t_parser **list, t_parser *new);
-t_parser		*lexer_listnew(char *input);
+t_lexer			*lexer_listlast(t_lexer *list);
+void			lexer_listadd_back(t_lexer **list, t_lexer *new);
+t_lexer			*lexer_listnew(char *input);
 
 //---------- token ----------//
 char			**parse_input(char *input);
@@ -72,10 +72,10 @@ int				next_quote(char *input, char c);
 
 				// parser
 //-------- parser --------//
-t_parser		*parser(t_parser *tokens);
+void			parser(t_process *data);
 
 //-------- parser_utils --------//
-int				is_meta_no_pipe(char *input);
+int				is_meta_not_pipe(char *input);
 t_parser		*handle_pipe(t_parser *data, int *flag);
 int				is_pipe(void *input);
 char			*is_redirect(void *input);
@@ -91,6 +91,14 @@ t_parser		*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
 t_parser		*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
 
 				// expander
+//------------------ expand -------------------//
+void			ft_expand(t_parser *lst, t_env **env);
+
+//------------------- expand_dollar --------------------//
+int				save_extra_string(t_expand *str, char *input, int i);
+int				first_bit(t_expand *str, char *input);
+void			expand_dollar(t_parser *lst, t_expand *str, t_env **env);
+
 //------------------- hd_expand --------------------//
 char			*hd_expand(t_env **env, char *read_line);
 
@@ -104,19 +112,14 @@ int				dquote_bit(t_expand *str, char *input, t_env **env, int i);
 int				dollar_expand(t_expand *str, t_env **env);
 int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
 
-//------------------- expand_dollar --------------------//
-int				save_extra_string(t_expand *str, char *input, int i);
-int				first_bit(t_expand *str, char *input);
-void			expand_dollar(t_parser *lst, t_expand *str, t_env **env);
+//-------------------- expand_quotes -------------------//
+void			expand_quotes(t_parser *tokens);
 
 //----------------- expand_quote_utils ------------------//
 int				check_quotes(char *str);
 void			copy_and_increment(char *new_str, char *str, int *i, int *j);
 int				check_space(char *str);
 int				quote_type(int str);
-
-//-------------------- expand_quotes -------------------//
-void			expand_quotes(t_parser *tokens);
 
 //------------------ expand_is_utils ------------------//
 int				expandable_str(int c);
@@ -127,8 +130,6 @@ int				add_to_expand(t_expand *str, char *copy_str);
 int				get_check_value(t_expand *str, t_env **env);
 int				set_expand_string(t_parser *tmp, t_expand *str);
 
-//------------------ expand -------------------//
-void			ft_expand(t_parser *lst, t_env **env);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 16:30:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 17:51:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,36 +81,51 @@ typedef enum e_exit
  * 			don't expand anything inside here_doc input for both
  * 			single and double quotes
 */
-typedef struct s_parser
+	// int					n_cmd;  // NOT NECESSARY BYEBYE
+	// int					n_pipe; // NOT NECESSARY BYEBYE
+	// int					hd_flag; // ??
+typedef struct s_lexer
 {
 	void				*input;
-	char				*cmd;
-	char				*meta;
-	char				*file;
-	char				*str;
-	int					flag;
-	// int					n_cmd;
-	// int					n_pipe; // NOT NECESSARY BYEBYE
-	int					hd_fd;
-	char				*hd_limit;
-	int					hd_flag; // ??
-	char				*exit_str;
-	enum e_exit			exit_code;
-	int					exit_stat;
-	struct s_parser		*next;
+	struct s_lexer		*next;
+}							t_lexer;
+
+/**
+ * proc_id is basically process count, can iterate through
+ * list of process nodes when it as index
+ * 
+ * proc -> parser struct [proc_id] -> one process ...
+ * 	as many processes as there are
+*/
+typedef	struct	s_parser
+{
+	char					*strs;
+	int						proc_id;
+	char					*cmd;
+	char					*str;
+	char					*meta;
+	char					*file;
+	char					*hd_limit;	
+	int						flag;
+	struct s_lexer			*lst;
+	// struct s_parser			*next;
 }							t_parser;
 
-typedef	struct	s_process
+/**
+ * list of split up tokens from lexer struct
+ * each parser struct is a process, array is contained 
+ * 		in process struct
+*/
+typedef struct s_process
 {
-	char					**process;
-	struct s_parser			*lst;
-	struct s_process		*next;
+	char					*exit_str;  //do we need all of these?  
+	enum e_exit				exit_code;  //do we need all of these?
+	int						exit_stat;  //do we need all of these?
+	int						hd_fd; // check which struct this should below to
+	t_lexer					*tokens;
+	t_parser				*proc;
+	int						proc_count;
 }							t_process;
-
-typedef struct s_input
-{
-	
-}							t_input;
 
 /**
  * comment on the way
