@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 18:18:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 20:20:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,22 @@ typedef struct s_process
 	t_parser				*parser;
 	int						proc_count;
 }							t_process;
+
+
+
+
+typedef struct s_tokens
+{
+	int			index;
+	int			proc_count;
+	char		*cmd;
+	char		*str;
+	char		*meta;
+	char		*file;
+	char		*hd_limit;
+}				t_tokens;
+
+
 
 /**
  * comment on the way

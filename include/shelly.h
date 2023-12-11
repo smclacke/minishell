@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 20:12:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 20:30:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,24 @@ int				len_token(char *input, int len);
 
 				// parser
 //-------- parser --------//
-void			parser(t_process *data);
+void			parse_tokens(char **tokens);
 
-//-------- parser_utils --------//
-int				is_meta_not_pipe(char *input);
-t_parser		*handle_pipe(t_parser *data, int *flag);
+//-------- parser --------//
 int				is_pipe(void *input);
-char			*is_redirect(void *input);
+int				count_procs(char **tokens);
+
+
+
+// OLD MCSHIZZLESS
+//-------- parser_utils --------//
+// int				is_meta_not_pipe(char *input);
+// t_parser		*handle_pipe(t_parser *data, int *flag);
+// char			*is_redirect(void *input);
 
 //---------- parser_sort ----------//
-t_parser		*handle_vars(t_parser *data, int *flag);
-t_parser		*handle_next(t_parser *data, char *type);
-t_parser		*handle_input(t_parser *data, int *flag);
+// t_parser		*handle_vars(t_parser *data, int *flag);
+// t_parser		*handle_next(t_parser *data, char *type);
+// t_parser		*handle_input(t_parser *data, int *flag);
 
 // //---------- sort ----------//
 // t_parser		*sort_list(t_parser *tokens);
@@ -86,6 +92,8 @@ t_parser		*handle_input(t_parser *data, int *flag);
 // t_parser		*add_new_file(t_parser *tmp, t_parser *new_list, char *file);
 // t_parser		*add_new_meta(t_parser *tmp, t_parser *new_list, char *meta);
 // t_parser		*add_new_cmd(t_parser *tmp, t_parser *new_list, char *cmd);
+
+
 
 				// expander
 //------------------ expand -------------------//
