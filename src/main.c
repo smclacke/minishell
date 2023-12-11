@@ -6,32 +6,30 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 19:06:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 20:12:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-void	lexing(t_process *data, char *input)
-{
-	if (!input)
-		exit(0);
-	if (!is_space(input))
-		add_history(input);
-	data->parser = lexer(input);
-	free(input);
-	// return (tokens);
-}
+/**
+ * after firguring this out properly
+ * could write func to take input, tokenize, parser... return 
+ * just the shizz the executor needs and make this main shorter
+*/
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_process	data;
 	char		*input;
+	char		**tokens;
+	int			og_stdout;
+	int			og_stdin;
+
+	
+	// t_process	data;
 	// t_lexer		*tokens;
 	// t_parser	*procs;
 	// t_env		*env;
-	int			og_stdout;
-	int			og_stdin;
 
 	(void) argc;
 	(void) argv;
@@ -44,15 +42,23 @@ int	main(int argc, char **argv, char **envp)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
-		lexing(&data, input); // add wrapper protection
-		shelly_print_list(data.parser);
-		parser(&data); // add wrapper
-		print_parser(&data);
+
+		tokens = lexer(input);
+		if (!tokens)
+			continue ;
+		print_token_arr(tokens);
+		exit(EXIT_SUCCESS);
+
+
+		// parser(&data); // add wrapper
+		// print_parser(&data);
 		// if (!procs)
 		// 	continue ;
 		// print_new_parser(&data);
-		exit(EXIT_SUCCESS);
+		// exit(EXIT_SUCCESS);
 		// print_the_full_thing(tokens);
+
+
 		// execute(&env, tokens);
 		// free_tokens(tokens);
 		dup2(og_stdout, STDOUT_FILENO);

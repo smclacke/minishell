@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   token_utils.c                                      :+:    :+:            */
+/*   lexer_utils.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 18:08:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 20:12:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-/**
- * @todo errors, 54 return needs error
-*/
 
 int	is_meta(char *input)
 {
@@ -31,6 +27,9 @@ int	is_meta(char *input)
 	return (0);
 }
 
+/**
+ * @todo errors: next_quote() and 54 return needs error
+*/
 int	space_or_meta(int c)
 {
 	if (ft_isspace(c) || ft_ismeta(c))
@@ -54,10 +53,6 @@ char	*which_quote(char *input)
 	return (0);
 }
 
-/**
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
-*/
 int	next_quote(char *input, char c)
 {
 	int	i;
@@ -67,8 +62,9 @@ int	next_quote(char *input, char c)
 		i++;
 	if (input[i] != c)
 	{
-		printf("ERROR UNCLOSED QUOTES\n"); // need to change to proper error func
+		printf("ERROR UNCLOSED QUOTES\n");
 		exit(1);
 	}
 	return (i);
 }
+

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/10 22:11:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 18:31:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 20:13:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	parser(t_process *data)
 	get_proc_count(data);
 	parser_array = malloc(sizeof(t_parser) * data->proc_count); // protect
 	parser_array = init_parser_structs(data, parser_array); // protect
-	free_input(data);
+	// free_input(data);
 	// freeeeeee lexer token list, here or main??
 	data->parser = parser_array;
 }

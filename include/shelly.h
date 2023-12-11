@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 18:28:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 20:12:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,24 @@ int				get_n_cmds(t_parser *tokens);
 
 				// print
 void			print_expand_vals(t_expand *str);
-void			shelly_print_list(t_parser *token);
+void			print_token_arr(char **token);
 t_parser		*shelly_parser_print(t_parser *tokens);
 t_parser		*print_the_full_thing(t_parser *tokens);
 
 				// lexer
 //---------- lexer ----------//
-t_parser		*lexer(char *input);
+char			**lexer(char *input);
 
 //-------- lexer_utils --------//
-t_parser		*lexer_listlast(t_parser *list);
-void			lexer_listadd_back(t_parser **list, t_parser *new);
-t_parser		*lexer_listnew(char *input);
-
-//---------- token ----------//
-char			**parse_input(char *input);
-
-//-------- token_size --------//
-int				start_token(char *input, int old_start);
-int				len_token(char *input, int len);
-
-//-------- token_utils --------//
 int				is_meta(char *input);
 int				space_or_meta(int c);
 int				is_same_quote(int c, char *quote_type);
 char			*which_quote(char *input);
 int				next_quote(char *input, char c);
+
+//-------- token_size --------//
+int				start_token(char *input, int old_start);
+int				len_token(char *input, int len);
 
 				// parser
 //-------- parser --------//
@@ -134,7 +126,6 @@ int				is_dollar_or_quote(int c);
 int				add_to_expand(t_expand *str, char *copy_str);
 int				get_check_value(t_expand *str, t_env **env);
 int				set_expand_string(t_parser *tmp, t_expand *str);
-
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);

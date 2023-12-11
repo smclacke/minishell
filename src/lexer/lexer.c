@@ -5,73 +5,118 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 19:31:22 by smclacke      ########   odam.nl         */
+/*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
+/*   Updated: 2023/12/11 20:08:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * @todo errors
+ * @todo errors (printfs) and basic comments
 */
-
-/**
- * @brief	add new tokens to linked list of the t_parser struct
- * @param	parsed_input an array created but separating the input string into 
- * 			tokenizable bites
- * @return	list of tokens
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
-*/
-static t_parser	*make_token_list(char **parsed_input)
+static int	quote_input(char *input, int i)
 {
-	t_parser		*tokens;
-	t_parser		*node;
-	int				i;
+	char	*quote_type;
 
-	tokens = NULL;
-	i = 0;
-	if (!*parsed_input)
-		return (NULL);
-	while (parsed_input[i])
+	while (input[i] && !space_or_meta(input[i]))
 	{
-		node = lexer_listnew(parsed_input[i]);
-		if (!node)
-			// mini_error("malloc error: make_token_list()", E_MALLOC);
-			return (0);
-		lexer_listadd_back(&tokens, node);
+		if (ft_isquote(input[i]))
+		{
+			quote_type = which_quote(&input[i]);
+			i += next_quote(&input[i], *quote_type);
+		}
 		i++;
 	}
-	free(parsed_input);
-	return (tokens);
+	return (i);
 }
 
-/**
- * @brief	takes the command line input, parses through the spaces, metas
- * 			and quotations, creating tokens
- * @param	input from the commandline
- * @return	t_parser tokens
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
-*/
-char	**lexer(char *input)
+static int	amount_tokens(char *input)
 {
-	t_parser			*tokens;
-	char				**lexer_array;
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (input[i])
+	{
+		while (input[i] && ft_isspace(input[i]))
+			i++;
+		if (ft_ismeta(input[i]))
+		{
+			if (ft_ismeta(input[i + 1]))
+				i++;
+			count++;
+			i++;
+		}
+		if (input[i] && !ft_isspace(input[i]))
+		{
+			i = quote_input(input, i);
+			count++;
+		}
+	}
+	return (count);
+}
+
+static char	*split_tokens(char *input, int len)
+{
+	char	*token;
 
 	if (!input)
 		return (NULL);
-	lexer_array = lexer_array(input);
-	if (!lexer_array)
+	token = ft_substr(input, 0, len);
+	if (!token)
 	{
-		free(input);
-		// mini_error("malloc error: lexer()", E_MALLOC);
+		printf("im a malloc error in the lexer\n");
 		return (0);
 	}
-	// tokens = make_token_list(lexer_array);
-	// if (!tokens)
-	// 	return (NULL);
-	// return (tokens);
-	return (lexer_array);
+	input += len;
+	return (token);
+}
+
+static char	**lexer_split(char *input)
+{
+	char	**array;
+	int		i;
+	int		start;
+	int		len;
+	int		no_tokens;
+
+	i = 0;
+	start = 0;
+	len = 0;
+	no_tokens = amount_tokens(input);
+	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
+	if (!array)
+	{
+		printf("im a malloc error in the lexer\n");
+		return (0);
+	}
+	while (i < no_tokens)
+	{
+		start = start_token(input, (start + len));
+		len = len_token(input, start);
+		array[i] = split_tokens(&input[start], len);
+		i++;
+	}
+	array[i] = NULL;
+	return (array);
+}
+
+char	**lexer(char *input)
+{
+	char	**array;
+
+	if (!input)
+		exit(0);
+	if (!is_space(input))
+		add_history(input);
+	array = lexer_split(input);
+	if (!array)
+	{
+		printf("im a lexer error, lexer_array()\n");
+		return (0);
+	}
+	free(input);
+	return (array);
 }
