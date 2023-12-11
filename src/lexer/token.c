@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/04 14:50:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/11 19:31:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static char	*split_tokens(char *input, int len)
  * @todo	norm proof, djoyke changed some things regarding mini_error
  * 			parser is not made yet so can't use mini_error function
 */
-static char	**parser_split(char *input)
+static char	**lexer_split(char *input)
 {
 	char	**array;
 	int		i;
@@ -144,11 +144,11 @@ static char	**parser_split(char *input)
  * @todo	norm proof, djoyke changed some things regarding mini_error
  * 			parser is not made yet so can't use mini_error function
 */
-char	**parse_input(char *input)
+char	**lexer_array(char *input)
 {
 	char	**array;
 
-	array = parser_split(input);
+	array = lexer_split(input);
 	if (!array)
 		// mini_error("general: parse_input()", E_GENERAL);
 		return (0);

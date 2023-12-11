@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/30 12:37:14 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 18:11:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 19:31:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,23 @@ static t_parser	*make_token_list(char **parsed_input)
  * @todo	norm proof, djoyke changed some things regarding mini_error
  * 			parser is not made yet so can't use mini_error function
 */
-t_parser	*lexer(char *input)
+char	**lexer(char *input)
 {
 	t_parser			*tokens;
-	char				**parsed_input;
+	char				**lexer_array;
 
 	if (!input)
 		return (NULL);
-	parsed_input = parse_input(input);
-	if (!parsed_input)
+	lexer_array = lexer_array(input);
+	if (!lexer_array)
 	{
 		free(input);
 		// mini_error("malloc error: lexer()", E_MALLOC);
 		return (0);
 	}
-	tokens = make_token_list(parsed_input);
-	if (!tokens)
-		return (NULL);
-	return (tokens);
+	// tokens = make_token_list(lexer_array);
+	// if (!tokens)
+	// 	return (NULL);
+	// return (tokens);
+	return (lexer_array);
 }

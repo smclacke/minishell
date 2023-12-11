@@ -6,27 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 18:33:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 19:06:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
-
-// void	print_new_parser(t_process *proc)
-// {
-// 	int		i = 0;
-// 	int		j = 0;
-
-// 	while (i < proc->parser->proc_id)
-// 	{
-// 		printf("[%i]\t", proc->parser->proc_id);
-// 		while ()
-// 		printf("input = %s\n", proc->parser->input);
-// 		// printf("cmd = [%s]\t", procs->cmd);
-// 		// printf("str = [%s]\t\n", procs->str);
-// 		i++;
-// 	}
-// }
 
 void	lexing(t_process *data, char *input)
 {
@@ -37,11 +21,6 @@ void	lexing(t_process *data, char *input)
 	data->parser = lexer(input);
 	free(input);
 	// return (tokens);
-}
-
-void	print_parser(t_process *data)
-{
-	
 }
 
 int	main(int argc, char **argv, char **envp)
