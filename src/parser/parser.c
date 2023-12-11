@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/10 22:11:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 21:43:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 21:45:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 // 	// add each process arr as node in parser struct
 // }
 
+/**
+ * we need = split tokens up into their processes
+ * 
+*/
 static t_tokens	*make_token_arr(char **tokens)
 {
 	int			token_count;
@@ -55,15 +59,9 @@ void	parse_tokens(char **tokens)
 	// for each process, a token list is created...
 	// need to figure out the whiles when not as tired
 	// also need to free the used tokens...
-	while (parser_arr)
-	{
-		while (tokens[i])
-		{
-			token_arr = make_token_arr(tokens);
-			i++;
-		}
-		parser_arr = parser_arr->next;
-			
-	}
-	// add token_arrs to parser_arr...
+	token_arr = make_token_arr(tokens);
+
+
+	// make token arrs
+	// theyre already part of the parser struct...
 }
