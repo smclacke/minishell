@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 20:20:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 20:45:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,71 +65,63 @@ typedef enum e_exit
 
 /**
  * @brief	specifies the different variable types of tokens from the
- * 			lexer that are parsed and then given to the executor
+ * 			lexer that are organised in mini sub arrays, parsed and then 
+ * 			given to the executor as a link list of parser struct nodes
  * @param	cmd: first string in each process without redirect char
+ * @param	str:  limiter for here_doc (string after <<) and all other input
  * @param	meta: pipe, more, less, moremore, lessless. 
  * 			**dollar is excluded and handled as a string
  * @param	file: in and out files; after more, less and moremore chars
- * @param	str:  limiter for here_doc (string after <<) and all other input
- * @param	flag: useful util var
- * @param	n_cmd: total amount of commands is stored in first node
- * @param	exit_code: enums to set exitcode at different
- * 			stages of process, saved to pass through the program
  * @param	hd_limit: save the limiter string, check if it's quoted or not
- * 			do not expand dollar in this case
+ * @param	flag: useful util var
  * @param	hd_flag: 1 = quoted, quotes are removed but if flag is set, 
  * 			don't expand anything inside here_doc input for both
  * 			single and double quotes
 */
-
-/**
- * proc_id is basically process count, can iterate through
- * list of process nodes when it as index
- * 
- * proc -> parser struct [proc_id] -> one process ...
- * 	as many processes as there are
-*/
-typedef	struct	s_parser
+typedef struct s_tokens
 {
-	void					*input;
-	int						proc_id;
+	int						index; // dunno if needed
+	int						proc_count;
 	char					*cmd;
 	char					*str;
 	char					*meta;
 	char					*file;
-	char					*hd_limit;	
+	char					*hd_limit;
+	int						hd_flag;
 	int						flag;
+	struct s_tokens			next;
+}				t_tokens;
+
+/**
+ * going to be an array of token lists, one for each process
+ * var are already organised in tokens struct
+*/
+typedef	struct	s_parser
+{
+	struct s_tokens			*process;
 	struct s_parser			*next;
 }							t_parser;
 
+
 /**
- * list of split up tokens from lexer struct
- * each parser struct is a process, array is contained 
- * 		in process struct
+ * THIS IS GOING TO BE PASSED TO THE EXECUTOR AND HAVE EVERYTHING INSIDE
+ * @param	exit_code: enums to set exitcode at different
+ * 			stages of process, saved to pass through the program
+ * 
+ * @todo exit stuff: what do we need?
+ * @todo init hd_fd somewhere
 */
-typedef struct s_process
+typedef struct s_input
 {
 	char					*exit_str;  //do we need all of these?  
 	enum e_exit				exit_code;  //do we need all of these?
 	int						exit_stat;  //do we need all of these?
+
 	int						hd_fd; // check which struct this should below to
 	t_parser				*parser;
-	int						proc_count;
-}							t_process;
+}							t_input;
 
 
-
-
-typedef struct s_tokens
-{
-	int			index;
-	int			proc_count;
-	char		*cmd;
-	char		*str;
-	char		*meta;
-	char		*file;
-	char		*hd_limit;
-}				t_tokens;
 
 
 
