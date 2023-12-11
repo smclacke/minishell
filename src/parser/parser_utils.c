@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 20:29:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/11 21:04:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		count_procs(char **tokens)
 	int		count;
 
 	i = 0;
-	count = 1;
+	count = 0;
 	while (tokens[i])
 	{
 		if (is_pipe(tokens[i]))
