@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 15:03:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 16:03:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ typedef enum e_exit
 */
 typedef struct s_tokens
 {
+	// char 					*node;
 	int						index; // dunno if needed
 	char					*cmd;
-	char					*str;
+	char					**str;
 	char					*meta;
-	char					*file;
-	char					*hd_limit;
+	char					**file;
+	char					**hd_limit;
 	int						hd_flag;
 	int						flag;
 	struct s_tokens			*next;
@@ -99,7 +100,7 @@ typedef	struct	s_parser
 {
 	int						proc_count;
 	struct s_tokens			*process; // one node parser, list tokens - one process
-	// struct s_parser			*next; // if parser_arr is array, need list?
+	struct s_parser			*next;
 }							t_parser;
 
 
