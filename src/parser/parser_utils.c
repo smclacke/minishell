@@ -6,11 +6,57 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 16:59:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 18:10:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+t_parser	*parser_listlast(t_parser *list)
+{
+	if (!list)
+	{
+		free(list);
+		printf("erroroororr\n");
+		return (0);
+	}
+	if (list->next)
+	{
+		while (list->next)
+			list = list->next;
+	}
+	return (list);
+}
+
+void	parser_listadd_back(t_parser **list, t_parser *new)
+{
+	t_parser	*last;
+
+	if (*list)
+	{
+		last = parser_listlast(*list);
+		last->next = new;
+	}
+	else
+		*list = new;
+}
+
+t_parser	*parser_listnew(char *input)
+{
+	t_parser	*new;
+
+	new = (t_parser *)malloc(sizeof(t_parser));
+	if (!new || !input)
+	{
+		printf("erroroororr\n");
+		return (0);
+	}
+	ft_bzero(new, sizeof(t_parser));
+	new->input = input;
+	// new->hd_fd = -1; // move this somewhere where process struct is inited
+	new->next = NULL;
+	return (new);
+}
 
 int	is_pipe(void *input)
 {
