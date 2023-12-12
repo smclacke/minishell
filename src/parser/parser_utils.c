@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 18:10:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 18:51:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_parser	*parser_listnew(char *input)
 	new = (t_parser *)malloc(sizeof(t_parser));
 	if (!new || !input)
 	{
+		free(input);
 		printf("erroroororr\n");
 		return (0);
 	}
