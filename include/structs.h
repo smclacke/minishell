@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 21:24:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 15:03:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ typedef	struct	s_parser
 {
 	int						proc_count;
 	struct s_tokens			*process; // one node parser, list tokens - one process
-	struct s_parser			*next;
+	// struct s_parser			*next; // if parser_arr is array, need list?
 }							t_parser;
 
 
