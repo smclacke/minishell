@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 18:33:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 20:05:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	shelly_strcmp(char *s1, char *s2)
 }
 
 
-// void	free_only_tokens(t_parser *tokens)
-// {
-// 	t_parser	*tmp;
+void	free_only_tokens(t_parser *tokens)
+{
+	t_parser	*tmp;
 
-// 	while (tokens)
-// 	{
-// 		tmp = tokens->next;
-// 		free (tokens);
-// 		tokens = tmp;
-// 	}
-// }
+	while (tokens)
+	{
+		tmp = tokens->next;
+		free (tokens);
+		tokens = tmp;
+	}
+}
 
 /**
  * hehe ugly

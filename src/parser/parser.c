@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 18:53:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 20:02:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@
 // 	return (list->process[i]);
 // }
 
-static t_parser	*make_parser_list(t_parser *list, char **tokens)
+static t_parser	*make_parser_list(char **tokens)
 {
 	int			i;
 	t_parser	*node;
+	t_parser	*list;
 
 	i = 0;
+	list = NULL;
+	if (!*tokens)
+		return (NULL);
 	while (tokens[i])
 	{
 		node = parser_listnew(tokens[i]);
@@ -62,6 +66,7 @@ static t_parser	*make_parser_list(t_parser *list, char **tokens)
 		parser_listadd_back(&list, node);
 		i++;
 	}
+	// free(tokens);
 	return (list);
 }
 
@@ -69,21 +74,22 @@ void	parse_tokens(char **tokens)
 {
 	t_parser	*list;
 	int			i;
-	int			proc_count;
+	// int			proc_count;
 
-	list = NULL;
 	i = 0;
-	proc_count = count_procs(tokens);
-	list = make_parser_list(list, tokens);
+	if (!tokens)
+		exit(EXIT_FAILURE);
+	// proc_count = count_procs(tokens);
+	list = make_parser_list(tokens);
 	if (!list)
 	{
 		free(tokens);
 		exit(EXIT_FAILURE);		
 	}
-	free(tokens);
-	list->proc_count = proc_count;
-	printf("proc_count = %i\n", list->proc_count);
-	shelly_input_print(list);
+	// ft_free_arr(tokens);
+	// list->proc_count = proc_count;
+	// printf("proc_count = %i\n", list->proc_count);
+	// shelly_input_print(list);
 	// while (proc_count >= 0)
 	// {
 	// 	list->process[i] = make_token_lists(list);

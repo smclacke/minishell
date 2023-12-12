@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 18:49:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 19:50:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,9 @@ char	**lexer(char *input)
 	if (!array)
 	{
 		printf("im a lexer error, lexer_array()\n");
+		free(input);
 		return (0);
 	}
-	free(input);
+	// free(input);
 	return (array);
 }

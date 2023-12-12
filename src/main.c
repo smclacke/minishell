@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 18:53:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 20:05:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,38 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	char		**tokens;
-	int			og_stdout;
-	int			og_stdin;
+	// int			og_stdout;
+	// int			og_stdin;
 
 	
 	// t_process	data;
 	// t_lexer		*tokens;
-	// t_parser	*procs;
+	t_parser	*procs;
 	// t_env		*env;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
+	procs = NULL;
 	// env = NULL;
 	// env = env_list(envp, env);
-	og_stdout = dup(STDOUT_FILENO);
-	og_stdin = dup(STDIN_FILENO);
+	// og_stdout = dup(STDOUT_FILENO);
+	// og_stdin = dup(STDIN_FILENO);
 	while (1)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
 
 		tokens = lexer(input);
+		print_token_arr(tokens);
+		free(input);
 		if (!tokens)
 			continue ;
 
 		parse_tokens(tokens);
+
+		free(tokens);
+		free_only_tokens(procs);
 		exit(EXIT_SUCCESS);
 
 
@@ -62,8 +68,8 @@ int	main(int argc, char **argv, char **envp)
 
 		// execute(&env, tokens);
 		// free_tokens(tokens);
-		dup2(og_stdout, STDOUT_FILENO);
-		dup2(og_stdin, STDIN_FILENO);
+		// dup2(og_stdout, STDOUT_FILENO);
+		// dup2(og_stdin, STDIN_FILENO);
 	}
 	return (0);
 }

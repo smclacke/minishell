@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 18:45:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 20:00:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_token_arr(char **token)
 	i = 0;
 	while (token[i])
 	{
-		printf("tokens list: [%s]\n", token[i]);
+		printf("TOOKENS: [%i] [%s]\n", i, token[i]);
 		i++;
 	}
 }
