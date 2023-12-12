@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 20:05:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 20:09:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 
 		tokens = lexer(input);
-		print_token_arr(tokens);
 		free(input);
+		print_token_arr(tokens);
 		if (!tokens)
 			continue ;
 
