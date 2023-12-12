@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 20:11:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 18:45:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,37 @@ void	print_token_arr(char **token)
 	}
 }
 
-// t_parser	*shelly_parser_print(t_parser *tokens)
+// void	shelly_token_print(t_parser *list)
 // {
-// 	t_parser	*list;
+// 	t_parser	*tmp_list;
 // 	int			i;
 
+// 	tmp_list = list;
 // 	i = 0;
-// 	list = tokens;
-// 	while (list)
+// 	while (tmp_list)
 // 	{
-// 		printf("parser list: index [%i] | node [%s]\n", i, (char *)list->input);
+// 		printf("[%i] tmp_list->process->str[i] = %s\n", i, tmp_list->process->str[i]);
 // 		i++;
-// 		list = list->next;
+// 		tmp_list = tmp_list->next;
 // 	}
-// 	return (tokens);
 // }
+
+void	shelly_input_print(t_parser *list)
+{
+	int			i;
+	t_parser	*tmp_list;
+
+	i = 0;
+	tmp_list = list;
+	while (tmp_list)
+	{
+		printf("parser list: index [%i] | node [%s]\n", i, (char *)tmp_list->input);
+		i++;
+		tmp_list = tmp_list->next;
+	}
+}
+
+
 
 // t_parser	*print_the_full_thing(t_parser *tokens)
 // {
