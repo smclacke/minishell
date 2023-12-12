@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/10 22:11:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 17:04:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/12 17:21:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,15 +146,15 @@ void		parse_tokens(char **tokens)
 		exit(EXIT_FAILURE);
 	}
 	printf("proc_count = %i\n", proc_count);
-	while (tokens[i] && arr < proc_count)
+	while (tokens[i]) //  && arr < proc_count
 	{
 		start = i;
 		while (tokens[i] && !is_pipe(tokens[i]))
 			i++;
 		token_count = i - start;
-		// printf("token_count = %i\n", token_count);
 		mini_arrs[arr] = (char **)malloc(sizeof(char *) * token_count);
-		while (tokens[start] && !is_pipe(tokens[start]))
+		arr_index = 0;
+		while (start < token_count)
 		{
 			mini_arrs[arr][arr_index] = tokens[start];
 			arr_index++;
@@ -163,16 +163,16 @@ void		parse_tokens(char **tokens)
 		// i++;
 		arr++;
 	}
-	arr = 0;
-	arr_index = 0;
-	while (mini_arrs[arr])
-	{
-		while (mini_arrs[arr][arr_index])
-		{
-			printf("mini_arrs = %s\n", mini_arrs[arr][arr_index]);
-			arr_index++;
-		}
-		arr++;
-	}
+	// arr = 0;
+	// arr_index = 0;
+	// while (mini_arrs[arr])
+	// {
+	// 	while (mini_arrs[arr][arr_index])
+	// 	{
+	// 		printf("mini_arrs = %s\n", mini_arrs[arr][arr_index]);
+	// 		arr_index++;
+	// 	}
+	// 	arr++;
+	// }
 	exit(EXIT_SUCCESS);
 }
