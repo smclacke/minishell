@@ -41,6 +41,11 @@ tokkkkkk = hehe
 [5] PARSER list->process->node = [hehe]
 
 
+!!!!!!!!!!! I should only have process number of processes... -- cause of token lists..
+!!!!!!!!!!! Im getting extra nodes in one or more lists...
+!!!!!!!!!!! CHECK PRINTING, WHAT AM I ACTUALLY PRINTING??? DONT MAKE STOOPID MISTAKES
+!!!!!!!!!!! after this is all fixed and leak free, sort nodes.... 
+
 
 ------------------------------------------------------------------------
 **IF THE SHIT SHOW HAS BEEN FIXED....**
