@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/13 20:57:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/13 22:19:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 			continue ;
 
-		// procs = parse_tokens(tokens);
-		parse_tokens(tokens);
+		procs = parse_tokens(tokens);
+		// parse_tokens(tokens);
 
 		ft_free_arr(tokens);
 		free_only_tokens(procs);

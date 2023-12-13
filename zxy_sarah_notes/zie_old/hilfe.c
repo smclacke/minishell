@@ -41,3 +41,41 @@
 */
 
 
+
+
+
+// void	parse_tokens(char **tokens)
+// {
+// 	t_tokens	*process;
+// 	// t_parser	*list;
+// 	int			proc_i;
+// 	int			proc_count;
+
+// 	// if (!tokens)
+// 	// 	return (NULL);
+// 	if (!tokens)
+// 		return ;
+// 	proc_i = 0;
+// 	// list = NULL;
+// 	proc_count = count_procs(tokens);
+// 	process = (t_tokens *)malloc(sizeof(t_tokens) * proc_count);
+// 	printf("proc_count = %i\n", proc_count);
+// 	// shelly_input_print(list);
+// 	while (proc_count > 0)
+// 	{
+// 		// list = make_parser_list(proc_count);
+// 		*process = make_token_lists(tokens, proc_i);
+// 		proc_count--;
+// 		// proc_i++;
+// 	}
+// 	// while (proc_count >= 0)
+// 	// {
+// 	// 	// list = make_parser_list(proc_count);
+// 	// 	process[proc_i] = make_token_lists(tokens, proc_i);
+// 	// 	proc_count--;
+// 	// 	proc_i++;
+// 	// }
+// 	// list = make_parser_list(process);
+// 	// return (list);
+// // }
+

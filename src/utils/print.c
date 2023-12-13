@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 20:00:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/13 22:25:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,12 @@ void	shelly_input_print(t_parser *list)
 	tmp_list = list;
 	while (tmp_list)
 	{
-		printf("parser list: index [%i] | node [%s]\n", i, (char *)tmp_list->input);
-		i++;
+		while (tmp_list->process)
+		{
+			printf("parser list: index [%i] | node [%s]\n", i, (char *)tmp_list->process->node);
+			i++;
+			tmp_list->process = tmp_list->process->next;
+		}
 		tmp_list = tmp_list->next;
 	}
 }
