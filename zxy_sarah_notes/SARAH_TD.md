@@ -3,10 +3,43 @@
 **TO DO NOW NOW NOW**
 HOU EVEN VOL SHELLY...
 
-*nummer eennnnn*
-does what im planning make sense?
-ask people
-ask djoyke
+*nummer eennnnn* WE GETTING SOMEWHERE BUT IT A BIT WEIRD LIKE
+minibleh:echo something | heheh e| omg  | hwhhwhw
+TOOKENS: [0] [echo]
+TOOKENS: [1] [something]
+TOOKENS: [2] [|]
+TOOKENS: [3] [heheh]
+TOOKENS: [4] [e]
+TOOKENS: [5] [|]
+TOOKENS: [6] [omg]
+TOOKENS: [7] [|]
+TOOKENS: [8] [hwhhwhw]
+[0] TOKENS process->node = [echo]
+[1] TOKENS process->node = [something]
+[0] PARSER list->process->node = [echo]
+[1] PARSER list->process->node = [something]
+[2] PARSER list->process->node = [something]
+
+**OMG IM KIND OF GETTING SOMEWHERE**
+TOOKENS: [0] [cd]
+TOOKENS: [1] [ls]
+TOOKENS: [2] [|]
+TOOKENS: [3] [some]
+TOOKENS: [4] [things]
+TOOKENS: [5] [hehe]
+tokkkkkk = some
+tokkkkkk = things
+tokkkkkk = hehe
+[0] TOKENS process->node = [echo]
+[1] TOKENS process->node = [something]
+[2] TOKENS process->node = [hehe]
+[0] PARSER list->process->node = [echo]
+[1] PARSER list->process->node = [something]
+[2] PARSER list->process->node = [hehe]
+[3] PARSER list->process->node = [something]
+[4] PARSER list->process->node = [hehe]
+[5] PARSER list->process->node = [hehe]
+
 
 
 ------------------------------------------------------------------------
@@ -17,16 +50,8 @@ JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
 **PROBLEM**
 **FOOOOOOOOOK**
 
-
-ok so everything is fucked, 
-take "sorted" parser list, do something with it
-outside (after) the sort functions. Just take what i have 
-give djoyke what she needss...
-
-
 *TODO 1* US
  ---->>>>  ?? why we exiting??
-
 EXAMPLE:
 minibleh:<< eof
 heredoc> hi

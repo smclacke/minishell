@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/13 22:25:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/13 22:30:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,22 @@ void	print_token_arr(char **token)
 	}
 }
 
-// void	shelly_token_print(t_parser *list)
-// {
-// 	t_parser	*tmp_list;
-// 	int			i;
+void	shelly_tokenlst_print(t_tokens *list)
+{
+	t_tokens	*tmp_list;
+	int			i;
 
-// 	tmp_list = list;
-// 	i = 0;
-// 	while (tmp_list)
-// 	{
-// 		printf("[%i] tmp_list->process->str[i] = %s\n", i, tmp_list->process->str[i]);
-// 		i++;
-// 		tmp_list = tmp_list->next;
-// 	}
-// }
+	i = 0;
+	tmp_list = list;
+	while (tmp_list)
+	{
+		printf("[%i] TOKENS process->node = [%s]\n", i, tmp_list->node);
+		tmp_list = tmp_list->next;
+		i++;
+	}
+}
 
-void	shelly_input_print(t_parser *list)
+void	shelly_parser_print(t_parser *list)
 {
 	int			i;
 	t_parser	*tmp_list;
@@ -58,39 +58,10 @@ void	shelly_input_print(t_parser *list)
 	{
 		while (tmp_list->process)
 		{
-			printf("parser list: index [%i] | node [%s]\n", i, (char *)tmp_list->process->node);
-			i++;
+			printf("[%i] PARSER list->process->node = [%s]\n", i, (char *)tmp_list->process->node);
 			tmp_list->process = tmp_list->process->next;
+			i++;
 		}
 		tmp_list = tmp_list->next;
 	}
 }
-
-
-
-// t_parser	*print_the_full_thing(t_parser *tokens)
-// {
-// 	t_parser	*list;
-// 	int			i;
-
-// 	i = 0;
-// 	list = tokens;
-// 	while (list)
-// 	{
-// 		// printf("input = %s\t", list->input);
-	
-// 		printf("[%i]\t ", i);
-// 		printf("cmd = %s\t", list->cmd);
-// 		printf("file = %s\t", list->file);
-// 		printf("meta = %s\t", list->meta);
-// 		printf("n_pipe = %i\t", list->n_pipe);
-// 		printf("str = %s\n", list->str);
-// 		// printf("hd_limit = %s\n", list->hd_limit);
-		
-// 		//  printf("n_cmd = %i\t", list->n_cmd);
-// 		// printf("hd_fd = %i\n", list->hd_fd);
-// 		i++;
-// 		list = list->next;
-// 	}
-// 	return (tokens);
-// }
