@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/13 18:21:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/13 20:46:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ typedef enum e_exit
 */
 typedef struct s_tokens
 {
-	char 					*node; // dunno if needed
-	int						index; // dunno if needed
+	char 					*node;
 	char					*cmd;
 	char					**str;
 	char					*meta;

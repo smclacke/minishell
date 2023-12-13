@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/13 17:14:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/13 20:57:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,13 @@ int				len_token(char *input, int len);
 
 				// parser
 //-------- parser --------//
-t_parser		*parse_tokens(char **tokens);
+// t_parser		*parse_tokens(char **tokens);
+void			parse_tokens(char **tokens);
+
+//-------- token list utils --------//
+t_tokens		*token_listlast(t_tokens *list);
+void			token_listadd_back(t_tokens **list, t_tokens *new);
+t_tokens		*token_listnew(char *input);
 
 //-------- parser utils --------//
 t_parser		*parser_listlast(t_parser *list);
