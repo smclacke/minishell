@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 18:40:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/13 17:14:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
 void			free_only_tokens(t_parser *tokens);
-void			free_tokens(t_parser *tokens);
-int				get_n_cmds(t_parser *tokens);
+// void			free_tokens(t_parser *tokens);
+// int				get_n_cmds(t_parser *tokens);
 
 				// print
 void			print_expand_vals(t_expand *str);
@@ -66,7 +66,7 @@ int				len_token(char *input, int len);
 
 				// parser
 //-------- parser --------//
-void			parse_tokens(char **tokens);
+t_parser		*parse_tokens(char **tokens);
 
 //-------- parser utils --------//
 t_parser		*parser_listlast(t_parser *list);

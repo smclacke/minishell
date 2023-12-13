@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 19:50:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/13 17:10:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	**lexer(char *input)
 	char	**array;
 
 	if (!input)
-		exit(0);
+		return (NULL);
 	if (!is_space(input))
 		add_history(input);
 	array = lexer_split(input);
