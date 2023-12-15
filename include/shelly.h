@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/13 22:29:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/15 16:21:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void			parser_listadd_back(t_parser **list, t_parser *new);
 t_parser		*parser_listnew(char *input);
 int				is_pipe(void *input);
 int				count_procs(char **tokens);
-
 
 
 				// expander
