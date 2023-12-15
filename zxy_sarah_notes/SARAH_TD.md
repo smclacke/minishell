@@ -40,12 +40,23 @@ tokkkkkk = hehe
 [4] PARSER list->process->node = [hehe]
 [5] PARSER list->process->node = [hehe]
 
+*nummer twooo* 
+!!!!!!!!!!! I should only have process number of processes... -- amount of token lists..
 
-!!!!!!!!!!! I should only have process number of processes... -- cause of token lists..
+*nummer tree* 
 !!!!!!!!!!! Im getting extra nodes in one or more lists...
+
+*nummer 4444* 
 !!!!!!!!!!! CHECK PRINTING, WHAT AM I ACTUALLY PRINTING??? DONT MAKE STOOPID MISTAKES
+
+*nummer fifff* 
 !!!!!!!!!!! after this is all fixed and leak free, sort nodes.... 
 
+*nummer sixx*  tff????
+minibleh:echo something | oof sd fs df | dsf f
+THIS SEGFAULTS
+echo something | mimi poo | hell on earth
+THIS DOESNT
 
 ------------------------------------------------------------------------
 **IF THE SHIT SHOW HAS BEEN FIXED....**
