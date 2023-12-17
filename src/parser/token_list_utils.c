@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 20:40:10 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/15 16:24:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/17 18:50:16 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	token_listadd_back(t_tokens **list, t_tokens *new)
 
 t_tokens	*token_listnew(char *input)
 {
-	t_tokens	**new;
+	t_tokens	*new;
 
-	new = (t_tokens **)malloc(sizeof(t_tokens));
+	new = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!new || !input)
 	{
 		// free(input);
@@ -52,7 +52,7 @@ t_tokens	*token_listnew(char *input)
 		return (0);
 	}
 	ft_bzero(new, sizeof(t_tokens));
-	new->node = input;
+	new->input = input;
 	new->next = NULL;
 	return (new);
 }

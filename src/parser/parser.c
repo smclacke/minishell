@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/15 16:22:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2023/12/17 19:08:44 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,46 +101,47 @@ static t_tokens	make_token_lists(char **tokens, int proc_i)
 	return (token_list[proc_i]);
 }
 
-static t_parser	*other_listnew(t_tokens *input)
-{
-	t_parser	*new;
+// static t_parser	*other_listnew(t_tokens *input)
+// {
+// 	t_parser	*new;
 
-	new = (t_parser *)malloc(sizeof(t_parser));
-	if (!new || !input)
-	{
-		// free(input); // errrm??
-		printf("erroroororr\n");
-		return (0);
-	}
-	ft_bzero(new, sizeof(t_parser));
-	new->process = input;
-	new->next = NULL;
-	return (new);
-}
+// 	new = (t_parser *)malloc(sizeof(t_parser));
+// 	if (!new || !input)
+// 	{
+// 		// free(input); // errrm??
+// 		printf("erroroororr\n");
+// 		return (0);
+// 	}
+// 	ft_bzero(new, sizeof(t_parser));
+// 	new->process = input;
+// 	new->next = NULL;
+// 	return (new);
+// }
 
-static t_parser	*make_parser_list(t_tokens *process)
-{
-	t_parser	*list;
-	t_parser	*node;
+// static t_parser	*make_parser_list(t_tokens *process)
+// {
+// 	t_parser	*list;
+// 	t_parser	*node;
 
-	list = NULL;
-	shelly_tokenlst_print(process);
-	while (process)
-	{
-		node = other_listnew(process);
-		parser_listadd_back(&list, node);
-		process = process->next;
-	}
-	return (list);
-}
+// 	list = NULL;
+// 	while (process)
+// 	{
+// 		node = other_listnew(process);
+// 		parser_listadd_back(&list, node);
+// 		process = process->next;
+// 	}
+// 	return (list);
+// }
 
 t_parser	*parse_tokens(char **tokens)
 {
 	t_tokens	*process;
 	t_parser	*list;
 	int			proc_i;
+	// int			nog_proc;
 	int			proc_count;
 
+	// nog_proc = 0;
 	if (!tokens)
 		return (NULL);
 	proc_i = 0;
@@ -150,9 +151,20 @@ t_parser	*parse_tokens(char **tokens)
 	while (proc_count > 0)
 	{
 		*process = make_token_lists(tokens, proc_i);
+		// printf("process in while = %p\n", process);
 		proc_count--;
+		// proc_i++;
 	}
-	list = make_parser_list(process);
-	shelly_parser_print(list);
+	printf("ret after while\n");
+	// proc_count = count_procs(tokens);
+	// proc_i = 0;
+	// while (process[proc_i])
+	// {
+	// 	printf("process ptrs = %p\n", process[proc_i]);
+	// 	proc_i++;
+	// }
+	shelly_tokenlst_print(process);
+	// list = make_parser_list(process);
+	// shelly_parser_print(list);
 	return (list);
 }

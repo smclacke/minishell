@@ -3,6 +3,37 @@
 **TO DO NOW NOW NOW**
 HOU EVEN VOL SHELLY...
 
+// obviously only getting two nodes because of proc count while loop...
+need to rethink this because it's been doomed from the start...
+
+**CURRENT SIT WITHOUT T_PARSER STRUCT**
+minibleh:one two | three four
+token_arr: [0] [one]
+token_arr: [1] [two]
+token_arr: [2] [|]
+token_arr: [3] [three]
+token_arr: [4] [four]
+------------------------------------
+token_arr: [0] [one]
+token_arr: [1] [two]
+token_arr: [2] [|]
+token_arr: [3] [three]
+token_arr: [4] [four]
+------------------------------------
+ret after while
+[0] tokenlst process->node = [one]
+[0] tokenlst process->node = [two]
+
+**plane, cant push**
+changed node -> input in token struct
+need to get right token lists, then add correctly to process nodes
+
+why double node at end of parser_list->process->node print??
+
+for laptop: signal usage of rl_replace (?) commented
+
+check WHAT IM PRINTINGNNGGG
+
 *nummer eennnnn* WE GETTING SOMEWHERE BUT IT A BIT WEIRD LIKE
 minibleh:echo something | heheh e| omg  | hwhhwhw
 TOOKENS: [0] [echo]
