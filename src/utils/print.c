@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/17 18:52:17 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2024/01/10 21:04:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	shelly_tokenlst_print(t_tokens *list)
 	{
 		printf("[%i] tokenlst process->node = [%s]\n", i, (char *)tmp_list->input);
 		tmp_list = tmp_list->next;
+		i++;
 	}
 	printf("------------------------------------\n");
 }

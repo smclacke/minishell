@@ -6,24 +6,62 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/10 20:06:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/10 22:04:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static	t_tokens	*make_token_lists(char **tokens)
+static	t_tokens	**make_token_lists(char **tokens, t_tokens **procs)
 {
-	t_tokens	*single_proc_list;
 	t_tokens	*node;
-	
-	single_proc_list = NULL;
-	print_token_arr(tokens);
-	while ()
+	t_tokens	*token_list;
+	int			token_count;
+	int			i;
+	int			proc_i;
 
-	return (single_proc_list);
+	i = 0;
+	proc_i = 0;
+	token_list = NULL;
+	token_count = 0;
+	while (tokens && tokens[i])
+	{
+		while (tokens[i] && !is_pipe(tokens[i]))
+		{
+			node = token_listnew(tokens[i]);
+			token_listadd_back(&token_list, node);
+			i++;
+			token_count++;
+		}
+		procs[proc_i] = (t_tokens *)malloc(sizeof(t_tokens) * (token_count + 1));
+		procs[proc_i] = token_list;
+		proc_i++;
+		free(token_list);
+		token_list = NULL;
+		token_count = 0;
+		if (tokens[i])
+			i++;
+	}
+	return (procs);
 }
 
+static	t_parser	*make_parser_list(t_tokens **procs, t_parser *proc_list, int proc_count)
+{
+	t_parser	*node;
+	int			i;
+
+	i = 0;
+	while (proc_count > 0)
+	{
+		node = parser_listnew(procs[i]);
+		parser_listadd_back(&proc_list, node);
+		proc_count--;
+		i++;
+	}
+	return (proc_list);
+}
+ 
+ 
 /**
  * - number of tokens per process
  * - number of processes
@@ -42,40 +80,28 @@ t_parser	*parse_tokens(char **tokens)
 	t_tokens	**procs;
 	t_parser	*proc_list;
 	int			proc_count;
-	int			token_count;
-	
+	// int			i = 0;
+	// int			token_count;
+
 	if (!tokens)
 		return (NULL);
 	proc_list = NULL;
 	proc_count = count_procs(tokens);
-	printf("proc_count = %i\n", proc_count);
-	
-	// need this?
-	// token_count = count_tokens(tokens);
-	// printf("token_count = %i\n", token_count);
-
-	procs = (t_tokens **)malloc(sizeof(t_tokens *) * proc_count);
+	procs = (t_tokens **)malloc(sizeof(t_tokens *) * (proc_count + 1));
 	if (!procs)
 	{
 		printf("malloc error parser\n");
 		return (NULL);
 	}
-	// this wont work, if token_count = 5, will go through 5 times, need to make list
-	// based on process count...
-	while (tokens)
+	procs = make_token_lists(tokens, procs);
+	proc_list = (t_parser *)malloc(sizeof(t_parser) * (proc_count + 1));
+	if (!proc_list)
 	{
-		while (proc_count >= 0)
-		{
-			procs[proc_count] = make_token_lists(tokens);
-			proc_count--;
-
-			// move position in token array to get next process...
-		}
-		// move through token list...
+		printf("malloc error parser\n");
+		return (NULL);
 	}
-	// proc_list ... 
+	proc_list = make_parser_list(procs, proc_list, proc_count);
 	return (proc_list);
-	
 }
 
 /**
@@ -93,3 +119,18 @@ t_parser	*parse_tokens(char **tokens)
  * 
  * proc_count--; 
 */
+
+
+	// this wont work, if token_count = 5, will go through 5 times, need to make list
+	// based on process count...
+	// while (tokens)
+	// {
+	// 	while (proc_count >= 0)
+	// 	{
+	// 		procs[proc_count] = make_token_lists(tokens);
+	// 		proc_count--;
+
+	// 		// move position in token array to get next process...
+	// 	}
+	// 	// move through token list...
+	// }

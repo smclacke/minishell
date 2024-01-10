@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/12 20:00:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/10 21:47:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	parser_listadd_back(t_parser **list, t_parser *new)
 		*list = new;
 }
 
-t_parser	*parser_listnew(char *input)
+t_parser	*parser_listnew(void *input)
 {
 	t_parser	*new;
 
