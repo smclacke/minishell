@@ -6,9 +6,48 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/10 19:47:09 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/10 19:53:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/10 22:18:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+-------------------------------
+newst notes:
+
+
+/**
+ * 
+ * remember = need TWO LISTS, one is a list of lists, the other is the list of tokens
+ * belonging to one process
+*/
+/**
+ * while proc_count > 0
+ * 
+ * add token lists as new nodes to proc_list array
+ * 
+ * proc_list = list_new(procs[i])
+ * list add back (&proc_list, procs[i])
+ * 
+ * proc_count--; 
+*/
+
+
+	// this wont work, if token_count = 5, will go through 5 times, need to make list
+	// based on process count...
+	// while (tokens)
+	// {
+	// 	while (proc_count >= 0)
+	// 	{
+	// 		procs[proc_count] = make_token_lists(tokens);
+	// 		proc_count--;
+
+	// 		// move position in token array to get next process...
+	// 	}
+	// 	// move through token list...
+	// }
+
+	
+-------------------------------
+
 
 
 /**

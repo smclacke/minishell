@@ -3,91 +3,13 @@
 **TO DO NOW NOW NOW**
 HOU EVEN VOL SHELLY...
 
-// obviously only getting two nodes because of proc count while loop...
-need to rethink this because it's been doomed from the start...
+PARSER
 
-**CURRENT SIT WITHOUT T_PARSER STRUCT**
-minibleh:one two | three four
-token_arr: [0] [one]
-token_arr: [1] [two]
-token_arr: [2] [|]
-token_arr: [3] [three]
-token_arr: [4] [four]
-------------------------------------
-token_arr: [0] [one]
-token_arr: [1] [two]
-token_arr: [2] [|]
-token_arr: [3] [three]
-token_arr: [4] [four]
-------------------------------------
-ret after while
-[0] tokenlst process->node = [one]
-[0] tokenlst process->node = [two]
+*nummer eennnnn*
+make sure my procs token lists are GOOOOOD, then cont. making the parser list...
 
-**plane, cant push**
-changed node -> input in token struct
-need to get right token lists, then add correctly to process nodes
-
-why double node at end of parser_list->process->node print??
-
-for laptop: signal usage of rl_replace (?) commented
-
-check WHAT IM PRINTINGNNGGG
-
-*nummer eennnnn* WE GETTING SOMEWHERE BUT IT A BIT WEIRD LIKE
-minibleh:echo something | heheh e| omg  | hwhhwhw
-TOOKENS: [0] [echo]
-TOOKENS: [1] [something]
-TOOKENS: [2] [|]
-TOOKENS: [3] [heheh]
-TOOKENS: [4] [e]
-TOOKENS: [5] [|]
-TOOKENS: [6] [omg]
-TOOKENS: [7] [|]
-TOOKENS: [8] [hwhhwhw]
-[0] TOKENS process->node = [echo]
-[1] TOKENS process->node = [something]
-[0] PARSER list->process->node = [echo]
-[1] PARSER list->process->node = [something]
-[2] PARSER list->process->node = [something]
-
-**OMG IM KIND OF GETTING SOMEWHERE**
-TOOKENS: [0] [cd]
-TOOKENS: [1] [ls]
-TOOKENS: [2] [|]
-TOOKENS: [3] [some]
-TOOKENS: [4] [things]
-TOOKENS: [5] [hehe]
-tokkkkkk = some
-tokkkkkk = things
-tokkkkkk = hehe
-[0] TOKENS process->node = [echo]
-[1] TOKENS process->node = [something]
-[2] TOKENS process->node = [hehe]
-[0] PARSER list->process->node = [echo]
-[1] PARSER list->process->node = [something]
-[2] PARSER list->process->node = [hehe]
-[3] PARSER list->process->node = [something]
-[4] PARSER list->process->node = [hehe]
-[5] PARSER list->process->node = [hehe]
-
-*nummer twooo* 
-!!!!!!!!!!! I should only have process number of processes... -- amount of token lists..
-
-*nummer tree* 
-!!!!!!!!!!! Im getting extra nodes in one or more lists...
-
-*nummer 4444* 
-!!!!!!!!!!! CHECK PRINTING, WHAT AM I ACTUALLY PRINTING??? DONT MAKE STOOPID MISTAKES
-
-*nummer fifff* 
-!!!!!!!!!!! after this is all fixed and leak free, sort nodes.... 
-
-*nummer sixx*  tff????
-minibleh:echo something | oof sd fs df | dsf f
-THIS SEGFAULTS
-echo something | mimi poo | hell on earth
-THIS DOESNT
+seg faulting rn while making parser list and think it's cause the procs token 
+	lists aren't right yet, also fix their leaks to avoid collecting problems
 
 ------------------------------------------------------------------------
 **IF THE SHIT SHOW HAS BEEN FIXED....**
@@ -126,43 +48,31 @@ heredoc> eof
 
 ***LETS GO FROM HERE***
 *TODO 3* ME
-THE WHOLE PARSER IS FUCKED
- ----->>> first process before pipe doesnt need cmd, 
-	because of sorting, input is getting messed up
-			> test | echo blabla
-	probably same for is no cmd after/between pipes...
-
-	TESTS:
-	> test | echo blabla
-	< does_not_exist | echo blabla > test6
-
-
-*TODO 4* ME
  ------>> put ft_malloc into libft, use for all malloc in libft, 
 		forget about protection hawhaw
 		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
 
 
-*TODO 5* ME
+*TODO 4* ME
  ---->> check and test here_doc expansion
  +++ -----> stress testing the expander + checking all for leaks
 
 
-*TODO 6* ME
+*TODO 5* ME
  ---->> NORM: expand_quotes.c
 
 
-*TODO 7* US
+*TODO 6* US
 SIGNALSSSSh 
  ---> heredoc still weird, two prompt with signal
 
 
-*TODO 8* ME
+*TODO 7* ME
 EXPANSION
  ---> $? ***, test once exit codes are good
 
 
-*TODO 9* ME
+*TODO 8* ME
 ---> literally all errors
 
 --------------------------------------------------------------------

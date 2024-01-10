@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/10 22:04:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/10 22:21:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static	t_tokens	**make_token_lists(char **tokens, t_tokens **procs)
 		procs[proc_i] = (t_tokens *)malloc(sizeof(t_tokens) * (token_count + 1));
 		procs[proc_i] = token_list;
 		proc_i++;
+		// check the free and null here
 		free(token_list);
 		token_list = NULL;
 		token_count = 0;
@@ -47,17 +48,21 @@ static	t_tokens	**make_token_lists(char **tokens, t_tokens **procs)
 
 static	t_parser	*make_parser_list(t_tokens **procs, t_parser *proc_list, int proc_count)
 {
+	t_parser	*new_list;
 	t_parser	*node;
 	int			i;
+	(void) proc_count;
 
+	new_list = NULL;
 	i = 0;
-	while (proc_count > 0)
+	while (procs[i])
 	{
 		node = parser_listnew(procs[i]);
-		parser_listadd_back(&proc_list, node);
-		proc_count--;
+		parser_listadd_back(&new_list, node);
 		i++;
 	}
+	proc_list = new_list;
+	// free, nullify new_list
 	return (proc_list);
 }
  
@@ -103,34 +108,3 @@ t_parser	*parse_tokens(char **tokens)
 	proc_list = make_parser_list(procs, proc_list, proc_count);
 	return (proc_list);
 }
-
-/**
- * 
- * remember = need TWO LISTS, one is a list of lists, the other is the list of tokens
- * belonging to one process
-*/
-/**
- * while proc_count > 0
- * 
- * add token lists as new nodes to proc_list array
- * 
- * proc_list = list_new(procs[i])
- * list add back (&proc_list, procs[i])
- * 
- * proc_count--; 
-*/
-
-
-	// this wont work, if token_count = 5, will go through 5 times, need to make list
-	// based on process count...
-	// while (tokens)
-	// {
-	// 	while (proc_count >= 0)
-	// 	{
-	// 		procs[proc_count] = make_token_lists(tokens);
-	// 		proc_count--;
-
-	// 		// move position in token array to get next process...
-	// 	}
-	// 	// move through token list...
-	// }
