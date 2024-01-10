@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/15 16:21:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/10 19:46:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_parser		*parse_tokens(char **tokens);
 t_tokens		*token_listlast(t_tokens *list);
 void			token_listadd_back(t_tokens **list, t_tokens *new);
 t_tokens		*token_listnew(char *input);
+int				count_tokens(char **tokens);
 
 //-------- parser utils --------//
 t_parser		*parser_listlast(t_parser *list);

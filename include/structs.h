@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/17 18:50:10 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2024/01/10 19:31:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct s_input
 	enum e_exit				exit_code;  //do we need all of these?
 	int						exit_stat;  //do we need all of these?
 
-	int						hd_fd; // check which struct this should below to
+	int						hd_fd; // check which struct this should belong to
 	t_parser				*parser;
 }							t_input;
 

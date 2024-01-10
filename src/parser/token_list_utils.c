@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/13 20:40:10 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/17 18:50:16 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2024/01/10 19:46:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@ t_tokens	*token_listnew(char *input)
 	new->input = input;
 	new->next = NULL;
 	return (new);
+}
+
+int		count_tokens(char **tokens)
+{
+	int		count;
+
+	count = ft_arrlen(tokens);
+	return (count);
 }
