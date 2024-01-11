@@ -6,11 +6,27 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/10 21:04:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/11 18:35:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
+
+void	print_proctok_list(t_tokens **procs)
+{
+	int		i = 0;
+
+	while (procs[i])
+	{
+		while (procs && procs[i])
+		{
+			printf("proc_input = %s\n", (char *)procs[i]->input);
+			procs = &procs[i]->next;
+		}
+		if (procs[i])
+			i++;
+	}
+}
 
 void	print_expand_vals(t_expand *str)
 {

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/15 15:21:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/11 18:19:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		// parse_tokens(tokens);
 
 		ft_free_arr(tokens);
-		free_only_tokens(procs);
+		// free_only_tokens(procs);
 		exit(EXIT_SUCCESS);
 
 
