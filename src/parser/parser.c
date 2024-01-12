@@ -6,12 +6,27 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/12 18:23:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 20:21:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+
+/**
+ * 		**strs - 2d array is one node in list, so as I make the list, check the content
+ * 
+ * 
+ * 		process list = cmd **strs redir file
+ * 
+ * 
+ * 		redir meta - just give as enum, then file, keep in order
+ * 			
+ * 
+ * 			redir = enum	file  | 	redir = enum	file
+ * 
+ * 
+*/
 static	t_tokens	**make_token_lists(char **tokens, t_tokens **procs)
 {
 	t_tokens	*node;
@@ -26,6 +41,8 @@ static	t_tokens	**make_token_lists(char **tokens, t_tokens **procs)
 	token_count = 0;
 	while (tokens && tokens[i])
 	{
+		// sort contents, make 2d array, then add things to nodes,
+			// straight away put into var nodes, skip input
 		while (tokens[i] && !is_pipe(tokens[i]))
 		{
 			node = token_listnew(tokens[i]);

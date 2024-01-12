@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/12 18:23:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 19:56:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_tokens
 	char					*cmd;
 	char					**str;
 	char					*meta;
-	char					**file;
+	char					*file;
 	char					**hd_limit;
 	int						hd_flag;
 	int						flag;
