@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/11 18:35:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 17:59:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,16 @@ void	shelly_tokenlst_print(t_tokens *list)
 
 void	shelly_parser_print(t_parser *list)
 {
-	int			i;
 	t_parser	*tmp_list;
+	int			i;
 
 	i = 0;
 	tmp_list = list;
 	while (tmp_list)
 	{
-		while (tmp_list->process)
-		{
-			printf("[%i] parser_print list->process->node = [%s]\n", i, (char *)tmp_list->process->input);
-			tmp_list->process = tmp_list->process->next;
-			i++;
-		}
+		printf("[%i] tmp_list->input = %p\n", i, tmp_list->input);
 		tmp_list = tmp_list->next;
+		i++;
 	}
 	printf("------------------------------------\n");
 }

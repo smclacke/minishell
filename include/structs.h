@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/10 19:31:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 17:44:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,6 @@ typedef struct s_tokens
 	struct s_tokens			*next;
 }				t_tokens;
 
-/**
- * going to be an array of token lists, one for each process
- * var are already organised in tokens struct
- * 
- * LIST AUCH ODER???
-*/
 typedef	struct	s_parser
 {
 	int						proc_count; // how any t_token processes there will be
