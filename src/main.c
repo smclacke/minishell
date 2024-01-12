@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/11 18:19:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 18:21:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,22 @@ int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	char		**tokens;
+	t_parser	*procs;
+
 	// int			og_stdout;
 	// int			og_stdin;
-
-	
-	// t_process	data;
-	// t_lexer		*tokens;
-	t_parser	*procs;
 	// t_env		*env;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
 	procs = NULL;
+
 	// env = NULL;
 	// env = env_list(envp, env);
 	// og_stdout = dup(STDOUT_FILENO);
 	// og_stdin = dup(STDIN_FILENO);
+
 	while (1)
 	{
 		handle_signals(PARENT);
@@ -46,29 +45,16 @@ int	main(int argc, char **argv, char **envp)
 
 		tokens = lexer(input);
 		free(input);
-		// print_token_arr(tokens);
 		if (!tokens)
 			continue ;
 
 		procs = parse_tokens(tokens);
-		// parse_tokens(tokens);
-
 		ft_free_arr(tokens);
-		// free_only_tokens(procs);
+		free_parser(procs);
 		exit(EXIT_SUCCESS);
 
-
-		// parser(&data); // add wrapper
-		// print_parser(&data);
-		// if (!procs)
-		// 	continue ;
-		// print_new_parser(&data);
-		// exit(EXIT_SUCCESS);
-		// print_the_full_thing(tokens);
-
-
 		// execute(&env, tokens);
-		// free_tokens(tokens);
+
 		// dup2(og_stdout, STDOUT_FILENO);
 		// dup2(og_stdin, STDIN_FILENO);
 	}

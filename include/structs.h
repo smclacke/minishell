@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/12 17:44:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 18:23:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,36 +91,20 @@ typedef struct s_tokens
 	struct s_tokens			*next;
 }				t_tokens;
 
+/**
+ * comment on the way
+*/
 typedef	struct	s_parser
 {
 	int						proc_count; // how any t_token processes there will be
 	void					*input;
 	struct s_tokens			*process; // one node parser, list tokens - one process
-	struct s_parser			*next;
-}							t_parser;
-
-
-/**
- * THIS IS GOING TO BE PASSED TO THE EXECUTOR AND HAVE EVERYTHING INSIDE
- * @param	exit_code: enums to set exitcode at different
- * 			stages of process, saved to pass through the program
- * 
- * @todo exit stuff: what do we need?
- * @todo init hd_fd somewhere
-*/
-typedef struct s_input
-{
 	char					*exit_str;  //do we need all of these?  
 	enum e_exit				exit_code;  //do we need all of these?
 	int						exit_stat;  //do we need all of these?
-
 	int						hd_fd; // check which struct this should belong to
-	t_parser				*parser;
-}							t_input;
-
-
-
-
+	struct s_parser			*next;
+}							t_parser;
 
 /**
  * comment on the way

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/12 17:57:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 18:23:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ static	t_tokens	**make_token_lists(char **tokens, t_tokens **procs)
 		}
 		procs[proc_i] = token_list;
 		proc_i++;
-		// free(token_list);
-		// free(node); // maybe fixes leak or double free..
 		token_list = NULL;
 		token_count = 0;
 		if (tokens[i])
@@ -63,17 +61,11 @@ static	t_parser	*make_parser_list(t_tokens **procs, t_parser *proc_list, int pro
 	i = 0;
 	while (procs[i])
 	{
-		printf("hoeveel?\n");
 		node = parser_listnew(procs[i]);
 		parser_listadd_back(&new_list, node);
 		i++;
 	}
-	shelly_parser_print(new_list);
 	proc_list = new_list;
-	// free(new_list);
-	// new_list = NULL;
-	// free, nullify new_list
-	// proc_list->next = NULL;
 	return (proc_list);
 }
 
@@ -108,14 +100,17 @@ t_parser	*parse_tokens(char **tokens)
 		return (NULL);
 	}
 	procs = make_token_lists(tokens, procs);
+
+	// printing
 	i = 0;
 	while (procs[i])
 	{
 		shelly_tokenlst_print(procs[i]);
 		i++;
 	}
-	// short contents of proc lists per var
+	// printing
 
+	// short contents of proc lists per var
 	
 	proc_list = (t_parser *)malloc(sizeof(t_parser) * (proc_count + 1));
 	if (!proc_list)
@@ -124,15 +119,16 @@ t_parser	*parse_tokens(char **tokens)
 		return (NULL);
 	}
 	proc_list = make_parser_list(procs, proc_list, proc_count);
-	i = 0;
-	while (proc_list)
-	{
-		// proc_list->process = procs[i];
-		// printf("proc_list = %s\n", (char *)proc_list->process);
 
-		proc_list->process = proc_list->input;
-		printf("proc_list = %p\n", proc_list->process);
-		proc_list = proc_list->next;
+	// printing
+	shelly_parser_print(proc_list);
+	// printing
+
+	i = 0;
+	while (procs[i])
+	{
+		free_tokens(procs[i]);
+		i++;
 	}
 	return (proc_list);
 }

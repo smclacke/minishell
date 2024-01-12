@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/10 21:47:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 18:13:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@
 				// utils
 bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
-void			free_only_tokens(t_parser *tokens);
-// void			free_tokens(t_parser *tokens);
-// int				get_n_cmds(t_parser *tokens);
+void			free_parser(t_parser *tokens);
+void			free_tokens(t_tokens *tokens);
 
 				// print
 void			print_expand_vals(t_expand *str);
@@ -65,7 +64,6 @@ int				len_token(char *input, int len);
 				// parser
 //-------- parser --------//
 t_parser		*parse_tokens(char **tokens);
-// void			parse_tokens(char **tokens);
 
 //-------- token list utils --------//
 t_tokens		*token_listlast(t_tokens *list);
@@ -76,7 +74,7 @@ int				count_tokens(char **tokens);
 //-------- parser utils --------//
 t_parser		*parser_listlast(t_parser *list);
 void			parser_listadd_back(t_parser **list, t_parser *new);
-t_parser		*parser_listnew(void *input);
+t_parser		*parser_listnew(t_tokens *process);
 int				is_pipe(void *input);
 int				count_procs(char **tokens);
 

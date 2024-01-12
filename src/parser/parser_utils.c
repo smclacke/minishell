@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/12 17:54:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/12 18:23:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_parser	*parser_listlast(t_parser *list)
 {
 	if (!list)
 	{
-		// free(list)s;
 		printf("erroroororr\n");
 		return (0);
 	}
@@ -41,20 +40,20 @@ void	parser_listadd_back(t_parser **list, t_parser *new)
 		*list = new;
 }
 
-t_parser	*parser_listnew(void *input)
+t_parser	*parser_listnew(t_tokens *process)
 {
 	t_parser	*new;
 
 	new = (t_parser *)malloc(sizeof(t_parser));
-	if (!new || !input)
+	if (!new || !process)
 	{
-		// free(input);
+		free(process);
 		printf("erroroororr\n");
 		return (0);
 	}
 	ft_bzero(new, sizeof(t_parser));
-	new->input = input;
-	// new->hd_fd = -1; // move this somewhere where process struct is inited
+	new->process = process;
+	new->hd_fd = -1;
 	new->next = NULL;
 	return (new);
 }
