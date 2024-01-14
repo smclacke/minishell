@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 20:47:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 20:59:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	get_procs(t_procs *proc)
 					start++;
 					proc_j++;
 				}
-				proc->proc_arrs[proc_i][proc_j] = NULL;
 				proc_i++;
 			}
 			i++;
@@ -51,7 +50,6 @@ void	get_procs(t_procs *proc)
 			i++;
 		start = i;
 	}
-	proc->proc_arrs[proc_i] = NULL;
 }
 
 static void	sort_proc(char **proc)
