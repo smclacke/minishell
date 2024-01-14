@@ -6,27 +6,27 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/12 18:16:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 18:59:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-void	print_proctok_list(t_tokens **procs)
-{
-	int		i = 0;
+// void	print_proctok_list(t_tokens **procs)
+// {
+// 	int		i = 0;
 
-	while (procs[i])
-	{
-		while (procs && procs[i])
-		{
-			printf("proc_input = %s\n", (char *)procs[i]->input);
-			procs = &procs[i]->next;
-		}
-		if (procs[i])
-			i++;
-	}
-}
+// 	while (procs[i])
+// 	{
+// 		while (procs && procs[i])
+// 		{
+// 			printf("proc_input = %s\n", (char *)procs[i]->input);
+// 			procs = &procs[i]->next;
+// 		}
+// 		if (procs[i])
+// 			i++;
+// 	}
+// }
 
 void	print_expand_vals(t_expand *str)
 {
@@ -49,21 +49,21 @@ void	print_token_arr(char **token)
 	printf("------------------------------------\n");
 }
 
-void	shelly_tokenlst_print(t_tokens *list)
-{
-	t_tokens	*tmp_list;
-	int			i;
+// void	shelly_tokenlst_print(t_tokens *list)
+// {
+// 	t_tokens	*tmp_list;
+// 	int			i;
 
-	i = 0;
-	tmp_list = list;
-	while (tmp_list)
-	{
-		printf("[%i] token_process->node = [%s]\n", i, (char *)tmp_list->input);
-		tmp_list = tmp_list->next;
-		i++;
-	}
-	printf("------------------------------------\n");
-}
+// 	i = 0;
+// 	tmp_list = list;
+// 	while (tmp_list)
+// 	{
+// 		printf("[%i] token_process->node = [%s]\n", i, (char *)tmp_list->input);
+// 		tmp_list = tmp_list->next;
+// 		i++;
+// 	}
+// 	printf("------------------------------------\n");
+// }
 
 void	shelly_parser_print(t_parser *list)
 {

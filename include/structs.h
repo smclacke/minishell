@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 18:44:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 18:54:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef	struct s_procs
 	char				**tokens;
 	char				***proc_arrs;
 	int					token_count;
-	int					proc_i;
 	int					proc_count;
 	int					proc_size;
 	struct s_tokens		*type;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 18:26:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 19:09:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ t_parser	*parse_tokens(char **tokens)
 		 * pass back
 		*/
 	t_procs		*proc;
-	int			i;
+	int			i = 0;
+	int			j = 0;
 
 	proc = (t_procs *)malloc(sizeof(t_procs));
 	proc->tokens = tokens;
@@ -122,10 +123,10 @@ t_parser	*parse_tokens(char **tokens)
 	// printf("token count = %i\n", proc->token_count);
 	printf("proc count = %i\n", proc->proc_count);
 	get_procs(proc);
-	i = 0;
-	int		j = 0;
+
 	while (proc->proc_arrs[i])
 	{
+		j = 0;
 		while (proc->proc_arrs[i][j])
 		{
 			printf("proc->proc_arrs[i][j] = [%i] [%i] %s\n", i, j, proc->proc_arrs[i][j]);

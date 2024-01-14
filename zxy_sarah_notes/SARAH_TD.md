@@ -1,24 +1,34 @@
+=================================================================
+=================================================================
 ------------------------------------------------------------------------
 
-**TO DO NOW NOW NOW**
-HOU EVEN VOL SHELLY...
+parser->process->type->cmd
 
-PARSER
 
-*nummer eennnnn*
-make sure my procs token lists are GOOOOOD, then cont. making the parser list...
+parser LIST: parser->process[i] = process[0], process[1], process[2]...
+process ARRAY: process[0] = {cmd, **args}
+process ARRAY: process[1] = {cmd, **args, redir, file, redir, file}
+process ARRAY: process[1] = {redir, file}
 
-seg faulting rn while making parser list and think it's cause the procs token 
-	lists aren't right yet, also fix their leaks to avoid collecting problems
+BUT NOT LIST RIGHT??
+parser->process[1]->cmd = echo
+parser->process[1]->**args = hi, NULL
+parser->process[1]->redir = NULL
+parser->process[1]->file = NULL
 
-------------------------------------------------------------------------
-**IF THE SHIT SHOW HAS BEEN FIXED....**
-JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
+parser->process[2]->cmd = NULL
+parser->process[2]->args = NULL
+parser->process[2]->**redir = <, >>
+parser->process[2]->**redir[0]->file = file.c
+parser->process[2]->**redir[1]->file = file2.c
 
-**TO DO**
-**PROBLEM**
-**FOOOOOOOOOK**
-j
+if (process[1]->cmd != NULL), is built-in?
+if (**args) ...
+if (process[1]->redir != NULL), in/out/trunc.. open files etc..
+
+
+**MAIN TO DO**
+
 *TODO 1* US
  ---->>>>  ?? why we exiting??
 EXAMPLE:
@@ -45,8 +55,6 @@ heredoc> "$USER"
 heredoc> '$USER'
 heredoc> eof
 
-
-***LETS GO FROM HERE***
 *TODO 3* ME
  ------>> put ft_malloc into libft, use for all malloc in libft, 
 		forget about protection hawhaw
@@ -81,6 +89,13 @@ EXPANSION
 =================================================================
 **RANDOM NOTES ...**
 
+------------------------------------------------------------------------
+**IF THE SHIT SHOW HAS BEEN FIXED....**
+JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
+
+**TO DO**
+**PROBLEM**
+**FOOOOOOOOOK**
 
 **THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 

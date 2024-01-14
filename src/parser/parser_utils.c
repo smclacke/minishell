@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/12 18:23:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 18:59:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ void	parser_listadd_back(t_parser **list, t_parser *new)
 		*list = new;
 }
 
-t_parser	*parser_listnew(t_tokens *process)
-{
-	t_parser	*new;
+// t_parser	*parser_listnew(t_tokens *process)
+// {
+// 	t_parser	*new;
 
-	new = (t_parser *)malloc(sizeof(t_parser));
-	if (!new || !process)
-	{
-		free(process);
-		printf("erroroororr\n");
-		return (0);
-	}
-	ft_bzero(new, sizeof(t_parser));
-	new->process = process;
-	new->hd_fd = -1;
-	new->next = NULL;
-	return (new);
-}
+// 	new = (t_parser *)malloc(sizeof(t_parser));
+// 	if (!new || !process)
+// 	{
+// 		free(process);
+// 		printf("erroroororr\n");
+// 		return (0);
+// 	}
+// 	ft_bzero(new, sizeof(t_parser));
+// 	new->process = process;
+// 	new->hd_fd = -1;
+// 	new->next = NULL;
+// 	return (new);
+// }
 
 int	is_pipe(void *input)
 {
