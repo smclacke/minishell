@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   sort_tokens.c                                      :+:    :+:            */
+/*   procs.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 19:01:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 19:46:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	get_procs(t_procs *proc)
 	int		end;
 	int		proc_i;
 	int		proc_j;
+	int		token_size;
 
 	i = 0;
 	start = 0;
@@ -36,6 +37,8 @@ void	get_procs(t_procs *proc)
 				proc_j = 0;
 				while (start <= i)
 				{
+					token_size = ft_strlen(proc->tokens[start]);
+					proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (token_size + 1));
 					proc->proc_arrs[proc_i][proc_j] = proc->tokens[start];
 					start++;
 					proc_j++;
@@ -47,5 +50,36 @@ void	get_procs(t_procs *proc)
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 			i++;
 		start = i;
+	}
+}
+
+/**
+ * void		sort_each_proc(t_procs *proc, bool multi_proc)
+ * {
+ * 		if (multi_proc == true)
+ *			while proc_arrs .. sort proc[0], proc[1]
+ * 		else
+ * 			sort tokens ... 
+ *
+ * }
+*/
+void	sort_each_proc(t_procs *proc, bool multi_proc)
+{
+	int		i;
+	(void)	proc;
+
+	i = 0;
+	if (multi_proc == true)
+	{
+		printf("more\n");
+		return ;
+	}
+	else
+	{
+			printf("just one\n");
+		// while (proc->tokens)
+		// {
+			//use sorting funcs?
+		// }
 	}
 }

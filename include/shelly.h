@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 17:56:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 19:44:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@
 bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
 void			free_parser(t_parser *tokens);
-void			free_tokens(t_tokens *tokens);
+// void			free_tokens(t_tokens *tokens);
 
 				// print
 void			print_expand_vals(t_expand *str);
 void			print_token_arr(char **token);
-void			shelly_tokenlst_print(t_tokens *list);
+// void			shelly_tokenlst_print(t_tokens *list);
 void			shelly_parser_print(t_parser *list);
 
 				// lexer
@@ -65,19 +65,15 @@ int				len_token(char *input, int len);
 //-------- parser --------//
 t_parser		*parse_tokens(char **tokens);
 
-//-------- sort_tokens --------//
+//-------- procs --------//
 void			get_procs(t_procs *proc);
-
-//-------- token list utils --------//
-t_tokens		*token_listlast(t_tokens *list);
-void			token_listadd_back(t_tokens **list, t_tokens *new);
-t_tokens		*token_listnew(char *input);
-int				count_tokens(char **tokens);
+void			sort_each_proc(t_procs *proc, bool multi_proc);
 
 //-------- parser utils --------//
 t_parser		*parser_listlast(t_parser *list);
 void			parser_listadd_back(t_parser **list, t_parser *new);
-t_parser		*parser_listnew(t_tokens *process);
+
+// t_parser		*parser_listnew(t_tokens *process);
 int				is_pipe(void *input);
 int				count_procs(char **tokens);
 

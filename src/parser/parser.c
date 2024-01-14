@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 19:09:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 19:41:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,27 +113,30 @@ t_parser	*parse_tokens(char **tokens)
 		 * pass back
 		*/
 	t_procs		*proc;
-	int			i = 0;
-	int			j = 0;
+	// int			i = 0;
+	// int			j = 0;
 
 	proc = (t_procs *)malloc(sizeof(t_procs));
 	proc->tokens = tokens;
-	// proc->token_count = ft_arrlen(tokens);
 	proc->proc_count = count_procs(tokens);
-	// printf("token count = %i\n", proc->token_count);
-	printf("proc count = %i\n", proc->proc_count);
-	get_procs(proc);
-
-	while (proc->proc_arrs[i])
+	if (proc->proc_count > 1)
 	{
-		j = 0;
-		while (proc->proc_arrs[i][j])
-		{
-			printf("proc->proc_arrs[i][j] = [%i] [%i] %s\n", i, j, proc->proc_arrs[i][j]);
-			j++;
-		}
-		i++;
+		proc->multi_proc = true;
+		get_procs(proc);
 	}
+	sort_each_proc(proc, proc->multi_proc);
+		
+
+	// while (proc->proc_arrs[i])
+	// {
+	// 	j = 0;
+	// 	while (proc->proc_arrs[i][j])
+	// 	{
+	// 		printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
 
 
 
@@ -199,5 +202,6 @@ t_parser	*parse_tokens(char **tokens)
 	// 	free_tokens(procs[i]);
 	// 	i++;
 	// }
+	free(proc);
 	return (proc_list);
 }
