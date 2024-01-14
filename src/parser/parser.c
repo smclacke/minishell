@@ -6,11 +6,124 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 19:41:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 20:02:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+// static	t_parser	*make_parser_list(char ***procs, t_parser *proc_list, int proc_count)
+// {
+// 	t_parser	*new_list;
+// 	t_parser	*node;
+// 	int			i;
+// 	(void) proc_count;
+
+// 	new_list = NULL;
+// 	i = 0;
+// 	while (procs[i])
+// 	{
+// 		node = parser_listnew(procs[i]);
+// 		parser_listadd_back(&new_list, node);
+// 		i++;
+// 	}
+// 	proc_list = new_list;
+// 	return (proc_list);
+// }
+
+t_parser	*parse_tokens(char **tokens)
+{
+	t_procs		*proc;
+	t_parser	*proc_list;
+
+	proc = (t_procs *)malloc(sizeof(t_procs));
+	proc->tokens = tokens;
+	proc->proc_count = count_procs(tokens);
+	proc_list = NULL;
+	if (proc->proc_count > 1)
+	{
+		proc->multi_proc = true;
+		get_procs(proc);
+	}
+	sort_each_proc(proc, proc->multi_proc);
+	proc_list = (t_parser *)malloc(sizeof(t_parser) * (proc->proc_count + 1));
+	if (!proc_list)
+	{
+		printf("malloc error parser\n");
+		return (NULL);
+	}
+	// proc_list = make_parser_list(proc->proc_arrs, proc_list, proc->proc_count);
+	// // printing
+	// shelly_parser_print(proc_list);
+	// // printing
+
+	if (proc)
+		free(proc);
+	return (proc_list);
+}
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	// int			proc_i;
+	// int			proc_count;
+	// int			i;
+
+	// if (!tokens)
+	// 	return (NULL);
+	// proc_count = count_procs(tokens);
+	// procs = (t_tokens **)malloc(sizeof(t_tokens *) * (proc_count + 1));
+	// if (!procs)
+	// {
+	// 	printf("malloc error parser\n");
+	// 	return (NULL);
+	// }
+
+	// proc_i = 0;
+	// // make mini proc arrays, then sort per var, then add into token list (one proc)
+	// // which will become node in parser list.. 
+	// while (proc_i <= proc_count)
+	// {
+	// 	proc_arr[proc_i] = get_procs(tokens);
+	// 	proc_i++;
+	// }
+	// i = 0;
+	// while (tokens[i])
+	// {
+	// 	procs = make_token_lists(tokens[i], procs);
+	// 	i++;
+	// }
+	// // procs = make_token_lists(tokens, procs);
+
+	// // printing
+	// i = 0;
+	// while (procs[i])
+	// {
+	// 	shelly_tokenlst_print(procs[i]);
+	// 	i++;
+	// }
+	// // printing
+
+	// // short contents of proc lists per var
+	
+
+
+	// i = 0;
+	// while (procs[i])
+	// {
+	// 	free_tokens(procs[i]);
+	// 	i++;
+	// }
 
 		// sort contents, make 2d array, then add things to nodes,
 			// straight away put into var nodes, skip input
@@ -69,139 +182,3 @@
 // 	procs[proc_i] = 0;
 // 	return (procs);
 // }
-
-// static	t_parser	*make_parser_list(t_tokens **procs, t_parser *proc_list, int proc_count)
-// {
-// 	t_parser	*new_list;
-// 	t_parser	*node;
-// 	int			i;
-// 	(void) proc_count;
-
-// 	new_list = NULL;
-// 	i = 0;
-// 	while (procs[i])
-// 	{
-// 		node = parser_listnew(procs[i]);
-// 		parser_listadd_back(&new_list, node);
-// 		i++;
-// 	}
-// 	proc_list = new_list;
-// 	return (proc_list);
-// }
-
-/**
- * - number of tokens per process
- * - number of processes
- * 
- * - split token array into separate process lists
- * - add these lists as process nodes for parser struct
- * 
- * **proc_list = {proc 1, proc 2}
- * 
- * // procs = 
- * *proc 1 = {echo, hehe} // | //
- * *proc 2 = {cd, ..}
-*/
-t_parser	*parse_tokens(char **tokens)
-{
-
-		/**
-		 * take token array
-		 * get proc arrays
-		 * put into lists per proc
-		 * put those lists into parser list
-		 * pass back
-		*/
-	t_procs		*proc;
-	// int			i = 0;
-	// int			j = 0;
-
-	proc = (t_procs *)malloc(sizeof(t_procs));
-	proc->tokens = tokens;
-	proc->proc_count = count_procs(tokens);
-	if (proc->proc_count > 1)
-	{
-		proc->multi_proc = true;
-		get_procs(proc);
-	}
-	sort_each_proc(proc, proc->multi_proc);
-		
-
-	// while (proc->proc_arrs[i])
-	// {
-	// 	j = 0;
-	// 	while (proc->proc_arrs[i][j])
-	// 	{
-	// 		printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-
-
-
-	// t_tokens	**procs;
-	t_parser	*proc_list;
-	// int			proc_i;
-	// int			proc_count;
-	// int			i;
-
-	// if (!tokens)
-	// 	return (NULL);
-	proc_list = NULL;
-	// proc_count = count_procs(tokens);
-	// procs = (t_tokens **)malloc(sizeof(t_tokens *) * (proc_count + 1));
-	// if (!procs)
-	// {
-	// 	printf("malloc error parser\n");
-	// 	return (NULL);
-	// }
-
-	// proc_i = 0;
-	// // make mini proc arrays, then sort per var, then add into token list (one proc)
-	// // which will become node in parser list.. 
-	// while (proc_i <= proc_count)
-	// {
-	// 	proc_arr[proc_i] = get_procs(tokens);
-	// 	proc_i++;
-	// }
-	// i = 0;
-	// while (tokens[i])
-	// {
-	// 	procs = make_token_lists(tokens[i], procs);
-	// 	i++;
-	// }
-	// // procs = make_token_lists(tokens, procs);
-
-	// // printing
-	// i = 0;
-	// while (procs[i])
-	// {
-	// 	shelly_tokenlst_print(procs[i]);
-	// 	i++;
-	// }
-	// // printing
-
-	// // short contents of proc lists per var
-	
-	// proc_list = (t_parser *)malloc(sizeof(t_parser) * (proc_count + 1));
-	// if (!proc_list)
-	// {
-	// 	printf("malloc error parser\n");
-	// 	return (NULL);
-	// }
-	// proc_list = make_parser_list(procs, proc_list, proc_count);
-
-	// // printing
-	// shelly_parser_print(proc_list);
-	// // printing
-
-	// i = 0;
-	// while (procs[i])
-	// {
-	// 	free_tokens(procs[i]);
-	// 	i++;
-	// }
-	free(proc);
-	return (proc_list);
-}
