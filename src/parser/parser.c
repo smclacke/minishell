@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 20:02:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 20:37:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ t_parser	*parse_tokens(char **tokens)
 		proc->multi_proc = true;
 		get_procs(proc);
 	}
+	
+	
+	// PRINTING
+	int i = 0; int	j = 0;
+	while (proc->proc_arrs)
+	{
+		j = 0;
+		while (proc->proc_arrs[i][j])
+		{
+			printf("proc_arr === [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
+			j++;
+		}
+		i++;
+	}
+	// PRINTING
+	
 	sort_each_proc(proc, proc->multi_proc);
 	proc_list = (t_parser *)malloc(sizeof(t_parser) * (proc->proc_count + 1));
 	if (!proc_list)
@@ -53,6 +69,7 @@ t_parser	*parse_tokens(char **tokens)
 		return (NULL);
 	}
 	// proc_list = make_parser_list(proc->proc_arrs, proc_list, proc->proc_count);
+	
 	// // printing
 	// shelly_parser_print(proc_list);
 	// // printing
