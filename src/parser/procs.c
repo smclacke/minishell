@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 20:32:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 20:47:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,19 @@ void	get_procs(t_procs *proc)
 	start = 0;
 	end = 0;
 	proc_i = 0;
-	proc->proc_arrs = (char ***)malloc(sizeof(char **) * proc->proc_count);
-	printf("proc_count = %i\n", proc->proc_count);
+	proc->proc_arrs = (char ***)malloc(sizeof(char **) * (proc->proc_count + 1));
 	while (proc->tokens[i])
 	{
-		printf("where we at?\n");
 		while (proc->tokens[i] && !is_pipe(proc->tokens[i]))
 		{
 			if (!proc->tokens[i + 1] || is_pipe(proc->tokens[i + 1]))
 			{
 				proc->proc_size = (i - start) + 1;
 				proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc->proc_size + 1));
-				printf("proc->proc_size = %i\n", proc->proc_size);
 				proc_j = 0;
 				while (start <= i)
 				{
 					proc->token_size = ft_strlen(proc->tokens[start]);
-					printf("proc->token_size = %i\n", proc->token_size);
 					proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (proc->token_size + 1));
 					proc->proc_arrs[proc_i][proc_j] = proc->tokens[start];
 					start++;
@@ -54,9 +50,8 @@ void	get_procs(t_procs *proc)
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 			i++;
 		start = i;
-		printf("start = %i\n", start);
 	}
-	printf("returning\n");
+	proc->proc_arrs[proc_i] = NULL;
 }
 
 static void	sort_proc(char **proc)
