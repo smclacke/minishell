@@ -6,12 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/12 20:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/14 16:51:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+		// sort contents, make 2d array, then add things to nodes,
+			// straight away put into var nodes, skip input
 
 /**
  * 		**strs - 2d array is one node in list, so as I make the list, check the content
@@ -27,7 +29,7 @@
  * 
  * 
 */
-static	t_tokens	**make_token_lists(char **tokens, t_tokens **procs)
+static	t_tokens	**make_token_lists(char *tokens, t_tokens **procs)
 {
 	t_tokens	*node;
 	t_tokens	*token_list;
@@ -38,11 +40,12 @@ static	t_tokens	**make_token_lists(char **tokens, t_tokens **procs)
 	i = 0;
 	proc_i = 0;
 	token_list = NULL;
-	token_count = 0;
+	token_count = 0;  
+
+	// only one part of array being sent here, which is one process
+	// find cmd, **str, redirs, and files, then add to list and send list back
 	while (tokens && tokens[i])
 	{
-		// sort contents, make 2d array, then add things to nodes,
-			// straight away put into var nodes, skip input
 		while (tokens[i] && !is_pipe(tokens[i]))
 		{
 			node = token_listnew(tokens[i]);
@@ -116,7 +119,15 @@ t_parser	*parse_tokens(char **tokens)
 		printf("malloc error parser\n");
 		return (NULL);
 	}
-	procs = make_token_lists(tokens, procs);
+	// iterate through array of tokens that are already processes
+	get_procs(tokens);
+	i = 0;
+	while (tokens[i])
+	{
+		procs = make_token_lists(tokens[i], procs);
+		i++;
+	}
+	// procs = make_token_lists(tokens, procs);
 
 	// printing
 	i = 0;
