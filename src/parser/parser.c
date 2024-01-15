@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 16:11:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 16:22:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_parser	*parse_tokens(char **tokens)
 {
 	t_procs		*proc;
 	t_parser	*proc_list;
+	int			i = 0;
+	int			j = 0;
 
 	proc = (t_procs *)malloc(sizeof(t_procs));
 	ft_bzero(proc, sizeof(t_procs));
@@ -55,6 +57,33 @@ t_parser	*parse_tokens(char **tokens)
 		get_procs(proc);
 		sort_each_proc(proc, proc->multi_proc_b);
 		// proc_list = make_parser_list(proc, proc_list, proc->proc_count);
+
+
+		while (proc->proc_arrs[i])
+		{
+			j = 0;
+			while (proc->proc_arrs[j])
+			{
+				printf("proc->proc_arrs[i] = [%i] | %s\n", i, proc->proc_arrs[i][j]);
+				j++;
+			}
+			i++;
+		}
+		// PRINTING
+		// i = 0; int	j = 0;
+		// while (proc->proc_arrs && *proc->proc_arrs[i])
+		// {
+		// 	j = 0;
+		// 	while (proc->proc_arrs[i][j])
+		// 	{
+		// 		printf("proc_arr === [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
+		// 		j++;
+		// 	}
+		// 	printf("!!-------------------------------------!!\n");
+		// 	// if (proc->proc_arrs[i])
+		// 	i++;
+		// }
+		// PRINTING
 	}
 	else
 	{
@@ -62,34 +91,6 @@ t_parser	*parse_tokens(char **tokens)
 		sort_each_proc(proc, proc->multi_proc_b);
 		// proc_list = make_parser_list(proc, proc_list, 1);
 	}
-	printf("here\n");
-	
-
-	// PRINTING
-	int i = 0; int	j = 0;
-	if (proc->proc_arrs && proc->proc_arrs[i])
-	{
-		while (proc->proc_arrs && *proc->proc_arrs[i])
-		{
-			j = 0;
-			while (proc->proc_arrs[i][j])
-			{
-				printf("proc_arr === [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
-				j++;
-			}
-			printf("!!-------------------------------------!!\n");
-			// if (proc->proc_arrs[i])
-			i++;
-	}
-	}
-	// PRINTING
-	
-	
-	// // printing
-	// shelly_parser_print(proc_list);
-	// // printing
-
-	// if (proc)
 	free(proc);
 	return (proc_list);
 }
