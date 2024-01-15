@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 17:21:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 20:54:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_parser	*parse_tokens(char **tokens)
 	t_procs		*proc;
 	t_parser	*proc_list;
 	int			i = 0;
-	int			j = 0;
 
 	proc = (t_procs *)malloc(sizeof(t_procs));
 	ft_bzero(proc, sizeof(t_procs));
@@ -58,18 +57,40 @@ t_parser	*parse_tokens(char **tokens)
 		sort_each_proc(proc, proc->multi_proc_b);
 		// proc_list = make_parser_list(proc, proc_list, proc->proc_count);
 
-		while (proc->proc_arrs[i])
+	int			j = 0;
+	while (i < proc->proc_count)
+	{
+		printf("i = %i\n", i);
+		j = 0;
+		while (j < proc->size_ptr[i])
 		{
-			j = 0;
-			while (proc->proc_arrs[j][i])
-			{
-				printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[j][i]);
-				j++;
-			}
-			// printf("i = %i, j = %i\n", i, j);
-			// printf("proc HERE = %s\n", *proc->proc_arrs[i]);
-			i++;
+			printf("j = %i\n", j);
+			j++;
 		}
+		i++;
+
+		
+		// j = 0;
+		// while (j < proc->proc_size)
+		// {
+		// 	printf("proc [i] = [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
+		// 	j++;
+		// }
+		// i++;
+	}
+		// while (proc->proc_arrs[i])
+		// {
+		// 	j = 0;
+		// 	while (proc->proc_arrs[i][j])
+		// 	{
+		// 		printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
+		// 		j++;
+		// 		printf("out\n");
+		// 	}
+		// 	// printf("i = %i, j = %i\n", i, j);
+		// 	// printf("proc HERE = %s\n", *proc->proc_arrs[i]);
+		// 	i++;
+		// }
 		
 		// PRINTING
 		// i = 0; int	j = 0;

@@ -3,6 +3,9 @@
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 
+PROBLEM - to print, im using proc_size, which is changed per iteration
+so it will always land on the last and fuck eerything up, time to stop printing :)
+
 minibleh:echo something | hello tere
 more
 proc->proc_arrs[i][j] = [0][0] tere

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 16:05:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 20:14:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "prompt.h"
 # include "colour.h"
 # include <unistd.h>
+# include <string.h>
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>

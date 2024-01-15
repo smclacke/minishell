@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 16:56:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 20:54:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,26 @@ void	get_procs(t_procs *proc)
 	start = 0;
 	end = 0;
 	proc_i = 0;
-	proc->proc_arrs = (char ***)malloc(sizeof(char **) * (proc->proc_count + 1));
+	proc->proc_arrs = (char ***)malloc(sizeof(char **) * proc->proc_count);
 	while (proc->tokens[i])
 	{
 		while (proc->tokens[i] && !is_pipe(proc->tokens[i]))
 		{
-			if (!proc->tokens[i + 1] || is_pipe(proc->tokens[i + 1]))
+			if (proc->tokens[i + 1] == NULL || is_pipe(proc->tokens[i + 1]))
 			{
-				proc->proc_size = (i - start) + 1;
+				proc->proc_size = i - start;
+				printf("proc_size = %i\n", proc->proc_size);
 				proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc->proc_size + 1));
 				proc_j = 0;
-				while (start <= i)
+				while (start <= i && proc_j <= proc->proc_size)
 				{
 					proc->token_size = ft_strlen(proc->tokens[start]);
 					proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (proc->token_size + 1));
-					proc->proc_arrs[proc_i][proc_j] = proc->tokens[start];
+					ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[start]);
+					proc->size_ptr[proc_i] = proc->proc_size;
+					// proc->proc_arrs[proc_i][proc_j] = proc->tokens[start];
+					// printf("IN CREATION [[[[%s]]]]\n", proc->proc_arrs[proc_i][proc_j]);
+					// printf("proc_i = [%i] | proc_j = [%i]\n", proc_i, proc_j);
 					start++;
 					proc_j++;
 				}
@@ -48,7 +53,7 @@ void	get_procs(t_procs *proc)
 		}
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 			i++;
-		start = (i + 1);
+		start = i;
 	}
 }
 
