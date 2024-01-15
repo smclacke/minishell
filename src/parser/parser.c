@@ -6,14 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 20:46:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 16:11:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// static	t_parser	*make_parser_list(char ***procs, t_parser *proc_list, int proc_count)
+// static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_count)
 // {
+
+	// if !procs->proc_arr, use proc->tokens ... 
+
 // 	t_parser	*new_list;
 // 	t_parser	*node;
 // 	int			i;
@@ -37,47 +40,57 @@ t_parser	*parse_tokens(char **tokens)
 	t_parser	*proc_list;
 
 	proc = (t_procs *)malloc(sizeof(t_procs));
+	ft_bzero(proc, sizeof(t_procs));
 	proc->tokens = tokens;
 	proc->proc_count = count_procs(tokens);
-	proc_list = NULL;
+	proc_list = (t_parser *)malloc(sizeof(t_parser) * (proc->proc_count + 1));
+	if (!proc_list)
+	{
+		printf("malloc error parser\n");
+		return (NULL);
+	}
 	if (proc->proc_count > 1)
 	{
-		proc->multi_proc = true;
+		proc->multi_proc_b = true;
 		get_procs(proc);
+		sort_each_proc(proc, proc->multi_proc_b);
+		// proc_list = make_parser_list(proc, proc_list, proc->proc_count);
+	}
+	else
+	{
+		proc->multi_proc_b = false;
+		sort_each_proc(proc, proc->multi_proc_b);
+		// proc_list = make_parser_list(proc, proc_list, 1);
 	}
 	printf("here\n");
 	
-	
+
 	// PRINTING
 	int i = 0; int	j = 0;
-	while (proc->proc_arrs)
+	if (proc->proc_arrs && proc->proc_arrs[i])
 	{
-		j = 0;
-		while (proc->proc_arrs[i][j])
+		while (proc->proc_arrs && *proc->proc_arrs[i])
 		{
-			printf("proc_arr === [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
-			j++;
-		}
-		if (proc->proc_arrs[i])
+			j = 0;
+			while (proc->proc_arrs[i][j])
+			{
+				printf("proc_arr === [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
+				j++;
+			}
+			printf("!!-------------------------------------!!\n");
+			// if (proc->proc_arrs[i])
 			i++;
+	}
 	}
 	// PRINTING
 	
-	// sort_each_proc(proc, proc->multi_proc);
-	// proc_list = (t_parser *)malloc(sizeof(t_parser) * (proc->proc_count + 1));
-	// if (!proc_list)
-	// {
-	// 	printf("malloc error parser\n");
-	// 	return (NULL);
-	// }
-	// proc_list = make_parser_list(proc->proc_arrs, proc_list, proc->proc_count);
 	
 	// // printing
 	// shelly_parser_print(proc_list);
 	// // printing
 
-	if (proc)
-		free(proc);
+	// if (proc)
+	free(proc);
 	return (proc_list);
 }
 

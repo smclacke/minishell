@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/14 20:59:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 16:05:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ static void	sort_proc(char **proc)
 void	sort_each_proc(t_procs *proc, bool multi_proc)
 {
 	int		i;
-	// (void)	proc;
 
 	i = 0;
 	if (multi_proc == true)
 	{
 		printf("more\n");
+
 		while (proc->proc_arrs[i])
 		{
 			sort_proc(proc->proc_arrs[i]);
