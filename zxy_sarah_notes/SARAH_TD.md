@@ -1,6 +1,47 @@
 =================================================================
 =================================================================
 ------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+minibleh:echo something | hello tere
+more
+proc->proc_arrs[i][j] = [0][0] tere
+
+while (proc->proc_arrs[i])
+		{
+			j = 0;
+			while (proc->proc_arrs[1][j])
+			{
+				printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[1][j]);
+				j++;
+			}
+			printf("i = %i, j = %i\n", i, j);
+			printf("proc HERE = %s\n", *proc->proc_arrs[i]);
+			i++;
+		}
+
+
+
+		➜  minishell git:(sarah) ✗ make run
+minibleh:eho something | cd  ..
+more
+proc->proc_arrs[i][j] = [0][0] eho
+proc->proc_arrs[i][j] = [0][1] ..
+
+	while (proc->proc_arrs[i])
+		{
+			j = 0;
+			while (proc->proc_arrs[j][i])
+			{
+				printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[j][i]);
+				j++;
+			}
+			// printf("i = %i, j = %i\n", i, j);
+			// printf("proc HERE = %s\n", *proc->proc_arrs[i]);
+			i++;
+		}
+------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 parser->process->type->cmd
 
@@ -57,14 +98,17 @@ proc->token_size = 2
 proc->token_size = 2
 start = 14
 returning
+
 proc_arr === [0][0] one
 proc_arr === [0][1] two
 proc_arr === [0][2] three
+
 proc_arr === [1][0] four
 proc_arr === [1][1] five
 proc_arr === [1][2] six
 proc_arr === [1][3] seven
 proc_arr === [1][4] eight
+
 proc_arr === [2][0] 34
 proc_arr === [2][1] 35
 proc_arr === [2][2] 36

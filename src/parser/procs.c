@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 16:19:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 16:56:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	get_procs(t_procs *proc)
 		}
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 			i++;
-		start = i;
+		start = (i + 1);
 	}
 }
 

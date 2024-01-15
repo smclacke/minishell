@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 16:22:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 17:21:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,19 @@ t_parser	*parse_tokens(char **tokens)
 		sort_each_proc(proc, proc->multi_proc_b);
 		// proc_list = make_parser_list(proc, proc_list, proc->proc_count);
 
-
 		while (proc->proc_arrs[i])
 		{
 			j = 0;
-			while (proc->proc_arrs[j])
+			while (proc->proc_arrs[j][i])
 			{
-				printf("proc->proc_arrs[i] = [%i] | %s\n", i, proc->proc_arrs[i][j]);
+				printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[j][i]);
 				j++;
 			}
+			// printf("i = %i, j = %i\n", i, j);
+			// printf("proc HERE = %s\n", *proc->proc_arrs[i]);
 			i++;
 		}
+		
 		// PRINTING
 		// i = 0; int	j = 0;
 		// while (proc->proc_arrs && *proc->proc_arrs[i])
