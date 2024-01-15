@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 20:54:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 21:40:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-void	get_procs(t_procs *proc)
+int	get_procs(t_procs *proc)
 {
 	int		i;
 	int		start;
@@ -25,6 +25,16 @@ void	get_procs(t_procs *proc)
 	end = 0;
 	proc_i = 0;
 	proc->proc_arrs = (char ***)malloc(sizeof(char **) * proc->proc_count);
+	if (!proc->proc_arrs)
+	{
+		printf("maloc fucked proc_arrs\n");
+		return (1);
+	}
+	if (!proc->proc_arrs)
+	{
+		printf("maloc fucked proc_arrs\n");
+		return (1);
+	}
 	while (proc->tokens[i])
 	{
 		while (proc->tokens[i] && !is_pipe(proc->tokens[i]))
@@ -32,21 +42,28 @@ void	get_procs(t_procs *proc)
 			if (proc->tokens[i + 1] == NULL || is_pipe(proc->tokens[i + 1]))
 			{
 				proc->proc_size = i - start;
-				printf("proc_size = %i\n", proc->proc_size);
 				proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc->proc_size + 1));
+				if (!proc->proc_arrs[proc_i])
+				{
+					printf("maloc fucked proc_arrs\n");
+					return (1);
+				}
 				proc_j = 0;
 				while (start <= i && proc_j <= proc->proc_size)
 				{
 					proc->token_size = ft_strlen(proc->tokens[start]);
 					proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (proc->token_size + 1));
+					if (!proc->proc_arrs[proc_i][proc_j])
+					{
+						printf("maloc fucked proc_arrs\n");
+						return (1);
+					}
 					ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[start]);
-					proc->size_ptr[proc_i] = proc->proc_size;
-					// proc->proc_arrs[proc_i][proc_j] = proc->tokens[start];
-					// printf("IN CREATION [[[[%s]]]]\n", proc->proc_arrs[proc_i][proc_j]);
-					// printf("proc_i = [%i] | proc_j = [%i]\n", proc_i, proc_j);
+					printf("proc->arr[%i][%i] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
 					start++;
 					proc_j++;
 				}
+				printf("-------------------------------\n");
 				proc_i++;
 			}
 			i++;
@@ -55,6 +72,7 @@ void	get_procs(t_procs *proc)
 			i++;
 		start = i;
 	}
+	return (0);
 }
 
 // static void	sort_proc(char **proc)
@@ -72,7 +90,7 @@ void	sort_each_proc(t_procs *proc, bool multi_proc)
 	i = 0;
 	if (multi_proc == true)
 	{
-		printf("more\n");
+		printf("\n");
 
 		// while (proc->proc_arrs[i])
 		// {
@@ -83,7 +101,7 @@ void	sort_each_proc(t_procs *proc, bool multi_proc)
 	}
 	else
 	{
-		printf("just one\n");
+		printf("\n");
 		// sort_proc(proc->tokens);
 	}
 }

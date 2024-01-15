@@ -6,39 +6,56 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 20:54:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 21:49:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_count)
-// {
+static	t_parser	*one_proc(t_procs *procs)
+{
+	t_parser	*new_list;
+	t_parser	*node;
+	int			i;
 
-	// if !procs->proc_arr, use proc->tokens ... 
+	new_list = NULL;
+	i = 0;
+	while (procs->tokens[i])
+	{
+		node = parser_listnew(procs->tokens[i]);
+		parser_listadd_back(&new_list, node);
+		i++;
+	}
+	return (new_list);
+}
 
-// 	t_parser	*new_list;
-// 	t_parser	*node;
-// 	int			i;
-// 	(void) proc_count;
+static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_count)
+{
+	t_parser	*new_list;
+	t_parser	*node;
+	int			i;
 
-// 	new_list = NULL;
-// 	i = 0;
-// 	while (procs[i])
-// 	{
-// 		node = parser_listnew(procs[i]);
-// 		parser_listadd_back(&new_list, node);
-// 		i++;
-// 	}
-// 	proc_list = new_list;
-// 	return (proc_list);
-// }
+	new_list = NULL;
+	i = 0;
+	if (proc_count == 1)
+		new_list = one_proc(procs);
+	else
+	{
+		while (procs->proc_arrs[i])
+		{
+			node = parser_listnew(procs->proc_arrs[i]);
+			parser_listadd_back(&new_list, node);
+			i++;
+		}
+	}
+	proc_list = new_list;
+	return (proc_list);
+}
 
 t_parser	*parse_tokens(char **tokens)
 {
 	t_procs		*proc;
 	t_parser	*proc_list;
-	int			i = 0;
 
 	proc = (t_procs *)malloc(sizeof(t_procs));
 	ft_bzero(proc, sizeof(t_procs));
@@ -53,66 +70,19 @@ t_parser	*parse_tokens(char **tokens)
 	if (proc->proc_count > 1)
 	{
 		proc->multi_proc_b = true;
-		get_procs(proc);
-		sort_each_proc(proc, proc->multi_proc_b);
-		// proc_list = make_parser_list(proc, proc_list, proc->proc_count);
-
-	int			j = 0;
-	while (i < proc->proc_count)
-	{
-		printf("i = %i\n", i);
-		j = 0;
-		while (j < proc->size_ptr[i])
+		if (get_procs(proc))
 		{
-			printf("j = %i\n", j);
-			j++;
+			printf("error in parse_tokens()\n");
+			return (NULL);
 		}
-		i++;
-
-		
-		// j = 0;
-		// while (j < proc->proc_size)
-		// {
-		// 	printf("proc [i] = [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
-		// 	j++;
-		// }
-		// i++;
-	}
-		// while (proc->proc_arrs[i])
-		// {
-		// 	j = 0;
-		// 	while (proc->proc_arrs[i][j])
-		// 	{
-		// 		printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
-		// 		j++;
-		// 		printf("out\n");
-		// 	}
-		// 	// printf("i = %i, j = %i\n", i, j);
-		// 	// printf("proc HERE = %s\n", *proc->proc_arrs[i]);
-		// 	i++;
-		// }
-		
-		// PRINTING
-		// i = 0; int	j = 0;
-		// while (proc->proc_arrs && *proc->proc_arrs[i])
-		// {
-		// 	j = 0;
-		// 	while (proc->proc_arrs[i][j])
-		// 	{
-		// 		printf("proc_arr === [%i][%i] %s\n", i, j, proc->proc_arrs[i][j]);
-		// 		j++;
-		// 	}
-		// 	printf("!!-------------------------------------!!\n");
-		// 	// if (proc->proc_arrs[i])
-		// 	i++;
-		// }
-		// PRINTING
+		sort_each_proc(proc, proc->multi_proc_b);
+		proc_list = make_parser_list(proc, proc_list, proc->proc_count);
 	}
 	else
 	{
 		proc->multi_proc_b = false;
 		sort_each_proc(proc, proc->multi_proc_b);
-		// proc_list = make_parser_list(proc, proc_list, 1);
+		proc_list = make_parser_list(proc, proc_list, 1);
 	}
 	free(proc);
 	return (proc_list);

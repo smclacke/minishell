@@ -3,120 +3,19 @@
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 
-PROBLEM - to print, im using proc_size, which is changed per iteration
-so it will always land on the last and fuck eerything up, time to stop printing :)
+LET'S FUCKING GOOOOO
 
-minibleh:echo something | hello tere
-more
-proc->proc_arrs[i][j] = [0][0] tere
+- hoping leaks are more fixable after adding array into parser_list
 
-while (proc->proc_arrs[i])
-		{
-			j = 0;
-			while (proc->proc_arrs[1][j])
-			{
-				printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[1][j]);
-				j++;
-			}
-			printf("i = %i, j = %i\n", i, j);
-			printf("proc HERE = %s\n", *proc->proc_arrs[i]);
-			i++;
-		}
+- must norm get_procs...
 
+- get sort_procs ... wel, sorted ;)
 
+- check parser_list allocation
 
-		➜  minishell git:(sarah) ✗ make run
-minibleh:eho something | cd  ..
-more
-proc->proc_arrs[i][j] = [0][0] eho
-proc->proc_arrs[i][j] = [0][1] ..
+- norm norm norm
 
-	while (proc->proc_arrs[i])
-		{
-			j = 0;
-			while (proc->proc_arrs[j][i])
-			{
-				printf("proc->proc_arrs[i][j] = [%i][%i] %s\n", i, j, proc->proc_arrs[j][i]);
-				j++;
-			}
-			// printf("i = %i, j = %i\n", i, j);
-			// printf("proc HERE = %s\n", *proc->proc_arrs[i]);
-			i++;
-		}
-------------------------------------------------------------------------
-------------------------------------------------------------------------
-
-parser->process->type->cmd
-
-
-parser LIST: parser->process[i] = process[0], process[1], process[2]...
-process ARRAY: process[0] = {cmd, **args}
-process ARRAY: process[1] = {cmd, **args, redir, file, redir, file}
-process ARRAY: process[1] = {redir, file}
-
-BUT NOT LIST RIGHT??
-parser->process[1]->cmd = echo
-parser->process[1]->**args = hi, NULL
-parser->process[1]->redir = NULL
-parser->process[1]->file = NULL
-
-parser->process[2]->cmd = NULL
-parser->process[2]->args = NULL
-parser->process[2]->**redir = <, >>
-parser->process[2]->**redir[0]->file = file.c
-parser->process[2]->**redir[1]->file = file2.c
-
-if (process[1]->cmd != NULL), is built-in?
-if (**args) ...
-if (process[1]->redir != NULL), in/out/trunc.. open files etc..
-
-
-
-BUFFER OVER FLOW BUT HEY HO WE GOT THE **********ARRAY
-
-proc->proc_count = heap overflow
-proc->proc_count + 1 = segfault 
-------------------------
-minibleh:one two three | four five six seven eight | 34 35 36 37
-proc_count = 3
-where we at?
-proc->proc_size = 3
-proc->token_size = 3
-proc->token_size = 3
-proc->token_size = 5
-start = 4
-where we at?
-proc->proc_size = 5
-proc->token_size = 4
-proc->token_size = 4
-proc->token_size = 3
-proc->token_size = 5
-proc->token_size = 5
-start = 10
-where we at?
-proc->proc_size = 4
-proc->token_size = 2
-proc->token_size = 2
-proc->token_size = 2
-proc->token_size = 2
-start = 14
-returning
-
-proc_arr === [0][0] one
-proc_arr === [0][1] two
-proc_arr === [0][2] three
-
-proc_arr === [1][0] four
-proc_arr === [1][1] five
-proc_arr === [1][2] six
-proc_arr === [1][3] seven
-proc_arr === [1][4] eight
-
-proc_arr === [2][0] 34
-proc_arr === [2][1] 35
-proc_arr === [2][2] 36
-proc_arr === [2][3] 37
-
+- errors errors errors
 
 ------------------------------
 ------------------------------

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 20:14:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 21:36:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int				len_token(char *input, int len);
 t_parser		*parse_tokens(char **tokens);
 
 //-------- procs --------//
-void			get_procs(t_procs *proc);
+int				get_procs(t_procs *proc);
 void			sort_each_proc(t_procs *proc, bool multi_proc);
 
 //-------- parser utils --------//
