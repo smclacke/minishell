@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 21:49:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 21:52:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,17 @@ t_parser	*parse_tokens(char **tokens)
 			printf("error in parse_tokens()\n");
 			return (NULL);
 		}
-		sort_each_proc(proc, proc->multi_proc_b);
+		// sort_each_proc(proc, proc->multi_proc_b);
 		proc_list = make_parser_list(proc, proc_list, proc->proc_count);
 	}
 	else
 	{
 		proc->multi_proc_b = false;
-		sort_each_proc(proc, proc->multi_proc_b);
+		// sort_each_proc(proc, proc->multi_proc_b);
 		proc_list = make_parser_list(proc, proc_list, 1);
 	}
 	free(proc);
+	shelly_parser_print(proc_list);
 	return (proc_list);
 }
 

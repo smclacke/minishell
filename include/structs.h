@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 21:28:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/15 21:55:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ typedef struct s_tokens
 
 typedef	struct s_procs
 {
-	bool				multi_proc_b;
 	char				**tokens;
 	char				***proc_arrs;
+	bool				multi_proc_b;
 	int					token_size;
 	int					token_count;
 	int					proc_count;

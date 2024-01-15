@@ -5,6 +5,8 @@
 
 LET'S FUCKING GOOOOO
 
+- with multi-procs, parser list fails, one proc seems fine just leaky
+
 - hoping leaks are more fixable after adding array into parser_list
 
 - must norm get_procs...
@@ -16,6 +18,8 @@ LET'S FUCKING GOOOOO
 - norm norm norm
 
 - errors errors errors
+
+- print parser list...
 
 ------------------------------
 ------------------------------
