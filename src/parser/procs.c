@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:36:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:52:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ static	int	count_strs(char **process)
 }
 
 // if if or if else??
+// NEED TO REMOVE THE STR STRS BEFORE ADDINGG EVERYTING IN LIST
+// ADD STR STRS TO LIST HERE...
 static	void	make_str_array(t_procs *proc, char **process)
 {
 	int		i;
@@ -179,7 +181,8 @@ void	sort_each_proc(t_procs *proc, bool multi_proc)
 	t_procs	*new_node;
 
 	i = 0;
-	new_list = NULL;
+	new_list = (t_procs *)malloc(sizeof(t_procs));
+	ft_bzero(new_list, sizeof(t_procs));
 	// ignore cmds, save strs in array, then make lists...
 	if (multi_proc == true)
 	{
@@ -204,13 +207,13 @@ void	sort_each_proc(t_procs *proc, bool multi_proc)
 		// remove str args from array, already add to proc list here
 		while (proc->tokens[i])
 		{
+			printf("proc->token[i] = %s\n", proc->tokens[i]);
 			new_node = proc_listnew(proc->tokens[i]);
 			proc_listadd_back(&new_list, new_node);
 			new_list = new_list->next;
 			i++;
 		}
-		new_list = proc;
-		print_procs(proc);
+		print_procs(new_list);
 	}
 	// sort_proc(proc);
 }

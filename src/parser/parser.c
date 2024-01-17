@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:31:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:44:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,16 @@ static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_
 t_parser	*parse_tokens(char **tokens)
 {
 	t_procs		*proc;
-	t_parser	*proc_list;
+	t_procs		*proc_list;
+	t_parser	*parser_list;
 
 	proc = (t_procs *)malloc(sizeof(t_procs));
 	ft_bzero(proc, sizeof(t_procs));
 	proc->tokens = tokens;
 	proc->proc_count = count_procs(tokens);
-	proc_list = (t_parser *)malloc(sizeof(t_parser) * (proc->proc_count + 1));
-	if (!proc_list)
+	proc_list = NULL;
+	parser_list = (t_parser *)malloc(sizeof(t_parser) * (proc->proc_count + 1));
+	if (!parser_list)
 	{
 		printf("malloc error parser\n");
 		return (NULL);
@@ -81,18 +83,18 @@ t_parser	*parse_tokens(char **tokens)
 			return (NULL);
 		}
 		// sort_each_proc(proc, proc->multi_proc_b);
-		proc_list = make_parser_list(proc, proc_list, proc->proc_count);
+		parser_list = make_parser_list(proc, parser_list, proc->proc_count);
 	}
 	else
 	{
 		proc->multi_proc_b = false;
 		sort_each_proc(proc, proc->multi_proc_b);
-		proc_list = make_parser_list(proc, proc_list, 1);
+		parser_list = make_parser_list(proc, parser_list, 1);
 	}
 	free(proc);
-	// shelly_parser_print(proc_list);
-	// print_the_full_thing(proc_list);
-	return (proc_list);
+	// shelly_parser_print(parser_list);
+	// print_the_full_thing(parser_list);
+	return (parser_list);
 }
 
 	
