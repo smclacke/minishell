@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 21:52:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 15:19:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_
 		new_list = one_proc(procs);
 	else
 	{
-		while (procs->proc_arrs[i])
+		while (i < procs->proc_count)
 		{
 			node = parser_listnew(procs->proc_arrs[i]);
 			parser_listadd_back(&new_list, node);
@@ -52,6 +52,11 @@ static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_
 	return (proc_list);
 }
 
+
+/**
+ * find strs and put into **str array, then make list, the add everything to right var
+ * otherwise meta is overriden/ needs ** and malloc...
+*/
 t_parser	*parse_tokens(char **tokens)
 {
 	t_procs		*proc;
@@ -81,7 +86,7 @@ t_parser	*parse_tokens(char **tokens)
 	else
 	{
 		proc->multi_proc_b = false;
-		// sort_each_proc(proc, proc->multi_proc_b);
+		sort_each_proc(proc, proc->multi_proc_b);
 		proc_list = make_parser_list(proc, proc_list, 1);
 	}
 	free(proc);

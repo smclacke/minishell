@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 21:55:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 15:23:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,29 +78,34 @@ typedef enum e_exit
  * 			don't expand anything inside here_doc input for both
  * 			single and double quotes
 */
-typedef struct s_tokens
-{
-	void					*input;
-	char					*cmd;
-	char					**str;
-	char					*meta;
-	char					*file;
-	char					**hd_limit;
-	int						hd_flag;
-	int						flag;
-	// struct s_tokens			*next;
-}				t_tokens;
+// typedef struct s_tokens
+// {
+// 	// struct s_tokens			*next;
+// }				t_tokens;
 
 typedef	struct s_procs
 {
 	char				**tokens;
 	char				***proc_arrs;
+
 	bool				multi_proc_b;
 	int					token_size;
-	int					token_count;
 	int					proc_count;
 	int					proc_size;
-	struct s_tokens		*type;
+
+	// int					token_count; not using this
+
+	char					*cmd;
+	char					**str;
+	char					*meta;
+	char					*file;
+
+	char					**hd_limit;
+	int						hd_flag; // need? CHECK EXPANDER FOR THESE
+	int						flag; // need?
+
+	struct s_procs			*next;
+	
 }			t_procs;
 
 /**
@@ -108,13 +113,16 @@ typedef	struct s_procs
 */
 typedef	struct	s_parser
 {
-	int						proc_count; // how any t_token processes there will be
-	void					*input;
+	// int						proc_count; // how any t_token processes there will be
+	// void					*input;
+
 	struct s_procs			*process; // one node parser, list tokens - one process
+
 	char					*exit_str;  //do we need all of these?  
 	enum e_exit				exit_code;  //do we need all of these?
 	int						exit_stat;  //do we need all of these?
 	int						hd_fd; // check which struct this should belong to
+
 	struct s_parser			*next;
 }							t_parser;
 
