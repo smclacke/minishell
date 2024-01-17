@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 16:29:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:36:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@ void	print_expand_vals(t_expand *str)
 	printf("dollar\t\t\t\t= [%s]\n", str->dollar);
 	printf("expanded\t\t\t\t\t= [%s]\n", str->expanded);
 	printf("------------------------------------------------------\n");
+}
+
+void	print_procs(t_procs *procs)
+{
+	t_procs	*list;
+	
+	list = procs;
+	while (list)
+	{
+		printf("proc list = %s\n", (char *)list->input);
+		list = list->next;
+	}
 }
 
 void	print_token_arr(char **token)

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:01:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:35:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void			free_parser(t_parser *tokens);
 
 				// print
 void			print_expand_vals(t_expand *str);
+void			print_procs(t_procs *procs);
 void			print_token_arr(char **token);
 void			shelly_parser_print(t_parser *list);
 t_parser		*print_the_full_thing(t_parser *tokens);
@@ -79,9 +80,9 @@ void			sort_each_proc(t_procs *proc, bool multi_proc);
 
 //-------- proc_utils --------//
 int				proc_redir(char *input);
-t_procs			*procs_listlast(t_procs *list);
-void			procs_listadd_back(t_procs **list, t_procs *new);
-t_procs			*procs_listnew(void *proc_arr);
+t_procs			*proc_listlast(t_procs *list);
+void			proc_listadd_back(t_procs **list, t_procs *new);
+t_procs			*proc_listnew(void *proc_arr);
 
 				// expander
 //------------------ expand -------------------//

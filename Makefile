@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/01/17 16:24:28 by smclacke      ########   odam.nl          #
+#    Updated: 2024/01/17 17:25:20 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS			= main.c								\
 					parser/parser.c						\
 					parser/parser_utils.c				\
 					parser/procs.c						\
-					parser/procs_utils.c				\
+					parser/proc_utils.c					\
 # parser/sort_utils.c					\
 # expander/expand.c					\
 # expander/expand_utils.c				\

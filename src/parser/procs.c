@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:02:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:36:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,47 +83,31 @@ int	get_procs(t_procs *proc)
 	return (0);
 }
 
-/**
- * typedef struct s_tokens
-{
-	void					*input;
-	char					*cmd;
-	char					**str;
-	char					*meta;
-	char					*file;
-	char					**hd_limit;
-	int						hd_flag;
-	int						flag;
-	// struct s_tokens			*next;
-}				t_tokens;
+// static void	sort_proc(t_procs *proc)
+// {
+// 	int		cmd_flag;
 
-		// find strs
-		// make list
-		// add to vars
-*/
-static void	sort_proc(t_procs *proc)
-{
-	int		cmd_flag;
-
-	cmd_flag = 0;
-	while (proc->input)
-	{
-		if (proc_redir(proc->input))
-		{
-			proc->input = proc->meta;
-			proc->input = proc->next;
-			proc->input = proc->file;
-		}
-		else if (cmd_flag == 0)
-		{
-			cmd_flag = 1;
-			proc->input = proc->cmd;
-		}
-		// else if (cmd_flag != 0)
-		// 	proc->input = proc->str;
-		proc->input = proc->next;
-	}
-}
+// 	cmd_flag = 0;
+// 	while (proc->input)
+// 	{
+// 		printf("here\n");
+// 		exit(EXIT_FAILURE);
+// 		if (proc_redir(proc->input))
+// 		{
+// 			proc->input = proc->meta;
+// 			proc->input = proc->next;
+// 			proc->input = proc->file;
+// 		}
+// 		else if (cmd_flag == 0)
+// 		{
+// 			cmd_flag = 1;
+// 			proc->input = proc->cmd;
+// 		}
+// 		// else if (cmd_flag != 0)
+// 		// 	proc->input = proc->str;
+// 		proc->input = proc->next;
+// 	}
+// }
 
 static	int	count_strs(char **process)
 {
@@ -144,7 +128,7 @@ static	int	count_strs(char **process)
 			cmd_flag = 1;
 			i += 1;
 		}
-		while (process[i] && !proc_redir(process[i] && cmd_flag == 1))
+		while (process[i] && proc_redir(process[i]) == 0 && cmd_flag != 0)
 			count++;
 		i++;
 	}
@@ -163,7 +147,7 @@ static	void	make_str_array(t_procs *proc, char **process)
 	j = 0;
 	cmd_flag = 0;
 	count = count_strs(process);
-	proc->str = (char *)malloc(sizeof(char) * (count + 1));
+	proc->str = (char **)malloc(sizeof(char *) * (count + 1));
 	while (process[i])
 	{
 		if (proc_redir(process[i]))
@@ -173,10 +157,11 @@ static	void	make_str_array(t_procs *proc, char **process)
 			cmd_flag = 1;
 			i += 1;
 		}
-		while (process[i] && !proc_redir(process[i]) && cmd_flag == 1)
+		while (process[i] && proc_redir(process[i]) == 0 && cmd_flag != 0)
 		{
 			proc->str[j] = process[i];
 			i++;
+			j++;
 		}
 		// i++;
 	}
@@ -207,7 +192,7 @@ void	sort_each_proc(t_procs *proc, bool multi_proc)
 		// remove str args from array, already add to proc list here
 		while (proc->proc_arrs[i])
 		{
-			new_node = proc_listnew(&new_list, proc->proc_arrs[i]);
+			new_node = proc_listnew(proc->proc_arrs[i]);
 			proc_listadd_back(&new_list, new_node);
 			new_list = new_list->next;
 			i++;
@@ -215,15 +200,17 @@ void	sort_each_proc(t_procs *proc, bool multi_proc)
 	}
 	else
 	{
-		make_str_array(proc, proc->tokens);
+		// make_str_array(proc, proc->tokens);
 		// remove str args from array, already add to proc list here
 		while (proc->tokens[i])
 		{
-			new_node = proc_listnew(&new_list, proc->tokens[i]);
+			new_node = proc_listnew(proc->tokens[i]);
 			proc_listadd_back(&new_list, new_node);
 			new_list = new_list->next;
 			i++;
 		}
+		new_list = proc;
+		print_procs(proc);
 	}
-	sort_proc(proc);
+	// sort_proc(proc);
 }

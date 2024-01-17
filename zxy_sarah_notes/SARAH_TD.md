@@ -3,17 +3,19 @@
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 
-Check parser_list malloc size, find the heap buffer overflow || sizeof parser * proc->proc_count --- maybe needs to be parser->process->proc_count ??,,, check the whole parse_tokens func...      bzero parser struct!!! + Check in parserr list funcs what vars I'm using, and make sure it's going to hold the procs correctly
-
 LET'S FUCKING GOOOOO
 
-- with multi-procs, parser list fails, one proc seems fine just leaky
+- make sure I've created the proc lists correctly
+
+- test the sorting function
+
+- test with the printing functions
+
+
 
 - hoping leaks are more fixable after adding array into parser_list
 
 - must norm get_procs...
-
-- get sort_procs ... wel, sorted ;)
 
 - check parser_list allocation
 

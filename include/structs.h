@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 16:22:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:21:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ typedef enum e_exit
 
 typedef	struct s_procs
 {
-	char				**tokens;
-	char				***proc_arrs;
-
-	bool				multi_proc_b;
-	int					token_size;
-	int					proc_count;
-	int					proc_size;
+	char					**tokens;
+	char					***proc_arrs;
+	
+	bool					multi_proc_b;
+	int						token_size;
+	int						proc_count;
+	int						proc_size;
 
 	// int					token_count; not using this
 
@@ -133,17 +133,17 @@ typedef	struct	s_parser
 */
 typedef struct s_expand
 {
-	char				*input;
-	char				*tmp;
-	char				*string;
-	char				*dollar;
-	char				*s_quote;
-	char				*d_quote;
-	char				*env_val;
-	char				*expanded;
-	char				*h_d;
-	int					sign;
-	struct s_parser		*exit;
+	char					*input;
+	char					*tmp;
+	char					*string;
+	char					*dollar;
+	char					*s_quote;
+	char					*d_quote;
+	char					*env_val;
+	char					*expanded;
+	char					*h_d;
+	int						sign;
+	struct s_parser			*exit;
 }							t_expand;
 
 /**
