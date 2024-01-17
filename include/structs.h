@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:23:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 16:22:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef	struct s_procs
 	int					proc_size;
 
 	// int					token_count; not using this
+
+	void					*input;
 
 	char					*cmd;
 	char					**str;

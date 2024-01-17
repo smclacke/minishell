@@ -6,27 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:03:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 16:29:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
-
-// void	print_proctok_list(t_tokens **procs)
-// {
-// 	int		i = 0;
-
-// 	while (procs[i])
-// 	{
-// 		while (procs && procs[i])
-// 		{
-// 			printf("proc_input = %s\n", (char *)procs[i]->input);
-// 			procs = &procs[i]->next;
-// 		}
-// 		if (procs[i])
-// 			i++;
-// 	}
-// }
 
 void	print_expand_vals(t_expand *str)
 {
@@ -49,22 +33,6 @@ void	print_token_arr(char **token)
 	printf("------------------------------------\n");
 }
 
-// void	shelly_tokenlst_print(t_tokens *list)
-// {
-// 	t_tokens	*tmp_list;
-// 	int			i;
-
-// 	i = 0;
-// 	tmp_list = list;
-// 	while (tmp_list)
-// 	{
-// 		printf("[%i] token_process->node = [%s]\n", i, (char *)tmp_list->input);
-// 		tmp_list = tmp_list->next;
-// 		i++;
-// 	}
-// 	printf("------------------------------------\n");
-// }
-
 void	shelly_parser_print(t_parser *list)
 {
 	t_parser	*tmp_list;
@@ -79,4 +47,30 @@ void	shelly_parser_print(t_parser *list)
 		i++;
 	}
 	printf("------------------------------------\n");
+}
+
+t_parser	*print_the_full_thing(t_parser *tokens)
+{
+	t_parser	*list;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	list = tokens;
+	while (list)
+	{
+		printf("[%i]\t ", i);
+		printf("cmd = %s\t", list->process->cmd);
+		while (list->process->str[j])
+		{
+			printf("str = %s\t", list->process->str[j]);
+			j++;
+		}
+		printf("meta = %s\t", list->process->meta);
+		printf("file = %s\n", list->process->file);
+		i++;
+		list = list->next;
+	}
+	return (tokens);
 }

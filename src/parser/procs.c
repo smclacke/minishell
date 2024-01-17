@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:21:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 16:55:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,55 +101,128 @@ int	get_procs(t_procs *proc)
 		// make list
 		// add to vars
 */
-static void	sort_proc(t_procs *proc, char **proc_arr)
+static void	sort_proc(t_procs *proc)
 {
-	int		i;
-	int		j;
+	int		cmd_flag;
 
-	i = 0;
-	j = 0;
-	// (void) proc;
-	// printf("sort each process here\n");
-	/**
-	 * if meta, assign + file, otherwise cmd, then strs
-	*/
-	while (proc_arr[i])
+	cmd_flag = 0;
+	while (proc->input)
 	{
-		printf("proc_arr[i] = [%i] %s\n", i, proc_arr[i]);
-		if (is_redirect(proc_arr[i]))
+		if (is_redirect(proc->input))
 		{
-			proc->meta[j] = ft_strdup(proc_arr[i]);
-			printf("proc->meta = %s\n", proc->meta[j]);
-			j++;
+			proc->input = proc->meta;
+			proc->input = proc->next;
+			proc->input = proc->file;
 		}
-		i++;
+		else if (cmd_flag == 0)
+		{
+			cmd_flag == 1;
+			proc->input = proc->cmd;
+		}
+		// else if (cmd_flag != 0)
+		// 	proc->input = proc->str;
+		proc->input = proc->next;
 	}
 }
 
-void	sort_each_proc(t_procs *proc, bool multi_proc)
+static	int	count_strs(char **process)
 {
 	int		i;
-	(void) proc;
+	int		cmd_flag;
+	int		count
 
 	i = 0;
+	cmd_flag = 0;
+	count = 0;
+	while (process[i])
+	{
+		if (is_redirect(process[i]))
+			i += 2;
+		if (cmd_flag != 1)
+		{
+			cmd_flag = 1;
+			i += 1;
+		}
+		while (process[i] && !is_redirect(process[i] && cmd_flag == 1))
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+// if if or if else??
+static	void	make_str_array(t_procs *proc, char **process)
+{
+	int		i;
+	int		j;
+	int		cmd_flag;
+	int		count;
+
+	i = 0;
+	j = 0;
+	cmd_flag = 0;
+	count = count_strs(process);
+	proc->str = (char *)malloc(sizeof(char) * (count + 1));
+	while (process[i])
+	{
+		if (is_redirect(process[i]))
+			i += 2;
+		else if (cmd_flag != 1)
+		{
+			cmd_flag = 1;
+			i += 1;
+		}
+		while (process[i] && !is_redirect(process[i]) && cmd_flag == 1)
+		{
+			proc->str[j] = process[i];
+			i++;
+		}
+		// i++;
+	}
+}
+
+/**
+ * !!!! already got separate nodes in list but want strs in array....
+*/
+void	sort_each_proc(t_procs *proc, bool multi_proc)
+{
+	(void) proc;
+	
+	int		i;
+	t_procs	*new_list;
+	t_procs	*new_node;
+
+	i = 0;
+	new_list = NULL;
+	// ignore cmds, save strs in array, then make lists...
 	if (multi_proc == true)
 	{
-		printf("\n");
-
-		// while (proc->proc_arrs[i])
-		// {
-			// sort_proc(proc, proc->tokens);
-		// 	i++;
-		// }
-		// return ;
-	}
-	else
-	{
-		// sort_proc(proc, proc->tokens);
-		while (proc->tokens[i])
+		while(proc->proc_arrs[i])
 		{
-			printf("meta = %s\n", proc->meta[i]);
+			make_str_array(proc, proc->proc_arrs[i]);
+			i++;
+		}
+		i = 0;
+		// remove str args from array, already add to proc list here
+		while (proc->proc_arrs[i])
+		{
+			new_node = proc_listnew(&new_list, proc->proc_arrs[i]);
+			proc_listadd_back(&new_list, new_node);
+			new_list = new_list->next;
 			i++;
 		}
 	}
+	else
+	{
+		make_str_array(proc, proc->tokens);
+		// remove str args from array, already add to proc list here
+		while (proc->tokens[i])
+		{
+			new_node = proc_listnew(&new_list, proc->tokens[i]);
+			proc_listadd_back(&new_list, new_node);
+			new_list = new_list->next;
+			i++;
+		}
+	}
+	sort_proc(proc);
 }

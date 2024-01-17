@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:11:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 16:29:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@
 bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
 void			free_parser(t_parser *tokens);
-// void			free_tokens(t_tokens *tokens);
 
 				// print
 void			print_expand_vals(t_expand *str);
 void			print_token_arr(char **token);
-// void			shelly_tokenlst_print(t_tokens *list);
 void			shelly_parser_print(t_parser *list);
+t_parser		*print_the_full_thing(t_parser *tokens);
 
 				// lexer
 //---------- lexer ----------//
@@ -66,19 +65,22 @@ int				len_token(char *input, int len);
 //-------- parser --------//
 t_parser		*parse_tokens(char **tokens);
 
+//-------- parser utils --------//
+t_parser		*parser_listlast(t_parser *list);
+void			parser_listadd_back(t_parser **list, t_parser *new);
+t_parser		*parser_listnew(void *process);
+int				is_pipe(void *input);
+int				count_procs(char **tokens);
+
 //-------- procs --------//
 char			*is_redirect(void *input);
 int				get_procs(t_procs *proc);
 void			sort_each_proc(t_procs *proc, bool multi_proc);
 
-//-------- parser utils --------//
-t_parser		*parser_listlast(t_parser *list);
-void			parser_listadd_back(t_parser **list, t_parser *new);
-
-t_parser		*parser_listnew(void *process);
-int				is_pipe(void *input);
-int				count_procs(char **tokens);
-
+//-------- proc_utils --------//
+t_procs			*procs_listlast(t_procs *list);
+void			procs_listadd_back(t_procs **list, t_procs *new);
+t_procs			*procs_listnew(void *proc_arr);
 
 				// expander
 //------------------ expand -------------------//
