@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:52:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:56:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,11 +188,11 @@ void	sort_each_proc(t_procs *proc, bool multi_proc)
 	{
 		while(proc->proc_arrs[i])
 		{
+		// add str strs to str var then give that back as one token...
 			make_str_array(proc, proc->proc_arrs[i]);
 			i++;
 		}
 		i = 0;
-		// remove str args from array, already add to proc list here
 		while (proc->proc_arrs[i])
 		{
 			new_node = proc_listnew(proc->proc_arrs[i]);
@@ -203,8 +203,8 @@ void	sort_each_proc(t_procs *proc, bool multi_proc)
 	}
 	else
 	{
+		// add str strs to str var then give that back as one token...
 		// make_str_array(proc, proc->tokens);
-		// remove str args from array, already add to proc list here
 		while (proc->tokens[i])
 		{
 			printf("proc->token[i] = %s\n", proc->tokens[i]);
