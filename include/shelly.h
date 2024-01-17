@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 16:29:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:01:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				get_procs(t_procs *proc);
 void			sort_each_proc(t_procs *proc, bool multi_proc);
 
 //-------- proc_utils --------//
+int				proc_redir(char *input);
 t_procs			*procs_listlast(t_procs *list);
 void			procs_listadd_back(t_procs **list, t_procs *new);
 t_procs			*procs_listnew(void *proc_arr);

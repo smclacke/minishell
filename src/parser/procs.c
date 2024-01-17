@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 16:55:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:02:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static void	sort_proc(t_procs *proc)
 	cmd_flag = 0;
 	while (proc->input)
 	{
-		if (is_redirect(proc->input))
+		if (proc_redir(proc->input))
 		{
 			proc->input = proc->meta;
 			proc->input = proc->next;
@@ -116,7 +116,7 @@ static void	sort_proc(t_procs *proc)
 		}
 		else if (cmd_flag == 0)
 		{
-			cmd_flag == 1;
+			cmd_flag = 1;
 			proc->input = proc->cmd;
 		}
 		// else if (cmd_flag != 0)
@@ -129,21 +129,22 @@ static	int	count_strs(char **process)
 {
 	int		i;
 	int		cmd_flag;
-	int		count
+	int		count;
 
 	i = 0;
 	cmd_flag = 0;
 	count = 0;
+	printf("process[i] = %s\n", process[i]);
 	while (process[i])
 	{
-		if (is_redirect(process[i]))
+		if (proc_redir(process[i]))
 			i += 2;
 		if (cmd_flag != 1)
 		{
 			cmd_flag = 1;
 			i += 1;
 		}
-		while (process[i] && !is_redirect(process[i] && cmd_flag == 1))
+		while (process[i] && !proc_redir(process[i] && cmd_flag == 1))
 			count++;
 		i++;
 	}
@@ -165,14 +166,14 @@ static	void	make_str_array(t_procs *proc, char **process)
 	proc->str = (char *)malloc(sizeof(char) * (count + 1));
 	while (process[i])
 	{
-		if (is_redirect(process[i]))
+		if (proc_redir(process[i]))
 			i += 2;
 		else if (cmd_flag != 1)
 		{
 			cmd_flag = 1;
 			i += 1;
 		}
-		while (process[i] && !is_redirect(process[i]) && cmd_flag == 1)
+		while (process[i] && !proc_redir(process[i]) && cmd_flag == 1)
 		{
 			proc->str[j] = process[i];
 			i++;

@@ -6,11 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 16:22:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/17 17:01:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+int		proc_redir(char *input)
+{
+	if (ft_strcmp(input, MOREMORE) == 0)
+		return (MOREMORE);
+	else if (ft_strcmp(input, LESSLESS) == 0)
+		return (LESSLESS);
+	else if (ft_strcmp(input, MORE) == 0)
+		return (MORE);
+	else if (ft_strcmp(input, LESS) == 0)
+		return (LESS);
+	return (0);
+}
 
 t_procs	*procs_listlast(t_procs *list)
 {
