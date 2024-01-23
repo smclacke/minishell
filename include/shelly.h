@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 17:35:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 18:56:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void			parser_listadd_back(t_parser **list, t_parser *new);
 t_parser		*parser_listnew(t_procs *proc);
 
 //-------- sort_procs --------//
-void			sort_each_proc(t_parser *proc_arr, t_procs *proc);
+void			sort_each_proc(t_parser *parser, t_procs *proc, char **proc_arr, int i);
 
 //-------- proc_utils --------//
 int				count_reds(char **process);

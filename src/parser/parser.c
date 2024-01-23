@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 17:36:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 19:21:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,32 +133,38 @@ t_parser	*parse_tokens(char **tokens)
 		proc->multi_proc_b = TRUE;
 		if (get_procs(proc))
 		{
-			printf("error in parse_tokens()\n");
+			printf("error in get_procs()\n");
 			return (NULL);
 		}
-		// !!
-		// proc_arrs[i] = process, process->next, sort(process).. process->next;
-		// !!
-		// sort_each_proc(proc);
-		// parser_list = make_parser_list(proc, parser_list, proc->proc_count);
+		printf("proc count = %i\n", proc->proc_count);
+		while (i < proc->proc_count)
+		{
+			printf("ptrrr = %p\n", proc->proc_arrs[i]);
+			sort_each_proc(proc, one_proc, proc->proc_arrs[i], i);
+			new_node = parser_listnew(proc->process[i]);
+			parser_listadd_back(&parser_list, new_node);
+			i++;
+		}
 	}
 	else
 	{
 		proc->multi_proc_b = FALSE;
-		sort_each_proc(proc, one_proc);
-		// printf("parser\n");
-		print_procs(proc->process[i]);
-		new_node = parser_listnew(proc->process[i]);
+		sort_each_proc(proc, one_proc, proc->tokens, 0);
+		new_node = parser_listnew(proc->process[0]);
 		parser_listadd_back(&parser_list, new_node);
-		// parser_list = make_parser_list(proc, parser_list, 1);
 	}
-	// free(proc);
-	// shelly_parser_print(parser_list);
-	i = 0;
 	while (parser_list)
 	{
-		printf("hello\n");
-		print_procs(parser_list->node);
+		int		j = 0;
+		
+		printf("[%i] cmd = %s\n", j, parser_list->proc->cmd);
+		int		k = 0;
+		while (k < parser_list->proc->str_count)
+		{
+			printf("strs = %s\n", parser_list->proc->str[k]);
+			k++;
+		}
+		j++;
 		parser_list = parser_list->next;
 	}
 	return (parser_list);

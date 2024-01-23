@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 17:34:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 18:40:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_parser	*parser_listnew(t_procs *proc)
 		return (0);
 	}
 	ft_bzero(new, sizeof(t_parser));
-	new->node = proc;
+	new->proc = proc;
 	new->hd_fd = -1;
 	new->next = NULL;
 	return (new);
