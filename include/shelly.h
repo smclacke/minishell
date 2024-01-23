@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:44:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:30:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ int				is_pipe(void *input);
 int				count_procs(char **tokens);
 
 //-------- procs --------//
-char			*is_redirect(void *input);
 int				get_procs(t_procs *proc);
 void			sort_each_proc(t_procs *proc, bool multi_proc);
 
 //-------- proc_utils --------//
+char			*is_redirect(void *input);
 int				proc_redir(char *input);
 t_procs			*proc_listlast(t_procs *list);
 void			proc_listadd_back(t_procs **list, t_procs *new);

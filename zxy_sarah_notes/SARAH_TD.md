@@ -5,6 +5,16 @@
 
 LET'S FUCKING GOOOOO
 
+ !!- focus on one proc - get it 100% working, then organise multiple...
+ !! add str strs to str arr var
+ !! sort rest of the tokens, do same for multiple, then check parser list
+
+ ---- don't know yet it procs will be list, maybe not necessary, just sort the 
+	tokens for now, then I'll see ....
+
+make_str_array = go through array of tokens, collect args, add to **str, remove from tokens? ... 
+
+
 - make sure I've created the proc lists correctly
 
 - test the sorting function

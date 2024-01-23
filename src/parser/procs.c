@@ -6,24 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:56:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:34:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-char	*is_redirect(void *input)
-{
-	if (ft_strcmp(input, MOREMORE) == 0)
-		return (MOREMORE);
-	else if (ft_strcmp(input, LESSLESS) == 0)
-		return (LESSLESS);
-	else if (ft_strcmp(input, MORE) == 0)
-		return (MORE);
-	else if (ft_strcmp(input, LESS) == 0)
-		return (LESS);
-	return (NULL);
-}
 
 int	get_procs(t_procs *proc)
 {
@@ -83,32 +70,6 @@ int	get_procs(t_procs *proc)
 	return (0);
 }
 
-// static void	sort_proc(t_procs *proc)
-// {
-// 	int		cmd_flag;
-
-// 	cmd_flag = 0;
-// 	while (proc->input)
-// 	{
-// 		printf("here\n");
-// 		exit(EXIT_FAILURE);
-// 		if (proc_redir(proc->input))
-// 		{
-// 			proc->input = proc->meta;
-// 			proc->input = proc->next;
-// 			proc->input = proc->file;
-// 		}
-// 		else if (cmd_flag == 0)
-// 		{
-// 			cmd_flag = 1;
-// 			proc->input = proc->cmd;
-// 		}
-// 		// else if (cmd_flag != 0)
-// 		// 	proc->input = proc->str;
-// 		proc->input = proc->next;
-// 	}
-// }
-
 static	int	count_strs(char **process)
 {
 	int		i;
@@ -118,27 +79,25 @@ static	int	count_strs(char **process)
 	i = 0;
 	cmd_flag = 0;
 	count = 0;
-	printf("process[i] = %s\n", process[i]);
 	while (process[i])
 	{
-		if (proc_redir(process[i]))
-			i += 2;
-		if (cmd_flag != 1)
-		{
-			cmd_flag = 1;
-			i += 1;
-		}
-		while (process[i] && proc_redir(process[i]) == 0 && cmd_flag != 0)
-			count++;
+		printf("process[i] = %s\n", process[i]);
+		// if (proc_redir(process[i]))
+		// 	i += 2;
+		// if (cmd_flag != 1)
+		// {
+		// 	cmd_flag = 1;
+		// 	i += 1;
+		// }
+		// while (process[i] && proc_redir(process[i]) == 0 && cmd_flag != 0)
+		// 	count++;
 		i++;
 	}
+	count = 2;
 	return (count);
 }
 
-// if if or if else??
-// NEED TO REMOVE THE STR STRS BEFORE ADDINGG EVERYTING IN LIST
-// ADD STR STRS TO LIST HERE...
-static	void	make_str_array(t_procs *proc, char **process)
+static	void	sort_vars(t_procs *proc, char **process)
 {
 	int		i;
 	int		j;
@@ -153,10 +112,15 @@ static	void	make_str_array(t_procs *proc, char **process)
 	while (process[i])
 	{
 		if (proc_redir(process[i]))
+		{
+			proc->meta = process[i];
+			proc->file = process[i + 1];
 			i += 2;
+		}
 		else if (cmd_flag != 1)
 		{
 			cmd_flag = 1;
+			proc->cmd = process[i];
 			i += 1;
 		}
 		while (process[i] && proc_redir(process[i]) == 0 && cmd_flag != 0)
@@ -165,55 +129,49 @@ static	void	make_str_array(t_procs *proc, char **process)
 			i++;
 			j++;
 		}
-		// i++;
 	}
 }
 
-/**
- * !!!! already got separate nodes in list but want strs in array....
-*/
 void	sort_each_proc(t_procs *proc, bool multi_proc)
 {
 	(void) proc;
 	
 	int		i;
-	t_procs	*new_list;
-	t_procs	*new_node;
+	// t_procs	*new_list;
+	// t_procs	*new_node;
 
 	i = 0;
-	new_list = (t_procs *)malloc(sizeof(t_procs));
-	ft_bzero(new_list, sizeof(t_procs));
+	// new_list = (t_procs *)malloc(sizeof(t_procs));
+	// ft_bzero(new_list, sizeof(t_procs));
 	// ignore cmds, save strs in array, then make lists...
 	if (multi_proc == true)
 	{
-		while(proc->proc_arrs[i])
-		{
-		// add str strs to str var then give that back as one token...
-			make_str_array(proc, proc->proc_arrs[i]);
-			i++;
-		}
-		i = 0;
-		while (proc->proc_arrs[i])
-		{
-			new_node = proc_listnew(proc->proc_arrs[i]);
-			proc_listadd_back(&new_list, new_node);
-			new_list = new_list->next;
-			i++;
-		}
+		// while(proc->proc_arrs[i])
+		// {
+		// 	make_str_array(proc, proc->proc_arrs[i]);
+		// 	i++;
+		// }
+		// sort rest of the tokens
+		// sort_proc(proc); / does this work for ***procs? or only tokens...
+		return ;
 	}
 	else
 	{
-		// add str strs to str var then give that back as one token...
-		// make_str_array(proc, proc->tokens);
-		while (proc->tokens[i])
-		{
-			printf("proc->token[i] = %s\n", proc->tokens[i]);
-			new_node = proc_listnew(proc->tokens[i]);
-			proc_listadd_back(&new_list, new_node);
-			new_list = new_list->next;
-			i++;
-		}
-		print_procs(new_list);
+		sort_vars(proc, proc->tokens);
+		// int		count = ft_arr_len(proc->tokens);
+		// i = 0;
+		// int	j = 0;
+		// while (i < count)
+		// {
+		// 	printf("cmd = %s\n", proc->cmd);
+		// 	printf("meta = %s\n", proc->meta);
+		// 	printf("file = %s\n", proc->file);
+		// 	while (proc->str[j])
+		// 	{
+		// 		printf("str[j] = %s\n", proc->str[j]);
+		// 		j++;
+		// 	}
+		// 	i++;
+		// }
 	}
-	// sort_proc(proc);
 }

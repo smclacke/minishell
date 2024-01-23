@@ -6,11 +6,34 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:28:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:31:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+// int		count_tokens(char **tokens)
+// {
+// 	int	count = 0;
+
+// 	while (tokens[count])
+// 		count++;
+// 	return (count);
+// }
+
+// am i usnig this func??
+char	*is_redirect(void *input)
+{
+	if (ft_strcmp(input, MOREMORE) == 0)
+		return (MOREMORE);
+	else if (ft_strcmp(input, LESSLESS) == 0)
+		return (LESSLESS);
+	else if (ft_strcmp(input, MORE) == 0)
+		return (MORE);
+	else if (ft_strcmp(input, LESS) == 0)
+		return (LESS);
+	return (NULL);
+}
 
 int		proc_redir(char *input)
 {
