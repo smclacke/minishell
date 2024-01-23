@@ -5,6 +5,36 @@
 
 LET'S FUCKING GOOOOO
 
+!!!!!!!!!!!!!!!!!!!!
+minibleh:<< eof < file cmd arg str hehe > other_file strings for fun > out_file
+proc->cmd = cmd
+proc->hd = <<
+proc->hd = eof
+reds[k] = <
+reds[k] = file
+reds[k] = >
+reds[k] = other_file
+reds[k] = >
+reds[k] = out_file
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==155196==ERROR: AddressSanitizer: SEGV on unknown address (pc 0x0000004ae5e0 bp 0x7ffdc9f400f0 sp 0x7ffdc9f3f868 T0)
+==155196==The signal is caused by a READ memory access.
+==155196==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x4ae5e0 in __sanitizer::internal_strlen(char const*) (/home/smclacke/Desktop/minishell/minishell+0x4ae5e0)
+    #1 0x43cfa6 in printf_common(void*, char const*, __va_list_tag*) (/home/smclacke/Desktop/minishell/minishell+0x43cfa6)
+    #2 0x43e41e in printf (/home/smclacke/Desktop/minishell/minishell+0x43e41e)
+    #3 0x4cbd1c in print_procs /home/smclacke/Desktop/minishell/src/utils/print.c:40:3
+    #4 0x4cef07 in sort_each_proc /home/smclacke/Desktop/minishell/src/parser/sort_procs.c:98:3
+    #5 0x4cd306 in parse_tokens /home/smclacke/Desktop/minishell/src/parser/parser.c:145:3
+    #6 0x4cb292 in main /home/smclacke/Desktop/minishell/src/main.c:51:11
+    #7 0x7f3a6b2f4d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #8 0x7f3a6b2f4e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #9 0x41f304 in _start (/home/smclacke/Desktop/minishell/minishell+0x41f304)
+
+
+	------------------------------------------
+
  !!- focus on one proc - get it 100% working, then organise multiple...
  !! add str strs to str arr var
  !! sort rest of the tokens, do same for multiple, then check parser list
