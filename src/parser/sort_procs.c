@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 17:06:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 17:25:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	sort_each_proc(t_parser *parser, t_procs *proc)
 	int		i;
 	// t_procs	*new_list;
 	// t_procs	*new_node;
-
+	parser->process = (t_procs **)malloc(sizeof(t_procs *));
+	// bzero process
 	i = 0;
 	// new_list = (t_procs *)malloc(sizeof(t_procs));
 	// ft_bzero(new_list, sizeof(t_procs));
@@ -78,20 +79,24 @@ void	sort_each_proc(t_parser *parser, t_procs *proc)
 	if (parser->multi_proc_b == TRUE)
 	{
 		// while (proc_arr[index])
-		// process[i] = **proc_arr
+		// proc[i] = parser->process[i];
 		// sort per proc ...
 
 		return ;
 	}
 	else
 	{
+		parser->process[i] = (t_procs *)malloc(sizeof(t_procs));
+		// bzero
+		proc = parser->process[i];
 		proc->token_count = ft_arrlen(parser->tokens);
 		proc->red_count = count_reds(parser->tokens);
 		proc->str_count = count_strs(proc, parser->tokens);
 		proc->hd_count = count_hds(parser->tokens);
-		parser->process[0] = parser->tokens; 
-		printf("tokens = %i\n reds = %i\n strs = %i\n hd = %i\n", proc->token_count, proc->red_count, proc->str_count, proc->hd_count);
+		// printf("tokens = %i\n reds = %i\n strs = %i\n hd = %i\n", proc->token_count, proc->red_count, proc->str_count, proc->hd_count);
 		sort_vars(proc, parser->tokens);
-		print_procs(proc);		
+		parser->process[i] = proc;
+		// print_procs(proc);		
+		// print_procs(parser->process[i]);		
 	}
 }

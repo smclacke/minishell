@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 17:02:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 17:28:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ t_parser	*parse_tokens(char **tokens)
 	t_parser	*proc;
 	t_parser	*parser_list;
 	t_parser	*new_node;
+	int			i;
 
+	i = 0;
 	one_proc = (t_procs *)malloc(sizeof(t_procs));
 	// wrap it up
 	ft_bzero(one_proc, sizeof(t_procs));
@@ -144,12 +146,22 @@ t_parser	*parse_tokens(char **tokens)
 	{
 		proc->multi_proc_b = FALSE;
 		sort_each_proc(proc, one_proc);
-		new_node = parser_listnew(proc);
+		// printf("parser\n");
+		print_procs(proc->process[i]);
+		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 		// parser_list = make_parser_list(proc, parser_list, 1);
 	}
 	// free(proc);
 	// shelly_parser_print(parser_list);
-	print_the_full_thing(parser_list);
+	i = 0;
+	while (parser_list)
+	{
+		printf("hello\n");
+		print_procs(parser_list->process[i]);
+		// i++;
+		parser_list = parser_list->next;
+	}
+	// print_parser(parser_list);
 	return (parser_list);
 }
