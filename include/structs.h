@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:21:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:08:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,28 +85,28 @@ typedef enum e_exit
 
 typedef	struct s_procs
 {
+	void					*input;
+	bool					multi_proc_b;
 	char					**tokens;
 	char					***proc_arrs;
 	
-	bool					multi_proc_b;
+	int						start;
 	int						token_size;
 	int						proc_count;
 	int						proc_size;
-
-	// int					token_count; not using this
-
-	void					*input;
-
+	
+	int						token_count;
 	char					*cmd;
 	char					**str;
-	char					*meta;
-	char					*file;
+	int						str_count;
+	char					**redir;
+	int						red_count;
+	int						cmd_flag;
 
 	char					**hd_limit;
-	int						hd_flag; // need? CHECK EXPANDER FOR THESE
-	int						flag; // need?
+	int						hd_flag;
 
-	struct s_procs			*next;
+	// struct s_procs			*next;
 	
 }			t_procs;
 
@@ -115,15 +115,12 @@ typedef	struct s_procs
 */
 typedef	struct	s_parser
 {
-	// int						proc_count; // how any t_token processes there will be
-	// void					*input;
-
 	struct s_procs			*process; // one node parser, list tokens - one process
 
 	char					*exit_str;  //do we need all of these?  
 	enum e_exit				exit_code;  //do we need all of these?
 	int						exit_stat;  //do we need all of these?
-	int						hd_fd; // check which struct this should belong to
+	int						hd_fd;
 
 	struct s_parser			*next;
 }							t_parser;

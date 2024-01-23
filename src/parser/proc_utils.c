@@ -6,33 +6,66 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:31:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:16:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// int		count_tokens(char **tokens)
-// {
-// 	int	count = 0;
-
-// 	while (tokens[count])
-// 		count++;
-// 	return (count);
-// }
-
-// am i usnig this func??
-char	*is_redirect(void *input)
+int	count_reds(char **process)
 {
-	if (ft_strcmp(input, MOREMORE) == 0)
-		return (MOREMORE);
-	else if (ft_strcmp(input, LESSLESS) == 0)
-		return (LESSLESS);
-	else if (ft_strcmp(input, MORE) == 0)
-		return (MORE);
-	else if (ft_strcmp(input, LESS) == 0)
-		return (LESS);
-	return (NULL);
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (process[i])
+	{
+		if (proc_redir(process[i]))
+		{
+			if (!process[i + 1])
+			{
+				printf("error\n");
+				return (EXIT_FAILURE);
+			}
+			count += 2;
+		}
+		i++;
+	}
+	return (count);
+}
+
+int	count_strs(t_procs *proc, char **process)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	proc->cmd_flag = 0;
+	count = 0;
+	while (process[i])
+	{
+		if (proc_redir(process[i]))
+		{
+			if (!process[i + 1])
+			{
+				printf("error\n");
+				return (EXIT_FAILURE);
+			}
+			i += 2;
+		}
+		else if (proc->cmd_flag != 1)
+		{
+			proc->cmd_flag = 1;
+			i += 1;
+		}
+		while (process[i] && proc_redir(process[i]) == 0 && proc->cmd_flag != 0)
+		{
+			count++;
+			i++;
+		}
+	}
+	return (count);
 }
 
 int		proc_redir(char *input)
@@ -48,47 +81,3 @@ int		proc_redir(char *input)
 	return (0);
 }
 
-t_procs	*proc_listlast(t_procs *list)
-{
-	if (!list)
-	{
-		printf("erroroororr\n");
-		return (0);
-	}
-	if (list->next)
-	{
-		while (list->next)
-			list = list->next;
-	}
-	return (list);
-}
-
-void	proc_listadd_back(t_procs **list, t_procs *new)
-{
-	t_procs	*last;
-
-	if (*list)
-	{
-		last = proc_listlast(*list);
-		last->next = new;
-	}
-	else
-		*list = new;
-}
-
-t_procs	*proc_listnew(void *proc_arr)
-{
-	t_procs	*new;
-
-	new = (t_procs *)malloc(sizeof(t_procs));
-	if (!new || !proc_arr)
-	{
-		free(proc_arr);
-		printf("erroroororr\n");
-		return (0);
-	}
-	ft_bzero(new, sizeof(t_procs));
-	new->input = proc_arr;
-	new->next = NULL;
-	return (new);
-}

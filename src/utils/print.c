@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:48:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 13:52:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,28 @@ void	shelly_parser_print(t_parser *list)
 	printf("------------------------------------\n");
 }
 
-t_parser	*print_the_full_thing(t_parser *tokens)
-{
-	t_parser	*list;
-	int			i;
-	int			j;
+// t_parser	*print_the_full_thing(t_parser *tokens)
+// {
+// 	t_parser	*list;
+// 	int			i;
+// 	int			j;
 
-	i = 0;
-	j = 0;
-	list = tokens;
-	while (list)
-	{
-		printf("[%i]\t ", i);
-		printf("cmd = %s\t", list->process->cmd);
-		while (list->process->str[j])
-		{
-			printf("str = %s\t", list->process->str[j]);
-			j++;
-		}
-		printf("meta = %s\t", list->process->meta);
-		printf("file = %s\n", list->process->file);
-		i++;
-		list = list->next;
-	}
-	return (tokens);
-}
+// 	i = 0;
+// 	j = 0;
+// 	list = tokens;
+// 	while (list)
+// 	{
+// 		printf("[%i]\t ", i);
+// 		printf("cmd = %s\t", list->process->cmd);
+// 		while (list->process->str[j])
+// 		{
+// 			printf("str = %s\t", list->process->str[j]);
+// 			j++;
+// 		}
+// 		printf("meta = %s\t", list->process->meta);
+// 		printf("file = %s\n", list->process->file);
+// 		i++;
+// 		list = list->next;
+// 	}
+// 	return (tokens);
+// }

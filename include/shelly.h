@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:30:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:17:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,19 @@ int				len_token(char *input, int len);
 t_parser		*parse_tokens(char **tokens);
 
 //-------- parser utils --------//
+int				is_pipe(void *input);
+int				count_procs(char **tokens);
 t_parser		*parser_listlast(t_parser *list);
 void			parser_listadd_back(t_parser **list, t_parser *new);
 t_parser		*parser_listnew(void *process);
-int				is_pipe(void *input);
-int				count_procs(char **tokens);
 
-//-------- procs --------//
-int				get_procs(t_procs *proc);
-void			sort_each_proc(t_procs *proc, bool multi_proc);
+//-------- sort_procs --------//
+void			sort_each_proc(t_procs *proc);
 
 //-------- proc_utils --------//
-char			*is_redirect(void *input);
+int				count_reds(char **process);
+int				count_strs(t_procs *proc, char **process);
 int				proc_redir(char *input);
-t_procs			*proc_listlast(t_procs *list);
-void			proc_listadd_back(t_procs **list, t_procs *new);
-t_procs			*proc_listnew(void *proc_arr);
 
 				// expander
 //------------------ expand -------------------//

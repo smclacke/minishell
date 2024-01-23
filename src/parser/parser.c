@@ -6,11 +6,66 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 17:44:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:16:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+static int	get_procs(t_procs *proc)
+{
+	int		i;
+	int		proc_i;
+	int		proc_j;
+
+	i = 0;
+	proc->start = 0;
+	proc_i = 0;
+	proc->proc_arrs = (char ***)malloc(sizeof(char **) * proc->proc_count);
+	if (!proc->proc_arrs)
+	{
+		printf("maloc fucked proc_arrs\n");
+		return (1);
+	}
+	while (proc->tokens[i])
+	{
+		while (proc->tokens[i] && !is_pipe(proc->tokens[i]))
+		{
+			if (proc->tokens[i + 1] == NULL || is_pipe(proc->tokens[i + 1]))
+			{
+				proc->proc_size = i - proc->start;
+				proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc->proc_size + 1));
+				if (!proc->proc_arrs[proc_i])
+				{
+					printf("maloc fucked proc_arrs\n");
+					return (1);
+				}
+				proc_j = 0;
+				while (proc->start <= i && proc_j <= proc->proc_size)
+				{
+					proc->token_size = ft_strlen(proc->tokens[proc->start]);
+					proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (proc->token_size + 1));
+					if (!proc->proc_arrs[proc_i][proc_j])
+					{
+						printf("maloc fucked proc_arrs\n");
+						return (1);
+					}
+					ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
+					printf("proc->arr[%i][%i] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
+					proc->start++;
+					proc_j++;
+				}
+				printf("-------------------------------\n");
+				proc_i++;
+			}
+			i++;
+		}
+		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
+			i++;
+		proc->start = i;
+	}
+	return (0);
+}
 
 static	t_parser	*one_proc(t_procs *procs)
 {
@@ -52,7 +107,6 @@ static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_
 	return (proc_list);
 }
 
-
 /**
  * find strs and put into **str array, then make list, the add everything to right var
  * otherwise meta is overriden/ needs ** and malloc...
@@ -76,19 +130,19 @@ t_parser	*parse_tokens(char **tokens)
 	}
 	if (proc->proc_count > 1)
 	{
-		proc->multi_proc_b = true;
+		proc->multi_proc_b = TRUE;
 		if (get_procs(proc))
 		{
 			printf("error in parse_tokens()\n");
 			return (NULL);
 		}
-		// sort_each_proc(proc, proc->multi_proc_b);
+		sort_each_proc(proc);
 		parser_list = make_parser_list(proc, parser_list, proc->proc_count);
 	}
 	else
 	{
-		proc->multi_proc_b = false;
-		sort_each_proc(proc, proc->multi_proc_b);
+		proc->multi_proc_b = FALSE;
+		sort_each_proc(proc);
 		parser_list = make_parser_list(proc, parser_list, 1);
 	}
 	free(proc);

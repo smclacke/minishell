@@ -6,11 +6,34 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/17 15:01:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:09:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+int	is_pipe(void *input)
+{
+	if (ft_strcmp(input, PIPE) == 0)
+		return (1);
+	return (0);
+}
+
+int		count_procs(char **tokens)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 1;
+	while (tokens[i])
+	{
+		if (is_pipe(tokens[i]))
+			count++;
+		i++;
+	}
+	return (count);
+}
 
 t_parser	*parser_listlast(t_parser *list)
 {
@@ -56,27 +79,4 @@ t_parser	*parser_listnew(void *proc_arr)
 	new->hd_fd = -1;
 	new->next = NULL;
 	return (new);
-}
-
-int	is_pipe(void *input)
-{
-	if (ft_strcmp(input, PIPE) == 0)
-		return (1);
-	return (0);
-}
-
-int		count_procs(char **tokens)
-{
-	int		i;
-	int		count;
-
-	i = 0;
-	count = 1;
-	while (tokens[i])
-	{
-		if (is_pipe(tokens[i]))
-			count++;
-		i++;
-	}
-	return (count);
 }
