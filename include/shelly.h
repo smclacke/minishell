@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 17:21:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 17:35:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				is_pipe(void *input);
 int				count_procs(char **tokens);
 t_parser		*parser_listlast(t_parser *list);
 void			parser_listadd_back(t_parser **list, t_parser *new);
-t_parser		*parser_listnew(void *proc);
+t_parser		*parser_listnew(t_procs *proc);
 
 //-------- sort_procs --------//
 void			sort_each_proc(t_parser *proc_arr, t_procs *proc);

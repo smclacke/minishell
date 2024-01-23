@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 17:03:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 17:34:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ typedef	struct	s_parser
 	int						proc_size;
 
 	struct s_procs			**process;
+	struct s_procs			*node;
+
 	char					*exit_str;
 	enum e_exit				exit_code;
 	int						exit_stat;
