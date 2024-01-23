@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 15:58:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 17:06:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ static	void	sort_vars(t_procs *proc, char **process)
 	}
 }
 
-void	sort_each_proc(t_procs *proc)
+void	sort_each_proc(t_parser *parser, t_procs *proc)
 {
-	(void) proc;
-	
 	int		i;
 	// t_procs	*new_list;
 	// t_procs	*new_node;
@@ -77,24 +75,23 @@ void	sort_each_proc(t_procs *proc)
 	// new_list = (t_procs *)malloc(sizeof(t_procs));
 	// ft_bzero(new_list, sizeof(t_procs));
 	// ignore cmds, save strs in array, then make lists...
-	if (proc->multi_proc_b == TRUE)
+	if (parser->multi_proc_b == TRUE)
 	{
-		// while(proc->proc_arrs[i])
-		// {
-		// 	make_str_array(proc, proc->proc_arrs[i]);
-		// 	i++;
-		// }
-		// sort rest of the tokens
-		// sort_proc(proc); / does this work for ***procs? or only tokens...
+		// while (proc_arr[index])
+		// process[i] = **proc_arr
+		// sort per proc ...
+
 		return ;
 	}
 	else
 	{
-		proc->token_count = ft_arrlen(proc->tokens);
-		proc->red_count = count_reds(proc->tokens);
-		proc->str_count = count_strs(proc, proc->tokens);
-		proc->hd_count = count_hds(proc->tokens);
-		sort_vars(proc, proc->tokens);
-		// print_procs(proc);		
+		proc->token_count = ft_arrlen(parser->tokens);
+		proc->red_count = count_reds(parser->tokens);
+		proc->str_count = count_strs(proc, parser->tokens);
+		proc->hd_count = count_hds(parser->tokens);
+		parser->process[0] = parser->tokens; 
+		printf("tokens = %i\n reds = %i\n strs = %i\n hd = %i\n", proc->token_count, proc->red_count, proc->str_count, proc->hd_count);
+		sort_vars(proc, parser->tokens);
+		print_procs(proc);		
 	}
 }

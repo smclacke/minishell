@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 16:21:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 17:03:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,30 +85,15 @@ typedef enum e_exit
 
 typedef	struct s_procs
 {
-	void					*input;
-	bool					multi_proc_b;
-	char					**tokens;
-	char					***proc_arrs;
-	
-	int						start;
-	int						token_size;
-	int						proc_count;
-	int						proc_size;
-	
 	int						token_count;
 	char					*cmd;
+	int						cmd_flag;
 	char					**str;
 	int						str_count;
 	char					**redir;
 	int						red_count;
-	int						cmd_flag;
 	char					**hd;
-	int						hd_count;
-
-	// int						hd_flag;
-
-	// struct s_procs			*next;
-	
+	int						hd_count;	
 }			t_procs;
 
 /**
@@ -116,11 +101,20 @@ typedef	struct s_procs
 */
 typedef	struct	s_parser
 {
-	struct s_procs			**process;
+	// void					*input;
+	bool					multi_proc_b;
+	char					**tokens;
+	char					***proc_arrs;
 
-	char					*exit_str;  //do we need all of these?  
-	enum e_exit				exit_code;  //do we need all of these?
-	int						exit_stat;  //do we need all of these?
+	int						start;
+	int						token_size;
+	int						proc_count;
+	int						proc_size;
+
+	struct s_procs			**process;
+	char					*exit_str;
+	enum e_exit				exit_code;
+	int						exit_stat;
 	int						hd_fd;
 
 	struct s_parser			*next;

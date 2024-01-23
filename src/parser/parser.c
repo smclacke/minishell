@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 16:16:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 17:02:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static int	get_procs(t_procs *proc)
+static int	get_procs(t_parser *proc)
 {
 	int		i;
 	int		proc_i;
@@ -68,29 +68,29 @@ static int	get_procs(t_procs *proc)
 }
 
 
-static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_count)
-{
-	t_parser	*new_list;
-	t_parser	*node;
-	int			i;
-	(void) proc_count;
+// static	t_parser	*make_parser_list(t_parser *procs, t_parser *proc_list, int proc_count)
+// {
+// 	t_parser	*new_list;
+// 	t_parser	*node;
+// 	int			i;
+// 	(void) proc_count;
 
-	new_list = NULL;
-	i = 0;
-	// if (proc_count == 1)
-	// 	new_list = one_proc(procs);
-	// else
-	// {
-		while (i < procs->proc_count)
-		{
-			node = parser_listnew(procs->proc_arrs[i]);
-			parser_listadd_back(&new_list, node);
-			i++;
-		}
-	// }
-	proc_list = new_list;
-	return (proc_list);
-}
+// 	new_list = NULL;
+// 	i = 0;
+// 	// if (proc_count == 1)
+// 	// 	new_list = one_proc(procs);
+// 	// else
+// 	// {
+// 		while (i < procs->proc_count)
+// 		{
+// 			node = parser_listnew(procs->proc_arrs[i]);
+// 			parser_listadd_back(&new_list, node);
+// 			i++;
+// 		}
+// 	// }
+// 	proc_list = new_list;
+// 	return (proc_list);
+// }
 
 // static	t_parser	*one_proc(t_procs *proc)
 // {
@@ -111,18 +111,21 @@ static	t_parser	*make_parser_list(t_procs *procs, t_parser *proc_list, int proc_
 */
 t_parser	*parse_tokens(char **tokens)
 {
-	t_procs		*proc;
-	t_procs		*proc_list;
+	t_procs		*one_proc;
+	t_parser	*proc;
 	t_parser	*parser_list;
 	t_parser	*new_node;
 
-	proc = (t_procs *)malloc(sizeof(t_procs));
+	one_proc = (t_procs *)malloc(sizeof(t_procs));
 	// wrap it up
-	ft_bzero(proc, sizeof(t_procs));
+	ft_bzero(one_proc, sizeof(t_procs));
+	proc = (t_parser *)malloc(sizeof(t_parser));
+	// wrap it up
+	ft_bzero(proc, sizeof(t_parser));
 	proc->tokens = tokens;
 	proc->proc_count = count_procs(tokens);
-	proc_list = NULL;
 	parser_list = NULL;
+	new_node = NULL;
 	if (proc->proc_count > 1)
 	{
 		proc->multi_proc_b = TRUE;
@@ -131,18 +134,21 @@ t_parser	*parse_tokens(char **tokens)
 			printf("error in parse_tokens()\n");
 			return (NULL);
 		}
-		sort_each_proc(proc);
-		parser_list = make_parser_list(proc, parser_list, proc->proc_count);
+		// !!
+		// proc_arrs[i] = process, process->next, sort(process).. process->next;
+		// !!
+		// sort_each_proc(proc);
+		// parser_list = make_parser_list(proc, parser_list, proc->proc_count);
 	}
 	else
 	{
 		proc->multi_proc_b = FALSE;
-		sort_each_proc(proc);
+		sort_each_proc(proc, one_proc);
 		new_node = parser_listnew(proc);
 		parser_listadd_back(&parser_list, new_node);
 		// parser_list = make_parser_list(proc, parser_list, 1);
 	}
-	free(proc);
+	// free(proc);
 	// shelly_parser_print(parser_list);
 	print_the_full_thing(parser_list);
 	return (parser_list);
