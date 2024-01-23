@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:16:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:28:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,22 @@ int	count_strs(t_procs *proc, char **process)
 			count++;
 			i++;
 		}
+	}
+	return (count);
+}
+
+int		count_hds(char **process)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (process[i])
+	{
+		if (proc_redir(process[i]) == 2)
+			count += 2;
+		i++;
 	}
 	return (count);
 }

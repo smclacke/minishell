@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:08:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:22:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,10 @@ typedef	struct s_procs
 	char					**redir;
 	int						red_count;
 	int						cmd_flag;
+	char					**hd;
+	int						hd_count;
 
-	char					**hd_limit;
-	int						hd_flag;
+	// int						hd_flag;
 
 	// struct s_procs			*next;
 	

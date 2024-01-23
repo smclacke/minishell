@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:16:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:28:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,37 @@ static	void	sort_vars(t_procs *proc, char **process)
 	int		i;
 	int		j;
 	int		k;
+	int		l;
 
 	i = 0;
 	j = 0;
 	k = 0;
+	l = 0;
 	proc->cmd_flag = 0;
 	proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
 	proc->redir = (char **)malloc(sizeof(char *) * (proc->red_count + 1));
+	proc->hd = (char **)malloc(sizeof(char *) * (proc->hd_count + 1));
 	while (process[i])
 	{
 		if (proc_redir(process[i]))
 		{
-			proc->redir[k] = process[i];
 			if (!process[i + 1])
 			{
 				printf("error\n");
 				return ;
 			}
-			proc->redir[k + 1] = process[i + 1];
-			k += 2;
+			if (proc_redir(process[i]) == 2)
+			{
+				proc->hd[l] = process[i];
+				proc->hd[l + 1] = process[i + 1];
+				l += 2;
+			}
+			else
+			{
+				proc->redir[k] = process[i];
+				proc->redir[k + 1] = process[i + 1];
+				k += 2;
+			}
 			i += 2;
 		}
 		else if (proc->cmd_flag != 1)
@@ -81,19 +93,8 @@ void	sort_each_proc(t_procs *proc)
 		proc->token_count = ft_arrlen(proc->tokens);
 		proc->red_count = count_reds(proc->tokens);
 		proc->str_count = count_strs(proc, proc->tokens);
+		proc->hd_count = count_hds(proc->tokens);
 		sort_vars(proc, proc->tokens);
-		printf("proc->cmd = %s\n", proc->cmd);
-		int	j = 0;
-		int	k = 0;
-		while (k < proc->red_count)
-		{
-			printf("reds[k] = %s\n", proc->redir[k]);
-			k++;
-		}
-		while (j < proc->str_count)
-		{
-			printf("str[j] = %s\n", proc->str[j]);
-			j++;
-		}		
+		print_procs(proc);		
 	}
 }

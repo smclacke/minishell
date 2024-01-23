@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 13:52:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 14:22:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,30 @@ void	print_expand_vals(t_expand *str)
 	printf("------------------------------------------------------\n");
 }
 
-void	print_procs(t_procs *procs)
+void	print_procs(t_procs *proc)
 {
-	t_procs	*list;
-	
-	list = procs;
-	while (list)
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	printf("proc->cmd = %s\n", proc->cmd);
+	while (i < proc->hd_count)
 	{
-		printf("proc list = %s\n", (char *)list->input);
-		list = list->next;
+		printf("proc->hd = %s\n", proc->hd[i]);
+		i++;
+	}
+	while (k < proc->red_count)
+	{
+		printf("reds[k] = %s\n", proc->redir[k]);
+		k++;
+	}
+	while (j < proc->str_count)
+	{
+		printf("str[j] = %s\n", proc->str[j]);
+		j++;
 	}
 }
 
