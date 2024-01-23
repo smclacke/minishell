@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 19:21:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 19:28:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	get_procs(t_parser *proc)
 	i = 0;
 	proc->start = 0;
 	proc_i = 0;
-	proc->proc_arrs = (char ***)malloc(sizeof(char **) * proc->proc_count);
+	proc->proc_arrs = (char ***)malloc(sizeof(char **) * (proc->proc_count + 1));
 	if (!proc->proc_arrs)
 	{
 		printf("maloc fucked proc_arrs\n");
@@ -137,12 +137,18 @@ t_parser	*parse_tokens(char **tokens)
 			return (NULL);
 		}
 		printf("proc count = %i\n", proc->proc_count);
-		while (i < proc->proc_count)
+		int		j = 0;
+		while (i <= proc->proc_count)
 		{
-			printf("ptrrr = %p\n", proc->proc_arrs[i]);
-			sort_each_proc(proc, one_proc, proc->proc_arrs[i], i);
-			new_node = parser_listnew(proc->process[i]);
-			parser_listadd_back(&parser_list, new_node);
+			j = 0;
+			while (j <= proc->proc_size)
+			{
+				printf("ptrrr = %p\n", proc->proc_arrs[i][j]);
+				sort_each_proc(proc, one_proc, &proc->proc_arrs[i][j], i);
+				j++;
+			}
+			// new_node = parser_listnew(proc->process[i]);
+			// parser_listadd_back(&parser_list, new_node);
 			i++;
 		}
 	}
