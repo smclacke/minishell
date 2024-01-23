@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:22:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 16:21:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef	struct s_procs
 */
 typedef	struct	s_parser
 {
-	struct s_procs			*process; // one node parser, list tokens - one process
+	struct s_procs			**process;
 
 	char					*exit_str;  //do we need all of these?  
 	enum e_exit				exit_code;  //do we need all of these?

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:22:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 16:19:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ void	print_procs(t_procs *proc)
 	i = 0;
 	j = 0;
 	k = 0;
-	printf("proc->cmd = %s\n", proc->cmd);
+	printf("cmd = %s\n", proc->cmd);
 	while (i < proc->hd_count)
 	{
-		printf("proc->hd = %s\n", proc->hd[i]);
+		printf("hd[] = %s\n", proc->hd[i]);
 		i++;
 	}
 	while (k < proc->red_count)
 	{
-		printf("reds[k] = %s\n", proc->redir[k]);
+		printf("reds[] = %s\n", proc->redir[k]);
 		k++;
 	}
 	while (j < proc->str_count)
 	{
-		printf("str[j] = %s\n", proc->str[j]);
+		printf("str[] = %s\n", proc->str[j]);
 		j++;
 	}
 }
@@ -76,28 +76,44 @@ void	shelly_parser_print(t_parser *list)
 	printf("------------------------------------\n");
 }
 
-// t_parser	*print_the_full_thing(t_parser *tokens)
-// {
-// 	t_parser	*list;
-// 	int			i;
-// 	int			j;
+void	print_the_full_thing(t_parser *tokens)
+{
+	t_parser	*list;
+	int			i;
+	int			j;
+	int			k;
+	int			l;
 
-// 	i = 0;
-// 	j = 0;
-// 	list = tokens;
-// 	while (list)
-// 	{
-// 		printf("[%i]\t ", i);
-// 		printf("cmd = %s\t", list->process->cmd);
-// 		while (list->process->str[j])
-// 		{
-// 			printf("str = %s\t", list->process->str[j]);
-// 			j++;
-// 		}
-// 		printf("meta = %s\t", list->process->meta);
-// 		printf("file = %s\n", list->process->file);
-// 		i++;
-// 		list = list->next;
-// 	}
-// 	return (tokens);
-// }
+	i = 0;
+	j = 0;
+	k = 0;
+	l = 0;
+	list = tokens;
+	while (list)
+	{
+		printf("[%i] parser_list->process = %p\n", i, list->process);
+		printf("process->input %s\n", (char *)list->process->input);
+		// printf("proc_count = %i\n", list->process->proc_count);
+		// while (i < list->process->proc_count)
+		// {
+		// 	printf("[%i]\t ", i);
+		// 	printf("cmd = %s\t", list->process->cmd);
+		// 	while (i < list->process->hd_count)
+		// 	{
+		// 		printf("proc->hd = %s\n", list->process->hd[i]);
+		// 		i++;
+		// 	}
+		// 	while (k < list->process->red_count)
+		// 	{
+		// 		printf("reds[k] = %s\n", list->process->redir[k]);
+		// 		k++;
+		// 	}
+		// 	while (j < list->process->str_count)
+		// 	{
+		// 		printf("str[j] = %s\n", list->process->str[j]);
+		// 		j++;
+		// 	}
+		// }
+		list = list->next;
+	}
+}

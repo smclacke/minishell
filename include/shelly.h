@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:25:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 16:21:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			print_expand_vals(t_expand *str);
 void			print_procs(t_procs *proc);
 void			print_token_arr(char **token);
 void			shelly_parser_print(t_parser *list);
-t_parser		*print_the_full_thing(t_parser *tokens);
+void			print_the_full_thing(t_parser *tokens);
 
 				// lexer
 //---------- lexer ----------//
@@ -71,7 +71,7 @@ int				is_pipe(void *input);
 int				count_procs(char **tokens);
 t_parser		*parser_listlast(t_parser *list);
 void			parser_listadd_back(t_parser **list, t_parser *new);
-t_parser		*parser_listnew(void *process);
+t_parser		*parser_listnew(t_procs *proc);
 
 //-------- sort_procs --------//
 void			sort_each_proc(t_procs *proc);

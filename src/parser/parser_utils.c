@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:09:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/23 16:20:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,19 @@ void	parser_listadd_back(t_parser **list, t_parser *new)
 		*list = new;
 }
 
-t_parser	*parser_listnew(void *proc_arr)
+t_parser	*parser_listnew(t_procs *proc)
 {
 	t_parser	*new;
 
 	new = (t_parser *)malloc(sizeof(t_parser));
-	if (!new || !proc_arr)
+	if (!new || !proc)
 	{
-		free(proc_arr);
+		free(proc);
 		printf("erroroororr\n");
 		return (0);
 	}
 	ft_bzero(new, sizeof(t_parser));
-	new->process = proc_arr;
+	new->process = proc;
 	new->hd_fd = -1;
 	new->next = NULL;
 	return (new);
