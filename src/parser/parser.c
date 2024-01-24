@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 15:52:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 17:09:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,15 @@
 	* add to proc_arr[i][j++]
  * ........................
 */
-void	
+
+	
 /**
  * @todo	maybe norm?
  * @todo	error handling
  * @todo	memory handling - add malloc protection back when it works
  * @todo	remove print statements when everything works
 */
-static int	get_procs(t_parser *proc)
+static void	get_procs(t_parser *proc)
 {
 	int		i;
 	int		proc_i;
@@ -92,7 +93,6 @@ static int	get_procs(t_parser *proc)
 			// printf("start = %i\n", proc->start);
 		}
 	}
-	return (0);
 }
 
 	// if (!proc->proc_arrs)
@@ -140,11 +140,12 @@ t_parser	*parse_tokens(char **tokens)
 	if (proc->proc_count > 0)
 	{
 		proc->multi_proc_b = TRUE;
-		if (get_procs(proc))
-		{
-			printf("error in get_procs()\n");
-			return (NULL);
-		}
+		get_procs(proc);
+		// if (get_procs(proc))
+		// {
+		// 	printf("error in get_procs()\n");
+		// 	return (NULL);
+		// }
 		while (i <= proc->proc_count)
 		{
 			sort_each_proc(proc, proc->proc_arrs[i], i);
