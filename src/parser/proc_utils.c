@@ -6,12 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 16:45:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:11:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo	error handling
+*/
 int	count_reds(char **process)
 {
 	int		i;
@@ -35,6 +38,10 @@ int	count_reds(char **process)
 	return (count);
 }
 
+/**
+ * @todo	error handling
+ * @todo	norm
+*/
 int	count_strs(t_procs *proc, char **process)
 {
 	int		i;
@@ -68,6 +75,9 @@ int	count_strs(t_procs *proc, char **process)
 	return (count);
 }
 
+/**
+ * @todo	error handling
+*/
 int		count_hds(char **process)
 {
 	int		i;
@@ -78,7 +88,14 @@ int		count_hds(char **process)
 	while (process[i])
 	{
 		if (proc_redir(process[i]) == 2)
+		{
+			if (!process[i + 1])
+			{
+				printf("error\n");
+				return (EXIT_FAILURE);
+			}
 			count += 2;
+		}
 		i++;
 	}
 	return (count);

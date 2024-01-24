@@ -6,12 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 17:51:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:21:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo	what are you and what are you doing?
+*/
 // static void	handle_dq(t_expand *str, t_env **env)
 // {	
 // 	(void)  env; // probs dont need you
@@ -20,6 +23,11 @@
 // 	str->expanded = ft_strjoin(str->expanded, str->exit->exit_str);
 // }
 
+/**
+ * @todo	error handling
+ * @todo	strjoin proctection
+ * @todo	strdup protection
+*/
 static int	handle_no_env_val(t_expand *str)
 {
 	char	*tmp;
@@ -36,6 +44,11 @@ static int	handle_no_env_val(t_expand *str)
 	return (1);
 }
 
+/**
+ * @todo	finish $? bit and test
+ * @todo	error handling
+ * @todo	strtrim protection
+*/
 int	dollar_expand(t_expand *str, t_env **env)
 {
 	// if (ft_strcmp(str->dollar, "$?") == 0)
@@ -63,6 +76,11 @@ int	dollar_expand(t_expand *str, t_env **env)
 	return (0);
 }
 
+/**
+ * @todo	error handling (?)
+ * @todo	strjoin proctection
+ * @todo	strdup protection
+*/
 static int	handle_one_dollar(t_expand *str)
 {
 	char	*tmp;
@@ -79,6 +97,10 @@ static int	handle_one_dollar(t_expand *str)
 	return (1);
 }
 
+/**
+ * @todo	error handling
+ * @todo	substr proctection
+*/
 int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 {
 	int		start;

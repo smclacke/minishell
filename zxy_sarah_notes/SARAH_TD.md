@@ -1,31 +1,16 @@
-=================================================================
-=================================================================
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 
-	------------------------------------------
+------------------------------
+------------------------------
+------------------------------
+------------------------------
+------------------------------
+------------------------------
 
- !!- focus on one proc - get it 100% working, then organise multiple...
- !! add str strs to str arr var
- !! sort rest of the tokens, do same for multiple, then check parser list
+- freee somethings
 
- ---- don't know yet it procs will be list, maybe not necessary, just sort the 
-	tokens for now, then I'll see ....
-
-make_str_array = go through array of tokens, collect args, add to **str, remove from tokens? ... 
-
-
-- make sure I've created the proc lists correctly
-
-- test the sorting function
-
-- test with the printing functions
-
-
-
-- hoping leaks are more fixable after adding array into parser_list
-
-- must norm get_procs...
+- leakkkyyyy af
 
 - check parser_list allocation
 
@@ -33,7 +18,7 @@ make_str_array = go through array of tokens, collect args, add to **str, remove 
 
 - errors errors errors
 
-- print parser list...
+- fix expander to work with new parser.....
 
 ------------------------------
 ------------------------------
@@ -41,12 +26,6 @@ make_str_array = go through array of tokens, collect args, add to **str, remove 
 ------------------------------
 ------------------------------
 
-------------------------------
-------------------------------
-------------------------------
-------------------------------
-------------------------------
-------------------------------
 
 
 **MAIN TO DO**
@@ -77,7 +56,8 @@ heredoc> "$USER"
 heredoc> '$USER'
 heredoc> eof
 
-*TODO 3* ME
+
+*TODO 3* ME 	WHAT AM I DOING ABOUT MALLOC FUNC/PROTECTION??
  ------>> put ft_malloc into libft, use for all malloc in libft, 
 		forget about protection hawhaw
 		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
@@ -93,7 +73,9 @@ heredoc> eof
 
 
 *TODO 6* US
-SIGNALSSSSh 
+SIGNALSSSSh
+ ---> the file is a total mess....
+ ---> check they really really work correctly in all situations 
  ---> heredoc still weird, two prompt with signal
 
 
@@ -105,10 +87,19 @@ EXPANSION
 *TODO 8* ME
 ---> literally all errors
 
+
+*TODO 9* 
+ ---> norm, comment printing utils, check all error messages for
+		inappropriatness (sp?)
+
+
+=================================================================
+=================================================================
 --------------------------------------------------------------------
 
 =================================================================
 =================================================================
+
 **RANDOM NOTES ...**
 
 ------------------------------------------------------------------------

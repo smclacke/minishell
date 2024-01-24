@@ -6,12 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/04 09:29:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 19:31:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:33:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo	get rid of this comment
+*/
 // if the limiter was NOT in qoutes, call expander on head_doc readline input
 // regardless of the quotes, dollars are ALWAYS being 
 // expanded if limit not in quotes
@@ -20,10 +23,9 @@
 // look for dollars, if found, check if expandable var, add to expanded
 
 /**
- * @todo TEST TEST TEST, havent tested since normed and also
- * 		no stress testing yet!!!
+ * @todo	TEST TEST TEST, havent tested since normed and also
+ * 			no stress testing yet!!!
 */
-
 static	int	save_first(t_expand *str, char *input)
 {
 	int		i;
@@ -40,6 +42,9 @@ static	int	save_first(t_expand *str, char *input)
 	return (i);
 }
 
+/**
+ * @todo	error handling
+*/
 static int	handle_hd_input(t_expand *str, char *read_line, int i)
 {
 	int	start;
@@ -60,6 +65,9 @@ static int	handle_hd_input(t_expand *str, char *read_line, int i)
 	return (i);
 }
 
+/**
+ * @todo	check malloc, need +1 for null?
+*/
 char	*hd_expand(t_env **env, char *read_line)
 {
 	t_expand		*str;

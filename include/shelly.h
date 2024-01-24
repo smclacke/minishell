@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 18:56:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:16:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@
 				// utils
 bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
-void			free_parser(t_parser *tokens);
 
+/**
+ * @todo	comment out print protos
+*/
 				// print
+void			print_token_arr(char **token);
 void			print_expand_vals(t_expand *str);
 void			print_procs(t_procs *proc);
 void			print_parser(t_parser *proc);
-void			print_token_arr(char **token);
-void			shelly_parser_print(t_parser *list);
-// void			print_the_full_thing(t_parser *tokens);
 
 				// lexer
 //---------- lexer ----------//

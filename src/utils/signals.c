@@ -6,14 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/17 18:47:42 by SarahLouise   ########   odam.nl         */
+/*   Updated: 2024/01/24 13:17:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
 /**
- * exit codes need to be set properly
+ * @todo	exit codes need to be set properly
+ * @todo	tidy comments
 */
 
 	// For the main:

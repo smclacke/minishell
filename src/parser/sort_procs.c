@@ -6,12 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 12:08:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:09:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo	protect all mallocs
+ * @todo	if no str/redir/hd, free the memory
+ * @todo	norm
+*/
 static	void	sort_vars(t_procs *proc, char **process)
 {
 	int		i;
@@ -65,9 +70,15 @@ static	void	sort_vars(t_procs *proc, char **process)
 	}
 }
 
+/**
+ * @todo	norm
+ * @todo	free proc_arr or tokens once sorted into proc struct
+ * @todo	malloc protection 
+ * @todo	bzeros?
+*/
 void	sort_each_proc(t_parser *parser, t_procs *proc, char **proc_arr, int i)
 {
-	int		j = 0;
+	// int		j = 0;
 	// while (proc_arr[j])
 	// {
 	// 	printf("proc_arr[j] = %s\n", proc_arr[j]);

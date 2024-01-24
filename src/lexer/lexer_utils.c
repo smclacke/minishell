@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/11 20:12:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:15:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ int	is_meta(char *input)
 	return (0);
 }
 
-/**
- * @todo errors: next_quote() and 54 return needs error
-*/
 int	space_or_meta(int c)
 {
 	if (ft_isspace(c) || ft_ismeta(c))
@@ -44,6 +41,9 @@ int	is_same_quote(int c, char *quote_type)
 	return (0);
 }
 
+/**
+ * @todo	error handling, must error odeR? line 56
+*/
 char	*which_quote(char *input)
 {
 	if (ft_strnstr(input, SINGLE_Q, 1))
@@ -53,6 +53,9 @@ char	*which_quote(char *input)
 	return (0);
 }
 
+/**
+ * @todo	error handling
+*/
 int	next_quote(char *input, char c)
 {
 	int	i;

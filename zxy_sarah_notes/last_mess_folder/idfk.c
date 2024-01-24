@@ -6,9 +6,49 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/23 13:25:46 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 14:18:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:05:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+
+// static	t_parser	*make_parser_list(t_parser *procs, t_parser *proc_list, int proc_count)
+// {
+// 	t_parser	*new_list;
+// 	t_parser	*node;
+// 	int			i;
+// 	(void) proc_count;
+
+// 	new_list = NULL;
+// 	i = 0;
+// 	// if (proc_count == 1)
+// 	// 	new_list = one_proc(procs);
+// 	// else
+// 	// {
+// 		while (i < procs->proc_count)
+// 		{
+// 			node = parser_listnew(procs->proc_arrs[i]);
+// 			parser_listadd_back(&new_list, node);
+// 			i++;
+// 		}
+// 	// }
+// 	proc_list = new_list;
+// 	return (proc_list);
+// }
+
+// static	t_parser	*one_proc(t_procs *proc)
+// {
+// 	t_parser	*new_list;
+// 	t_parser	*node;
+// 	int			i;
+
+// 	new_list = NULL;
+// 	i = 0;
+// 	node = parser_listnew(proc);
+// 	parser_listadd_back(&new_list, node);
+// 	return (new_list);
+// }
+
 
 
 // static void	sort_proc(t_procs *proc)
@@ -40,10 +80,35 @@
 
 
 
+
+
+// FREEING FUNCS I DON'T KNOW IF I NEED THESE OR NOT
+
+// void	free_parser(t_parser *tokens)
+// {
+// 	t_parser	*tmp;
+
+// 	while (tokens)
+// 	{
+// 		tmp = tokens->next;
+// 		free (tokens);
+// 		tokens = tmp;
+// 	}
+// }
+
+// void	free_tokens(t_tokens *tokens)
+// {
+// 	t_tokens	*tmp;
+
+// 	while (tokens)
+// 	{
+// 		tmp = tokens->next;
+// 		free (tokens);
+// 		tokens = tmp;
+// 	}
+// }
+
 	
-
-
-
 
 
 

@@ -6,12 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 17:34:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:29:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo	strjoin protection
+ * @todo	strdup protection
+ * @todo	error handling?
+*/
 int	add_to_expand(t_expand *str, char *copy_str)
 {
 	char	*tmp;
@@ -31,12 +36,12 @@ int	add_to_expand(t_expand *str, char *copy_str)
 }
 
 /**
- * @param env expander struct
- * @param exp environmet linked list
- * @brief checks environment value of string to be expanded
- * if there is no value it free's the comp_str and env_value.
- * @return 1 if there is no value, 0 if value is found and assigned
- * @todo triple check protection, norm and sooo when less tired
+ * @param	env expander struct
+ * @param	exp environmet linked list
+ * @brief	checks environment value of string to be expanded
+ * 			if there is no value it free's the comp_str and env_value.
+ * @return	1 if there is no value, 0 if value is found and assigned
+ * @todo	triple check protection, norm and sooo when less tired
 */
 int	get_check_value(t_expand *str, t_env **env)
 {

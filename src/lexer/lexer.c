@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/10 21:23:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:14:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ static int	amount_tokens(char *input)
 	return (count);
 }
 
+/**
+ * @todo	error handling
+*/
 static char	*split_tokens(char *input, int len)
 {
 	char	*token;
@@ -74,6 +77,9 @@ static char	*split_tokens(char *input, int len)
 	return (token);
 }
 
+/**
+ * @todo	error handling
+*/
 static char	**lexer_split(char *input)
 {
 	char	**array;
@@ -103,6 +109,11 @@ static char	**lexer_split(char *input)
 	return (array);
 }
 
+/**
+ * @todo	error handling
+ * @todo	check free
+ * @todo	check array at end? error here if no tokens?
+*/
 char	**lexer(char *input)
 {
 	char	**array;

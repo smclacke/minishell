@@ -6,14 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 19:28:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:24:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * string after closed quotes that needs to be added to expanded string
+ * @todo	check the comment
+ * @todo	substr protection
+ * @todo	strjoin protection
+ * @brief	string after closed quotes that needs to be added to expanded string
 */
 int	save_extra_string(t_expand *str, char *input, int i)
 {
@@ -42,7 +45,8 @@ int	save_extra_string(t_expand *str, char *input, int i)
 }
 
 /**
- * before any dollar or quotes, just save the string
+ * @todo	substr protection
+ * @brief	before any dollar or quotes, just save the string
 */
 int	first_bit(t_expand *str, char *input)
 {
@@ -63,9 +67,9 @@ int	first_bit(t_expand *str, char *input)
 }
 
 /**
- * get first part of string, then loop through separating dollars and quotes...
- * @todo fix this, leaks, norm, test test test...
- * write version (or have func for here_doc and only edit that bit)
+ * @todo	fix this, leaks, norm, test test test...
+ * @todo	did i do this? -> write version (or have func for here_doc and only edit that bit)
+ * @brief	get first part of string, then loop through separating dollars and quotes...
 */
 static void	dollar(t_expand *str, t_env **env)
 {
@@ -92,10 +96,10 @@ static void	dollar(t_expand *str, t_env **env)
 }
 
 /**
- * adding expanded str back into correct parser struct var
- * @todo comment
- * @todo	when expanding a non expandable... need an empty string but this was 
- * causing problems...
+ * @todo 	error handling
+ * @todo	did i fix this?  ->  when expanding a non expandable... need an empty string but this was 
+ * 			causing problems...
+ * @brief	adding expanded str back into correct parser struct var
 */
 void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
 {

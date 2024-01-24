@@ -6,12 +6,16 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/10 17:50:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 17:50:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:33:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo	error handling
+ * @todo	substr protection
+*/
 int	squote_bit(t_expand *str, char *input, int i)
 {
 	int		start;
