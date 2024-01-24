@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:48:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 19:43:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,24 @@ void	print_expand_vals(t_expand *str)
 	printf("dollar\t\t\t\t= [%s]\n", str->dollar);
 	printf("expanded\t\t\t\t\t= [%s]\n", str->expanded);
 	printf("------------------------------------------------------\n");
+}
+
+void	print_proc_arrs(t_parser *parser)
+{
+	int		i = 0;
+
+	printf("proc count = %i\n", parser->proc_count);
+	while (i <= parser->proc_count)
+	{
+		int		j = 0;
+		int		proc_size = ft_arrlen(parser->proc_arrs[i]);
+		while (j <= proc_size)
+		{
+			printf("proc_arrs[%i][%i] = %s\n", i, j, parser->proc_arrs[i][j]);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	print_procs(t_procs *proc)
