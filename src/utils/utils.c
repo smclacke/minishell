@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 12:55:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:08:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,19 @@ int	shelly_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (0);
+}
+
+/**
+ * @todo	check this is correct for new parser ...
+*/
+void	free_parser(t_parser *procs)
+{
+	t_parser	*tmp;
+
+	while (procs)
+	{
+		tmp = procs->next;
+		free (procs);
+		procs = tmp;
+	}
 }

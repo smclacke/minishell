@@ -8,6 +8,8 @@
 ------------------------------
 ------------------------------
 
+----- change hd_count and red_count to half for djoy? ask what she needs
+
 - freee somethings
 
 - leakkkyyyy af

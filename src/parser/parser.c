@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:13:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:49:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ static int	get_procs(t_parser *proc)
 						return (1);
 					}
 					ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
-					// printf("proc->arr[%i][%i] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
 					proc->start++;
 					proc_j++;
 				}
-				// printf("-------------------------------\n");
 				proc_i++;
 			}
 			i++;
@@ -82,16 +80,16 @@ static int	get_procs(t_parser *proc)
 */
 t_parser	*parse_tokens(char **tokens)
 {
-	t_procs		*one_proc;
+	// t_procs		*one_proc;
 	t_parser	*proc;
 	t_parser	*parser_list;
 	t_parser	*new_node;
 	int			i;
 
 	i = 0;
-	one_proc = (t_procs *)malloc(sizeof(t_procs));
+	// one_proc = (t_procs *)malloc(sizeof(t_procs));
 	// wrap it up
-	ft_bzero(one_proc, sizeof(t_procs));
+	// ft_bzero(one_proc, sizeof(t_procs));
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	// wrap it up
 	ft_bzero(proc, sizeof(t_parser));
@@ -107,7 +105,6 @@ t_parser	*parse_tokens(char **tokens)
 			printf("error in get_procs()\n");
 			return (NULL);
 		}
-		printf("proc count = %i\n", proc->proc_count);
 		int		j = 0;
 		while (i <= proc->proc_count)
 		{
@@ -115,7 +112,7 @@ t_parser	*parse_tokens(char **tokens)
 			while (j <= proc->proc_size)
 			{
 				// printf("ptrrr = %p\n", proc->proc_arrs[i][j]);
-				sort_each_proc(proc, one_proc, &proc->proc_arrs[i][j], i);
+				sort_each_proc(proc, &proc->proc_arrs[i][j], i);
 				j++;
 			}
 			// new_node = parser_listnew(proc->process[i]);
@@ -126,23 +123,10 @@ t_parser	*parse_tokens(char **tokens)
 	else
 	{
 		proc->multi_proc_b = FALSE;
-		sort_each_proc(proc, one_proc, proc->tokens, 0);
+		sort_each_proc(proc, proc->tokens, 0);
 		new_node = parser_listnew(proc->process[0]);
 		parser_listadd_back(&parser_list, new_node);
 	}
-	while (parser_list)
-	{
-		int		j = 0;
-		
-		printf("cmd = %s\n", parser_list->proc->cmd);
-		int		k = 0;
-		while (k < parser_list->proc->str_count)
-		{
-			printf("strs = %s\n", parser_list->proc->str[k]);
-			k++;
-		}
-		j++;
-		parser_list = parser_list->next;
-	}
+	print_parser(parser_list);
 	return (parser_list);
 }

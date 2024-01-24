@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:17:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:48:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,28 @@ void	print_procs(t_procs *proc)
 	j = 0;
 	k = 0;
 	printf("cmd = %s\n", proc->cmd);
+	printf("--------------------------------------------------\n");
+	printf("hd_count = %i\n", proc->hd_count);
 	while (i < proc->hd_count)
 	{
-		printf("hd[] = %s\n", proc->hd[i]);
+		printf("hd[%i] = %s\n", i, proc->hd[i]);
 		i++;
 	}
+	printf("--------------------------------------------------\n");
+	printf("red_count = %i\n", proc->red_count);
 	while (k < proc->red_count)
 	{
-		printf("reds[] = %s\n", proc->redir[k]);
+		printf("reds[%i] = %s\n", k, proc->redir[k]);
 		k++;
 	}
+	printf("--------------------------------------------------\n");
+	printf("str_count = %i\n", proc->str_count);
 	while (j < proc->str_count)
 	{
-		printf("str[] = %s\n", proc->str[j]);
+		printf("str[%i] = %s\n", j, proc->str[j]);
 		j++;
 	}
+	printf("--------------------------------------------------\n");
 }
 
 void	print_parser(t_parser *proc)
@@ -77,28 +84,28 @@ void	print_parser(t_parser *proc)
 	printf("--------------------------------------------------\n");
 	printf("proc_count = %i\n", proc->proc_count);
 	printf("--------------------------------------------------\n");
-	while (index < proc->proc_count)
+	printf("proc->cmd = %s\n", proc->proc[0].cmd);
+	printf("--------------------------------------------------\n");
+	while (index <= proc->proc_count)
 	{
-		printf("[%i] cmd = %s\n", index, proc->process[index]->cmd);
-		printf("--------------------------------------------------\n");
-		printf("hd_count = %i\n", proc->process[index]->hd_count);
-		while (i < proc->process[index]->hd_count)
+		printf("hd_count = %i\n", proc->proc[index].hd_count);
+		while (i < proc->proc[index].hd_count)
 		{
-			printf("[%i] hd[%i] = %s\n", index, i, proc->process[index]->hd[i]);
+			printf("[%i] hd[%i] = %s\n", index, i, proc->proc[index].hd[i]);
 			i++;
 		}
 		printf("--------------------------------------------------\n");
-		printf("red_count = %i\n", proc->process[index]->red_count);
-		while (k < proc->process[index]->red_count)
+		printf("red_count = %i\n", proc->proc[index].red_count);
+		while (k < proc->proc[index].red_count)
 		{
-			printf("[%i] reds[k] = %s\n", index, k, proc->process[index]->redir[k]);
+			printf("[%i] reds[%i] = %s\n", index, k, proc->proc[index].redir[k]);
 			k++;
 		}
 		printf("--------------------------------------------------\n");
-		printf("str_count = %i\n", proc->process[index]->str_count);
-		while (j < proc->process[index]->str_count)
+		printf("str_count = %i\n", proc->proc[index].str_count);
+		while (j < proc->proc[index].str_count)
 		{
-			printf("[%i] str[j] = %s\n", index, j, proc->process[index]->str[j]);
+			printf("[%i] str[%i] = %s\n", index, j, proc->proc[index].str[j]);
 			j++;
 		}
 		printf("--------------------------------------------------\n");

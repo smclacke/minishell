@@ -6,18 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/15 21:53:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:09:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
 /**
- * after firguring this out properly
- * could write func to take input, tokenize, parser... return 
- * just the shizz the executor needs and make this main shorter
+ * @todo	you need to be normed
+ * @todo	check the frees
+ * @todo	free proc struct
 */
-
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;

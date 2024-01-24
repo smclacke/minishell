@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:16:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:38:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 				// utils
 bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
+void			free_parser(t_parser *procs);
 
 /**
  * @todo	comment out print protos
@@ -75,7 +76,7 @@ void			parser_listadd_back(t_parser **list, t_parser *new);
 t_parser		*parser_listnew(t_procs *proc);
 
 //-------- sort_procs --------//
-void			sort_each_proc(t_parser *parser, t_procs *proc, char **proc_arr, int i);
+void			sort_each_proc(t_parser *parser, char **proc_arr, int i);
 
 //-------- proc_utils --------//
 int				count_reds(char **process);

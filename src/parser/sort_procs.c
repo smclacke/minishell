@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:09:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:38:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,15 @@ static	void	sort_vars(t_procs *proc, char **process)
  * @todo	malloc protection 
  * @todo	bzeros?
 */
-void	sort_each_proc(t_parser *parser, t_procs *proc, char **proc_arr, int i)
+void	sort_each_proc(t_parser *parser, char **proc_arr, int i)
 {
-	// int		j = 0;
-	// while (proc_arr[j])
-	// {
-	// 	printf("proc_arr[j] = %s\n", proc_arr[j]);
-	// 	j++;
-	// }
 	parser->process = (t_procs **)malloc(sizeof(t_procs *));
-	// bzero process
+	ft_bzero(parser->process, sizeof(t_procs));
 	parser->process[i] = (t_procs *)malloc(sizeof(t_procs));
-	// bzero
-	proc = parser->process[i];
-	// int		j = 0;
-	// while (proc_arr[j])
-	// {
-	// 	printf("proc_arr in sort = %s\n", proc_arr[j]);
-	// 	j++;
-	// }
-	proc->token_count = ft_arrlen(proc_arr);
-	proc->red_count = count_reds(proc_arr);
-	proc->str_count = count_strs(proc, proc_arr);
-	proc->hd_count = count_hds(proc_arr);
-	sort_vars(proc, proc_arr);
-	parser->process[i] = proc;		
+	ft_bzero(parser->process[i], sizeof(t_procs));
+	parser->process[i]->token_count = ft_arrlen(proc_arr);
+	parser->process[i]->red_count = count_reds(proc_arr);
+	parser->process[i]->str_count = count_strs(parser->process[i], proc_arr);
+	parser->process[i]->hd_count = count_hds(proc_arr);
+	sort_vars(parser->process[i], proc_arr);
 }
