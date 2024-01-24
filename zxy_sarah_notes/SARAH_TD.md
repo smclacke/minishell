@@ -10,6 +10,8 @@
 
 ----- change hd_count and red_count to half for djoy? ask what she needs
 
+----- proc_size || token_count... make sure the correct one is being used and updated per proc node...
+
 - freee somethings
 
 - leakkkyyyy af

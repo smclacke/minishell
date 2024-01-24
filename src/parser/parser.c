@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:49:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 15:07:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	get_procs(t_parser *proc)
 					proc->start++;
 					proc_j++;
 				}
+				// proc->proc_arrs[proc_i][proc_j] = NULL;
 				proc_i++;
 			}
 			i++;
@@ -68,6 +69,7 @@ static int	get_procs(t_parser *proc)
 			i++;
 		proc->start = i;
 	}
+	// proc->proc_arrs[proc_i] = NULL;
 	return (0);
 }
 
@@ -105,20 +107,15 @@ t_parser	*parse_tokens(char **tokens)
 			printf("error in get_procs()\n");
 			return (NULL);
 		}
-		int		j = 0;
 		while (i <= proc->proc_count)
 		{
-			j = 0;
-			while (j <= proc->proc_size)
-			{
-				// printf("ptrrr = %p\n", proc->proc_arrs[i][j]);
-				sort_each_proc(proc, &proc->proc_arrs[i][j], i);
-				j++;
-			}
+			sort_each_proc(proc, proc->proc_arrs[i], i);
 			// new_node = parser_listnew(proc->process[i]);
 			// parser_listadd_back(&parser_list, new_node);
 			i++;
 		}
+		printf("im done\n");
+		return (EXIT_SUCCESS);
 	}
 	else
 	{

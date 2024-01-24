@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 14:38:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 15:04:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,22 @@ static	void	sort_vars(t_procs *proc, char **process)
 */
 void	sort_each_proc(t_parser *parser, char **proc_arr, int i)
 {
+	int		j = 0;
+	while (proc_arr[j])
+	{
+		printf("proc _arr tokens = %s\n", proc_arr[j]);
+		j++;
+	}
+	if (proc_arr[j] == NULL)
+		printf("NULL\n");
+	exit (EXIT_SUCCESS);
 	parser->process = (t_procs **)malloc(sizeof(t_procs *));
 	ft_bzero(parser->process, sizeof(t_procs));
 	parser->process[i] = (t_procs *)malloc(sizeof(t_procs));
 	ft_bzero(parser->process[i], sizeof(t_procs));
+	printf("are we good?\n");
 	parser->process[i]->token_count = ft_arrlen(proc_arr);
+	printf("proc->token_count = %i\n", parser->process[i]->token_count);
 	parser->process[i]->red_count = count_reds(proc_arr);
 	parser->process[i]->str_count = count_strs(parser->process[i], proc_arr);
 	parser->process[i]->hd_count = count_hds(proc_arr);

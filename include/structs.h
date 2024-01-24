@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 12:31:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:55:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ typedef	struct s_procs
  * @param	start: used for creating proc_arrs
  * @param	token_size: size per token (input variable) e.g. echo = 3
  * @param	proc_count: total number of processes
- * @param	proc_size: total number of tokens within each process
+ * @param	proc_size: util for making proc_array
+ * 			for total number of tokens within each process, look at 
+ * 			proc struct->token_count
  * 
  * @param	process: use to sort either tokens or proc_arrs into procs struct
  * 					similiar to just an input var
