@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 19:28:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 12:08:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ t_parser	*parse_tokens(char **tokens)
 			j = 0;
 			while (j <= proc->proc_size)
 			{
-				printf("ptrrr = %p\n", proc->proc_arrs[i][j]);
+				// printf("ptrrr = %p\n", proc->proc_arrs[i][j]);
 				sort_each_proc(proc, one_proc, &proc->proc_arrs[i][j], i);
 				j++;
 			}
@@ -163,7 +163,7 @@ t_parser	*parse_tokens(char **tokens)
 	{
 		int		j = 0;
 		
-		printf("[%i] cmd = %s\n", j, parser_list->proc->cmd);
+		printf("cmd = %s\n", parser_list->proc->cmd);
 		int		k = 0;
 		while (k < parser_list->proc->str_count)
 		{

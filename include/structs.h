@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 18:39:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 12:31:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,24 @@ typedef enum e_exit
 }						t_exit;
 
 /**
- * @brief	specifies the different variable types of tokens from the
- * 			lexer that are organised in mini sub arrays, parsed and then 
- * 			given to the executor as a link list of parser struct nodes
+ * @todo	check the count vars are correctly updated and saved per process
+ * @brief	specifies the different variable types from the
+ * 			lexer that are organised via the parser, then given to the 
+ * 			executor in the form of a parser list, each node being
+ * 			one process containing some or all of these proc struct vars
+ * @param	token_count: total number of tokens within each process
  * @param	cmd: first string in each process without redirect char
- * @param	str:  limiter for here_doc (string after <<) and all other input
- * @param	meta: pipe, more, less, moremore, lessless. 
- * 			**dollar is excluded and handled as a string
- * @param	file: in and out files; after more, less and moremore chars
- * @param	hd_limit: save the limiter string, check if it's quoted or not
- * @param	flag: useful util var
- * @param	hd_flag: 1 = quoted, quotes are removed but if flag is set, 
- * 			don't expand anything inside here_doc input for both
- * 			single and double quotes
+ * @param	cmd_flag: util var to check if cmd has been found per process
+ * @param	str: array of all cmd args
+ * @param	str_count: number of string args per process
+ * @param	redir: array of all < > >> in, out and truncate files, 
+ * 			left in order as inputted. file after each meta characher included, 
+ * 			error if no string after meta
+ * @param	red_count: number of redir metas and files per process
+ * @param	hd: array of all << hd meta and delimiter, left in order
+ * 			 as inputted. error if no string after hd meta
+ * @param	hd_count: number of hd metas << and delmiters per process
 */
-// typedef struct s_tokens
-// {
-// 	// struct s_tokens			*next;
-// }				t_tokens;
-
 typedef	struct s_procs
 {
 	int						token_count;
@@ -97,11 +96,25 @@ typedef	struct s_procs
 }			t_procs;
 
 /**
- * comment on the way
+ * @todo	check proc_size is correct while iterating through processes
+ * @todo	exit stuff, what need to happen here?
+ * @param	multi_proc_b: specifies whether there is only one process or multiple
+ * @param	tokens: if only one process, can just use the token array
+ * @param	proc_arrs: if multiple processes, use the array of processes
+ * 
+ * @param	start: used for creating proc_arrs
+ * @param	token_size: size per token (input variable) e.g. echo = 3
+ * @param	proc_count: total number of processes
+ * @param	proc_size: total number of tokens within each process
+ * 
+ * @param	process: use to sort either tokens or proc_arrs into procs struct
+ * 					similiar to just an input var
+ * @param	proc: each node of the parser list is stored here, this way each node
+ * 				parser->proc[0]->... accesses the procs struct with all vars
+ * 				from that processes, can iterate through these proc nodes 
 */
 typedef	struct	s_parser
 {
-	// void					*input;
 	bool					multi_proc_b;
 	char					**tokens;
 	char					***proc_arrs;
@@ -123,7 +136,8 @@ typedef	struct	s_parser
 }							t_parser;
 
 /**
- * comment on the way
+ *  @todo	check what needs to be done with exit codes in expander
+ *	@brief	simply a struct used to store and organise while expanding variables
 */
 typedef struct s_expand
 {

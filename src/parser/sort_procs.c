@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/23 19:17:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 12:08:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ static	void	sort_vars(t_procs *proc, char **process)
 void	sort_each_proc(t_parser *parser, t_procs *proc, char **proc_arr, int i)
 {
 	int		j = 0;
-	while (proc_arr[j])
-	{
-		printf("proc_arr[j] = %s\n", proc_arr[j]);
-		j++;
-	}
+	// while (proc_arr[j])
+	// {
+	// 	printf("proc_arr[j] = %s\n", proc_arr[j]);
+	// 	j++;
+	// }
 	parser->process = (t_procs **)malloc(sizeof(t_procs *));
 	// bzero process
 	parser->process[i] = (t_procs *)malloc(sizeof(t_procs));
