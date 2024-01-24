@@ -8,9 +8,12 @@
 ------------------------------
 ------------------------------
 
------ change hd_count and red_count to half for djoy? ask what she needs
 
------ proc_size || token_count... make sure the correct one is being used and updated per proc node...
+------- something not right with printing proc arrs... but think they are being made correctly and there is something wrong with the sort bit for the arrs
+
+
+
+----- change hd_count and red_count to half for djoy? ask what she needs
 
 - freee somethings
 
