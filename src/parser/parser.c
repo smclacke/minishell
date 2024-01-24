@@ -6,16 +6,34 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 15:07:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 15:47:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
+ * while tokens + !pipe
+ * get process tokens !start----------end!
+ * make array[i] filled with those tokens
+ * tokens[i]++ if pipe, move over
+ * array[i] ++ move to next process
+ * do again
+ * 
+ * proc_arr[i]
+	* get proc tokens...
+	* add to proc_arr[i][j++]
+ * proc_arr[i++]
+	* skip pipe
+	* get proc tokens...
+	* add to proc_arr[i][j++]
+ * ........................
+*/
+void	
+/**
  * @todo	maybe norm?
  * @todo	error handling
- * @todo	memory handling
+ * @todo	memory handling - add malloc protection back when it works
  * @todo	remove print statements when everything works
 */
 static int	get_procs(t_parser *proc)
@@ -28,50 +46,70 @@ static int	get_procs(t_parser *proc)
 	proc->start = 0;
 	proc_i = 0;
 	proc->proc_arrs = (char ***)malloc(sizeof(char **) * (proc->proc_count + 1));
-	if (!proc->proc_arrs)
-	{
-		printf("maloc fucked proc_arrs\n");
-		return (1);
-	}
+	printf("proc->proc_count = %i\n", proc->proc_count);
 	while (proc->tokens[i])
 	{
 		while (proc->tokens[i] && !is_pipe(proc->tokens[i]))
 		{
 			if (proc->tokens[i + 1] == NULL || is_pipe(proc->tokens[i + 1]))
 			{
-				proc->proc_size = i - proc->start;
+				proc->proc_size = (i - proc->start) + 1;
+				// make array ..
+				make_proc_array(proc);
+				printf("proc->proc_size = %i\n", proc->proc_size);
 				proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc->proc_size + 1));
-				if (!proc->proc_arrs[proc_i])
-				{
-					printf("maloc fucked proc_arrs\n");
-					return (1);
-				}
+				while (proc_i <proc->proc_size)
 				proc_j = 0;
-				while (proc->start <= i && proc_j <= proc->proc_size)
+				printf("proc->start = %i\n", proc->start);
+				printf("pos i = %i\n", i);
+				while (proc->start <= i)
 				{
 					proc->token_size = ft_strlen(proc->tokens[proc->start]);
+					printf("proc->token_size = %i\n", proc->token_size);
 					proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (proc->token_size + 1));
-					if (!proc->proc_arrs[proc_i][proc_j])
+					while (proc_j <= proc->token_size)
 					{
-						printf("maloc fucked proc_arrs\n");
-						return (1);
+						printf("where break?\n");
+						ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
+						printf("proc->arr[%i][%i] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
+						proc_j++;
 					}
-					ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
 					proc->start++;
-					proc_j++;
 				}
-				// proc->proc_arrs[proc_i][proc_j] = NULL;
-				proc_i++;
 			}
 			i++;
 		}
-		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
+		proc_i++;
+		if (is_pipe(proc->tokens[i]))
+		{
+			printf("proc->start = %i\n", proc->start);
+			proc->start = i;
 			i++;
-		proc->start = i;
+			printf("im here\n");
+			exit (EXIT_SUCCESS);
+			// proc->proc_arrs[proc_i][proc_j] = NULL;
+			// // proc_j = 0;
+			// printf("start = %i\n", proc->start);
+		}
 	}
-	// proc->proc_arrs[proc_i] = NULL;
 	return (0);
 }
+
+	// if (!proc->proc_arrs)
+	// {
+	// 	printf("maloc fucked proc_arrs\n");
+	// 	return (1);
+	// }
+				// if (!proc->proc_arrs[proc_i])
+				// {
+				// 	printf("maloc fucked proc_arrs\n");
+				// 	return (1);
+				// }
+					// if (!proc->proc_arrs[proc_i][proc_j])
+					// {
+					// 	printf("maloc fucked proc_arrs\n");
+					// 	return (1);
+					// }
 
 /**
  * @todo	maybe norm?
@@ -99,7 +137,7 @@ t_parser	*parse_tokens(char **tokens)
 	proc->proc_count = count_procs(tokens);
 	parser_list = NULL;
 	new_node = NULL;
-	if (proc->proc_count > 1)
+	if (proc->proc_count > 0)
 	{
 		proc->multi_proc_b = TRUE;
 		if (get_procs(proc))
