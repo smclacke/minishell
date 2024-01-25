@@ -8,6 +8,31 @@
 
 *right here, right now*
 
+**IT APPEARS THE PIPE AND LACK OF NULL ARE PROCS AN ISSUE...**
+minibleh:<< hd < in cmd > out str string | cd .. > outfile <<hd2
+in coming
+proc->tokens[proc->start] = <<
+proc->tokens[proc->start] = hd
+proc->tokens[proc->start] = <
+proc->tokens[proc->start] = in
+proc->tokens[proc->start] = cmd
+proc->tokens[proc->start] = >
+proc->tokens[proc->start] = out
+proc->tokens[proc->start] = str
+proc->tokens[proc->start] = string
+proc->tokens[proc->start] = |
+in coming
+proc->tokens[proc->start] = cd
+proc->tokens[proc->start] = ..
+proc->tokens[proc->start] = >
+proc->tokens[proc->start] = outfile
+proc->tokens[proc->start] = <<
+proc->tokens[proc->start] = hd2
+proc->tokens[proc->start] = (null)
+this one
+
+
+
 minibleh:<<hd2  echo something | cd .. <in_file | >out_file grep hello
 proc count = 2
 proc_arrs[0][0] = <<

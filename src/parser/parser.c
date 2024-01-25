@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:26:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:29:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,19 @@ static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 	{
 		printf("proc->tokens[proc->start] = %s\n", proc->tokens[proc->start]);
 		if (!proc->tokens[proc->start])
-			exit(EXIT_FAILURE);
+		{
+			printf("this one\n");
+			exit(EXIT_SUCCESS);
+		}
 		token_size = ft_strlen(proc->tokens[proc->start]);
 		proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (token_size + 1));
 		// wrap
 		ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
 		if (!proc->proc_arrs[proc_i][proc_j])
-			exit(EXIT_FAILURE);
+		{
+			printf("noooo, this one\n");
+			exit(EXIT_SUCCESS);
+		}
 		proc_j++;
 		proc->start++;
 	}
@@ -56,6 +62,7 @@ static	void	get_procs(t_parser *proc)
 		proc_size = i - proc->start;
 		proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc_size + 1));
 		// wrap
+		printf("in coming\n");
 		make_proc_arr(proc, proc_i, proc_size);
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 		{
