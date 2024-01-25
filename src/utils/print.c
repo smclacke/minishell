@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 19:43:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/25 12:36:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,7 @@ void	print_parser(t_parser *proc)
 	k = 0;
 	index = 0;
 	printf("--------------------------------------------------\n");
-	printf("proc_count = %i\n", proc->proc_count);
-	printf("--------------------------------------------------\n");
-	printf("proc->cmd = %s\n", proc->proc[0].cmd);
+	printf("proc_count = %i | proc->cmd = %s\n", proc->proc_count, proc->proc[0].cmd);
 	printf("--------------------------------------------------\n");
 	while (index <= proc->proc_count)
 	{

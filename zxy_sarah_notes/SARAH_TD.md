@@ -5,17 +5,20 @@
 ------------------------------
 ------------------------------
 ------------------------------
+
+*right here, right now*
+
+minibleh:<<hd2  echo something | cd .. <in_file | >out_file grep hello
+proc count = 2
+proc_arrs[0][0] = <<
+proc_arrs[0][1] = hd2
+proc_arrs[0][2] = echo
+proc_arrs[0][3] = something
+
 ------------------------------
 ------------------------------
 
-
-------- something not right with printing proc arrs... but think they are being made correctly and there is something wrong with the sort bit for the arrs
-
-
-
------ change hd_count and red_count to half for djoy? ask what she needs
-
-- freee somethings
+- freee some things
 
 - leakkkyyyy af
 
@@ -27,12 +30,65 @@
 
 - fix expander to work with new parser.....
 
-------------------------------
-------------------------------
-------------------------------
+
 ------------------------------
 ------------------------------
 
+**ASK DJOYKE**
+------------------------------
+
+*ONE* use as example to explain how this works:
+//// one proc ////
+
+minibleh:<<hd1 cmd >out_file hehe <<hd2 <in_file str string strings
+--------------------------------------------------
+proc_count = 0 | proc->cmd = cmd
+--------------------------------------------------
+hd_count = 4
+[0] hd[0] = <<
+[0] hd[1] = hd1
+[0] hd[2] = <<
+[0] hd[3] = hd2
+--------------------------------------------------
+red_count = 4
+[0] reds[0] = >
+[0] reds[1] = out_file
+[0] reds[2] = <
+[0] reds[3] = in_file
+--------------------------------------------------
+str_count = 4
+[0] str[0] = str
+[0] str[1] = string
+[0] str[2] = strings
+[0] str[3] = hehe
+
+
+
+*TWO*
+----- change hd_count and red_count to half for djoy? ask what she needs
+-- explain these counts and see what's most useful for djoy, could change it
+	in what I send to executor, but will need to make sure it doesn't affect my code
+
+proc_count = 0				= 1 process
+hd_count = 2				= 1 hd
+[0] hd[0] = <<
+[0] hd[1] = eof
+
+red_count = 4				= 2 redirects
+[0] reds[0] = >
+[0] reds[1] = out_file
+[0] reds[2] = <
+[0] reds[3] = in_file
+
+str_count = 4				= 4 cmd args
+[0] str[0] = something
+[0] str[1] = string
+[0] str[2] = and
+[0] str[3] = things
+
+
+------------------------------
+------------------------------
 
 
 **MAIN TO DO**

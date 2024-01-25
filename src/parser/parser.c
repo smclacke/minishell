@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 19:42:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/25 12:58:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,12 @@ t_parser	*parse_tokens(char **tokens)
 	{
 		proc->multi_proc_b = TRUE;
 		get_procs(proc);
-		print_proc_arrs(proc);
+		// print_proc_arrs(proc);
+		while (proc->process[i]) // i < proc->proc_count
+		{
+			print_procs(proc->process[i]);
+			i++;
+		}
 		// while (i <= proc->proc_count)
 		// {
 		// int		j = 0;
