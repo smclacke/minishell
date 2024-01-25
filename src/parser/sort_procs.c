@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:15:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:45:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,16 @@
 */
 void	sort_each_proc(t_parser *parser, char **proc_arr, int i)
 {
+	int		token_count = ft_arrlen(proc_arr);
+
 	parser->process = (t_procs **)malloc(sizeof(t_procs *));
 	// wrap it up
 	ft_bzero(parser->process, sizeof(t_procs));
-	parser->process[i] = (t_procs *)malloc(sizeof(t_procs));
+	parser->process[i] = (t_procs *)malloc(sizeof(token_count + 1));
 	// wrap it up
 	ft_bzero(parser->process[i], sizeof(t_procs));
-	parser->process[i]->token_count = ft_arrlen(proc_arr);
+	// parser->process[i]->token_count = ft_arrlen(proc_arr);
+	parser->process[i]->token_count = token_count;
 	printf("token_count = %i\n", parser->process[i]->token_count);
 	parser->process[i]->red_count = count_reds(proc_arr);
 	printf("red_count = %i\n", parser->process[i]->red_count);

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:04:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/25 14:43:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	count_reds(char **process)
 	count = 0;
 	while (process[i])
 	{
-		// printf("[%i] ptr = %p\n", i, process[i]);
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
 		{
 			if (!process[i + 1])
@@ -37,7 +36,6 @@ int	count_reds(char **process)
 		}
 		i++;
 	}
-	printf("count in count_reds = %i\n", count);
 	return (count);
 }
 
