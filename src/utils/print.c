@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 12:36:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/25 15:08:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	print_proc_arrs(t_parser *parser)
 	{
 		int		j = 0;
 		int		proc_size = ft_arrlen(parser->proc_arrs[i]);
+		printf("proc_size = %i\n", proc_size);
 		while (j <= proc_size)
 		{
 			printf("proc_arrs[%i][%i] = %s\n", i, j, parser->proc_arrs[i][j]);

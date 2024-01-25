@@ -8,37 +8,45 @@
 
 *right here, right now*
 
-**IT APPEARS THE PIPE AND LACK OF NULL ARE PROCS AN ISSUE...**
+**AM I LOOSING THE LAST ONE OR JUST PRINTING LIKE A DIV?**
 minibleh:<< hd < in cmd > out str string | cd .. > outfile <<hd2
-in coming
-proc->tokens[proc->start] = <<
-proc->tokens[proc->start] = hd
-proc->tokens[proc->start] = <
-proc->tokens[proc->start] = in
-proc->tokens[proc->start] = cmd
-proc->tokens[proc->start] = >
-proc->tokens[proc->start] = out
-proc->tokens[proc->start] = str
-proc->tokens[proc->start] = string
-proc->tokens[proc->start] = |
-in coming
-proc->tokens[proc->start] = cd
-proc->tokens[proc->start] = ..
-proc->tokens[proc->start] = >
-proc->tokens[proc->start] = outfile
-proc->tokens[proc->start] = <<
-proc->tokens[proc->start] = hd2
-proc->tokens[proc->start] = (null)
-this one
-
-
-
-minibleh:<<hd2  echo something | cd .. <in_file | >out_file grep hello
-proc count = 2
+ proc->proc_arrs[0][0] = <<
+ proc->proc_arrs[0][1] = hd
+ proc->proc_arrs[0][2] = <
+ proc->proc_arrs[0][3] = in
+ proc->proc_arrs[0][4] = cmd
+ proc->proc_arrs[0][5] = >
+ proc->proc_arrs[0][6] = out
+ proc->proc_arrs[0][7] = str
+ proc->proc_arrs[0][8] = string
+ proc->proc_arrs[1][0] = cd
+ proc->proc_arrs[1][1] = ..
+ proc->proc_arrs[1][2] = >
+ proc->proc_arrs[1][3] = outfile
+ proc->proc_arrs[1][4] = <<
+ proc->proc_arrs[1][5] = hd2
+proc count = 1
+proc_size = 8
 proc_arrs[0][0] = <<
-proc_arrs[0][1] = hd2
-proc_arrs[0][2] = echo
-proc_arrs[0][3] = something
+proc_arrs[0][1] = hd
+proc_arrs[0][2] = <
+proc_arrs[0][3] = in
+proc_arrs[0][4] = cmd
+proc_arrs[0][5] = >
+proc_arrs[0][6] = out
+proc_arrs[0][7] = str
+proc_arrs[0][8] = (null)
+proc_size = 5
+proc_arrs[1][0] = cd
+proc_arrs[1][1] = ..
+proc_arrs[1][2] = >
+proc_arrs[1][3] = outfile
+proc_arrs[1][4] = <<
+proc_arrs[1][5] = (null)
+im done
+success
+
+
 
 ------------------------------
 ------------------------------

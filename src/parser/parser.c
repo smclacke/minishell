@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 15:03:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/25 15:27:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (token_size + 1));
 		// wrap
 		ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
-		printf("[%i][%i] proc->proc_arrs[proc_i][proc_j] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
+		printf(" MAKING ARRAYS: [%i][%i] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
+		printf("----------------------------------------------\n");
 		if (!proc->proc_arrs[proc_i][proc_j])
 		{
 			printf("noooo, this one\n");
@@ -39,8 +40,6 @@ static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		proc_j++;
 		proc->start++;
 	}
-	printf("[%i][%i] proc->proc_arrs[proc_i][proc_j] = NULL\n", proc_i, proc_j);
-	proc->proc_arrs[proc_i][proc_size] = NULL;
 }
 
 static	void	get_procs(t_parser *proc)
@@ -63,14 +62,14 @@ static	void	get_procs(t_parser *proc)
 		proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc_size + 1));
 		// wrap
 		make_proc_arr(proc, proc_i, proc_size);
+		proc->proc_arrs[proc_i][proc_size] = NULL;
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 		{
 			i++;
 			proc_i++;
 		}
 	}
-	// proc->proc_arrs[proc_i] = NULL;
-	proc->proc_arrs[proc->proc_count] = NULL;
+	print_proc_arrs(proc);
 }
 
 /**
@@ -99,18 +98,6 @@ t_parser	*parse_tokens(char **tokens)
 	{
 		proc->multi_proc_b = TRUE;
 		get_procs(proc);
-
-		int		j = 0;
-		while (j <= proc->proc_count)
-		{
-			int		k = 0;
-			while (proc->proc_arrs[j][k])
-			{
-				printf("proc_arr[%i][%i] = %s\n", j, k, proc->proc_arrs[j][k]);
-				k++;
-			}
-			j++;
-		}
 		// while (i < proc->proc_count)
 		// {
 		// 	sort_each_proc(proc, proc->proc_arrs[i], i);
@@ -118,27 +105,6 @@ t_parser	*parse_tokens(char **tokens)
 		// }
 		// new_node = parser_listnew(proc->process[i]);
 		// parser_listadd_back(&parser_list, new_node);
-		printf("wtf\n");
-		exit(EXIT_SUCCESS);
-		
-		//printing
-		// while (i <= proc->proc_count)
-		// {
-		// int		j = 0;
-		// while (j <= proc->proc_count)
-		// {
-		// 	int	k = 0;
-		// 	while (k <= proc->proc_size)
-		// 	{
-		// 		printf("proc_arrs[%i][%i] = %s\n", j, k, proc->proc_arrs[j][k]);
-		// 		k++;
-		// 	}
-		// 	j++;
-		// }
-		// 	i++;
-		// }
-		//printing
-
 		printf("im done\n");
 		return (EXIT_SUCCESS);
 	}
