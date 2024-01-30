@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 15:27:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/30 12:53:56 by eugene        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ t_parser	*parse_tokens(char **tokens)
 	t_parser	*proc;
 	t_parser	*parser_list;
 	t_parser	*new_node;
-	int			i;
+	// int			i;
 
-	i = 0;
+	// i = 0;
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	// wrap it up
 	ft_bzero(proc, sizeof(t_parser));
