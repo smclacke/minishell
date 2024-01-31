@@ -100,7 +100,7 @@ void	print_parser(t_parser *proc)
 	j = 0;
 	k = 0;
 	index = 0;
-	printf("--------------------------------------------------\n");
+	printf("---------------------PARSER_PRINT()-----------------------------\n");
 	printf("proc_count = %i | proc->cmd = %s\n", proc->proc_count, proc->proc[0].cmd);
 	printf("--------------------------------------------------\n");
 	while (index <= proc->proc_count)

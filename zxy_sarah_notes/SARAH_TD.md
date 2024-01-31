@@ -8,44 +8,9 @@
 
 *right here, right now*
 
-**AM I LOOSING THE LAST ONE OR JUST PRINTING LIKE A DIV?**
-minibleh:<< hd < in cmd > out str string | cd .. > outfile <<hd2
- proc->proc_arrs[0][0] = <<
- proc->proc_arrs[0][1] = hd
- proc->proc_arrs[0][2] = <
- proc->proc_arrs[0][3] = in
- proc->proc_arrs[0][4] = cmd
- proc->proc_arrs[0][5] = >
- proc->proc_arrs[0][6] = out
- proc->proc_arrs[0][7] = str
- proc->proc_arrs[0][8] = string
- proc->proc_arrs[1][0] = cd
- proc->proc_arrs[1][1] = ..
- proc->proc_arrs[1][2] = >
- proc->proc_arrs[1][3] = outfile
- proc->proc_arrs[1][4] = <<
- proc->proc_arrs[1][5] = hd2
-proc count = 1
-proc_size = 8
-proc_arrs[0][0] = <<
-proc_arrs[0][1] = hd
-proc_arrs[0][2] = <
-proc_arrs[0][3] = in
-proc_arrs[0][4] = cmd
-proc_arrs[0][5] = >
-proc_arrs[0][6] = out
-proc_arrs[0][7] = str
-proc_arrs[0][8] = (null)
-proc_size = 5
-proc_arrs[1][0] = cd
-proc_arrs[1][1] = ..
-proc_arrs[1][2] = >
-proc_arrs[1][3] = outfile
-proc_arrs[1][4] = <<
-proc_arrs[1][5] = (null)
-im done
-success
-
+sooo, without nullifying, heap buffer voer flow, but when nullifying - 
+last good token is overrideen, can't not -1 for proc_size otherwise pipe
+gets added, and if try to null proc_size + 1, problems...
 
 
 ------------------------------

@@ -38,7 +38,7 @@ static	void	sort_vars(t_procs *proc, char **process)
 		{
 			if (!process[i + 1])
 			{
-				printf("error\n");
+				printf("error 1\n");
 				return ;
 			}
 			if (proc_redir(process[i]) == 2)
@@ -79,6 +79,12 @@ static	void	sort_vars(t_procs *proc, char **process)
 void	sort_each_proc(t_parser *parser, char **proc_arr, int i)
 {
 	t_procs		**proc;
+	int		j = 0;
+	while (proc_arr[j])
+	{
+		printf("proc_arr = %s\n", proc_arr[j]);
+		j++;
+	}
 	int			token_count = ft_arrlen(proc_arr);
 	int			red_count = count_reds(proc_arr);
 	int			str_count = count_strs(proc_arr);
@@ -101,6 +107,7 @@ void	sort_each_proc(t_parser *parser, char **proc_arr, int i)
 
 	proc[i]->hd_count = hd_count;
 	printf("hd_count = %i\n", proc[i]->hd_count);
+
 	sort_vars(proc[i], proc_arr);
 	parser->process[i] = proc[i];
 }

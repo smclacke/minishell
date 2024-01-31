@@ -28,7 +28,7 @@ int	count_reds(char **process)
 		{
 			if (!process[i + 1])
 			{
-				printf("error\n");
+				printf("error 2\n");
 				return (EXIT_FAILURE);
 			}
 			count += 2;
@@ -57,7 +57,7 @@ int	count_strs(char **process)
 		{
 			if (!process[i + 1])
 			{
-				printf("error\n");
+				printf("error 3\n");
 				return (EXIT_FAILURE);
 			}
 			i += 2;
@@ -92,7 +92,7 @@ int		count_hds(char **process)
 		{
 			if (!process[i + 1])
 			{
-				printf("error\n");
+				printf("error 4\n");
 				return (EXIT_FAILURE);
 			}
 			count += 2;
