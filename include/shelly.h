@@ -81,7 +81,7 @@ void			sort_each_proc(t_parser *parser, char **proc_arr, int i);
 
 //-------- proc_utils --------//
 int				count_reds(char **process);
-int				count_strs(t_procs *proc, char **process);
+int				count_strs(char **process);
 int				count_hds(char **process);
 int				proc_redir(char *input);
 

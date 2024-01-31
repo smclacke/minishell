@@ -84,9 +84,9 @@ t_parser	*parse_tokens(char **tokens)
 	t_parser	*proc;
 	t_parser	*parser_list;
 	t_parser	*new_node;
-	// int			i;
+	int			i;
 
-	// i = 0;
+	i = 0;
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	// wrap it up
 	ft_bzero(proc, sizeof(t_parser));
@@ -110,6 +110,11 @@ t_parser	*parse_tokens(char **tokens)
 	}
 	else
 	{
+		while (proc->tokens[i])
+		{
+			printf("tokens = %s\n", proc->tokens[i]);
+			i++;
+		}
 		proc->multi_proc_b = FALSE;
 		sort_each_proc(proc, proc->tokens, 0);
 		new_node = parser_listnew(proc->process[0]);
