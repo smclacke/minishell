@@ -45,28 +45,33 @@ static	void	sort_vars(t_procs *proc, char **process)
 			{
 				proc->hd[l] = process[i];
 				proc->hd[l + 1] = process[i + 1];
-				l += 2;
+				l++;
 			}
 			else
 			{
 				proc->redir[k] = process[i];
 				proc->redir[k + 1] = process[i + 1];
-				k += 2;
+				k++;
 			}
-			i += 2;
-		}
-		else if (proc->cmd_flag != 1)
-		{
-			proc->cmd_flag = 1;
-			proc->cmd = process[i];
 			i += 1;
 		}
-		while (process[i] && proc_redir(process[i]) == 0 && proc->cmd_flag != 0)
+		else
+		{
+			if (proc->cmd_flag != 1)
+			{
+
+				proc->cmd_flag = 1;
+				proc->cmd = process[i];
+				i++;
+			}
+		}
+		while (process[i] && !proc_redir(process[i]) && proc->cmd_flag == 1)
 		{
 			proc->str[j] = process[i];
 			i++;
 			j++;
 		}
+		i++;
 	}
 }
 
