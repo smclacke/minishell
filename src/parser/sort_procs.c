@@ -79,12 +79,12 @@ static	void	sort_vars(t_procs *proc, char **process)
 void	sort_each_proc(t_parser *parser, char **proc_arr, int i)
 {
 	t_procs		**proc;
-	int		j = 0;
-	while (proc_arr[j])
-	{
-		printf("proc_arr = %s\n", proc_arr[j]);
-		j++;
-	}
+	// int		j = 0;
+	// while (proc_arr[j])
+	// {
+	// 	printf("proc_arr = %s\n", proc_arr[j]);
+	// 	j++;
+	// }
 	int			token_count = ft_arrlen(proc_arr);
 	int			red_count = count_reds(proc_arr);
 	int			str_count = count_strs(proc_arr);

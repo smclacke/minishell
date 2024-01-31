@@ -8,9 +8,8 @@
 
 *right here, right now*
 
-sooo, without nullifying, heap buffer voer flow, but when nullifying - 
-last good token is overrideen, can't not -1 for proc_size otherwise pipe
-gets added, and if try to null proc_size + 1, problems...
+making mutiple procs = i < proc_count only going once and not getting second list
+with adding second list, overflow.. must fix, malloc process in sort()??? should be in parser right?
 
 
 ------------------------------

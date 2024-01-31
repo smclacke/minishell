@@ -112,6 +112,7 @@ t_parser	*parse_tokens(char **tokens)
 		// 	}
 		// 	fuck++;
 		// }
+		// proc->process = (t_procs **)malloc(sizeof(t_procs *));
 		while (i < proc->proc_count)
 		{
 			sort_each_proc(proc, proc->proc_arrs[i], i);
