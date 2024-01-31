@@ -97,5 +97,4 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 
 	sort_vars(proc, proc_arr);
 	print_procs(proc);
-
 }

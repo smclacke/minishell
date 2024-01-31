@@ -8,12 +8,50 @@
 
 *right here, right now*
 
+sort vars function doesnt work for << hd ONE PROC....
+
 make sure on every sort_proc iteration, i can print the procs
 
 make sure each process is correctly being added to parseR_list...
 
 mutli procs still can't print proc list on each sort call
 multi procs still can't print parser list... (using tmp list while)
+
+!!!!!!
+if echo something | << hd  --- fails
+
+minibleh:echo something | hello there
+->token_count = 2
+->red_count = 0
+->str_count = 1
+->hd_count = 0
+cmd = echo
+--------------------------------------------------
+hd_count = 0
+--------------------------------------------------
+red_count = 0
+--------------------------------------------------
+str_count = 1
+str[0] = something
+--------------------------------------------------
+->token_count = 2
+->red_count = 0
+->str_count = 1
+->hd_count = 0
+cmd = hello
+--------------------------------------------------
+hd_count = 0
+--------------------------------------------------
+red_count = 0
+--------------------------------------------------
+str_count = 1
+str[0] = there
+--------------------------------------------------
+NOPE
+success
+
+--- NOPING IN MAIN
+
 
 ------------------------------
 ------------------------------
