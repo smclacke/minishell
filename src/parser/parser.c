@@ -120,6 +120,7 @@ t_parser	*parse_tokens(char **tokens)
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 	}
+	// print_parser(parser_list);
 	// t_parser	*tmp_list;
 	// tmp_list = parser_list;
 	// while (tmp_list)

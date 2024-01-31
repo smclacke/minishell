@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 19:44:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/31 22:07:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef	struct s_procs
 	int						proc_count;
 	int						token_count;
 	char					*cmd;
-	int						cmd_flag;
+	// int						cmd_flag;
 	char					**str;
 	int						str_count;
 	char					**redir;

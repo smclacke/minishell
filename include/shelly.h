@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 13:54:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/31 21:57:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ t_parser		*parser_listnew(t_procs *proc);
 
 //-------- sort_procs --------//
 void			sort_each_proc(t_procs *proc, char **proc_arr);
+
+//-------- get_procs --------//
+void			get_reds(t_procs *proc, char **process);
+void			get_hds(t_procs *proc, char **process);
+void			get_strs(t_procs *proc, char **process);
 
 //-------- proc_utils --------//
 int				count_reds(char **process);

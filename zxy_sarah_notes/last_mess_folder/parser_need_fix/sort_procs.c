@@ -12,6 +12,92 @@
 
 #include "../../include/shelly.h"
 
+
+		// if (proc_redir(process[i]))
+		// {
+		// 	if (!process[i + 1])
+		// 	{
+		// 		printf("error 1\n");
+		// 		return ;
+		// 	}
+		// 	if (proc_redir(process[i]) == 2)
+		// 	{
+		// 		proc->hd[l] = process[i];
+		// 		proc->hd[l + 1] = process[i + 1];
+		// 		l += 2;
+		// 	}
+		// 	else
+		// 	{
+		// 		proc->redir[k] = process[i];
+		// 		proc->redir[k + 1] = process[i + 1];
+		// 		k += 2;
+		// 	}
+		// 	i += 2;
+		// }
+		// else
+		// {
+		// 	if (proc->cmd_flag != 1)
+		// 	{
+
+		// 		proc->cmd_flag = 1;
+		// 		proc->cmd = process[i];
+		// 		i++;
+		// 	}
+		// }
+		// if (process[i])
+		// {
+		// 	while (process[i] && !proc_redir(process[i]) && proc->cmd_flag == 1)
+		// 	{
+		// 		proc->str[j] = process[i];
+		// 		i++;
+		// 		j++;
+		// 	}
+		// }
+
+			// while (process[i])
+	// {
+	// 	if (!proc_redir(process[i]))
+	// 	{
+	// 		if (proc->cmd_flag == 0)
+	// 		{
+	// 			proc->cmd_flag = 1;
+	// 			proc->cmd = process[i];
+	// 			i++;
+	// 		}
+	// 		else
+	// 		{
+	// 			while (process[i] && !proc_redir(process[i]))
+	// 			{
+	// 				proc->str[j] = process[i];
+	// 				i++;
+	// 				j++;
+	// 			}
+	// 		}
+	// 	}
+	// 	if (proc_redir(process[i]))
+	// 	{
+	// 		if (!process[i + 1])
+	// 		{
+	// 			printf("error 1\n");
+	// 			return ;
+	// 		}
+	// 		if (proc_redir(process[i]) == 2)
+	// 		{
+	// 			proc->hd[l] = process[i];
+	// 			proc->hd[l + 1] = process[i + 1];
+	// 			l += 2;
+	// 		}
+	// 		else
+	// 		{
+	// 			proc->redir[k] = process[i];
+	// 			proc->redir[k + 1] = process[i + 1];
+	// 			k += 2;
+	// 		}
+	// 		i += 2;
+	// 	}
+	// 	i++;
+	// }
+
 /**
  * @todo	protect all mallocs
  * @todo	if no str/redir/hd, free the memory

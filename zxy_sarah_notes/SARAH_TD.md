@@ -8,16 +8,13 @@
 
 *right here, right now*
 
-sort vars function doesnt work for << hd ONE PROC....
+--- fix and test (loads) new get_procs
 
-make sure on every sort_proc iteration, i can print the procs
+--- make sure on every sort_proc iteration, i can print the procs
 
-make sure each process is correctly being added to parseR_list...
+--- make sure each process is correctly being added to parseR_list...
 
-mutli procs still can't print proc list on each sort call
-multi procs still can't print parser list... (using tmp list while)
-
-!!!!!!
+!!!!!! - then check proc in main is created properly!!
 if echo something | << hd  --- fails
 
 minibleh:echo something | hello there

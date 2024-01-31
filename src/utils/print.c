@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 15:08:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/31 22:11:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,7 @@ void	print_procs(t_procs *proc)
 	i = 0;
 	j = 0;
 	k = 0;
-	// should print null anyway...
-	if (proc->cmd)
-		printf("cmd = %s\n", proc->cmd);
-	else
-		printf("cmd = NULL\n");
+	printf("cmd = %s\n", proc->cmd);
 	printf("--------------------------------------------------\n");
 	printf("hd_count = %i\n", proc->hd_count);
 	while (i < proc->hd_count)

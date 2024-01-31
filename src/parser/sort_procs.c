@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:45:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/31 22:13:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,60 +19,31 @@
 */
 static	void	sort_vars(t_procs *proc, char **process)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		l;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	l = 0;
-	proc->cmd_flag = 0;
-	proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
-	proc->redir = (char **)malloc(sizeof(char *) * (proc->red_count + 1));
-	proc->hd = (char **)malloc(sizeof(char *) * (proc->hd_count + 1));
-	while (process[i])
+	if (proc->str_count != 0)
 	{
-		if (proc_redir(process[i]))
-		{
-			if (!process[i + 1])
-			{
-				printf("error 1\n");
-				return ;
-			}
-			if (proc_redir(process[i]) == 2)
-			{
-				proc->hd[l] = process[i];
-				proc->hd[l + 1] = process[i + 1];
-				l++;
-			}
-			else
-			{
-				proc->redir[k] = process[i];
-				proc->redir[k + 1] = process[i + 1];
-				k++;
-			}
-			i += 1;
-		}
-		else
-		{
-			if (proc->cmd_flag != 1)
-			{
-
-				proc->cmd_flag = 1;
-				proc->cmd = process[i];
-				i++;
-			}
-		}
-		while (process[i] && !proc_redir(process[i]) && proc->cmd_flag == 1)
-		{
-			proc->str[j] = process[i];
-			i++;
-			j++;
-		}
-		i++;
+		proc->cmd = (char *)malloc(sizeof(char));
+		proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
+		get_strs(proc, process);
 	}
+	else
+	{
+		proc->cmd = NULL;
+		proc->str = NULL;
+	}
+	if (proc->red_count != 0)
+	{
+		proc->redir = (char **)malloc(sizeof(char *) * (proc->red_count + 1));
+		get_reds(proc, process);
+	}
+	else
+		proc->redir = NULL;
+	if (proc->hd_count != 0)
+	{
+		proc->hd = (char **)malloc(sizeof(char *) * (proc->hd_count + 1));
+		get_hds(proc, process);
+	}
+	else
+		proc->hd = NULL;
 }
 
 /**
