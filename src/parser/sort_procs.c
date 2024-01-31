@@ -68,6 +68,7 @@ static	void	sort_vars(t_procs *proc, char **process)
 			j++;
 		}
 	}
+	// process[i + 1] = NULL;
 }
 
 /**
@@ -76,38 +77,33 @@ static	void	sort_vars(t_procs *proc, char **process)
  * @todo	malloc protection 
  * @todo	bzeros?
 */
-void	sort_each_proc(t_parser *parser, char **proc_arr, int i)
+void	sort_each_proc(t_procs *proc, char **proc_arr)
 {
-	t_procs		**proc;
-	// int		j = 0;
-	// while (proc_arr[j])
-	// {
-	// 	printf("proc_arr = %s\n", proc_arr[j]);
-	// 	j++;
-	// }
+	// t_procs		*proc_tmp;
 	int			token_count = ft_arrlen(proc_arr);
 	int			red_count = count_reds(proc_arr);
 	int			str_count = count_strs(proc_arr);
 	int			hd_count = count_hds(proc_arr);
 
+	printf("where?\n");
+	// proc[i] = (t_procs *)malloc(sizeof(t_procs));
 
-	parser->process = (t_procs **)malloc(sizeof(t_procs *));
-	parser->process[i] = (t_procs *)malloc(sizeof(t_procs));
+	// proc_tmp = proc;
 
-	proc = parser->process;
+	proc->token_count = token_count;
+	printf("->token_count = %i\n", proc->token_count);
 
-	proc[i]->token_count = token_count;
-	printf("token_count = %i\n", proc[i]->token_count);
+	proc->red_count = red_count;
+	printf("->red_count = %i\n", proc->red_count);
 
-	proc[i]->red_count = red_count;
-	printf("red_count = %i\n", proc[i]->red_count);
+	proc->str_count = str_count;
+	printf("->str_count = %i\n", proc->str_count);
 
-	proc[i]->str_count = str_count;
-	printf("str_count = %i\n", proc[i]->str_count);
+	proc->hd_count = hd_count;
+	printf("->hd_count = %i\n", proc->hd_count);
 
-	proc[i]->hd_count = hd_count;
-	printf("hd_count = %i\n", proc[i]->hd_count);
-
-	sort_vars(proc[i], proc_arr);
-	parser->process[i] = proc[i];
+	sort_vars(proc, proc_arr);
+	// print_procs(proc);
+	// proc = proc_tmp;
+	// free(proc_tmp);
 }

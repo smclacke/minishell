@@ -77,7 +77,7 @@ void			parser_listadd_back(t_parser **list, t_parser *new);
 t_parser		*parser_listnew(t_procs *proc);
 
 //-------- sort_procs --------//
-void			sort_each_proc(t_parser *parser, char **proc_arr, int i);
+void			sort_each_proc(t_procs *proc, char **proc_arr);
 
 //-------- proc_utils --------//
 int				count_reds(char **process);

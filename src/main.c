@@ -36,7 +36,6 @@ int	main(int argc, char **argv, char **envp)
 	// env = env_list(envp, env);
 	// og_stdout = dup(STDOUT_FILENO);
 	// og_stdin = dup(STDIN_FILENO);
-
 	while (1)
 	{
 		handle_signals(PARENT);
@@ -48,6 +47,8 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 
 		procs = parse_tokens(tokens);
+		if (!procs)
+			printf("NOPE\n");
 		ft_free_arr(tokens);
 		free_parser(procs);
 

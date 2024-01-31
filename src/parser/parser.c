@@ -30,8 +30,8 @@ static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (token_size + 1));
 		// wrap
 		ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
-		printf(" MAKING ARRAYS: [%i][%i] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
-		printf("----------------------------------------------\n");
+		// printf("Proc Arrays: [%i][%i] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
+		// printf("----------------------------------------------\n");
 		if (!proc->proc_arrs[proc_i][proc_j])
 		{
 			printf("noooo, this one\n");
@@ -69,7 +69,6 @@ static	void	get_procs(t_parser *proc)
 			proc_i++;
 		}
 	}
-	// print_proc_arrs(proc);
 }
 
 /**
@@ -92,42 +91,39 @@ t_parser	*parse_tokens(char **tokens)
 	ft_bzero(proc, sizeof(t_parser));
 
 	proc->tokens = tokens;
-	proc->proc_count = count_procs(tokens);
+	proc->proc_count = (count_procs(tokens) + 1);
 
 	parser_list = NULL;
 	new_node = NULL;
 
-	if (proc->proc_count > 0)
+	proc->process = (t_procs **)malloc(sizeof(t_procs *) * (proc->proc_count + 1));
+	if (proc->proc_count > 1)
 	{
 		proc->multi_proc_b = TRUE;
 		get_procs(proc);
-		// int	fuck = 0;
-		// while (proc->proc_arrs[fuck])
-		// {
-		// 	int		oops = 0;
-		// 	while (proc->proc_arrs[fuck][oops])
-		// 	{
-		// 		printf("procccc = %s\n", proc->proc_arrs[fuck][oops]);
-		// 		oops++;
-		// 	}
-		// 	fuck++;
-		// }
-		// proc->process = (t_procs **)malloc(sizeof(t_procs *));
 		while (i < proc->proc_count)
 		{
-			sort_each_proc(proc, proc->proc_arrs[i], i);
+			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
+			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
 			new_node = parser_listnew(proc->process[i]);
 			parser_listadd_back(&parser_list, new_node);
 			i++;
 		}
+		int	j = 0;
+		while (proc->process[j])
+		{
+			print_parser(parser_list);
+			j++;
+		}
 	}	
-	else if (proc->proc_count == 0)
+	else if (proc->proc_count == 1)
 	{
 		proc->multi_proc_b = FALSE;
-		sort_each_proc(proc, proc->tokens, i);
+		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
+		sort_each_proc(proc->process[i], proc->tokens);
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
+		print_parser(parser_list);
 	}
-	print_parser(parser_list);
 	return (parser_list);
 }
