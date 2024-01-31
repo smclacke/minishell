@@ -84,6 +84,7 @@ typedef enum e_exit
 */
 typedef	struct s_procs
 {
+	int						proc_count;
 	int						token_count;
 	char					*cmd;
 	int						cmd_flag;

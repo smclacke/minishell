@@ -68,7 +68,6 @@ static	void	sort_vars(t_procs *proc, char **process)
 			j++;
 		}
 	}
-	// process[i + 1] = NULL;
 }
 
 /**
@@ -79,16 +78,10 @@ static	void	sort_vars(t_procs *proc, char **process)
 */
 void	sort_each_proc(t_procs *proc, char **proc_arr)
 {
-	// t_procs		*proc_tmp;
 	int			token_count = ft_arrlen(proc_arr);
 	int			red_count = count_reds(proc_arr);
 	int			str_count = count_strs(proc_arr);
 	int			hd_count = count_hds(proc_arr);
-
-	printf("where?\n");
-	// proc[i] = (t_procs *)malloc(sizeof(t_procs));
-
-	// proc_tmp = proc;
 
 	proc->token_count = token_count;
 	printf("->token_count = %i\n", proc->token_count);
@@ -103,7 +96,6 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	printf("->hd_count = %i\n", proc->hd_count);
 
 	sort_vars(proc, proc_arr);
-	// print_procs(proc);
-	// proc = proc_tmp;
-	// free(proc_tmp);
+	print_procs(proc);
+
 }

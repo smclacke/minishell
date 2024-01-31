@@ -105,15 +105,10 @@ t_parser	*parse_tokens(char **tokens)
 		{
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
-			new_node = parser_listnew(proc->process[i]);
-			parser_listadd_back(&parser_list, new_node);
+			proc->process[i]->proc_count = (proc->proc_count - 1);
+			// new_node = parser_listnew(proc->process[i]);
+			// parser_listadd_back(&parser_list, new_node);
 			i++;
-		}
-		int	j = 0;
-		while (proc->process[j])
-		{
-			print_parser(parser_list);
-			j++;
 		}
 	}	
 	else if (proc->proc_count == 1)
@@ -121,9 +116,17 @@ t_parser	*parse_tokens(char **tokens)
 		proc->multi_proc_b = FALSE;
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		sort_each_proc(proc->process[i], proc->tokens);
+		proc->process[i]->proc_count = 0;
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
-		print_parser(parser_list);
 	}
+	// t_parser	*tmp_list;
+	// tmp_list = parser_list;
+	// while (tmp_list)
+	// {
+	// 	print_parser(tmp_list);
+	// 	tmp_list = tmp_list->next;
+	// }
+
 	return (parser_list);
 }

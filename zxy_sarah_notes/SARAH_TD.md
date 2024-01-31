@@ -8,9 +8,12 @@
 
 *right here, right now*
 
-making mutiple procs = i < proc_count only going once and not getting second list
-with adding second list, overflow.. must fix, malloc process in sort()??? should be in parser right?
+make sure on every sort_proc iteration, i can print the procs
 
+make sure each process is correctly being added to parseR_list...
+
+mutli procs still can't print proc list on each sort call
+multi procs still can't print parser list... (using tmp list while)
 
 ------------------------------
 ------------------------------
