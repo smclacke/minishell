@@ -70,42 +70,70 @@
 // 	}
 // }
 
+
+
+// void	sort_each_proc(t_parser *parser, t_procs *proc, char **proc_arr, int i)
+// {
+// 	int		j = 0;
+// 	while (proc_arr[j])
+// 	{
+// 		printf("proc_arr[j] = %s\n", proc_arr[j]);
+// 		j++;
+// 	}
+// 	parser->process = (t_procs **)malloc(sizeof(t_procs *));
+// 	// bzero process
+// 	parser->process[i] = (t_procs *)malloc(sizeof(t_procs));
+// 	// bzero
+// 	proc = parser->process[i];
+// 	// int		j = 0;
+// 	// while (proc_arr[j])
+// 	// {
+// 	// 	printf("proc_arr in sort = %s\n", proc_arr[j]);
+// 	// 	j++;
+// 	// }
+// 	proc->token_count = ft_arrlen(proc_arr);
+// 	proc->red_count = count_reds(proc_arr);
+// 	proc->str_count = count_strs(proc, proc_arr);
+// 	proc->hd_count = count_hds(proc_arr);
+// 	sort_vars(proc, proc_arr);
+// 	parser->process[i] = proc;		
+// }
+
 /**
  * @todo	norm
  * @todo	free proc_arr or tokens once sorted into proc struct
  * @todo	malloc protection 
  * @todo	bzeros?
 */
-void	sort_each_proc(t_parser *parser, char **proc_arr, int i)
+void	sort_each_proc(t_procs *proc, char **proc_arr)
 {
 	int		token_count = ft_arrlen(proc_arr);
-	printf("tokens = %i\n", token_count);
 	int		red_count = count_reds(proc_arr);
-	printf("red = %i\n", red_count);
 	int		str_count = count_strs(proc_arr);
 	int		hd_count = count_hds(proc_arr);
 
-	printf("token = %i\n red = %i\n str = %i\n hd = %i\n", token_count, red_count, str_count, hd_count);
+	// printf("token = %i\n red = %i\n str = %i\n hd = %i\n", token_count, red_count, str_count, hd_count);
 
-	parser->process = (t_procs **)malloc(sizeof(t_procs *));
-	// wrap it up
-	ft_bzero(parser->process, sizeof(t_procs));
-	parser->process[i] = (t_procs *)malloc(sizeof(token_count + 1));
-	// wrap it up
-	ft_bzero(parser->process[i], sizeof(t_procs));
+	// proc = (t_procs **)malloc(sizeof(token_count + 1));
+	// // wrap it up
+	// ft_bzero(parser->process, sizeof(t_procs));
+
+	// proc = (t_procs *)malloc(sizeof(t_procs));
+	// // wrap it up
+	// ft_bzero(proc, sizeof(t_procs));
 
 
-	// parser->process[i]->token_count = ft_arrlen(proc_arr);
-	parser->process[i]->token_count = token_count;
-	printf("token_count = %i\n", parser->process[i]->token_count);
+	// proc[i]->token_count = ft_arrlen(proc_arr);
+	proc->token_count = token_count;
+	printf("token_count = %i\n", proc->token_count);
 
-	parser->process[i]->red_count = count_reds(proc_arr);
-	printf("red_count = %i\n", parser->process[i]->red_count);
+	proc->red_count = red_count;
+	printf("red_count = %i\n", proc->red_count);
 
-	parser->process[i]->str_count = count_strs(proc_arr);
-	printf("str_count = %i\n", parser->process[i]->str_count);
+	proc->str_count = str_count;
+	printf("str_count = %i\n", proc->str_count);
 
-	parser->process[i]->hd_count = count_hds(proc_arr);
-	printf("hd_count = %i\n", parser->process[i]->hd_count);
-	// sort_vars(parser->process[i], proc_arr);
+	proc->hd_count = hd_count;
+	printf("hd_count = %i\n", proc->hd_count);
+	// sort_vars(proc, proc_arr);
 }
