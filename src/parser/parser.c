@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 16:03:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 16:47:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static	void	get_procs(t_parser *proc)
 
 /**
  * @todo	maybe norm?
- * @todo	bzero procs struct!
+ * @todo	bzero procs struct??
  * @todo	error handling
  * @todo	memory handling, malloc protection
  * @todo	remove print statements when everything works
@@ -105,6 +105,7 @@ t_parser	*parse_tokens(char **tokens)
 	// wrap it up
 	if (proc->proc_count > 1)
 	{
+		// handle mutli (())
 		proc->multi_proc_b = TRUE;
 		get_procs(proc);
 		while (i < proc->proc_count)
@@ -120,6 +121,7 @@ t_parser	*parse_tokens(char **tokens)
 	}	
 	else if (proc->proc_count == 1)
 	{
+		// handle singular ())()
 		proc->multi_proc_b = FALSE;
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		// wrap it up
@@ -128,6 +130,6 @@ t_parser	*parse_tokens(char **tokens)
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 	}
-	prpr(parser_list);
+	prpr(parser_list); // printing
 	return (parser_list);
 }
