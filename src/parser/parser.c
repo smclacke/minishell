@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 14:45:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 15:36:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,9 @@ t_parser	*parse_tokens(char **tokens)
 		{
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
-			print_procs(proc->process[i]);
 			proc->process[i]->proc_count = (proc->proc_count - 1);
 			new_node = parser_listnew(proc->process[i]);
 			parser_listadd_back(&parser_list, new_node);
-			// new_node = new_node->next;
 			i++;
 		}
 	}	
@@ -119,11 +117,18 @@ t_parser	*parse_tokens(char **tokens)
 		proc->multi_proc_b = FALSE;
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		sort_each_proc(proc->process[i], proc->tokens);
+		print_procs(proc->process[i]);
 		proc->process[i]->proc_count = 0;
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 	}
-	print_parser(parser_list);
+	prpr(parser_list);
+	// while (parser_list)
+	// {
+	// 	print_procs(parser_list->proc);
+	// 	parser_list = parser_list->next;
+	// }
+	// print_parser(parser_list);
 	// t_parser	*tmp_list;
 	// tmp_list = parser_list;
 	// while (tmp_list)

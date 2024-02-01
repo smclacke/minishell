@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 14:42:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 15:51:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,56 @@ void	print_procs(t_procs *proc)
 		j++;
 	}
 	printf("--------------------------------------------------\n");
+}
+
+void	prpr(t_parser *proc)
+{
+	int		i = 0;
+	int		j = 0;
+
+	printf("---------------PARSER_PRINT-------------------\n\n");
+	printf("\tproc_count = [%i]\n\n", proc->proc->proc_count);
+	while (proc)
+	{
+		printf("\tCMD\n");
+		printf("[%i] cmd = %s\n", i, proc->proc->cmd);
+		printf("\n\tSTR\n");
+		printf("[%i] str_count = %i\n", i, proc->proc->str_count);
+		if (proc->proc->str_count)
+		{
+			while (j < proc->proc->str_count)
+			{
+				printf("[%i] strs[%i] = %s\n", i, j, proc->proc->str[j]);
+				j++;
+			}
+		}
+		j = 0;
+		printf("\n\tHD\n");
+		printf("[%i] hd_count = %i\n", i, proc->proc->hd_count);
+		if (proc->proc->hd_count)
+		{
+			while (j < proc->proc->hd_count)
+			{
+				printf("[%i] hd[%i] = %s\n", i, j, proc->proc->hd[j]);
+				j++;
+			}
+		}
+		j = 0;
+		printf("\n\tRED\n");
+		printf("[%i] red_count = %i\n", i, proc->proc->red_count);
+		if (proc->proc->hd_count)
+		{
+			while (j < proc->proc->red_count)
+			{
+				printf("[%i] reds[%i] = %s\n", i, j, proc->proc->redir[j]);
+				j++;
+			}
+		}
+		printf("--------------------------------------------------\n");
+		i++;
+		proc = proc->next;
+	}
+	
 }
 
 void	print_parser(t_parser *proc)
