@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 14:45:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 16:19:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /**
  * @todo	protect all mallocs
- * @todo	if no str/redir/hd, free the memory
  * @todo	norm - if red // make red arr func(), if hd // make hd arr func ().... 
 */
 static	void	sort_vars(t_procs *proc, char **process)
@@ -64,5 +63,5 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	proc->str_count = str_count;
 	proc->hd_count = hd_count;
 	sort_vars(proc, proc_arr);
-	// print_procs(proc);
+	print_procs(proc);
 }

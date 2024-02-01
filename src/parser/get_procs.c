@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 14:29:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 16:19:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	get_reds(t_procs *proc, char **process)
 			}
 			proc->redir[j] = process[i];
 			proc->redir[j + 1] = process[i + 1];
-			i += 2;
-		}
-		if (process[i])
+			j += 2;
 			i++;
+		}
+		i++;
 	}
 }
 
@@ -46,7 +46,7 @@ void	get_hds(t_procs *proc, char **process)
 	j = 0;
 	while (process[i])
 	{
-		if (proc_redir(process[i]) && proc_redir(process[i]) == 2)
+		if (proc_redir(process[i]) == 2)
 		{
 			if (!process[i + 1])
 			{
@@ -55,10 +55,10 @@ void	get_hds(t_procs *proc, char **process)
 			}
 			proc->hd[j] = process[i];
 			proc->hd[j + 1] = process[i + 1];
-			i += 2;
-		}
-		if (process[i])
+			j += 2;
 			i++;
+		}
+		i++;
 	}
 }
 

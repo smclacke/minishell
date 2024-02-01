@@ -8,53 +8,7 @@
 
 *right here, right now*
 
-// change parser print to run through proc->proc[i] but this is passed as param
-
-**this**
---- make sure each process is correctly being added to parseR_list...
-
-!! tihs is interesitng, segfaults and red count on second is fuckkked
-
-minibleh:<< hd | echo somehting
-cmd = (null)
---------------------------------------------------
-hd_count = 2
-hd[0] = <<
-hd[1] = hd
---------------------------------------------------
-red_count = 0
---------------------------------------------------
-str_count = 0
---------------------------------------------------
-cmd = echo
---------------------------------------------------
-hd_count = 0
---------------------------------------------------
-red_count = 0
---------------------------------------------------
-str_count = 1
-str[0] = somehting
---------------------------------------------------
----------------------PARSER_PRINT()-----------------------------
-proc_count = 1
---------------------------------------------------
-whats happenng?
---------------------------------------------------
-hd_count = 2
-[0] hd[0] = <<
-[0] hd[1] = hd
---------------------------------------------------
-red_count = 0
---------------------------------------------------
-str_count = 0
---------------------------------------------------
-whats happenng?
---------------------------------------------------
-hd_count = 1
---------------------------------------------------
-red_count = 10608
-AddressSanitizer:DEADLYSIGNAL
-
+--> multiple hd and reds are segfaulting, i think because of get_procs()s
 
 **then this**
 !!!!!! - then check proc in main is created properly!!

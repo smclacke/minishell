@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 15:51:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 16:03:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,11 @@ void	prpr(t_parser *proc)
 	int		i = 0;
 	int		j = 0;
 
-	printf("---------------PARSER_PRINT-------------------\n\n");
-	printf("\tproc_count = [%i]\n\n", proc->proc->proc_count);
+	printf("  -> proc_count = [%i]\n\n", proc->proc->proc_count);
 	while (proc)
 	{
-		printf("\tCMD\n");
-		printf("[%i] cmd = %s\n", i, proc->proc->cmd);
-		printf("\n\tSTR\n");
-		printf("[%i] str_count = %i\n", i, proc->proc->str_count);
+		printf("\n[%i] cmd = %s\n", i, proc->proc->cmd);
+		printf("\n[%i] str_count = %i\n", i, proc->proc->str_count);
 		if (proc->proc->str_count)
 		{
 			while (j < proc->proc->str_count)
@@ -111,8 +108,7 @@ void	prpr(t_parser *proc)
 			}
 		}
 		j = 0;
-		printf("\n\tHD\n");
-		printf("[%i] hd_count = %i\n", i, proc->proc->hd_count);
+		printf("\n[%i] hd_count = %i\n", i, proc->proc->hd_count);
 		if (proc->proc->hd_count)
 		{
 			while (j < proc->proc->hd_count)
@@ -122,9 +118,8 @@ void	prpr(t_parser *proc)
 			}
 		}
 		j = 0;
-		printf("\n\tRED\n");
-		printf("[%i] red_count = %i\n", i, proc->proc->red_count);
-		if (proc->proc->hd_count)
+		printf("\n[%i] red_count = %i\n", i, proc->proc->red_count);
+		if (proc->proc->red_count)
 		{
 			while (j < proc->proc->red_count)
 			{
@@ -139,6 +134,7 @@ void	prpr(t_parser *proc)
 	
 }
 
+// currently useless, probs will just delete
 void	print_parser(t_parser *proc)
 {
 	int	i;

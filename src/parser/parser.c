@@ -6,12 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 15:36:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 16:03:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo comments
+ * @todo malloc protect
+ * @todo norm
+ * @todo errors
+ */
 static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 {
 	int		proc_j;
@@ -30,8 +36,6 @@ static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (token_size + 1));
 		// wrap
 		ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
-		// printf("Proc Arrays: [%i][%i] = %s\n", proc_i, proc_j, proc->proc_arrs[proc_i][proc_j]);
-		// printf("----------------------------------------------\n");
 		if (!proc->proc_arrs[proc_i][proc_j])
 		{
 			printf("noooo, this one\n");
@@ -98,6 +102,7 @@ t_parser	*parse_tokens(char **tokens)
 	new_node = NULL;
 
 	proc->process = (t_procs **)malloc(sizeof(t_procs *) * (proc->proc_count + 1));
+	// wrap it up
 	if (proc->proc_count > 1)
 	{
 		proc->multi_proc_b = TRUE;
@@ -105,6 +110,7 @@ t_parser	*parse_tokens(char **tokens)
 		while (i < proc->proc_count)
 		{
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
+			// wrap it up
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
 			proc->process[i]->proc_count = (proc->proc_count - 1);
 			new_node = parser_listnew(proc->process[i]);
@@ -116,25 +122,12 @@ t_parser	*parse_tokens(char **tokens)
 	{
 		proc->multi_proc_b = FALSE;
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
+		// wrap it up
 		sort_each_proc(proc->process[i], proc->tokens);
-		print_procs(proc->process[i]);
 		proc->process[i]->proc_count = 0;
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 	}
 	prpr(parser_list);
-	// while (parser_list)
-	// {
-	// 	print_procs(parser_list->proc);
-	// 	parser_list = parser_list->next;
-	// }
-	// print_parser(parser_list);
-	// t_parser	*tmp_list;
-	// tmp_list = parser_list;
-	// while (tmp_list)
-	// {
-	// 	print_parser(tmp_list);
-	// 	tmp_list = tmp_list->next;
-	// }
 	return (parser_list);
 }
