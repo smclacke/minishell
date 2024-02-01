@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 15:30:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 16:36:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ int	main(int argc, char **argv, char **envp)
 		procs = parse_tokens(tokens);
 		if (!procs)
 			printf("NOPE\n");
+		
+		// int		i = 0;
+		// while (procs)
+		// {
+		// 	printf("in main\n");
+		// 	printf("[%i] cmd = %s\n", i, procs->proc->cmd);
+		// 	printf("[%i] hd_count = %i\n", i, procs->proc->hd_count);
+		// 	procs = procs->next;
+		// 	i++;
+		// }
+	
 		ft_free_arr(tokens);
 		free_parser(procs);
 

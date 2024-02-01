@@ -6,11 +6,15 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 16:19:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 16:44:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+/**
+ * @todo			NORM ERRORS AND MALLOC PROTECT FOR ALLL
+ */
 
 void	get_reds(t_procs *proc, char **process)
 {
@@ -19,6 +23,7 @@ void	get_reds(t_procs *proc, char **process)
 
 	i = 0;
 	j = 0;
+	proc->redir = (char **)malloc(sizeof(char *) * (proc->red_count + 1));
 	while (process[i])
 	{
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
@@ -44,6 +49,7 @@ void	get_hds(t_procs *proc, char **process)
 
 	i = 0;
 	j = 0;
+	proc->hd = (char **)malloc(sizeof(char *) * (proc->hd_count + 1));
 	while (process[i])
 	{
 		if (proc_redir(process[i]) == 2)
@@ -62,6 +68,9 @@ void	get_hds(t_procs *proc, char **process)
 	}
 }
 
+/**
+ * norm meeee
+ */
 void	get_strs(t_procs *proc, char **process)
 {
 	int		i;

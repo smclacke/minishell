@@ -8,9 +8,8 @@
 
 *right here, right now*
 
---> multiple hd and reds are segfaulting, i think because of get_procs()s
 
-**then this**
+**CHECK this**
 !!!!!! - then check proc in main is created properly!!
 if echo something | << hd  --- fails
 
@@ -47,14 +46,11 @@ success
 --- NOPING IN MAIN
 
 
-------------------------------
-------------------------------
+**DO this**
 
 - freee some things
 
 - leakkkyyyy af
-
-- check parser_list allocation
 
 - norm norm norm
 
@@ -63,37 +59,105 @@ success
 - fix expander to work with new parser.....
 
 
+
 ------------------------------
 ------------------------------
 
 **ASK DJOYKE**
 ------------------------------
 
-*ONE* use as example to explain how this works:
-//// one proc ////
+*ONE* explain the structure:  ++ how to access (example in main)
 
-minibleh:<<hd1 cmd >out_file hehe <<hd2 <in_file str string strings
---------------------------------------------------
-proc_count = 0 | proc->cmd = cmd
---------------------------------------------------
-hd_count = 4
+cmd <in <<hd str arg >out more strings | echo some | >out << hd1 << hd2 other ran wor
+
+  -> proc_count = [2]		// == 3 processes
+
+[0] cmd = cmd				// == process[0] cmd
+
+[0] str_count = 4			// == 4 string args not including cmd str
+[0] strs[0] = str
+[0] strs[1] = arg
+[0] strs[2] = more
+[0] strs[3] = strings
+
+[0] hd_count = 2			// == 1 here_doc
 [0] hd[0] = <<
-[0] hd[1] = hd1
-[0] hd[2] = <<
-[0] hd[3] = hd2
---------------------------------------------------
-red_count = 4
-[0] reds[0] = >
-[0] reds[1] = out_file
-[0] reds[2] = <
-[0] reds[3] = in_file
---------------------------------------------------
-str_count = 4
-[0] str[0] = str
-[0] str[1] = string
-[0] str[2] = strings
-[0] str[3] = hehe
+[0] hd[1] = hd
 
+[0] red_count = 4			// == 2 redirects
+[0] reds[0] = <
+[0] reds[1] = in
+[0] reds[2] = >
+[0] reds[3] = out
+--------------------------------------------------
+
+[1] cmd = echo				// == process[1] cmd
+
+[1] str_count = 1			// == 1 string args not including cmd str
+[1] strs[0] = some
+
+[1] hd_count = 0
+
+[1] red_count = 0
+--------------------------------------------------
+
+[2] cmd = other				// == process[2] cmd
+
+[2] str_count = 2			// == 2 string args not including cmd str
+[2] strs[0] = ran
+[2] strs[1] = wor
+
+[2] hd_count = 4			// == 2 here_doc
+[2] hd[0] = <<
+[2] hd[1] = hd1
+[2] hd[2] = <<
+[2] hd[3] = hd2
+
+[2] red_count = 2			// == 1 redirect
+[2] reds[0] = >
+[2] reds[1] = out
+--------------------------------------------------
+
+**SECOND EXAMPLE**
+< in > out | echo something | << hd1 << hd2 cmd str
+  -> proc_count = [2]
+
+
+[0] cmd = (null)
+
+[0] str_count = 0
+
+[0] hd_count = 0
+
+[0] red_count = 4
+[0] reds[0] = <
+[0] reds[1] = in
+[0] reds[2] = >
+[0] reds[3] = out
+--------------------------------------------------
+
+[1] cmd = echo
+
+[1] str_count = 1
+[1] strs[0] = something
+
+[1] hd_count = 0
+
+[1] red_count = 0
+--------------------------------------------------
+
+[2] cmd = cmd
+
+[2] str_count = 1
+[2] strs[0] = str
+
+[2] hd_count = 4
+[2] hd[0] = <<
+[2] hd[1] = hd1
+[2] hd[2] = <<
+[2] hd[3] = hd2
+
+[2] red_count = 0
 
 
 *TWO*
