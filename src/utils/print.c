@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 14:27:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 14:42:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void	print_parser(t_parser *proc)
 	printf("--------------------------------------------------\n");
 	while (index <= proc->proc->proc_count)
 	{
-		printf("proc[%i] cmd = %s\n", index, proc->proc[index].cmd);
+		printf("whats happenng?\n");
+		// printf("proc[%i] cmd = %s\n", index, proc->proc[index].cmd);
 		printf("--------------------------------------------------\n");
 		printf("hd_count = %i\n", proc->proc[index].hd_count);
 		while (i < proc->proc[index].hd_count)
