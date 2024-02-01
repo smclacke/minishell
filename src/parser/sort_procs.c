@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 14:24:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 14:39:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,9 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	int			hd_count = count_hds(proc_arr);
 
 	proc->token_count = token_count;
-	// printf("->token_count = %i\n", proc->token_count);
-
 	proc->red_count = red_count;
-	// printf("->red_count = %i\n", proc->red_count);
-
 	proc->str_count = str_count;
-	// printf("->str_count = %i\n", proc->str_count);
-
 	proc->hd_count = hd_count;
-	// printf("->hd_count = %i\n", proc->hd_count);
-
 	sort_vars(proc, proc_arr);
 	print_procs(proc);
 }

@@ -8,12 +8,12 @@
 
 *right here, right now*
 
---- fix and test (loads) new get_procs
-
---- make sure on every sort_proc iteration, i can print the procs
-
+**this**
 --- make sure each process is correctly being added to parseR_list...
 
+
+
+**then this**
 !!!!!! - then check proc in main is created properly!!
 if echo something | << hd  --- fails
 
@@ -100,10 +100,8 @@ str_count = 4
 
 
 *TWO*
------ change hd_count and red_count to half for djoy? ask what she needs
--- explain these counts and see what's most useful for djoy, could change it
-	in what I send to executor, but will need to make sure it doesn't affect my code
-
+----- ask djoyke what counts she wants, i think easier to use << hd == 2
+		then iterate hd_count to find meta and eof, since same array...
 proc_count = 0				= 1 process
 hd_count = 2				= 1 hd
 [0] hd[0] = <<

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 14:30:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 14:39:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static	void	get_procs(t_parser *proc)
 
 /**
  * @todo	maybe norm?
+ * @todo	bzero procs struct!
  * @todo	error handling
  * @todo	memory handling, malloc protection
  * @todo	remove print statements when everything works
@@ -106,8 +107,8 @@ t_parser	*parse_tokens(char **tokens)
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
 			proc->process[i]->proc_count = (proc->proc_count - 1);
-			// new_node = parser_listnew(proc->process[i]);
-			// parser_listadd_back(&parser_list, new_node);
+			new_node = parser_listnew(proc->process[i]);
+			parser_listadd_back(&parser_list, new_node);
 			i++;
 		}
 	}	
@@ -128,6 +129,5 @@ t_parser	*parse_tokens(char **tokens)
 	// 	print_parser(tmp_list);
 	// 	tmp_list = tmp_list->next;
 	// }
-
 	return (parser_list);
 }
