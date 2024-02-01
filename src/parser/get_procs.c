@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/31 22:14:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/01 14:29:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	get_strs(t_procs *proc, char **process)
 
 	i = 0;
 	j = 0;
+	cmd_flag = 0;
 	while (process[i])
 	{
 		if (proc_redir(process[i]))
@@ -81,20 +82,17 @@ void	get_strs(t_procs *proc, char **process)
 				}
 			i += 2;
 		}
-		else if (!proc_redir(process[i]))
+		if (process[i] && !proc_redir(process[i]) && cmd_flag == 0)
 		{
-			if (cmd_flag == 0)
-			{
-				cmd_flag = 1;
-				proc->cmd = process[i];
-				i++;
-			}
-			while (process[i] && !proc_redir(process[i]))
-			{
-				proc->str[j] = process[i];
-				i++;
-				j++;
-			}
+			cmd_flag = 1;
+			proc->cmd = process[i];
+			i++;
+		}
+		while (process[i] && !proc_redir(process[i]) && cmd_flag != 0)
+		{
+			proc->str[j] = process[i];
+			i++;
+			j++;
 		}
 	}
 }

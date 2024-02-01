@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/30 12:53:56 by eugene        ########   odam.nl         */
+/*   Updated: 2024/02/01 14:30:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_parser	*parse_tokens(char **tokens)
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 	}
-	// print_parser(parser_list);
+	print_parser(parser_list);
 	// t_parser	*tmp_list;
 	// tmp_list = parser_list;
 	// while (tmp_list)
