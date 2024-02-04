@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 16:47:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 16:53:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_parser	*parse_tokens(char **tokens)
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 			// wrap it up
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
-			proc->process[i]->proc_count = (proc->proc_count - 1);
+			proc->process[i]->proc_count = proc->proc_count;
 			new_node = parser_listnew(proc->process[i]);
 			parser_listadd_back(&parser_list, new_node);
 			i++;
@@ -126,7 +126,7 @@ t_parser	*parse_tokens(char **tokens)
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		// wrap it up
 		sort_each_proc(proc->process[i], proc->tokens);
-		proc->process[i]->proc_count = 0;
+		proc->process[i]->proc_count = 1;
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 	}

@@ -6,13 +6,12 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 16:46:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 16:53:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-<<<<<<< HEAD
 t_parser	*lexing(char *input)
 {
 	t_parser	*tokens;
