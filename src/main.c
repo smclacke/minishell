@@ -6,21 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 21:20:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 21:20:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-t_parser	*lexing(char *input)
-{
-	t_parser	*tokens;
-*/
->>>>>>> sarah
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_parser	*procs;
+	char		**tokens;
 
 	int			og_stdout;
 	int			og_stdin;
