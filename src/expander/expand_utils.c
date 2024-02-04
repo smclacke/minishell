@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 20:58:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 21:17:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,16 +122,20 @@ void		do_cmd(t_parser *tmp, t_expand *str, t_env **env)
 {
 	int		len;
 
-	len = ft_strlen(tmp->proc->cmd);
-	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", len))
+	len = 0;
+	if (tmp->proc->cmd)
 	{
-		str->input = tmp->proc->cmd;
-		str->expanded = NULL;
-		dollar(str, env);
-		if (!str->expanded)
-			return ;
-		tmp->proc->cmd = str->expanded;
-		if (!tmp->proc->cmd)
-			return ; //error || ??
+		len = ft_strlen(tmp->proc->cmd);
+		if (ft_strnstr(tmp->proc->cmd, "$", len))
+		{
+			str->input = tmp->proc->cmd;
+			str->expanded = NULL;
+			dollar(str, env);
+			if (!str->expanded)
+				return ;
+			tmp->proc->cmd = str->expanded;
+			if (!tmp->proc->cmd)
+				return ; //error || ??
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 21:10:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 21:15:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static void	remove_quotes(char *str)
 }
 
 /**
+ * @todo	norm
  * @brief	if cmd has quotes, check if there is a space inside,
  * 			if so it's invalid. for cmds and strs remove closed 
  * 			quotes and returns the new cmd string, don't remove 
@@ -94,7 +95,7 @@ void	expand_quotes(t_parser *tokens)
 	}
 	if (list->proc->hd_count != 0)
 	{
-		while (list->proc->hd[i])
+		while (i < list->proc->hd_count)
 		{
 			if (check_quotes(list->proc->hd[i]) && (!ft_isdollar(list->proc->hd[i])))
 			{
@@ -107,7 +108,7 @@ void	expand_quotes(t_parser *tokens)
 	i = 0;
 	if (list->proc->str_count != 0)
 	{
-		while (list->proc->str[i])
+		while (i < list->proc->str_count)
 		{
 			if (check_quotes(list->proc->str[i]) && (!ft_isdollar(list->proc->str[i])))
 				remove_quotes(list->proc->str[i]);
