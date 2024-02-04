@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 16:47:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 17:22:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ static	void	get_procs(t_parser *proc)
 		proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc_size + 1));
 		// wrap
 		make_proc_arr(proc, proc_i, proc_size);
-		proc->proc_arrs[proc_i][proc_size] = NULL;
+		// printf("proc_size = %i\n", proc_size);
+		// if (proc_size == 1)
+		// 	proc->proc_arrs[proc_i][proc_size + 1] = NULL;
+		// else
+		// proc->proc_arrs[proc_i][proc_size + 1] = NULL;
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 		{
 			i++;
