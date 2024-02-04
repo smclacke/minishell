@@ -22,6 +22,9 @@
 
 
 
+// how does hd expansion work again? 
+// expand quotes needs same as expand dollar
+
 ------------------------------
 ------------------------------
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:29:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 16:33:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,22 @@ int	get_check_value(t_expand *str, t_env **env)
 	return (1);
 }
 
-static void	set_input_and_sign(t_expand *str, char *input_type, int type)
+static void	set_input_and_sign(t_expand *str, char *input_type, int type, int i)
 {
 	str->sign = type;
 	str->input = input_type;
+	str->pos = i;
 }
 
-int	set_expand_string(t_parser *lst, t_expand *str)
+
+/**
+ * if cmd = $, put into input, type = CMD 
+ * expand and return to proc var
+ * 
+ * else
+ * 	while arrays.. then get the right str from there
+ */
+int	set_expand_string(t_parser *lst, t_expand *str, int i)
 {
 	t_parser	*tmp;
 
@@ -85,20 +94,56 @@ int	set_expand_string(t_parser *lst, t_expand *str)
 	tmp = lst;
 	if (!tmp)
 		return (0);
-	if (tmp->cmd && ft_strnstr(tmp->cmd, "$", ft_strlen(tmp->cmd)))
+	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", ft_strlen(tmp->proc->cmd)))
+		set_input_and_sign(str, tmp->proc->cmd, CMD_X, 0);
+	i = find_strs(tmp, str, i);
+	i = find_hds(tmp, str, i);
+	i = find_reds(tmp, str, i);
+	// str, hd and reds are arrays...
+	// return i position!!
+	else if (tmp->proc->str && ft_strnstr(tmp->proc->str, "$", ft_strlen(tmp->proc->str)))
 	{
-		set_input_and_sign(str, tmp->cmd, CMD_X);
+		set_input_and_sign(str, tmp->proc->str, STR_X);
 		return (1);
 	}
-	else if (tmp->str && ft_strnstr(tmp->str, "$", ft_strlen(tmp->str)))
+	else if (tmp->proc->file && ft_strnstr(tmp->proc->file, "$", ft_strlen(tmp->proc->file)))
 	{
-		set_input_and_sign(str, tmp->str, STR_X);
+		set_input_and_sign(str, tmp->proc->file, HD_X);
 		return (1);
 	}
-	else if (tmp->file && ft_strnstr(tmp->file, "$", ft_strlen(tmp->file)))
-	{
-		set_input_and_sign(str, tmp->file, FILE_X);
-		return (1);
-	}
+		// set_input_and_sign(str, tmp->proc->file, RED_X);
 	return (0);
+}
+
+void		do_strs(t_parser *tmp, t_expand *str, t_env **env)
+{
+	int		i;
+
+	i = 0;
+	if (tmp->proc->str_count != 0)
+	{
+		while (tmp->proc->str[i])
+		{
+			if (ft_strnstr(tmp->proc->str[i], "$", ft_strlen(tmp->proc->str[i])))
+			{
+				str->input = tmp->proc->
+			}
+			i++;
+		}
+	}
+}
+
+void		do_cmd(t_parser *tmp, t_expand *str, t_env **env)
+{
+	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", ft_strlen(tmp->proc->cmd)))
+	{
+		str->input = tmp->proc->cmd;
+		str->expanded = NULL;
+		dollar(str->expanded);
+		if (!str->expanded)
+			return ;
+		tmp->proc->cmd = str->expanded;
+		if (!tmp->proc->cmd)
+			return ; //error || ??
+	}
 }

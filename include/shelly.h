@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 15:35:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 16:11:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int				is_dollar_or_quote(int c);
 //------------------ expand_utils ------------------//
 int				add_to_expand(t_expand *str, char *copy_str);
 int				get_check_value(t_expand *str, t_env **env);
-int				set_expand_string(t_parser *tmp, t_expand *str);
+int				set_expand_string(t_parser *lst, t_expand *str, int i);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);
