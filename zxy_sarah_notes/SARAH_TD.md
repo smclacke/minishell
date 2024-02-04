@@ -10,6 +10,10 @@
 
 **DO this**
 
+- i changed hd!! - just don't like forget.. maybe add to func comment
+
+- NULLs at end are fucked if echo something | echo, last echo becomes NULL....
+
 - freee some things
 
 - leakkkyyyy af
@@ -18,12 +22,6 @@
 
 - errors errors errors
 
-- fix expander to work with new parser.....
-
-
-
-// how does hd expansion work again? 
-// expand quotes needs same as expand dollar
 
 ------------------------------
 ------------------------------

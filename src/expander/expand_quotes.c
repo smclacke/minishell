@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:26:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 21:15:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,8 @@ static void	remove_quotes(char *str)
 	free(new);
 }
 
-static void	handle_hd_quote(t_parser *list)
-{
-	if (check_quotes(list->hd_limit))
-	{
-		list->hd_flag = 1;
-		if (!ft_isdollar(list->hd_limit))
-			remove_quotes(list->hd_limit);
-	}
-}
-
 /**
+ * @todo	norm
  * @brief	if cmd has quotes, check if there is a space inside,
  * 			if so it's invalid. for cmds and strs remove closed 
  * 			quotes and returns the new cmd string, don't remove 
@@ -93,25 +84,35 @@ static void	handle_hd_quote(t_parser *list)
 void	expand_quotes(t_parser *tokens)
 {
 	t_parser	*list;
+	int			i;
 
 	list = tokens;
-	while (list)
+	i = 0;
+	if (list->proc->cmd && check_quotes(list->proc->cmd))
 	{
-		if (list->cmd && check_quotes(list->cmd))
+		if (!check_space(list->proc->cmd) && !ft_isdollar(list->proc->cmd))
+			remove_quotes(list->proc->cmd);
+	}
+	if (list->proc->hd_count != 0)
+	{
+		while (i < list->proc->hd_count)
 		{
-			if (!check_space(list->cmd) && !ft_isdollar(list->cmd))
-				remove_quotes(list->cmd);
-		}
-		else if (list->str || list->hd_limit)
-		{
-			if (list->hd_limit)
-				handle_hd_quote(list);
-			else if (list->str)
+			if (check_quotes(list->proc->hd[i]) && (!ft_isdollar(list->proc->hd[i])))
 			{
-				if (check_quotes(list->str) && (!ft_isdollar(list->str)))
-					remove_quotes(list->str);
+				list->hd_flag = 1;
+				remove_quotes(list->proc->hd[i]);
 			}
+			i++;
 		}
-		list = list->next;
+	}
+	i = 0;
+	if (list->proc->str_count != 0)
+	{
+		while (i < list->proc->str_count)
+		{
+			if (check_quotes(list->proc->str[i]) && (!ft_isdollar(list->proc->str[i])))
+				remove_quotes(list->proc->str[i]);
+			i++;
+		}
 	}
 }

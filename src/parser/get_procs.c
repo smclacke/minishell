@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 16:44:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 18:16:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ void	get_hds(t_procs *proc, char **process)
 				printf("error 2\n");
 				exit (EXIT_FAILURE);
 			}
-			proc->hd[j] = process[i];
-			proc->hd[j + 1] = process[i + 1];
-			j += 2;
+			proc->hd[j] = process[i + 1];
+			j++;
 			i++;
 		}
 		i++;

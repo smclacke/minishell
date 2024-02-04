@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 16:33:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 21:17:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,98 +35,83 @@ int	add_to_expand(t_expand *str, char *copy_str)
 	return (0);
 }
 
-/**
- * @param	env expander struct
- * @param	exp environmet linked list
- * @brief	checks environment value of string to be expanded
- * 			if there is no value it free's the comp_str and env_value.
- * @return	1 if there is no value, 0 if value is found and assigned
- * @todo	triple check protection, norm and sooo when less tired
-*/
-int	get_check_value(t_expand *str, t_env **env)
+void		do_reds(t_parser *tmp, t_expand *str, t_env **env)
 {
-	t_env	*head;
+	int		i;
 	int		len;
 
-	head = *env;
-	str->env_val = NULL;
-	while (head)
+	i = 0;
+	len = 0;
+	if (tmp->proc->red_count != 0)
 	{
-		if (shelly_strcmp(str->dollar, head->key) == 0)
+		while (i < tmp->proc->red_count)
 		{
-			if (!head->value)
-				return (1);
-			len = ft_strlen(head->value);
-			str->env_val = ft_substr(head->value, 0, len);
-			if (!str->env_val)
+			len = ft_strlen(tmp->proc->redir[i]);
+			if (ft_strnstr(tmp->proc->redir[i], "$", len))
 			{
-				free(str->env_val);
-				return (1);
+				str->input = tmp->proc->redir[i];
+				str->expanded = NULL;
+				dollar(str, env);
+				if (!str->expanded)
+					return ;
+				tmp->proc->redir[i] = str->expanded;
+				if (!tmp->proc->redir[i])
+					return ; // errorR?????
 			}
-			return (0);
+			i++;
 		}
-		head = head->next;
 	}
-	return (1);
 }
 
-static void	set_input_and_sign(t_expand *str, char *input_type, int type, int i)
+void		do_hds(t_parser *tmp, t_expand *str, t_env **env)
 {
-	str->sign = type;
-	str->input = input_type;
-	str->pos = i;
-}
+	int		i;
+	int		len;
 
-
-/**
- * if cmd = $, put into input, type = CMD 
- * expand and return to proc var
- * 
- * else
- * 	while arrays.. then get the right str from there
- */
-int	set_expand_string(t_parser *lst, t_expand *str, int i)
-{
-	t_parser	*tmp;
-
-	str->sign = 0;
-	str->input = NULL;
-	tmp = lst;
-	if (!tmp)
-		return (0);
-	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", ft_strlen(tmp->proc->cmd)))
-		set_input_and_sign(str, tmp->proc->cmd, CMD_X, 0);
-	i = find_strs(tmp, str, i);
-	i = find_hds(tmp, str, i);
-	i = find_reds(tmp, str, i);
-	// str, hd and reds are arrays...
-	// return i position!!
-	else if (tmp->proc->str && ft_strnstr(tmp->proc->str, "$", ft_strlen(tmp->proc->str)))
+	i = 0;
+	len = 0;
+	if (tmp->proc->hd_count != 0)
 	{
-		set_input_and_sign(str, tmp->proc->str, STR_X);
-		return (1);
+		while (i < tmp->proc->hd_count)
+		{
+			len = ft_strlen(tmp->proc->hd[i]);
+			if (ft_strnstr(tmp->proc->hd[i], "$", len))
+			{
+				str->input = tmp->proc->hd[i];
+				str->expanded = NULL;
+				dollar(str, env);
+				if (!str->expanded)
+					return ;
+				tmp->proc->hd[i] = str->expanded;
+				if (!tmp->proc->hd[i])
+					return ; // errorR?????
+			}
+			i++;
+		}
 	}
-	else if (tmp->proc->file && ft_strnstr(tmp->proc->file, "$", ft_strlen(tmp->proc->file)))
-	{
-		set_input_and_sign(str, tmp->proc->file, HD_X);
-		return (1);
-	}
-		// set_input_and_sign(str, tmp->proc->file, RED_X);
-	return (0);
 }
 
 void		do_strs(t_parser *tmp, t_expand *str, t_env **env)
 {
 	int		i;
+	int		len;
 
 	i = 0;
 	if (tmp->proc->str_count != 0)
 	{
-		while (tmp->proc->str[i])
+		while (i < tmp->proc->str_count)
 		{
-			if (ft_strnstr(tmp->proc->str[i], "$", ft_strlen(tmp->proc->str[i])))
+			len = ft_strlen(tmp->proc->str[i]);
+			if (ft_strnstr(tmp->proc->str[i], "$", len))
 			{
-				str->input = tmp->proc->
+				str->input = tmp->proc->str[i];
+				str->expanded = NULL;
+				dollar(str, env);
+				if (!str->expanded)
+					return ;
+				tmp->proc->str[i] = str->expanded;
+				if (!tmp->proc->str[i])
+					return ; // error?????
 			}
 			i++;
 		}
@@ -135,15 +120,22 @@ void		do_strs(t_parser *tmp, t_expand *str, t_env **env)
 
 void		do_cmd(t_parser *tmp, t_expand *str, t_env **env)
 {
-	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", ft_strlen(tmp->proc->cmd)))
+	int		len;
+
+	len = 0;
+	if (tmp->proc->cmd)
 	{
-		str->input = tmp->proc->cmd;
-		str->expanded = NULL;
-		dollar(str->expanded);
-		if (!str->expanded)
-			return ;
-		tmp->proc->cmd = str->expanded;
-		if (!tmp->proc->cmd)
-			return ; //error || ??
+		len = ft_strlen(tmp->proc->cmd);
+		if (ft_strnstr(tmp->proc->cmd, "$", len))
+		{
+			str->input = tmp->proc->cmd;
+			str->expanded = NULL;
+			dollar(str, env);
+			if (!str->expanded)
+				return ;
+			tmp->proc->cmd = str->expanded;
+			if (!tmp->proc->cmd)
+				return ; //error || ??
+		}
 	}
 }
