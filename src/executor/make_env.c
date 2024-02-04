@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:47:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 15:49:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,21 +119,21 @@ t_env	*env_list(char **envp, t_env *env)
  * @todo do we need to free full?
  * @todo error code
 */
-char	**list_to_string(t_env *env, t_parser *lst)
-{
-	char	**env_array;
-	int		i;
+// char	**list_to_string(t_env *env, t_parser *lst)
+// {
+// 	char	**env_array;
+// 	int		i;
 
-	i = 0;
-	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
-	if (!env_array)
-		mini_error(E_MALLOC, lst);
-	while (env)
-	{
-		env_array[i] = env->full;
-		i++;
-		env = env->next;
-	}
-	env_array[i] = NULL;
-	return (env_array);
-}
+// 	i = 0;
+// 	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
+// 	if (!env_array)
+// 		mini_error(E_MALLOC, lst);
+// 	while (env)
+// 	{
+// 		env_array[i] = env->full;
+// 		i++;
+// 		env = env->next;
+// 	}
+// 	env_array[i] = NULL;
+// 	return (env_array);
+// }

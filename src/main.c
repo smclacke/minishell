@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 16:36:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 15:50:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ int	main(int argc, char **argv, char **envp)
 	char		**tokens;
 	t_parser	*procs;
 
-	// int			og_stdout;
-	// int			og_stdin;
-	// t_env		*env;
+	int			og_stdout;
+	int			og_stdin;
+	t_env		*env;
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
+	// (void) envp;
 	procs = NULL;
 
-	// env = NULL;
-	// env = env_list(envp, env);
-	// og_stdout = dup(STDOUT_FILENO);
-	// og_stdin = dup(STDIN_FILENO);
+	env = NULL;
+	env = env_list(envp, env);
+	og_stdout = dup(STDOUT_FILENO);
+	og_stdin = dup(STDIN_FILENO);
 	while (1)
 	{
 		handle_signals(PARENT);
@@ -49,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 		procs = parse_tokens(tokens);
 		if (!procs)
 			printf("NOPE\n");
+		// ft_free_arr(tokens);
 		
 		// int		i = 0;
 		// while (procs)
@@ -60,16 +61,15 @@ int	main(int argc, char **argv, char **envp)
 		// 	i++;
 		// }
 	
-		ft_free_arr(tokens);
-		free_parser(procs);
 
-		printf("success\n");
-		exit(EXIT_SUCCESS);
+		// printf("success\n");
+		// exit(EXIT_SUCCESS);
 
-		// execute(&env, tokens);
+		execute(&env, procs);
 
-		// dup2(og_stdout, STDOUT_FILENO);
-		// dup2(og_stdin, STDIN_FILENO);
+		dup2(og_stdout, STDOUT_FILENO);
+		dup2(og_stdin, STDIN_FILENO);
+		// free_parser(procs);
 	}
 	return (0);
 }

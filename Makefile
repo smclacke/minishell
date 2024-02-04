@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/01/31 21:57:45 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/04 15:49:38 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,37 +39,36 @@ SRCS			= main.c								\
 					parser/sort_procs.c					\
 					parser/get_procs.c					\
 					parser/proc_utils.c					\
-# parser/sort_utils.c					\
-# expander/expand.c					\
-# expander/expand_utils.c				\
-# expander/expand_quotes.c			\
-# expander/expand_quote_utils.c		\
-# expander/expand_dollar.c			\
-# expander/dollars.c					\
-# expander/d_quotes.c					\
-# expander/s_quotes.c					\
-# expander/hd_expand.c				\
-# expander/expand_is_utils.c			\
-# builtin/echo.c						\
-# builtin/cd.c 						\
-# builtin/pwd.c 						\
-# builtin/export.c 					\
-# builtin/unset.c 					\
-# builtin/env.c 						\
-# builtin/errors.c					\
-# builtin/builtin_utils_one.c 		\
-# builtin/builtin_utils_two.c 		\
-# builtin/exit.c						\
-# executor/execute.c					\
-# executor/execute_utils_one.c		\
-# executor/execute_utils_two.c		\
-# executor/make_env.c					\
-# executor/utils_one.c				\
-# executor/utils_two.c				\
-# executor/redirect.c					\
-# executor/list_utils.c 				\
-# executor/print_utils.c				\
-# executor/heredoc_utils.c
+					expander/expand.c					\
+					executor/execute.c					\
+					executor/list_utils.c 				\
+					executor/make_env.c					\
+					# expander/expand_utils.c				\
+					# expander/expand_quotes.c			\
+					# expander/expand_quote_utils.c		\
+					# expander/expand_dollar.c			\
+					# expander/dollars.c					\
+					# expander/d_quotes.c					\
+					# expander/s_quotes.c					\
+					# expander/hd_expand.c				\
+					# expander/expand_is_utils.c			\
+					# builtin/echo.c						\
+					# builtin/cd.c 						\
+					# builtin/pwd.c 						\
+					# builtin/export.c 					\
+					# builtin/unset.c 					\
+					# builtin/env.c 						\
+					# builtin/errors.c					\
+					# builtin/builtin_utils_one.c 		\
+					# builtin/builtin_utils_two.c 		\
+					# builtin/exit.c						\
+					# executor/execute_utils_one.c		\
+					# executor/execute_utils_two.c		\
+					# executor/utils_one.c				\
+					# executor/utils_two.c				\
+					# executor/redirect.c					\
+					# executor/print_utils.c				\
+					# executor/heredoc_utils.c
 
 
 SRC_DIR		= src

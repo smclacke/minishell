@@ -8,44 +8,6 @@
 
 *right here, right now*
 
-
-**CHECK this**
-!!!!!! - then check proc in main is created properly!!
-if echo something | << hd  --- fails
-
-minibleh:echo something | hello there
-->token_count = 2
-->red_count = 0
-->str_count = 1
-->hd_count = 0
-cmd = echo
---------------------------------------------------
-hd_count = 0
---------------------------------------------------
-red_count = 0
---------------------------------------------------
-str_count = 1
-str[0] = something
---------------------------------------------------
-->token_count = 2
-->red_count = 0
-->str_count = 1
-->hd_count = 0
-cmd = hello
---------------------------------------------------
-hd_count = 0
---------------------------------------------------
-red_count = 0
---------------------------------------------------
-str_count = 1
-str[0] = there
---------------------------------------------------
-NOPE
-success
-
---- NOPING IN MAIN
-
-
 **DO this**
 
 - freee some things
@@ -65,6 +27,11 @@ success
 
 **ASK DJOYKE**
 ------------------------------
+
+ACCESS = parser_list 	-> 		proc   ->		var
+		parser list		proc struct process		var 
+		t_parser		t_procs					token type || array
+
 
 *ONE* explain the structure:  ++ how to access (example in main)
 
