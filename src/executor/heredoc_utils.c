@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:17:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 20:17:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * @param lst parser linked list
  * @brief redirect heredoc in child process
  * @todo exit errors
+ * @note change mini_error
 */
 void	redirect_heredoc(t_procs *lst)
 {
