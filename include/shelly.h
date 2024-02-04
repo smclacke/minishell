@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 20:29:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 20:58:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int				proc_redir(char *input);
 void			ft_expand(t_parser *lst, t_env **env);
 
 //------------------- expand_dollar --------------------//
+int				get_check_value(t_expand *str, t_env **env);
 int				save_extra_string(t_expand *str, char *input, int i);
 int				first_bit(t_expand *str, char *input);
 void			dollar(t_expand *str, t_env **env);
@@ -129,7 +130,6 @@ int				is_dollar_or_quote(int c);
 
 //------------------ expand_utils ------------------//
 int				add_to_expand(t_expand *str, char *copy_str);
-int				get_check_value(t_expand *str, t_env **env);
 void			do_reds(t_parser *tmp, t_expand *str, t_env **env);
 void			do_hds(t_parser *tmp, t_expand *str, t_env **env);
 void			do_strs(t_parser *tmp, t_expand *str, t_env **env);

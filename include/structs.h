@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 16:11:07 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 21:07:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ typedef	struct s_procs
 	char					**redir;
 	int						red_count;
 	char					**hd;
-	int						hd_count;	
+	int						hd_count;
+	int						hd_fd;
 }			t_procs;
 
 /**
@@ -125,10 +126,10 @@ typedef	struct	s_parser
 	struct s_procs			**process;
 	struct s_procs			*proc;
 
+	int						hd_flag;
 	char					*exit_str;
 	enum e_exit				exit_code;
 	int						exit_stat;
-	int						hd_fd;
 
 	struct s_parser			*next;
 }							t_parser;
