@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 22:30:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/01/12 19:53:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,15 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
+ * @todo add list->proc-count instead of lst->n_cmd,
+ * dont need to use int count anymore :)
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
 	int	count;
 	int	i;
 
-	count = lst->n_cmd;
+	count = lst->n_cmd;//instead of this go to proc-count
 	i = 0;
 	while (lst)
 	{
@@ -109,11 +111,11 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
  * @param lst parser linked list
  * @param execute execute struct
  * @brief checks for redirects and enters redirect in or outfile function
- * @todo remove printf statement
+ * @todo remove printf statement check line 118
 */
 void	redirect(t_parser *lst, t_execute *data)
 {
-	if (!lst->next)
+	if (!lst->next)//still need this?
 		return ;
 	if (!lst->meta)
 		lst = lst->next;

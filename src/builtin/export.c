@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 21:23:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/29 21:13:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * might be overwriting a pointer and not allocating a new string.
  * @todo 
  * env does show the expanded version.
+ * check if multiple ===== what do you do?
  * 
 */
 void	ft_export(t_parser *node, t_env **env)
