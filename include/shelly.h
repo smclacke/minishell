@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:12:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 19:37:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int				set_expand_string(t_parser *lst, t_expand *str, int i);
 void			handle_signals(int proc);
 
 				// ALL DJOYKE PROTOS //
-bool			check_for_builtin(t_parser *node);
+int				check_for_builtin(t_parser *node);
 void			redirect_outfile(t_procs *head, t_execute *data);
 bool			redirect_infile(t_procs *head, t_execute *data);
 void			redirect_append(t_procs *head, t_execute *data);
@@ -159,7 +159,7 @@ char			*get_full(char *str);
 
 //---- Built-in ----//
 void			free_all(t_env *env);
-void			do_builtin(t_parser *node, t_env **env);
+void			do_builtin(t_parser *node, t_env **env, int cmd_type);
 bool			word_check(t_parser *lst);
 void			ft_cd(t_parser *lst, t_env **env);
 bool			too_many_args(t_parser *lst);

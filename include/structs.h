@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 18:27:09 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 19:32:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define EXIT 1
+# define CD 2
+# define EXPORT 3
+# define UNSET 4
+# define ECHO 5
+# define PWD 6
+# define ENV 7
+
 
 # define PIPE "|"
 # define MORE ">"
@@ -126,6 +135,7 @@ typedef	struct	s_parser
 	struct s_procs			**process;
 	struct s_procs			*proc;
 
+	int						hd_flag;
 	char					*exit_str;
 	enum e_exit				exit_code;
 	int						exit_stat;

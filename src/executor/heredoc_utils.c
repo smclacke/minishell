@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:02:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 19:17:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	redirect_heredoc(t_procs *lst)
 */
 static void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
 {
-	if (lst->hd_flag == 0)
+	if (lst->hd_flag == 0) 
 	{
 		if (ft_isdollar(readline))
 			readline = hd_expand(env, readline);

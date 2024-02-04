@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:44:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 19:36:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,22 @@ void	free_all(t_env *env)
  * echo, cd, pwd, export, unset, env and exit
  * @todo exit codes
 */
-void	do_builtin(t_parser *node, t_env **env)
+void	do_builtin(t_parser *node, t_env **env, int cmd_type)
 {
-	if (!node->cmd)
-		mini_error(E_GENERAL, node);
-	else if (mini_strcmp(node->cmd, "echo") == 0)
-		ft_echo(node, env);
-	else if (mini_strcmp(node->cmd, "cd") == 0)
-		ft_cd(node, env);
-	else if (mini_strcmp(node->cmd, "pwd") == 0)
-		ft_pwd(node);
-	else if (mini_strcmp(node->cmd, "export") == 0)
-		ft_export(node, env);
-	else if (mini_strcmp(node->cmd, "unset") == 0)
-		ft_unset(node, env);
-	else if (mini_strcmp(node->cmd, "env") == 0)
-		ft_env(*env, node);
-	else if (mini_strcmp(node->cmd, "exit") == 0)
+	if (cmd_type == EXIT)
 		ft_exit(node);
+	else if (cmd_type == CD)
+		ft_cd(node, env);
+	else if (cmd_type == EXPORT)
+		ft_export(node, env);
+	else if (cmd_type == UNSET)
+		ft_unset(node, env);
+	else if (cmd_type == ECHO)
+		ft_echo(node, env);
+	else if (cmd_type == PWD)
+		ft_pwd(node);
+	else if (cmd_type == ENV)
+		ft_env(*env, node);
 }
 
 /**

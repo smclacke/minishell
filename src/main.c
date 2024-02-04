@@ -6,34 +6,28 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 16:46:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 20:04:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-<<<<<<< HEAD
-t_parser	*lexing(char *input)
-{
-	t_parser	*tokens;
-*/
->>>>>>> sarah
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
 	t_parser	*procs;
-
+	char		**tokens;
 	int			og_stdout;
 	int			og_stdin;
 	t_env		*env;
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
+	// (void) envp;
 	procs = NULL;
 
 	env = NULL;
-	// env = env_list(envp, env);
+	env = env_list(envp, env);
 	og_stdout = dup(STDOUT_FILENO);
 	og_stdin = dup(STDIN_FILENO);
 	while (1)
@@ -49,26 +43,8 @@ int	main(int argc, char **argv, char **envp)
 		procs = parse_tokens(tokens);
 		if (!procs)
 			printf("NOPE\n");
-		// ft_free_arr(tokens);
 
-		
-		int		i = 0;
-		while (procs)
-		{
-			printf("in main\n");
-			printf("[%i] cmd = %s\n", i, procs->proc->cmd);
-			// printf("[%i] hd_count = %i\n", i, procs->proc->hd_count);
-			procs = procs->next;
-			i++;
-		}
-	
-
-		printf("success\n");
-		exit(EXIT_SUCCESS);
-		// printf("success\n");
-		// exit(EXIT_SUCCESS);
-
-		// execute(&env, procs);
+		execute(&env, procs);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);

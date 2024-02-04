@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:44:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 19:45:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,10 @@ int	list_iter(t_parser *lst)
 */
 bool	too_many_args(t_parser *lst)
 {
-	t_parser	*temp;
-
-	temp = lst->next;
-	while (temp)
+	if (lst->proc->str_count > 1)
 	{
-		if (temp->str)
-		{
-			if (temp->next && temp->next->str)
-			{
-				dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
-				return (true);
-			}
-		}
-		return (false);
+		dprintf(STDERR_FILENO, ARG_ERROR, lst->proc->cmd);
+		return (true);
 	}
 	return (false);
 }

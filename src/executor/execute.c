@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 16:58:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 20:02:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	int		i;
 
 	i = 0;
-	if (!node->cmd)//
-		return (node->cmd);//
+	if (!node->proc->cmd)
+		return (node->proc->cmd); // necessary?
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
 		{
-			command = ft_strjoin("/", node->cmd);
+			command = ft_strjoin("/", node->proc->cmd);
 			if (command == NULL)
 				mini_error (E_MALLOC, node);
 			ok_path = ft_strjoin(data->path[i], command);
@@ -80,7 +80,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 		put_execute_error(node);
 		data->error = false;
 	}
-	return (node->cmd);
+	return (node->proc->cmd);
 }
 
 /**
@@ -94,18 +94,21 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
+	int			cmd_type;
 
+	cmd_type = 0;
 	init_pipes_child(data, lst);
 	redirect(lst, data);
 	if (data->error == false)
 		exit (0);
-	if (check_for_builtin(lst))
+	cmd_type = check_for_builtin(lst);
+	if (cmd_type != 0)
 	{
-		do_builtin(lst, env);
+		do_builtin(lst, env, cmd_type);
 		exit (0);
 	}
-	if (!lst->cmd)
-		exit (0);
+	// if (!lst->cmd) // we do need this?
+		// exit (0);
 	executable = check_access(*env, lst, data);
 	if (data->error == false)
 		exit (0);
@@ -119,7 +122,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		put_permission_error(lst);
 		exit (0);
 	}
-	data->env_array = list_to_string(*env, lst);
+	data->env_array = list_to_string(*env, lst); // is this necessary?
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
 	exit (0);
@@ -137,12 +140,12 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
 	if (!lst)
 		mini_error (E_GENERAL, lst);
-	init_heredoc(lst, env);
+	// init_heredoc(lst, env);
 	if (single_builtin_cmd(lst, env, data) == true)
 		return ;
-	pipeline(lst, env, data);
-	close_all(data, lst);
-	waitpid(data->fork_pid, NULL, 0);
+	// pipeline(lst, env, data);
+	// close_all(data, lst);
+	// waitpid(data->fork_pid, NULL, 0);
 	// while (wait(NULL) != -1)
 	// 	(void)NULL;
 }
@@ -163,9 +166,9 @@ void	execute(t_env **env, t_parser *lst)
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);
 	init_execute_struct(data);
-	ft_expand(lst, env);
-	printf("success\n");
-	exit(EXIT_SUCCESS);
+	// ft_expand(lst, env);
+	// printf("success\n");
+	// exit(EXIT_SUCCESS);
 	build(lst, env, data);
 	free (data);
 }
