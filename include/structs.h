@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 20:55:28 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 16:11:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@
 
 # define CMD_X 1
 # define STR_X 2
-# define FILE_X 3
+# define HD_X 3
+# define RED_X 4
 
 # define NOT_POSSIBLE "minishell: env: no such file or directory\n"
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
@@ -64,66 +65,92 @@ typedef enum e_exit
 }						t_exit;
 
 /**
- * @brief	specifies the different variable types of tokens from the
- * 			lexer that are parsed and then given to the executor
+ * @todo	check the count vars are correctly updated and saved per process
+ * @brief	specifies the different variable types from the
+ * 			lexer that are organised via the parser, then given to the 
+ * 			executor in the form of a parser list, each node being
+ * 			one process containing some or all of these proc struct vars
+ * @param	token_count: total number of tokens within each process
  * @param	cmd: first string in each process without redirect char
- * @param	meta: pipe, more, less, moremore, lessless. 
- * 			**dollar is excluded and handled as a string
- * @param	file: in and out files; after more, less and moremore chars
- * @param	str:  limiter for here_doc (string after <<) and all other input
- * @param	flag: useful util var
- * @param	n_cmd: total amount of commands is stored in first node
- * @param	exit_code: enums to set exitcode at different
- * 			stages of process, saved to pass through the program
- * @param	hd_limit: save the limiter string, check if it's quoted or not
- * 			do not expand dollar in this case
- * @param	hd_flag: 1 = quoted, quotes are removed but if flag is set, 
- * 			don't expand anything inside here_doc input for both
- * 			single and double quotes
+ * @param	cmd_flag: util var to check if cmd has been found per process
+ * @param	str: array of all cmd args
+ * @param	str_count: number of string args per process
+ * @param	redir: array of all < > >> in, out and truncate files, 
+ * 			left in order as inputted. file after each meta characher included, 
+ * 			error if no string after meta
+ * @param	red_count: number of redir metas and files per process
+ * @param	hd: array of all << hd meta and delimiter, left in order
+ * 			 as inputted. error if no string after hd meta
+ * @param	hd_count: number of hd metas << and delmiters per process
 */
-typedef struct s_parser
+typedef	struct s_procs
 {
-	void				*input;
-	char				*cmd;
-	char				*meta;
-	char				*file;
-	char				*str;
-	int					flag;
-	int					flag_42;
-	int					n_cmd;
-	int					n_pipe;
-	int					hd_fd;
-	char				*hd_limit;
-	int					hd_flag;
-	char				*exit_str;
-	enum e_exit			exit_code;
-	int					exit_stat;
-	struct s_parser		*next;
-}							t_parser;
-
-// typedef	struct	s_process
-// {
-// 	char					**process;
-// 	struct s_parser			*lst;
-// 	struct s_process		*next;
-// }				t_process;
+	int						proc_count;
+	int						token_count;
+	char					*cmd;
+	// int						cmd_flag;
+	char					**str;
+	int						str_count;
+	char					**redir;
+	int						red_count;
+	char					**hd;
+	int						hd_count;	
+}			t_procs;
 
 /**
- * comment on the way
+ * @todo	check proc_size is correct while iterating through processes
+ * @todo	exit stuff, what need to happen here?
+ * @param	multi_proc_b: specifies whether there is only one process or multiple
+ * @param	tokens: if only one process, can just use the token array
+ * @param	proc_arrs: if multiple processes, use the array of processes
+ * 
+ * @param	start: used for creating proc_arrs
+ * @param	proc_count: total number of processes
+ * 
+ * @param	process: use to sort either tokens or proc_arrs into procs struct
+ * 					similiar to just an input var
+ * @param	proc: each node of the parser list is stored here, this way each node
+ * 				parser->proc[0]->... accesses the procs struct with all vars
+ * 				from that processes, can iterate through these proc nodes 
+*/
+typedef	struct	s_parser
+{
+	bool					multi_proc_b;
+	char					**tokens;
+	char					***proc_arrs;
+
+	int						start;
+	int						proc_count;
+
+	struct s_procs			**process;
+	struct s_procs			*proc;
+
+	char					*exit_str;
+	enum e_exit				exit_code;
+	int						exit_stat;
+	int						hd_fd;
+
+	struct s_parser			*next;
+}							t_parser;
+
+/**
+ *  @todo	check what needs to be done with exit codes in expander
+ *	@brief	simply a struct used to store and organise while expanding variables
 */
 typedef struct s_expand
 {
-	char				*input;
-	char				*tmp;
-	char				*string;
-	char				*dollar;
-	char				*s_quote;
-	char				*d_quote;
-	char				*env_val;
-	char				*expanded;
-	char				*h_d;
-	int					sign;
-	struct s_parser		*exit;
+	char					*input;
+	char					*tmp;
+	char					*string;
+	char					*dollar;
+	char					*s_quote;
+	char					*d_quote;
+	char					*env_val;
+	char					*expanded;
+	char					*h_d;
+	int						sign;
+	int						pos;
+	struct s_parser			*exit;
 }							t_expand;
 
 /**

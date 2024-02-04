@@ -6,14 +6,17 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 19:28:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 16:30:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * string after closed quotes that needs to be added to expanded string
+ * @todo	check the comment
+ * @todo	substr protection
+ * @todo	strjoin protection
+ * @brief	string after closed quotes that needs to be added to expanded string
 */
 int	save_extra_string(t_expand *str, char *input, int i)
 {
@@ -42,7 +45,8 @@ int	save_extra_string(t_expand *str, char *input, int i)
 }
 
 /**
- * before any dollar or quotes, just save the string
+ * @todo	substr protection
+ * @brief	before any dollar or quotes, just save the string
 */
 int	first_bit(t_expand *str, char *input)
 {
@@ -63,9 +67,9 @@ int	first_bit(t_expand *str, char *input)
 }
 
 /**
- * get first part of string, then loop through separating dollars and quotes...
- * @todo fix this, leaks, norm, test test test...
- * write version (or have func for here_doc and only edit that bit)
+ * @todo	fix this, leaks, norm, test test test...
+ * @todo	did i do this? -> write version (or have func for here_doc and only edit that bit)
+ * @brief	get first part of string, then loop through separating dollars and quotes...
 */
 static void	dollar(t_expand *str, t_env **env)
 {
@@ -92,33 +96,53 @@ static void	dollar(t_expand *str, t_env **env)
 }
 
 /**
- * adding expanded str back into correct parser struct var
- * @todo comment
- * @todo	when expanding a non expandable... need an empty string but this was 
- * causing problems...
+ * @todo 	error handling
+ * @todo	did i fix this?  ->  when expanding a non expandable... need an empty string but this was 
+ * 			causing problems...
+ * @brief	adding expanded str back into correct parser struct var
+ * 
+ * while list ... if cmd / hd / str ... = $ save type, put str into expand struct, 
+ * 		replace list->proc->var after expansion
+ * 
+ * // THIS IS ONE PROC AT A TIME... EXECUTE() HAS LIST WHILE LOOP
+ * 
+ * // if cmd has $, use that string, very simple. else, look into arrays, if str = $
+ * 		send that part of the array..
 */
 void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
 {
 	t_parser	*tmp;
+	int			i;
 
+	i = 0;
 	tmp = lst;
 	if (!tmp)
 		return ; // error oder??
-	if (!set_expand_string(lst, str))
-		return ;
-	if (str->sign == CMD_X || str->sign == STR_X || str->sign == FILE_X)
+	do_cmd(tmp, str, env);
+	do_strs(tmp, str, env);
+	// do strs
+
+	// do hds
+
+	// do reds
+	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", ft_strlen(tmp->proc->cmd)))
+	i = set_expand_string(lst, str, i);
+	if (str->sign != 0)
 	{
 		str->expanded = NULL;
 		dollar(str, env);
 		if (!str->expanded)
 			return ;
 		if (str->sign == CMD_X)
-			tmp->cmd = str->expanded;
+			tmp->proc->cmd = str->expanded;
 		else if (str->sign == STR_X)
-			tmp->str = str->expanded;
-		else if (str->sign == FILE_X)
-			tmp->file = str->expanded;
-		if (!tmp->cmd || !tmp->str || !tmp->file)
+			tmp->proc->str[i] = str->expanded;
+		else if (str->sign == HD_X)
+			tmp->proc->hd[i] = str->expanded;
+		else if (str->sign == RED_X)
+			tmp->proc->redir[i] = str->expanded;
+		if (!tmp->proc->cmd || !tmp->proc->str[i] 
+			|| !tmp->proc->hd[i] || !tmp->proc->redir[i])
 			return ; // error || ??
 	}
 	free(tmp);
