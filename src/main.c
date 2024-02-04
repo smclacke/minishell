@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 15:50:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 16:42:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	// (void) envp;
+	(void) envp;
 	procs = NULL;
 
 	env = NULL;
-	env = env_list(envp, env);
+	// env = env_list(envp, env);
 	og_stdout = dup(STDOUT_FILENO);
 	og_stdin = dup(STDIN_FILENO);
 	while (1)
@@ -50,22 +50,25 @@ int	main(int argc, char **argv, char **envp)
 		if (!procs)
 			printf("NOPE\n");
 		// ft_free_arr(tokens);
+
 		
-		// int		i = 0;
-		// while (procs)
-		// {
-		// 	printf("in main\n");
-		// 	printf("[%i] cmd = %s\n", i, procs->proc->cmd);
-		// 	printf("[%i] hd_count = %i\n", i, procs->proc->hd_count);
-		// 	procs = procs->next;
-		// 	i++;
-		// }
+		int		i = 0;
+		while (procs)
+		{
+			printf("in main\n");
+			printf("[%i] cmd = %s\n", i, procs->proc->cmd);
+			// printf("[%i] hd_count = %i\n", i, procs->proc->hd_count);
+			procs = procs->next;
+			i++;
+		}
 	
 
+		printf("success\n");
+		exit(EXIT_SUCCESS);
 		// printf("success\n");
 		// exit(EXIT_SUCCESS);
 
-		execute(&env, procs);
+		// execute(&env, procs);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
