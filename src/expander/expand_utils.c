@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 16:33:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 18:11:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,35 +85,35 @@ static void	set_input_and_sign(t_expand *str, char *input_type, int type, int i)
  * else
  * 	while arrays.. then get the right str from there
  */
-int	set_expand_string(t_parser *lst, t_expand *str, int i)
-{
-	t_parser	*tmp;
+// int	set_expand_string(t_parser *lst, t_expand *str, int i)
+// {
+// 	t_parser	*tmp;
 
-	str->sign = 0;
-	str->input = NULL;
-	tmp = lst;
-	if (!tmp)
-		return (0);
-	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", ft_strlen(tmp->proc->cmd)))
-		set_input_and_sign(str, tmp->proc->cmd, CMD_X, 0);
-	i = find_strs(tmp, str, i);
-	i = find_hds(tmp, str, i);
-	i = find_reds(tmp, str, i);
-	// str, hd and reds are arrays...
-	// return i position!!
-	else if (tmp->proc->str && ft_strnstr(tmp->proc->str, "$", ft_strlen(tmp->proc->str)))
-	{
-		set_input_and_sign(str, tmp->proc->str, STR_X);
-		return (1);
-	}
-	else if (tmp->proc->file && ft_strnstr(tmp->proc->file, "$", ft_strlen(tmp->proc->file)))
-	{
-		set_input_and_sign(str, tmp->proc->file, HD_X);
-		return (1);
-	}
-		// set_input_and_sign(str, tmp->proc->file, RED_X);
-	return (0);
-}
+// 	str->sign = 0;
+// 	str->input = NULL;
+// 	tmp = lst;
+// 	if (!tmp)
+// 		return (0);
+// 	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", ft_strlen(tmp->proc->cmd)))
+// 		set_input_and_sign(str, tmp->proc->cmd, CMD_X, 0);
+// 	i = find_strs(tmp, str, i);
+// 	i = find_hds(tmp, str, i);
+// 	i = find_reds(tmp, str, i);
+// 	// str, hd and reds are arrays...
+// 	// return i position!!
+// 	else if (tmp->proc->str && ft_strnstr(tmp->proc->str, "$", ft_strlen(tmp->proc->str)))
+// 	{
+// 		set_input_and_sign(str, tmp->proc->str, STR_X);
+// 		return (1);
+// 	}
+// 	else if (tmp->proc->file && ft_strnstr(tmp->proc->file, "$", ft_strlen(tmp->proc->file)))
+// 	{
+// 		set_input_and_sign(str, tmp->proc->file, HD_X);
+// 		return (1);
+// 	}
+// 		// set_input_and_sign(str, tmp->proc->file, RED_X);
+// 	return (0);
+// }
 
 void		do_strs(t_parser *tmp, t_expand *str, t_env **env)
 {

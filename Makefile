@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/04 16:38:37 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/04 18:11:16 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,19 +39,19 @@ SRCS			= main.c								\
 					parser/sort_procs.c					\
 					parser/get_procs.c					\
 					parser/proc_utils.c					\
-					# expander/expand.c					\
-					# executor/execute.c					\
-					# executor/list_utils.c 				\
-					# executor/make_env.c					\
-					# expander/expand_utils.c				\
-					# expander/expand_quotes.c			\
-					# expander/expand_quote_utils.c		\
-					# expander/expand_dollar.c			\
-					# expander/dollars.c					\
-					# expander/d_quotes.c					\
-					# expander/s_quotes.c					\
-					# expander/hd_expand.c				\
-					# expander/expand_is_utils.c			\
+					expander/expand.c					\
+					executor/execute.c					\
+					executor/list_utils.c 				\
+					executor/make_env.c					\
+					expander/expand_utils.c				\
+					expander/expand_quotes.c			\
+					expander/expand_quote_utils.c		\
+					expander/expand_dollar.c			\
+					expander/dollars.c					\
+					expander/d_quotes.c					\
+					expander/s_quotes.c					\
+					expander/hd_expand.c				\
+					expander/expand_is_utils.c			\
 					# builtin/echo.c						\
 					# builtin/cd.c 						\
 					# builtin/pwd.c 						\

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 17:22:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 18:10:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,8 @@ static	void	get_procs(t_parser *proc)
 		proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc_size + 1));
 		// wrap
 		make_proc_arr(proc, proc_i, proc_size);
-		// printf("proc_size = %i\n", proc_size);
-		// if (proc_size == 1)
-		// 	proc->proc_arrs[proc_i][proc_size + 1] = NULL;
-		// else
-		// proc->proc_arrs[proc_i][proc_size + 1] = NULL;
+		proc->proc_arrs[proc_i][proc_size] = NULL; 
+	// needs to change to proc_size + 1, but buffer overflow so find where there isnt enough memory
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 		{
 			i++;
@@ -117,7 +114,7 @@ t_parser	*parse_tokens(char **tokens)
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 			// wrap it up
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
-			proc->process[i]->proc_count = (proc->proc_count - 1);
+			proc->process[i]->proc_count = proc->proc_count;
 			new_node = parser_listnew(proc->process[i]);
 			parser_listadd_back(&parser_list, new_node);
 			i++;
@@ -130,7 +127,7 @@ t_parser	*parse_tokens(char **tokens)
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		// wrap it up
 		sort_each_proc(proc->process[i], proc->tokens);
-		proc->process[i]->proc_count = 0;
+		proc->process[i]->proc_count = 1;
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 	}
