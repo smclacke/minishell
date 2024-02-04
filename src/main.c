@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 18:17:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 20:53:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
+	// (void) envp;
 	procs = NULL;
 
 	env = NULL;
-	// env = env_list(envp, env);
+	env = env_list(envp, env);
 	og_stdout = dup(STDOUT_FILENO);
 	og_stdin = dup(STDIN_FILENO);
 	while (1)
@@ -50,25 +50,12 @@ int	main(int argc, char **argv, char **envp)
 		if (!procs)
 			printf("NOPE\n");
 		// ft_free_arr(tokens);
-
 		
-		int		i = 0;
-		while (procs)
-		{
-			printf("in main\n");
-			printf("[%i] cmd = %s\n", i, procs->proc->cmd);
-			// printf("[%i] hd_count = %i\n", i, procs->proc->hd_count);
-			procs = procs->next;
-			i++;
-		}
-	
+		execute(&env, procs);
 
-		// printf("success\n");
-		// exit(EXIT_SUCCESS);
-		// printf("success\n");
-		// exit(EXIT_SUCCESS);
-
-		// execute(&env, lprocs);
+		prpr(procs);
+		printf("success\n");
+		exit(EXIT_SUCCESS);
 
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);

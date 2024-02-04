@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 16:30:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 20:51:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	first_bit(t_expand *str, char *input)
  * @todo	did i do this? -> write version (or have func for here_doc and only edit that bit)
  * @brief	get first part of string, then loop through separating dollars and quotes...
 */
-static void	dollar(t_expand *str, t_env **env)
+void	dollar(t_expand *str, t_env **env)
 {
 	int		i;
 
@@ -120,30 +120,7 @@ void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
 		return ; // error oder??
 	do_cmd(tmp, str, env);
 	do_strs(tmp, str, env);
-	// do strs
-
-	// do hds
-
-	// do reds
-	if (tmp->proc->cmd && ft_strnstr(tmp->proc->cmd, "$", ft_strlen(tmp->proc->cmd)))
-	i = set_expand_string(lst, str, i);
-	if (str->sign != 0)
-	{
-		str->expanded = NULL;
-		dollar(str, env);
-		if (!str->expanded)
-			return ;
-		if (str->sign == CMD_X)
-			tmp->proc->cmd = str->expanded;
-		else if (str->sign == STR_X)
-			tmp->proc->str[i] = str->expanded;
-		else if (str->sign == HD_X)
-			tmp->proc->hd[i] = str->expanded;
-		else if (str->sign == RED_X)
-			tmp->proc->redir[i] = str->expanded;
-		if (!tmp->proc->cmd || !tmp->proc->str[i] 
-			|| !tmp->proc->hd[i] || !tmp->proc->redir[i])
-			return ; // error || ??
-	}
-	free(tmp);
+	do_hds(tmp, str, env);
+	do_reds(tmp, str, env);
+	// free(tmp);
 }
