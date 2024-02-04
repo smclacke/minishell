@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 20:13:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:26:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static char	*copy_back_and_free(char *new, char *str, int *j)
 }
 
 /**
- * buildt in protection
- * len is always given with one for the null!!
+ * @brief	buildt in protection
+ * 			len is always given with one for the null, don't need to add here 
+ * @todo	check the null malloc thingy...
 */
 static char	*ft_char_malloc(int len)
 {
@@ -37,12 +38,12 @@ static char	*ft_char_malloc(int len)
 }
 
 /**
- * @todo errors NORMMMMMMMMM
+ * @todo	errors NORMMMMMMMMM
  * @todo	norm proof, djoyke changed some things regarding mini_error
  * 			parser is not made yet so can't use mini_error function
  * 
- * minus one for malloc cause - 2 for quotes for str size then plus one
- * for null dus - 1 uiteindelijk
+ * @brief	minus one for malloc cause - 2 for quotes for str size then plus one
+ * 			for null dus - 1 uiteindelijk
 */
 static void	remove_quotes(char *str)
 {

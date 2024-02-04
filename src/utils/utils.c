@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 18:21:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 14:08:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,57 +42,17 @@ int	shelly_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-void	free_only_tokens(t_parser *tokens)
-{
-	t_parser	*tmp;
-
-	while (tokens)
-	{
-		tmp = tokens->next;
-		free (tokens);
-		tokens = tmp;
-	}
-}
-
 /**
- * hehe ugly
+ * @todo	check this is correct for new parser ...
 */
-void	free_tokens(t_parser *tokens)
+void	free_parser(t_parser *procs)
 {
 	t_parser	*tmp;
 
-	while (tokens)
+	while (procs)
 	{
-		tmp = tokens->next;
-		if (tokens->cmd != tokens->input)
-			free(tokens->cmd);
-		if (tokens->meta != tokens->input)
-			free(tokens->meta);
-		if (tokens->file != tokens->input)
-			free(tokens->file);
-		if (tokens->str != tokens->input)
-			free(tokens->str);
-		if (tokens->hd_limit != tokens->input)
-			free(tokens->hd_limit);
-		free (tokens->input);
-		free (tokens);
-		tokens = tmp;
+		tmp = procs->next;
+		free (procs);
+		procs = tmp;
 	}
-}
-
-// find out how many cmds there are total for pipe purposes
-int	get_n_cmds(t_parser *tokens)
-{
-	t_parser	*tmp;
-	int			i;
-
-	i = 0;
-	tmp = tokens;
-	while (tmp)
-	{
-		if (tmp->cmd)
-			i += 1;
-		tmp = tmp->next;
-	}
-	return (i);
 }

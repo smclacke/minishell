@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   dd_quotes.c                                        :+:    :+:            */
+/*   d_quotes.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/07 19:31:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/01/24 13:19:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
+/**
+ * @todo	error handling
+ * @todo	substr protection
+ * @todo	strdup protection
+*/
 static int	first_str_bit(t_expand *str, char *input)
 {
 	int	i;
@@ -35,6 +40,11 @@ static int	first_str_bit(t_expand *str, char *input)
 	return (i);
 }
 
+/**
+ * @todo	error handling
+ * @todo	strjoin protection
+ * @todo	strdup protection
+*/
 static int	add_single_quote(t_expand *str, char *c)
 {
 	char	*tmp;
@@ -51,6 +61,9 @@ static int	add_single_quote(t_expand *str, char *c)
 	return (0);
 }
 
+/**
+ * @todo	error handling
+*/
 static int	handle_double(t_expand *str, char *input, t_env **env)
 {
 	int		i;
@@ -76,6 +89,10 @@ static int	handle_double(t_expand *str, char *input, t_env **env)
 	return (0);
 }
 
+/**
+ * @todo	error handling
+ * @todo	substr protection
+*/
 int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 {
 	int		start;

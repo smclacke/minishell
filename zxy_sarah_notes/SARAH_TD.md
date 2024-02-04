@@ -1,14 +1,164 @@
----------------------------------------------------------------------------------
-JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
+------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-**TO DO**
-**PROBLEM**
-**FOOOOOOOOOK**
+------------------------------
+------------------------------
+------------------------------
+------------------------------
 
+*right here, right now*
+
+**DO this**
+
+- freee some things
+
+- leakkkyyyy af
+
+- norm norm norm
+
+- errors errors errors
+
+- fix expander to work with new parser.....
+
+
+
+// how does hd expansion work again? 
+// expand quotes needs same as expand dollar
+
+------------------------------
+------------------------------
+
+**ASK DJOYKE**
+------------------------------
+
+ACCESS = parser_list 	-> 		proc   ->		var
+		parser list		proc struct process		var 
+		t_parser		t_procs					token type || array
+
+
+*ONE* explain the structure:  ++ how to access (example in main)
+
+cmd <in <<hd str arg >out more strings | echo some | >out << hd1 << hd2 other ran wor
+
+  -> proc_count = [2]		// == 3 processes
+
+[0] cmd = cmd				// == process[0] cmd
+
+[0] str_count = 4			// == 4 string args not including cmd str
+[0] strs[0] = str
+[0] strs[1] = arg
+[0] strs[2] = more
+[0] strs[3] = strings
+
+[0] hd_count = 2			// == 1 here_doc
+[0] hd[0] = <<
+[0] hd[1] = hd
+
+[0] red_count = 4			// == 2 redirects
+[0] reds[0] = <
+[0] reds[1] = in
+[0] reds[2] = >
+[0] reds[3] = out
+--------------------------------------------------
+
+[1] cmd = echo				// == process[1] cmd
+
+[1] str_count = 1			// == 1 string args not including cmd str
+[1] strs[0] = some
+
+[1] hd_count = 0
+
+[1] red_count = 0
+--------------------------------------------------
+
+[2] cmd = other				// == process[2] cmd
+
+[2] str_count = 2			// == 2 string args not including cmd str
+[2] strs[0] = ran
+[2] strs[1] = wor
+
+[2] hd_count = 4			// == 2 here_doc
+[2] hd[0] = <<
+[2] hd[1] = hd1
+[2] hd[2] = <<
+[2] hd[3] = hd2
+
+[2] red_count = 2			// == 1 redirect
+[2] reds[0] = >
+[2] reds[1] = out
+--------------------------------------------------
+
+**SECOND EXAMPLE**
+< in > out | echo something | << hd1 << hd2 cmd str
+  -> proc_count = [2]
+
+
+[0] cmd = (null)
+
+[0] str_count = 0
+
+[0] hd_count = 0
+
+[0] red_count = 4
+[0] reds[0] = <
+[0] reds[1] = in
+[0] reds[2] = >
+[0] reds[3] = out
+--------------------------------------------------
+
+[1] cmd = echo
+
+[1] str_count = 1
+[1] strs[0] = something
+
+[1] hd_count = 0
+
+[1] red_count = 0
+--------------------------------------------------
+
+[2] cmd = cmd
+
+[2] str_count = 1
+[2] strs[0] = str
+
+[2] hd_count = 4
+[2] hd[0] = <<
+[2] hd[1] = hd1
+[2] hd[2] = <<
+[2] hd[3] = hd2
+
+[2] red_count = 0
+
+
+*TWO*
+----- ask djoyke what counts she wants, i think easier to use << hd == 2
+		then iterate hd_count to find meta and eof, since same array...
+proc_count = 0				= 1 process
+hd_count = 2				= 1 hd
+[0] hd[0] = <<
+[0] hd[1] = eof
+
+red_count = 4				= 2 redirects
+[0] reds[0] = >
+[0] reds[1] = out_file
+[0] reds[2] = <
+[0] reds[3] = in_file
+
+str_count = 4				= 4 cmd args
+[0] str[0] = something
+[0] str[1] = string
+[0] str[2] = and
+[0] str[3] = things
+
+
+------------------------------
+------------------------------
+
+
+**MAIN TO DO**
 
 *TODO 1* US
  ---->>>>  ?? why we exiting??
-
 EXAMPLE:
 minibleh:<< eof
 heredoc> hi
@@ -34,59 +184,58 @@ heredoc> '$USER'
 heredoc> eof
 
 
-***LETS GO FROM HERE***
-*TODO 3* ME
- ----->>> first process before pipe doesnt need cmd, 
-	because of sorting, input is getting messed up
-			> test | echo blabla
-	probably same for is no cmd after/between pipes...
-
-	TESTS:
-	> test | echo blabla
-	< does_not_exist | echo blabla > test6
-
-
-*TODO 4* ME
------>>>> pipe count
-
-
-*TODO 5* US
- --->>> ".." not erroring... not leaking either
-		same with "''" and """"
-need to give no command error
-
-
-*TODO 6* ME
+*TODO 3* ME 	WHAT AM I DOING ABOUT MALLOC FUNC/PROTECTION??
  ------>> put ft_malloc into libft, use for all malloc in libft, 
 		forget about protection hawhaw
 		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
 
 
-*TODO 7* ME
+*TODO 4* ME
  ---->> check and test here_doc expansion
  +++ -----> stress testing the expander + checking all for leaks
 
 
-*TODO 8* ME
+*TODO 5* ME
  ---->> NORM: expand_quotes.c
 
 
-*TODO 9* US
-SIGNALSSSSh 
+*TODO 6* US
+SIGNALSSSSh
+ ---> the file is a total mess....
+ ---> check they really really work correctly in all situations 
  ---> heredoc still weird, two prompt with signal
 
 
-*TODO 10* ME
+*TODO 7* ME
 EXPANSION
  ---> $? ***, test once exit codes are good
 
 
+*TODO 8* ME
+---> literally all errors
+
+
+*TODO 9* 
+ ---> norm, comment printing utils, check all error messages for
+		inappropriatness (sp?)
+
+
+=================================================================
+=================================================================
 --------------------------------------------------------------------
 
 =================================================================
 =================================================================
+
 **RANDOM NOTES ...**
 
+------------------------------------------------------------------------
+**IF THE SHIT SHOW HAS BEEN FIXED....**
+JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
+
+**TO DO**
+**PROBLEM**
+**FOOOOOOOOOK**
 
 **THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
 

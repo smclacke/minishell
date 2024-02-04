@@ -5,173 +5,131 @@
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/09/21 15:06:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/12/10 20:22:53 by smclacke      ########   odam.nl         */
+/*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
+/*   Updated: 2024/02/01 16:47:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
+ * @todo comments
+ * @todo malloc protect
+ * @todo norm
  * @todo errors
-*/
-
-/**
- * @brief	sorting all tokens from one process together
- * 			if no cmd has been found, the first string not
- * 			assocciated with a redrect is assigned data->cmd
- * 			is meta char? data->meta
- * 			all other input is str, token after redirect is
- * 			handled in handle_next(), (e.g. in/out files)
- * @param	data struct holding the varibale types of the lexer tokens
- * @param	flag int to check whether the cmd of the process has been found
- * @return	tokens->data passed from the data struct into the parser struct
- * 			after varibales have been assigned correctly
- * @return	tokens passed from the data struct into the parser struct
- * 			tokens with correctly assigned varibales
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
-*/
-static t_parser	*handle_vars(t_parser *data, int *flag)
+ */
+static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 {
-	if (!*flag)
+	int		proc_j;
+	int		token_size;
+
+	proc_j = 0;
+	token_size = 0;
+	while (proc_j < proc_size)
 	{
-		if (is_meta_no_pipe(data->input))
-			data->meta = data->input;
-		else
+		if (!proc->tokens[proc->start])
 		{
-			data->cmd = data->input;
-			*flag = 1;
+			printf("this one\n");
+			exit(EXIT_SUCCESS);
+		}
+		token_size = ft_strlen(proc->tokens[proc->start]);
+		proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (token_size + 1));
+		// wrap
+		ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
+		if (!proc->proc_arrs[proc_i][proc_j])
+		{
+			printf("noooo, this one\n");
+			exit(EXIT_SUCCESS);
+		}
+		proc_j++;
+		proc->start++;
+	}
+}
+
+static	void	get_procs(t_parser *proc)
+{
+	int	i;
+	int	proc_i;
+	int	proc_size;
+
+	i = 0;
+	proc_i = 0;
+	proc_size = 0;
+	proc->proc_arrs = (char ***)malloc(sizeof(char **) * (proc->proc_count + 1));
+	// wrap
+	while (proc->tokens[i])
+	{
+		proc->start = i;
+		while (proc->tokens[i] && !is_pipe(proc->tokens[i]))
+			i++;
+		proc_size = (i - proc->start);
+		proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc_size + 1));
+		// wrap
+		make_proc_arr(proc, proc_i, proc_size);
+		proc->proc_arrs[proc_i][proc_size] = NULL;
+		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
+		{
+			i++;
+			proc_i++;
 		}
 	}
-	else if (*flag)
-	{
-		if (is_meta_no_pipe(data->input))
-			data->meta = data->input;
-		else
-			data->str = data->input;
-	}
-	if (!data)
-		// mini_error("general: handle_vars()", E_GENERAL);
-		return (0);
-	return (data);
 }
 
 /**
- * @brief	if previous token was a meta char, the next is 
- * 			either an in or out file, or the here_doc limiter
- * 			- if < or >, next is in or out file
- *			- if << here_doc, next is limiter string
- *			- if >> concat, so outfile follows
-			- don't need to handle pipes here
- * @param	data tokens
- * @param	type the previous tokens type of meta character
- * @return	tokens->data passed from the data struct into the parser struct
- * 			tokens with correctly assigned varibales
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
+ * @todo	maybe norm?
+ * @todo	bzero procs struct??
+ * @todo	error handling
+ * @todo	memory handling, malloc protection
+ * @todo	remove print statements when everything works
+ * @todo 	do I need alllll of these vars??
 */
-static t_parser	*handle_next(t_parser *data, char *type)
+t_parser	*parse_tokens(char **tokens)
 {
-	if (is_meta(data->input))
-		// mini_error("syntax error near expected token 'TOKEN'", E_SYNTAX);
-		return (0);
-	if (ft_strcmp(type, LESSLESS) == 0)
-		data->hd_limit = data->input;
-	else
-		data->file = data->input;
-	if (!data)
-		// mini_error("general: handle_next()", E_GENERAL);
-		return (0);
-	return (data);
-}
-
-/**
- * @brief	if no pipe meta is encountered, handle_vars()
- * 			everything possible within one process (i.e. one cmd)
- * 			if pipe meta is found, this is added to variable struct
- * 			and the process starts from the beginning finding the 
- * 			new cmd string etc.
- * @param	data tokens
- * @param	flag int to check whether the cmd of the process has been found
- * @return	tokens with correctly assigned varibales
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
-*/
-static t_parser	*handle_input(t_parser *data, int *flag)
-{
-	if (data && !is_pipe(data->input))
-		data = handle_vars(data, flag);
-	else if (data && is_pipe(data->input))
-		data = handle_pipe(data, flag);
-	if (!data)
-		// mini_error("general: handle_input()", E_GENERAL);
-		return (0);
-	return (data);
-}
-
-static int	get_n_pipe(t_parser *tokens)
-{
-	t_parser	*tmp;
+	t_parser	*proc;
+	t_parser	*parser_list;
+	t_parser	*new_node;
 	int			i;
 
 	i = 0;
-	tmp = tokens;
-	while (tmp)
-	{
-		if (tmp->meta && shelly_strcmp(tmp->meta, "|") == 0)
-			i += 1;
-		tmp = tmp->next;
-	}
-	return (i);
-}
+	proc = (t_parser *)malloc(sizeof(t_parser));
+	// wrap it up
+	ft_bzero(proc, sizeof(t_parser));
 
-/**
- * @brief	main parser func:
- * 			If there's a redirect, the type is saved
- * 			in type var and the next token is handled depending on
- * 			the type of redirect before it. 
- * 			handle_all() checks whether a pipe had been encountered 
- * 			or not so that the cmd can be found.
- * 			i.e. cmd str | < file CMD str str...
- * 			Flag is used to find the cmd from the strs, first str without
- * 			redirect is cmd, if pipe, this is reset.
- *  		- if < or >, next is in or out file
- *			- if << here_doc, next is limiter string
- *			- if >> concat, so outfile follows
- *			- if first encountered str, then = cmd, all others strs
- *			- if pipe, flag is reset to find the new cmd, rest works the same
- * @param	tokens t_tokens passed from the lexer to be sorted by the parser()
- * @return	tokens: all the tokens given by the lexer have been
- * 			sorted into the parser struct variables making
- * 			them more managable for the executor
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
-*/
-t_parser	*parser(t_parser *tokens)
-{
-	t_parser	*tmp;
-	char		*type;
-	int			flag;
+	proc->tokens = tokens;
+	proc->proc_count = (count_procs(tokens) + 1);
 
-	tmp = tokens;
-	type = NULL;
-	flag = 0;
-	while (tmp)
+	parser_list = NULL;
+	new_node = NULL;
+
+	proc->process = (t_procs **)malloc(sizeof(t_procs *) * (proc->proc_count + 1));
+	// wrap it up
+	if (proc->proc_count > 1)
 	{
-		type = is_redirect(tmp->input);
-		tmp = handle_input(tmp, &flag);
-		if (type && tmp->next)
+		// handle mutli (())
+		proc->multi_proc_b = TRUE;
+		get_procs(proc);
+		while (i < proc->proc_count)
 		{
-			tmp = tmp->next;
-			tmp = handle_next(tmp, type);
+			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
+			// wrap it up
+			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
+			proc->process[i]->proc_count = (proc->proc_count - 1);
+			new_node = parser_listnew(proc->process[i]);
+			parser_listadd_back(&parser_list, new_node);
+			i++;
 		}
-		else if (type && !tmp->next)
-			return (0); // errror
-		tmp = tmp->next;
+	}	
+	else if (proc->proc_count == 1)
+	{
+		// handle singular ())()
+		proc->multi_proc_b = FALSE;
+		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
+		// wrap it up
+		sort_each_proc(proc->process[i], proc->tokens);
+		proc->process[i]->proc_count = 0;
+		new_node = parser_listnew(proc->process[i]);
+		parser_listadd_back(&parser_list, new_node);
 	}
-	tokens = sort_list(tokens);
-	tokens->n_cmd = get_n_cmds(tokens);
-	tokens->n_pipe = get_n_pipe(tokens);
-	return (tokens);
+	prpr(parser_list); // printing
+	return (parser_list);
 }
