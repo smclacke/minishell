@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:55:24 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 20:12:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ void	put_custom_error(t_parser *node, char *cmd)
 	if (mini_strcmp(cmd, "export") == 0)
 	{
 		ft_putstr_fd("minishell: export: `", STDOUT_FILENO);
-		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd(node->proc->str, STDOUT_FILENO);
 		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
 	}
 	else if (mini_strcmp(cmd, "unset") == 0)
 	{
 		ft_putstr_fd("minishell: unset: `", STDOUT_FILENO);
-		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd(node->proc->str, STDOUT_FILENO);
 		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
 	}
 	else if (mini_strcmp(cmd, "exit") == 0)
 	{
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
-		ft_putstr_fd(node->str, STDOUT_FILENO);
+		ft_putstr_fd(node->proc->str, STDOUT_FILENO);
 		ft_putstr_fd(ERROR_MESSAGE, STDOUT_FILENO);
 	}
 }
@@ -48,7 +48,7 @@ void	put_custom_error(t_parser *node, char *cmd)
 void	put_execute_error(t_parser *node)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(node->cmd, STDERR_FILENO);
+	ft_putstr_fd(node->proc->cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 }
 
@@ -59,7 +59,7 @@ void	put_execute_error(t_parser *node)
 */
 void	put_permission_error(t_parser *node)
 {
-	ft_putstr_fd(node->cmd, STDERR_FILENO);
+	ft_putstr_fd(node->proc->cmd, STDERR_FILENO);
 	ft_putstr_fd(": permission denied\n", STDERR_FILENO);
 }
 
