@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/01/12 19:53:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/04 19:01:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,25 @@
  * @param data execute struct
  * @brief checks for single builtin command and if there are redirects
  * executes the builtin and redirect function
+ * @note change to count == one because won't ever be 0 processes
+ * 		1 == one process
 */
 bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {
 	int	count;
 
-	count = lst->n_cmd;
-	if (count <= 1)
+	count = lst->proc->proc_count;
+	if (count == 1)
 	{
-		if (check_for_builtin(lst) || lst->meta)
+		if (lst->proc->red_count != 0)
 		{
 			redirect(lst, data);
 			if (data->error == false)
 				return (true);
-			do_builtin(lst, env);
-			return (true);
 		}
+		if (check_for_builtin(lst))
+			do_builtin(lst, env);
+		return (true);
 	}
 	return (false);
 }
@@ -63,16 +66,16 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 */
 bool	absolute_check(t_parser *node)
 {
-	if (!node->cmd)
+	if (!node->proc->cmd)
 		return (false);
-	if (!ft_strncmp(node->cmd, "/", 1)
-		&& access(node->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->proc->cmd, "/", 1)
+		&& access(node->proc->cmd, F_OK) == 0)
 		return (true);
-	if (!ft_strncmp(node->cmd, "./", 2)
-		&& access(node->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->proc->cmd, "./", 2)
+		&& access(node->proc->cmd, F_OK) == 0)
 		return (true);
-	if (!ft_strncmp(node->cmd, "../", 3)
-		&& access(node->cmd, F_OK) == 0)
+	if (!ft_strncmp(node->proc->cmd, "../", 3)
+		&& access(node->proc->cmd, F_OK) == 0)
 		return (true);
 	return (false);
 }
@@ -85,17 +88,18 @@ bool	absolute_check(t_parser *node)
  * init_forks and close_between in a while loop
  * @todo add list->proc-count instead of lst->n_cmd,
  * dont need to use int count anymore :)
+ * check with if work :)
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
 	int	count;
 	int	i;
 
-	count = lst->n_cmd;//instead of this go to proc-count
+	count = lst->proc_count;//instead of this go to proc-count
 	i = 0;
 	while (lst)
 	{
-		if (count >= 1 && lst->cmd)
+		if (count >= 1 && lst->proc_count)	
 		{
 			init_pipe(i, count, data, lst);
 			init_fork(lst, env, data);
@@ -112,26 +116,23 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
  * @param execute execute struct
  * @brief checks for redirects and enters redirect in or outfile function
  * @todo remove printf statement check line 118
+ * @note keeping hd_count check since func used much, i.e. mini_forks
+ * 		- when used with multi procs, check hd stuff...
+ * @note from single_builtin_cmd, already checked for redirs
+ * 		make sure this happens on every redirect() call
+	
+	// redirs are totally separate from hd
+	// if (!lst->proc->hd_count)
+	// 	lst = lst->next; // don't list next, look only at current proc
 */
 void	redirect(t_parser *lst, t_execute *data)
 {
-	if (!lst->next)//still need this?
-		return ;
-	if (!lst->meta)
-		lst = lst->next;
-	while (lst && !lst->cmd)
+	if (!redirect_infile(lst->proc, data))
 	{
-		if (check_redirect(lst) != 0)
-		{
-			if (!redirect_infile(lst, data))
-			{
-				data->error = false;
-				return ;
-			}
-			redirect_heredoc(lst);
-			redirect_outfile(lst, data);
-			redirect_append(lst, data);
-		}
-		lst = lst->next;
+		data->error = false;
+		return ;
 	}
+	redirect_heredoc(lst->proc);
+	redirect_outfile(lst, data);
+	redirect_append(lst, data);
 }

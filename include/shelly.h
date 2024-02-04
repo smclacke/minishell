@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 16:45:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 19:12:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,12 +137,12 @@ void			handle_signals(int proc);
 
 				// ALL DJOYKE PROTOS //
 bool			check_for_builtin(t_parser *node);
-void			redirect_outfile(t_parser *head, t_execute *data);
-bool			redirect_infile(t_parser *head, t_execute *data);
-void			redirect_append(t_parser *head, t_execute *data);
+void			redirect_outfile(t_procs *head, t_execute *data);
+bool			redirect_infile(t_procs *head, t_execute *data);
+void			redirect_append(t_procs *head, t_execute *data);
 void			init_heredoc(t_parser *lst, t_env **env);
 void			redirect(t_parser *lst, t_execute *data);
-void			redirect_heredoc(t_parser *lst);
+void			redirect_heredoc(t_procs *lst);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);
@@ -181,7 +181,7 @@ void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
 bool			absolute_check(t_parser *node);
 void			execute(t_env **env, t_parser *list);
 void			init_execute_struct(t_execute *data);
-bool			check_redirect(t_parser *node);
+// bool			check_redirect(t_parser *node);
 void			free_data(t_execute *data);
 void			close_all(t_execute *data, t_parser *lst);
 void			close_between(t_execute *data, t_parser *lst);

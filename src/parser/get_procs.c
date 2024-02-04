@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 16:44:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 18:23:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	get_reds(t_procs *proc, char **process)
 		i++;
 	}
 }
-
+/**
+ * @note changed hds, ignoring << meta, hd_count= actual hd_count
+ * 		hd_array = array delimiters e.g. hd[0] = eof hd[1] = end ...  
+*/
 void	get_hds(t_procs *proc, char **process)
 {
 	int		i;
@@ -59,9 +62,8 @@ void	get_hds(t_procs *proc, char **process)
 				printf("error 2\n");
 				exit (EXIT_FAILURE);
 			}
-			proc->hd[j] = process[i];
-			proc->hd[j + 1] = process[i + 1];
-			j += 2;
+			proc->hd[j] = process[i + 1];
+			j++;
 			i++;
 		}
 		i++;

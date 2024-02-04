@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/25 14:43:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/04 18:20:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		count_hds(char **process)
 				printf("error 4\n");
 				return (EXIT_FAILURE);
 			}
-			count += 2;
+			count += 1;
 		}
 		i++;
 	}
