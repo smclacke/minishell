@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 17:43:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 18:09:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,11 @@ static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		token_size = ft_strlen(proc->tokens[proc->start]);
 		proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (token_size + 1));
 		if (!proc->proc_arrs[proc_i][proc_j])
-		{
-			free(proc);
-			free(proc->proc_arrs);
-			free(proc->proc_arrs[proc_i]);
-			sarah_error("malloc error make_proc_arr");
-		}
-		// wrap
+			sarah_error(proc, "malloc error make_proc_arr");
 		ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
 		free(proc->tokens[proc->start]);
 		if (!proc->proc_arrs[proc_i][proc_j])
 		{
-			free(proc);
-			free(proc->proc_arrs);
-			free(proc->proc_arrs[proc_i]);
 			printf("noooo, this one\n");
 			exit(EXIT_SUCCESS);
 		}
@@ -68,11 +59,7 @@ static	void	get_procs(t_parser *proc)
 	proc_size = 0;
 	proc->proc_arrs = (char ***)malloc(sizeof(char **) * (proc->proc_count + 1));
 	if (!proc->proc_arrs)
-	{
-		free (proc);
-		sarah_error("malloc error get_procs 1");
-	}
-	// wrap
+		sarah_error(proc, "malloc error get_procs 1");
 	while (proc->tokens[i])
 	{
 		proc->start = i;
@@ -81,11 +68,7 @@ static	void	get_procs(t_parser *proc)
 		proc_size = (i - proc->start);
 		proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc_size + 1));
 		if (!proc->proc_arrs[proc_i])
-		{
-			free(proc);
-			free(proc->proc_arrs);
-			sarah_error("malloc error get_procs 2");
-		}
+			sarah_error(proc, "malloc error get_procs 2");
 		make_proc_arr(proc, proc_i, proc_size);
 		proc->proc_arrs[proc_i][proc_size] = NULL;
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
@@ -114,7 +97,7 @@ t_parser	*parse_tokens(char **tokens)
 	i = 0;
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	if (!proc)
-		sarah_error("malloc error parser_tokens 1");
+		sarah_error(NULL, "malloc error parser_tokens 1");
 	ft_bzero(proc, sizeof(t_parser));
 
 	proc->tokens = tokens;
@@ -125,10 +108,7 @@ t_parser	*parse_tokens(char **tokens)
 
 	proc->process = (t_procs **)malloc(sizeof(t_procs *) * (proc->proc_count + 1));
 	if (!proc->process)
-	{
-		free(proc);	
-		sarah_error("malloc error parser_tokens 2");
-	}
+		sarah_error(proc, "malloc error parser_tokens 2");
 	if (proc->proc_count > 1)
 	{
 		// handle mutli (())
@@ -138,12 +118,7 @@ t_parser	*parse_tokens(char **tokens)
 		{
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 			if (!proc->process[i])
-			{
-				free(proc);
-				free(proc->process);
-				sarah_error("malloc error parser_tokens 3");
-			}
-			// wrap it up
+				sarah_error(proc, "malloc error parser_tokens 3");
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
 			proc->process[i]->proc_count = proc->proc_count;
 			new_node = parser_listnew(proc->process[i]);
@@ -157,11 +132,7 @@ t_parser	*parse_tokens(char **tokens)
 		proc->multi_proc_b = FALSE;
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		if (!proc->process[i])
-		{
-			free(proc);
-			free(proc->process);
-			sarah_error("malloc error parser_tokens 4");
-		}
+			sarah_error(proc, "malloc error parser_tokens 4");
 		sort_each_proc(proc->process[i], proc->tokens);
 		proc->process[i]->proc_count = 1;
 		new_node = parser_listnew(proc->process[i]);

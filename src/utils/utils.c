@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 17:52:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 18:08:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ int	shelly_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (0);
-}
-
-void	sarah_error(char *str)
-{
-	printf("%s\n", str);
-	exit (EXIT_FAILURE);
 }
 
 static	void	sarah_free_procs(t_procs *proc)
@@ -107,7 +101,15 @@ void	free_parser(t_parser *procs)
 		free(procs->process);
 		sarah_free_procs(procs->proc);
 		free(procs->proc);
-		free (procs);
+		free(procs);
 		procs = tmp;
 	}
+}
+
+void	sarah_error(t_parser *proc, char *str)
+{
+	if (proc)
+		free_parser(proc);
+	printf("%s\n", str);
+	exit (EXIT_FAILURE);
 }
