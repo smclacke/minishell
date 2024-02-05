@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 20:12:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 16:27:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	put_permission_error(t_parser *node)
  * @param lst node in linked list
  * @brief puts custom error message on STDOUT_FILENO
 */
-void	no_such_file(t_parser *lst)
+void	no_such_file(char *str, t_parser *lst)
 {
-	dprintf(STDERR_FILENO, NO_SUCH_THING, lst->proc->str);
+	dprintf(STDERR_FILENO, NO_SUCH_THING, str);
 	mini_error(E_GENERAL, lst);
 }
 

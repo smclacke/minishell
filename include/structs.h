@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:32:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 17:35:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 # define STR_X 2
 # define HD_X 3
 # define RED_X 4
+
+# define PATH_MAX 4096
 
 # define NOT_POSSIBLE "minishell: env: no such file or directory\n"
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
@@ -105,6 +107,7 @@ typedef	struct s_procs
 	char					**hd;
 	int						hd_count;	
 	int						hd_fd;
+	struct s_parser			*parser;
 }			t_procs;
 
 /**

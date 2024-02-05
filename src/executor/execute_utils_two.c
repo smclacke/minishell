@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 20:07:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 16:51:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	redirect(t_parser *lst, t_execute *data)
 		data->error = false;
 		return ;
 	}
-	redirect_heredoc(lst->proc);
+	redirect_heredoc(lst);
 	redirect_outfile(lst->proc, data);
 	redirect_append(lst->proc, data);
 }

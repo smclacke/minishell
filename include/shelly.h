@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:37:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 16:53:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ bool			redirect_infile(t_procs *head, t_execute *data);
 void			redirect_append(t_procs *head, t_execute *data);
 void			init_heredoc(t_parser *lst, t_env **env);
 void			redirect(t_parser *lst, t_execute *data);
-void			redirect_heredoc(t_procs *lst);
+void			redirect_heredoc(t_parser *lst);
 
 //----Environment----//
 t_env			*env_list(char **envp, t_env *env);
@@ -163,7 +163,7 @@ void			do_builtin(t_parser *node, t_env **env, int cmd_type);
 bool			word_check(t_parser *lst);
 void			ft_cd(t_parser *lst, t_env **env);
 bool			too_many_args(t_parser *lst);
-void			no_such_file(t_parser *lst);
+void			no_such_file(char *str, t_parser *lst);
 void			put_custom_error(t_parser *node, char *cmd);
 void			ft_echo(t_parser *lst, t_env **env);
 void			ft_env(t_env *env, t_parser *lst);

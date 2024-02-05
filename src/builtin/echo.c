@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 21:19:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 18:23:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static bool	is_all_n(t_parser *temp)
 	int	j;
 
 	j = 1;
-	if (temp->str[0] != '-')
+	if (temp->proc->str[0] != '-')
 		return (false);
-	while (temp && temp->str[0] == '-' && temp->str[j] != '\0')
+	while (temp->proc->str[0] == '-' && temp->proc->str[j] != '\0')
 	{
-		if (temp->str[j] != 'n')
+		if (temp->proc->str[j] != 'n')
 			return (false);
 		j++;
 	}
@@ -40,13 +40,16 @@ static bool	is_all_n(t_parser *temp)
 */
 static void	write_line(t_parser *temp)
 {
-	while (temp && temp->str)
+	int i;
+
+	i = 0;
+	while (temp->proc->str[i])
 	{
-		if (temp->str)
-			write(1, temp->str, ft_strlen(temp->str));
-		if (temp->next)
+		if (temp->proc->str[i])
+			write(1, temp->proc->str, ft_strlen(temp->proc->str));
+		if (temp->proc->str[i + 1] != '\0')
 			write(1, " ", 1);
-		temp = temp->next;
+		i++;
 	}
 }
 
@@ -59,10 +62,10 @@ static void	home_check(t_parser *lst, t_env **env)
 {
 	char		*new_str;
 
-	if (mini_strcmp(lst->next->str, "~") == 0)
+	if (mini_strcmp(lst->proc->str[0], "~") == 0)
 	{
 		new_str = ft_getenv(*env, "HOME");
-		lst->next->str = new_str;
+		lst->proc->str[0] = new_str;
 	}
 }
 
@@ -70,18 +73,18 @@ static void	home_check(t_parser *lst, t_env **env)
  * @param lst t_parser linked list
  * @brief checks if cmd exist, and if there is a str input after it
  * @todo check error
+	// if (!temp->cmd)
+	// {
+	// 	mini_error(E_USAGE, lst);
+	// 	return (false);
+	// }
 */
 static bool	input_check(t_parser *lst)
 {
 	t_parser	*temp;
 
 	temp = lst;
-	if (!temp->cmd)
-	{
-		mini_error(E_USAGE, lst);
-		return (false);
-	}
-	if (!temp->next || temp->next->meta)
+	if (lst->proc->str_count == 0)
 	{
 		write(1, "\n", 1);
 		return (false);
@@ -106,19 +109,15 @@ void	ft_echo(t_parser *lst, t_env **env)
 	if (!input_check(lst))
 		return ;
 	home_check(temp, env);
-	temp = temp->next;
-	while (temp && is_all_n(temp))
-	{
-		temp = temp->next;
+	while (is_all_n(temp))
 		is_flag++;
-	}
 	write_line(temp);
 	if (is_flag != 0)
 	{
 		lst->exit_code = E_USAGE;
 		return ;
 	}
-	if (is_flag == 0 || !temp->str)
+	if (is_flag == 0 || temp->proc->str_count == 0)
 		write(1, "\n", 1);
 	lst->exit_code = E_USAGE;
 }
