@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 19:29:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 19:30:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,4 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	proc->str_count = count_strs(proc, proc_arr);
 	proc->hd_count = count_hds(proc_arr);
 	sort_vars(proc, proc_arr);
-	// print_procs(proc);
 }
