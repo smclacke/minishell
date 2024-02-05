@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:45:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 19:19:24 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ void	make_node(t_parser *node, t_env **env, char *n_k, char *n_v)
 	char	*new_full;
 
 	h_v = 0;
-	h_v = get_key_value(node->str, &n_k, &n_v);
-	new_full = ft_strdup(node->str);
+	h_v = get_key_value(node->proc->str, &n_k, &n_v);
+	new_full = ft_strdup(node->proc->str);
 	if (new_full == NULL)
 		return ;
 	new_node = env_lstnew(n_k, n_v, new_full, h_v);

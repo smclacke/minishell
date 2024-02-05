@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/29 21:13:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 19:59:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static char	*check_for_equal_sign(char *str)
  * @param n_v string to contain new value value
  * @brief reassigns lines in the environment when export arguments is
  * 		  is an already excisting key.
+ * @todo is index [0] correct at check_for equal sign?
 */
 static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 {
@@ -61,12 +62,12 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
 	char	*temp;
 
 	head = *e;
-	comp_str = check_for_equal_sign(node->str);
+	comp_str = check_for_equal_sign(node->proc->str[0]);
 	while (head)
 	{
 		if (mini_strcmp(comp_str, head->key) == 0)
 		{
-			if (node->str[ft_strlen(node->str) == '='])
+			if (node->proc->str[ft_strlen(node->proc->str[0]) == '='])
 			{
 				temp = head->full;
 				head->full = comp_str;
@@ -90,22 +91,28 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * @todo 
  * env does show the expanded version.
  * check if multiple ===== what do you do?
+ * 	if (!node->next || node->n_cmd != 1)
+	{
+		export_print(*env);
+		return ;
+	}
  * 
 */
 void	ft_export(t_parser *node, t_env **env)
 {
 	char	*new_key;
 	char	*new_value;
+	int		i;
 
 	new_key = NULL;
 	new_value = NULL;
-	if (!node->next || node->n_cmd != 1)
+	i = 0;
+	if (node->proc->str_count == 0)
 	{
 		export_print(*env);
 		return ;
 	}
-	node = node->next;
-	while (node && node->str != NULL)
+	while (node->proc->str[i] != NULL)
 	{
 		if (word_check(node) == 1)
 			return ;
@@ -113,6 +120,6 @@ void	ft_export(t_parser *node, t_env **env)
 			return ;
 		make_node(node, env, new_key, new_value);
 		node->exit_code = E_USAGE;
-		node = node->next;
+		i++;
 	}
 }

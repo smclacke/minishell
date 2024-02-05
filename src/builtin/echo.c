@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:23:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 19:54:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static bool	is_all_n(t_parser *temp)
 	int	j;
 
 	j = 1;
-	if (temp->proc->str[0] != '-')
+	if (temp->proc->str[0][0] != '-')
 		return (false);
-	while (temp->proc->str[0] == '-' && temp->proc->str[j] != '\0')
+	while (temp->proc->str[0][0] == '-' && temp->proc->str[0][j] != '\0')
 	{
-		if (temp->proc->str[j] != 'n')
+		if (temp->proc->str[0][j] != 'n')
 			return (false);
 		j++;
 	}
@@ -37,6 +37,7 @@ static bool	is_all_n(t_parser *temp)
 /**
  * @param temp t_parser linked list
  * @brief writes string and space to the terminal
+ * @todo pointer or indext at strlen?
 */
 static void	write_line(t_parser *temp)
 {
@@ -46,8 +47,8 @@ static void	write_line(t_parser *temp)
 	while (temp->proc->str[i])
 	{
 		if (temp->proc->str[i])
-			write(1, temp->proc->str, ft_strlen(temp->proc->str));
-		if (temp->proc->str[i + 1] != '\0')
+			write(1, temp->proc->str, ft_strlen(*temp->proc->str));
+		if (temp->proc->str[i + 1] != NULL)
 			write(1, " ", 1);
 		i++;
 	}

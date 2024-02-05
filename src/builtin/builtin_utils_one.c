@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:36:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 18:55:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ bool	word_check(t_parser *lst)
 	char		**words;
 	char		*cmd;
 
-	cmd = lst->cmd;
+	cmd = lst->proc->cmd;
 	temp = lst;
 	words = null_check(temp);
 	if (!words)

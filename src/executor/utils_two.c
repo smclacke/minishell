@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:37:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 19:48:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,22 @@ int	check_for_builtin(t_parser *node)
  * @brief count's amount of words including cmd for 2d array
  * @return returns int representing word count.
  * @note do we need this??
+ * @todo norm 
 */
-static int	count_words(t_parser *temp)
+static int	count_words(t_procs *temp)
 {
 	int	i;
 
 	i = 0;
 	while (temp)
 	{
-		if (temp->cmd)
-			break ;
-		if (temp->str)
+		// if (temp->cmd)
+		// 	break ;
+		if (temp->str[i])
 			i++;
-		if (temp->meta)
-			temp = temp->next;
-		temp = temp->next;
+		// if (temp->meta)
+		// 	temp = temp->next;
+		// temp = temp->next;
 	}
 	return (i);
 }
@@ -71,21 +72,26 @@ static int	count_words(t_parser *temp)
  * @brief fill's 2d array with content of temp->str
  * @return returns int representing word count.
  * @note do we need this??
+ * @todo norm
 */
 static char	**fill_array(t_parser *temp, char **new_str, int i)
 {
-	while (temp && !temp->meta)
+	int j;
+
+	j = 0;
+	while (temp->proc->str[j])
 	{
-		if (temp->cmd)
-			break ;
-		if (temp->str)
+		// if (temp->proc->cmd)
+		// 	break ;
+		if (temp->proc->str[j])
 		{
-			new_str[i] = temp->str;
+			new_str[i] = temp->proc->str[j];
 			i++;
+			j++;
 		}
-		if (temp->meta)
-			temp = temp->next;
-		temp = temp->next;
+		// if (temp->meta)
+		// 	temp = temp->next;
+		// temp = temp->next;
 	}
 	new_str[i] = NULL;
 	return (new_str);
@@ -105,11 +111,11 @@ char	**get_argv(t_parser *lst)
 	int			i;
 
 	temp = lst->next;
-	i = count_words(temp);
+	i = count_words(temp->proc);
 	new_str = (char **)malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
 		mini_error(E_MALLOC, lst);
-	new_str[0] = lst->cmd;
+	new_str[0] = lst->proc->cmd;
 	i = 1;
 	new_str = fill_array(temp, new_str, i);
 	return (new_str);
