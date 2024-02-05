@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 16:35:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 17:39:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static	void	sort_vars(t_procs *proc, char **process)
 	if (proc->cmd_flag != 0 || proc->str_count != 0)
 	{
 		proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
+		if (!proc->str)
+			sarah_error("malloc sort_vars");
 		get_strs(proc, process);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 15:30:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 17:38:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	get_reds(t_procs *proc, char **process)
 	i = 0;
 	j = 0;
 	proc->redir = (char **)malloc(sizeof(char *) * (proc->red_count + 1));
+	if (!proc->redir)
+		sarah_error("malloc error get_reds");
 	while (process[i])
 	{
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
@@ -56,6 +58,8 @@ void	get_hds(t_procs *proc, char **process)
 	i = 0;
 	j = 0;
 	proc->hd = (char **)malloc(sizeof(char *) * (proc->hd_count + 1));
+	if (!proc->hd)
+		sarah_error("malloc error het_hds");
 	while (process[i])
 	{
 		if (proc_redir(process[i]) == 2)
@@ -101,6 +105,8 @@ void	get_strs(t_procs *proc, char **process)
 		{
 			len = ft_strlen(process[i]);
 			proc->cmd = (char *)malloc(sizeof(process[i] + 1));
+			if (!proc->cmd)
+				sarah_error("malloc error get_strs");
 			proc->cmd_flag = 1;
 			proc->cmd = process[i];
 			i++;

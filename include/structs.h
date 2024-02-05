@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 15:24:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 17:33:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef	struct s_procs
 	char					**hd;
 	int						hd_count;
 	int						hd_fd;
+	struct s_parser			*parser;
 }			t_procs;
 
 /**
