@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:42:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 19:29:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 */
 static	void	sort_vars(t_procs *proc, char **process)
 {
-	if (proc->cmd_flag != 0 || proc->str_count != 0)
+	if (proc->cmd_flag == TRUE)
 	{
-		proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
-		// if (!proc->str)
-		// 	sarah_error(NULL, "malloc sort_vars");
+		proc->cmd = (char *)malloc(sizeof(char));
+		if (proc->str_count != 0)
+			proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
 		get_strs(proc, process);
 	}
 	else
@@ -54,4 +54,5 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	proc->str_count = count_strs(proc, proc_arr);
 	proc->hd_count = count_hds(proc_arr);
 	sort_vars(proc, proc_arr);
+	// print_procs(proc);
 }

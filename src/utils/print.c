@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 15:21:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 19:24:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	prpr(t_parser *proc)
 	int		i = 0;
 	int		j = 0;
 
-	printf("parser proc count = [%i]\n", proc->proc_count);
-	// printf("proc proc_count = [%i]\n\n", proc->proc->proc_count);
+	// printf("parser proc count = [%i]\n", proc->proc_count);
+	printf("proc proc_count = [%i]\n\n", proc->proc->proc_count);
 	while (proc)
 	{
 		printf("\n[%i] cmd = %s\n", i, proc->proc->cmd);
