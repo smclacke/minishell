@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 20:58:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 15:25:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void			get_strs(t_procs *proc, char **process);
 
 //-------- proc_utils --------//
 int				count_reds(char **process);
-int				count_strs(char **process);
+int				count_strs(t_procs *proc, char **process);
 int				count_hds(char **process);
 int				proc_redir(char *input);
 

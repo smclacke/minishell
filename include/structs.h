@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 21:07:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 15:24:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,26 @@ typedef enum e_exit
  * 			lexer that are organised via the parser, then given to the 
  * 			executor in the form of a parser list, each node being
  * 			one process containing some or all of these proc struct vars
+ * @param	proc_count: total number of processes (3 = 3)
  * @param	token_count: total number of tokens within each process
  * @param	cmd: first string in each process without redirect char
- * @param	cmd_flag: util var to check if cmd has been found per process
  * @param	str: array of all cmd args
- * @param	str_count: number of string args per process
+ * @param	str_count: number of string args per process (3 = 3)
  * @param	redir: array of all < > >> in, out and truncate files, 
  * 			left in order as inputted. file after each meta characher included, 
  * 			error if no string after meta
- * @param	red_count: number of redir metas and files per process
- * @param	hd: array of all << hd meta and delimiter, left in order
- * 			 as inputted. error if no string after hd meta
- * @param	hd_count: number of hd metas << and delmiters per process
+ * @param	red_count: number of redir metas and files in array per process  (3 = 3)
+ * @param	hd: array of all hd delimiters, ignoring hd meta itself
+ * 				error if no string after hd meta
+ * @param	hd_count: number of hd delimiters in array (3 = 3)
+ * @param	hd_fd: var for djoyke, inited at -1
 */
 typedef	struct s_procs
 {
 	int						proc_count;
 	int						token_count;
 	char					*cmd;
-	// int						cmd_flag;
+	int						cmd_flag;
 	char					**str;
 	int						str_count;
 	char					**redir;
@@ -106,13 +107,14 @@ typedef	struct s_procs
  * @param	proc_arrs: if multiple processes, use the array of processes
  * 
  * @param	start: used for creating proc_arrs
- * @param	proc_count: total number of processes
+ * @param	proc_count: total number of processes (3 = 3)
  * 
  * @param	process: use to sort either tokens or proc_arrs into procs struct
  * 					similiar to just an input var
  * @param	proc: each node of the parser list is stored here, this way each node
  * 				parser->proc[0]->... accesses the procs struct with all vars
- * 				from that processes, can iterate through these proc nodes 
+ * 				from that processes, can iterate through these proc nodes
+ * @param	hd_flag: check if expansion in hd is necessary
 */
 typedef	struct	s_parser
 {
@@ -125,8 +127,8 @@ typedef	struct	s_parser
 
 	struct s_procs			**process;
 	struct s_procs			*proc;
-
 	int						hd_flag;
+
 	char					*exit_str;
 	enum e_exit				exit_code;
 	int						exit_stat;

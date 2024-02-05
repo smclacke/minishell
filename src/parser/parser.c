@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 20:54:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 15:29:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ static	void	get_procs(t_parser *proc)
 		proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc_size + 1));
 		// wrap
 		make_proc_arr(proc, proc_i, proc_size);
-		proc->proc_arrs[proc_i][proc_size] = NULL; 
-	// needs to change to proc_size + 1, but buffer overflow so find where there isnt enough memory
+		proc->proc_arrs[proc_i][proc_size] = NULL;
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 		{
 			i++;
@@ -131,5 +130,6 @@ t_parser	*parse_tokens(char **tokens)
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
 	}
+	parser_list->proc_count = (count_procs(tokens) + 1);
 	return (parser_list);
 }

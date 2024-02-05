@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/01 16:44:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 15:26:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@
 */
 static	void	sort_vars(t_procs *proc, char **process)
 {
-	if (proc->str_count != 0)
+	if (proc->cmd_flag != 0 || proc->str_count != 0)
 	{
-		proc->cmd = (char *)malloc(sizeof(char));
 		proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
 		get_strs(proc, process);
 	}
@@ -44,13 +43,13 @@ static	void	sort_vars(t_procs *proc, char **process)
  * @todo	free proc_arr or tokens once sorted into proc struct
  * @todo	malloc protection 
  * @todo	bzeros?
+ * @brief	count_hds looks for the hd meta and saves the number of hds
 */
 void	sort_each_proc(t_procs *proc, char **proc_arr)
 {
 	proc->token_count = ft_arrlen(proc_arr);
 	proc->red_count = count_reds(proc_arr);
-	proc->str_count = count_strs(proc_arr);
+	proc->str_count = count_strs(proc, proc_arr);
 	proc->hd_count = count_hds(proc_arr);
 	sort_vars(proc, proc_arr);
-	// print_procs(proc);
 }
