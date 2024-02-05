@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:37:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 18:45:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	main(int argc, char **argv, char **envp)
 
 		prpr(procs);
 
-		dup2(og_stdout, STDOUT_FILENO);
-		dup2(og_stdin, STDIN_FILENO);
+		// dup2(og_stdout, STDOUT_FILENO);
+		// dup2(og_stdin, STDIN_FILENO);
 
-		free_parser(procs);
+		// free_parser(procs);
 
 		printf("success\n");
 		exit(EXIT_SUCCESS);
