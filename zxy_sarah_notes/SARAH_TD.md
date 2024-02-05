@@ -10,8 +10,6 @@
 
 **DO this**
 
-- NULLs at end are fucked if echo something | echo, last echo becomes NULL....
-
 - freee some things
 
 - leakkkyyyy af
@@ -21,6 +19,8 @@
 - errors errors errors
 
 - STRESS TEST THE FUCK OUTTA IT
+
+- check everything is nullified properly...
 ------------------------------
 ------------------------------
 
