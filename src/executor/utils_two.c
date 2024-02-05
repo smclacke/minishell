@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 20:32:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 22:32:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	count_words(t_parser *temp)
 */
 static char	**fill_array(t_parser *temp, char **new_str, int i)
 {
-	while (temp)
+	while (temp && !temp->meta)
 	{
 		if (temp->cmd)
 			break ;
@@ -106,7 +106,6 @@ char	**get_argv(t_parser *lst)
 	new_str = (char **)malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
 		mini_error(E_MALLOC, lst);
-	temp = lst->next;
 	new_str[0] = lst->cmd;
 	i = 1;
 	new_str = fill_array(temp, new_str, i);

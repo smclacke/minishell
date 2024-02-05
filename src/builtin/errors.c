@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/08 22:28:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 16:48:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,5 @@ void	no_such_file(t_parser *lst)
 void	mini_error(int exit_enum, t_parser *lst)
 {
 	lst->exit_code = exit_enum;
-	exit(exit_enum);
+	// exit(exit_enum);
 }

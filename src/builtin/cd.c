@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/08 22:31:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 20:28:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	old_pwd(t_parser *lst, t_env **env)
  * checks access of lst->str, changes directory
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
- * @todo PATH_MAX not defined?
+ * @todo PATH_MAX not defined? NORM IT!
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {

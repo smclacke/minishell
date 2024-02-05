@@ -213,3 +213,148 @@ echo code instead of input check
 // 	}
 // 	return (0);
 // }
+
+// /**
+//  * @param lst parser linked list
+//  * @brief set's linked list from cmd to next cmd to 2d array
+//  * cmd at 0, plus args at 1 , 2 etc.
+//  * @todo error code
+//  * need to SAVE UNTIL PIPE MAYBE USE NUMBER OF CMDS
+// */
+// char	**get_argv(t_parser *lst)
+// 	t_parser	*temp;
+// 	char		**new_str;
+// 	int			i;
+
+// 	temp = lst->next;
+// 	i = count_words(temp);
+// 	// i = count_words(lst);
+// 	// printf("i = [%d]\n", i);
+// 	new_str = (char **)malloc(sizeof (char *) * (i + 2));
+// 	if (new_str == NULL)
+// 		mini_error(E_MALLOC, lst);
+// 	// temp = lst->next;
+// 	new_str[0] = lst->cmd;
+// 	i = 1;
+// 	new_str = fill_array(temp, new_str, i);
+// 	// new_str = fill_array(lst, new_str, i);
+// 	return (new_str);
+
+// /**
+//  * @param lst linked list containing commands and atributes
+//  * @param env linked list containing environment
+//  * @param data struct containing fd's and 2d arrays needed for execution
+//  * @brief checks parser input for executable and executes with execve
+//  *  replace exit int with the existatus global we pass on
+//  * @todo added id !lst->cmd to stop segfault NORM IT
+//  * 
+// */
+// void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
+// {
+// 	char		*executable;
+// 	char		**test;
+
+// 	test = get_argv(lst);
+// 	// print_array(test);
+// 	data->env_array = list_to_string(*env, lst);
+// 	init_pipes_child(data, lst);
+// 	redirect(lst, data);
+// 	if (data->error == false)
+// 		exit (0);
+// 	if (check_for_builtin(lst))
+// 	{
+// 		do_builtin(lst, env);
+// 		exit (0);
+// 	}
+// 	if (!lst->cmd)
+// 		exit (0);
+// 	executable = check_access(*env, lst, data);
+// 	// if (data->error == false)
+// 	// 	exit (0);
+// 	// if (access(executable, F_OK) == -1)
+// 	// {
+// 	// 	put_execute_error(lst);
+// 	// 	// exit (0);
+// 	// 	// return ;
+// 	// }
+// 	// if (access(executable, X_OK) == -1)
+// 	// {
+// 	// 	put_permission_error(lst);
+// 	// 	// exit (0);
+// 	// 	// return ;
+// 	// }
+// 	// if (execve(executable, get_argv(lst), data->env_array) == -1)
+// 	if (execve(executable, test, data->env_array) == -1)
+// 		mini_error (E_GENERAL, lst);
+// 	exit (0);
+// }
+
+// /**
+//  * @param lst parser linked list
+//  * @param env  environment linked list
+//  * @param data execute struct
+//  * @brief child execution process, calls init_pipes
+//  * init_forks and close_between in a while loop
+//  * @todo which version if statement? remove printf statement
+// */
+// void	pipeline(t_parser *lst, t_env **env, t_execute *data)
+// {
+// 	int	count;
+// 	int	i;
+
+// 	count = lst->n_cmd;
+// 	i = 0;
+// 	while (lst)
+// 	{
+// 		// if (count >= 0)
+// 		// if ((count >= 1 && lst->cmd) || (count == 0 && lst->meta))
+// 		// if (count >= 1)
+// 		if (count >= 1 && lst->cmd)
+// 		{
+// 			init_pipe(i, count, data, lst);
+// 			init_fork(lst, env, data);
+// 			close_between(data, lst);
+// 			count--;
+// 			i++;
+// 		}
+// 		lst = lst->next;
+// 	}
+// }
+
+// /**
+//  * @param env linked list with environment
+//  * @param node noded from parser linked list
+//  * @param data struct containing fd's and 2d arrays needed for execution
+//  * @brief checks is command has access
+//  * @todo exit codes
+// */
+// static char	*check_access(t_env *env, t_parser *node, t_execute *data)
+// {
+// 	char	*ok_path;
+// 	char	*command;
+// 	int		i;
+
+// 	i = 0;
+// 	if (!node->cmd)//
+// 		return (node->cmd);//
+// 	if (!absolute_check(node) && parse_path(env, data, node))
+// 	{
+// 		while (data->path && data->path[i] != NULL)
+// 		{
+// 			command = ft_strjoin("/", node->cmd);
+// 			if (command == NULL)
+// 				mini_error (E_MALLOC, node);
+// 			ok_path = ft_strjoin(data->path[i], command);
+// 			if (command == NULL)
+// 				mini_error (E_MALLOC, node);
+// 			free(command);
+// 			if (access(ok_path, F_OK) == 0)
+// 				return (ok_path);
+// 			free(ok_path);
+// 			i++;
+// 		}
+// 		put_execute_error(node);
+// 		data->error = false;
+// 	}
+// 	return (node->cmd);
+// }

@@ -6,22 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:03:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 18:37:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-/**
- * @todo	you need to be normed
- * @todo	check the frees
- * @todo	free proc struct
-*/
 int	main(int argc, char **argv, char **envp)
 {
 	char		*input;
-	char		**tokens;
 	t_parser	*procs;
+	char		**tokens;
 
 	int			og_stdout;
 	int			og_stdin;

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/08 22:46:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2023/12/10 22:30:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param env  environment linked list
  * @param data execute struct
  * @brief forks, checks if it didnt fail, enters child process
- * @todo exit code NORM do I need to WAIT here?
+ * @todo exit code NORM do I need to WAIT here
 */
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -53,7 +53,6 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 		mini_error(E_GENERAL, lst);
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
-	// wait(NULL);
 }
 
 /**
@@ -84,7 +83,6 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
- * @todo which version if statement?
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -95,9 +93,7 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 	i = 0;
 	while (lst)
 	{
-		// if (count >= 0)
-		// if (count >= 1 && lst->cmd)
-		if ((count >= 1 && lst->cmd) || (count == 0 && lst->meta))
+		if (count >= 1 && lst->cmd)
 		{
 			init_pipe(i, count, data, lst);
 			init_fork(lst, env, data);

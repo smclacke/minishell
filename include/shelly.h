@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:06:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 18:37:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,5 +205,8 @@ int				mini_lstsize(t_env *lst);
 void			free_strs(char *str, char *str2);
 char			*ft_getenv(t_env *env, char *str);
 int				list_iter(t_parser *lst);
+
+
+void			print_array(char **arr);
 
 #endif
