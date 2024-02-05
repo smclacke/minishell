@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 16:27:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 20:00:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,27 @@
  * @param node node in linked list
  * @param cmd either unset or export
  * @brief puts custom error message on STDOUT_FILENO
+ * @todo is index[0] okay?
 */
 void	put_custom_error(t_parser *node, char *cmd)
 {
 	if (mini_strcmp(cmd, "export") == 0)
 	{
 		ft_putstr_fd("minishell: export: `", STDOUT_FILENO);
-		ft_putstr_fd(node->proc->str, STDOUT_FILENO);
+		ft_putstr_fd(node->proc->str[0], STDOUT_FILENO);
 		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
 	}
 	else if (mini_strcmp(cmd, "unset") == 0)
 	{
 		ft_putstr_fd("minishell: unset: `", STDOUT_FILENO);
-		ft_putstr_fd(node->proc->str, STDOUT_FILENO);
+		ft_putstr_fd(node->proc->str[0], STDOUT_FILENO);
 		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
 	}
 	else if (mini_strcmp(cmd, "exit") == 0)
 	{
 		ft_putstr_fd("exit\n", STDOUT_FILENO);
 		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
-		ft_putstr_fd(node->proc->str, STDOUT_FILENO);
+		ft_putstr_fd(node->proc->str[0], STDOUT_FILENO);
 		ft_putstr_fd(ERROR_MESSAGE, STDOUT_FILENO);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:55:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 20:01:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,14 @@ bool	word_check(t_parser *lst)
  * @param n_k string to contain new key value
  * @param n_v string to contain new value value
  * @brief reassigns lines in the environment
+ * @todo is index[0] correct?
 */
 void	replace_str(t_env *head, t_parser *node, char *n_k, char *n_v)
 {
 	int		has_value;
 	char	*temp;
 
-	has_value = get_key_value(node->str, &n_k, &n_v);
+	has_value = get_key_value(node->proc->str[0], &n_k, &n_v);
 	temp = head->value;
 	head->value = n_v;
 	free(temp);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:40:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 20:12:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,25 @@
 /**
  * @param node parsed list
  * @brief checks if content is a digit
+ * @todo is this still working?
 */
 static void	digit_check(t_parser *lst)
 {
 	int	i;
+	int j;
 
 	i = 0;
+	j = 0;
 	while (lst->proc->str[i])
 	{
-		if (ft_isdigit(lst->proc->str[i]) == 0)
+		while (ft_isdigit(lst->proc->str[i][j]) != 0)
 		{
-			put_custom_error(lst, "exit");
-			exit(255);
+			j++;
+			if (ft_isdigit(lst->proc->str[i][j]) == 0)
+			{
+				put_custom_error(lst, "exit");
+				exit(255);
+			}
 		}
 		i++;
 	}
