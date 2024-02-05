@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 15:34:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/05 16:56:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	main(int argc, char **argv, char **envp)
 		procs = parse_tokens(tokens);
 		if (!procs)
 			printf("NOPE\n");
-		// ft_free_arr(tokens);
 		
 		execute(&env, procs);
 

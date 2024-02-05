@@ -22,6 +22,31 @@
 
 - check everything is nullified properly...
 ------------------------------
+//		this was how i was using expander... merge with djoyke and try to not 
+		make a mess of everything....
+/**
+ * @param env environment linked list
+ * @param lst linked list parsed
+ * @brief calls functions needed to start executing process
+ * @todo exit codes
+*/
+void	execute(t_env **env, t_parser *lst)
+{
+	t_execute	*data;
+	(void)		data;
+	(void)		env;
+	(void)		lst;
+	// data = malloc(sizeof(t_execute));
+	// if (data == NULL)
+	// 	mini_error (E_GENERAL, lst);
+	// init_execute_struct(data);
+	ft_expand(lst, env);
+	// printf("success\n");
+	// exit(EXIT_SUCCESS);
+	// build(lst, env, data);
+	// free (data);
+}
+
 ------------------------------
 
 **ASK DJOYKE**
