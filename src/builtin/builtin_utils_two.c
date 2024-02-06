@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 18:21:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 21:21:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,20 @@ bool	too_many_args(t_parser *lst)
  * @todo check return / need exit code?
  * is index [0] correct?
 */
-void	make_node(char *str, t_env **env, char *n_k, char *n_v)
+void	make_node(char *str, t_env **env, char *key, char *value)
 {
-	int		h_v;
+	bool	has_value;
 	t_env	*new_node;
-	char	*new_full;
 
-	h_v = 0;
-	h_v = get_key_value(str, &n_k, &n_v);
-	new_full = ft_strdup(str);
-	if (new_full == NULL)
-		return ;
-	new_node = env_lstnew(n_k, n_v, new_full, h_v);
+	if (value)
+		has_value = true;
+	else
+		has_value = false;
+	new_node = env_lstnew(key, value, str, has_value);
+	if (!new_node)
+	{
+		// free it 
+		// return bla
+	}
 	env_lstadd_back(env, new_node);
 }

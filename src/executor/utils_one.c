@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 20:12:32 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 21:23:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,36 +64,4 @@ void	free_strs(char *str, char *str2)
 {
 	free (str);
 	free (str2);
-}
-
-/**
- * @param str string to be freed
- * @param str2 string to be freed
- * @brief frees strings
- * @todo can this be char *str as param?
- * added pointer to param of ft_split
- * @note changes ft_split
-*/
-char	**null_check(char *str, t_parser *temp)
-{
-	char		**words;
-	int			i;
-
-	i = 0;
-
-	words = NULL;
-	words = mini_split(str, '=');
-	// while(words[i] != NULL)
-	// {
-	// 	printf("word = %s\n", words[i]);
-	// 	i++;
-	// }
-	if (words == NULL)
-		mini_error(E_GENERAL, temp);
-	if (words[0] == NULL)
-	{
-		ft_free_arr(words);
-		return (NULL);
-	}
-	return (words);
 }

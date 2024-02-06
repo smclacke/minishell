@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 18:24:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 21:40:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,6 @@ static void	export_print(t_env *env)
 }
 
 /**
- * @param str string from the t_parser node containing export argument
- * @brief checks string if there's an equal sign present
-*/
-static char	*check_for_equal_sign(char *str)
-{
-	char	*comp_str;
-	int		i;
-
-	comp_str = NULL;
-	i = 0;
-	while (str[i] != '\0' && str[i] != '=')
-		i++;
-	comp_str = ft_substr(str, 0, i);
-	return (comp_str);
-}
-
-/**
  * @param e double pointer to environmet list
 //  * @param node pointer to node in list given in the form of a string
  * @param str string passed by parser
@@ -55,30 +38,21 @@ static char	*check_for_equal_sign(char *str)
  * @brief reassigns lines in the environment when export arguments is
  * 		  is an already excisting key.
 */
-static bool	reassign_env(t_env **e, char *str, char *n_k, char *n_v)
+static bool	reassign_env(t_env **e, char *str, char *key, char *value)
 {
 	t_env	*head;
-	char	*comp_str;
-	char	*temp;
 
 	head = *e;
-	comp_str = check_for_equal_sign(str);
 	while (head)
 	{
-		if (mini_strcmp(comp_str, head->key) == 0)
+		if (mini_strcmp(key, head->key) == 0)
 		{
-			if (str[ft_strlen(str) == '='])
-			{
-				temp = head->full;
-				head->full = comp_str;
-				free(temp);
-				replace_str(head, str, n_k, n_v);
-				return (true);
-			}
+			free(key);
+			replace_node(head, str, value);
+			return (true);
 		}
 		head = head->next;
 	}
-	free(comp_str);
 	return (false);
 }
 
@@ -95,12 +69,8 @@ static bool	reassign_env(t_env **e, char *str, char *n_k, char *n_v)
 */
 void	ft_export(t_parser *node, t_env **env)
 {
-	char	*new_key;
-	char	*new_value;
 	int		i;
 
-	new_key = NULL;
-	new_value = NULL;
 	i = 0;
 	if (node->proc->str_count == 0)
 	{
@@ -109,11 +79,22 @@ void	ft_export(t_parser *node, t_env **env)
 	}
 	while (i < node->proc->str_count)
 	{
-		if (word_check(node->proc->str[i], node) == 1)
+		char *str = node->proc->str[i];
+
+		while (str[i] && str[i] != '=')
+		{
+			i++;
+		}
+		
+		char *key = ft_substr(str, 0, i);
+		char *value = ft_substr(str, i + 1, ft_strlen(str + i) + 1);
+
+		if (word_check(node, key, value) == true)
 			return ;
-		if (reassign_env(env, node->proc->str[i], new_key, new_value) == 1)
+		if (reassign_env(env, str, key, value) == true)
 			return ;
-		make_node(node->proc->str[i], env, new_key, new_value);
+
+		make_node(str, env, key, value);
 		node->exit_code = E_USAGE;
 		i++;
 	}

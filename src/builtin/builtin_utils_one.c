@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 18:23:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 21:42:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,27 @@ void	do_builtin(t_parser *node, t_env **env, int cmd_type)
  * @brief checks if key and value are alphanumeric
  * @return 1 if not alphanumeric, 0 is alphanumeric
 */
-int	key_value_check(t_parser *temp, char **words, char *cmd)
+static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 {
 	int	i;
+	printf("key = %s\n", key);
 
-	if ((ft_isalpha(words[0][0]) == 0) && words[0][0] != '_')
+	if ((ft_isalpha(key[0]) == 0) && key[0] != '_')
 	{
 		put_custom_error(temp, cmd);
-		return (1);
+		return false;
 	}
 	i = 1;
-	while (words[0][i])
+	while (key[i])
 	{
-		if (words[0][i] != '_' && ft_isalnum(words[0][i]) == 0)
+		if (key[i] != '_' && ft_isalnum(key[i]) == 0)
 		{
 			put_custom_error(temp, cmd);
-			return (1);
+			return false;
 		}
 		i++;
 	}
-	return (0);
+	return true;
 }
 
 /**
@@ -99,16 +100,9 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * export var=a
  * export $var=test
  * echo $var $a
-*/
-bool	word_check(char *str, t_parser *lst)
-{
-	t_parser	*temp;
-	char		**words;
-	char		*cmd;
-
-	cmd = lst->proc->cmd;
-	temp = lst;
-	words = null_check(str, lst);
+ * @todo why do I need list and value and what do my errors do?
+ * better way to do this
+ * 	words = null_check(str, lst);
 	if (!words)
 	{
 		put_custom_error(lst, "export");
@@ -125,7 +119,25 @@ bool	word_check(char *str, t_parser *lst)
 		ft_free_arr(words);
 		return (true);
 	}
-	ft_free_arr(words);
+*/
+bool	word_check(t_parser *lst, char *key, char *value)
+{
+	t_parser	*temp;
+	char		*cmd;
+
+	cmd = lst->proc->cmd;
+	temp = lst;
+	if ((mini_strcmp(cmd, "unset") == 0) && value)
+	{
+		put_custom_error(temp, cmd);
+		return (true);
+	}
+	if (is_valid_key(lst, key, "export") == false)
+	{
+		free(key);
+		free(value);
+		return (true);
+	}
 	return (false);
 }
 
@@ -138,16 +150,14 @@ bool	word_check(char *str, t_parser *lst)
  * @brief reassigns lines in the environment
  * @todo changed to char *str in this function
 */
-void	replace_str(t_env *head, char *str, char *n_k, char *n_v)
+void	replace_node(t_env *head, char *str, char *value)
 {
-	int		has_value;
 	char	*temp;
 
-	has_value = get_key_value(str, &n_k, &n_v);
-	temp = head->value;
-	head->value = n_v;
+	temp = head->full;
+	head->full = str;
 	free(temp);
-	temp = head->key;
-	head->key = n_k;
+	temp = head->value;
+	head->value = value;
 	free(temp);
 }
