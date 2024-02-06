@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 19:56:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 16:24:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
  * @param env environment in linked list
  * @brief stores home directory and changes to it
  * @todo do I need use no such file?
- * if !lst->next is uncommented it segfaults
- * do I need the if statement?
- * - is homedir correct string to pass to no such file?
 */
 void	home_dir(t_parser *lst, t_env **env)
 {
@@ -112,8 +109,6 @@ void	old_pwd(char *str, t_env **env, t_parser *lst)
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
  * @todo  NORM IT!??
- * @note check that the old pwd is being updated correctly
- * @note check error messages passing lst ipv proc->str[]
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
