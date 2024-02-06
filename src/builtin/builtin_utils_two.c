@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:44:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 20:02:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,20 +81,10 @@ int	list_iter(t_parser *lst)
 */
 bool	too_many_args(t_parser *lst)
 {
-	t_parser	*temp;
-
-	temp = lst->next;
-	while (temp)
+	if (lst->proc->str_count > 1)
 	{
-		if (temp->str)
-		{
-			if (temp->next && temp->next->str)
-			{
-				dprintf(STDERR_FILENO, ARG_ERROR, lst->cmd);
-				return (true);
-			}
-		}
-		return (false);
+		dprintf(STDERR_FILENO, ARG_ERROR, lst->proc->cmd);
+		return (true);
 	}
 	return (false);
 }
@@ -106,6 +96,7 @@ bool	too_many_args(t_parser *lst)
  * @param new_v char str containing new value
  * @brief makes all components for new node and adds to env linked list
  * @todo check return / need exit code?
+ * is index [0] correct?
 */
 void	make_node(t_parser *node, t_env **env, char *n_k, char *n_v)
 {
@@ -114,8 +105,8 @@ void	make_node(t_parser *node, t_env **env, char *n_k, char *n_v)
 	char	*new_full;
 
 	h_v = 0;
-	h_v = get_key_value(node->str, &n_k, &n_v);
-	new_full = ft_strdup(node->str);
+	h_v = get_key_value(node->proc->str[0], &n_k, &n_v);
+	new_full = ft_strdup(node->proc->str[0]);
 	if (new_full == NULL)
 		return ;
 	new_node = env_lstnew(n_k, n_v, new_full, h_v);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:44:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 20:01:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,22 @@ void	free_all(t_env *env)
  * echo, cd, pwd, export, unset, env and exit
  * @todo exit codes
 */
-void	do_builtin(t_parser *node, t_env **env)
+void	do_builtin(t_parser *node, t_env **env, int cmd_type)
 {
-	if (!node->cmd)
-		mini_error(E_GENERAL, node);
-	else if (mini_strcmp(node->cmd, "echo") == 0)
-		ft_echo(node, env);
-	else if (mini_strcmp(node->cmd, "cd") == 0)
-		ft_cd(node, env);
-	else if (mini_strcmp(node->cmd, "pwd") == 0)
-		ft_pwd(node);
-	else if (mini_strcmp(node->cmd, "export") == 0)
-		ft_export(node, env);
-	else if (mini_strcmp(node->cmd, "unset") == 0)
-		ft_unset(node, env);
-	else if (mini_strcmp(node->cmd, "env") == 0)
-		ft_env(*env, node);
-	else if (mini_strcmp(node->cmd, "exit") == 0)
+	if (cmd_type == EXIT)
 		ft_exit(node);
+	else if (cmd_type == CD)
+		ft_cd(node, env);
+	else if (cmd_type == EXPORT)
+		ft_export(node, env);
+	else if (cmd_type == UNSET)
+		ft_unset(node, env);
+	else if (cmd_type == ECHO)
+		ft_echo(node, env);
+	else if (cmd_type == PWD)
+		ft_pwd(node);
+	else if (cmd_type == ENV)
+		ft_env(*env, node);
 }
 
 /**
@@ -108,7 +106,7 @@ bool	word_check(t_parser *lst)
 	char		**words;
 	char		*cmd;
 
-	cmd = lst->cmd;
+	cmd = lst->proc->cmd;
 	temp = lst;
 	words = null_check(temp);
 	if (!words)
@@ -137,13 +135,14 @@ bool	word_check(t_parser *lst)
  * @param n_k string to contain new key value
  * @param n_v string to contain new value value
  * @brief reassigns lines in the environment
+ * @todo is index[0] correct?
 */
 void	replace_str(t_env *head, t_parser *node, char *n_k, char *n_v)
 {
 	int		has_value;
 	char	*temp;
 
-	has_value = get_key_value(node->str, &n_k, &n_v);
+	has_value = get_key_value(node->proc->str[0], &n_k, &n_v);
 	temp = head->value;
 	head->value = n_v;
 	free(temp);

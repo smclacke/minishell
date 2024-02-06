@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2024/02/04 21:07:31 by smclacke      ########   odam.nl         */
+=======
+/*   Updated: 2024/02/05 17:35:25 by dreijans      ########   odam.nl         */
+>>>>>>> djoyke
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +25,15 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define EXIT 1
+# define CD 2
+# define EXPORT 3
+# define UNSET 4
+# define ECHO 5
+# define PWD 6
+# define ENV 7
+
 
 # define PIPE "|"
 # define MORE ">"
@@ -38,6 +51,8 @@
 # define STR_X 2
 # define HD_X 3
 # define RED_X 4
+
+# define PATH_MAX 4096
 
 # define NOT_POSSIBLE "minishell: env: no such file or directory\n"
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
@@ -94,8 +109,9 @@ typedef	struct s_procs
 	char					**redir;
 	int						red_count;
 	char					**hd;
-	int						hd_count;
+	int						hd_count;	
 	int						hd_fd;
+	struct s_parser			*parser;
 }			t_procs;
 
 /**
