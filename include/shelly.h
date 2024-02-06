@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 16:07:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 17:07:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				len_token(char *input, int len);
 
 				// parser
 //-------- parser --------//
-t_parser		*parse_tokens(char **tokens);
+t_parser		*parse_input(t_parser *procs, char *input);
 
 //-------- parser utils --------//
 int				is_pipe(void *input);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 16:26:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 17:09:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	char		*input;
-	char		**tokens;
-	t_parser	*procs;
-
 	int			og_stdout;
 	int			og_stdin;
+	char		*input;
+	t_parser	*procs;
 	t_env		*env;
 
 	(void) argc;
 	(void) argv;
-	// (void) envp;
 	procs = NULL;
-
 	env = NULL;
 	env = env_list(envp, env);
 	og_stdout = dup(STDOUT_FILENO);
@@ -37,25 +33,20 @@ int	main(int argc, char **argv, char **envp)
 		handle_signals(PARENT);
 		input = readline(PROMPT);
 
-		tokens = lexer(input);
-		free(input);
-		if (!tokens)
-			continue ;
-
-		procs = parse_tokens(tokens);
+		procs = parse_input(procs, input);
 		if (!procs)
-			printf("NOPE\n");
-		ft_free_arr(tokens);
+			continue ;
 
 		execute(&env, procs);
 
 		prpr(procs);
 
-		dup2(og_stdout, STDOUT_FILENO);
-		dup2(og_stdin, STDIN_FILENO);
-
 		free_parser(procs);
 
+
+		dup2(og_stdout, STDOUT_FILENO);
+		dup2(og_stdin, STDIN_FILENO);
+		
 		printf("success\n");
 		exit(EXIT_SUCCESS);
 	}

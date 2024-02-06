@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 16:39:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 17:07:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static	void	get_procs(t_parser *proc)
  * @todo	remove print statements when everything works
  * @todo 	do I need alllll of these vars??
 */
-t_parser	*parse_tokens(char **tokens)
+static t_parser	*parse_tokens(char **tokens)
 {
 	t_parser	*proc;
 	t_parser	*parser_list;
@@ -128,4 +128,21 @@ t_parser	*parse_tokens(char **tokens)
 	parser_list->proc_count = (count_procs(tokens) + 1);
 	free(proc->process);
 	return (parser_list);
+}
+
+t_parser		*parse_input(t_parser *procs, char *input)
+{
+	char	**tokens;
+
+	tokens = lexer(input);
+	free(input);
+	if (tokens)
+	{
+		procs = parse_tokens(tokens);
+		ft_free_arr(tokens);
+		if (!procs)
+			return (NULL);
+		return (procs);
+	}
+	return (NULL);
 }
