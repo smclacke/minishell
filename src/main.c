@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 17:33:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 17:45:20 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,23 @@ int	main(int argc, char **argv, char **envp)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
-
-		procs = parse_input(procs, input);
-		if (procs)
-		{	
-			execute(&env, procs);
-			free_parser(procs);
-		}
+		if (!input)
 			continue ;
-
-		// prpr(procs);
-
-
-
+		else
+		{
+			procs = parse_input(procs, input);
+			if (proc == NULL)
+				printf("I am NULL\n");
+			printf("proc = %p\n", procs);
+			if (procs)
+			{
+				execute(&env, procs);
+				prpr(procs);
+				free_parser(procs);
+			}
+			else if (!procs)
+				continue ;
+		}
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
 		

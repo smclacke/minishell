@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 17:07:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 17:40:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static t_parser	*parse_tokens(char **tokens)
 	int			i;
 
 	i = 0;
+	if (!tokens)
+		return (NULL);
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	ft_bzero(proc, sizeof(t_parser));
 
