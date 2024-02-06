@@ -8,6 +8,23 @@
 
 *right here, right now*
 
+Memory Allocation in parse_tokens: In the parse_tokens function, you allocate memory for proc->proc_arrs and proc->process[i] but don't free them in case of failure or when they're no longer needed. Make sure to free them appropriately in all execution paths.
+
+Memory Allocation in get_procs and make_proc_arr: Similar to the above point, ensure that memory allocated in the get_procs and make_proc_arr functions is properly deallocated in case of errors or when it's no longer needed.
+
+Error Handling: Ensure that all potential error conditions are properly handled. For example, if malloc fails to allocate memory, your program should exit gracefully without leaking memory.
+
+parse_input Function: In the parse_input function, if parse_tokens returns NULL, you should ensure that any memory allocated within the function is properly deallocated before returning.
+
+Here are some specific suggestions:
+
+In the parse_tokens function, ensure that proc->proc_arrs and proc->process[i] are freed in case of failure.
+Add appropriate error handling and memory deallocation in the get_procs and make_proc_arr functions.
+Check all code paths in parse_tokens and parse_input to ensure that memory is properly deallocated in case of errors.
+Use tools like Valgrind to detect memory leaks and run your program under different scenarios to identify any potential issues.
+
+
+
 **DO this**
 
 - freee some things

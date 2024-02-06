@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:42:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 19:45:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ t_parser	*parser_listnew(t_procs *proc)
 	if (!new || !proc)
 	{
 		free(proc);
-		printf("erroroororr\n");
-		return (0);
+		free(new);
+		return (NULL);
 	}
 	ft_bzero(new, sizeof(t_parser));
 	new->proc = proc;

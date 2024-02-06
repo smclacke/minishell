@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 18:28:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 19:58:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ int	shelly_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-static	void	free_procs(t_procs *proc)
+void	free_procs(t_procs *proc)
 {
 	int			i;
 
+	if (proc == NULL)
+		return ;
 	i = 0;
 	if (proc->cmd)
 		free(proc->cmd);
@@ -90,7 +92,7 @@ void	free_parser(t_parser *procs)
 			ft_free_arr(procs->tokens);
 		if (procs->proc_arrs)
 		{
-			while (procs->proc_arrs[i])
+			while (i < procs->proc_count)
 			{
 				ft_free_arr(procs->proc_arrs[i]);
 				i++;
@@ -107,7 +109,6 @@ void	free_parser(t_parser *procs)
 		free(procs);
 		procs = tmp;
 	}
-	free(tmp);
 	free(procs);
 }
 

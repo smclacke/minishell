@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 17:07:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 19:23:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 				// utils
 bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
+void			free_procs(t_procs *proc);
 void			free_parser(t_parser *procs);
 void			sarah_error(t_parser *proc, char *str);
 
