@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:14:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 15:12:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,5 @@ char	**lexer(char *input)
 		free(input);
 		return (0);
 	}
-	// free(input);
 	return (array);
 }
