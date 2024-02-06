@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 20:12:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 17:20:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,17 @@
  * @brief checks if content is a digit
  * @todo is this still working?
 */
-static void	digit_check(t_parser *lst)
+static void	digit_check(char *str)
 {
 	int	i;
-	int j;
 
 	i = 0;
-	j = 0;
-	while (lst->proc->str[i])
-	{
-		while (ft_isdigit(lst->proc->str[i][j]) != 0)
-		{
-			j++;
-			if (ft_isdigit(lst->proc->str[i][j]) == 0)
-			{
-				put_custom_error(lst, "exit");
-				exit(255);
-			}
-		}
+	while (str[i] && ft_isdigit(str[i]) != 0)
 		i++;
+	if (str[i] != 0)
+	{
+		dprintf(STDERR_FILENO, NON_NUMERIC_ARG, str);
+		exit(2);
 	}
 }
 
@@ -70,9 +62,7 @@ void	exit_with_stat(int exit_status, int status)
  * @param lst parsed list
  * @brief exits the program and displays corresponding error number
  * @todo check for exitstatus line 68 if it's exit status from prev child process
- * minishell: exit: 7767: positive numeric argument 255 or below required
- * make: *** [Makefile:91: run] Error 255
- * check it thouroughly
+ * memory leaks in parse tokens
 */
 void	ft_exit(t_parser *lst)
 {
@@ -86,8 +76,8 @@ void	ft_exit(t_parser *lst)
 		return ;
 	if (lst->proc->str_count == 0)
 		exit_with_stat(exit_status, status);
-	digit_check(lst);
 	arg_check(lst);
+	digit_check(lst->proc->str[0]);
 	error = ft_atoi(lst->proc->str[0]);
 	if (error > 255)
 	{
