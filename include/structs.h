@@ -6,13 +6,10 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-<<<<<<< HEAD
-/*   Updated: 2024/02/04 21:07:31 by smclacke      ########   odam.nl         */
-=======
-/*   Updated: 2024/02/05 17:35:25 by dreijans      ########   odam.nl         */
->>>>>>> djoyke
+/*   Updated: 2024/02/06 14:44:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
