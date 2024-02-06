@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 17:09:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 17:33:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,15 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 
 		procs = parse_input(procs, input);
-		if (!procs)
+		if (procs)
+		{	
+			execute(&env, procs);
+			free_parser(procs);
+		}
 			continue ;
 
-		execute(&env, procs);
+		// prpr(procs);
 
-		prpr(procs);
-
-		free_parser(procs);
 
 
 		dup2(og_stdout, STDOUT_FILENO);
