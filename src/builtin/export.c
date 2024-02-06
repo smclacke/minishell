@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 19:59:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 18:24:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,31 @@ static char	*check_for_equal_sign(char *str)
 
 /**
  * @param e double pointer to environmet list
- * @param node pointer to node in list given in the form of a string
+//  * @param node pointer to node in list given in the form of a string
+ * @param str string passed by parser
  * @param n_k string to contain new key value
  * @param n_v string to contain new value value
  * @brief reassigns lines in the environment when export arguments is
  * 		  is an already excisting key.
- * @todo is index [0] correct at check_for equal sign?
 */
-static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
+static bool	reassign_env(t_env **e, char *str, char *n_k, char *n_v)
 {
 	t_env	*head;
 	char	*comp_str;
 	char	*temp;
 
 	head = *e;
-	comp_str = check_for_equal_sign(node->proc->str[0]);
+	comp_str = check_for_equal_sign(str);
 	while (head)
 	{
 		if (mini_strcmp(comp_str, head->key) == 0)
 		{
-			if (node->proc->str[ft_strlen(node->proc->str[0]) == '='])
+			if (str[ft_strlen(str) == '='])
 			{
 				temp = head->full;
 				head->full = comp_str;
 				free(temp);
-				replace_str(head, node, n_k, n_v);
+				replace_str(head, str, n_k, n_v);
 				return (true);
 			}
 		}
@@ -91,11 +91,6 @@ static bool	reassign_env(t_env **e, t_parser *node, char *n_k, char *n_v)
  * @todo 
  * env does show the expanded version.
  * check if multiple ===== what do you do?
- * 	if (!node->next || node->n_cmd != 1)
-	{
-		export_print(*env);
-		return ;
-	}
  * 
 */
 void	ft_export(t_parser *node, t_env **env)
@@ -112,13 +107,13 @@ void	ft_export(t_parser *node, t_env **env)
 		export_print(*env);
 		return ;
 	}
-	while (node->proc->str[i] != NULL)
+	while (i < node->proc->str_count)
 	{
-		if (word_check(node) == 1)
+		if (word_check(node->proc->str[i], node) == 1)
 			return ;
-		if (reassign_env(env, node, new_key, new_value) == 1)
+		if (reassign_env(env, node->proc->str[i], new_key, new_value) == 1)
 			return ;
-		make_node(node, env, new_key, new_value);
+		make_node(node->proc->str[i], env, new_key, new_value);
 		node->exit_code = E_USAGE;
 		i++;
 	}

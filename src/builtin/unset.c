@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 19:26:09 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 18:06:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_unset(t_parser *node, t_env **env)
 	i = 0;
 	if (node->proc->proc_count != 1)
 		return ;
-	if (word_check(node) == 1)
+	if (word_check(node->proc->str[i], node) == 1)
 		return ;
 	// if (node != NULL)
 	// 	node = node->next;

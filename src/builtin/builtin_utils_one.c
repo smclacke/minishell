@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 20:01:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 18:23:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	key_value_check(t_parser *temp, char **words, char *cmd)
  * export $var=test
  * echo $var $a
 */
-bool	word_check(t_parser *lst)
+bool	word_check(char *str, t_parser *lst)
 {
 	t_parser	*temp;
 	char		**words;
@@ -108,7 +108,7 @@ bool	word_check(t_parser *lst)
 
 	cmd = lst->proc->cmd;
 	temp = lst;
-	words = null_check(temp);
+	words = null_check(str, lst);
 	if (!words)
 	{
 		put_custom_error(lst, "export");
@@ -120,7 +120,7 @@ bool	word_check(t_parser *lst)
 		put_custom_error(temp, cmd);
 		return (true);
 	}
-	if (key_value_check(temp, words, "export") == 1)
+	if (key_value_check(lst, words, "export") == 1)
 	{
 		ft_free_arr(words);
 		return (true);
@@ -131,18 +131,19 @@ bool	word_check(t_parser *lst)
 
 /**
  * @param head single pointer to environmet list
- * @param node pointer to node in list
+//  * @param node pointer to node in list
+ * @param str string passed from parser
  * @param n_k string to contain new key value
  * @param n_v string to contain new value value
  * @brief reassigns lines in the environment
- * @todo is index[0] correct?
+ * @todo changed to char *str in this function
 */
-void	replace_str(t_env *head, t_parser *node, char *n_k, char *n_v)
+void	replace_str(t_env *head, char *str, char *n_k, char *n_v)
 {
 	int		has_value;
 	char	*temp;
 
-	has_value = get_key_value(node->proc->str[0], &n_k, &n_v);
+	has_value = get_key_value(str, &n_k, &n_v);
 	temp = head->value;
 	head->value = n_v;
 	free(temp);

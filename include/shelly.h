@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:58:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 20:15:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ char			*get_full(char *str);
 //---- Built-in ----//
 void			free_all(t_env *env);
 void			do_builtin(t_parser *node, t_env **env, int cmd_type);
-bool			word_check(t_parser *lst);
+bool			word_check(char *str, t_parser *node);
 void			ft_cd(t_parser *lst, t_env **env);
 bool			too_many_args(t_parser *lst);
 void			no_such_file(char *str, t_parser *lst);
@@ -174,9 +174,9 @@ void			ft_env(t_env *env, t_parser *lst);
 void			ft_exit(t_parser *lst);
 void			ft_pwd(t_parser *head);
 void			ft_export(t_parser *lst, t_env **env);
-char			**null_check(t_parser *temp);
-void			make_node(t_parser *node, t_env **env, char *n_k, char *n_v);
-void			replace_str(t_env *head, t_parser *node, char *n_k, char *n_v);
+char			**null_check(char *str, t_parser *temp);
+void			make_node(char *str, t_env **env, char *n_k, char *n_v);
+void			replace_str(t_env *head, char *str, char *n_k, char *n_v);
 void			ft_unset(t_parser *lst, t_env **env);
 void			reassign_values(char *cwd, t_env *node, t_parser *head);
 
