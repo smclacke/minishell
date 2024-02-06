@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 18:06:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 18:19:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,10 @@ static t_parser	*parse_tokens(char **tokens)
 		sort_each_proc(proc->process[i], proc->tokens);
 		proc->process[i]->proc_count = 1;
 		new_node = parser_listnew(proc->process[i]);
+		free(proc->process);
 		parser_listadd_back(&parser_list, new_node);
 	}
 	parser_list->proc_count = (count_procs(tokens) + 1);
-	free(proc->process);
 	return (parser_list);
 }
 
