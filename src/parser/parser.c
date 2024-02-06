@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 16:07:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 16:39:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ t_parser	*parse_tokens(char **tokens)
 	new_node = NULL;
 
 	proc->process = (t_procs **)malloc(sizeof(t_procs *) * (proc->proc_count + 1));
+	ft_bzero(proc->process, sizeof(t_procs));
 	if (proc->proc_count > 1)
 	{
 		// handle mutli (())
@@ -105,6 +106,7 @@ t_parser	*parse_tokens(char **tokens)
 		while (i < proc->proc_count)
 		{
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
+			ft_bzero(proc->process[i], sizeof(t_procs));
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
 			proc->process[i]->proc_count = proc->proc_count;
 			new_node = parser_listnew(proc->process[i]);
@@ -117,6 +119,7 @@ t_parser	*parse_tokens(char **tokens)
 		// handle singular ())()
 		proc->multi_proc_b = FALSE;
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
+		ft_bzero(proc->process[i], sizeof(t_procs));
 		sort_each_proc(proc->process[i], proc->tokens);
 		proc->process[i]->proc_count = 1;
 		new_node = parser_listnew(proc->process[i]);
