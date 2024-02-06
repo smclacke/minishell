@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 18:20:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 18:28:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	shelly_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-static	void	sarah_free_procs(t_procs *proc)
+static	void	free_procs(t_procs *proc)
 {
 	int			i;
 
@@ -77,9 +77,6 @@ static	void	sarah_free_procs(t_procs *proc)
 	}
 }
 
-/**
- * @todo	check this is correct for new parser ...
-*/
 void	free_parser(t_parser *procs)
 {
 	t_parser	*tmp;
@@ -89,7 +86,8 @@ void	free_parser(t_parser *procs)
 	while (procs)
 	{
 		tmp = procs->next;
-		free(procs->tokens);
+		if (procs->tokens)
+			ft_free_arr(procs->tokens);
 		if (procs->proc_arrs)
 		{
 			while (procs->proc_arrs[i])
@@ -97,10 +95,15 @@ void	free_parser(t_parser *procs)
 				ft_free_arr(procs->proc_arrs[i]);
 				i++;
 			}
+			free(procs->proc_arrs);
 		}
-		free(procs->process);
-		sarah_free_procs(procs->proc);
-		free(procs->proc);
+		if (procs->process)
+			free(procs->process);
+		if (procs->proc)
+		{
+			free_procs(procs->proc);
+			free(procs->proc);
+		}
 		free(procs);
 		procs = tmp;
 	}
@@ -108,6 +111,9 @@ void	free_parser(t_parser *procs)
 	free(procs);
 }
 
+/**
+ * need to fix literally all errors... 
+ */
 void	sarah_error(t_parser *proc, char *str)
 {
 	if (proc)
