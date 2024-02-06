@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 15:07:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 15:51:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	get_reds(t_procs *proc, char **process)
 				printf("error 2\n");
 				exit (EXIT_FAILURE);
 			}
-			proc->redir[j] = process[i];
-			proc->redir[j + 1] = process[i + 1];
+			proc->redir[j] = ft_strdup(process[i]);
+			proc->redir[j + 1] = ft_strdup(process[i + 1]);
 			j += 2;
 			i++;
 		}
@@ -63,7 +63,7 @@ void	get_hds(t_procs *proc, char **process)
 				printf("error 2\n");
 				exit (EXIT_FAILURE);
 			}
-			proc->hd[j] = process[i + 1];
+			proc->hd[j] = ft_strdup(process[i + 1]);
 			j++;
 			i++;
 		}
@@ -78,12 +78,12 @@ void	get_strs(t_procs *proc, char **process)
 {
 	int		i;
 	int		j;
-	int		len;
 
 	i = 0;
 	j = 0;
 	proc->cmd_flag = 0;
-	len = 0;
+	if (proc->str_count != 0)
+		proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
 	while (process[i])
 	{
 		if (proc_redir(process[i]))
@@ -97,15 +97,13 @@ void	get_strs(t_procs *proc, char **process)
 		}
 		if (process[i] && !proc_redir(process[i]) && proc->cmd_flag == 0)
 		{
-			len = ft_strlen(process[i]);
-			proc->cmd = (char *)malloc(sizeof(process[i] + 1));
 			proc->cmd_flag = 1;
-			proc->cmd = process[i];
+			proc->cmd = ft_strdup(process[i]);
 			i++;
 		}
 		while (process[i] && !proc_redir(process[i]) && proc->cmd_flag != 0)
 		{
-			proc->str[j] = process[i];
+			proc->str[j] = ft_strdup(process[i]);
 			i++;
 			j++;
 		}

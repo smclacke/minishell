@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 15:39:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 16:01:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ static	void	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 			exit(EXIT_SUCCESS);
 		}
 		token_size = ft_strlen(proc->tokens[proc->start]);
-		proc->proc_arrs[proc_i][proc_j] = (char *)malloc(sizeof(char) * (token_size + 1));
-		ft_strcpy(proc->proc_arrs[proc_i][proc_j], proc->tokens[proc->start]);
+		proc->proc_arrs[proc_i][proc_j] = ft_strdup(proc->tokens[proc->start]);
 		if (!proc->proc_arrs[proc_i][proc_j])
 		{
 			printf("noooo, this one\n");
@@ -103,7 +102,6 @@ t_parser	*parse_tokens(char **tokens)
 		// handle mutli (())
 		proc->multi_proc_b = TRUE;
 		get_procs(proc);
-		// ft_free_arr(tokens);
 		while (i < proc->proc_count)
 		{
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
@@ -125,6 +123,5 @@ t_parser	*parse_tokens(char **tokens)
 		parser_listadd_back(&parser_list, new_node);
 	}
 	parser_list->proc_count = (count_procs(tokens) + 1);
-	free (tokens);
 	return (parser_list);
 }

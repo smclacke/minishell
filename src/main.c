@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 15:39:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 16:01:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 		procs = parse_tokens(tokens);
 		if (!procs)
 			printf("NOPE\n");
-		free(tokens);
+		ft_free_arr(tokens);
 
 		execute(&env, procs);
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
 
-		// free_parser(procs);
+		free_parser(procs);
 
 		printf("success\n");
 		exit(EXIT_SUCCESS);
