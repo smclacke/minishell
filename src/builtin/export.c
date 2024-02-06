@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 22:13:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 22:15:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ static bool	reassign_env(t_env **e, char *str, char *key, char *value)
  * @todo 
  * env does show the expanded version.
  * Norm it!
- * has_value doesnt work anymore
+ * has_value doesnt work anymore, when has no value it still prints equal sign
+ * and it also prints in env which shouldnt happen, refer to old before push
+ 
 */
 void	ft_export(t_parser *node, t_env **env)
 {
