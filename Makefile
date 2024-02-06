@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/06 15:00:15 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/06 15:46:47 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS			= main.c								\
 					utils/signals.c						\
 					utils/utils.c						\
 					utils/print.c						\
+					utils/errors.c						\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
 					lexer/token_size.c					\
@@ -55,7 +56,6 @@ SRCS			= main.c								\
 					builtin/export.c 					\
 					builtin/unset.c 					\
 					builtin/env.c 						\
-					builtin/errors.c					\
 					builtin/builtin_utils_one.c 		\
 					builtin/builtin_utils_two.c 		\
 					builtin/exit.c						\

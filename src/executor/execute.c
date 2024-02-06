@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:44:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 14:54:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	if (!lst)
 		mini_error (E_GENERAL, lst);
 	init_heredoc(lst, env);
-	printf("hello build\n");
 	if (single_builtin_cmd(lst, env, data) == true)
 		return ;
 	pipeline(lst, env, data);
@@ -167,7 +166,6 @@ void	execute(t_env **env, t_parser *lst)
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);
 	init_execute_struct(data);
-	printf("hello\n");
 	// ft_expand(lst, env);
 	build(lst, env, data);
 	free (data);
