@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 15:34:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 16:28:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ void	free_parser(t_parser *procs)
 		free(procs->proc);
 		free(procs);
 		procs = tmp;
+		free(tmp);
 	}
+	free(tmp);
+	free(procs);
 }
 
 void	sarah_error(t_parser *proc, char *str)
