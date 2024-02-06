@@ -163,3 +163,7 @@ bool	word_check(char *str, t_parser *lst)
 	ft_free_arr(words);
 	return (false);
 }
+
+
+
+ERRORS TO STANDARD ERROR!

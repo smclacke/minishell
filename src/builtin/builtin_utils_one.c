@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 21:42:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 21:47:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,22 +142,20 @@ bool	word_check(t_parser *lst, char *key, char *value)
 }
 
 /**
- * @param head single pointer to environmet list
-//  * @param node pointer to node in list
+ * @param lst single pointer to environmet list
  * @param str string passed from parser
- * @param n_k string to contain new key value
- * @param n_v string to contain new value value
+ * @param value string to contain new value value
  * @brief reassigns lines in the environment
  * @todo changed to char *str in this function
 */
-void	replace_node(t_env *head, char *str, char *value)
+void	replace_node(t_env *lst, char *str, char *value)
 {
 	char	*temp;
 
-	temp = head->full;
-	head->full = str;
+	temp = lst->full;
+	lst->full = str;
 	free(temp);
-	temp = head->value;
-	head->value = value;
+	temp = lst->value;
+	lst->value = value;
 	free(temp);
 }

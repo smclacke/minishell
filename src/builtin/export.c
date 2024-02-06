@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 21:40:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 22:13:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	export_print(t_env *env)
 {
 	while (env != NULL)
 	{
+		printf("has_value = %i\n", env->has_value);
 		if (env->has_value)
 			printf("declare -x %s=\"%s\"\n", env->key, env->value);
 		else
@@ -40,18 +41,18 @@ static void	export_print(t_env *env)
 */
 static bool	reassign_env(t_env **e, char *str, char *key, char *value)
 {
-	t_env	*head;
+	t_env	*lst;
 
-	head = *e;
-	while (head)
+	lst = *e;
+	while (lst)
 	{
-		if (mini_strcmp(key, head->key) == 0)
+		if (mini_strcmp(key, lst->key) == 0)
 		{
 			free(key);
-			replace_node(head, str, value);
+			replace_node(lst, str, value);
 			return (true);
 		}
-		head = head->next;
+		lst = lst->next;
 	}
 	return (false);
 }
@@ -64,12 +65,15 @@ static bool	reassign_env(t_env **e, char *str, char *key, char *value)
  * might be overwriting a pointer and not allocating a new string.
  * @todo 
  * env does show the expanded version.
- * check if multiple ===== what do you do?
- * 
+ * Norm it!
+ * has_value doesnt work anymore
 */
 void	ft_export(t_parser *node, t_env **env)
 {
 	int		i;
+	char	*str;
+	char	*key;
+	char	*value;
 
 	i = 0;
 	if (node->proc->str_count == 0)
@@ -79,21 +83,15 @@ void	ft_export(t_parser *node, t_env **env)
 	}
 	while (i < node->proc->str_count)
 	{
-		char *str = node->proc->str[i];
-
+		str = node->proc->str[i];
 		while (str[i] && str[i] != '=')
-		{
 			i++;
-		}
-		
-		char *key = ft_substr(str, 0, i);
-		char *value = ft_substr(str, i + 1, ft_strlen(str + i) + 1);
-
+		key = ft_substr(str, 0, i);
+		value = ft_substr(str, i + 1, ft_strlen(str + i) + 1);
 		if (word_check(node, key, value) == true)
 			return ;
 		if (reassign_env(env, str, key, value) == true)
 			return ;
-
 		make_node(str, env, key, value);
 		node->exit_code = E_USAGE;
 		i++;

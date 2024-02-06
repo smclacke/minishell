@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 21:21:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 22:12:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ bool	too_many_args(t_parser *lst)
 */
 void	make_node(char *str, t_env **env, char *key, char *value)
 {
-	bool	has_value;
+	int	has_value;
 	t_env	*new_node;
 
-	if (value)
-		has_value = true;
+	if (!value)
+		has_value = FALSE;
 	else
-		has_value = false;
+		has_value = TRUE;
 	new_node = env_lstnew(key, value, str, has_value);
 	if (!new_node)
 	{
