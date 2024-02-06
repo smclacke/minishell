@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 19:16:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 14:59:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,10 @@ void	get_reds(t_procs *proc, char **process)
 		i++;
 	}
 }
-
 /**
- * @brief	finds the hd meta, skips it, saves the delimiters in the
- * 		hd array so iterating through that array looks like this:
- * 		hd_count = 3
- * 		hd[0] = eof | hd[1] = end | hd[2] = stop
- */
+ * @note changed hds, ignoring << meta, hd_count= actual hd_count
+ * 		hd_array = array delimiters e.g. hd[0] = eof hd[1] = end ...  
+*/
 void	get_hds(t_procs *proc, char **process)
 {
 	int		i;

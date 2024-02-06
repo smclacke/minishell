@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/10 20:28:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/05 19:56:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
  * @brief assigns full and new to their values and adds them to
  * an empty list.
  * @todo exit codes
+ * @note (for all error functions) passing parser list but want actual var to print..
 */
 static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 {
@@ -65,6 +66,7 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
  * @todo do I need use no such file?
  * if !lst->next is uncommented it segfaults
  * do I need the if statement?
+ * - is homedir correct string to pass to no such file?
 */
 void	home_dir(t_parser *lst, t_env **env)
 {
@@ -73,14 +75,11 @@ void	home_dir(t_parser *lst, t_env **env)
 	home_dir = ft_getenv(*env, "HOME");
 	if (home_dir == NULL)
 	{
-		// if (!lst->next)//segfault
-		// {
-			dprintf(STDERR_FILENO, NO_HOME);
-			return ;
-		// }
+		dprintf(STDERR_FILENO, NO_HOME);
+		return ;
 	}
 	if (chdir(home_dir) == -1)
-		no_such_file(lst);
+		no_such_file(home_dir, lst);
 }
 
 /**
@@ -89,7 +88,7 @@ void	home_dir(t_parser *lst, t_env **env)
  * @brief stores old working dir and changes to it
  * @todo do I need use no such file?
 */
-void	old_pwd(t_parser *lst, t_env **env)
+void	old_pwd(char *str, t_env **env, t_parser *lst)
 {
 	char		*old_pwd;
 
@@ -100,9 +99,9 @@ void	old_pwd(t_parser *lst, t_env **env)
 		mini_error(E_GENERAL, lst);
 		return ;
 	}
-	lst->str = old_pwd;
-	if (chdir(lst->str) == -1)
-		no_such_file(lst);
+	str = old_pwd;
+	if (chdir(str) == -1)
+		no_such_file(str, lst);
 }
 
 /**
@@ -112,31 +111,30 @@ void	old_pwd(t_parser *lst, t_env **env)
  * checks access of lst->str, changes directory
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
- * @todo PATH_MAX not defined? NORM IT!
+ * @todo  NORM IT!??
+ * @note check that the old pwd is being updated correctly
+ * @note check error messages passing lst ipv proc->str[]
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
 	char		cwd[PATH_MAX];
-	t_parser	*head;
 
-	head = lst;
 	if (too_many_args(lst) == true)
 		return ;
-	lst = lst->next;
 	getcwd(cwd, PATH_MAX);
-	if (!lst || mini_strcmp(lst->str, "~") == 0)
+	if (lst->proc->str_count == 0 || mini_strcmp(lst->proc->str[0], "~") == 0)
 		home_dir(lst, env);
-	else if (mini_strcmp(lst->str, "-") == 0)
-		old_pwd(lst, env);
-	else if (access(lst->str, F_OK) == 0)
+	else if (mini_strcmp(lst->proc->str[0], "-") == 0)
+		old_pwd(lst->proc->str[0], env, lst);
+	else if (access(lst->proc->str[0], F_OK) == 0)
 	{
-		if (chdir(lst->str) == -1)
-			no_such_file(lst);
+		if (chdir(lst->proc->str[0]) == -1)
+			no_such_file(lst->proc->str[0], lst);
 	}
-	else if (lst->str != NULL)
-		no_such_file(lst);
-	update_env(env, cwd, "OLDPWD", head);
+	else if (lst->proc->str[0] != NULL)
+		no_such_file(lst->proc->str[0], lst);
+	update_env(env, cwd, "OLDPWD", lst);
 	getcwd(cwd, PATH_MAX);
-	update_env(env, cwd, "PWD", head);
-	head->exit_code = E_USAGE;
+	update_env(env, cwd, "PWD", lst);
+	lst->exit_code = E_USAGE;
 }

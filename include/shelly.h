@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:37:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/06 14:58:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,10 @@ void			do_cmd(t_parser *tmp, t_expand *str, t_env **env);
 void			handle_signals(int proc);
 
 				// ALL DJOYKE PROTOS //
-bool			check_for_builtin(t_parser *node);
-void			redirect_outfile(t_parser *head, t_execute *data);
-bool			redirect_infile(t_parser *head, t_execute *data);
-void			redirect_append(t_parser *head, t_execute *data);
+int				check_for_builtin(t_parser *node);
+void			redirect_outfile(t_procs *head, t_execute *data);
+bool			redirect_infile(t_procs *head, t_execute *data);
+void			redirect_append(t_procs *head, t_execute *data);
 void			init_heredoc(t_parser *lst, t_env **env);
 void			redirect(t_parser *lst, t_execute *data);
 void			redirect_heredoc(t_parser *lst);
@@ -163,11 +163,11 @@ char			*get_full(char *str);
 
 //---- Built-in ----//
 void			free_all(t_env *env);
-void			do_builtin(t_parser *node, t_env **env);
+void			do_builtin(t_parser *node, t_env **env, int cmd_type);
 bool			word_check(t_parser *lst);
 void			ft_cd(t_parser *lst, t_env **env);
 bool			too_many_args(t_parser *lst);
-void			no_such_file(t_parser *lst);
+void			no_such_file(char *str, t_parser *lst);
 void			put_custom_error(t_parser *node, char *cmd);
 void			ft_echo(t_parser *lst, t_env **env);
 void			ft_env(t_env *env, t_parser *lst);
@@ -185,7 +185,7 @@ void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
 bool			absolute_check(t_parser *node);
 void			execute(t_env **env, t_parser *list);
 void			init_execute_struct(t_execute *data);
-bool			check_redirect(t_parser *node);
+// bool			check_redirect(t_parser *node);
 void			free_data(t_execute *data);
 void			close_all(t_execute *data, t_parser *lst);
 void			close_between(t_execute *data, t_parser *lst);
