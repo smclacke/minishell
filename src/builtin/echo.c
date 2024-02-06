@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 19:54:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 15:41:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	is_all_n(t_parser *temp)
 	j = 1;
 	if (temp->proc->str[0][0] != '-')
 		return (false);
-	while (temp->proc->str[0][0] == '-' && temp->proc->str[0][j] != '\0')
+	while (temp->proc->str[0][j] != '\0')
 	{
 		if (temp->proc->str[0][j] != 'n')
 			return (false);
@@ -44,11 +44,11 @@ static void	write_line(t_parser *temp)
 	int i;
 
 	i = 0;
-	while (temp->proc->str[i])
+	while (i < temp->proc->str_count)
 	{
 		if (temp->proc->str[i])
-			write(1, temp->proc->str, ft_strlen(*temp->proc->str));
-		if (temp->proc->str[i + 1] != NULL)
+			write(1, temp->proc->str[i], ft_strlen(temp->proc->str[i]));
+		if (i < temp->proc->str_count)
 			write(1, " ", 1);
 		i++;
 	}
@@ -107,18 +107,18 @@ void	ft_echo(t_parser *lst, t_env **env)
 
 	temp = lst;
 	is_flag = 0;
-	if (!input_check(lst))
+	if (input_check(lst) == false)
 		return ;
 	home_check(temp, env);
-	while (is_all_n(temp))
+	if (is_all_n(temp))
 		is_flag++;
-	write_line(temp);
 	if (is_flag != 0)
 	{
 		lst->exit_code = E_USAGE;
 		return ;
 	}
-	if (is_flag == 0 || temp->proc->str_count == 0)
+	write_line(temp);
+	if (is_flag == 0)
 		write(1, "\n", 1);
 	lst->exit_code = E_USAGE;
 }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:35:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 14:53:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 
 	count = lst->proc->proc_count;
 	cmd_type = 0;
-	printf("hoi single_builtin");
 	if (count == 1)
 	{
 		if (lst->proc->red_count != 0)

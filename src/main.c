@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:43:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 14:56:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,11 @@ int	main(int argc, char **argv, char **envp)
 			printf("NOPE\n");
 		// ft_free_arr(tokens);
 		
-		execute(&env, procs);
+		// execute(&env, procs);
 
 		prpr(procs);
-		printf("success\n");
-		exit(EXIT_SUCCESS);
-		printf("hello main\n");
+		// printf("success\n");
+		// exit(EXIT_SUCCESS);
 		execute(&env, procs);
 
 		dup2(og_stdout, STDOUT_FILENO);
