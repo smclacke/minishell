@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:16:24 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:27:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 16:09:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 /**
  * @param env environment stored in linked list
  * @brief prints linked list containing env key and value
- * 	if (lst->next && lst->next->str)
-	{
-		ft_putstr(NOT_POSSIBLE);
-		mini_error(E_COMMAND_NOT_FOUND, lst);
-		return ;
-	}
 */
 void	ft_env(t_env *env, t_parser *lst)
 {

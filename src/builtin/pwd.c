@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/12/06 19:45:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/06 16:09:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @param path string passed as NULL that needs to be filled in this function
  * @brief get's current working firectory
  * @return node made
- * @todo needs exit codes? dprintf?
+ * @todo needs exit codes?
 */
 void	ft_pwd(t_parser *head)
 {
