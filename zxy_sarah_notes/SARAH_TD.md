@@ -6,6 +6,23 @@
 ------------------------------
 ------------------------------
 
+**booo**
+minibleh:echo $USER
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==1385268==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x0000004d3ae1 bp 0x7fffeea70190 sp 0x7fffeea70090 T0)
+==1385268==The signal is caused by a WRITE memory access.
+==1385268==Hint: address points to the zero page.
+    #0 0x4d3ae1 in do_strs /home/smclacke/Desktop/mini_check/src/expander/expand_utils.c:110:16
+    #1 0x4d6748 in expand_dollar /home/smclacke/Desktop/mini_check/src/expander/expand_dollar.c:128:2
+    #2 0x4d2a68 in ft_expand /home/smclacke/Desktop/mini_check/src/expander/expand.c:23:3
+    #3 0x4d83ac in execute /home/smclacke/Desktop/mini_check/src/executor/execute.c:170:2
+    #4 0x4cb38b in run_minishell /home/smclacke/Desktop/mini_check/src/main.c:28:2
+    #5 0x4cb46f in main /home/smclacke/Desktop/mini_check/src/main.c:48:8
+    #6 0x7f3d3bc73d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #7 0x7f3d3bc73e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #8 0x41f344 in _start (/home/smclacke/Desktop/mini_check/minishell+0x41f344)
+
 *right here, right now*
 
 **YAYAY**
@@ -35,7 +52,6 @@
 
 **NENENENE**
 --- to norm:
-		parser/
 		expand_quotes.c
 		parser.c
 

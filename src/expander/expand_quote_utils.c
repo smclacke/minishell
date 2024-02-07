@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:25:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 17:29:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-int	check_quotes(char *str)
+int	check_qs(char *str)
 {
 	int	i;
 
