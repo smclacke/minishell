@@ -8,63 +8,314 @@
 
 *right here, right now*
 
-Memory Allocation in parse_tokens: In the parse_tokens function, you allocate memory for proc->proc_arrs and proc->process[i] but don't free them in case of failure or when they're no longer needed. Make sure to free them appropriately in all execution paths.
+**YAYAY**
+--- normed:
+		lexer/
+		expand.c
+		expand_quote_utils.c
+		expand_utils.c
+		expand_is_utils.c
+		dollars.c
+		d_quotes.c
+		hd_expand.c
+		s_quotes.c
+		parser_utils.c
+		proc_utils.c
+		sort_procs.c
+		expand_dollar.c	
+		get_procs.c
 
-Memory Allocation in get_procs and make_proc_arr: Similar to the above point, ensure that memory allocated in the get_procs and make_proc_arr functions is properly deallocated in case of errors or when it's no longer needed.
+--- errored:
+		expand_quote_utils.c
+		lexer/token_size.c
+		expand_is_utils.c
+		expand.c
+		sort_procs.c
 
-Error Handling: Ensure that all potential error conditions are properly handled. For example, if malloc fails to allocate memory, your program should exit gracefully without leaking memory.
 
-parse_input Function: In the parse_input function, if parse_tokens returns NULL, you should ensure that any memory allocated within the function is properly deallocated before returning.
+**NENENENE**
+--- to norm:
+		parser/
+		expand_quotes.c
+		parser.c
 
-Here are some specific suggestions:
-
-In the parse_tokens function, ensure that proc->proc_arrs and proc->process[i] are freed in case of failure.
-Add appropriate error handling and memory deallocation in the get_procs and make_proc_arr functions.
-Check all code paths in parse_tokens and parse_input to ensure that memory is properly deallocated in case of errors.
-Use tools like Valgrind to detect memory leaks and run your program under different scenarios to identify any potential issues.
-
+--- to error:
+		lexer.c
+		lexer_utils.c
+		expand_utils.c
+		expand_quotes.c
+		expand_dollar.c
+		dollars.c
+		d_quotes.c
+		hd_expand.c
+		s_quotes.c
+		parser.c
+		parser_utils.c
+		get_procs.c
+		proc_utils.c
 
 
 **DO this**
 
-- freee some things
-
-- leakkkyyyy af
-
 - norm norm norm
 
-- errors errors errors
+- errors
+
+- leaks
 
 - STRESS TEST THE FUCK OUTTA IT
 
 - check everything is nullified properly...
-------------------------------
-//		this was how i was using expander... merge with djoyke and try to not 
-		make a mess of everything....
-/**
- * @param env environment linked list
- * @param lst linked list parsed
- * @brief calls functions needed to start executing process
- * @todo exit codes
-*/
-void	execute(t_env **env, t_parser *lst)
-{
-	t_execute	*data;
-	(void)		data;
-	(void)		env;
-	(void)		lst;
-	// data = malloc(sizeof(t_execute));
-	// if (data == NULL)
-	// 	mini_error (E_GENERAL, lst);
-	// init_execute_struct(data);
-	ft_expand(lst, env);
-	// printf("success\n");
-	// exit(EXIT_SUCCESS);
-	// build(lst, env, data);
-	// free (data);
-}
 
 ------------------------------
+------------------------------
+------------------------------
+------------------------------
+------------------------------
+
+
+**MAIN TO DO**
+
+*TODO 1* US
+ ---->>>>  ?? why we exiting??
+EXAMPLE:
+minibleh:<< eof
+heredoc> hi
+heredoc> hello
+heredoc> exit
+heredoc> eof
+make: *** [Makefile:95: run] Error 1
+
+
+*TODO 2*  ME
+ ---->>>>> THIS LEAK... comes in here_doc and i think somewhere else too..
+Direct leak of 33 byte(s) in 4 object(s) allocated from:
+    #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
+    #1 0x7fba8cca3bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+EXAMPLE:
+minibleh:cat << eof
+heredoc> $USER
+heredoc> hehe
+heredoc> $LESS$USER
+heredoc> "$USER"
+heredoc> '$USER'
+heredoc> eof
+
+
+*TODO 3* ME 	WHAT AM I DOING ABOUT MALLOC FUNC/PROTECTION??
+ ------>> put ft_malloc into libft, use for all malloc in libft, 
+		forget about protection hawhaw
+		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
+
+
+*TODO 4* ME
+ ---->> check and test here_doc expansion
+ +++ -----> stress testing the expander + checking all for leaks
+
+
+*TODO 5* ME
+ ---->> NORM: expand_quotes.c
+
+
+*TODO 6* US
+SIGNALSSSSh
+ ---> the file is a total mess....
+ ---> check they really really work correctly in all situations 
+ ---> heredoc still weird, two prompt with signal
+
+
+*TODO 7* ME
+EXPANSION
+ ---> $? ***, test once exit codes are good
+
+
+*TODO 8* ME
+---> literally all errors
+
+
+*TODO 9* 
+ ---> norm, comment printing utils, check all error messages for
+		inappropriatness (sp?)
+
+
+=================================================================
+=================================================================
+--------------------------------------------------------------------
+
+=================================================================
+=================================================================
+
+**RANDOM NOTES ...**
+
+------------------------------------------------------------------------
+**IF THE SHIT SHOW HAS BEEN FIXED....**
+JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
+
+**TO DO**
+**PROBLEM**
+**FOOOOOOOOOK**
+
+**THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
+
+my brain is fried and i hate this project :)
+
+Holy mother of fuckidy fuck
+here we gooo
+
+// # define PROMPT BI_YELLOW"🍌🍌🍌🍌🍌🍌🍌🍌
+	 Gutentag Fräulein Shelly, wie geht's?"RESET
+
+mehmehmehmeh
+     __
+ .--()°'.'**ASK DJOYKE**
+------------------------------
+
+ACCESS = parser_list 	-> 		proc   ->		var
+		parser list		proc struct process		var 
+		t_parser		t_procs					token type || array
+
+
+*ONE* explain the structure:  ++ how to access (example in main)
+
+cmd <in <<hd str arg >out more strings | echo some | >out << hd1 << hd2 other ran wor
+
+  -> proc_count = [2]		// == 3 processes
+
+[0] cmd = cmd				// == process[0] cmd
+
+[0] str_count = 4			// == 4 string args not including cmd str
+[0] strs[0] = str
+[0] strs[1] = arg
+[0] strs[2] = more
+[0] strs[3] = strings
+
+[0] hd_count = 2			// == 1 here_doc
+[0] hd[0] = <<
+[0] hd[1] = hd
+
+[0] red_count = 4			// == 2 redirects
+[0] reds[0] = <
+[0] reds[1] = in
+[0] reds[2] = >
+[0] reds[3] = out
+--------------------------------------------------
+
+[1] cmd = echo				// == process[1] cmd
+
+[1] str_count = 1			// == 1 string args not including cmd str
+[1] strs[0] = some
+
+[1] hd_count = 0
+
+[1] red_count = 0
+--------------------------------------------------
+
+[2] cmd = other				// == process[2] cmd
+
+[2] str_count = 2			// == 2 string args not including cmd str
+[2] strs[0] = ran
+[2] strs[1] = wor
+
+[2] hd_count = 4			// == 2 here_doc
+[2] hd[0] = <<
+[2] hd[1] = hd1
+[2] hd[2] = <<
+[2] hd[3] = hd2
+
+[2] red_count = 2			// == 1 redirect
+[2] reds[0] = >
+[2] reds[1] = out
+--------------------------------------------------
+
+**SECOND EXAMPLE**
+< in > out | echo something | << hd1 << hd2 cmd str
+  -> proc_count = [2]
+
+
+[0] cmd = (null)
+
+[0] str_count = 0
+
+[0] hd_count = 0
+
+[0] red_count = 4
+[0] reds[0] = <
+[0] reds[1] = in
+[0] reds[2] = >
+[0] reds[3] = out
+--------------------------------------------------
+
+[1] cmd = echo
+
+[1] str_count = 1
+[1] strs[0] = something
+
+[1] hd_count = 0
+
+[1] red_count = 0
+--------------------------------------------------
+
+[2] cmd = cmd
+
+[2] str_count = 1
+[2] strs[0] = str
+
+[2] hd_count = 4
+[2] hd[0] = <<
+[2] hd[1] = hd1
+[2] hd[2] = <<
+[2] hd[3] = hd2
+
+[2] red_count = 0
+
+
+*TWO*
+----- ask djoyke what counts she wants, i think easier to use << hd == 2
+		then iterate hd_count to find meta and eof, since same array...
+proc_count = 0				= 1 process
+hd_count = 2				= 1 hd
+[0] hd[0] = <<
+[0] hd[1] = eof
+
+red_count = 4				= 2 redirects
+[0] reds[0] = >
+[0] reds[1] = out_file
+[0] reds[2] = <
+[0] reds[3] = in_file
+
+str_count = 4				= 4 cmd args
+[0] str[0] = something
+[0] str[1] = string
+[0] str[2] = and
+[0] str[3] = things
+
+'|, . ,'
+ !_-(_|\grep >
+input: grep >
+this is fucked
+this is fucked
+this is fucked
+this is fucked
+
+
+**SARAH, SHIT TO DO**
+
+HELLO WHAT DE FOOK
+
+Gutentag Frälein Shelly, wie geht's?
+dein computer, kein computer
+
+for in the future... don't change utils... ever. 
+=================================================================
+=================================================================
+-----------------------------------------------------------------
+
+**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
+
+=================================================================
+=================================================================
+=================================================================
 
 **ASK DJOYKE**
 ------------------------------
@@ -188,131 +439,6 @@ str_count = 4				= 4 cmd args
 [0] str[2] = and
 [0] str[3] = things
 
-
-------------------------------
-------------------------------
-
-
-**MAIN TO DO**
-
-*TODO 1* US
- ---->>>>  ?? why we exiting??
-EXAMPLE:
-minibleh:<< eof
-heredoc> hi
-heredoc> hello
-heredoc> exit
-heredoc> eof
-make: *** [Makefile:95: run] Error 1
-
-
-*TODO 2*  ME
- ---->>>>> THIS LEAK... comes in here_doc and i think somewhere else too..
-Direct leak of 33 byte(s) in 4 object(s) allocated from:
-    #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
-    #1 0x7fba8cca3bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
-
-EXAMPLE:
-minibleh:cat << eof
-heredoc> $USER
-heredoc> hehe
-heredoc> $LESS$USER
-heredoc> "$USER"
-heredoc> '$USER'
-heredoc> eof
-
-
-*TODO 3* ME 	WHAT AM I DOING ABOUT MALLOC FUNC/PROTECTION??
- ------>> put ft_malloc into libft, use for all malloc in libft, 
-		forget about protection hawhaw
-		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
-
-
-*TODO 4* ME
- ---->> check and test here_doc expansion
- +++ -----> stress testing the expander + checking all for leaks
-
-
-*TODO 5* ME
- ---->> NORM: expand_quotes.c
-
-
-*TODO 6* US
-SIGNALSSSSh
- ---> the file is a total mess....
- ---> check they really really work correctly in all situations 
- ---> heredoc still weird, two prompt with signal
-
-
-*TODO 7* ME
-EXPANSION
- ---> $? ***, test once exit codes are good
-
-
-*TODO 8* ME
----> literally all errors
-
-
-*TODO 9* 
- ---> norm, comment printing utils, check all error messages for
-		inappropriatness (sp?)
-
-
-=================================================================
-=================================================================
---------------------------------------------------------------------
-
-=================================================================
-=================================================================
-
-**RANDOM NOTES ...**
-
-------------------------------------------------------------------------
-**IF THE SHIT SHOW HAS BEEN FIXED....**
-JINGLE GLOBALS (:(:(:(:(:(:(::):):):):):):)
-
-**TO DO**
-**PROBLEM**
-**FOOOOOOOOOK**
-
-**THIS IS THE END YAY (not of minishell obvs, just my sanity) WOOOO**
-
-my brain is fried and i hate this project :)
-
-Holy mother of fuckidy fuck
-here we gooo
-
-// # define PROMPT BI_YELLOW"🍌🍌🍌🍌🍌🍌🍌🍌
-	 Gutentag Fräulein Shelly, wie geht's?"RESET
-
-mehmehmehmeh
-     __
- .--()°'.'
-'|, . ,'
- !_-(_|\grep >
-input: grep >
-this is fucked
-this is fucked
-this is fucked
-this is fucked
-
-
-**SARAH, SHIT TO DO**
-
-HELLO WHAT DE FOOK
-
-Gutentag Frälein Shelly, wie geht's?
-dein computer, kein computer
-
-for in the future... don't change utils... ever. 
-=================================================================
-=================================================================
------------------------------------------------------------------
-
-**OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT****OLD SHIT**
-
-=================================================================
-=================================================================
 =================================================================
 
 minibleh:echo '$USER'

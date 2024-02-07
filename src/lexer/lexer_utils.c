@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/07 15:53:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:20:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ char	*which_quote(char *input)
 	return (0);
 }
 
-/**
- * @todo	error handling
-*/
 int	next_quote(char *input, char c)
 {
 	int	i;
@@ -62,8 +59,7 @@ int	next_quote(char *input, char c)
 		i++;
 	if (input[i] != c)
 	{
-		printf("ERROR UNCLOSED QUOTES\n");
-		exit(1);
+		return (0); // syntax error
 	}
 	return (i);
 }

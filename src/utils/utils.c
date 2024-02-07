@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 19:58:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:21:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	shelly_strcmp(char *s1, char *s2)
 	return (0);
 }
 
+/**
+ * norrrrrmmmmmmmmm 
+ */
 void	free_procs(t_procs *proc)
 {
 	int			i;
@@ -79,6 +82,9 @@ void	free_procs(t_procs *proc)
 	}
 }
 
+/**
+ * norrrrrmmmmmmmmm 
+ */
 void	free_parser(t_parser *procs)
 {
 	t_parser	*tmp;
@@ -113,7 +119,7 @@ void	free_parser(t_parser *procs)
 }
 
 /**
- * need to fix literally all errors... 
+ * get rid of this and use something legit
  */
 void	sarah_error(t_parser *proc, char *str)
 {

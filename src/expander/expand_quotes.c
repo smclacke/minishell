@@ -6,42 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 21:15:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:35:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static char	*copy_back_and_free(char *new, char *str, int *j)
+static char	*copy_back(char *new, char *str, int *j)
 {
 	new[(*j)] = '\0';
 	str = ft_strcpy(str, new);
+	if (!str)
+		return (NULL);
 	return (str);
 }
 
 /**
- * @brief	buildt in protection
- * 			len is always given with one for the null, don't need to add here 
- * @todo	check the null malloc thingy...
-*/
-static char	*ft_char_malloc(int len)
-{
-	char	*var;
-
-	var = (char *)malloc(sizeof(char) * len);
-	if (!var)
-	{
-		printf("malloc noped oh no!\n");
-		exit(EXIT_FAILURE);
-	}
-	return (var);
-}
-
-/**
- * @todo	errors NORMMMMMMMMM
- * @todo	norm proof, djoyke changed some things regarding mini_error
- * 			parser is not made yet so can't use mini_error function
- * 
+ * @todo	norm
+ * @todo	maybe use mini struct and save some vars to help norm
  * @brief	minus one for malloc cause - 2 for quotes for str size then plus one
  * 			for null dus - 1 uiteindelijk
 */
@@ -55,7 +37,9 @@ static void	remove_quotes(char *str)
 	i = 0;
 	j = 0;
 	q = 0;
-	new = ft_char_malloc(ft_strlen(str) - 1);
+	new = (char *)malloc(sizeof(ft_strlen(str) - 1));
+	if (!new)
+		return ; // malloc error
 	while (str[i])
 	{
 		while (str[i] && !ft_isquote(str[i]))
@@ -70,7 +54,7 @@ static void	remove_quotes(char *str)
 				i++;
 		}
 	}
-	str = copy_back_and_free(new, str, &j);
+	str = copy_back(new, str, &j);
 	free(new);
 }
 
@@ -95,6 +79,7 @@ void	expand_quotes(t_parser *tokens)
 	}
 	if (list->proc->hd_count != 0)
 	{
+		// handle_hd()
 		while (i < list->proc->hd_count)
 		{
 			if (check_quotes(list->proc->hd[i]) && (!ft_isdollar(list->proc->hd[i])))
@@ -108,6 +93,7 @@ void	expand_quotes(t_parser *tokens)
 	i = 0;
 	if (list->proc->str_count != 0)
 	{
+		// handle_str()
 		while (i < list->proc->str_count)
 		{
 			if (check_quotes(list->proc->str[i]) && (!ft_isdollar(list->proc->str[i])))

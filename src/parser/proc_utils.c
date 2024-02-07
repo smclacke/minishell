@@ -6,15 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:59:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 17:05:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo	error handling
-*/
 int	count_reds(char **process)
 {
 	int		i;
@@ -27,10 +24,7 @@ int	count_reds(char **process)
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
 		{
 			if (!process[i + 1])
-			{
-				printf("error 2\n");
-				return (EXIT_FAILURE);
-			}
+				return (-1); // snytax error
 			count += 2;
 		}
 		i++;
@@ -38,10 +32,6 @@ int	count_reds(char **process)
 	return (count);
 }
 
-/**
- * @todo	error handling
- * @todo	norm
-*/
 int	count_strs(t_procs *proc, char **process)
 {
 	int		i;
@@ -54,10 +44,7 @@ int	count_strs(t_procs *proc, char **process)
 		if (proc_redir(process[i]))
 		{
 			if (!process[i + 1])
-			{
-				printf("error 3\n");
-				return (EXIT_FAILURE);
-			}
+				return (-1); // syntax error
 			i += 2;
 		}
 		else if (proc->cmd_flag != 1)
@@ -74,10 +61,7 @@ int	count_strs(t_procs *proc, char **process)
 	return (count);
 }
 
-/**
- * @todo	error handling
-*/
-int		count_hds(char **process)
+int	count_hds(char **process)
 {
 	int		i;
 	int		count;
@@ -89,10 +73,7 @@ int		count_hds(char **process)
 		if (proc_redir(process[i]) == 2)
 		{
 			if (!process[i + 1])
-			{
-				printf("error 4\n");
-				return (EXIT_FAILURE);
-			}
+				return (-1); // syntax error
 			count += 1;
 		}
 		i++;
@@ -100,7 +81,7 @@ int		count_hds(char **process)
 	return (count);
 }
 
-int		proc_redir(char *input)
+int	proc_redir(char *input)
 {
 	if (ft_strcmp(input, MOREMORE) == 0)
 		return (1);
@@ -112,4 +93,3 @@ int		proc_redir(char *input)
 		return (4);
 	return (0);
 }
-

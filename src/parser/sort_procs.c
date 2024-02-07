@@ -6,20 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 15:51:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 17:12:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo	protect all mallocs
- * @todo	norm - if red // make red arr func(), if hd // make hd arr func ().... 
-*/
 static	void	sort_vars(t_procs *proc, char **process)
 {
 	if (proc->cmd_flag == TRUE)
+	{
+		if (proc->str_count != 0)
+		{
+			proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
+			if (!proc->str)
+				return ; //malloc error
+		}
 		get_strs(proc, process);
+	}
 	else
 	{
 		proc->cmd = NULL;
@@ -35,13 +39,6 @@ static	void	sort_vars(t_procs *proc, char **process)
 		proc->hd = NULL;
 }
 
-/**
- * @todo	norm
- * @todo	free proc_arr or tokens once sorted into proc struct
- * @todo	malloc protection 
- * @todo	bzeros?
- * @brief	count_hds looks for the hd meta and saves the number of hds
-*/
 void	sort_each_proc(t_procs *proc, char **proc_arr)
 {
 	proc->token_count = ft_arrlen(proc_arr);

@@ -6,17 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 20:01:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:58:56 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
 /**
- * @todo comments
- * @todo malloc protect
  * @todo norm
- * @todo errors
  */
 static	int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 {
@@ -31,7 +28,7 @@ static	int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		{
 			free(proc->tokens);
 			free(proc);
-			return (0);
+			return (0); // errrrror
 		}
 		token_size = ft_strlen(proc->tokens[proc->start]);
 		proc->proc_arrs[proc_i][proc_j] = ft_strdup(proc->tokens[proc->start]);
@@ -41,7 +38,7 @@ static	int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 			free(proc->tokens);
 			free(proc->proc_arrs);
 			free(proc);
-			return (0);
+			return (0); // malloc error
 		}
 		proc_j++;
 		proc->start++;
@@ -49,6 +46,9 @@ static	int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 	return (1);
 }
 
+/**
+ * normynorm
+ */
 static	int	get_procs(t_parser *proc)
 {
 	int	i;
@@ -62,7 +62,7 @@ static	int	get_procs(t_parser *proc)
 	if (!proc->proc_arrs)
 	{
 		free (proc);
-		return (0);
+		return (0); // malloc error
 	}
 	while (proc->tokens[i])
 	{
@@ -75,10 +75,10 @@ static	int	get_procs(t_parser *proc)
 		{
 			free(proc->proc_arrs);
 			free(proc);
-			return (0);
+			return (0); // malloc error
 		}
 		if (!make_proc_arr(proc, proc_i, proc_size))
-			return (0);
+			return (0); // error
 		proc->proc_arrs[proc_i][proc_size] = NULL;
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 		{
@@ -90,13 +90,8 @@ static	int	get_procs(t_parser *proc)
 }
 
 /**
- * @todo	maybe norm?
- * @todo	bzero procs struct??
- * @todo	error handling
- * @todo	memory handling, malloc protection
- * @todo	remove print statements when everything works
- * @todo 	do I need alllll of these vars??
-*/
+ * normynorm
+ */
 static t_parser	*parse_tokens(char **tokens)
 {
 	t_parser	*proc;
@@ -106,23 +101,20 @@ static t_parser	*parse_tokens(char **tokens)
 
 	i = 0;
 	if (!tokens)
-		return (NULL);
+		return (NULL); //  error??
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	if (!proc)
-		return (NULL);
+		return (NULL); // malloc error
 	ft_bzero(proc, sizeof(t_parser));
-
 	proc->tokens = tokens;
 	proc->proc_count = (count_procs(tokens) + 1);
-
 	parser_list = NULL;
 	new_node = NULL;
-
 	proc->process = (t_procs **)malloc(sizeof(t_procs *) * (proc->proc_count + 1));
 	if (!proc->process)
 	{
 		free(proc);
-		return (NULL);
+		return (NULL); // malloc error
 	}
 	ft_bzero(proc->process, sizeof(t_procs));
 	if (proc->proc_count > 1)
@@ -130,14 +122,14 @@ static t_parser	*parse_tokens(char **tokens)
 		// handle mutli (())
 		proc->multi_proc_b = TRUE;
 		if (!get_procs(proc))
-			return (NULL);
+			return (NULL); // error
 		while (i < proc->proc_count)
 		{
 			proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 			if (!proc->process[i])
 			{
 				free(proc->process);
-				return (NULL);
+				return (NULL); // malloc error
 			}
 			ft_bzero(proc->process[i], sizeof(t_procs));
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
@@ -155,7 +147,7 @@ static t_parser	*parse_tokens(char **tokens)
 			if (!proc->process[i])
 			{
 				free(proc->process);
-				return (NULL);
+				return (NULL); // malloc error
 			}
 		ft_bzero(proc->process[i], sizeof(t_procs));
 		sort_each_proc(proc->process[i], proc->tokens);
@@ -190,9 +182,9 @@ t_parser		*parse_input(t_parser *procs, char *input)
 		if (!procs)
 		{
 			free_parser(procs);
-			return (NULL);
+			return (NULL); // parser failed error
 		}
 		return (procs);
 	}
-	return (NULL);
+	return (NULL); // parser failed error
 }

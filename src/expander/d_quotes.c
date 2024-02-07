@@ -6,17 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:19:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:49:46 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo	error handling
- * @todo	substr protection
- * @todo	strdup protection
-*/
 static int	first_str_bit(t_expand *str, char *input)
 {
 	int	i;
@@ -29,41 +24,44 @@ static int	first_str_bit(t_expand *str, char *input)
 		if (i == 0)
 			return (0);
 		str->tmp = ft_substr(input, 0, i);
+		if (!str->tmp)
+			return (-1); // malloc error
 	}
 	else
-		str->tmp = ft_strdup(input);
-	if (add_to_expand(str, str->tmp) == -1)
 	{
-		printf("errorrrrrrr\n");
-		return (-1); // need proper error like
+		str->tmp = ft_strdup(input);
+		if (!str->tmp)
+			return (-1); // malloc error
 	}
+	if (add_to_expand(str, str->tmp) == -1)
+		return (-1); // error
 	return (i);
 }
 
-/**
- * @todo	error handling
- * @todo	strjoin protection
- * @todo	strdup protection
-*/
 static int	add_single_quote(t_expand *str, char *c)
 {
 	char	*tmp;
 
 	tmp = NULL;
 	if (str->expanded)
+	{
 		tmp = ft_strjoin(str->expanded, c);
+		if (!tmp)
+			return (-1); // mallloc error
+	}
 	else
+	{
 		tmp = ft_strdup(c);
+		if (!tmp)
+			return (-1); // mallloc error
+	}
 	free(str->expanded);
 	str->expanded = tmp;
 	if (!str->expanded)
-		return (-1); // need proper error like
+		return (-1); // error
 	return (0);
 }
 
-/**
- * @todo	error handling
-*/
 static int	handle_double(t_expand *str, char *input, t_env **env)
 {
 	int		i;
@@ -78,7 +76,7 @@ static int	handle_double(t_expand *str, char *input, t_env **env)
 		if (input[i] && ft_issquote(input[i]))
 		{
 			if (add_single_quote(str, "\'"))
-				return (-1); // need proper error like
+				return (-1); // error ?
 			i++;
 		}
 		if (input[i] && !is_dollar_or_quote(input[i]))
@@ -89,10 +87,6 @@ static int	handle_double(t_expand *str, char *input, t_env **env)
 	return (0);
 }
 
-/**
- * @todo	error handling
- * @todo	substr protection
-*/
 int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 {
 	int		start;
@@ -106,12 +100,14 @@ int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 		{
 			end = i - start;
 			str->d_quote = ft_substr(input, start, end);
+			if (!str->d_quote)
+				return (-1); //malloc error
 			if (handle_double(str, str->d_quote, env) == -1)
-				return (-1); // need proper error like
+				return (-1); // error
 			free(str->d_quote);
 			return (i + 1);
 		}
 		i++;
 	}
-	return (-1); //error oder?
+	return (-1); //error ??
 }

@@ -6,15 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/07 15:58:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:20:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo errors (printfs) and basic comments
-*/
 static int	quote_input(char *input, int i)
 {
 	char	*quote_type;
@@ -58,9 +55,6 @@ static int	amount_tokens(char *input)
 	return (count);
 }
 
-/**
- * @todo	error handling
-*/
 static char	*split_tokens(char *input, int len)
 {
 	char	*token;
@@ -74,9 +68,6 @@ static char	*split_tokens(char *input, int len)
 	return (token);
 }
 
-/**
- * @todo	error handling
-*/
 static char	**lexer_split(char *input)
 {
 	char	**array;
@@ -103,9 +94,6 @@ static char	**lexer_split(char *input)
 	return (array);
 }
 
-/**
- * @todo	error handling
-*/
 char	**lexer(char *input)
 {
 	char	**array;
