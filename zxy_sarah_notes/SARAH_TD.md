@@ -9,7 +9,6 @@
 **booo**
 minibleh:echo $USER
 AddressSanitizer:DEADLYSIGNAL
-=================================================================
 ==1385268==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x0000004d3ae1 bp 0x7fffeea70190 sp 0x7fffeea70090 T0)
 ==1385268==The signal is caused by a WRITE memory access.
 ==1385268==Hint: address points to the zero page.
@@ -22,6 +21,35 @@ AddressSanitizer:DEADLYSIGNAL
     #6 0x7f3d3bc73d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
     #7 0x7f3d3bc73e3f in __libc_start_main csu/../csu/libc-start.c:392:3
     #8 0x41f344 in _start (/home/smclacke/Desktop/mini_check/minishell+0x41f344)
+
+**booo_2**
+minibleh:'echo'
+parser proc count = [1]
+proc proc_count = [1]
+
+
+[0] cmd = echo
+
+[0] str_count = 0
+
+[0] hd_count = 0
+
+[0] red_count = 0
+
+success
+
+==1387085==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 80 byte(s) in 1 object(s) allocated from:
+    #0 0x49a20d in malloc (/home/smclacke/Desktop/mini_check/minishell+0x49a20d)
+    #1 0x4cf066 in parse_tokens /home/smclacke/Desktop/mini_check/src/parser/parser.c:105:21
+    #2 0x4ceedd in parse_input /home/smclacke/Desktop/mini_check/src/parser/parser.c:180:11
+    #3 0x4cb359 in run_minishell /home/smclacke/Desktop/mini_check/src/main.c:25:10
+    #4 0x4cb46f in main /home/smclacke/Desktop/mini_check/src/main.c:48:8
+    #5 0x7f1d92f2bd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: 80 byte(s) leaked in 1 allocation(s).
+make: *** [Makefile:93: run] Error 1
 
 *right here, right now*
 
