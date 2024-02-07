@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/07 17:34:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 18:16:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef	struct s_procs
 /**
  * @todo	check proc_size is correct while iterating through processes
  * @todo	exit stuff, what need to happen here?
+ * @param	i, j and q are all quote removing utils, don't use anywhere else
  * @param	multi_proc_b: specifies whether there is only one process or multiple
  * @param	tokens: if only one process, can just use the token array
  * @param	proc_arrs: if multiple processes, use the array of processes
@@ -130,6 +131,10 @@ typedef	struct s_procs
 */
 typedef	struct	s_parser
 {
+	int						i;
+	int						j;
+	int						q;
+	
 	bool					multi_proc_b;
 	char					**tokens;
 	char					***proc_arrs;
