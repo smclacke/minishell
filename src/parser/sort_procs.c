@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 19:32:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:43:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,34 +49,24 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	sort_vars(proc, proc_arr);
 }
 
-/**
- * normynorm
- */
-int	get_procs(t_parser *proc)
+static	void	token_while(t_parser *proc, char *str)
 {
-	int	i;
+	int		i;
 	int	proc_i;
 	int	proc_size;
 
 	i = 0;
 	proc_i = 0;
 	proc_size = 0;
-	proc->proc_arrs = (char ***)malloc(sizeof(char **) * (proc->proc_count + 1));
-	if (!proc->proc_arrs)
-		return (free (proc), 0); // malloc error
-	while (proc->tokens[i])
+	while (str[i])
 	{
 		proc->start = i;
-		while (proc->tokens[i] && !is_pipe(proc->tokens[i]))
+		while (str[i] && !is_pipe(str[i]))
 			i++;
-		proc_size = (i - proc->start);
+		proc_size = (i = proc->start);
 		proc->proc_arrs[proc_i] = (char **)malloc(sizeof(char *) * (proc_size + 1));
 		if (!proc->proc_arrs)
-		{
-			free(proc->proc_arrs);
-			free(proc);
-			return (0); // malloc error
-		}
+			return (free_util(proc, proc->proc_arrs, NULL, NULL), 0); // malloc error
 		if (!make_proc_arr(proc, proc_i, proc_size))
 			return (0); // error
 		proc->proc_arrs[proc_i][proc_size] = NULL;
@@ -86,5 +76,13 @@ int	get_procs(t_parser *proc)
 			proc_i++;
 		}
 	}
+}
+
+int	get_procs(t_parser *proc)
+{
+	proc->proc_arrs = (char ***)malloc(sizeof(char **) * (proc->proc_count + 1));
+	if (!proc->proc_arrs)
+		return (free (proc), 0); // malloc error
+	token_while(proc,proc->tokens[i]);
 	return (1);
 }

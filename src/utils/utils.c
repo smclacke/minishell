@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 17:33:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:41:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,14 @@ void	free_parser(t_parser *procs)
 	free(procs);
 }
 
-void	free_util(t_parser *list, t_procs *proc, char **arr, char *str)
+void	free_util(t_parser *list, char ***arrs, char **arr, char *str)
 {
 	if (str)
 		free(str);
 	if (arr)
 		ft_free_arr(arr);
-	if (proc)
-		free(proc);
+	if (arrs)
+		free(arrs);
 	if (list)
 		free(list);
 }

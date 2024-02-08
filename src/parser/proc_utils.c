@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 17:43:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:42:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,7 @@ int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		proc->proc_arrs[proc_i][proc_j] = ft_strdup(proc->tokens[proc->start]);
 		if (!proc->proc_arrs[proc_i][proc_j])
 		{
-			free_util(proc, NULL, proc->tokens, proc->tokens[proc_i]);
-			free(proc->proc_arrs);
+			free_util(proc, proc->proc_arrs, proc->tokens, proc->tokens[proc_i]);
 			return (0); // malloc error
 		}
 		proc_j++;
