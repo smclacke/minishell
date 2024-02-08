@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:54:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 21:09:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ static	void	token_while(t_parser *proc, char *str)
 	while (str[i])
 	{
 		proc->start = i;
-		while (str[i] && !is_pipe(str[i]))
+		while (str[i] && !ft_ispipe(str[i]))
 			i++;
 		p_size = (i + proc->start);
 		proc->proc_arrs[pi] = (char **)malloc(sizeof(char *) * (p_size + 1));
 		if (!proc->proc_arrs)
-			return (free_util(proc, proc->proc_arrs, NULL, NULL), 0);// malloc error
+			free_util(proc, proc->proc_arrs, NULL, NULL); // malloc error, but no return
 		if (!make_proc_arr(proc, pi, p_size))
-			return (0);// error
+			return ;// error
 		proc->proc_arrs[pi][p_size] = NULL;
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 		{
@@ -84,6 +84,6 @@ int	get_procs(t_parser *proc)
 			* (proc->proc_count + 1));
 	if (!proc->proc_arrs)
 		return (free (proc), 0);// malloc error
-	token_while(proc, proc->tokens);
+	token_while(proc, *proc->tokens);
 	return (1);
 }

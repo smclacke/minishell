@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:41:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 21:02:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int				is_same_quote(int c, char *quote_type);
 char			*which_quote(char *input);
 int				next_quote(char *input, char c);
 
-//-------- token_size --------//
+//-------- tokens --------//
 bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
 int				start_token(char *input, int old_start);
@@ -106,6 +106,28 @@ int				first_bit(t_expand *str, char *input);
 void			dollar(t_expand *str, t_env **env);
 void			expand_dollar(t_parser *lst, t_env **env);
 
+//-------------------- expand_quotes -------------------//
+void			expand_quotes(t_parser *tokens);
+
+//-------------------- remove_quotes -------------------//
+
+
+//----------------- expand_quote_utils ------------------//
+int				check_qs(char *str);
+int				check_space(char *str);
+int				quote_type(int str);
+
+//------------------ expand_utils ------------------//
+int				add_to_expand(t_expand *str, char *copy_str);
+void			do_reds(t_parser *tmp, t_expand *str, t_env **env);
+void			do_hds(t_parser *tmp, t_expand *str, t_env **env);
+void			do_strs(t_parser *tmp, t_expand *str, t_env **env);
+void			do_cmd(t_parser *tmp, t_expand *str, t_env **env);
+
+//------------------ expand_utils_2 ------------------//
+int				expandable_str(int c);
+int				is_dollar_or_quote(int c);
+
 //------------------- hd_expand --------------------//
 char			*hd_expand(t_env **env, char *read_line);
 
@@ -118,25 +140,6 @@ int				dquote_bit(t_expand *str, char *input, t_env **env, int i);
 //----------------- dollars ------------------//
 int				dollar_expand(t_expand *str, t_env **env);
 int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
-
-//-------------------- expand_quotes -------------------//
-void			expand_quotes(t_parser *tokens);
-
-//----------------- expand_quote_utils ------------------//
-int				check_qs(char *str);
-int				check_space(char *str);
-int				quote_type(int str);
-
-//------------------ expand_is_utils ------------------//
-int				expandable_str(int c);
-int				is_dollar_or_quote(int c);
-
-//------------------ expand_utils ------------------//
-int				add_to_expand(t_expand *str, char *copy_str);
-void			do_reds(t_parser *tmp, t_expand *str, t_env **env);
-void			do_hds(t_parser *tmp, t_expand *str, t_env **env);
-void			do_strs(t_parser *tmp, t_expand *str, t_env **env);
-void			do_cmd(t_parser *tmp, t_expand *str, t_env **env);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);

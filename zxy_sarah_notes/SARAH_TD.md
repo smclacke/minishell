@@ -1,64 +1,17 @@
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
-
 ------------------------------
 ------------------------------
 ------------------------------
 ------------------------------
-
-**BOOOOOO**
-  --- quotes seem to be ok again with old remove_quotes functions, 
-		but not norm...
 
 *right here, right now*
-
-**YAYAY**
---- normed:
-		lexer/
-		expand.c
-		expand_quote_utils.c
-		expand_utils.c
-		expand_is_utils.c
-		dollars.c
-		d_quotes.c
-		hd_expand.c
-		s_quotes.c
-		parser_utils.c
-		proc_utils.c
-		sort_procs.c
-		expand_dollar.c	
-		get_procs.c
-		parser.c
-		sort_procs.c
-
---- errored:
-		expand_quote_utils.c
-		lexer/token_size.c
-		expand_is_utils.c
-		expand.c
-
 
 **NENENENE**
 --- to norm:
 		expand_quotes.c
 		utils.c (freeing stuff, so wait till it's good, then normal
 				and probs break)
-
---- to error:
-		lexer.c
-		lexer_utils.c
-		expand_utils.c
-		expand_quotes.c
-		expand_dollar.c
-		dollars.c
-		d_quotes.c
-		hd_expand.c
-		s_quotes.c
-		parser.c
-		parser_utils.c
-		get_procs.c
-		proc_utils.c
-
 
 **DO this**
 
@@ -117,11 +70,6 @@ heredoc> eof
 *TODO 4* ME
  ---->> check and test here_doc expansion
  +++ -----> stress testing the expander + checking all for leaks
-
-
-*TODO 5* ME
- ---->> NORM: expand_quotes.c
-
 
 *TODO 6* US
 SIGNALSSSSh

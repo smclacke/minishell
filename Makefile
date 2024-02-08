@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/08 20:20:15 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/08 21:04:31 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,16 +33,17 @@ SRCS			= main.c								\
 					utils/print.c						\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
-					lexer/token_size.c					\
+					lexer/tokens.c						\
 					parser/parser.c						\
 					parser/parser_utils.c				\
 					parser/sort_procs.c					\
 					parser/get_procs.c					\
 					parser/proc_utils.c					\
-					expander/expand_is_utils.c			\
+					expander/expand_utils_2.c			\
 					expander/expand.c					\
 					expander/expand_utils.c				\
 					expander/expand_quotes.c			\
+					expander/remove_quotes.c			\
 					expander/expand_quote_utils.c		\
 					expander/expand_dollar.c			\
 					expander/dollars.c					\
