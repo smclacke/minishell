@@ -56,12 +56,14 @@ did not fail....
 		lexer/token_size.c
 		expand_is_utils.c
 		expand.c
-		sort_procs.c
 
 
 **NENENENE**
 --- to norm:
 		parser.c
+		sort_procs.c
+		utils.c (freeing stuff, so wait till it's good, then normal
+				and probs break)
 
 --- to error:
 		lexer.c

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/07 18:18:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 17:28:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static char	*copy_back(char *new, char *str, int *j)
 }
 
 /**
- * @todo	norm
- * @todo	maybe use mini struct and save some vars to help norm
  * @brief	minus one for malloc cause - 2 for quotes for str size then plus one
  * 			for null dus - 1 uiteindelijk
 */

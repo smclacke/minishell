@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/07 17:30:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 17:45:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@
 # include <limits.h>
 
 				// utils
-bool			is_space(char *input);
-int				shelly_strcmp(char *s1, char *s2);
 void			free_procs(t_procs *proc);
 void			free_parser(t_parser *procs);
-void			sarah_error(t_parser *proc, char *str);
+void			free_util(t_parser *list, t_procs *proc, char **arr, char *str);
 
 /**
  * @todo	comment out print protos
@@ -65,6 +63,8 @@ char			*which_quote(char *input);
 int				next_quote(char *input, char c);
 
 //-------- token_size --------//
+bool			is_space(char *input);
+int				shelly_strcmp(char *s1, char *s2);
 int				start_token(char *input, int old_start);
 int				len_token(char *input, int len);
 
@@ -81,6 +81,7 @@ t_parser		*parser_listnew(t_procs *proc);
 
 //-------- sort_procs --------//
 void			sort_each_proc(t_procs *proc, char **proc_arr);
+int				get_procs(t_parser *proc);
 
 //-------- get_procs --------//
 void			get_reds(t_procs *proc, char **process);
@@ -92,6 +93,7 @@ int				count_reds(char **process);
 int				count_strs(t_procs *proc, char **process);
 int				count_hds(char **process);
 int				proc_redir(char *input);
+int				make_proc_arr(t_parser *proc, int proc_i, int proc_size);
 
 				// expander
 //------------------ expand -------------------//
