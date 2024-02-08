@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 21:19:39 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 21:50:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static void	mini_remove_env(char *str, t_env **env)
 }
 
 /**
- * @param argv terminal given arguments (for now)
+ * @param node parser linked list
  * @param env pointer to environment
  * @brief unset values by deleting nodes in env linked list
  * @note if path is unset cant do env in bash
- * @todo work check needs key and value now
+ * @todo make it work
 */
 void	ft_unset(t_parser *node, t_env **env)
 {
@@ -60,9 +60,7 @@ void	ft_unset(t_parser *node, t_env **env)
 	i = 0;
 	if (node->proc->proc_count != 1)
 		return ;
-	// if (word_check(node->proc->str[i], node) == 1)
-	// 	return ;
-	while (node->proc->str[i])
+	while (i < node->proc->proc_count)
 	{
 		mini_remove_env(node->proc->str[i], env);
 		i++;

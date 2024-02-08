@@ -516,3 +516,94 @@ echo code instead of input check
 // 		ft_free_arr(words);
 // 		return (true);
 // 	}
+
+
+// /**
+//  * @param node node in linked list
+//  * @param cmd either unset or export
+//  * @brief puts custom error message on STDOUT_FILENO
+//  * @todo is index[0] okay?
+// */
+// void	put_custom_error(t_parser *node, char *cmd)
+// {
+// 	if (mini_strcmp(cmd, "export") == 0)
+// 	{
+// 		ft_putstr_fd("minishell: export: `", STDOUT_FILENO);
+// 		ft_putstr_fd(node->proc->str[0], STDOUT_FILENO);
+// 		ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
+// 	}
+// 	// else if (mini_strcmp(cmd, "unset") == 0)
+// 	// {
+// 	// 	ft_putstr_fd("minishell: unset: `", STDOUT_FILENO);
+// 	// 	ft_putstr_fd(node->proc->str[0], STDOUT_FILENO);
+// 	// 	ft_putstr_fd("': not a valid identifier\n", STDOUT_FILENO);
+// 	// }
+// 	else if (mini_strcmp(cmd, "exit") == 0)
+// 	{
+// 		ft_putstr_fd("exit\n", STDOUT_FILENO);
+// 		ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
+// 		ft_putstr_fd(node->proc->str[0], STDOUT_FILENO);
+// 		ft_putstr_fd(ERROR_MESSAGE, STDOUT_FILENO);
+// 	}
+// }
+
+// /**
+//  * @param lst linked list
+//  * @param key string containing key
+//  * @param value string containing value
+//  * @brief checks if the words are export and unset norm
+//  * proof.
+//  * key (word) first letter has:
+//  * capital (H), lowercase (h), underscore (_) as first letter 
+//  * else give error if given 99=djoyke as key
+//  * minishell: export: `99=djoyke': not a valid identifier
+//  * rest of word can only have numbers, letters and underscore.
+//  * else give error export d@@=haha
+//  * minishell: export: `d@@=haha': not a valid identifier
+//  * same for unset
+//  * @return true if wrong found with the words
+//  * @todo
+//  * export var=a
+//  * export $var=test
+//  * echo $var $a
+// */
+// bool	word_check(t_parser *lst, char *key, char *value)
+// {
+// 	t_parser	*temp;
+// 	char		*cmd;
+
+// 	cmd = lst->proc->cmd;
+// 	temp = lst;
+// 	// if ((mini_strcmp(cmd, "unset") == 0) && value)
+// 	// {
+// 	// 	put_custom_error(temp, cmd);
+// 	// 	return (true);
+// 	// }
+// 	if (is_valid_key(lst, key, "export") == false)
+// 		return (true);
+
+// 	return (false);
+// }
+
+// /**
+//  * @param argv terminal given arguments (for now)
+//  * @param env pointer to environment
+//  * @brief unset values by deleting nodes in env linked list
+//  * @note if path is unset cant do env in bash
+//  * @todo work check needs key and value now
+// */
+// void	ft_unset(t_parser *node, t_env **env)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	if (node->proc->proc_count != 1)
+// 		return ;
+// 	// if (word_check(node->proc->str[i], env->key, env->value) == 1)
+// 	// 	return ;
+// 	while (node->proc->str[i])
+// 	{
+// 		mini_remove_env(node->proc->str[i], env);
+// 		i++;
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:04:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 21:48:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	export_print(t_env *env)
 {
 	while (env != NULL)
 	{
-		printf("has_value = %i\n", env->has_value);
 		if (env->has_value)
 			printf("declare -x %s=\"%s\"\n", env->key, env->value);
 		else
@@ -66,7 +65,7 @@ static bool	reassign_env(t_env **env, t_export ex_var)
 */
 static bool key_value_check(t_parser *node, t_export ex_var, int i)
 {
-	if (word_check(node, ex_var.key, ex_var.value) == true)
+	if (word_check(node, ex_var.key) == true)
 	{
 		if (i == (node->proc->str_count - 1))
 		{
