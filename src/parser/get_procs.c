@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/07 17:22:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 19:30:00 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	get_reds(t_procs *proc, char **process)
 			if (!process[i + 1])
 				return ; // syntax error
 			proc->redir[j] = ft_strdup(process[i]);
-			if (!proc->redir[i])
+			if (!proc->redir[j])
 				return ; // malloc error
 			proc->redir[j + 1] = ft_strdup(process[i + 1]);
 			if (!proc->redir[j + 1])
@@ -62,7 +62,7 @@ void	get_hds(t_procs *proc, char **process)
 			if (!process[i + 1])
 				return ; // syntax error
 			proc->hd[j] = ft_strdup(process[i + 1]);
-			if (!proc->hd[i])
+			if (!proc->hd[j])
 				return ; //malloc error
 			j++;
 			i++;

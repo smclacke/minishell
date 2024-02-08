@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 17:45:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 19:32:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static	void	sort_vars(t_procs *proc, char **process)
 	{
 		if (proc->str_count != 0)
 		{
-			proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
+			proc->str = (char **)malloc(sizeof(char *)
+				* (proc->str_count + 1));
 			if (!proc->str)
 				return ; //malloc error
 		}
