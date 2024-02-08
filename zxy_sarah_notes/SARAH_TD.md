@@ -9,13 +9,10 @@
 
 **NENENENE**
 --- to norm:
-		expand_quotes.c
 		utils.c (freeing stuff, so wait till it's good, then normal
 				and probs break)
 
 **DO this**
-
-- norm norm norm
 
 - errors
 

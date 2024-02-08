@@ -6,57 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:00:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 22:40:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-static void	increment(int *len, int *i)
-{
-	(*len)++;
-	(*i)++;
-}
-
-static void	remove_quotes(char *str)
-{
-	int			i;
-	int			j;
-	int			q;
-	size_t		len;
-	char		*new;	
-
-	i = 0;
-	j = 0;
-	q = 0;
-	len = (ft_strlen(str) - 2);
-	new = (char *)malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return ;
-	while (str[i])
-	{
-		while (str[i] && !ft_isquote(str[i]))
-		{
-			new[j] = str[i];
-			increment(&i, &j);
-		}
-		if (ft_isquote(str[i]))
-		{
-			q = quote_type(str[i]);
-			i++;
-			while (str[i] && str[i] != q)
-			{
-				new[j] = str[i];
-				increment(&i, &j);
-			}
-			if (ft_isquote(str[i]) && str[i] == q)
-				i++;
-		}
-	}
-	new[j] = '\0';
-	str = ft_strcpy(str, new);
-	free(new);
-}
 
 static	void	handle_hd(t_parser *list)
 {
