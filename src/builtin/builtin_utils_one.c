@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 21:47:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:54:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	do_builtin(t_parser *node, t_env **env, int cmd_type)
 static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 {
 	int	i;
-	printf("key = %s\n", key);
 
 	if ((ft_isalpha(key[0]) == 0) && key[0] != '_')
 	{
@@ -81,6 +80,8 @@ static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 
 /**
  * @param lst linked list
+ * @param key string containing key
+ * @param value string containing value
  * @brief checks if the words are export and unset norm
  * proof.
  * key (word) first letter has:
@@ -100,25 +101,6 @@ static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
  * export var=a
  * export $var=test
  * echo $var $a
- * @todo why do I need list and value and what do my errors do?
- * better way to do this
- * 	words = null_check(str, lst);
-	if (!words)
-	{
-		put_custom_error(lst, "export");
-		mini_error(E_GENERAL, lst);
-		return (true);
-	}
-	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
-	{
-		put_custom_error(temp, cmd);
-		return (true);
-	}
-	if (key_value_check(lst, words, "export") == 1)
-	{
-		ft_free_arr(words);
-		return (true);
-	}
 */
 bool	word_check(t_parser *lst, char *key, char *value)
 {
@@ -133,11 +115,8 @@ bool	word_check(t_parser *lst, char *key, char *value)
 		return (true);
 	}
 	if (is_valid_key(lst, key, "export") == false)
-	{
-		free(key);
-		free(value);
 		return (true);
-	}
+
 	return (false);
 }
 
@@ -148,14 +127,19 @@ bool	word_check(t_parser *lst, char *key, char *value)
  * @brief reassigns lines in the environment
  * @todo changed to char *str in this function
 */
-void	replace_node(t_env *lst, char *str, char *value)
+void	replace_node(t_env *lst, t_export ex_var)
 {
 	char	*temp;
 
 	temp = lst->full;
-	lst->full = str;
+	lst->full = ex_var.str;
+	free(temp);
+	temp = lst->key;
+	lst->key = ex_var.key;
 	free(temp);
 	temp = lst->value;
-	lst->value = value;
+	lst->value = ex_var.value;
+	ex_var.has_value = TRUE;
+	lst->has_value = ex_var.has_value;
 	free(temp);
 }

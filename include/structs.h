@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 17:13:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:28:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,22 @@ typedef struct s_env
 	struct s_env		*next;
 	int					has_value;
 }							t_env;
+
+/**
+ * @brief	struct used for export functions
+ * @param	str: string containing full line of the environment
+ * 			including semicolon.
+ * @param	key: string containing the key part of the environment
+ * @param	value: string containing the value part of the environment
+ * @param	has_value: int used as checkpoint if the key has a value
+*/
+typedef struct s_export
+{
+	char	*str;
+	char	*key;
+	char	*value;
+	int		has_value;
+}			t_export;
 
 /**
  * @brief	struct containing variables needed for execution process

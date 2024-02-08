@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 22:15:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:52:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,23 @@ static void	export_print(t_env *env)
 }
 
 /**
- * @param e double pointer to environmet list
-//  * @param node pointer to node in list given in the form of a string
- * @param str string passed by parser
- * @param n_k string to contain new key value
- * @param n_v string to contain new value value
+ * @param env double pointer to environmet list
+ * @param ex_var export struct
  * @brief reassigns lines in the environment when export arguments is
  * 		  is an already excisting key.
+ * @todo leak check and norm it
 */
-static bool	reassign_env(t_env **e, char *str, char *key, char *value)
+static bool	reassign_env(t_env **env, t_export ex_var)
 {
 	t_env	*lst;
 
-	lst = *e;
+	lst = *env;
 	while (lst)
 	{
-		if (mini_strcmp(key, lst->key) == 0)
+		if (mini_strcmp(ex_var.key, lst->key) == 0)
 		{
-			free(key);
-			replace_node(lst, str, value);
+			// free(key);
+			replace_node(lst, ex_var);
 			return (true);
 		}
 		lst = lst->next;
@@ -66,18 +64,15 @@ static bool	reassign_env(t_env **e, char *str, char *key, char *value)
  * @todo 
  * env does show the expanded version.
  * Norm it!
- * has_value doesnt work anymore, when has no value it still prints equal sign
- * and it also prints in env which shouldnt happen, refer to old before push
- 
 */
 void	ft_export(t_parser *node, t_env **env)
 {
 	int		i;
-	char	*str;
-	char	*key;
-	char	*value;
+	int		j;
+	t_export ex_var;
 
 	i = 0;
+	j = 0;
 	if (node->proc->str_count == 0)
 	{
 		export_print(*env);
@@ -85,16 +80,19 @@ void	ft_export(t_parser *node, t_env **env)
 	}
 	while (i < node->proc->str_count)
 	{
-		str = node->proc->str[i];
-		while (str[i] && str[i] != '=')
-			i++;
-		key = ft_substr(str, 0, i);
-		value = ft_substr(str, i + 1, ft_strlen(str + i) + 1);
-		if (word_check(node, key, value) == true)
+		ex_var.str = node->proc->str[i];
+		while (ex_var.str[j] && ex_var.str[j] != '=')
+			j++;
+		ex_var.has_value = get_key_value(ex_var.str, &ex_var.key, &ex_var.value);
+		if (word_check(node, ex_var.key, ex_var.value) == true && i == (node->proc->str_count - 1))
+		{
+			free(ex_var.key);
+			free(ex_var.value);
 			return ;
-		if (reassign_env(env, str, key, value) == true)
+		}
+		if (reassign_env(env, ex_var) == true && i == (node->proc->str_count - 1))
 			return ;
-		make_node(str, env, key, value);
+		make_node(env, ex_var);
 		node->exit_code = E_USAGE;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 20:13:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:00:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	get_key_value(char *str, char **key, char **value)
 	else
 	{
 		*key = ft_substr(str, 0, i);
+		*value = NULL;
 		has_value = FALSE;
 	}
 	return (has_value);

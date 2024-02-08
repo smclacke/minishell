@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 22:12:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:28:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,28 +90,21 @@ bool	too_many_args(t_parser *lst)
 }
 
 /**
- * @param node node from parser linked list
  * @param env environment linked list
- * @param new_k char str containing new key
- * @param new_v char str containing new value
+ * @param ex_var export struct
  * @brief makes all components for new node and adds to env linked list
- * @todo check return / need exit code?
- * is index [0] correct?
+ * @todo check return / need exit code? free it
 */
-void	make_node(char *str, t_env **env, char *key, char *value)
+void	make_node(t_env **env, t_export ex_var)
 {
-	int	has_value;
 	t_env	*new_node;
 
-	if (!value)
-		has_value = FALSE;
-	else
-		has_value = TRUE;
-	new_node = env_lstnew(key, value, str, has_value);
+	new_node = env_lstnew(ex_var.key, ex_var.value, ex_var.str, ex_var.has_value);
 	if (!new_node)
 	{
-		// free it 
-		// return bla
+		free_all(new_node);
+		free(new_node);
+		return ;
 	}
 	env_lstadd_back(env, new_node);
 }

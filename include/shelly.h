@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 21:16:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:31:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,8 @@ void			ft_exit(t_parser *lst);
 void			ft_pwd(t_parser *head);
 void			ft_export(t_parser *lst, t_env **env);
 char			**null_check(char *str, t_parser *temp);
-void			make_node(char *str, t_env **env, char *n_k, char *n_v);
-void			replace_node(t_env *head, char *str, char *value);
+void			make_node(t_env **env, t_export ex_var);
+void			replace_node(t_env *lst, t_export ex_var);
 void			ft_unset(t_parser *lst, t_env **env);
 void			reassign_values(char *cwd, t_env *node, t_parser *head);
 

@@ -358,3 +358,161 @@ echo code instead of input check
 // 	}
 // 	return (node->cmd);
 // }
+
+
+// /**
+//  * @param node pointer to node in list given in the form of a string
+//  * @param env pointer to linked list
+//  * @brief export with no options, learned that double free 
+//  * with freeing in an unrelated spot 
+//  * might be overwriting a pointer and not allocating a new string.
+//  * @todo 
+//  * env does show the expanded version.
+//  * Norm it!
+//  * has_value doesnt work anymore, when has no value it still prints equal sign
+//  * and it also prints in env which shouldnt happen, refer to old before push
+// */
+// void	ft_export(t_parser *node, t_env **env)
+// {
+// 	int		i;
+// 	char	*str;
+// 	char	*key;
+// 	char	*value;
+// 	int		has_value;
+
+// 	key = 0;
+// 	value = 0;
+// 	i = 0;
+// 	if (node->proc->str_count == 0)
+// 	{
+// 		export_print(*env);
+// 		return ;
+// 	}
+// 	while (i < node->proc->str_count)
+// 	{
+// 		str = node->proc->str[i];
+// 		while (str[i] && str[i] != '=')
+// 			i++;
+// 		has_value = get_key_value(str, &key, &value);
+// 		// key = ft_substr(str, 0, i);
+// 		// value = ft_substr(str, i + 1, ft_strlen(str + i) + 1);
+// 		if (word_check(node, key, value) == true)
+// 			return ;
+// 		if (reassign_env(env, str, key, value) == true)
+// 			return ;
+// 		make_node(str, env, key, value);
+// 		node->exit_code = E_USAGE;
+// 		i++;
+// 	}
+// }
+
+// /**
+//  * @param temp linked list
+//  * @param words 2D array with seperate words key and value
+//  * @param cmd string containing command
+//  * @brief checks if key and value are alphanumeric
+//  * @return 1 if not alphanumeric, 0 is alphanumeric
+// */
+// static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
+// {
+// 	int	i;
+// 	printf("key = %s\n", key);
+
+// 	if ((ft_isalpha(key[0]) == 0) && key[0] != '_')
+// 	{
+// 		put_custom_error(temp, cmd);
+// 		return false;
+// 	}
+// 	i = 1;
+// 	while (key[i])
+// 	{
+// 		if (key[i] != '_' && ft_isalnum(key[i]) == 0)
+// 		{
+// 			put_custom_error(temp, cmd);
+// 			return false;
+// 		}
+// 		i++;
+// 	}
+// 	return true;
+// }
+
+// /**
+//  * @param lst linked list
+//  * @brief checks if the words are export and unset norm
+//  * proof.
+//  * key (word) first letter has:
+//  * capital (H), lowercase (h), underscore (_) as first letter 
+//  * else give error if given 99=djoyke as key
+//  * minishell: export: `99=djoyke': not a valid identifier
+//  * rest of word can only have numbers, letters and underscore.
+//  * else give error export d@@=haha
+//  * minishell: export: `d@@=haha': not a valid identifier
+//  * same for unset
+//  * @return true if wrong found with the words
+//  * @todo the !word error part is for this edge case :
+//  * export "" test=a
+//  * 
+//  * but comprimises this edge case which didnt work before
+//  * but now doesnt work in a different way:
+//  * export var=a
+//  * export $var=test
+//  * echo $var $a
+//  * @todo why do I need list and value and what do my errors do?
+//  * better way to do this
+//  * 	words = null_check(str, lst);
+// 	if (!words)
+// 	{
+// 		put_custom_error(lst, "export");
+// 		mini_error(E_GENERAL, lst);
+// 		return (true);
+// 	}
+// 	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
+// 	{
+// 		put_custom_error(temp, cmd);
+// 		return (true);
+// 	}
+// 	if (key_value_check(lst, words, "export") == 1)
+// 	{
+// 		ft_free_arr(words);
+// 		return (true);
+// 	}
+// */
+// bool	word_check(t_parser *lst, char *key, char *value)
+// {
+// 	t_parser	*temp;
+// 	char		*cmd;
+
+// 	cmd = lst->proc->cmd;
+// 	temp = lst;
+// 	if ((mini_strcmp(cmd, "unset") == 0) && value)
+// 	{
+// 		put_custom_error(temp, cmd);
+// 		return (true);
+// 	}
+// 	if (is_valid_key(lst, key, "export") == false)
+// 	{
+// 		free(key);
+// 		free(value);
+// 		return (true);
+// 	}
+// 	return (false);
+// }
+
+// word check nonsense
+//  * 	words = null_check(str, lst);
+// 	if (!words)
+// 	{
+// 		put_custom_error(lst, "export");
+// 		mini_error(E_GENERAL, lst);
+// 		return (true);
+// 	}
+// 	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
+// 	{
+// 		put_custom_error(temp, cmd);
+// 		return (true);
+// 	}
+// 	if (key_value_check(lst, words, "export") == 1)
+// 	{
+// 		ft_free_arr(words);
+// 		return (true);
+// 	}
