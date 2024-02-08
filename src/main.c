@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 19:15:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:21:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int		run_minishell(char **envp, char *input)
 	(void)		env;
 	
 	procs = NULL;
-	// env = NULL;
-	// env = env_list(envp, env);
+	env = NULL;
+	env = env_list(envp, env);
 	procs = parse_input(procs, input);
 	if (!procs)
 		return (0);

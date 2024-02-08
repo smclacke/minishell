@@ -6,14 +6,9 @@
 ------------------------------
 ------------------------------
 
-**booo**
-minibleh:echo $USER --- segfaults (:(:(:)))
-
-**booo2**
-minibleh:echo "something" --- heap buffer overflow
-
-**booo3**
-minibleh:echo "something'hello'hehe" --- heap buffer overflow
+**BOOOOOO**
+  --- quotes seem to be ok again with old remove_quotes functions, 
+		but not norm...
 
 *right here, right now*
 
@@ -33,7 +28,6 @@ minibleh:echo "something'hello'hehe" --- heap buffer overflow
 		sort_procs.c
 		expand_dollar.c	
 		get_procs.c
-		expand_quotes.c
 		parser.c
 
 --- errored:
@@ -45,6 +39,7 @@ minibleh:echo "something'hello'hehe" --- heap buffer overflow
 
 **NENENENE**
 --- to norm:
+		expand_quotes.c
 		sort_procs.c
 		utils.c (freeing stuff, so wait till it's good, then normal
 				and probs break)

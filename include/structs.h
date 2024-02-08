@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 19:14:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:21:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,6 @@ typedef	struct s_procs
 */
 typedef	struct	s_parser
 {
-	int						i;
-	int						j;
-	int						q;
-	
 	bool					multi_proc_b;
 	char					**tokens;
 	char					***proc_arrs;
