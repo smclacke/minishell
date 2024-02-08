@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:52:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 21:04:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,36 @@ static bool	reassign_env(t_env **env, t_export ex_var)
 
 /**
  * @param node pointer to node in list given in the form of a string
+ * @param ex_var export struct
+ * @param i iterator
+ * @brief checks if key and value are valid strings
+ * @return true if valid false if invalid
+ * @todo 
+ * what about expansions
+*/
+bool key_value_check(t_parser *node, t_export ex_var, int i)
+{
+	if (word_check(node, ex_var.key, ex_var.value) == true)
+	{
+		if (i == (node->proc->str_count - 1))
+		{
+			free(ex_var.key);
+			free(ex_var.value);
+			return (false);
+		}
+	}
+	return (true);
+}
+
+/**
+ * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
  * @brief export with no options, learned that double free 
  * with freeing in an unrelated spot 
  * might be overwriting a pointer and not allocating a new string.
  * @todo 
- * env does show the expanded version.
- * Norm it!
+ * what about expansions
+ * exit codes
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -84,12 +107,8 @@ void	ft_export(t_parser *node, t_env **env)
 		while (ex_var.str[j] && ex_var.str[j] != '=')
 			j++;
 		ex_var.has_value = get_key_value(ex_var.str, &ex_var.key, &ex_var.value);
-		if (word_check(node, ex_var.key, ex_var.value) == true && i == (node->proc->str_count - 1))
-		{
-			free(ex_var.key);
-			free(ex_var.value);
+		if (key_value_check(node, ex_var, i) == false)
 			return ;
-		}
 		if (reassign_env(env, ex_var) == true && i == (node->proc->str_count - 1))
 			return ;
 		make_node(env, ex_var);
