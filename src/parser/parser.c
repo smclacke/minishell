@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 18:15:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 18:17:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static	t_parser *handle_procs(t_parser *proc)
+static	t_parser	*handle_procs(t_parser *proc)
 {
 	t_parser	*parser_list;
 	t_parser	*new_node;
@@ -42,7 +42,7 @@ static	t_parser *handle_procs(t_parser *proc)
 
 static	t_parser	*init_parser(char **tokens)
 {
-	t_parser *proc;
+	t_parser	*proc;
 
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	if (!proc)
@@ -50,7 +50,8 @@ static	t_parser	*init_parser(char **tokens)
 	ft_bzero(proc, sizeof(t_parser));
 	proc->tokens = tokens;
 	proc->proc_count = (count_procs(tokens) + 1);
-	proc->process = (t_procs **)malloc(sizeof(t_procs *) * (proc->proc_count + 1));
+	proc->process = (t_procs **)malloc(sizeof(t_procs *)
+			* (proc->proc_count + 1));
 	if (!proc->process)
 	{
 		free(proc);
@@ -76,7 +77,7 @@ static t_parser	*parse_tokens(char **tokens)
 		proc->multi_proc_b = TRUE;
 		if (!get_procs(proc))
 			return (NULL); // error
-	}	
+	}
 	else if (proc->proc_count == 1)
 		proc->multi_proc_b = FALSE;
 	parser_list = handle_procs(proc);
@@ -85,7 +86,7 @@ static t_parser	*parse_tokens(char **tokens)
 	return (parser_list);
 }
 
-t_parser		*parse_input(t_parser *procs, char *input)
+t_parser	*parse_input(t_parser *procs, char *input)
 {
 	char	**tokens;
 
