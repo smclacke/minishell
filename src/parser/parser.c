@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 18:17:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:47:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	t_parser	*handle_procs(t_parser *proc)
 	{
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		if (!proc->process[i])
-			return (free(proc->process[i]), NULL); // malloc error
+			return (free(proc->process[i]), NULL);// malloc error
 		ft_bzero(proc->process[i], sizeof(t_procs));
 		if (proc->multi_proc_b == TRUE)
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
@@ -46,7 +46,7 @@ static	t_parser	*init_parser(char **tokens)
 
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	if (!proc)
-		return (NULL); // malloc error
+		return (NULL);// malloc error
 	ft_bzero(proc, sizeof(t_parser));
 	proc->tokens = tokens;
 	proc->proc_count = (count_procs(tokens) + 1);
@@ -55,7 +55,7 @@ static	t_parser	*init_parser(char **tokens)
 	if (!proc->process)
 	{
 		free(proc);
-		return (NULL); // malloc error
+		return (NULL);// malloc error
 	}
 	ft_bzero(proc->process, sizeof(t_procs));
 	return (proc);
@@ -69,14 +69,14 @@ static t_parser	*parse_tokens(char **tokens)
 
 	i = 0;
 	if (!tokens)
-		return (NULL); //  error
+		return (NULL);//  error
 	proc = init_parser(tokens);
 	parser_list = NULL;
 	if (proc->proc_count > 1)
 	{
 		proc->multi_proc_b = TRUE;
 		if (!get_procs(proc))
-			return (NULL); // error
+			return (NULL);// error
 	}
 	else if (proc->proc_count == 1)
 		proc->multi_proc_b = FALSE;
@@ -103,9 +103,9 @@ t_parser	*parse_input(t_parser *procs, char *input)
 		if (!procs)
 		{
 			free_parser(procs);
-			return (NULL); // parser failed error
+			return (NULL);// parser failed error
 		}
 		return (procs);
 	}
-	return (NULL); // parser failed error
+	return (NULL);// parser failed error
 }

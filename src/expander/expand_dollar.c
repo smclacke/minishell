@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:14:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:48:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_check_value(t_expand *str, t_env **env)
 			if (!str->env_val)
 			{
 				free(str->env_val);
-				return (1); // malloc error
+				return (1);// malloc error
 			}
 			return (0);
 		}
@@ -61,12 +61,12 @@ int	save_extra_string(t_expand *str, char *input, int i)
 	len = end - start;
 	str->string = ft_substr(input, start, len);
 	if (!str->string)
-		return (free(tmp), 0); // malloc error
+		return (free(tmp), 0);// malloc error
 	if (tmp && str->string)
 	{
 		str->expanded = ft_strjoin(tmp, str->string);
 		if (!str->expanded)
-			return (0); // malloc error
+			return (0);// malloc error
 	}
 	free(tmp);
 	free(str->string);
@@ -86,7 +86,7 @@ int	first_bit(t_expand *str, char *input)
 			return (0);
 		str->expanded = ft_substr(input, 0, i);
 		if (!str->expanded)
-			return (0); // malloc error
+			return (0);// malloc error
 	}
 	return (i);
 }

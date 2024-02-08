@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/07 17:00:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:47:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_parser	*parser_listnew(t_procs *proc)
 	{
 		free(proc);
 		free(new);
-		return (NULL); // malloc error
+		return (NULL);// malloc error
 	}
 	ft_bzero(new, sizeof(t_parser));
 	new->proc = proc;

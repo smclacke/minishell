@@ -29,6 +29,7 @@
 		expand_dollar.c	
 		get_procs.c
 		parser.c
+		sort_procs.c
 
 --- errored:
 		expand_quote_utils.c
@@ -40,7 +41,6 @@
 **NENENENE**
 --- to norm:
 		expand_quotes.c
-		sort_procs.c
 		utils.c (freeing stuff, so wait till it's good, then normal
 				and probs break)
 

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 19:16:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:47:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	next_quote(char *input, char c)
 	{
 		printf("UNCLOSED QUOTE MOFO\n");
 		exit(EXIT_FAILURE);
-		return (0); // syntax error
+		return (0);// syntax error
 	}
 	return (i);
 }

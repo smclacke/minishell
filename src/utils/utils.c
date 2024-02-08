@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:41:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:49:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
 /**
- * norrrrrmmmmmmmmm 
+ * norrrrrmmmmmmmmm meee
  */
 void	free_procs(t_procs *proc)
 {
@@ -53,7 +53,7 @@ void	free_procs(t_procs *proc)
 }
 
 /**
- * norrrrrmmmmmmmmm 
+ * norrrrrmmmmmmmmm meeee
  */
 void	free_parser(t_parser *procs)
 {
