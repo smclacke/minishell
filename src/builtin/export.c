@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:04:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 21:04:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static bool	reassign_env(t_env **env, t_export ex_var)
  * @todo 
  * what about expansions
 */
-bool key_value_check(t_parser *node, t_export ex_var, int i)
+static bool key_value_check(t_parser *node, t_export ex_var, int i)
 {
 	if (word_check(node, ex_var.key, ex_var.value) == true)
 	{
