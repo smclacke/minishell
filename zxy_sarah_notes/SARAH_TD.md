@@ -7,11 +7,6 @@
 
 *right here, right now*
 
-**NENENENE**
---- to norm:
-		utils.c (freeing stuff, so wait till it's good, then normal
-				and probs break)
-
 **DO this**
 
 - errors
@@ -27,7 +22,6 @@
 ------------------------------
 ------------------------------
 ------------------------------
-
 
 **MAIN TO DO**
 
@@ -82,11 +76,6 @@ EXPANSION
 
 *TODO 8* ME
 ---> literally all errors
-
-
-*TODO 9* 
- ---> norm, comment printing utils, check all error messages for
-		inappropriatness (sp?)
 
 
 =================================================================

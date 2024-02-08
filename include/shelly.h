@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:45:41 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 22:52:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@
 # include <limits.h>
 
 				// utils
+//---------- free_procs ----------//
 void			free_procs(t_procs *proc);
-void			free_parser(t_parser *procs);
 void			free_util(t_parser *list, char ***arrs, char **arr, char *str);
+
+//---------- utils ----------//
+void			free_parser(t_parser *procs);
 
 /**
  * @todo	comment out print protos
