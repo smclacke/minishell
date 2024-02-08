@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 18:14:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 18:15:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static	t_parser *handle_procs(t_parser *proc)
 		proc->process[i]->proc_count = proc->proc_count;
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
+		parser_list->proc_count = proc->process[i]->proc_count;
 		i++;
 	}
 	return (parser_list);
