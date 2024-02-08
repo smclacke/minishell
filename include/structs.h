@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:21:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 23:00:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,14 @@ typedef enum e_exit
  * @param	redir: array of all < > >> in, out and truncate files, 
  * 			left in order as inputted. file after each meta characher included, 
  * 			error if no string after meta
- * @param	red_count: number of redir metas and files in array per process  (3 = 3)
+ * @param	red_count: number of redir metas and files in array per process
+ * 			(3 = 3)
  * @param	hd: array of all hd delimiters, ignoring hd meta itself
  * 				error if no string after hd meta
  * @param	hd_count: number of hd delimiters in array (3 = 3)
  * @param	hd_fd: var for djoyke, inited at -1
 */
-typedef	struct s_procs
+typedef struct s_procs
 {
 	int						index;
 	int						proc_count;
@@ -129,7 +130,7 @@ typedef	struct s_procs
  * 				from that processes, can iterate through these proc nodes
  * @param	hd_flag: check if expansion in hd is necessary
 */
-typedef	struct	s_parser
+typedef struct s_parser
 {
 	bool					multi_proc_b;
 	char					**tokens;
