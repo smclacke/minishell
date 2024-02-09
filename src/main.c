@@ -6,12 +6,16 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 15:29:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 15:33:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
+/**
+ * // = remove for final version
+ * 	everything else normed
+ */
 int	run_minishell(char **envp, char *input)
 {
 	t_parser	*procs;

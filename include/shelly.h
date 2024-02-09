@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 15:27:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 15:35:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void			free_util(t_parser *list, char ***arrs, char **arr, char *str);
 void			free_parser(t_parser *procs);
 
 /**
- * @todo	comment out print protos
-*/
+ * comment out print protos
+ */
 				// print
 void			print_token_arr(char **token);
 void			print_expand_vals(t_expand *str);
