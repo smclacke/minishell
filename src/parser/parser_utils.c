@@ -6,16 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:42:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:47:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/shelly.h"
-
-/**
- * @todo	errors
-*/
 
 int	is_pipe(void *input)
 {
@@ -24,10 +19,10 @@ int	is_pipe(void *input)
 	return (0);
 }
 
-int		count_procs(char **tokens)
+int	count_procs(char **tokens)
 {
-	int		i;
-	int		count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -43,10 +38,7 @@ int		count_procs(char **tokens)
 t_parser	*parser_listlast(t_parser *list)
 {
 	if (!list)
-	{
-		printf("erroroororr\n");
-		return (0);
-	}
+		return (NULL);
 	if (list->next)
 	{
 		while (list->next)
@@ -76,8 +68,8 @@ t_parser	*parser_listnew(t_procs *proc)
 	if (!new || !proc)
 	{
 		free(proc);
-		printf("erroroororr\n");
-		return (0);
+		free(new);
+		return (NULL);// malloc error
 	}
 	ft_bzero(new, sizeof(t_parser));
 	new->proc = proc;

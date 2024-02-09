@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:19:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/09 15:27:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@
 # include <limits.h>
 
 				// utils
-void			sarah_error(t_parser *proc, char *str);
-bool			is_space(char *input);
-int				shelly_strcmp(char *s1, char *s2);
+//---------- free_procs ----------//
+void			free_procs(t_procs *proc);
+void			free_util(t_parser *list, char ***arrs, char **arr, char *str);
+
+//---------- utils ----------//
 void			free_parser(t_parser *procs);
 
 /**
@@ -63,13 +65,15 @@ int				is_same_quote(int c, char *quote_type);
 char			*which_quote(char *input);
 int				next_quote(char *input, char c);
 
-//-------- token_size --------//
+//-------- tokens --------//
+bool			is_space(char *input);
+int				shelly_strcmp(char *s1, char *s2);
 int				start_token(char *input, int old_start);
 int				len_token(char *input, int len);
 
 				// parser
 //-------- parser --------//
-t_parser		*parse_tokens(char **tokens);
+t_parser		*parse_input(t_parser *procs, char *input);
 
 //-------- parser utils --------//
 int				is_pipe(void *input);
@@ -80,6 +84,7 @@ t_parser		*parser_listnew(t_procs *proc);
 
 //-------- sort_procs --------//
 void			sort_each_proc(t_procs *proc, char **proc_arr);
+int				get_procs(t_parser *proc);
 
 //-------- get_procs --------//
 void			get_reds(t_procs *proc, char **process);
@@ -91,6 +96,7 @@ int				count_reds(char **process);
 int				count_strs(t_procs *proc, char **process);
 int				count_hds(char **process);
 int				proc_redir(char *input);
+int				make_proc_arr(t_parser *proc, int proc_i, int proc_size);
 
 				// expander
 //------------------ expand -------------------//
@@ -101,7 +107,29 @@ int				get_check_value(t_expand *str, t_env **env);
 int				save_extra_string(t_expand *str, char *input, int i);
 int				first_bit(t_expand *str, char *input);
 void			dollar(t_expand *str, t_env **env);
-void			expand_dollar(t_parser *lst, t_expand *str, t_env **env);
+void			expand_dollar(t_parser *lst, t_env **env);
+
+//-------------------- expand_quotes -------------------//
+void			expand_quotes(t_parser *tokens);
+
+//-------------------- remove_quotes -------------------//
+void			remove_quotes(char *str);
+
+//----------------- expand_quote_utils ------------------//
+int				check_qs(char *str);
+int				check_space(char *str);
+int				quote_type(int str);
+
+//------------------ expand_utils ------------------//
+int				add_to_expand(t_expand *str, char *copy_str);
+void			do_reds(t_parser *tmp, t_expand *str, t_env **env);
+void			do_hds(t_parser *tmp, t_expand *str, t_env **env);
+void			do_strs(t_parser *tmp, t_expand *str, t_env **env);
+void			do_cmd(t_parser *tmp, t_expand *str, t_env **env);
+
+//------------------ expand_utils_2 ------------------//
+int				expandable_str(int c);
+int				is_dollar_or_quote(int c);
 
 //------------------- hd_expand --------------------//
 char			*hd_expand(t_env **env, char *read_line);
@@ -115,26 +143,6 @@ int				dquote_bit(t_expand *str, char *input, t_env **env, int i);
 //----------------- dollars ------------------//
 int				dollar_expand(t_expand *str, t_env **env);
 int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
-
-//-------------------- expand_quotes -------------------//
-void			expand_quotes(t_parser *tokens);
-
-//----------------- expand_quote_utils ------------------//
-int				check_quotes(char *str);
-void			copy_and_increment(char *new_str, char *str, int *i, int *j);
-int				check_space(char *str);
-int				quote_type(int str);
-
-//------------------ expand_is_utils ------------------//
-int				expandable_str(int c);
-int				is_dollar_or_quote(int c);
-
-//------------------ expand_utils ------------------//
-int				add_to_expand(t_expand *str, char *copy_str);
-void			do_reds(t_parser *tmp, t_expand *str, t_env **env);
-void			do_hds(t_parser *tmp, t_expand *str, t_env **env);
-void			do_strs(t_parser *tmp, t_expand *str, t_env **env);
-void			do_cmd(t_parser *tmp, t_expand *str, t_env **env);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);
@@ -205,7 +213,6 @@ int				mini_lstsize(t_env *lst);
 void			free_strs(char *str, char *str2);
 char			*ft_getenv(t_env *env, char *str);
 int				list_iter(t_parser *lst);
-
 
 void			print_array(char **arr);
 

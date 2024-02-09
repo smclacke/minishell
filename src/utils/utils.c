@@ -6,80 +6,25 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 18:12:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 22:55:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-bool	is_space(char *input)
+static	void	free_proc_arrs(t_parser *proc)
 {
 	int	i;
 
 	i = 0;
-	while (input[i])
+	while (i < proc->proc_count)
 	{
-		if (!ft_isspace(input[i]))
-			return (0);
+		ft_free_arr(proc->proc_arrs[i]);
 		i++;
 	}
-	return (1);
+	free(proc->proc_arrs);
 }
 
-int	shelly_strcmp(char *s1, char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (1);
-	while (s1[i] || s2[i])
-	{
-		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
-			return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
-		i++;
-	}
-	return (0);
-}
-
-static	void	sarah_free_procs(t_procs *proc)
-{
-	int			i;
-
-	i = 0;
-	if (proc->cmd)
-		free(proc->cmd);
-	if (proc->str_count != 0)
-	{
-		while (i < proc->str_count)
-		{
-			free(proc->str[i]);
-			i++;
-		}
-	}
-	i = 0;
-	if (proc->hd_count != 0)
-	{
-		while (i < proc->hd_count)
-		{
-			free(proc->hd[i]);
-			i++;
-		}
-	}
-	i = 0;
-	if (proc->red_count != 0)
-	{
-		while (i < proc->red_count)
-		{
-			free(proc->redir[i]);
-			i++;
-		}
-	}
-}
-
-/**
- * @todo	check this is correct for new parser ...
-*/
 void	free_parser(t_parser *procs)
 {
 	t_parser	*tmp;
@@ -89,27 +34,16 @@ void	free_parser(t_parser *procs)
 	while (procs)
 	{
 		tmp = procs->next;
-		free(procs->tokens);
+		if (procs->tokens)
+			ft_free_arr(procs->tokens);
 		if (procs->proc_arrs)
-		{
-			while (procs->proc_arrs[i])
-			{
-				ft_free_arr(procs->proc_arrs[i]);
-				i++;
-			}
-		}
-		free(procs->process);
-		sarah_free_procs(procs->proc);
-		free(procs->proc);
+			free_proc_arrs(procs);
+		if (procs->process)
+			free(procs->process);
+		if (procs->proc)
+			free_procs(procs->proc);
 		free(procs);
 		procs = tmp;
 	}
-}
-
-void	sarah_error(t_parser *proc, char *str)
-{
-	if (proc)
-	free_parser(proc);
-	printf("%s\n", str);
-	exit (EXIT_FAILURE);
+	free(procs);
 }

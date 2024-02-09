@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/04 21:00:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:48:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
  * @brief	checks environment value of string to be expanded
  * 			if there is no value it free's the comp_str and env_value.
  * @return	1 if there is no value, 0 if value is found and assigned
- * @todo	triple check protection, norm and sooo when less tired
 */
 int	get_check_value(t_expand *str, t_env **env)
 {
@@ -38,7 +37,7 @@ int	get_check_value(t_expand *str, t_env **env)
 			if (!str->env_val)
 			{
 				free(str->env_val);
-				return (1);
+				return (1);// malloc error
 			}
 			return (0);
 		}
@@ -47,12 +46,6 @@ int	get_check_value(t_expand *str, t_env **env)
 	return (1);
 }
 
-/**
- * @todo	check the comment
- * @todo	substr protection
- * @todo	strjoin protection
- * @brief	string after closed quotes that needs to be added to expanded string
-*/
 int	save_extra_string(t_expand *str, char *input, int i)
 {
 	int		start;
@@ -67,22 +60,19 @@ int	save_extra_string(t_expand *str, char *input, int i)
 	end = i;
 	len = end - start;
 	str->string = ft_substr(input, start, len);
-	// if (!str->string)
-	// {
-	// 	free(tmp);
-	// 	return (0);
-	// }
+	if (!str->string)
+		return (free(tmp), 0);// malloc error
 	if (tmp && str->string)
+	{
 		str->expanded = ft_strjoin(tmp, str->string);
+		if (!str->expanded)
+			return (0);// malloc error
+	}
 	free(tmp);
 	free(str->string);
 	return (i);
 }
 
-/**
- * @todo	substr protection
- * @brief	before any dollar or quotes, just save the string
-*/
 int	first_bit(t_expand *str, char *input)
 {
 	int		i;
@@ -96,16 +86,11 @@ int	first_bit(t_expand *str, char *input)
 			return (0);
 		str->expanded = ft_substr(input, 0, i);
 		if (!str->expanded)
-			return (0);
+			return (0);// malloc error
 	}
 	return (i);
 }
 
-/**
- * @todo	fix this, leaks, norm, test test test...
- * @todo	did i do this? -> write version (or have func for here_doc and only edit that bit)
- * @brief	get first part of string, then loop through separating dollars and quotes...
-*/
 void	dollar(t_expand *str, t_env **env)
 {
 	int		i;
@@ -130,21 +115,16 @@ void	dollar(t_expand *str, t_env **env)
 	}
 }
 
-/**
- * @todo 	error handling
- * @todo	comment
-*/
-void	expand_dollar(t_parser *lst, t_expand *str, t_env **env)
+void	expand_dollar(t_parser *lst, t_env **env)
 {
+	t_expand	str;
 	t_parser	*tmp;
 	int			i;
 
-	i = 0;
 	tmp = lst;
-	if (!tmp)
-		return ; // error oder??
-	do_cmd(tmp, str, env);
-	do_strs(tmp, str, env);
-	do_hds(tmp, str, env);
-	do_reds(tmp, str, env);
+	i = 0;
+	do_cmd(tmp, &str, env);
+	do_strs(tmp, &str, env);
+	do_hds(tmp, &str, env);
+	do_reds(tmp, &str, env);
 }

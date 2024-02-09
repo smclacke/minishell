@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/06 20:15:32 by dreijans      ########   odam.nl          #
+#    Updated: 2024/02/09 15:30:48 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,27 +29,29 @@ HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
 
 SRCS			= main.c								\
 					utils/signals.c						\
+					utils/free_procs.c					\
 					utils/utils.c						\
 					utils/print.c						\
-					utils/errors.c						\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
-					lexer/token_size.c					\
+					lexer/tokens.c						\
 					parser/parser.c						\
 					parser/parser_utils.c				\
 					parser/sort_procs.c					\
 					parser/get_procs.c					\
 					parser/proc_utils.c					\
-					executor/execute.c					\
-					executor/list_utils.c 				\
-					executor/make_env.c					\
-					executor/execute_utils_one.c		\
-					executor/execute_utils_two.c		\
-					executor/heredoc_utils.c			\
-					executor/utils_one.c				\
-					executor/utils_two.c				\
-					executor/redirect.c					\
-					executor/print_utils.c				\
+					expander/expand_utils_2.c			\
+					expander/expand.c					\
+					expander/expand_utils.c				\
+					expander/expand_quotes.c			\
+					expander/remove_quotes.c			\
+					expander/expand_quote_utils.c		\
+					expander/expand_dollar.c			\
+					expander/dollars.c					\
+					expander/d_quotes.c					\
+					expander/s_quotes.c					\
+					expander/hd_expand.c				\
+					builtin/errors.c					\
 					builtin/echo.c						\
 					builtin/cd.c 						\
 					builtin/pwd.c 						\
@@ -59,16 +61,16 @@ SRCS			= main.c								\
 					builtin/builtin_utils_one.c 		\
 					builtin/builtin_utils_two.c 		\
 					builtin/exit.c						\
-					# expander/expand_is_utils.c			\
-					# expander/expand.c					\
-					# expander/expand_utils.c				\
-					# expander/expand_quotes.c			\
-					# expander/expand_quote_utils.c		\
-					# expander/expand_dollar.c			\
-					# expander/dollars.c					\
-					# expander/d_quotes.c					\
-					# expander/s_quotes.c					\
-					# expander/hd_expand.c				\
+					executor/execute.c					\
+					executor/list_utils.c 				\
+					executor/make_env.c					\
+					executor/utils_one.c				\
+					executor/utils_two.c				\
+					executor/execute_utils_one.c		\
+					executor/execute_utils_two.c		\
+					executor/heredoc_utils.c			\
+					executor/redirect.c					\
+					executor/print_utils.c				\
 
 
 SRC_DIR		= src

@@ -6,26 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/04 09:29:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:33:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:48:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo	get rid of this comment
-*/
-// if the limiter was NOT in qoutes, call expander on head_doc readline input
-// regardless of the quotes, dollars are ALWAYS being 
-// expanded if limit not in quotes
-// dont need to do anything with the quotes here
-
-// look for dollars, if found, check if expandable var, add to expanded
-
-/**
- * @todo	TEST TEST TEST, havent tested since normed and also
- * 			no stress testing yet!!!
-*/
 static	int	save_first(t_expand *str, char *input)
 {
 	int		i;
@@ -37,14 +23,11 @@ static	int	save_first(t_expand *str, char *input)
 	{
 		str->expanded = ft_substr(input, 0, i);
 		if (!str->expanded)
-			return (0);
+			return (0);// malloc error
 	}
 	return (i);
 }
 
-/**
- * @todo	error handling
-*/
 static int	handle_hd_input(t_expand *str, char *read_line, int i)
 {
 	int	start;
@@ -56,18 +39,12 @@ static int	handle_hd_input(t_expand *str, char *read_line, int i)
 	end = i - start;
 	str->string = ft_substr(read_line, start, end);
 	if (!str->string)
-		return (0);
+		return (0);// malloc error
 	if (add_to_expand(str, str->string) == -1)
-	{
-		printf("errorrrrrrr\n");
-		return (0);
-	}
+		return (0);// error
 	return (i);
 }
 
-/**
- * @todo	check malloc, need +1 for null?
-*/
 char	*hd_expand(t_env **env, char *read_line)
 {
 	t_expand		*str;
@@ -75,7 +52,7 @@ char	*hd_expand(t_env **env, char *read_line)
 
 	str = (t_expand *)malloc(sizeof(*str));
 	if (!str)
-		return (0);
+		return (0);// malloc error
 	ft_bzero(str, sizeof(t_expand));
 	i = save_first(str, read_line);
 	while (read_line[i])

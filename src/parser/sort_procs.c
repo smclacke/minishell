@@ -6,23 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/05 19:30:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 21:09:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo	protect all mallocs
- * @todo	norm - if red // make red arr func(), if hd // make hd arr func ().... 
-*/
 static	void	sort_vars(t_procs *proc, char **process)
 {
 	if (proc->cmd_flag == TRUE)
 	{
-		proc->cmd = (char *)malloc(sizeof(char));
 		if (proc->str_count != 0)
-			proc->str = (char **)malloc(sizeof(char *) * (proc->str_count + 1));
+		{
+			proc->str = (char **)malloc(sizeof(char *)
+					* (proc->str_count + 1));
+			if (!proc->str)
+				return ;//malloc error
+		}
 		get_strs(proc, process);
 	}
 	else
@@ -40,13 +40,6 @@ static	void	sort_vars(t_procs *proc, char **process)
 		proc->hd = NULL;
 }
 
-/**
- * @todo	norm
- * @todo	free proc_arr or tokens once sorted into proc struct
- * @todo	malloc protection 
- * @todo	bzeros?
- * @brief	count_hds looks for the hd meta and saves the number of hds
-*/
 void	sort_each_proc(t_procs *proc, char **proc_arr)
 {
 	proc->token_count = ft_arrlen(proc_arr);
@@ -54,4 +47,43 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	proc->str_count = count_strs(proc, proc_arr);
 	proc->hd_count = count_hds(proc_arr);
 	sort_vars(proc, proc_arr);
+}
+
+static	void	token_while(t_parser *proc, char *str)
+{
+	int		i;
+	int		pi;
+	int		p_size;
+
+	i = 0;
+	pi = 0;
+	p_size = 0;
+	while (str[i])
+	{
+		proc->start = i;
+		while (str[i] && !ft_ispipe(str[i]))
+			i++;
+		p_size = (i + proc->start);
+		proc->proc_arrs[pi] = (char **)malloc(sizeof(char *) * (p_size + 1));
+		if (!proc->proc_arrs)
+			free_util(proc, proc->proc_arrs, NULL, NULL); // malloc error, but no return
+		if (!make_proc_arr(proc, pi, p_size))
+			return ;// error
+		proc->proc_arrs[pi][p_size] = NULL;
+		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
+		{
+			i++;
+			pi++;
+		}
+	}
+}
+
+int	get_procs(t_parser *proc)
+{
+	proc->proc_arrs = (char ***)malloc(sizeof(char **)
+			* (proc->proc_count + 1));
+	if (!proc->proc_arrs)
+		return (free (proc), 0);// malloc error
+	token_while(proc, *proc->tokens);
+	return (1);
 }

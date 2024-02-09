@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/28 16:34:53 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:25:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:30:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-int	check_quotes(char *str)
+int	check_qs(char *str)
 {
 	int	i;
 
@@ -24,13 +24,6 @@ int	check_quotes(char *str)
 		i++;
 	}
 	return (0);
-}
-
-void	copy_and_increment(char *new_str, char *str, int *i, int *j)
-{
-	new_str[(*j)] = str[(*i)];
-	(*i)++;
-	(*j)++;
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:45:59 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:15:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:47:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ int	is_same_quote(int c, char *quote_type)
 	return (0);
 }
 
-/**
- * @todo	error handling, must error odeR? line 56
-*/
 char	*which_quote(char *input)
 {
 	if (ft_strnstr(input, SINGLE_Q, 1))
@@ -53,9 +50,6 @@ char	*which_quote(char *input)
 	return (0);
 }
 
-/**
- * @todo	error handling
-*/
 int	next_quote(char *input, char c)
 {
 	int	i;
@@ -65,9 +59,9 @@ int	next_quote(char *input, char c)
 		i++;
 	if (input[i] != c)
 	{
-		printf("ERROR UNCLOSED QUOTES\n");
-		exit(1);
+		printf("UNCLOSED QUOTE MOFO\n");
+		exit(EXIT_FAILURE);
+		return (0);// syntax error
 	}
 	return (i);
 }
-

@@ -6,15 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:14:29 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/07 16:20:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo errors (printfs) and basic comments
-*/
 static int	quote_input(char *input, int i)
 {
 	char	*quote_type;
@@ -58,9 +55,6 @@ static int	amount_tokens(char *input)
 	return (count);
 }
 
-/**
- * @todo	error handling
-*/
 static char	*split_tokens(char *input, int len)
 {
 	char	*token;
@@ -69,17 +63,11 @@ static char	*split_tokens(char *input, int len)
 		return (NULL);
 	token = ft_substr(input, 0, len);
 	if (!token)
-	{
-		printf("im a malloc error in the lexer\n");
-		return (0);
-	}
+		return (NULL);// malloc error
 	input += len;
 	return (token);
 }
 
-/**
- * @todo	error handling
-*/
 static char	**lexer_split(char *input)
 {
 	char	**array;
@@ -94,10 +82,7 @@ static char	**lexer_split(char *input)
 	no_tokens = amount_tokens(input);
 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 	if (!array)
-	{
-		printf("im a malloc error in the lexer\n");
-		return (0);
-	}
+		return (NULL);// malloc error
 	while (i < no_tokens)
 	{
 		start = start_token(input, (start + len));
@@ -109,26 +94,14 @@ static char	**lexer_split(char *input)
 	return (array);
 }
 
-/**
- * @todo	error handling
- * @todo	check free
- * @todo	check array at end? error here if no tokens?
-*/
 char	**lexer(char *input)
 {
 	char	**array;
 
 	if (!input)
 		return (NULL);
-	if (!is_space(input))
-		add_history(input);
 	array = lexer_split(input);
 	if (!array)
-	{
-		printf("im a lexer error, lexer_array()\n");
-		free(input);
-		return (0);
-	}
-	// free(input);
+		return (NULL);
 	return (array);
 }

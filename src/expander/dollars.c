@@ -6,37 +6,29 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:21:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/08 20:49:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @todo	what are you and what are you doing?
-*/
-// static void	handle_dq(t_expand *str, t_env **env)
-// {	
-// 	(void)  env; // probs dont need you
-
-// 	str->exit->exit_str = ft_itoa(str->exit->exit_code);
-// 	str->expanded = ft_strjoin(str->expanded, str->exit->exit_str);
-// }
-
-/**
- * @todo	error handling
- * @todo	strjoin proctection
- * @todo	strdup protection
-*/
 static int	handle_no_env_val(t_expand *str)
 {
 	char	*tmp;
 
 	tmp = NULL;
 	if (str->expanded)
+	{
 		tmp = ft_strjoin(str->expanded, "");
+		if (!tmp)
+			return (-1);// malloc error
+	}
 	else
+	{
 		tmp = ft_strdup("");
+		if (!tmp)
+			return (-1);// malloc error
+	}
 	free(str->expanded);
 	str->expanded = tmp;
 	if (!str->expanded)
@@ -46,8 +38,6 @@ static int	handle_no_env_val(t_expand *str)
 
 /**
  * @todo	finish $? bit and test
- * @todo	error handling
- * @todo	strtrim protection
 */
 int	dollar_expand(t_expand *str, t_env **env)
 {
@@ -57,50 +47,48 @@ int	dollar_expand(t_expand *str, t_env **env)
 	// 	return (0);
 	// }
 	str->tmp = ft_strtrim(str->dollar, "$");
+	if (!str->tmp)
+		return (-1);// malloc error
 	free(str->dollar);
 	str->dollar = str->tmp;
 	if ((get_check_value(str, env) == 0) && str->env_val)
 	{
 		if (add_to_expand(str, str->env_val) == -1)
-		{
-			printf("errorrrrrrr\n");
-			return (-1); // need proper error like
-		}
+			return (-1);// error
 	}
 	if (!str->env_val)
 	{
 		if (handle_no_env_val(str) == -1)
-			return (0);  // error if this comes back with -1
+			return (0);// error
 	}
 	free(str->tmp);
 	return (0);
 }
 
-/**
- * @todo	error handling (?)
- * @todo	strjoin proctection
- * @todo	strdup protection
-*/
 static int	handle_one_dollar(t_expand *str)
 {
 	char	*tmp;
 
 	tmp = NULL;
 	if (str->expanded)
+	{
 		tmp = ft_strjoin(str->expanded, "$");
+		if (!tmp)
+			return (-1);// malloc error
+	}
 	else
+	{
 		tmp = ft_strdup("$");
+		if (!tmp)
+			return (-1);// malloc error
+	}
 	free(str->expanded);
 	str->expanded = tmp;
 	if (!str->expanded)
-		return (-1);
+		return (-1);// error
 	return (1);
 }
 
-/**
- * @todo	error handling
- * @todo	substr proctection
-*/
 int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 {
 	int		start;
@@ -114,13 +102,15 @@ int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 			i++;
 		end = i - start;
 		str->dollar = ft_substr(input, start, end);
+		if (!str->dollar)
+			return (-1);// error
 		if (dollar_expand(str, env) == -1)
-			return (-1); // need proper error like
+			return (-1);// error
 	}
 	else if (!input[i])
 	{
 		if (handle_one_dollar(str) == -1)
-			return (0); // error if this comes back with -1
+			return (0);// error
 	}
 	return (i);
 }
