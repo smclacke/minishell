@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:53:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/09 19:59:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 		}
 		cmd_type = check_for_builtin(lst);
 		if (cmd_type)
+		{
 			do_builtin(lst, env, cmd_type);
-		return (true);
+			return (true);
+		}
 	}
 	return (false);
 }
@@ -100,6 +102,7 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 
 	count = lst->proc_count;//instead of this go to proc-count
 	i = 0;
+	printf("hi from pipeline \n");
 	while (lst)
 	{
 		if (count >= 1 && lst->proc_count)	
@@ -130,6 +133,7 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 */
 void	redirect(t_parser *lst, t_execute *data)
 {
+	printf("hi from redirect \n");
 	if (!redirect_infile(lst->proc, data))
 	{
 		data->error = false;

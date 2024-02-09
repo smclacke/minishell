@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:12:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/09 19:56:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	redirect_infile(t_procs *head, t_execute *data)
 	int		i;
 
 	i = 0;
-	while (head->redir[i])
+	while (i < head->red_count)
 	{
 		if (mini_strcmp(head->redir[i], "<") == 0)
 		{
@@ -62,11 +62,12 @@ bool	redirect_infile(t_procs *head, t_execute *data)
 			if (access(head->redir[i], F_OK) != 0)
 			{
 				dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->redir[i]);
-				// return (false);
+				return (false);
 			}
 			if (check_infile_stat(head->redir[i], data) == false)
 				return (false);
 		}
+		// i++;
 	}
 	return (true);
 }
@@ -83,7 +84,7 @@ void	redirect_outfile(t_procs *head, t_execute *data)
 	struct stat	file_stat;
 
 	i = 0;
-	while (head->redir[i])
+	while (i < head->red_count)
 	{		
 		if (mini_strcmp(head->redir[i], ">") == 0)
 		{
@@ -99,8 +100,11 @@ void	redirect_outfile(t_procs *head, t_execute *data)
 				if (S_ISREG(file_stat.st_mode))
 					data->out = open(head->redir[i], O_CREAT | O_RDWR | O_TRUNC, 0644);
 				if (S_ISDIR(file_stat.st_mode))
+				{
 					dprintf(STDERR_FILENO, DIR_MESSAGE, head->redir[i]);
-					// return ;
+					return ;
+				}
+					
 			}
 			if (dup2(data->out, STDOUT_FILENO) == 0)
 				close(data->out);
@@ -146,10 +150,11 @@ void	redirect_append(t_procs *head, t_execute *data)
 	struct stat	file_stat;
 
 	i = 0;
-	while (head->redir[i])
+	while (i < head->red_count)
 	{
 		if (mini_strcmp(head->redir[i], ">>") == 0)
 		{
+			i++;
 			if (access(head->redir[i], F_OK) != 0)
 			{
 				data->out = open(head->redir[i], O_CREAT | O_RDWR | O_APPEND, 0644);
