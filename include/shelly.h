@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 15:35:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 17:25:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,6 @@ void			free_strs(char *str, char *str2);
 char			*ft_getenv(t_env *env, char *str);
 int				list_iter(t_parser *lst);
 
-void			print_array(char **arr);
+// void			print_array(char **arr);
 
 #endif

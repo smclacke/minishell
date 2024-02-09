@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/08 22:51:10 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 22:53:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 17:25:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	free_hds(t_procs *proc)
 	}
 }
 
-static void	free_strs(t_procs *proc)
+static void	free_str(t_procs *proc)
 {
 	int	i;
 
@@ -55,7 +55,7 @@ void	free_procs(t_procs *proc)
 	if (proc->cmd)
 		free(proc->cmd);
 	if (proc->str_count != 0)
-		free_strs(proc);
+		free_str(proc);
 	if (proc->hd_count != 0)
 		free_hds(proc);
 	if (proc->red_count != 0)

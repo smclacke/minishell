@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/09 15:30:48 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/09 17:31:02 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,11 @@ HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
 ## SRC FILES ##
 
 SRCS			= main.c								\
-					utils/signals.c						\
+					utils/errors.c						\
 					utils/free_procs.c					\
-					utils/utils.c						\
 					utils/print.c						\
+					utils/signals.c						\
+					utils/utils.c						\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
 					lexer/tokens.c						\
@@ -51,26 +52,25 @@ SRCS			= main.c								\
 					expander/d_quotes.c					\
 					expander/s_quotes.c					\
 					expander/hd_expand.c				\
-					builtin/errors.c					\
-					builtin/echo.c						\
-					builtin/cd.c 						\
-					builtin/pwd.c 						\
-					builtin/export.c 					\
-					builtin/unset.c 					\
-					builtin/env.c 						\
-					builtin/builtin_utils_one.c 		\
-					builtin/builtin_utils_two.c 		\
-					builtin/exit.c						\
 					executor/execute.c					\
-					executor/list_utils.c 				\
 					executor/make_env.c					\
+					executor/list_utils.c 				\
 					executor/utils_one.c				\
-					executor/utils_two.c				\
-					executor/execute_utils_one.c		\
-					executor/execute_utils_two.c		\
-					executor/heredoc_utils.c			\
-					executor/redirect.c					\
-					executor/print_utils.c				\
+					# builtin/echo.c						\
+					# builtin/cd.c 						\
+					# builtin/pwd.c 						\
+					# builtin/export.c 					\
+					# builtin/unset.c 					\
+					# builtin/env.c 						\
+					# builtin/builtin_utils_one.c 		\
+					# builtin/builtin_utils_two.c 		\
+					# builtin/exit.c						\
+					# executor/utils_two.c				\
+					# executor/execute_utils_one.c		\
+					# executor/execute_utils_two.c		\
+					# executor/heredoc_utils.c			\
+					# executor/redirect.c					\
+					# executor/print_utils.c				\
 
 
 SRC_DIR		= src

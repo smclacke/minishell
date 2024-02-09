@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/09 15:34:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 17:27:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,19 +135,19 @@
  * pipes and makes child process
  * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
  */
-static void	build(t_parser *lst, t_env **env, t_execute *data)
-{
-	if (!lst)
-		mini_error (E_GENERAL, lst);
-	init_heredoc(lst, env);
-	if (single_builtin_cmd(lst, env, data) == true)
-		return ;
-	pipeline(lst, env, data);
-	close_all(data, lst);
-	waitpid(data->fork_pid, NULL, 0);
-	while (wait(NULL) != -1)
-		(void)NULL;
-}
+// static void	build(t_parser *lst, t_env **env, t_execute *data)
+// {
+// 	if (!lst)
+// 		mini_error (E_GENERAL, lst);
+// 	init_heredoc(lst, env);
+// 	if (single_builtin_cmd(lst, env, data) == true)
+// 		return ;
+// 	pipeline(lst, env, data);
+// 	close_all(data, lst);
+// 	waitpid(data->fork_pid, NULL, 0);
+// 	while (wait(NULL) != -1)
+// 		(void)NULL;
+// }
 
 /**
  * @param env environment linked list
