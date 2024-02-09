@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 15:27:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 15:32:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define NO_HOME "minishell: cd: HOME not set\n"
 # define ARG_ERROR "minishell: %s: too many arguments\n"
 # define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
-# define NON_NUMERIC_ARG "exit\nminishell: exit: %s: numeric argument required\n"
+# define NON_NUM_ARG "exit\nminishell: exit: %s: numeric argument required\n"
 # define INFILE_ERROR "minishell: %s: No such file or directory\n"
 # define DIR_MESSAGE "minishell: %s: Is a directory\n"
 # define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"

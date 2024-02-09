@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 17:20:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/09 15:32:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	digit_check(char *str)
 		i++;
 	if (str[i] != 0)
 	{
-		dprintf(STDERR_FILENO, NON_NUMERIC_ARG, str);
+		dprintf(STDERR_FILENO, NON_NUM_ARG, str);
 		exit(2);
 	}
 }
