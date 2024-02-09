@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 22:55:10 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 20:13:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	free_parser(t_parser *procs)
 			free_proc_arrs(procs);
 		if (procs->process)
 			free(procs->process);
-		if (procs->proc)
-			free_procs(procs->proc);
+		// if (procs->proc)
+		free_procs(procs->proc);
 		free(procs);
 		procs = tmp;
 	}

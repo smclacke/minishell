@@ -7,6 +7,15 @@
 
 *right here, right now*
 
+SEGFAULLLLT (:)
+---minibleh:<< $EF | << $DFSD
+red_count = 0
+hd_count = 1
+red_count = 0
+
+ // handle_procs(), if multi proc-> loop arr, getting first proc
+		segfaulting on second... need to check that function...
+
 **DO this**
 
 - protection, expand_utils.c and norm...

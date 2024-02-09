@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/08 22:51:10 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 17:25:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 20:15:09 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	free_hds(t_procs *proc)
 	i = 0;
 	while (i < proc->hd_count)
 	{
-		free(proc->str[i]);
+		free(proc->hd[i]);
 		i++;
 	}
 }

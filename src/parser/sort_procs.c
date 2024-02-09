@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:09:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 20:32:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ static	void	sort_vars(t_procs *proc, char **process)
 void	sort_each_proc(t_procs *proc, char **proc_arr)
 {
 	proc->token_count = ft_arrlen(proc_arr);
+	printf("red_count = %i\n", proc->red_count);
 	proc->red_count = count_reds(proc_arr);
 	proc->str_count = count_strs(proc, proc_arr);
 	proc->hd_count = count_hds(proc_arr);
+	printf("hd_count = %i\n", proc->hd_count);
 	sort_vars(proc, proc_arr);
 }
 
-static	void	token_while(t_parser *proc, char *str)
+static	void	token_while(t_parser *proc, char **str)
 {
 	int		i;
 	int		pi;
@@ -61,7 +63,7 @@ static	void	token_while(t_parser *proc, char *str)
 	while (str[i])
 	{
 		proc->start = i;
-		while (str[i] && !ft_ispipe(str[i]))
+		while (str[i] && !is_pipe(str[i]))
 			i++;
 		p_size = (i + proc->start);
 		proc->proc_arrs[pi] = (char **)malloc(sizeof(char *) * (p_size + 1));
@@ -84,6 +86,6 @@ int	get_procs(t_parser *proc)
 			* (proc->proc_count + 1));
 	if (!proc->proc_arrs)
 		return (free (proc), 0);// malloc error
-	token_while(proc, *proc->tokens);
+	token_while(proc, proc->tokens);
 	return (1);
 }

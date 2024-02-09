@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:47:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 20:33:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static	t_parser	*handle_procs(t_parser *proc)
 	t_parser	*parser_list;
 	t_parser	*new_node;
 	int			i;
+	int			j;
 
 	i = 0;
+	j = 0;
 	parser_list = NULL;
 	new_node = NULL;
 	while (i < proc->proc_count)
@@ -28,7 +30,13 @@ static	t_parser	*handle_procs(t_parser *proc)
 			return (free(proc->process[i]), NULL);// malloc error
 		ft_bzero(proc->process[i], sizeof(t_procs));
 		if (proc->multi_proc_b == TRUE)
-			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
+		{
+			while (proc->proc_arrs[j])
+			{
+				sort_each_proc(proc->process[i], proc->proc_arrs[j]);
+				j++;
+			}
+		}
 		else
 			sort_each_proc(proc->process[i], proc->tokens);
 		proc->process[i]->proc_count = proc->proc_count;
