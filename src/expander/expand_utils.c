@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:56:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 15:23:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	do_hds(t_parser *tmp, t_expand *str, t_env **env)
 			len = ft_strlen(tmp->proc->hd[i]);
 			if (ft_strnstr(tmp->proc->hd[i], "$", len))
 			{
-				str->input = ft_strdup(tmp->proc->hd[i]);
+				str->input = ft_strdup(tmp->proc->hd[i]); // protect
 				str->expanded = NULL;
 				dollar(str, env);
 				if (!str->expanded)

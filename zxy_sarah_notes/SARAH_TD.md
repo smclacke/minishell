@@ -9,6 +9,8 @@
 
 **DO this**
 
+- protection, expand_utils.c and norm...
+
 - errors
 
 - leaks
