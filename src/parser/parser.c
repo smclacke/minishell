@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 20:37:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 20:47:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static	t_parser	*handle_procs(t_parser *proc)
 	new_node = NULL;
 	while (i < proc->proc_count)
 	{
-		printf("while loop [%i]\n", i);
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		if (!proc->process[i])
 			return (free(proc->process[i]), NULL);// malloc error

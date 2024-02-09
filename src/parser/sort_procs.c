@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 20:39:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/09 20:48:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,14 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	printf("we here right?\n");
 	// something goes wrong on second call of this function and after
 	// above printf, we segfault...
+	// token_count is totally wrong .. on second cound it is 9
+	// for input = << $SF | << $SDF
 	proc->token_count = ft_arrlen(proc_arr);
+	printf("token_count = %i\n", proc->token_count);
 	proc->red_count = count_reds(proc_arr);
 	printf("red_count = %i\n", proc->red_count);
 	proc->str_count = count_strs(proc, proc_arr);
+	printf("str_count = %d\n", proc->str_count);
 	proc->hd_count = count_hds(proc_arr);
 	printf("hd_count = %i\n", proc->hd_count);
 	sort_vars(proc, proc_arr);
