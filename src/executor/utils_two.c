@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 19:48:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/12 14:29:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_for_builtin(t_parser *node)
 	else if (mini_strcmp(node->proc->cmd, "unset") == 0)
 		return (UNSET);
 	else if (mini_strcmp(node->proc->cmd, "echo") == 0)
-		return (ECHO);
+		return (5);
 	else if (mini_strcmp(node->proc->cmd, "pwd") == 0)
 		return (PWD);
 	else if (mini_strcmp(node->proc->cmd, "env") == 0)

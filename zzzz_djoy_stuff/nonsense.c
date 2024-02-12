@@ -607,3 +607,24 @@ echo code instead of input check
 // 		i++;
 // 	}
 // }
+
+/**
+ * @param node linked list
+ * @brief checks arguments to find output or input redirect
+ * @todo triple check no necessary...
+*/
+// bool	check_redirect(t_parser *node)
+// {
+// 	if (!node)
+// 		return (false);
+// 	if (mini_strcmp(node->redir[i], ">") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, "<<") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, "<") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, ">>") == 0)
+// 		return (true);
+// 	else
+// 		return (false);
+// }

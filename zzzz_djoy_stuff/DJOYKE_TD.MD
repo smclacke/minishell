@@ -166,4 +166,5 @@ bool	word_check(char *str, t_parser *lst)
 
 
 
-ERRORS TO STANDARD ERROR!
+1) ERRORS TO STANDARD ERROR!
+2) exit > hoi.txt is writing exit in the file

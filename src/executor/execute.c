@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/09 19:57:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/12 16:38:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	i = 0;
 	if (!node->proc->cmd)
 		return (node->proc->cmd); // necessary?
+	printf("cmd = [%s]\n", node->proc->cmd);
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
@@ -107,9 +108,12 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		do_builtin(lst, env, cmd_type);
 		exit (0);
 	}
-	// if (!lst->cmd) // we do need this?
-		// exit (0);
+	if (!lst->proc->cmd) // we do need this?
+		exit (0);
 	executable = check_access(*env, lst, data);
+	if (executable == NULL)
+		return ;
+	printf("executable = [%s]\n", executable);
 	if (data->error == false)
 		exit (0);
 	if (access(executable, F_OK) == -1)
