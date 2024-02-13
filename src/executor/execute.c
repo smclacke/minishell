@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 14:12:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/13 18:48:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,18 +127,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		exit (0);
 	}
 	data->env_array = list_to_string(*env, lst);
-		int			i = 0;
-		// while (lst->proc->str[i])
-		// {
-		// 	if (lst->proc->str[i] == NULL)
-		// 		printf("NULL");
-			printf("str = [%s]\n", lst->proc->str[i]);
-			i++;	
-			printf("str = [%s]\n", lst->proc->str[i]);
-		// }
-	// if (execve(executable, lst->tokens, data->env_array) == -1)
-	// if (execve(executable, get_argv(lst), data->env_array) == -1)
-	if (execve(executable, lst->proc->str, data->env_array) == -1)
+	if (execve(executable, get_argv(lst), data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
 	printf("you done?\n");
 	exit (0);
