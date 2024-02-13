@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 16:38:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 18:14:29 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,37 @@ void	free_parser(t_parser *procs)
 		if (procs->proc_arrs)
 			free_proc_arrs(procs);
 		if (procs->process)
+		{
+			while (procs->process[i])
+			{
+				free(procs->process[i]);
+				i++;
+			}
 			free(procs->process);
+		}
 		// if (procs->proc)
 		free_procs(procs->proc);
 		free(procs);
 		procs = tmp;
 	}
 	free(procs);
+}
+
+void	free_this_proc(t_parser *proc)
+{
+	int		i = 0;
+
+	if (proc)
+	{
+		if (proc->process)
+		{
+			while (proc->process[i])
+			{
+				free(proc->process[i]);
+				i++;
+			}
+			free(proc->process);
+		}
+		free(proc);
+	}
 }
