@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 14:06:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/13 19:47:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 		mini_error(E_GENERAL, lst);
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
-	printf("return from child process\n");
+	// printf("return from child process\n");
 }
 
 /**
@@ -104,22 +104,46 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 
 	count = lst->proc_count;//instead of this go to proc-count
 	i = 0;
-	printf("hi from pipeline \n");
+	// printf("hi from pipeline \n");
 	// while (lst)
 	while (i < lst->proc_count)
 	{
 		// if (count >= 1 && lst->proc_count)
 		// if (count >= 1)
 		// {
-			printf("hi from pipeline again\n");
+			// printf("hi from pipeline again\n");
 			init_pipe(i, count, data, lst);
 			init_fork(lst, env, data);
-			printf("back from init_fork\n");
+			// printf("back from init_fork\n");
 			close_between(data, lst);
 			count--;
 			i++;
 		// }
-		// lst = lst->next;
+		// lst->proc = lst->proc->next;
+		//is it an array or a list? hehe need to go to next process
+			// ➜  minishell git:(djoyke) ✗ ./minishell
+			// minibleh:wc Makefile | ls
+
+			// [0] cmd = wc
+
+			// [0] str_count = 1
+			// [0] strs[0] = Makefile
+
+			// [0] hd_count = 0
+
+			// [0] red_count = 0
+			// --------------------------------------------------
+
+			// [1] cmd = ls
+
+			// [1] str_count = 0
+
+			// [1] hd_count = 0
+
+			// [1] red_count = 0
+			// --------------------------------------------------
+			// executable = [/usr/bin/wc]
+			// minibleh:^Z
 	}
 }
 
@@ -139,7 +163,7 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 */
 void	redirect(t_parser *lst, t_execute *data)
 {
-	printf("hi from redirect \n");
+	// printf("hi from redirect \n");
 	if (lst->proc->red_count == 0)
 		return ;
 	if (!redirect_infile(lst->proc, data))//why did I do this?

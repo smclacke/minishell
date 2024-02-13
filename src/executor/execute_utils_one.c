@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:03 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 18:39:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/13 19:29:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 void	init_pipes_child(t_execute *data, t_parser *lst)
 {
 	// printf("plumber\n");
+	// printf("pipe right [%i]\n", data->pipe_right[READ]);
+	// printf("pipe right [%i]\n", data->pipe_right[WRITE]);
+	// printf("pipe left [%i]\n", data->pipe_left[READ]);
+	// printf("pipe left [%i]\n", data->pipe_left[WRITE]);
 	if (data->pipe_right[WRITE] != -1)
 		if (dup2(data->pipe_right[WRITE], STDOUT_FILENO) == -1)
 			mini_error(E_GENERAL, lst);
@@ -32,10 +36,6 @@ void	init_pipes_child(t_execute *data, t_parser *lst)
 		mini_error(E_GENERAL, lst);
 	if (data->pipe_right[READ] != -1 && close(data->pipe_right[READ]) == -1)
 		mini_error(E_GENERAL, lst);
-	// printf("pipe right [%i]\n", data->pipe_right[READ]);
-	// printf("pipe right [%i]\n", data->pipe_right[WRITE]);
-	// printf("pipe left [%i]\n", data->pipe_left[READ]);
-	// printf("pipe left [%i]\n", data->pipe_left[WRITE]);
 	// printf("bye plumber\n");
 }
 
