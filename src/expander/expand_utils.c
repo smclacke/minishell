@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 15:23:38 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 17:24:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,16 @@ void		do_reds(t_parser *tmp, t_expand *str, t_env **env)
 			len = ft_strlen(tmp->proc->redir[i]);
 			if (ft_strnstr(tmp->proc->redir[i], "$", len))
 			{
-				str->input = ft_strdup(tmp->proc->redir[i]);// protect
-				str->expanded = NULL;
-				dollar(str, env);
-				if (!str->expanded)
-					return ;// error?
-				tmp->proc->redir[i] = str->expanded;
-				if (!tmp->proc->redir[i])
-					return ;// errorR
+				if (expand_this(str, tmp->proc->redir[i], env))
+					return ; // error
+				// str->input = ft_strdup(tmp->proc->redir[i]);// protect
+				// str->expanded = NULL;
+				// dollar(str, env);
+				// if (!str->expanded)
+				// 	return ;// error?
+				// tmp->proc->redir[i] = str->expanded;
+				// if (!tmp->proc->redir[i])
+				// 	return ;// errorR
 			}
 			i++;
 		}
@@ -82,14 +84,16 @@ void	do_hds(t_parser *tmp, t_expand *str, t_env **env)
 			len = ft_strlen(tmp->proc->hd[i]);
 			if (ft_strnstr(tmp->proc->hd[i], "$", len))
 			{
-				str->input = ft_strdup(tmp->proc->hd[i]); // protect
-				str->expanded = NULL;
-				dollar(str, env);
-				if (!str->expanded)
-					return ;// error?
-				tmp->proc->hd[i] = str->expanded;
-				if (!tmp->proc->hd[i])
-					return ;// error
+				if (expand_this(str, tmp->proc->hd[i], env))
+					return ; // error
+				// str->input = ft_strdup(tmp->proc->hd[i]); // protect
+				// str->expanded = NULL;
+				// dollar(str, env);
+				// if (!str->expanded)
+				// 	return ;// error?
+				// tmp->proc->hd[i] = str->expanded;
+				// if (!tmp->proc->hd[i])
+				// 	return ;// error
 			}
 			i++;
 		}
@@ -110,14 +114,17 @@ void	do_strs(t_parser *tmp, t_expand *str, t_env **env)
 			len = ft_strlen(tmp->proc->str[i]);
 			if (ft_strnstr(tmp->proc->str[i], "$", len))
 			{
-				str->input = ft_strdup(tmp->proc->str[i]);// protect
-				str->expanded = NULL;
-				dollar(str, env);
-				if (!str->expanded)
-					return ;// error?
-				tmp->proc->str[i] = str->expanded;
-				if (!tmp->proc->str[i])
-					return ;// error
+				printf("need to expand///\n");
+				if (expand_this(str, tmp->proc->str[i], env))
+					return ; // error
+				// str->input = ft_strdup(tmp->proc->str[i]);// protect
+				// str->expanded = NULL;
+				// dollar(str, env);
+				// if (!str->expanded)
+				// 	return ;// error?
+				// tmp->proc->str[i] = str->expanded;
+				// if (!tmp->proc->str[i])
+				// 	return ;// error
 			}
 			i++;
 		}
