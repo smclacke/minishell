@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 17:21:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 17:35:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,6 @@ int				save_extra_string(t_expand *str, char *input, int i);
 int				first_bit(t_expand *str, char *input);
 void			dollar(t_expand *str, t_env **env);
 void			expand_dollar(t_parser *lst, t_env **env);
-
-//-------------------- expand_this -------------------//
-int				expand_this(t_expand *str, char *exable, t_env **env);
 
 //-------------------- expand_quotes -------------------//
 void			expand_quotes(t_parser *tokens);
