@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/08 22:51:10 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 20:15:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 20:02:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	free_reds(t_procs *proc)
 		free(proc->redir[i]);
 		i++;
 	}
+	free(proc->redir);
 }
 
 static void	free_hds(t_procs *proc)
@@ -34,6 +35,7 @@ static void	free_hds(t_procs *proc)
 		free(proc->hd[i]);
 		i++;
 	}
+	free(proc->hd);
 }
 
 static void	free_str(t_procs *proc)
@@ -46,6 +48,7 @@ static void	free_str(t_procs *proc)
 		free(proc->str[i]);
 		i++;
 	}
+	free(proc->str);
 }
 
 void	free_procs(t_procs *proc)

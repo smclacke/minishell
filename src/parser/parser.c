@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 19:36:15 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 20:00:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,7 @@ t_parser	*parse_input(t_parser *procs, char *input)
 	{
 		procs = parse_tokens(tokens);
 		if (!procs)
-		{
-			free_parser(procs);
 			return (NULL);// parser failed error
-		}
 		ft_free_process(procs);
 		return (procs);
 	}

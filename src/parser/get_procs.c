@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:50:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 19:53:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ static	int	copy_strs(t_procs *proc, char *process)
 {
 	proc->str[proc->index] = ft_strdup(process);
 	if (!proc->str[proc->index])
+	{
+		free_procs(proc);
 		return (-1);// malloc error
+	}
 	proc->index++;
 	return (0);
 }

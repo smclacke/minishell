@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 18:24:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 20:02:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	run_minishell(char **envp, char *input)
 	if (!procs)
 		return (0);
 	// prpr(procs); //
-	// execute(&env, procs);
+	execute(&env, procs);
 	// prpr(procs); //
 	free_parser(procs);
 	return (1);
@@ -56,7 +56,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
-		printf("success\n"); //
+		// printf("success\n"); //
 		exit(EXIT_SUCCESS); //
 	}
 	return (0);
