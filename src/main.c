@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 17:29:46 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 17:47:15 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 /**
  * // = remove for final version
- * 	everything else normed
+ * 	everything else is normed
  */
 int	run_minishell(char **envp, char *input)
 {
 	t_parser	*procs;
 	t_env		*env;
 
-	// (void) envp;
+	(void) envp;
 	procs = NULL;
 	env = NULL;
-	env = env_list(envp, env);
+	// env = env_list(envp, env);
 	procs = parse_input(procs, input);
 	if (!procs)
 		return (0);
-	prpr(procs); //
-	execute(&env, procs);
-	prpr(procs); //
+	// prpr(procs); //
+	// execute(&env, procs);
+	// prpr(procs); //
 	free_parser(procs);
 	return (1);
 }

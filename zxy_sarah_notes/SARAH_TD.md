@@ -9,15 +9,11 @@
 
 **DO this**
 
-- protection, expand_utils.c and norm...
+- leaks
 
 - errors
 
-- leaks
-
 - STRESS TEST THE FUCK OUTTA IT
-
-- check everything is nullified properly...
 
 ------------------------------
 ------------------------------
