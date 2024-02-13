@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 19:53:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 20:05:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	get_reds(t_procs *proc, char **process)
 	j = 0;
 	proc->redir = (char **)malloc(sizeof(char *) * (proc->red_count + 1));
 	if (!proc->redir)
+	{
+		free_procs(proc);
 		return ;// malloc error
+	}
 	while (process[i])
 	{
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
@@ -54,7 +57,10 @@ void	get_hds(t_procs *proc, char **process)
 	j = 0;
 	proc->hd = (char **)malloc(sizeof(char *) * (proc->hd_count + 1));
 	if (!proc->hd)
+	{
+		free_procs(proc);
 		return ;// malloc error
+	}
 	while (process[i])
 	{
 		if (proc_redir(process[i]) == 2)
