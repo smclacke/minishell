@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:18:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/12 15:33:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	do_builtin(t_parser *node, t_env **env, int cmd_type)
 		ft_export(node, env);
 	else if (cmd_type == UNSET)
 		ft_unset(node, env);
-	else if (cmd_type == ECHO)
+	else if (cmd_type == 5)
 		ft_echo(node, env);
 	else if (cmd_type == PWD)
 		ft_pwd(node);

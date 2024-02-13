@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 17:23:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 19:01:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 // 	i = 0;
 // 	if (!node->proc->cmd)
 // 		return (node->proc->cmd); // necessary?
+// 	printf("cmd = [%s]\n", node->proc->cmd);
 // 	if (!absolute_check(node) && parse_path(env, data, node))
 // 	{
 // 		while (data->path && data->path[i] != NULL)
@@ -106,9 +107,12 @@
 // 		do_builtin(lst, env, cmd_type);
 // 		exit (0);
 // 	}
-// 	// if (!lst->cmd) // we do need this?
-// 		// exit (0);
+// 	if (!lst->proc->cmd) // we do need this?
+// 		exit (0);
 // 	executable = check_access(*env, lst, data);
+// 	if (executable == NULL)
+// 		return ;
+// 	printf("executable = [%s]\n", executable);
 // 	if (data->error == false)
 // 		exit (0);
 // 	if (access(executable, F_OK) == -1)
@@ -121,9 +125,10 @@
 // 		put_permission_error(lst);
 // 		exit (0);
 // 	}
-// 	data->env_array = list_to_string(*env, lst); // is this necessary?
+// 	data->env_array = list_to_string(*env, lst);
 // 	if (execve(executable, get_argv(lst), data->env_array) == -1)
 // 		mini_error (E_GENERAL, lst);
+// 	printf("you done?\n");
 // 	exit (0);
 // }
 
@@ -135,19 +140,21 @@
  * pipes and makes child process
  * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
  */
-// static void	build(t_parser *lst, t_env **env, t_execute *data)
-// {
-// 	if (!lst)
-// 		mini_error (E_GENERAL, lst);
-// 	init_heredoc(lst, env);
-// 	if (single_builtin_cmd(lst, env, data) == true)
-// 		return ;
-// 	pipeline(lst, env, data);
-// 	close_all(data, lst);
-// 	waitpid(data->fork_pid, NULL, 0);
-// 	while (wait(NULL) != -1)
-// 		(void)NULL;
-// }
+static void	build(t_parser *lst, t_env **env, t_execute *data)
+{
+	if (!lst)
+		mini_error (E_GENERAL, lst);
+	init_heredoc(lst, env);
+	if (single_builtin_cmd(lst, env, data) == true)
+		return ;
+	pipeline(lst, env, data);
+	close_all(data, lst);
+	printf("waiting indef\n");
+	waitpid(data->fork_pid, NULL, 0);//werkt niet
+	while (wait(NULL) != -1)//jij ook niet
+		(void)NULL;
+	printf("done waiting\n");
+}
 
 /**
  * @param env environment linked list
