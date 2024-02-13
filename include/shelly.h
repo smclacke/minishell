@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 18:14:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 18:22:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void			free_util(t_parser *list, char ***arrs, char **arr, char *str);
 
 //---------- utils ----------//
 int				ft_abs(int i);
+void			ft_free_process(t_parser *proc);
 void			free_parser(t_parser *procs);
-void			free_this_proc(t_parser *proc);
 
 /**
  * comment out print protos
