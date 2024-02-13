@@ -6,11 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 20:13:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 16:38:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
+
+int		ft_abs(int i)
+{
+	if (i < 0)
+		i *= 1;
+	return (i);
+}
 
 static	void	free_proc_arrs(t_parser *proc)
 {
