@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/12 16:27:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/13 14:06:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 		mini_error(E_GENERAL, lst);
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
+	printf("return from child process\n");
 }
 
 /**
@@ -113,6 +114,7 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 			printf("hi from pipeline again\n");
 			init_pipe(i, count, data, lst);
 			init_fork(lst, env, data);
+			printf("back from init_fork\n");
 			close_between(data, lst);
 			count--;
 			i++;
@@ -138,7 +140,9 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 void	redirect(t_parser *lst, t_execute *data)
 {
 	printf("hi from redirect \n");
-	if (!redirect_infile(lst->proc, data))
+	if (lst->proc->red_count == 0)
+		return ;
+	if (!redirect_infile(lst->proc, data))//why did I do this?
 	{
 		data->error = false;
 		return ;

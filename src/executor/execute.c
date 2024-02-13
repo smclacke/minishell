@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/12 16:38:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/13 14:12:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,21 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		put_permission_error(lst);
 		exit (0);
 	}
-	data->env_array = list_to_string(*env, lst); // is this necessary?
-	if (execve(executable, get_argv(lst), data->env_array) == -1)
+	data->env_array = list_to_string(*env, lst);
+		int			i = 0;
+		// while (lst->proc->str[i])
+		// {
+		// 	if (lst->proc->str[i] == NULL)
+		// 		printf("NULL");
+			printf("str = [%s]\n", lst->proc->str[i]);
+			i++;	
+			printf("str = [%s]\n", lst->proc->str[i]);
+		// }
+	// if (execve(executable, lst->tokens, data->env_array) == -1)
+	// if (execve(executable, get_argv(lst), data->env_array) == -1)
+	if (execve(executable, lst->proc->str, data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
+	printf("you done?\n");
 	exit (0);
 }
 
@@ -149,9 +161,11 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 		return ;
 	pipeline(lst, env, data);
 	close_all(data, lst);
-	waitpid(data->fork_pid, NULL, 0);
-	while (wait(NULL) != -1)
+	printf("waiting indef\n");
+	waitpid(data->fork_pid, NULL, 0);//werkt niet
+	while (wait(NULL) != -1)//jij ook niet
 		(void)NULL;
+	printf("done waiting\n");
 }
 
 /**

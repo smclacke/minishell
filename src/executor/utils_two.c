@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/12 14:29:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/13 13:45:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static char	**fill_array(t_parser *temp, char **new_str, int i)
  * @brief set's linked list from cmd to next cmd to 2d array
  * cmd at 0, plus args at 1 , 2 etc.
  * @todo error code
- * @note do we need this??
+ * @note this needs to put the commands and the strs in an array
 */
 char	**get_argv(t_parser *lst)
 {

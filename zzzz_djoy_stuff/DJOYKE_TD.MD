@@ -168,3 +168,9 @@ bool	word_check(char *str, t_parser *lst)
 
 1) ERRORS TO STANDARD ERROR!
 2) exit > hoi.txt is writing exit in the file
+
+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
+
+first! before start,
+
+clone met ssh!!!!! wieeeeeeh
