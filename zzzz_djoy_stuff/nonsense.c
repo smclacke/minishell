@@ -607,3 +607,49 @@ echo code instead of input check
 // 		i++;
 // 	}
 // }
+
+// /**
+//  * @param node linked list
+//  * @brief checks arguments to find output or input redirect
+//  * @todo triple check no necessary...
+// */
+// bool	check_redirect(t_parser *node)
+// {
+// 	if (!node)
+// 		return (false);
+// 	if (mini_strcmp(node->redir[i], ">") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, "<<") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, "<") == 0)
+// 		return (true);
+// 	else if (mini_strcmp(node->meta, ">>") == 0)
+// 		return (true);
+// 	else
+// 		return (false);
+// }
+
+// /**
+//  * @param temp parser linked list
+//  * @brief count's amount of words including cmd for 2d array
+//  * @return returns int representing word count.
+//  * @note do we need this??
+//  * @todo norm 
+// */
+// static int	count_words(t_procs *lst)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (lst)
+// 	{
+// 		// if (lst->cmd)
+// 		// 	break ;
+// 		if (lst->str[i])
+// 			i++;
+// 		// if (lst->meta)
+// 		// 	lst = lst->next;
+// 		// lst = lst->next;
+// 	}
+// 	return (i);
+// }

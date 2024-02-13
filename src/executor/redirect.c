@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/04 19:12:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/12 16:44:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ bool	check_infile_stat(char *file, t_execute *data)
 				close(data->in);
 		}
 		if (S_ISDIR(file_stat.st_mode))
+		{
 			dprintf(STDERR_FILENO, DIR_MESSAGE, file);
 			// return (false);
+		}
 		else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
 			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, file);
 			// return (false);
@@ -48,25 +50,20 @@ bool	check_infile_stat(char *file, t_execute *data)
  * @param head parser linked list
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function 
+ * @todo name the brief correctly
 */
 bool	redirect_infile(t_procs *head, t_execute *data)
 {
-	int		i;
-
-	i = 0;
-	while (head->redir[i])
+	if (mini_strcmp(head->redir[0], "<") == 0)
 	{
-		if (mini_strcmp(head->redir[i], "<") == 0)
+		printf("hi\n");
+		if (access(head->redir[1], F_OK) != 0)
 		{
-			i++;
-			if (access(head->redir[i], F_OK) != 0)
-			{
-				dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->redir[i]);
-				// return (false);
-			}
-			if (check_infile_stat(head->redir[i], data) == false)
-				return (false);
+			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->redir[1]);
+			return (false);
 		}
+		if (check_infile_stat(head->redir[1], data) == false)
+			return (false);
 	}
 	return (true);
 }
@@ -76,60 +73,36 @@ bool	redirect_infile(t_procs *head, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for redirects enters redirect function
  * @todo check returns norm it hehe
+ * name the brief correctly
 */
 void	redirect_outfile(t_procs *head, t_execute *data)
 {
-	int		i;
 	struct stat	file_stat;
-
-	i = 0;
-	while (head->redir[i])
-	{		
-		if (mini_strcmp(head->redir[i], ">") == 0)
+		
+	if (mini_strcmp(head->redir[0], ">") == 0)
+	{
+		if (access(head->redir[1], F_OK) != 0)
 		{
-			i++;
-			if (access(head->redir[i], F_OK) != 0)
-			{
-				data->out = open(head->redir[i], O_CREAT | O_RDWR | O_TRUNC, 0644);
-				if (data->out == -1)
-					return ;
-			}
-			if (stat(head->redir[i], &file_stat) == 0)
-			{
-				if (S_ISREG(file_stat.st_mode))
-					data->out = open(head->redir[i], O_CREAT | O_RDWR | O_TRUNC, 0644);
-				if (S_ISDIR(file_stat.st_mode))
-					dprintf(STDERR_FILENO, DIR_MESSAGE, head->redir[i]);
-					// return ;
-			}
-			if (dup2(data->out, STDOUT_FILENO) == 0)
-				close(data->out);
-			return ;
+			data->out = open(head->redir[1], O_CREAT | O_RDWR | O_TRUNC, 0644);
+			if (data->out == -1)
+				return ;
 		}
+		if (stat(head->redir[1], &file_stat) == 0)
+		{
+			if (S_ISREG(file_stat.st_mode))
+				data->out = open(head->redir[1], O_CREAT | O_RDWR | O_TRUNC, 0644);
+			if (S_ISDIR(file_stat.st_mode))
+			{
+				dprintf(STDERR_FILENO, DIR_MESSAGE, head->redir[1]);
+				return ;
+			}
+		}
+		if (dup2(data->out, STDOUT_FILENO) == 0)
+			close(data->out);
+		return ;
 	}
 	return ;
 }
-
-/**
- * @param node linked list
- * @brief checks arguments to find output or input redirect
- * @todo triple check no necessary...
-*/
-// bool	check_redirect(t_parser *node)
-// {
-// 	if (!node)
-// 		return (false);
-// 	if (mini_strcmp(node->redir[i], ">") == 0)
-// 		return (true);
-// 	else if (mini_strcmp(node->meta, "<<") == 0)
-// 		return (true);
-// 	else if (mini_strcmp(node->meta, "<") == 0)
-// 		return (true);
-// 	else if (mini_strcmp(node->meta, ">>") == 0)
-// 		return (true);
-// 	else
-// 		return (false);
-// }
 
 /**
  * @param head parser linked list
@@ -142,32 +115,27 @@ void	redirect_outfile(t_procs *head, t_execute *data)
 */
 void	redirect_append(t_procs *head, t_execute *data)
 {
-	int		i;
 	struct stat	file_stat;
 
-	i = 0;
-	while (head->redir[i])
+	if (mini_strcmp(head->redir[0], ">>") == 0)
 	{
-		if (mini_strcmp(head->redir[i], ">>") == 0)
+		if (access(head->redir[1], F_OK) != 0)
 		{
-			if (access(head->redir[i], F_OK) != 0)
-			{
-				data->out = open(head->redir[i], O_CREAT | O_RDWR | O_APPEND, 0644);
-				if (data->out == -1)
-					return ;
-			}
-			if (stat(head->redir[i], &file_stat) == 0)
-			{
-				if (S_ISREG(file_stat.st_mode))
-					data->out = open(head->redir[i], O_CREAT | O_RDWR | O_APPEND, 0644);
-				if (S_ISDIR(file_stat.st_mode))
-					dprintf(STDERR_FILENO, "%s is a directory\n", head->redir[i]);
-					// return ;
-			}
-			if (dup2(data->out, STDOUT_FILENO) == 0)
-				close(data->out);
-			return ;
+			data->out = open(head->redir[1], O_CREAT | O_RDWR | O_APPEND, 0644);
+			if (data->out == -1)
+				return ;
 		}
+		if (stat(head->redir[1], &file_stat) == 0)
+		{
+			if (S_ISREG(file_stat.st_mode))
+				data->out = open(head->redir[1], O_CREAT | O_RDWR | O_APPEND, 0644);
+			if (S_ISDIR(file_stat.st_mode))
+				dprintf(STDERR_FILENO, "%s is a directory\n", head->redir[1]);
+				// return ;
+		}
+		if (dup2(data->out, STDOUT_FILENO) == 0)
+			close(data->out);
+		return ;
 	}
 	return ;
 }

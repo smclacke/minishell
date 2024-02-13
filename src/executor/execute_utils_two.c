@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 14:53:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/13 14:06:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,19 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	cmd_type = 0;
 	if (count == 1)
 	{
-		if (lst->proc->red_count != 0)
+		cmd_type = check_for_builtin(lst);
+		if (cmd_type != 0)
 		{
-			redirect(lst, data);
-			if (data->error == false)
+			if (lst->proc->red_count != 0)
+			{
+				redirect(lst, data);
+				// if (data->error == false)
+				// 	return (true);
+			}
+			do_builtin(lst, env, cmd_type);
 				return (true);
 		}
-		cmd_type = check_for_builtin(lst);
-		if (cmd_type)
-			do_builtin(lst, env, cmd_type);
-		return (true);
+		return (false);
 	}
 	return (false);
 }
@@ -59,6 +62,7 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 		mini_error(E_GENERAL, lst);
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
+	printf("return from child process\n");
 }
 
 /**
@@ -100,17 +104,22 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 
 	count = lst->proc_count;//instead of this go to proc-count
 	i = 0;
-	while (lst)
+	printf("hi from pipeline \n");
+	// while (lst)
+	while (i < lst->proc_count)
 	{
-		if (count >= 1 && lst->proc_count)	
-		{
+		// if (count >= 1 && lst->proc_count)
+		// if (count >= 1)
+		// {
+			printf("hi from pipeline again\n");
 			init_pipe(i, count, data, lst);
 			init_fork(lst, env, data);
+			printf("back from init_fork\n");
 			close_between(data, lst);
 			count--;
 			i++;
-		}
-		lst = lst->next;
+		// }
+		// lst = lst->next;
 	}
 }
 
@@ -130,7 +139,10 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 */
 void	redirect(t_parser *lst, t_execute *data)
 {
-	if (!redirect_infile(lst->proc, data))
+	printf("hi from redirect \n");
+	if (lst->proc->red_count == 0)
+		return ;
+	if (!redirect_infile(lst->proc, data))//why did I do this?
 	{
 		data->error = false;
 		return ;

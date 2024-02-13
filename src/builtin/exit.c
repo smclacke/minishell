@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/09 15:32:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/13 19:00:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_exit(t_parser *lst)
 	if (lst->proc->proc_count != 1)
 		return ;
 	if (lst->proc->str_count == 0)
-		exit_with_stat(exit_status, status);
+		exit_with_stat(exit_status, status); // do we need this?
 	arg_check(lst);
 	digit_check(lst->proc->str[0]);
 	error = ft_atoi(lst->proc->str[0]);
