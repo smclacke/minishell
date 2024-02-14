@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 20:27:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/14 15:04:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,19 @@ int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 	while (proc_j < proc_size)
 	{
 		if (!proc->tokens[proc->start])
+		{
+			free_util(proc, proc->proc_arrs, proc->proc_arrs[proc_i], NULL);
+			free_parser(proc);
 			return (0);// errrrror?
+		}
 		token_size = ft_strlen(proc->tokens[proc->start]);
 		proc->proc_arrs[proc_i][proc_j] = ft_strdup(proc->tokens[proc->start]);
 		if (!proc->proc_arrs[proc_i][proc_j])
+		{
+			free_util(proc, proc->proc_arrs, proc->proc_arrs[proc_i], NULL);
+			free_parser(proc);
 			return (0);// malloc error
+		}
 		proc_j++;
 		proc->start++;
 	}

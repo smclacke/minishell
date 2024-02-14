@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 20:29:43 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/14 15:29:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,19 @@ int		ft_abs(int i)
 	return (i);
 }
 
-static	void	free_proc_arrs(t_parser *proc)
+void	free_proc_arrs(t_parser *proc, int count)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while (i < proc->proc_count)
+	printf("hello\n");
+	while (i < count)
 	{
-		while (j < proc->proc->token_count)
-		{
-			free(proc->proc_arrs[i][j]);
-			j++;
-		}
+		printf("here\n");
 		ft_free_arr(proc->proc_arrs[i]);
 		i++;
 	}
+		// free(proc->proc_arrs[i]);
 	free(proc->proc_arrs);
 }
 
@@ -56,25 +52,18 @@ void	ft_free_process(t_parser *proc)
 void	free_parser(t_parser *procs)
 {
 	t_parser	*tmp;
+	int			count;
 	int			i;
 
+	count = procs->proc_count;
 	i = 0;
 	while (procs)
 	{
 		tmp = procs->next;
-		// if (procs->tokens)
-		// 	ft_free_arr(procs->tokens);
-		if (procs->proc_arrs)
-			free_proc_arrs(procs);
-		// if (procs->process)
-		// {
-		// 	while (procs->process[i])
-		// 	{
-		// 		free(procs->process[i]);
-		// 		i++;
-		// 	}
-		// 	free(procs->process);
-		// }
+		if (count > 1)
+			free_proc_arrs(procs, count);
+		else
+			free(procs->tokens);
 		free_procs(procs->proc);
 		free(procs);
 		procs = tmp;

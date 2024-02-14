@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 14:42:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/14 15:02:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static	void	token_while(t_parser *proc, char **str)
 		p_size = ft_abs(i - proc->start);
 		proc->proc_arrs[pi] = (char **)malloc(sizeof(char *) * (p_size + 1));
 		if (!proc->proc_arrs)
-			free_util(proc, proc->proc_arrs, NULL, NULL); // malloc error, but no return
+			free_util(proc, proc->proc_arrs, str, NULL); // malloc error, but no return
 		if (!make_proc_arr(proc, pi, p_size))
 			return ;// error
 		proc->proc_arrs[pi][p_size] = NULL;

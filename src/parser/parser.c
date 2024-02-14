@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 20:00:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/14 15:19:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static	t_parser	*handle_procs(t_parser *proc)
 		if (!proc->process[i])
 			return (free(proc->process[i]), NULL);// malloc error
 		ft_bzero(proc->process[i], sizeof(t_procs));
-		if (proc->multi_proc_b == TRUE)
+		if (proc->proc_count > 1)
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
 		else
 			sort_each_proc(proc->process[i], proc->tokens);
@@ -75,13 +75,8 @@ static t_parser	*parse_tokens(char **tokens)
 	proc = init_parser(tokens);
 	parser_list = NULL;
 	if (proc->proc_count > 1)
-	{
-		proc->multi_proc_b = TRUE;
 		if (!get_procs(proc))
 			return (NULL);// error
-	}
-	else if (proc->proc_count == 1)
-		proc->multi_proc_b = FALSE;
 	parser_list = handle_procs(proc);
 	if (!parser_list)
 		return (free_parser(proc), NULL);
