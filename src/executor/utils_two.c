@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 18:52:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 19:43:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static char	**fill_array(t_procs *lst, char **new_str)
 	//whats wrong with the strings from the parser? is the string NULL terminated
 	if (lst->str_count == 0)
 		return (new_str = NULL);
+	// while (i < lst->str_count)
 	while (j < lst->str_count)
 	{
 		new_str[i] = lst->str[j];

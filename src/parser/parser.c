@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 18:50:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 19:51:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static	t_parser	*init_parser(char **tokens)
 {
 	t_parser	*proc;
 
-	proc = (t_parser *)malloc(sizeof(t_parser));
+	proc = (t_parser *)malloc(sizeof(t_parser));//struct
 	if (!proc)
 		return (NULL);// malloc error
-	// ft_bzero(proc, sizeof(t_parser));
+	ft_bzero(proc, sizeof(t_parser));
 	proc->tokens = tokens;
 	proc->proc_count = (count_procs(tokens) + 1);
-	proc->process = (t_procs **)malloc(sizeof(t_procs *)
+	proc->process = (t_procs **)malloc(sizeof(t_procs *)//pointer to struct 8 * whatever content
 			* (proc->proc_count + 1));
 	if (!proc->process)
 	{
@@ -58,8 +58,11 @@ static	t_parser	*init_parser(char **tokens)
 		return (NULL);// malloc error
 	}
 	// ft_bzero(proc->process, sizeof(t_procs));
+	// passes malloced amount of bytes
+	ft_bzero(proc->process, (sizeof(t_procs *) * (proc->proc_count + 1))); //same here
 	return (proc);
 }
+
 
 static t_parser	*parse_tokens(char **tokens)
 {

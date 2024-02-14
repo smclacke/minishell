@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 16:12:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 19:01:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	executable = check_access(*env, lst, data);
 	if (executable == NULL)
 		return ;
-	dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
+	// dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
 	if (data->error == false)
 		exit (0);
 	if (access(executable, F_OK) == -1)

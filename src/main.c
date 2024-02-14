@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 18:05:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 19:41:32 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ int	main(int argc, char **argv, char **envp)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
+		if (input == NULL)
+		{
+			exit(EXIT_SUCCESS);
+			//for now exit success?
+		}
 		if (!run_minishell(envp, input))
 			continue ;
 		dup2(og_stdout, STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 18:18:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 19:53:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
  * @brief malloc's and init node for linked list containing: 
  * key, value and next
  * @return node made
+ * @note make sure to bzero same amount as malloc, or use calloc
 */
 t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 {
 	t_env	*new;
 
 	new = (t_env *)malloc(sizeof(t_env));
-	ft_bzero(new, sizeof(new));
+	ft_bzero(new, sizeof(t_env));
 	if (!new)
 		return (NULL);
 	new->key = key;
