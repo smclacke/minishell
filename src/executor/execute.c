@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 19:42:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 15:55:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,12 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
+	char		**argv;
 	int			cmd_type;
 
 	cmd_type = 0;
+	argv = NULL;//need?
+	executable = NULL;//need?
 	init_pipes_child(data, lst);
 	redirect(lst, data);
 	if (data->error == false)
@@ -126,9 +129,10 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		exit (0);
 	}
 	data->env_array = list_to_string(*env, lst);
-	if (execve(executable, get_argv(lst), data->env_array) == -1)
+	argv = get_argv(lst);
+	// if (execve(executable, get_argv(lst), data->env_array) == -1)
+	if (execve(executable, argv, data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
-	// printf("you done?\n");
 	exit (0);
 }
 
@@ -149,11 +153,9 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 		return ;
 	pipeline(lst, env, data);
 	close_all(data, lst);
-	// printf("waiting indef\n");
-	waitpid(data->fork_pid, NULL, 0);//werkt niet
-	while (wait(NULL) != -1)//jij ook niet
+	waitpid(data->fork_pid, NULL, 0);
+	while (wait(NULL) != -1)
 		(void)NULL;
-	// printf("done waiting\n");
 }
 
 /**
