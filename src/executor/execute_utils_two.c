@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 14:06:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 15:55:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
  * @param data execute struct
  * @brief checks for single builtin command and if there are redirects
  * executes the builtin and redirect function
- * @note change to count == one because won't ever be 0 processes
- * 		1 == one process
+ * @todo norm it
 */
 bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -52,7 +51,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param env  environment linked list
  * @param data execute struct
  * @brief forks, checks if it didnt fail, enters child process
- * @todo exit code NORM do I need to WAIT here
+ * @todo exit code NORM
 */
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -62,7 +61,6 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 		mini_error(E_GENERAL, lst);
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
-	printf("return from child process\n");
 }
 
 /**
@@ -93,33 +91,23 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
- * @todo add list->proc-count instead of lst->n_cmd,
- * dont need to use int count anymore :)
- * check with if work :)
+ * @todo norm it
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
 	int	count;
 	int	i;
 
-	count = lst->proc_count;//instead of this go to proc-count
+	count = lst->proc_count;
 	i = 0;
-	printf("hi from pipeline \n");
-	// while (lst)
-	while (i < lst->proc_count)
+	while (lst)
 	{
-		// if (count >= 1 && lst->proc_count)
-		// if (count >= 1)
-		// {
-			printf("hi from pipeline again\n");
-			init_pipe(i, count, data, lst);
-			init_fork(lst, env, data);
-			printf("back from init_fork\n");
-			close_between(data, lst);
-			count--;
-			i++;
-		// }
-		// lst = lst->next;
+		init_pipe(i, count, data, lst);
+		init_fork(lst, env, data);
+		close_between(data, lst);
+		count--;
+		i++;
+		lst = lst->next;
 	}
 }
 
@@ -127,22 +115,15 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
  * @param lst parser linked list
  * @param execute execute struct
  * @brief checks for redirects and enters redirect in or outfile function
- * @todo remove printf statement check line 118
+ * @todo remove printf statement
  * @note keeping hd_count check since func used much, i.e. mini_forks
  * 		- when used with multi procs, check hd stuff...
- * @note from single_builtin_cmd, already checked for redirs
- * 		make sure this happens on every redirect() call
-	
-	// redirs are totally separate from hd
-	// if (!lst->proc->hd_count)
-	// 	lst = lst->next; // don't list next, look only at current proc
 */
 void	redirect(t_parser *lst, t_execute *data)
 {
-	printf("hi from redirect \n");
 	if (lst->proc->red_count == 0)
 		return ;
-	if (!redirect_infile(lst->proc, data))//why did I do this?
+	if (!redirect_infile(lst->proc, data))//why again?
 	{
 		data->error = false;
 		return ;

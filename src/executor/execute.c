@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 16:20:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/14 16:24:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	i = 0;
 	if (!node->proc->cmd)
 		return (node->proc->cmd); // necessary?
+	// printf("cmd = [%s]\n", node->proc->cmd);
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
@@ -93,9 +94,12 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
+	char		**argv;
 	int			cmd_type;
 
 	cmd_type = 0;
+	argv = NULL;//need?
+	executable = NULL;//need?
 	init_pipes_child(data, lst);
 	redirect(lst, data);
 	if (data->error == false)
@@ -111,6 +115,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	executable = check_access(*env, lst, data);
 	if (executable == NULL)
 		return ;
+	dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
 	if (data->error == false)
 		exit (0);
 	if (access(executable, F_OK) == -1)
@@ -124,7 +129,9 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		exit (0);
 	}
 	data->env_array = list_to_string(*env, lst);
-	if (execve(executable, get_argv(lst), data->env_array) == -1)
+	argv = get_argv(lst);
+	// if (execve(executable, get_argv(lst), data->env_array) == -1)
+	if (execve(executable, argv, data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
 	exit (0);
 }
@@ -146,8 +153,8 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 		return ;
 	pipeline(lst, env, data);
 	close_all(data, lst);
-	waitpid(data->fork_pid, NULL, 0);//werkt niet
-	while (wait(NULL) != -1)//jij ook niet
+	waitpid(data->fork_pid, NULL, 0);
+	while (wait(NULL) != -1)
 		(void)NULL;
 }
 
@@ -161,14 +168,14 @@ void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
 
-	// (void) data;
-	// (void) env;
-	// (void) lst;
+	(void) data;
+	(void) env;
+	(void) lst;
 	data = malloc(sizeof(t_execute));
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);
 	init_execute_struct(data);
-	ft_expand(lst, env);
+	// ft_expand(lst, env);
 	build(lst, env, data);
 	free (data);
 }
