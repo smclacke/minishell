@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 15:16:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/14 16:20:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,19 +137,19 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * pipes and makes child process
  * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
  */
-// static void	build(t_parser *lst, t_env **env, t_execute *data)
-// {
-// 	if (!lst)
-// 		mini_error (E_GENERAL, lst);
-// 	init_heredoc(lst, env);
-// 	if (single_builtin_cmd(lst, env, data) == true)
-// 		return ;
-// 	pipeline(lst, env, data);
-// 	close_all(data, lst);
-// 	waitpid(data->fork_pid, NULL, 0);//werkt niet
-// 	while (wait(NULL) != -1)//jij ook niet
-// 		(void)NULL;
-// }
+static void	build(t_parser *lst, t_env **env, t_execute *data)
+{
+	if (!lst)
+		mini_error (E_GENERAL, lst);
+	init_heredoc(lst, env);
+	if (single_builtin_cmd(lst, env, data) == true)
+		return ;
+	pipeline(lst, env, data);
+	close_all(data, lst);
+	waitpid(data->fork_pid, NULL, 0);//werkt niet
+	while (wait(NULL) != -1)//jij ook niet
+		(void)NULL;
+}
 
 /**
  * @param env environment linked list
@@ -161,14 +161,14 @@ void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
 
-	(void) data;
-	(void) env;
-	(void) lst;
-	// data = malloc(sizeof(t_execute));
-	// if (data == NULL)
-	// 	mini_error (E_GENERAL, lst);
-	// init_execute_struct(data);
+	// (void) data;
+	// (void) env;
+	// (void) lst;
+	data = malloc(sizeof(t_execute));
+	if (data == NULL)
+		mini_error (E_GENERAL, lst);
+	init_execute_struct(data);
 	ft_expand(lst, env);
-	// build(lst, env, data);
-	// free (data);
+	build(lst, env, data);
+	free (data);
 }
