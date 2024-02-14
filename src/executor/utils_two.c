@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 18:43:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 18:52:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int	check_for_builtin(t_parser *node)
  * @param i int representing index of new_str
  * @brief fill's 2d array with content of temp->str
  * @return returns int representing word count.
- * @note do we need this??
+ * @note do we need this?? commented out bzero in init parser and iterate
+ * with j in fill array. super weird it kinda works now but don't really
+ * understand why
  * @todo norm
 */
 // static char	**fill_array(t_procs *lst, char **new_str, int i)

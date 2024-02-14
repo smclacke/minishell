@@ -175,6 +175,64 @@ first! before start,
 
 clone met ssh!!!!! wieeeeeeh
 
+when i comment bzero out and start from j in fill array it works but has leaks.
+
+
+static	t_parser	*init_parser(char **tokens)
+{
+	t_parser	*proc;
+
+	proc = (t_parser *)malloc(sizeof(t_parser));
+	if (!proc)
+		return (NULL);// malloc error
+	// ft_bzero(proc, sizeof(t_parser));
+	proc->tokens = tokens;
+	proc->proc_count = (count_procs(tokens) + 1);
+	proc->process = (t_procs **)malloc(sizeof(t_procs *)
+			* (proc->proc_count + 1));
+	if (!proc->process)
+	{
+		free(proc);
+		return (NULL);// malloc error
+	}
+	// ft_bzero(proc->process, sizeof(t_procs));
+	return (proc);
+}
+
+/**
+ * @param temp parser linked list
+ * @param new_str 2d array containing command + strings and flags
+ * @param i int representing index of new_str
+ * @brief fill's 2d array with content of temp->str
+ * @return returns int representing word count.
+ * @note do we need this??
+ * @todo norm
+*/
+// static char	**fill_array(t_procs *lst, char **new_str, int i)
+static char	**fill_array(t_procs *lst, char **new_str)
+{
+
+	int j;
+	int i;
+
+	j = 0;
+	i = 0;
+	new_str[0] = lst->cmd;
+	i++;
+	// fprintf(stderr, "lst->str[%s]\n", lst->str[0]);
+	//whats wrong with the strings from the parser? is the string NULL terminated
+	if (lst->str_count == 0)
+		return (new_str = NULL);
+	while (j < lst->str_count)
+	{
+		new_str[i] = lst->str[j];
+		i++;
+		j++;
+	}
+	new_str[i] = NULL;
+	return (new_str);
+}
+
 
 minishell git:(djoyke) ✗ valgrind --leak-check=full ./minishell
 ==1842334== Memcheck, a memory error detector
