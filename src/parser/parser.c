@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 16:29:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/14 18:02:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	t_parser	*init_parser(char **tokens)
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	if (!proc)
 		return (NULL);// malloc error
-	ft_bzero(proc, sizeof(t_parser));
+	// ft_bzero(proc, sizeof(t_parser));
 	proc->tokens = tokens;
 	proc->proc_count = (count_procs(tokens) + 1);
 	proc->process = (t_procs **)malloc(sizeof(t_procs *)
@@ -57,7 +57,7 @@ static	t_parser	*init_parser(char **tokens)
 		free(proc);
 		return (NULL);// malloc error
 	}
-	ft_bzero(proc->process, sizeof(t_procs));
+	// ft_bzero(proc->process, sizeof(t_procs));
 	return (proc);
 }
 

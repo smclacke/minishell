@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 15:22:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 18:43:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,26 @@ int	check_for_builtin(t_parser *node)
  * @note do we need this??
  * @todo norm
 */
-static char	**fill_array(t_procs *lst, char **new_str, int i)
+// static char	**fill_array(t_procs *lst, char **new_str, int i)
+static char	**fill_array(t_procs *lst, char **new_str)
 {
+
 	int j;
+	int i;
 
 	j = 0;
-	while (lst->str[j])
+	i = 0;
+	new_str[0] = lst->cmd;
+	i++;
+	// fprintf(stderr, "lst->str[%s]\n", lst->str[0]);
+	//whats wrong with the strings from the parser? is the string NULL terminated
+	if (lst->str_count == 0)
+		return (new_str = NULL);
+	while (j < lst->str_count)
 	{
-		if (lst->str[j])
-		{
-			new_str[i] = lst->str[j];
-			i++;
-			j++;
-		}
+		new_str[i] = lst->str[j];
+		i++;
+		j++;
 	}
 	new_str[i] = NULL;
 	return (new_str);
@@ -79,14 +86,14 @@ char	**get_argv(t_parser *lst)
 	char		**new_str;
 	int			i;
 
-	if (lst->proc->str_count == 0)
-		return (new_str = NULL);
+	new_str = NULL;
 	i = lst->proc->str_count;
 	new_str = (char **)malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
 		mini_error(E_MALLOC, lst);
-	new_str[0] = lst->proc->cmd;
-	i = 1;
-	new_str = fill_array(lst->proc, new_str, i);
+	// new_str[0] = lst->proc->cmd;
+	// i = 1;
+	new_str = fill_array(lst->proc, new_str);
+	// new_str = fill_array(lst->proc, new_str, i);
 	return (new_str);
 }

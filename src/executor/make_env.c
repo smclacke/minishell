@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:00:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 18:18:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_env	*env_list(char **envp, t_env *env)
 	full = NULL;
 	if (envp[i] == NULL)
 		return (0);
-	while (envp[i] != NULL)
+	while (envp && envp[i] != NULL)
 	{
 		has_value = get_key_value(envp[i], &key, &value);
 		full = get_full(envp[i]);
@@ -126,6 +126,7 @@ char	**list_to_string(t_env *env, t_parser *lst)
 	int		i;
 
 	i = 0;
+	env_array = NULL;
 	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
 	if (!env_array)
 		mini_error(E_MALLOC, lst);
