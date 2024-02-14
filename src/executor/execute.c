@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 19:40:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/14 14:43:07 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	i = 0;
 	if (!node->proc->cmd)
 		return (node->proc->cmd); // necessary?
-	printf("cmd = [%s]\n", node->proc->cmd);
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
@@ -112,7 +111,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	executable = check_access(*env, lst, data);
 	if (executable == NULL)
 		return ;
-	printf("executable = [%s]\n", executable);
 	if (data->error == false)
 		exit (0);
 	if (access(executable, F_OK) == -1)
@@ -128,7 +126,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	data->env_array = list_to_string(*env, lst);
 	if (execve(executable, get_argv(lst), data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
-	printf("you done?\n");
 	exit (0);
 }
 
@@ -140,21 +137,19 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * pipes and makes child process
  * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
  */
-static void	build(t_parser *lst, t_env **env, t_execute *data)
-{
-	if (!lst)
-		mini_error (E_GENERAL, lst);
-	init_heredoc(lst, env);
-	if (single_builtin_cmd(lst, env, data) == true)
-		return ;
-	pipeline(lst, env, data);
-	close_all(data, lst);
-	printf("waiting indef\n");
-	waitpid(data->fork_pid, NULL, 0);//werkt niet
-	while (wait(NULL) != -1)//jij ook niet
-		(void)NULL;
-	printf("done waiting\n");
-}
+// static void	build(t_parser *lst, t_env **env, t_execute *data)
+// {
+// 	if (!lst)
+// 		mini_error (E_GENERAL, lst);
+// 	init_heredoc(lst, env);
+// 	if (single_builtin_cmd(lst, env, data) == true)
+// 		return ;
+// 	pipeline(lst, env, data);
+// 	close_all(data, lst);
+// 	waitpid(data->fork_pid, NULL, 0);//werkt niet
+// 	while (wait(NULL) != -1)//jij ook niet
+// 		(void)NULL;
+// }
 
 /**
  * @param env environment linked list
@@ -166,14 +161,14 @@ void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
 
-	// (void) data;
-	// (void) env;
-	// (void) lst;
-	data = malloc(sizeof(t_execute));
-	if (data == NULL)
-		mini_error (E_GENERAL, lst);
-	init_execute_struct(data);
-	ft_expand(lst, env);
-	build(lst, env, data);
-	free (data);
+	(void) data;
+	(void) env;
+	(void) lst;
+	// data = malloc(sizeof(t_execute));
+	// if (data == NULL)
+	// 	mini_error (E_GENERAL, lst);
+	// init_execute_struct(data);
+	// ft_expand(lst, env);
+	// build(lst, env, data);
+	// free (data);
 }

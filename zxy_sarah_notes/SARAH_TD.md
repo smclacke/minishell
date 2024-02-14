@@ -10,12 +10,17 @@
 **DO this**
 
 - leaks
+		echo $USER -- without any expansion, no leak, with expansion
+			and execution, many env_list leaks and one sort_vars->copy_strs leak
+				check once env_list leaks fixed if i still have leak..
 
 - errors
 
 - STRESS TEST THE FUCK OUTTA IT
 
 ------------------------------
+
+-- hd when i test does not work correctly and then segfaults..
 ------------------------------
 ------------------------------
 ------------------------------
