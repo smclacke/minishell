@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 19:47:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 15:20:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 	count = lst->proc_count;//instead of this go to proc-count
 	i = 0;
 	// printf("hi from pipeline \n");
-	// while (lst)
-	while (i < lst->proc_count)
+	// while (i < lst->proc_count)
+	while (lst)
 	{
 		// if (count >= 1 && lst->proc_count)
 		// if (count >= 1)
@@ -118,32 +118,8 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 			close_between(data, lst);
 			count--;
 			i++;
+			lst = lst->next;
 		// }
-		// lst->proc = lst->proc->next;
-		//is it an array or a list? hehe need to go to next process
-			// ➜  minishell git:(djoyke) ✗ ./minishell
-			// minibleh:wc Makefile | ls
-
-			// [0] cmd = wc
-
-			// [0] str_count = 1
-			// [0] strs[0] = Makefile
-
-			// [0] hd_count = 0
-
-			// [0] red_count = 0
-			// --------------------------------------------------
-
-			// [1] cmd = ls
-
-			// [1] str_count = 0
-
-			// [1] hd_count = 0
-
-			// [1] red_count = 0
-			// --------------------------------------------------
-			// executable = [/usr/bin/wc]
-			// minibleh:^Z
 	}
 }
 

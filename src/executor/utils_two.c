@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 18:51:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/14 15:22:03 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ char	**get_argv(t_parser *lst)
 	char		**new_str;
 	int			i;
 
+	if (lst->proc->str_count == 0)
+		return (new_str = NULL);
 	i = lst->proc->str_count;
 	new_str = (char **)malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
