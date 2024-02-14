@@ -10,18 +10,54 @@
 **DO this**
 
 - leaks
-		echo $USER -- without any expansion, no leak, with expansion
-			and execution, many env_list leaks and one sort_vars->copy_strs leak
-				check once env_list leaks fixed if i still have leak..
 
 - errors
 
 - STRESS TEST THE FUCK OUTTA IT
 
 ------------------------------
+**THIS**
+		echo $USER -- without any expansion, no leak, with expansion
+		and execution, many env_list leaks and one sort_vars->copy_strs leak
+		
+	check once env_list leaks fixed if i still have leak..
 
--- hd when i test does not work correctly and then segfaults..
 ------------------------------
+**THIS**
+	-- hd when i test does not work correctly and then segfaults..
+
+------------------------------
+**THIS**
+	no input a load of times then echo has leak....
+
+minibleh:
+minibleh:
+minibleh:
+minibleh:
+minibleh:
+minibleh:
+minibleh:
+minibleh:
+minibleh:
+minibleh:echo
+
+[0] cmd = echo
+
+[0] str_count = 0
+
+[0] hd_count = 0
+
+[0] red_count = 0
+
+==23438==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 9 byte(s) in 9 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/mini_check/minishell+0x49a28d)
+    #1 0x7f9b2f231bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+SUMMARY: AddressSanitizer: 9 byte(s) leaked in 9 allocation(s).
+make: *** [Makefile:95: run] Error 1
+
 ------------------------------
 ------------------------------
 ------------------------------
