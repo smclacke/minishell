@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 17:40:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/15 21:26:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,8 @@ typedef struct s_execute
 	int					out;
 	int					count;
 	bool				error;
+	// t_export			*export; s_execute meegeven ipv env zodat ik alles kan cleanen
+	// t_env				*env;
 }							t_execute;
 
 #endif

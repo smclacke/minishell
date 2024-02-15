@@ -6,15 +6,14 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/14 19:28:43 by dreijans      ########   odam.nl          #
+#    Updated: 2024/02/15 20:47:25 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
 MAKEFLAGS		= --no-print-directory
-CFLAGS			= -Wall -Wextra -Werror -g
-# -g -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g #-fsanitize=address
 # -valgrind --leak-check=yes
 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline

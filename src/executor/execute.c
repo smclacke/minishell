@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 19:01:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/15 19:57:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief determines how many times needs to fork
  * pipes and makes child process
- * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
+ * @todo exit codes 
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -168,14 +168,14 @@ void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
 
-	(void) data;
-	(void) env;
-	(void) lst;
+	// (void) data;
+	// (void) env;
+	// (void) lst;
 	data = malloc(sizeof(t_execute));
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);
 	init_execute_struct(data);
 	// ft_expand(lst, env);
 	build(lst, env, data);
-	free (data);
+	free(data);
 }

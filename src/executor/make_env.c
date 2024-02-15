@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 19:53:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/15 21:14:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 	t_env	*new;
 
 	new = (t_env *)malloc(sizeof(t_env));
-	ft_bzero(new, sizeof(t_env));
 	if (!new)
 		return (NULL);
+	ft_bzero(new, sizeof(t_env));
 	new->key = key;
 	new->value = value;
 	new->full = full;
-	new->next = NULL;
+	// new->next = NULL;
 	new->has_value = has_value;
 	return (new);
 }
@@ -119,7 +119,7 @@ t_env	*env_list(char **envp, t_env *env)
  * @param env linked list containing environment
  * @brief turns environment linked list into 2d array
  * @todo do we need to free full?
- * @todo error code
+ * @todo error code NORM IT
 */
 char	**list_to_string(t_env *env, t_parser *lst)
 {
@@ -127,10 +127,12 @@ char	**list_to_string(t_env *env, t_parser *lst)
 	int		i;
 
 	i = 0;
-	env_array = NULL;
 	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
 	if (!env_array)
+	{
 		mini_error(E_MALLOC, lst);
+		return (NULL);//exit ??
+	}
 	while (env)
 	{
 		env_array[i] = env->full;

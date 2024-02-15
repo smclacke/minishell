@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:28:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/15 20:02:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ bool	too_many_args(t_parser *lst)
  * @param ex_var export struct
  * @brief makes all components for new node and adds to env linked list
  * @todo check return / need exit code? free it
+ * need free_all or free_env?
 */
 void	make_node(t_env **env, t_export ex_var)
 {
@@ -102,7 +103,8 @@ void	make_node(t_env **env, t_export ex_var)
 	new_node = env_lstnew(ex_var.key, ex_var.value, ex_var.str, ex_var.has_value);
 	if (!new_node)
 	{
-		free_all(new_node);
+		// free_all(new_node);
+		free_env(env);
 		free(new_node);
 		return ;
 	}
