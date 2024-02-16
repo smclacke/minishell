@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 16:24:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 17:34:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 				// utils
 //---------- parser_erros ----------//
-void			malloc_error(t_parser *par, t_procs *proc, int flag, int exit_code);
+void			malloc_error(t_parser *par, t_procs *proc, char **str, int exit_code);
 
 //---------- free_procs ----------//
 void			free_procs(t_procs *proc);

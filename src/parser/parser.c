@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 16:26:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 17:39:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	t_parser	*handle_procs(t_parser *proc)
 	{
 		proc->process[i] = (t_procs *)malloc(sizeof(t_procs));
 		if (!proc->process[i])
-			malloc_error(proc->process[i], NULL, 0, E_MALLOC);
+			malloc_error(NULL, proc->process[i], NULL, 0);
 		ft_bzero(proc->process[i], sizeof(t_procs));
 		if (proc->proc_count > 1)
 			sort_each_proc(proc->process[i], proc->proc_arrs[i]);
@@ -47,14 +47,14 @@ static	t_parser	*init_parser(char **tokens)
 
 	proc = (t_parser *)malloc(sizeof(t_parser));
 	if (!proc)
-		malloc_error(NULL, NULL, 0, E_MALLOC);
+		malloc_error(NULL, NULL, NULL, 0);
 	ft_bzero(proc, sizeof(t_parser));
 	proc->tokens = tokens;
 	proc->proc_count = (count_procs(tokens) + 1);
 	proc->process = (t_procs **)malloc(sizeof(t_procs *)
 			* (proc->proc_count + 1));
 	if (!proc->process)
-		malloc_error(proc, NULL, 0, E_MALLOC);
+		malloc_error(proc, NULL, NULL, 0);
 	ft_bzero(proc->process, (sizeof(t_procs *) * (proc->proc_count + 1)));
 	return (proc);
 }
