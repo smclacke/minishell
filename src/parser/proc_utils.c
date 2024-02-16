@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:11:44 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:49:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	count_hds(char **process)
 	{
 		if (proc_redir(process[i]) == 2)
 		{
-			if (!process[i + 1])
+			if (!(process[i + 1]) || !ft_spaced(process[i + 1]))
 				syntax_error("syntax error near unexpected token 'newline'");
 			count += 1;
 		}

@@ -9,30 +9,14 @@
 
 **DO this**
 
+- check! << "" - expands to empty str, EOF = /n ..
+
 - errors - am i exiting immideately? always?
 		"malloc error"
 		general errors like parser failure but unclear why...?
 
 - STRESS TEST THE FUCK OUTTA IT
 
-**THIS IS NOT GOOD**
-here_doc seen as redir, hd_count 1 without str but not NULL
-here_doc still opened...
-minibleh:f><<
-
-[0] cmd = f
-
-[0] str_count = 1
-[0] strs[0] = 
-
-[0] hd_count = 1
-[0] hd[0] = 
-
-[0] red_count = 2
-[0] reds[0] = >
-[0] reds[1] = <<
---------------------------------------------------
-heredoc> ^C
 
 **THIS IS STILL ISSUE**
 
