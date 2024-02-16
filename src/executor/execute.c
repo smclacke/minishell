@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/15 19:57:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 20:55:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks environment to find PATH put it in temp_path
  * split temp_path into 2d array and put it in the struct data->path
- * @todo exit codes
+ * @todo exit codes NORM IT
 */
 static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 {
@@ -28,7 +28,8 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 	{
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
-			temp_path = ft_substr(env->value, 0, ft_strlen(env->value));
+			// temp_path = ft_substr(env->value, 0, ft_strlen(env->value));
+			temp_path = mini_substr(env->value, 0, ft_strlen(env->value));
 			if (temp_path == NULL)
 				mini_error (E_MALLOC, node);
 			data->path = ft_split(temp_path, ':');
@@ -44,13 +45,13 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 	return (false);
 }
 
-// /**
-//  * @param env linked list with environment
-//  * @param node noded from parser linked list
-//  * @param data struct containing fd's and 2d arrays needed for execution
-//  * @brief checks is command has access
-//  * @todo exit codes
-// */
+/**
+ * @param env linked list with environment
+ * @param node noded from parser linked list
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @brief checks is command has access
+ * @todo exit codes norm it
+*/
 static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
 	char	*ok_path;
@@ -65,10 +66,12 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	{
 		while (data->path && data->path[i] != NULL)
 		{
-			command = ft_strjoin("/", node->proc->cmd);
+			// command = ft_strjoin("/", node->proc->cmd);
+			command = mini_strjoin("/", node->proc->cmd);
 			if (command == NULL)
 				mini_error (E_MALLOC, node);
-			ok_path = ft_strjoin(data->path[i], command);
+			// ok_path = ft_strjoin(data->path[i], command);
+			ok_path = mini_strjoin(data->path[i], command);
 			if (command == NULL)
 				mini_error (E_MALLOC, node);
 			free(command);
@@ -83,14 +86,14 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	return (node->proc->cmd);
 }
 
-// /**
-//  * @param lst linked list containing commands and atributes
-//  * @param env linked list containing environment
-//  * @param data struct containing fd's and 2d arrays needed for execution
-//  * @brief checks parser input for executable and executes with execve
-//  *  replace exit int with the existatus global we pass on
-//  * @todo added id !lst->cmd to stop segfault NORM IT
-// */
+/**
+ * @param lst linked list containing commands and atributes
+ * @param env linked list containing environment
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @brief checks parser input for executable and executes with execve
+ *  replace exit int with the existatus global we pass on
+ * @todo added id !lst->cmd to stop segfault NORM IT
+*/
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
@@ -162,7 +165,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
  * @param env environment linked list
  * @param lst linked list parsed
  * @brief calls functions needed to start executing process
- * @todo exit codes
+ * @todo exit codes norm it
 */
 void	execute(t_env **env, t_parser *lst)
 {
@@ -171,11 +174,13 @@ void	execute(t_env **env, t_parser *lst)
 	// (void) data;
 	// (void) env;
 	// (void) lst;
-	data = malloc(sizeof(t_execute));
+	// data = malloc(sizeof(t_execute));
+	data = mini_malloc(sizeof(t_execute));
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);
 	init_execute_struct(data);
 	// ft_expand(lst, env);
 	build(lst, env, data);
+	
 	free(data);
 }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/15 19:50:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 20:16:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	digit_check(char *str)
 	i = 0;
 	while (str[i] && ft_isdigit(str[i]) != 0)
 		i++;
+	// if (str[i] != '\0')
 	if (str[i] != 0)
 	{
 		dprintf(STDERR_FILENO, NON_NUM_ARG, str);
@@ -64,7 +65,7 @@ void	exit_with_stat(int exit_status, int status)
  * @todo check for exitstatus line 68 if it's exit status from prev child process
  * memory leaks in parse tokens
 */
-void	ft_exit(t_parser *lst)
+void	ft_exit(t_parser *lst, t_env **env)
 {
 	long long	error;
 	int			exit_status;
@@ -82,8 +83,11 @@ void	ft_exit(t_parser *lst)
 	if (error > 255)
 	{
 		put_custom_error(lst, "exit");
+		free_env(env);
+		// free_parser(lst);
 		exit(255);
 	}
 	write(STDOUT_FILENO, "exit\n", 5);
+	free_env(env);
 	exit(error);
 }

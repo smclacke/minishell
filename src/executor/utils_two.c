@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 19:43:05 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 20:53:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_for_builtin(t_parser *node)
  * @param i int representing index of new_str
  * @brief fill's 2d array with content of temp->str
  * @return returns int representing word count.
- * @note do we need this?? commented out bzero in init parser and iterate
+ * @note commented out bzero in init parser and iterate
  * with j in fill array. super weird it kinda works now but don't really
  * understand why
  * @todo norm
@@ -81,7 +81,7 @@ static char	**fill_array(t_procs *lst, char **new_str)
  * @param lst parser linked list
  * @brief set's linked list from cmd to next cmd to 2d array
  * cmd at 0, plus args at 1 , 2 etc.
- * @todo error code
+ * @todo error code NORM IT
  * @note this needs to put the commands and the strs in an array
 */
 char	**get_argv(t_parser *lst)
@@ -91,7 +91,8 @@ char	**get_argv(t_parser *lst)
 
 	new_str = NULL;
 	i = lst->proc->str_count;
-	new_str = (char **)malloc(sizeof (char *) * (i + 2));
+	// new_str = (char **)malloc(sizeof (char *) * (i + 2));
+	new_str = (char **)mini_malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
 		mini_error(E_MALLOC, lst);
 	// new_str[0] = lst->proc->cmd;

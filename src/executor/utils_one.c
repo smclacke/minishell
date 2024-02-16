@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/03 16:47:04 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/06 21:23:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:57:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void	init_execute_struct(t_execute *data)
 	data->error = true;
 }
 
-/**
- * @param str string to be freed
- * @param str2 string to be freed
- * @brief frees strings 
-*/
-void	free_strs(char *str, char *str2)
-{
-	free (str);
-	free (str2);
-}
+// /**
+//  * @param str string to be freed
+//  * @param str2 string to be freed
+//  * @brief frees strings 
+// */
+// void	free_strs(char *str, char *str2)
+// {
+// 	free (str);
+// 	free (str2);
+// }

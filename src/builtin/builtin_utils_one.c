@@ -6,35 +6,35 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/13 19:27:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 18:26:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-/**
- * @param env pointer to environment
- * @brief free's content plus node.
-*/
-void	free_all(t_env *env)
-{
-	free(env->value);
-	free(env->key);
-	free(env->full);
-	free(env);
-}
+// /**
+//  * @param env pointer to environment
+//  * @brief free's content plus node.
+// */
+// void	free_all(t_env *env)
+// {
+// 	free(env->value);
+// 	free(env->key);
+// 	free(env->full);
+// 	free(env);
+// }
 
 /**
  * @param node node in linked list
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins:
  * echo, cd, pwd, export, unset, env and exit
- * @todo exit codes
+ * @todo exit codes NORM IT
 */
 void	do_builtin(t_parser *node, t_env **env, int cmd_type)
 {
 	if (cmd_type == EXIT)
-		ft_exit(node);
+		ft_exit(node, env);
 	else if (cmd_type == CD)
 		ft_cd(node, env);
 	else if (cmd_type == EXPORT)

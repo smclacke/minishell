@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/15 21:28:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 21:03:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,16 @@
  * // = remove for final version
  * 	everything else normed
  */
-int	run_minishell(char **envp, char *input)
+int	run_minishell(t_env *env, char *input)
 {
 	t_parser	*procs;
-	t_env		*env;
-	// t_execute	data;
 
-	// (void) envp;
 	procs = NULL;
-	env = NULL;
-	env = env_list(envp, env);
 	procs = parse_input(procs, input);
 	if (!procs)
 		return (0);
-	prpr(procs); //
+	prpr(procs);
 	execute(&env, procs);
-	// some_function(&data);
-	// prpr(procs); //
-	free_env(&env);
 	// clean_funct(&data);
 	free_parser(procs);
 	return (1);
@@ -44,26 +36,24 @@ int	main(int argc, char **argv, char **envp)
 	int			og_stdout;
 	int			og_stdin;
 	char		*input;
+	t_env		*env;
 
 	(void) argc;
 	(void) argv;
+	env = NULL;
 	og_stdout = dup(STDOUT_FILENO);
 	og_stdin = dup(STDIN_FILENO);
+	env = env_list(envp, env);
 	while (1)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
 		if (input == NULL)
-		{
 			exit(EXIT_SUCCESS);
-			//for now exit success?
-		}
-		if (!run_minishell(envp, input))
+		if (!run_minishell(env, input))
 			continue ;
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
-		// printf("success\n"); //
-		// exit(EXIT_SUCCESS); //
 	}
 	return (0);
 }

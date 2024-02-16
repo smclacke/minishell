@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/15 21:14:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:43:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
  * @param value data passed from environment after = sign
  * @brief malloc's and init node for linked list containing: 
  * key, value and next
+ * @todo NORM IT
  * @return node made
  * @note make sure to bzero same amount as malloc, or use calloc
 */
@@ -24,9 +25,10 @@ t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
 {
 	t_env	*new;
 
-	new = (t_env *)malloc(sizeof(t_env));
-	if (!new)
-		return (NULL);
+	// new = (t_env *)malloc(sizeof(t_env));
+	new = (t_env *)mini_malloc(sizeof(t_env));
+	// if (!new)
+	// 	return (NULL);
 	ft_bzero(new, sizeof(t_env));
 	new->key = key;
 	new->value = value;
@@ -54,13 +56,16 @@ int	get_key_value(char *str, char **key, char **value)
 		i++;
 	if (str[i] == '=')
 	{
-		*key = ft_substr(str, 0, i);
-		*value = ft_substr(str, i + 1, (ft_strlen(str) - i));
+		// *key = ft_substr(str, 0, i);
+		// *value = ft_substr(str, i + 1, (ft_strlen(str) - i));
+		*key = mini_substr(str, 0, i);
+		*value = mini_substr(str, i + 1, (ft_strlen(str) - i));
 		has_value = TRUE;
 	}
 	else
 	{
-		*key = ft_substr(str, 0, i);
+		// *key = ft_substr(str, 0, i);
+		*key = mini_substr(str, 0, i);
 		*value = NULL;
 		has_value = FALSE;
 	}
@@ -78,7 +83,8 @@ char	*get_full(char *str)
 
 	new_str = NULL;
 	if (str)
-		new_str = ft_substr(str, 0, ft_strlen(str));
+		new_str = mini_substr(str, 0, ft_strlen(str));
+		// new_str = ft_substr(str, 0, ft_strlen(str));
 	return (new_str);
 }
 
@@ -89,7 +95,7 @@ char	*get_full(char *str)
  * @param env linked list containing key and env
  * @brief putting the envp content into a linked list seperated by key and value
  * @return linked list
-* @todo return line 105
+* @todo return line 105 NORM IT
 */
 t_env	*env_list(char **envp, t_env *env)
 {
@@ -126,13 +132,15 @@ char	**list_to_string(t_env *env, t_parser *lst)
 	char	**env_array;
 	int		i;
 
+	(void)lst;
 	i = 0;
-	env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
-	if (!env_array)
-	{
-		mini_error(E_MALLOC, lst);
-		return (NULL);//exit ??
-	}
+	// env_array = (char **)malloc((mini_lstsize(env) + 1) * sizeof(char *));
+	env_array = (char **)mini_malloc((mini_lstsize(env) + 1) * sizeof(char *));
+	// if (!env_array)
+	// {
+	// 	mini_error(E_MALLOC, lst);
+	// 	return (NULL);//exit ??
+	// }
 	while (env)
 	{
 		env_array[i] = env->full;
