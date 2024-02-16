@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 17:42:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:28:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@ int	add_to_expand(t_expand *str, char *copy_str)
 	char	*tmp;
 
 	if (!copy_str)
-		return (-1);// error?
+		general_error("expansion failure");
 	if (str->expanded)
 	{
 		tmp = ft_strjoin(str->expanded, copy_str);
 		if (!tmp)
-			return (-1);// malloc error
+			malloc_error(NULL, NULL, NULL, 0);
 	}
 	else
 	{
 		tmp = ft_strdup(copy_str);
 		if (!tmp)
-			return (-1);// malloc error
+			malloc_error(NULL, NULL, NULL, 0);
 	}
 	free(str->expanded);
 	str->expanded = tmp;
 	free(copy_str);
 	if (!str->expanded)
-		return (-1);// error?
+		general_error("expansion failure");
 	return (0);
 }
 
@@ -56,7 +56,8 @@ void	do_reds(t_parser *tmp, t_expand *str, t_env **env)
 				str->input = tmp->proc->redir[i];
 				str->expanded = NULL;
 				dollar(str, env);
-				tmp->proc->redir[i] = str->expanded;
+				if (str->expanded)
+					tmp->proc->redir[i] = str->expanded;
 			}
 			i++;
 		}
@@ -81,7 +82,8 @@ void	do_hds(t_parser *tmp, t_expand *str, t_env **env)
 				str->input = tmp->proc->hd[i];
 				str->expanded = NULL;
 				dollar(str, env);
-				tmp->proc->hd[i] = str->expanded;
+				if (str->expanded)
+					tmp->proc->hd[i] = str->expanded;
 			}
 			i++;
 		}
@@ -105,7 +107,8 @@ void	do_strs(t_parser *tmp, t_expand *str, t_env **env)
 				str->input = tmp->proc->str[i];
 				str->expanded = NULL;
 				dollar(str, env);
-				tmp->proc->str[i] = str->expanded;
+				if (str->expanded)
+					tmp->proc->str[i] = str->expanded;
 			}
 			i++;
 		}
@@ -126,7 +129,8 @@ void	do_cmd(t_parser *tmp, t_expand *str, t_env **env)
 			str->input = tmp->proc->cmd;
 			str->expanded = NULL;
 			dollar(str, env);
-			tmp->proc->cmd = str->expanded;
+			if (str->expanded)
+				tmp->proc->cmd = str->expanded;
 		}
 	}
 }

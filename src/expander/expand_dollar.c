@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 16:43:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:25:42 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_check_value(t_expand *str, t_env **env)
 			if (!str->env_val)
 			{
 				free(str->env_val);
-				return (1);// malloc error
+				malloc_error(NULL, NULL, NULL, 0);
 			}
 			return (0);
 		}
@@ -61,15 +61,17 @@ int	save_extra_string(t_expand *str, char *input, int i)
 	len = end - start;
 	str->string = ft_substr(input, start, len);
 	if (!str->string)
-		return (free(tmp), 0);// malloc error
+	{
+		free(tmp);
+		malloc_error(NULL, NULL, NULL, 0);
+	}
 	if (tmp && str->string)
 	{
 		str->expanded = ft_strjoin(tmp, str->string);
 		if (!str->expanded)
-			return (0);// malloc error
+			malloc_error(NULL, NULL, NULL, 0);
 	}
-	free(tmp);
-	free(str->string);
+	free_strs(tmp, str->string);
 	return (i);
 }
 
@@ -86,7 +88,7 @@ int	first_bit(t_expand *str, char *input)
 			return (0);
 		str->expanded = ft_substr(input, 0, i);
 		if (!str->expanded)
-			return (0);// malloc error
+			malloc_error(NULL, NULL, NULL, 0);
 	}
 	return (i);
 }
@@ -96,7 +98,7 @@ void	dollar(t_expand *str, t_env **env)
 	int		i;
 
 	i = first_bit(str, str->input);
-	while (str->input[i])
+	while (str->input[i] && i >= 0)
 	{
 		if (ft_dollar(str->input[i]))
 			i = dollar_bit(str, str->input, env, (i + 1));

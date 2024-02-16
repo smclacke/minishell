@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 15:04:18 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:11:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	count_reds(char **process)
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
 		{
 			if (!process[i + 1])
-				return (-1);// snytax error
+				syntax_error("syntax error near unexpected token 'newline'");
 			count += 2;
 		}
 		i++;
@@ -44,7 +44,7 @@ int	count_strs(t_procs *proc, char **process)
 		if (proc_redir(process[i]))
 		{
 			if (!process[i + 1])
-				return (-1);// syntax error
+				syntax_error("syntax error near unexpected token 'newline'");
 			i += 2;
 		}
 		else if (proc->cmd_flag != 1)
@@ -73,7 +73,7 @@ int	count_hds(char **process)
 		if (proc_redir(process[i]) == 2)
 		{
 			if (!process[i + 1])
-				return (-1);// syntax error
+				syntax_error("syntax error near unexpected token 'newline'");
 			count += 1;
 		}
 		i++;
@@ -107,7 +107,7 @@ int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		{
 			free_util(proc, proc->proc_arrs, proc->proc_arrs[proc_i], NULL);
 			free_parser(proc);
-			return (0);// errrrror?
+			return (0);
 		}
 		token_size = ft_strlen(proc->tokens[proc->start]);
 		proc->proc_arrs[proc_i][proc_j] = ft_strdup(proc->tokens[proc->start]);
@@ -115,7 +115,7 @@ int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 		{
 			free_util(proc, proc->proc_arrs, proc->proc_arrs[proc_i], NULL);
 			free_parser(proc);
-			return (0);// malloc error
+			return (0);
 		}
 		proc_j++;
 		proc->start++;

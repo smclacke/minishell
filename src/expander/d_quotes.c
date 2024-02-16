@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:49:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:32:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ static int	first_str_bit(t_expand *str, char *input)
 			return (0);
 		str->tmp = ft_substr(input, 0, i);
 		if (!str->tmp)
-			return (-1);// malloc error
+			malloc_error(NULL, NULL, NULL, 0);
 	}
 	else
 	{
 		str->tmp = ft_strdup(input);
 		if (!str->tmp)
-			return (-1);// malloc error
+			malloc_error(NULL, NULL, NULL, 0);
 	}
 	if (add_to_expand(str, str->tmp) == -1)
-		return (-1);// error
+		general_error("expansion failure");
 	return (i);
 }
 
@@ -47,18 +47,18 @@ static int	add_single_quote(t_expand *str, char *c)
 	{
 		tmp = ft_strjoin(str->expanded, c);
 		if (!tmp)
-			return (-1);// mallloc error
+			malloc_error(NULL, NULL, NULL, 0);
 	}
 	else
 	{
 		tmp = ft_strdup(c);
 		if (!tmp)
-			return (-1);// mallloc error
+			malloc_error(NULL, NULL, NULL, 0);
 	}
 	free(str->expanded);
 	str->expanded = tmp;
 	if (!str->expanded)
-		return (-1);// error
+		general_error("expansion failure");
 	return (0);
 }
 
@@ -76,7 +76,7 @@ static int	handle_double(t_expand *str, char *input, t_env **env)
 		if (input[i] && ft_issquote(input[i]))
 		{
 			if (add_single_quote(str, "\'"))
-				return (-1);// error ?
+				general_error("expansion failure");
 			i++;
 		}
 		if (input[i] && !is_dollar_or_quote(input[i]))
@@ -101,13 +101,14 @@ int	dquote_bit(t_expand *str, char *input, t_env **env, int i)
 			end = i - start;
 			str->d_quote = ft_substr(input, start, end);
 			if (!str->d_quote)
-				return (-1);//malloc error
+				malloc_error(NULL, NULL, NULL, 0);
 			if (handle_double(str, str->d_quote, env) == -1)
-				return (-1);// error
+				general_error("expansion failure");
 			free(str->d_quote);
 			return (i + 1);
 		}
 		i++;
 	}
-	return (-1);//error ??
+	general_error("expansion failure");
+	return (0);
 }

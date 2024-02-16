@@ -6,11 +6,23 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 16:13:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 17:38:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 18:56:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+void	syntax_error(char *str)
+{
+	printf("minishell: %s\n", str);
+	exit(E_SYNTAX);
+}
+
+void	general_error(char *str)
+{
+	printf("minishell: %s\n", str);
+	exit(E_GENERAL);
+}
 
 void	malloc_error(t_parser *par, t_procs *proc, char **str, int flag)
 {

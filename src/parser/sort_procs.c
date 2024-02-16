@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 17:35:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:11:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static	void	token_while(t_parser *proc, char **str)
 		if (!proc->proc_arrs)
 			malloc_error(proc, NULL, str, 2);
 		if (!make_proc_arr(proc, pi, p_size))
-			return ;// error
+			general_error("error parsing input");
 		proc->proc_arrs[pi][p_size] = NULL;
 		if (proc->tokens[i] && is_pipe(proc->tokens[i]))
 		{

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/07 16:20:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 18:58:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*split_tokens(char *input, int len)
 		return (NULL);
 	token = ft_substr(input, 0, len);
 	if (!token)
-		return (NULL);// malloc error
+		malloc_error(NULL, NULL, NULL, 0);
 	input += len;
 	return (token);
 }
@@ -82,7 +82,7 @@ static char	**lexer_split(char *input)
 	no_tokens = amount_tokens(input);
 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 	if (!array)
-		return (NULL);// malloc error
+		malloc_error(NULL, NULL, NULL, 0);
 	while (i < no_tokens)
 	{
 		start = start_token(input, (start + len));

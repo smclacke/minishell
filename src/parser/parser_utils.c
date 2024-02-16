@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/11 20:28:57 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 14:47:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:06:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	count_procs(char **tokens)
 		if (is_pipe(tokens[i]))
 		{
 			if (!tokens[i + 1])
-				exit (EXIT_FAILURE); // syntax error
+				syntax_error("nothing after pipe");
 			count++;
 		}
 		i++;
@@ -70,11 +70,7 @@ t_parser	*parser_listnew(t_procs *proc)
 
 	new = (t_parser *)malloc(sizeof(t_parser));
 	if (!new || !proc)
-	{
-		free(proc);
-		free(new);
-		return (NULL);// malloc error
-	}
+		malloc_error(new, proc, NULL, 0);
 	ft_bzero(new, sizeof(t_parser));
 	new->proc = proc;
 	new->proc->hd_fd = -1;

@@ -9,11 +9,47 @@
 
 **DO this**
 
-- leaks
-
-- errors
+- errors - am i exiting immideately? always?
+		"malloc error"
+		general errors like parser failure but unclear why...?
 
 - STRESS TEST THE FUCK OUTTA IT
+
+**THIS IS NOT GOOD**
+here_doc seen as redir, hd_count 1 without str but not NULL
+here_doc still opened...
+minibleh:f><<
+
+[0] cmd = f
+
+[0] str_count = 1
+[0] strs[0] = 
+
+[0] hd_count = 1
+[0] hd[0] = 
+
+[0] red_count = 2
+[0] reds[0] = >
+[0] reds[1] = <<
+--------------------------------------------------
+heredoc> ^C
+
+**THIS IS STILL ISSUE**
+
+Direct leak of 27 byte(s) in 1 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/mini_check/minishell+0x49a28d)
+    #1 0x4e3179 in ft_strdup (/home/smclacke/Desktop/mini_check/minishell+0x4e3179)
+    #2 0x4d1f7b in copy_strs /home/smclacke/Desktop/mini_check/src/parser/get_procs.c:79:27
+    #3 0x4d1e49 in get_strs /home/smclacke/Desktop/mini_check/src/parser/get_procs.c:120:4
+    #4 0x4d0b77 in sort_vars /home/smclacke/Desktop/mini_check/src/parser/sort_procs.c:26:3
+    #5 0x4d09d6 in sort_each_proc /home/smclacke/Desktop/mini_check/src/parser/sort_procs.c:50:2
+    #6 0x4cfee9 in handle_procs /home/smclacke/Desktop/mini_check/src/parser/parser.c:31:4
+    #7 0x4cf738 in parse_tokens /home/smclacke/Desktop/mini_check/src/parser/parser.c:76:16
+    #8 0x4cf5fd in parse_input /home/smclacke/Desktop/mini_check/src/parser/parser.c:95:11
+    #9 0x4cb420 in run_minishell /home/smclacke/Desktop/mini_check/src/main.c:27:10
+    #10 0x4cb53f in main /home/smclacke/Desktop/mini_check/src/main.c:52:8
+    #11 0x7f31aac0ad8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
 
 ------------------------------
 **THIS**

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/10 17:50:16 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:48:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:22:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	squote_bit(t_expand *str, char *input, int i)
 			end = i - start;
 			str->s_quote = ft_substr(tmp_input, start, end);
 			if (!str->s_quote)
-				return (-1);// malloc error
+				malloc_error(NULL, NULL, NULL, 0);
 			if (add_to_expand(str, str->s_quote) == -1)
-				return (-1);// error
+				return (-1);
 			return (i + 1);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 16:03:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:18:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ void	get_reds(t_procs *proc, char **process)
 	j = 0;
 	proc->redir = (char **)malloc(sizeof(char *) * (proc->red_count + 1));
 	if (!proc->redir)
-		return (free_procs(proc));// malloc error
+		malloc_error(NULL, proc, NULL, 1);
 	while (process[i])
 	{
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
 		{
 			if (!process[i + 1])
-				return ;// syntax error
+				syntax_error("syntax error near unexpected token 'newline'");
 			proc->redir[j] = ft_strdup(process[i]);
 			if (!proc->redir[j])
-				return ;// malloc error
+				malloc_error(NULL, NULL, NULL, 0);
 			proc->redir[j + 1] = ft_strdup(process[i + 1]);
 			if (!proc->redir[j + 1])
-				return ;// malloc error
+				malloc_error(NULL, NULL, NULL, 0);
 			j += 2;
 			i++;
 		}
@@ -41,10 +41,6 @@ void	get_reds(t_procs *proc, char **process)
 	}
 }
 
-/**
- * @note changed hds, ignoring << meta, hd_count= actual hd_count
- * 		hd_array = array delimiters e.g. hd[0] = eof hd[1] = end ...  
-*/
 void	get_hds(t_procs *proc, char **process)
 {
 	int		i;
@@ -54,19 +50,16 @@ void	get_hds(t_procs *proc, char **process)
 	j = 0;
 	proc->hd = (char **)malloc(sizeof(char *) * (proc->hd_count + 1));
 	if (!proc->hd)
-	{
-		free_procs(proc);
-		return ;// malloc error
-	}
+		malloc_error(NULL, proc, NULL, 1);
 	while (process[i])
 	{
 		if (proc_redir(process[i]) == 2)
 		{
 			if (!process[i + 1])
-				return ;// syntax error
+				syntax_error("syntax error near unexpected token 'newline'");
 			proc->hd[j] = ft_strdup(process[i + 1]);
 			if (!proc->hd[j])
-				return ;//malloc error
+				malloc_error(NULL, NULL, NULL, 0);
 			j++;
 			i++;
 		}
@@ -80,8 +73,7 @@ static	int	copy_strs(t_procs *proc, char *process)
 	if (!proc->str[proc->index])
 	{
 		free(process);
-		free_procs(proc);
-		return (-1);// malloc error
+		malloc_error(NULL, proc, NULL, 1);
 	}
 	proc->index++;
 	return (0);
@@ -92,7 +84,7 @@ static	int	handle_cmd(t_procs *proc, char *process)
 	proc->cmd_flag = 1;
 	proc->cmd = ft_strdup(process);
 	if (!proc->cmd)
-		return (-1);// malloc error
+		malloc_error(NULL, NULL, NULL, 0);
 	return (0);
 }
 
@@ -107,7 +99,7 @@ void	get_strs(t_procs *proc, char **process)
 		if (proc_redir(process[i]))
 		{
 			if (!process[i + 1])
-				return ;// syntax error
+				syntax_error("syntax error near unexpected token 'newline'");
 			i += 2;
 		}
 		if (process[i] && !proc_redir(process[i]) && proc->cmd_flag == 0)
