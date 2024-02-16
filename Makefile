@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/14 16:29:30 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/16 15:11:32 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,17 +60,17 @@ SRCS			= main.c								\
 					builtin/builtin_utils_one.c 		\
 					builtin/builtin_utils_two.c 		\
 					builtin/exit.c						\
-					# expander/expand_utils_2.c			\
-					# expander/expand.c					\
-					# expander/expand_utils.c				\
-					# expander/expand_quotes.c			\
-					# expander/remove_quotes.c			\
-					# expander/expand_quote_utils.c		\
-					# expander/expand_dollar.c			\
-					# expander/dollars.c					\
-					# expander/d_quotes.c					\
-					# expander/s_quotes.c					\
-					# expander/hd_expand.c				\
+					expander/expand_utils_2.c			\
+					expander/expand.c					\
+					expander/expand_utils.c				\
+					expander/expand_quotes.c			\
+					expander/remove_quotes.c			\
+					expander/expand_quote_utils.c		\
+					expander/expand_dollar.c			\
+					expander/dollars.c					\
+					expander/d_quotes.c					\
+					expander/s_quotes.c					\
+					expander/hd_expand.c				\
 
 
 SRC_DIR		= src

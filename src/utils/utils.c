@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 16:56:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 15:20:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,18 @@ int		ft_abs(int i)
 
 void	free_proc_arrs(t_parser *proc)
 {
-	int		i = 0;
-	int		j = 0;
-	while (proc->proc_arrs)
+	int		i;
+	
+	i = 0;
+	if (proc->proc_arrs)
 	{
-		while (proc->proc_arrs[i][j])
+		while (i < proc->proc_count)
 		{
-			free(proc->proc_arrs[i][j]);
-			j++;
+			ft_free_arr(proc->proc_arrs[i]);
+			i++;
 		}
-		free(proc->proc_arrs[i]);
-		i++;
+		free(proc->proc_arrs);
 	}
-	free(proc->proc_arrs);
 }
 
 void	ft_free_process(t_parser *proc)

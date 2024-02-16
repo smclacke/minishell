@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 16:45:58 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 15:12:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	run_minishell(char **envp, char *input)
 		return (0);
 	// prpr(procs); //
 	// execute(&env, procs);
-	prpr(procs); //
+	// prpr(procs); //
 	free_parser(procs);
 	return (1);
 }
