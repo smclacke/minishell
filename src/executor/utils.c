@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils_two.c                                        :+:    :+:            */
+/*   utils.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 20:53:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 22:47:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	check_for_builtin(t_parser *node)
  * understand why
  * @todo norm
 */
-// static char	**fill_array(t_procs *lst, char **new_str, int i)
 static char	**fill_array(t_procs *lst, char **new_str)
 {
 
@@ -62,11 +61,8 @@ static char	**fill_array(t_procs *lst, char **new_str)
 	i = 0;
 	new_str[0] = lst->cmd;
 	i++;
-	// fprintf(stderr, "lst->str[%s]\n", lst->str[0]);
-	//whats wrong with the strings from the parser? is the string NULL terminated
 	if (lst->str_count == 0)
 		return (new_str = NULL);
-	// while (i < lst->str_count)
 	while (j < lst->str_count)
 	{
 		new_str[i] = lst->str[j];
@@ -81,7 +77,8 @@ static char	**fill_array(t_procs *lst, char **new_str)
  * @param lst parser linked list
  * @brief set's linked list from cmd to next cmd to 2d array
  * cmd at 0, plus args at 1 , 2 etc.
- * @todo error code NORM IT
+ * @todo error code NORM IT if malloc already exits 
+ * I dont need the NULL check?
  * @note this needs to put the commands and the strs in an array
 */
 char	**get_argv(t_parser *lst)
@@ -91,13 +88,52 @@ char	**get_argv(t_parser *lst)
 
 	new_str = NULL;
 	i = lst->proc->str_count;
-	// new_str = (char **)malloc(sizeof (char *) * (i + 2));
 	new_str = (char **)mini_malloc(sizeof (char *) * (i + 2));
 	if (new_str == NULL)
 		mini_error(E_MALLOC, lst);
-	// new_str[0] = lst->proc->cmd;
-	// i = 1;
 	new_str = fill_array(lst->proc, new_str);
-	// new_str = fill_array(lst->proc, new_str, i);
 	return (new_str);
+}
+
+/**
+ * @param s1 string to compare
+ * @param s1 string or char to compare with
+ * @brief compares 2 strings replace by the libft version without -n
+ * @return difference if different or 0
+ * old function:
+*/
+int	mini_strcmp(char *s1, char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (1);
+	while (s1[i] || s2[i])
+	{
+		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
+			return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
+		i++;
+	}
+	return (0);
+}
+
+/**
+ * @param data struct to be updated with fd's and 2d arrays for later use
+ * @param env 
+ * @brief intitializes struct before further use
+*/
+void	init_execute_struct(t_execute *data)
+{
+	data->fork_pid = -1;
+	data->pipe_left[READ] = -1;
+	data->pipe_left[WRITE] = -1;
+	data->pipe_right[READ] = -1;
+	data->pipe_right[WRITE] = -1;
+	data->path = NULL;
+	data->env_array = NULL;
+	data->in = -1;
+	data->out = -1;
+	data->count = 0;
+	data->error = true;
 }

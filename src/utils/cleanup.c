@@ -6,13 +6,19 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 17:27:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:03:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 22:31:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-
+/**
+ * @param s const string 
+ * @param start int index indicating start of new string
+ * @param len size_t indicating lenght of new string
+ * @brief creates new string of size len
+ * @return string.
+*/
 char	*mini_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
@@ -30,6 +36,11 @@ char	*mini_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
+/**
+ * @param s1 const string to join
+ * @brief duplicates string with malloc
+ * @return string.
+*/
 char	*mini_strdup(const char *s1)
 {
 	char	*s2;
@@ -48,6 +59,12 @@ char	*mini_strdup(const char *s1)
 	return (s2);
 }
 
+/**
+ * @param s1 string to join
+ * @param s2 string to join
+ * @brief joins 2 strings
+ * @return returns joined string.
+*/
 char	*mini_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
@@ -68,6 +85,11 @@ char	*mini_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
+/**
+ * @param size int size 
+ * @brief custom malloc, exits when malloc fails
+ * @return malloced variable
+*/
 void	*mini_malloc(int size)
 {
 	void *data;

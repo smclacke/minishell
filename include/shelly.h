@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:57:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 22:50:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,12 +167,12 @@ void			env_lstadd_back(t_env **lst, t_env *new);
 void			print_list(t_env *env);
 void			print_list_key(t_env *env);
 void			print_list_value(t_env *env);
-char			**list_to_string(t_env *env, t_parser *lst);
+// char			**list_to_string(t_env *env, t_parser *lst);
+char			**list_to_string(t_env *env);
 void			free_env(t_env **lst);
 char			*get_full(char *str);
 
 //---- Built-in ----//
-// void			free_all(t_env *env);
 void			do_builtin(t_parser *node, t_env **env, int cmd_type);
 bool			word_check(t_parser *lst, char *key);
 void			ft_cd(t_parser *lst, t_env **env);
@@ -181,11 +181,9 @@ void			no_such_file(char *str, t_parser *lst);
 void			put_custom_error(t_parser *node, char *cmd);
 void			ft_echo(t_parser *lst, t_env **env);
 void			ft_env(t_env *env, t_parser *lst);
-// void			ft_exit(t_parser *lst);
-void			ft_exit(t_parser *lst, t_env **env);
+void			ft_exit(t_parser *lst);
 void			ft_pwd(t_parser *head);
 void			ft_export(t_parser *lst, t_env **env);
-char			**null_check(char *str, t_parser *temp);
 void			make_node(t_env **env, t_export ex_var);
 void			replace_node(t_env *lst, t_export ex_var);
 void			ft_unset(t_parser *lst, t_env **env);
@@ -196,7 +194,6 @@ void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
 bool			absolute_check(t_parser *node);
 void			execute(t_env **env, t_parser *list);
 void			init_execute_struct(t_execute *data);
-// bool			check_redirect(t_parser *node);
 void			free_data(t_execute *data);
 void			close_all(t_execute *data, t_parser *lst);
 void			close_between(t_execute *data, t_parser *lst);
@@ -213,14 +210,11 @@ void			put_permission_error(t_parser *node);
 void			mini_error(int exit_enum, t_parser *lst);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
-// void			free_strs(char *str, char *str2);
 char			*ft_getenv(t_env *env, char *str);
 int				list_iter(t_parser *lst);
 void			*mini_malloc(int size);
 char			*mini_strjoin(char const *s1, char const *s2);
 char			*mini_strdup(const char *s1);
 char			*mini_substr(char const *s, unsigned int start, size_t len);
-
-// void			print_array(char **arr);
 
 #endif

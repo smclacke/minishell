@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/16 19:18:06 by dreijans      ########   odam.nl          #
+#    Updated: 2024/02/16 22:40:02 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,7 @@ SRCS			= main.c								\
 					executor/execute.c					\
 					executor/make_env.c					\
 					executor/list_utils.c 				\
-					executor/utils_one.c				\
-					executor/utils_two.c				\
+					executor/utils.c					\
 					executor/execute_utils_one.c		\
 					executor/execute_utils_two.c		\
 					executor/heredoc_utils.c			\

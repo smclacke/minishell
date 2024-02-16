@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 20:16:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 22:34:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @param node parsed list
  * @brief checks if content is a digit
- * @todo is this still working?
+ * @todo exit codes for the exit at line 30
 */
 static void	digit_check(char *str)
 {
@@ -24,8 +24,7 @@ static void	digit_check(char *str)
 	i = 0;
 	while (str[i] && ft_isdigit(str[i]) != 0)
 		i++;
-	// if (str[i] != '\0')
-	if (str[i] != 0)
+	if (str[i] != '\0')
 	{
 		dprintf(STDERR_FILENO, NON_NUM_ARG, str);
 		exit(2);
@@ -63,9 +62,9 @@ void	exit_with_stat(int exit_status, int status)
  * @param lst parsed list
  * @brief exits the program and displays corresponding error number
  * @todo check for exitstatus line 68 if it's exit status from prev child process
- * memory leaks in parse tokens
+ * memory leaks in parse tokens NORM IT!
 */
-void	ft_exit(t_parser *lst, t_env **env)
+void	ft_exit(t_parser *lst)
 {
 	long long	error;
 	int			exit_status;
@@ -76,18 +75,15 @@ void	ft_exit(t_parser *lst, t_env **env)
 	if (lst->proc->proc_count != 1)
 		return ;
 	if (lst->proc->str_count == 0)
-		exit_with_stat(exit_status, status); // do we need this?
+		exit_with_stat(exit_status, status);
 	arg_check(lst);
 	digit_check(lst->proc->str[0]);
 	error = ft_atoi(lst->proc->str[0]);
 	if (error > 255)
 	{
 		put_custom_error(lst, "exit");
-		free_env(env);
-		// free_parser(lst);
 		exit(255);
 	}
 	write(STDOUT_FILENO, "exit\n", 5);
-	free_env(env);
 	exit(error);
 }
