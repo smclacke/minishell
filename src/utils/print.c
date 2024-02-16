@@ -6,14 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/13 16:41:05 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 16:01:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
 /**
- * @todo	comment out all
+ * @todo	comment out all // delete for final push
 */
 void	print_token_arr(char **token)
 {

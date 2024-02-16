@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/01/24 13:17:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 16:01:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
  * @todo	tidy comments
 */
 
-	// For the main:
-	// 	Ctrl-C: Displays a new prompt, exits with code 1.
-	// 	Ctrl-\: Has no effect.
+//	For the main:
+// 	Ctrl-C: Displays a new prompt, exits with code 1.
+// 	Ctrl-\: Has no effect.
 static void	sig_parent(int signum)
 {
 	// t_parser		*tmp;
@@ -35,7 +35,7 @@ static void	sig_parent(int signum)
 	}
 }
 
-	// 	Ctrl-C: Exits the child process, displaying ^C, exits with code 130.
+// 	Ctrl-C: Exits the child process, displaying ^C, exits with code 130.
 static void	sig_child_c(int signum)
 {
 	// t_parser		*tmp;
@@ -48,7 +48,7 @@ static void	sig_child_c(int signum)
 	}
 }
 
-	// 	Ctrl-\: Exits the child process, displaying ^\Quit, exits with code 131.
+// 	Ctrl-\: Exits the child process, displaying ^\Quit, exits with code 131.
 static void	sig_child_q(int signum)
 {	
 	// t_parser		*tmp;
@@ -61,9 +61,9 @@ static void	sig_child_q(int signum)
 	}
 }
 
-	// For here_doc (input redirection):
-	// 	Ctrl-C: Displays the here_doc sign, exits with code 1.
-	// 	Ctrl-\: Has no effect.
+//	For here_doc (input redirection):
+// 	Ctrl-C: Displays the here_doc sign, exits with code 1.
+// 	Ctrl-\: Has no effect.
 static void	sig_hd(int signum)
 {
 	// t_parser		*tmp;

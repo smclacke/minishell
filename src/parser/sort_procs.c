@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 15:02:01 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 16:31:38 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ static	void	sort_vars(t_procs *proc, char **process)
 			proc->str = (char **)malloc(sizeof(char *)
 					* (proc->str_count + 1));
 			if (!proc->str)
-			{
-				free_procs(proc);
-				return ;//malloc error
-			}
+				malloc_error(NULL, proc, 1, E_MALLOC);
 		}
 		get_strs(proc, process);
 	}
@@ -52,7 +49,7 @@ void	sort_each_proc(t_procs *proc, char **proc_arr)
 	proc->hd_count = count_hds(proc_arr);
 	sort_vars(proc, proc_arr);
 }
-
+// need to free str, was using free_utils, now changing for malloc error
 static	void	token_while(t_parser *proc, char **str)
 {
 	int		i;
@@ -70,7 +67,7 @@ static	void	token_while(t_parser *proc, char **str)
 		p_size = ft_abs(i - proc->start);
 		proc->proc_arrs[pi] = (char **)malloc(sizeof(char *) * (p_size + 1));
 		if (!proc->proc_arrs)
-			free_util(proc, proc->proc_arrs, str, NULL); // malloc error, but no return
+			malloc_error(proc, NULL, 2, E_MALLOC);
 		if (!make_proc_arr(proc, pi, p_size))
 			return ;// error
 		proc->proc_arrs[pi][p_size] = NULL;

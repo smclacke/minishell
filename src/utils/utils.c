@@ -6,23 +6,30 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 15:20:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 16:06:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-int		ft_abs(int i)
+int	ft_abs(int i)
 {
 	if (i < 0)
 		i *= 1;
 	return (i);
 }
 
+void	free_lots_stuff(t_parser *proc)
+{
+	free_proc_arrs(proc);
+	free(proc->process);
+	free(proc);
+}
+
 void	free_proc_arrs(t_parser *proc)
 {
 	int		i;
-	
+
 	i = 0;
 	if (proc->proc_arrs)
 	{
@@ -37,10 +44,12 @@ void	free_proc_arrs(t_parser *proc)
 
 void	ft_free_process(t_parser *proc)
 {
-	int		i = 0;
+	int		i;
+
+	i = 0;
 	if (proc->process)
 	{
-		while(proc->process[i])
+		while (proc->process[i])
 		{
 			free(proc->process[i]);
 			i++;
@@ -70,4 +79,3 @@ void	free_parser(t_parser *procs)
 	}
 	free(procs);
 }
-

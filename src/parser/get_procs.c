@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 14:42:02 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 16:03:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	get_reds(t_procs *proc, char **process)
 	j = 0;
 	proc->redir = (char **)malloc(sizeof(char *) * (proc->red_count + 1));
 	if (!proc->redir)
-	{
-		free_procs(proc);
-		return ;// malloc error
-	}
+		return (free_procs(proc));// malloc error
 	while (process[i])
 	{
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)

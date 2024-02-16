@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/14 16:56:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 16:24:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # include <limits.h>
 
 				// utils
+//---------- parser_erros ----------//
+void			malloc_error(t_parser *par, t_procs *proc, int flag, int exit_code);
+
 //---------- free_procs ----------//
 void			free_procs(t_procs *proc);
 void			free_proc_arrs(t_parser *proc);
@@ -43,6 +46,7 @@ void			free_util(t_parser *list, char ***arrs, char **arr, char *str);
 
 //---------- utils ----------//
 int				ft_abs(int i);
+void			free_lots_stuff(t_parser *proc);
 void			ft_free_process(t_parser *proc);
 void			free_parser(t_parser *procs);
 
