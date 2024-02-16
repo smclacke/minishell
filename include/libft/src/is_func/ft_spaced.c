@@ -6,11 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 19:44:26 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:49:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:54:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../include/libft.h"
+#include "../../include/libft.h"
 
 int	ft_spaced(char *str)
 {

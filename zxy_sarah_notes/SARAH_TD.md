@@ -10,87 +10,17 @@
 **DO this**
 
 - check! << "" - expands to empty str, EOF = /n ..
-
-- errors - am i exiting immideately? always?
-		"malloc error"
-		general errors like parser failure but unclear why...?
+		here_doc needs some fixing first though...
 
 - STRESS TEST THE FUCK OUTTA IT
 
-
-**THIS IS STILL ISSUE**
-
-Direct leak of 27 byte(s) in 1 object(s) allocated from:
-    #0 0x49a28d in malloc (/home/smclacke/Desktop/mini_check/minishell+0x49a28d)
-    #1 0x4e3179 in ft_strdup (/home/smclacke/Desktop/mini_check/minishell+0x4e3179)
-    #2 0x4d1f7b in copy_strs /home/smclacke/Desktop/mini_check/src/parser/get_procs.c:79:27
-    #3 0x4d1e49 in get_strs /home/smclacke/Desktop/mini_check/src/parser/get_procs.c:120:4
-    #4 0x4d0b77 in sort_vars /home/smclacke/Desktop/mini_check/src/parser/sort_procs.c:26:3
-    #5 0x4d09d6 in sort_each_proc /home/smclacke/Desktop/mini_check/src/parser/sort_procs.c:50:2
-    #6 0x4cfee9 in handle_procs /home/smclacke/Desktop/mini_check/src/parser/parser.c:31:4
-    #7 0x4cf738 in parse_tokens /home/smclacke/Desktop/mini_check/src/parser/parser.c:76:16
-    #8 0x4cf5fd in parse_input /home/smclacke/Desktop/mini_check/src/parser/parser.c:95:11
-    #9 0x4cb420 in run_minishell /home/smclacke/Desktop/mini_check/src/main.c:27:10
-    #10 0x4cb53f in main /home/smclacke/Desktop/mini_check/src/main.c:52:8
-    #11 0x7f31aac0ad8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-
-
 ------------------------------
 **THIS**
-		echo $USER -- without any expansion, no leak, with expansion
-		and execution, many env_list leaks and one sort_vars->copy_strs leak
-		
-	check once env_list leaks fixed if i still have leak..
-
-	Direct leak of 6 byte(s) in 1 object(s) allocated from:
-    #0 0x49a28d in malloc (/home/smclacke/Desktop/mini_check/minishell+0x49a28d)
-    #1 0x4e2fff in ft_strdup (/home/smclacke/Desktop/mini_check/minishell+0x4e2fff)
-    #2 0x4d1dfb in copy_strs /home/smclacke/Desktop/mini_check/src/parser/get_procs.c:82:27
-    #3 0x4d1cc9 in get_strs /home/smclacke/Desktop/mini_check/src/parser/get_procs.c:123:4
-    #4 0x4d09c0 in sort_vars /home/smclacke/Desktop/mini_check/src/parser/sort_procs.c:29:3
-    #5 0x4d0826 in sort_each_proc /home/smclacke/Desktop/mini_check/src/parser/sort_procs.c:53:2
-    #6 0x4cfde0 in handle_procs /home/smclacke/Desktop/mini_check/src/parser/parser.c:33:4
-    #7 0x4cf538 in parse_tokens /home/smclacke/Desktop/mini_check/src/parser/parser.c:81:16
-    #8 0x4cf40d in parse_input /home/smclacke/Desktop/mini_check/src/parser/parser.c:100:11
-    #9 0x4cb420 in run_minishell /home/smclacke/Desktop/mini_check/src/main.c:28:10
-    #10 0x4cb53f in main /home/smclacke/Desktop/mini_check/src/main.c:52:8
-    #11 0x7f08f90a6d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-
+		echo $USER  - leakk
 ------------------------------
 **THIS**
-	-- hd when i test does not work correctly and then segfaults..
+	-- hd what you doing??
 
-------------------------------
-**THIS**
-	no input a load of times then echo has leak....
-
-minibleh:
-minibleh:
-minibleh:
-minibleh:
-minibleh:
-minibleh:
-minibleh:
-minibleh:
-minibleh:
-minibleh:echo
-
-[0] cmd = echo
-
-[0] str_count = 0
-
-[0] hd_count = 0
-
-[0] red_count = 0
-
-==23438==ERROR: LeakSanitizer: detected memory leaks
-
-Direct leak of 9 byte(s) in 9 object(s) allocated from:
-    #0 0x49a28d in malloc (/home/smclacke/Desktop/mini_check/minishell+0x49a28d)
-    #1 0x7f9b2f231bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
-
-SUMMARY: AddressSanitizer: 9 byte(s) leaked in 9 allocation(s).
-make: *** [Makefile:95: run] Error 1
 
 ------------------------------
 ------------------------------

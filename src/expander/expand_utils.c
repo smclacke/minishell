@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:28:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:59:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	do_reds(t_parser *tmp, t_expand *str, t_env **env)
 			if (ft_strnstr(tmp->proc->redir[i], "$", len))
 			{
 				str->input = tmp->proc->redir[i];
+				tmp->proc->redir[i] = NULL;
 				str->expanded = NULL;
 				dollar(str, env);
 				if (str->expanded)
@@ -80,6 +81,7 @@ void	do_hds(t_parser *tmp, t_expand *str, t_env **env)
 			if (ft_strnstr(tmp->proc->hd[i], "$", len))
 			{
 				str->input = tmp->proc->hd[i];
+				tmp->proc->hd[i] = NULL;
 				str->expanded = NULL;
 				dollar(str, env);
 				if (str->expanded)
@@ -105,6 +107,7 @@ void	do_strs(t_parser *tmp, t_expand *str, t_env **env)
 			if (ft_strnstr(tmp->proc->str[i], "$", len))
 			{
 				str->input = tmp->proc->str[i];
+				tmp->proc->str[i] = NULL;
 				str->expanded = NULL;
 				dollar(str, env);
 				if (str->expanded)
@@ -127,6 +130,7 @@ void	do_cmd(t_parser *tmp, t_expand *str, t_env **env)
 		if (ft_strnstr(tmp->proc->cmd, "$", len))
 		{
 			str->input = tmp->proc->cmd;
+			tmp->proc->cmd = NULL;
 			str->expanded = NULL;
 			dollar(str, env);
 			if (str->expanded)
