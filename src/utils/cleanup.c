@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 17:27:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 20:51:43 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 22:03:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	*mini_substr(char const *s, unsigned int start, size_t len)
 	if (len > (ft_strlen(s) - start))
 		len = (ft_strlen(s) - start);
 	str = mini_malloc(sizeof(char) * (len + 1));
-	// str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
 	ft_strlcpy(str, s + start, len + 1);
@@ -72,8 +71,7 @@ char	*mini_strjoin(char const *s1, char const *s2)
 void	*mini_malloc(int size)
 {
 	void *data;
-	
-	data = NULL;
+
 	data = malloc(size);
 	if (!data)
 		exit(E_MALLOC);

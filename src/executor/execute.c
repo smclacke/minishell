@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 20:55:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 21:07:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,9 +171,6 @@ void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
 
-	// (void) data;
-	// (void) env;
-	// (void) lst;
 	// data = malloc(sizeof(t_execute));
 	data = mini_malloc(sizeof(t_execute));
 	if (data == NULL)

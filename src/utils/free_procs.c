@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/08 22:51:10 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/09 20:15:09 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 21:23:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	free_str(t_procs *proc)
 	while (i < proc->str_count)
 	{
 		free(proc->str[i]);
+		// proc->str[i] = NULL;
 		i++;
 	}
 }

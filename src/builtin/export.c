@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:48:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 22:04:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static bool	reassign_env(t_env **env, t_export ex_var)
 	{
 		if (mini_strcmp(ex_var.key, lst->key) == 0)
 		{
-			// free(key);
 			replace_node(lst, ex_var);
 			return (true);
 		}
@@ -71,6 +70,7 @@ static bool key_value_check(t_parser *node, t_export ex_var, int i)
 		{
 			free(ex_var.key);
 			free(ex_var.value);
+			free(ex_var.str);
 			return (false);
 		}
 	}
@@ -86,6 +86,7 @@ static bool key_value_check(t_parser *node, t_export ex_var, int i)
  * @todo 
  * what about expansions
  * exit codes
+ * 
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -102,7 +103,7 @@ void	ft_export(t_parser *node, t_env **env)
 	}
 	while (i < node->proc->str_count)
 	{
-		ex_var.str = node->proc->str[i];
+		ex_var.str = mini_strdup(node->proc->str[i]);
 		while (ex_var.str[j] && ex_var.str[j] != '=')
 			j++;
 		ex_var.has_value = get_key_value(ex_var.str, &ex_var.key, &ex_var.value);
