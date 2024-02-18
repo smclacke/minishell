@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 17:36:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 20:01:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	do_reds(t_parser *tmp, t_expand *str, t_env **env)
 					tmp->proc->redir[i] = str->expanded;
 			}
 			i++;
+			free(str->input);
 		}
 	}
 }
@@ -88,6 +89,7 @@ void	do_hds(t_parser *tmp, t_expand *str, t_env **env)
 					tmp->proc->hd[i] = str->expanded;
 			}
 			i++;
+			free(str->input);
 		}
 	}
 }
@@ -116,6 +118,7 @@ void	do_strs(t_parser *tmp, t_expand *str, t_env **env)
 					tmp->proc->str[i] = str->expanded;
 			}
 			i++;
+			free(str->input);
 		}
 	}
 }
@@ -139,6 +142,7 @@ void	do_cmd(t_parser *tmp, t_expand *str, t_env **env)
 			dollar(str, env);
 			if (str->expanded)
 				tmp->proc->cmd = str->expanded;
+			free(str->input);
 		}
 	}
 }

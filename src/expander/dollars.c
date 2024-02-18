@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:34:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 19:56:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 		end = i - start;
 		str->dollar = ft_substr(input, start, end);
 		if (!str->dollar)
-			malloc_error(NULL, NULL, NULL, 0);
+			malloc_error(NULL, NULL, &input, 0);
 		if (dollar_expand(str, env) == -1)
 			general_error("expansion failure");
 	}
