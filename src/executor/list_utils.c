@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2023/11/05 19:21:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/16 20:06:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ void	env_lstadd_back(t_env **lst, t_env *new)
 int	mini_lstsize(t_env *lst)
 {
 	size_t	i;
+	t_env *temp;
 
 	i = 0;
-	while (lst)
+	temp = lst;
+	while (temp)
 	{
-		lst = lst->next;
+		temp = temp->next;
 		i++;
 	}
 	return (i);

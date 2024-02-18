@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 21:50:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/16 19:20:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * @param str key given as string
  * @param env pointer to environment
  * @brief loops through list and finds the key's to delete
+ * @todo use free_env?
 */
 static void	mini_remove_env(char *str, t_env **env)
 {
@@ -36,7 +37,7 @@ static void	mini_remove_env(char *str, t_env **env)
 				*env = current->next;
 			tmp = current;
 			current = current->next;
-			free_all(tmp);
+			free_env(&tmp);
 		}
 		else
 		{

@@ -653,3 +653,40 @@ echo code instead of input check
 // 	}
 // 	return (i);
 // }
+
+// /**
+//  * @param env pointer to environment
+//  * @brief free's content plus node.
+// */
+// void	free_all(t_env *env)
+// {
+// 	free(env->value);
+// 	free(env->key);
+// 	free(env->full);
+// 	free(env);
+// }
+
+// /**
+//  * @param lst parser linked list
+//  * @brief set's linked list from cmd to next cmd to 2d array
+//  * cmd at 0, plus args at 1 , 2 etc.
+//  * @todo error code NORM IT
+//  * @note this needs to put the commands and the strs in an array
+// */
+// char	**get_argv(t_parser *lst)
+// {
+// 	char		**new_str;
+// 	int			i;
+
+// 	new_str = NULL;
+// 	i = lst->proc->str_count;
+// 	// new_str = (char **)malloc(sizeof (char *) * (i + 2));
+// 	new_str = (char **)mini_malloc(sizeof (char *) * (i + 2));
+// 	if (new_str == NULL)
+// 		mini_error(E_MALLOC, lst);
+// 	// new_str[0] = lst->proc->cmd;
+// 	// i = 1;
+// 	new_str = fill_array(lst->proc, new_str);
+// 	// new_str = fill_array(lst->proc, new_str, i);
+// 	return (new_str);
+// }

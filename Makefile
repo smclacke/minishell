@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/16 16:19:03 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/18 16:43:30 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS			= main.c								\
 					utils/print.c						\
 					utils/signals.c						\
 					utils/utils.c						\
+					utils/cleanup.c						\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
 					lexer/tokens.c						\
@@ -65,8 +66,7 @@ SRCS			= main.c								\
 					executor/execute.c					\
 					executor/make_env.c					\
 					executor/list_utils.c 				\
-					executor/utils_one.c				\
-					executor/utils_two.c				\
+					executor/utils.c					\
 					executor/execute_utils_one.c		\
 					executor/execute_utils_two.c		\
 					executor/heredoc_utils.c			\

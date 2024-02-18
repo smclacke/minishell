@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/05 20:15:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:37:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
  * @param i int containing number of heredoc
  * @brief makes name for heredoc by adding number of heredoc
  * to the name. unlinks, frees the string and the number.
+ * @todo NORM IT
 */
 static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 {
@@ -105,7 +106,7 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 	while (lst->hd[i])
 	{
 		number = ft_itoa(i);
-		str = ft_strjoin("heredoc", number);
+		str = mini_strjoin("heredoc", number);
 		write_to_heredoc(lst, env, str, i);
 		lst->hd_fd = open(str, O_RDONLY);
 		unlink(str);

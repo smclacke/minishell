@@ -174,3 +174,17 @@ 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
 first! before start,
 
 clone met ssh!!!!! wieeeeeeh
+
+when i comment bzero out and start from j in fill array it works but has leaks.
+
+3) custom mini_strdup en mini_substr te maken met mini_calloc.
+
+void	*mini_malloc(t_data *data, size)
+{
+	thing = malloc(size);
+	if (thing == NULL)
+		mini_error_met_exit(data, 1, "malloc failed);
+	return (thing);
+}
+
+4) met t_execute struct pointer maar t_export en t_env maken zodat ik clean functie kan.

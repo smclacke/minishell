@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:28:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:38:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param str old working directory string
  * @param env environment in linked list
  * @brief replaces the value of set key in the environment
- * @todo exit codes
+ * @todo exit codes norm it!
 */
 void	reassign_values(char *cwd, t_env *node, t_parser *head)
 {
@@ -25,13 +25,13 @@ void	reassign_values(char *cwd, t_env *node, t_parser *head)
 	char	*new_full;
 
 	free(node->value);
-	node->value = ft_strdup(cwd);
+	node->value = mini_strdup(cwd);
 	if (!node->value)
 		mini_error(E_GENERAL, head);
-	key_equal = ft_strjoin(node->key, "=");
+	key_equal = mini_strjoin(node->key, "=");
 	if (!key_equal)
 		mini_error(E_GENERAL, head);
-	new_full = ft_strjoin(key_equal, cwd);
+	new_full = mini_strjoin(key_equal, cwd);
 	if (!key_equal)
 		mini_error(E_GENERAL, head);
 	free(key_equal);
@@ -94,6 +94,7 @@ bool	too_many_args(t_parser *lst)
  * @param ex_var export struct
  * @brief makes all components for new node and adds to env linked list
  * @todo check return / need exit code? free it
+ * need free_env?
 */
 void	make_node(t_env **env, t_export ex_var)
 {
@@ -102,7 +103,7 @@ void	make_node(t_env **env, t_export ex_var)
 	new_node = env_lstnew(ex_var.key, ex_var.value, ex_var.str, ex_var.has_value);
 	if (!new_node)
 	{
-		free_all(new_node);
+		free_env(env);
 		free(new_node);
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:35:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:42:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 	return (false);
 }
 
-// /**
-//  * @param env linked list with environment
-//  * @param node noded from parser linked list
-//  * @param data struct containing fd's and 2d arrays needed for execution
-//  * @brief checks is command has access
-//  * @todo exit codes
-// */
+/**
+ * @param env linked list with environment
+ * @param node noded from parser linked list
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @brief checks is command has access
+ * @todo exit codes
+*/
 static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
 	char	*ok_path;
@@ -83,14 +83,14 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	return (node->proc->cmd);
 }
 
-// /**
-//  * @param lst linked list containing commands and atributes
-//  * @param env linked list containing environment
-//  * @param data struct containing fd's and 2d arrays needed for execution
-//  * @brief checks parser input for executable and executes with execve
-//  *  replace exit int with the existatus global we pass on
-//  * @todo added id !lst->cmd to stop segfault NORM IT
-// */
+/**
+ * @param lst linked list containing commands and atributes
+ * @param env linked list containing environment
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @brief checks parser input for executable and executes with execve
+ *  replace exit int with the existatus global we pass on
+ * @todo added id !lst->cmd to stop segfault NORM IT
+*/
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
 	char		*executable;
@@ -128,7 +128,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		put_permission_error(lst);
 		exit (0);
 	}
-	data->env_array = list_to_string(*env, lst);
+	data->env_array = list_to_string(*env);
 	argv = get_argv(lst);
 	// if (execve(executable, get_argv(lst), data->env_array) == -1)
 	if (execve(executable, argv, data->env_array) == -1)
@@ -175,7 +175,7 @@ void	execute(t_env **env, t_parser *lst)
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);
 	init_execute_struct(data);
-	ft_expand(lst, env);
+	// ft_expand(lst, env);
 	build(lst, env, data);
 	free (data);
 }
