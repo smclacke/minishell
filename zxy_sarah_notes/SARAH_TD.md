@@ -5,50 +5,30 @@
 ------------------------------
 ------------------------------
 
+**DO this**
 *right here, right now*
 
-**DO this**
+1) $?
 
-- check! << "" - expands to empty str, EOF = /n ..
-		here_doc needs some fixing first though...
-	minibleh:<<""
+2) leak - echo $USER
+    #0 0x485f24 in strdup (/home/smclacke/Desktop/mini_check/minishell+0x485f24)
+    #1 0x4d4735 in do_strs /home/smclacke/Desktop/mini_check/src/expander/expand_utils.c:109:18
+    #2 0x4d782c in expand_dollar /home/smclacke/Desktop/mini_check/src/expander/expand_dollar.c:129:2
+    #3 0x4d36c8 in ft_expand /home/smclacke/Desktop/mini_check/src/expander/expand.c:23:3
+    #4 0x4de19c in execute /home/smclacke/Desktop/mini_check/src/executor/execute.c:178:2
+    #5 0x4cb420 in run_minishell /home/smclacke/Desktop/mini_check/src/main.c:24:2
+    #6 0x4cb52f in main /home/smclacke/Desktop/mini_check/src/main.c:48:8
+    #7 0x7f1816812d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
 
-[0] cmd = (null)
+SUMMARY: AddressSanitizer: 6 byte(s) leaked in 1 allocation(s).
+make: *** [Makefile:96: run] Error 1
 
-[0] str_count = 0
+3) stress testing
 
-[0] hd_count = 1
-[0] hd[0] = ""
-
-[0] red_count = 0
---------------------------------------------------
-
-[0] cmd = (null)
-
-[0] str_count = 0
-
-[0] hd_count = 1
-[0] hd[0] = 
-
-[0] red_count = 0
---------------------------------------------------
-heredoc> 
-heredoc>
-
-expands to empty, not NULL. probably a good thing, but hd fucked...
+4) if hd do, test empty str delim
 
 
-- STRESS TEST THE FUCK OUTTA IT
-
-------------------------------
-**THIS**
-		echo $USER  - leakk
-------------------------------
-**THIS**
-	-- hd what you doing??
-
-
-**THIS HEHEHEHE**
+**TEST MEEEEE**
 minibleh:export var=a
 [0] cmd = export
 [0] str_count = 1
@@ -102,7 +82,9 @@ Direct leak of 10 byte(s) in 1 object(s) allocated from:
 
 **MAIN TO DO**
 
-*TODO 1* US
+1) if hd does the thing, test these things:
+
+*1*
  ---->>>>  ?? why we exiting??
 EXAMPLE:
 minibleh:<< eof
@@ -112,8 +94,7 @@ heredoc> exit
 heredoc> eof
 make: *** [Makefile:95: run] Error 1
 
-
-*TODO 2*  ME
+*2*
  ---->>>>> THIS LEAK... comes in here_doc and i think somewhere else too..
 Direct leak of 33 byte(s) in 4 object(s) allocated from:
     #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
@@ -128,31 +109,8 @@ heredoc> "$USER"
 heredoc> '$USER'
 heredoc> eof
 
+2) signals, test them, check them, clean up file
 
-*TODO 3* ME 	WHAT AM I DOING ABOUT MALLOC FUNC/PROTECTION??
- ------>> put ft_malloc into libft, use for all malloc in libft, 
-		forget about protection hawhaw
-		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
-
-
-*TODO 4* ME
- ---->> check and test here_doc expansion
- +++ -----> stress testing the expander + checking all for leaks
-
-*TODO 6* US
-SIGNALSSSSh
- ---> the file is a total mess....
- ---> check they really really work correctly in all situations 
- ---> heredoc still weird, two prompt with signal
-
-
-*TODO 7* ME
-EXPANSION
- ---> $? ***, test once exit codes are good
-
-
-*TODO 8* ME
----> literally all errors
 
 
 =================================================================

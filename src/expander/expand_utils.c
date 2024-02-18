@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:59:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 17:36:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,10 @@ void	do_strs(t_parser *tmp, t_expand *str, t_env **env)
 			len = ft_strlen(tmp->proc->str[i]);
 			if (ft_strnstr(tmp->proc->str[i], "$", len))
 			{
-				str->input = tmp->proc->str[i];
-				tmp->proc->str[i] = NULL;
+				str->input = strdup(tmp->proc->str[i]);
+				if (!str->input)
+					malloc_error(tmp, NULL, tmp->proc->str, 3);
+				free(tmp->proc->str[i]);
 				str->expanded = NULL;
 				dollar(str, env);
 				if (str->expanded)
@@ -129,8 +131,10 @@ void	do_cmd(t_parser *tmp, t_expand *str, t_env **env)
 		len = ft_strlen(tmp->proc->cmd);
 		if (ft_strnstr(tmp->proc->cmd, "$", len))
 		{
-			str->input = tmp->proc->cmd;
-			tmp->proc->cmd = NULL;
+			str->input = ft_strdup(tmp->proc->cmd);
+			if (!str->input)
+				malloc_error(tmp, NULL, &tmp->proc->cmd, 3);
+			free(tmp->proc->cmd);
 			str->expanded = NULL;
 			dollar(str, env);
 			if (str->expanded)

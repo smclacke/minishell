@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 16:13:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 18:56:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 17:26:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	malloc_error(t_parser *par, t_procs *proc, char **str, int flag)
 		ft_free_arr(*par->proc_arrs);
 	if (flag == 1 && proc)
 		free_procs(proc);
+	if (flag == 3 && par)
+	{
+		ft_free_arr(*par->proc_arrs);
+		free_procs(par->proc);
+	}
 	if (proc)
 		free(proc);
 	if (par)
