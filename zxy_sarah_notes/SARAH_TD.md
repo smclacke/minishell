@@ -48,6 +48,54 @@ expands to empty, not NULL. probably a good thing, but hd fucked...
 	-- hd what you doing??
 
 
+**THIS HEHEHEHE**
+minibleh:export var=a
+[0] cmd = export
+[0] str_count = 1
+[0] strs[0] = var=a
+[0] hd_count = 0
+[0] red_count = 0
+--------------------------------------------------
+minibleh:export $var=test
+[0] cmd = export
+[0] str_count = 1
+[0] strs[0] = $var=test
+[0] hd_count = 0
+[0] red_count = 0
+--------------------------------------------------
+minishell: export: `': not a valid identifier
+minibleh:echo $var $a"
+minishell: unclosed quotes
+=================================================================
+==148474==ERROR: LeakSanitizer: detected memory leaks
+Direct leak of 45 byte(s) in 1 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/dreijans/Documents/rank3/minishell/minishell+0x49a28d)
+    #1 0x4e3d5a in ft_strdup (/home/dreijans/Documents/rank3/minishell/minishell+0x4e3d5a)
+    #2 0x4d254c in handle_cmd /home/dreijans/Documents/rank3/minishell/src/parser/get_procs.c:85:14
+    #3 0x4d2375 in get_strs /home/dreijans/Documents/rank3/minishell/src/parser/get_procs.c:107:4
+    #4 0x4d11c7 in sort_vars /home/dreijans/Documents/rank3/minishell/src/parser/sort_procs.c:26:3
+    #5 0x4d1026 in sort_each_proc /home/dreijans/Documents/rank3/minishell/src/parser/sort_procs.c:50:2
+    #6 0x4d061f in handle_procs /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:33:4
+    #7 0x4cfda8 in parse_tokens /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:79:16
+    #8 0x4cfc6d in parse_input /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:98:11
+    #9 0x4cb3e5 in run_minishell /home/dreijans/Documents/rank3/minishell/src/main.c:20:10
+    #10 0x4cb52f in main /home/dreijans/Documents/rank3/minishell/src/main.c:49:8
+    #11 0x7f032c5a1d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+Direct leak of 10 byte(s) in 1 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/dreijans/Documents/rank3/minishell/minishell+0x49a28d)
+    #1 0x4e3d5a in ft_strdup (/home/dreijans/Documents/rank3/minishell/minishell+0x4e3d5a)
+    #2 0x4d25eb in copy_strs /home/dreijans/Documents/rank3/minishell/src/parser/get_procs.c:72:27
+    #3 0x4d24d3 in get_strs /home/dreijans/Documents/rank3/minishell/src/parser/get_procs.c:112:4
+    #4 0x4d11c7 in sort_vars /home/dreijans/Documents/rank3/minishell/src/parser/sort_procs.c:26:3
+    #5 0x4d1026 in sort_each_proc /home/dreijans/Documents/rank3/minishell/src/parser/sort_procs.c:50:2
+    #6 0x4d061f in handle_procs /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:33:4
+    #7 0x4cfda8 in parse_tokens /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:79:16
+    #8 0x4cfc6d in parse_input /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:98:11
+    #9 0x4cb3e5 in run_minishell /home/dreijans/Documents/rank3/minishell/src/main.c:20:10
+    #10 0x4cb52f in main /home/dreijans/Documents/rank3/minishell/src/main.c:49:8
+    #11 0x7f032c5a1d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+
 ------------------------------
 ------------------------------
 ------------------------------
