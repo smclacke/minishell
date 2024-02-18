@@ -6,17 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:36:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:37:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-/**
- * // = remove for final version
- * 	everything else is normed
- */
-int	run_minishell(char **envp, char *input)
+int	run_minishell(t_env *env, char *input)
 {
 	t_parser	*procs;
 
@@ -26,9 +22,8 @@ int	run_minishell(char **envp, char *input)
 		return (0);
 	prpr(procs); //
 	execute(&env, procs);
-	prpr(procs); //
+	// clean_funct(&data);
 	free_parser(procs);
-	// need env and data freeing funcs from djoy
 	return (1);
 }
 
@@ -49,7 +44,9 @@ int	main(int argc, char **argv, char **envp)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
-		if (!run_minishell(envp, input))
+		if (input == NULL)
+			exit(EXIT_SUCCESS);
+		if (!run_minishell(env, input))
 			continue ;
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
