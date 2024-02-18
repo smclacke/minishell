@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:04:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 20:38:32 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	ft_export(t_parser *node, t_env **env)
 		while (ex_var.str[j] && ex_var.str[j] != '=')
 			j++;
 		ex_var.has_value = get_key_value(ex_var.str, &ex_var.key, &ex_var.value);
+		// ex_var.has_value = get_key_value(node->proc->str[i], &ex_var.key, &ex_var.value);
 		if (key_value_check(node, ex_var, i) == false)
 			return ;
 		if (reassign_env(env, ex_var) == true && i == (node->proc->str_count - 1))
