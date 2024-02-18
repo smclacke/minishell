@@ -11,6 +11,32 @@
 
 - check! << "" - expands to empty str, EOF = /n ..
 		here_doc needs some fixing first though...
+	minibleh:<<""
+
+[0] cmd = (null)
+
+[0] str_count = 0
+
+[0] hd_count = 1
+[0] hd[0] = ""
+
+[0] red_count = 0
+--------------------------------------------------
+
+[0] cmd = (null)
+
+[0] str_count = 0
+
+[0] hd_count = 1
+[0] hd[0] = 
+
+[0] red_count = 0
+--------------------------------------------------
+heredoc> 
+heredoc>
+
+expands to empty, not NULL. probably a good thing, but hd fucked...
+
 
 - STRESS TEST THE FUCK OUTTA IT
 

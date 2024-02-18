@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 15:29:13 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:36:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@
 int	run_minishell(char **envp, char *input)
 {
 	t_parser	*procs;
-	t_env		*env;
 
 	procs = NULL;
-	env = NULL;
-	env = env_list(envp, env);
 	procs = parse_input(procs, input);
 	if (!procs)
 		return (0);
@@ -40,11 +37,14 @@ int	main(int argc, char **argv, char **envp)
 	int			og_stdout;
 	int			og_stdin;
 	char		*input;
+	t_env		*env;
 
 	(void) argc;
 	(void) argv;
+	env = NULL;
 	og_stdout = dup(STDOUT_FILENO);
 	og_stdin = dup(STDIN_FILENO);
+	env = env_list(envp, env);
 	while (1)
 	{
 		handle_signals(PARENT);
