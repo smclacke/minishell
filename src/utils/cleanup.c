@@ -6,11 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 17:27:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:31:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:52:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+void	free_strs(char *str1, char *str2)
+{
+	free(str1);
+	free(str2);
+}
 
 /**
  * @param s const string 
