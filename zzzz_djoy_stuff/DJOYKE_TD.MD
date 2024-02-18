@@ -169,22 +169,67 @@ bool	word_check(char *str, t_parser *lst)
 1) ERRORS TO STANDARD ERROR!
 2) exit > hoi.txt is writing exit in the file
 
-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
+3) $sign is fine in key string for export fix that!
+	export var=a
+	export $var=test
+	echo $var $a
 
-first! before start,
+	➜  minishell git:(djoyke) ✗ make && ./minishell                      
+make[1]: Nothing to be done for 'all'.
+minibleh:export var=a
 
-clone met ssh!!!!! wieeeeeeh
+[0] cmd = export
 
-when i comment bzero out and start from j in fill array it works but has leaks.
+[0] str_count = 1
+[0] strs[0] = var=a
 
-3) custom mini_strdup en mini_substr te maken met mini_calloc.
+[0] hd_count = 0
 
-void	*mini_malloc(t_data *data, size)
-{
-	thing = malloc(size);
-	if (thing == NULL)
-		mini_error_met_exit(data, 1, "malloc failed);
-	return (thing);
-}
+[0] red_count = 0
+--------------------------------------------------
+minibleh:export $var=test
+
+[0] cmd = export
+
+[0] str_count = 1
+[0] strs[0] = $var=test
+
+[0] hd_count = 0
+
+[0] red_count = 0
+--------------------------------------------------
+minishell: export: `': not a valid identifier
+minibleh:echo $var $a
+
+[0] cmd = echo
+
+[0] str_count = 2
+[0] strs[0] = $var
+[0] strs[1] = $a
+
+[0] hd_count = 0
+
+[0] red_count = 0
+--------------------------------------------------
+a 
+minibleh:export $ha
+
+[0] cmd = export
+
+[0] str_count = 1
+[0] strs[0] = $ha
+
+[0] hd_count = 0
+
+[0] red_count = 0
+--------------------------------------------------
+minishell: export: `': not a valid identifier
 
 4) met t_execute struct pointer maar t_export en t_env maken zodat ik clean functie kan.
+
+REMEMBER! exit from parser when:
+	- nothing after meta
+	- unclosed quotes
+	- pipe after pipe
+	- malloc
+	- if string doesnt come back exit

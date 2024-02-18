@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:42:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:53:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	execute(t_env **env, t_parser *lst)
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);
 	init_execute_struct(data);
-	// ft_expand(lst, env);
+	ft_expand(lst, env);
 	build(lst, env, data);
 	free (data);
 }
