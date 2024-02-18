@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 19:56:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 21:53:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,8 @@ static int	handle_no_env_val(t_expand *str)
 	return (1);
 }
 
-/**
- * @todo	finish $? bit and test
-*/
 int	dollar_expand(t_expand *str, t_env **env)
 {
-	if (ft_strcmp(str->dollar, "$?") == 0)
-	{
-		// handle_dq(str, env);
-		return (0);
-	}
 	str->tmp = ft_strtrim(str->dollar, "$");
 	if (!str->tmp)
 		malloc_error(NULL, NULL, NULL, 0);

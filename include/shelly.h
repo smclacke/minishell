@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:52:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 21:46:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # include <dirent.h>
 # include <termios.h>
 # include <limits.h>
+
+int	is_equal(int c); // move this hehe
 
 				// utils
 //---------- parser_erros ----------//

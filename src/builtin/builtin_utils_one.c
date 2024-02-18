@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:40:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 20:38:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,22 @@ void	do_builtin(t_parser *node, t_env **env, int cmd_type)
  * @param cmd string containing command
  * @brief checks if key and value are alphanumeric
  * @return 1 if not alphanumeric, 0 is alphanumeric
+ * @todo export var=a
+ * expoty $var=test (is a=test)
+ * echo $var $a gives a and test
 */
 static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 {
 	int	i;
-
+	
+	printf("key = [%s]\n", key);
+	//if key is empty return
+	// if (mini_strcmp(key, "") == 0)//need this?
+	// 	return (false);//need this?
+	// if ((ft_isalpha(key[0]) == 0) && key[0] != '_' && key[0] != '$')
 	if ((ft_isalpha(key[0]) == 0) && key[0] != '_')
 	{
+		printf("here?\n");
 		put_custom_error(temp, cmd);
 		return false;
 	}
