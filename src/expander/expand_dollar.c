@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:25:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/18 21:48:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,19 @@ int	get_check_value(t_expand *str, t_env **env)
 	str->env_val = NULL;
 	while (head)
 	{
+		printf("dollar = %s\n", str->dollar);
+		printf("key = %s\n", head->key);
 		if (shelly_strcmp(str->dollar, head->key) == 0)
 		{
-			if (!head->value)
+			printf("value = %s\n", head->value);
+			if (!head->value) // THERE IS NO VALUE, THIS WHY WE FAIL
+			{
+				printf("HELLO\n");
 				return (1);
+			}
 			len = ft_strlen(head->value);
 			str->env_val = ft_substr(head->value, 0, len);
+			printf("env val = %s\n", str->env_val);
 			if (!str->env_val)
 			{
 				free(str->env_val);
@@ -98,7 +105,7 @@ void	dollar(t_expand *str, t_env **env)
 	int		i;
 
 	i = first_bit(str, str->input);
-	while (str->input[i] && i >= 0)
+	while (str->input[i] && i >= 0 && !is_equal(str->input[i]))
 	{
 		if (ft_dollar(str->input[i]))
 			i = dollar_bit(str, str->input, env, (i + 1));
@@ -125,6 +132,7 @@ void	expand_dollar(t_parser *lst, t_env **env)
 
 	tmp = lst;
 	i = 0;
+	// check_exit(tmp, &str, env);
 	do_cmd(tmp, &str, env);
 	do_strs(tmp, &str, env);
 	do_hds(tmp, &str, env);

@@ -7,46 +7,72 @@
 
 *right here, right now*
 
+
 **DO this**
+*right here, right now*
 
-- check! << "" - expands to empty str, EOF = /n ..
-		here_doc needs some fixing first though...
-	minibleh:<<""
+1) $?
 
-[0] cmd = (null)
+2) var=a $var=test | echo $var $a = a test
+export var=a
+export $var=test
 
-[0] str_count = 0
+var is a
+a is test
 
-[0] hd_count = 1
-[0] hd[0] = ""
+echo $var $a
+a test
+
+**for $a, we don't have a head->value**
+$a
+dollar = a
+key = var
+dollar = a
+key = a
+value = (null)
+
+**for $var:** // there is a value so we don't just exit
+dollar = var
+key = var
+value = a
+env val = a
+a
+
+2) YAYY A LEAK
+minibleh:exoprt $var=test
+
+[0] cmd = exoprt
+
+[0] str_count = 1
+[0] strs[0] = $var=test
+
+[0] hd_count = 0
 
 [0] red_count = 0
 --------------------------------------------------
+thing = var
+thingggg = var
+env val = a
+minishell: exoprt: command not found
+executable = [exoprt]
 
-[0] cmd = (null)
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
+    #1 0x4e4043 in ft_strdup (/home/smclacke/Desktop/shelly/minishell+0x4e4043)
+    #2 0x4d25eb in copy_strs /home/smclacke/Desktop/shelly/src/parser/get_procs.c:72:27
+    #3 0x4d24d3 in get_strs /home/smclacke/Desktop/shelly/src/parser/get_procs.c:112:4
+    #4 0x4d11c7 in sort_vars /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:26:3
+    #5 0x4d1026 in sort_each_proc /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:50:2
+    #6 0x4d061f in handle_procs /home/smclacke/Desktop/shelly/src/parser/parser.c:33:4
+    #7 0x4cfda8 in parse_tokens /home/smclacke/Desktop/shelly/src/parser/parser.c:79:16
+    #8 0x4cfc6d in parse_input /home/smclacke/Desktop/shelly/src/parser/parser.c:98:11
+    #9 0x4cb3e5 in run_minishell /home/smclacke/Desktop/shelly/src/main.c:20:10
+    #10 0x4cb52f in main /home/smclacke/Desktop/shelly/src/main.c:49:8
+    #11 0x7fc0059e2d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
 
-[0] str_count = 0
-
-[0] hd_count = 1
-[0] hd[0] = 
-
-[0] red_count = 0
---------------------------------------------------
-heredoc> 
-heredoc>
-
-expands to empty, not NULL. probably a good thing, but hd fucked...
-
-
-- STRESS TEST THE FUCK OUTTA IT
-
-------------------------------
-**THIS**
-		echo $USER  - leakk
-------------------------------
-**THIS**
-	-- hd what you doing??
-
+3) 
+right now only reading upto an equal, dollar or quote, but i think only alnum and
+	underscore, so need to read only till those, but check examples to know for sure
+	what to skip/ how handle / what do
 
 ------------------------------
 ------------------------------
@@ -54,7 +80,9 @@ expands to empty, not NULL. probably a good thing, but hd fucked...
 
 **MAIN TO DO**
 
-*TODO 1* US
+1) if hd does the thing, test these things:
+
+*1*
  ---->>>>  ?? why we exiting??
 EXAMPLE:
 minibleh:<< eof
@@ -64,8 +92,7 @@ heredoc> exit
 heredoc> eof
 make: *** [Makefile:95: run] Error 1
 
-
-*TODO 2*  ME
+*2*
  ---->>>>> THIS LEAK... comes in here_doc and i think somewhere else too..
 Direct leak of 33 byte(s) in 4 object(s) allocated from:
     #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
@@ -80,31 +107,11 @@ heredoc> "$USER"
 heredoc> '$USER'
 heredoc> eof
 
+*3*
+empty str delim
 
-*TODO 3* ME 	WHAT AM I DOING ABOUT MALLOC FUNC/PROTECTION??
- ------>> put ft_malloc into libft, use for all malloc in libft, 
-		forget about protection hawhaw
-		--->> add malloc func to libft with protection, change all malloc in libft, no longer need wrapers in main files..
+2) signals, test them, check them, clean up file
 
-
-*TODO 4* ME
- ---->> check and test here_doc expansion
- +++ -----> stress testing the expander + checking all for leaks
-
-*TODO 6* US
-SIGNALSSSSh
- ---> the file is a total mess....
- ---> check they really really work correctly in all situations 
- ---> heredoc still weird, two prompt with signal
-
-
-*TODO 7* ME
-EXPANSION
- ---> $? ***, test once exit codes are good
-
-
-*TODO 8* ME
----> literally all errors
 
 
 =================================================================
