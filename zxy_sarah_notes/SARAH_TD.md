@@ -5,6 +5,9 @@
 ------------------------------
 ------------------------------
 
+*right here, right now*
+
+
 **DO this**
 *right here, right now*
 
@@ -45,11 +48,6 @@ minibleh:exoprt $var=test
 
 [0] hd_count = 0
 
-minibleh:export var=a
-[0] cmd = export
-[0] str_count = 1
-[0] strs[0] = var=a
-[0] hd_count = 0
 [0] red_count = 0
 --------------------------------------------------
 thing = var
@@ -113,7 +111,6 @@ heredoc> eof
 empty str delim
 
 2) signals, test them, check them, clean up file
-
 
 
 =================================================================
