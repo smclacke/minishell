@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:35:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:38:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ void	reassign_values(char *cwd, t_env *node, t_parser *head)
 	char	*new_full;
 
 	free(node->value);
-	// node->value = ft_strdup(cwd);
 	node->value = mini_strdup(cwd);
 	if (!node->value)
 		mini_error(E_GENERAL, head);
 	key_equal = mini_strjoin(node->key, "=");
-	// key_equal = ft_strjoin(node->key, "=");
 	if (!key_equal)
 		mini_error(E_GENERAL, head);
 	new_full = mini_strjoin(key_equal, cwd);
-	// new_full = ft_strjoin(key_equal, cwd);
 	if (!key_equal)
 		mini_error(E_GENERAL, head);
 	free(key_equal);

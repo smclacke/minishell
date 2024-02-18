@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:51:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:37:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ char	**list_to_string(t_env *env)
 	char	**env_array;
 	int		i;
 
-	// (void)lst;
 	i = 0;
 	env_array = (char **)mini_malloc((mini_lstsize(env) + 1) * sizeof(char *));
 	while (env)

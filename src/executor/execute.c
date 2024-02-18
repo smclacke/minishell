@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:50:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:36:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 	{
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
-			// temp_path = ft_substr(env->value, 0, ft_strlen(env->value));
 			temp_path = mini_substr(env->value, 0, ft_strlen(env->value));
 			if (temp_path == NULL)
 				mini_error (E_MALLOC, node);
@@ -61,16 +60,13 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 	i = 0;
 	if (!node->proc->cmd)
 		return (node->proc->cmd); // necessary?
-	// printf("cmd = [%s]\n", node->proc->cmd);
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
 		{
-			// command = ft_strjoin("/", node->proc->cmd);
 			command = mini_strjoin("/", node->proc->cmd);
 			if (command == NULL)
 				mini_error (E_MALLOC, node);
-			// ok_path = ft_strjoin(data->path[i], command);
 			ok_path = mini_strjoin(data->path[i], command);
 			if (command == NULL)
 				mini_error (E_MALLOC, node);
@@ -131,10 +127,8 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		put_permission_error(lst);
 		exit (0);
 	}
-	// data->env_array = list_to_string(*env, lst);
 	data->env_array = list_to_string(*env);
 	argv = get_argv(lst);
-	// if (execve(executable, get_argv(lst), data->env_array) == -1)
 	if (execve(executable, argv, data->env_array) == -1)
 		mini_error (E_GENERAL, lst);
 	exit (0);
@@ -172,7 +166,6 @@ void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
 
-	// data = malloc(sizeof(t_execute));
 	data = mini_malloc(sizeof(t_execute));
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:31:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/18 16:38:17 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 	char	*full;
 	t_env	*new;
 
-	// full = ft_strjoin("OLDPWD=", cwd);
 	full = mini_strjoin("OLDPWD=", cwd);
 	if (full == NULL)
 		mini_error(E_MALLOC, head);
@@ -54,7 +53,7 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
 		node = node->next;
 	if (node == NULL)
 	{
-		reassign_old_pwd(env, cwd, head);
+		reassign_old_pwd(	// new_full = ft_strjoin(key_equal, cwd);env, cwd, head);
 		return ;
 	}
 	reassign_values(cwd, node, head);
