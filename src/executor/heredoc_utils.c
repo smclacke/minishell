@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:37:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 16:17:23 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 	int			i;
 
 	i = 0;
-	while (lst->hd[i])
+	// while (lst->hd[i])
+	while (i < lst->hd_count)
 	{
 		number = ft_itoa(i);
 		str = mini_strjoin("heredoc", number);
@@ -147,11 +148,12 @@ void	init_heredoc(t_parser *lst, t_env **env)
 		if (head->proc->hd_count != 0)
 		{
 			//loop through the hd_array
-			// while(head->proc->hd[i])
-			// {
+			printf("hi\n");
+			while (i < head->proc->hd_count)
+			{
 				setup_heredoc(head->proc, env, heredoc);
-				// i++;
-			// }
+				i++;
+			}
 		}
 		head = head->next;
 	}

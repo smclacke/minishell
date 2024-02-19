@@ -1,16 +1,13 @@
 ------------------------------TO DO----------------------------
 
 1) 
-
     static void	build(t_parser *lst, t_env **env, t_execute *data)
      * check the last while(wait(NULL) != -1) loop
 
 2) 
-
     find solid evidence for allowing dprintf, if not just change it you lazy bum
 
 3) 
-
     handle exit codes
 
 4) EXPORT OR EXPANDER
@@ -27,6 +24,21 @@
     bash: ..: command not found
 
     minibleh:..
+	leaks many bites
+==107406==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 16 byte(s) in 1 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/dreijans/Documents/rank3/minishell/minishell+0x49a28d)
+    #1 0x4ce5c3 in mini_malloc /home/dreijans/Documents/rank3/minishell/src/utils/cleanup.c:103:9
+    #2 0x4dfa19 in get_argv /home/dreijans/Documents/rank3/minishell/src/executor/utils.c:91:21
+    #3 0x4ddcc5 in mini_forks /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:132:9
+    #4 0x4e10ae in init_fork /home/dreijans/Documents/rank3/minishell/src/executor/execute_utils_two.c:63:3
+    #5 0x4e1483 in pipeline /home/dreijans/Documents/rank3/minishell/src/executor/execute_utils_two.c:107:3
+    #6 0x4de23e in build /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:154:2
+    #7 0x4de1bd in execute /home/dreijans/Documents/rank3/minishell/src/executor/execute.c:179:2
+    #8 0x4cb420 in run_minishell /home/dreijans/Documents/rank3/minishell/src/main.c:24:2
+    #9 0x4cb52f in main /home/dreijans/Documents/rank3/minishell/src/main.c:49:8
+    #10 0x7f0f3c53bd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
 
 7) ECHO??
 
@@ -36,6 +48,43 @@
 
     minibleh:
 
+8) ERRORS TO STANDARD ERROR!
+
+9) exit > hoi.txt is writing exit in the file
+
+10) met t_execute struct pointer maar t_export en t_env maken zodat ik clean functie kan.
+
+11) dumb input like this gives a segfault
+
+	minibleh:$var=test
+
+[0] cmd = $var=test
+
+[0] str_count = 0
+
+[0] hd_count = 0
+
+[0] red_count = 0
+--------------------------------------------------
+minishell: a: command not found
+executable = [a]
+
+=================================================================
+==110641==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 10 byte(s) in 1 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/dreijans/Documents/rank3/minishell/minishell+0x49a28d)
+    #1 0x4e3ed3 in ft_strdup (/home/dreijans/Documents/rank3/minishell/minishell+0x4e3ed3)
+    #2 0x4d254c in handle_cmd /home/dreijans/Documents/rank3/minishell/src/parser/get_procs.c:85:14
+    #3 0x4d2375 in get_strs /home/dreijans/Documents/rank3/minishell/src/parser/get_procs.c:107:4
+    #4 0x4d11c7 in sort_vars /home/dreijans/Documents/rank3/minishell/src/parser/sort_procs.c:26:3
+    #5 0x4d1026 in sort_each_proc /home/dreijans/Documents/rank3/minishell/src/parser/sort_procs.c:50:2
+    #6 0x4d061f in handle_procs /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:33:4
+    #7 0x4cfda8 in parse_tokens /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:79:16
+    #8 0x4cfc6d in parse_input /home/dreijans/Documents/rank3/minishell/src/parser/parser.c:98:11
+    #9 0x4cb3e5 in run_minishell /home/dreijans/Documents/rank3/minishell/src/main.c:20:10
+    #10 0x4cb52f in main /home/dreijans/Documents/rank3/minishell/src/main.c:49:8
+    #11 0x7f68bb559d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
 
 **------------------ hello from sarah -------------------------**
 
@@ -83,149 +132,6 @@ heredoc still weird, two prompts with signal (ctrl c sws, not sure about the qui
 !!*we are not:*!!
 - SHLVL
 - export ls="ls -l"
-
-char	**null_check(char *str, t_parser *temp)
-{
-	// char		**words;
-	char		words[2];
-	int			i;
-
-	i = 0;
-
-	words = NULL;
-	// words = ft_split(str, '=');
-	words[0] = ft_substr(0, lencount(str, '='));
-	words[1] = ft_substr(lencount(str, '=', ft_strlen(str + 1)));
-	// words[2] = NULL;
-	// while(words[i] != NULL)
-	// {
-	// 	printf("word = %s\n", words[i]);
-	// 	i++;
-	// }
-	if (words == NULL)
-		mini_error(E_GENERAL, temp);
-	if (words[0] == NULL)
-	{
-		ft_free_arr(words);
-		return (NULL);
-	}
-	return (words);
-}
-
-
-/**
- * @param lst linked list
- * @brief checks if the words are export and unset norm
- * proof.
- * key (word) first letter has:
- * capital (H), lowercase (h), underscore (_) as first letter 
- * else give error if given 99=djoyke as key
- * minishell: export: `99=djoyke': not a valid identifier
- * rest of word can only have numbers, letters and underscore.
- * else give error export d@@=haha
- * minishell: export: `d@@=haha': not a valid identifier
- * same for unset
- * @return true if wrong found with the words
- * @todo the !word error part is for this edge case :
- * export "" test=a
- * 
- * but comprimises this edge case which didnt work before
- * but now doesnt work in a different way:
- * export var=a
- * export $var=test
- * echo $var $a
-*/
-bool	word_check(char *str, t_parser *lst)
-{
-	t_parser	*temp;
-	char		**words;
-	char		*cmd;
-
-	cmd = lst->proc->cmd;
-	temp = lst;
-	words = null_check(str, lst);
-	if (!words)
-	{
-		put_custom_error(lst, "export");
-		mini_error(E_GENERAL, lst);
-		return (true);
-	}
-	if ((mini_strcmp(cmd, "unset") == 0) && words[1])
-	{
-		put_custom_error(temp, cmd);
-		return (true);
-	}
-	if (key_value_check(lst, words, "export") == 1)
-	{
-		ft_free_arr(words);
-		return (true);
-	}
-	ft_free_arr(words);
-	return (false);
-}
-
-
-
-1) ERRORS TO STANDARD ERROR!
-2) exit > hoi.txt is writing exit in the file
-
-3) $sign is fine in key string for export fix that!
-	export var=a
-	export $var=test
-	echo $var $a
-
-	➜  minishell git:(djoyke) ✗ make && ./minishell                      
-make[1]: Nothing to be done for 'all'.
-minibleh:export var=a
-
-[0] cmd = export
-
-[0] str_count = 1
-[0] strs[0] = var=a
-
-[0] hd_count = 0
-
-[0] red_count = 0
---------------------------------------------------
-minibleh:export $var=test
-
-[0] cmd = export
-
-[0] str_count = 1
-[0] strs[0] = $var=test
-
-[0] hd_count = 0
-
-[0] red_count = 0
---------------------------------------------------
-minishell: export: `': not a valid identifier
-minibleh:echo $var $a
-
-[0] cmd = echo
-
-[0] str_count = 2
-[0] strs[0] = $var
-[0] strs[1] = $a
-
-[0] hd_count = 0
-
-[0] red_count = 0
---------------------------------------------------
-a 
-minibleh:export $ha
-
-[0] cmd = export
-
-[0] str_count = 1
-[0] strs[0] = $ha
-
-[0] hd_count = 0
-
-[0] red_count = 0
---------------------------------------------------
-minishell: export: `': not a valid identifier
-
-4) met t_execute struct pointer maar t_export en t_env maken zodat ik clean functie kan.
 
 REMEMBER! exit from parser when:
 	- nothing after meta

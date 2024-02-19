@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 21:48:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 14:05:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ int	get_check_value(t_expand *str, t_env **env)
 	str->env_val = NULL;
 	while (head)
 	{
-		printf("dollar = %s\n", str->dollar);
-		printf("key = %s\n", head->key);
+		// printf("dollar = %s\n", str->dollar);
+		// printf("key = %s\n", head->key);
 		if (shelly_strcmp(str->dollar, head->key) == 0)
 		{
-			printf("value = %s\n", head->value);
+			// printf("value = %s\n", head->value);
 			if (!head->value) // THERE IS NO VALUE, THIS WHY WE FAIL
 			{
-				printf("HELLO\n");
+				// printf("HELLO\n");
 				return (1);
 			}
 			len = ft_strlen(head->value);
 			str->env_val = ft_substr(head->value, 0, len);
-			printf("env val = %s\n", str->env_val);
+			// printf("env val = %s\n", str->env_val);
 			if (!str->env_val)
 			{
 				free(str->env_val);
