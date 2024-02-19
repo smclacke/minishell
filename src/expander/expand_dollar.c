@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 17:54:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 19:03:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,20 @@ int	first_bit(t_expand *str, char *input)
 	return (i);
 }
 
+/**
+ *	$something doesnt expand...
+ * 	smclacke@f0r3s25:~$ export $something...
+ *	bash: export: `...': not a valid identifier
+ *	$USER expands, then rest if just saved and then fails.
+ *	smclacke@f0r3s25:~$ export $USER!
+ *	bash: export: `smclacke!': not a valid identifier
+*/
 void	dollar(t_expand *str, t_env **env)
 {
 	int		i;
 
 	i = first_bit(str, str->input);
-	while (str->input[i] && i >= 0 && !is_equal(str->input[i]))
+	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
 			i = dollar_bit(str, str->input, env, (i + 1));
@@ -114,6 +122,8 @@ void	dollar(t_expand *str, t_env **env)
 			if (str->input[i] && !is_dollar_or_quote(str->input[i]))
 				i = save_extra_string(str, str->input, i);
 		}
+		if (!ex_str(str->input[i]))
+			i = save_extra_string(str, str->input, i);
 	}
 }
 

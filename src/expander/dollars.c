@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 19:25:18 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 21:53:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 19:03:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int	dollar_bit(t_expand *str, char *input, t_env **env, int i)
 
 	start = i;
 	end = 0;
-	if (input[i] && expandable_str(input[i]))
+	if (input[i] && ex_str(input[i]))
 	{
-		while (input[i] && expandable_str(input[i]))
+		while (input[i] && ex_str(input[i]))
 			i++;
 		end = i - start;
 		str->dollar = ft_substr(input, start, end);
