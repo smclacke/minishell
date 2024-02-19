@@ -38,7 +38,8 @@ value = a
 env val = a
 a
 
-2) YAYY A LEAK
+2) YAYY A LEAK - wait for djoy to fix non-executable cmd - needs to error, 
+	then check if still leaking
 minibleh:exoprt $var=test
 
 [0] cmd = exoprt

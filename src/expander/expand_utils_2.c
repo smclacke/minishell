@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/07 19:21:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 21:49:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 17:56:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 // 	}
 // }
 
+
 // add all other shit, only alnum and underscore (but check example sheet)
 int	is_equal(int c) // put in libft
 {
@@ -36,12 +37,18 @@ int	is_equal(int c) // put in libft
 	return (0);
 }
 
+// static	int	ft_isunder(int c)
+// {
+// 	return (c == '_');
+// }
+
 /**
  * @brief	specifically for checking the values after dollar sign
  * 			need to check if expandable if not another dollar, quote or space
 */
 int	expandable_str(int c)
 {
+	// if (ft_isalnum(c) || ft_isunder(c))
 	if (!is_dollar_or_quote(c) && !ft_isspace(c) && !is_equal(c))
 		return (1);
 	return (0);
