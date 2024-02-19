@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 19:13:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 20:50:05 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void			do_strs(t_parser *tmp, t_expand *str, t_env **env);
 void			do_cmd(t_parser *tmp, t_expand *str, t_env **env);
 
 //------------------ expand_utils_2 ------------------//
+void			exit_exp(t_expand *str);
 int				ex_str(int c);
 int				is_dollar_or_quote(int c);
 

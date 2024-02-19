@@ -13,38 +13,6 @@
 
 1) $?
 
-2) YAYY A LEAK - wait for djoy to fix non-executable cmd - needs to error, 
-	then check if still leaking
-minibleh:exoprt $var=test
-
-[0] cmd = exoprt
-
-[0] str_count = 1
-[0] strs[0] = $var=test
-
-[0] hd_count = 0
-
-[0] red_count = 0
---------------------------------------------------
-thing = var
-thingggg = var
-env val = a
-minishell: exoprt: command not found
-executable = [exoprt]
-
-    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
-    #1 0x4e4043 in ft_strdup (/home/smclacke/Desktop/shelly/minishell+0x4e4043)
-    #2 0x4d25eb in copy_strs /home/smclacke/Desktop/shelly/src/parser/get_procs.c:72:27
-    #3 0x4d24d3 in get_strs /home/smclacke/Desktop/shelly/src/parser/get_procs.c:112:4
-    #4 0x4d11c7 in sort_vars /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:26:3
-    #5 0x4d1026 in sort_each_proc /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:50:2
-    #6 0x4d061f in handle_procs /home/smclacke/Desktop/shelly/src/parser/parser.c:33:4
-    #7 0x4cfda8 in parse_tokens /home/smclacke/Desktop/shelly/src/parser/parser.c:79:16
-    #8 0x4cfc6d in parse_input /home/smclacke/Desktop/shelly/src/parser/parser.c:98:11
-    #9 0x4cb3e5 in run_minishell /home/smclacke/Desktop/shelly/src/main.c:20:10
-    #10 0x4cb52f in main /home/smclacke/Desktop/shelly/src/main.c:49:8
-    #11 0x7fc0059e2d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-
 3) 
 right now only reading upto an equal, dollar or quote, but i think only alnum and
 	underscore, so need to read only till those, but check examples to know for sure
