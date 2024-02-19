@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:37 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 18:09:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 22:03:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	ft_pwd(t_parser *head)
 	{
 		printf("Current working directory: %s\n", path);
 		free(path);
+		head->exit_code = E_USAGE;
 	}
 	else
-		mini_error(E_USAGE, head);
+		mini_error(E_USAGE, head); //  if we error, why exit 0?
 }

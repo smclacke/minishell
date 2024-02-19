@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 18:49:29 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 22:13:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	put_execute_error(t_parser *node)
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(node->proc->cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	mini_error(E_COMMAND_NOT_FOUND, node);
 }
 
 /**

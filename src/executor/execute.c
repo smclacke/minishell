@@ -6,7 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2024/02/19 19:14:44 by dreijans      ########   odam.nl         */
+=======
+/*   Updated: 2024/02/19 22:07:38 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +176,11 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
+<<<<<<< HEAD
 
+=======
+;
+>>>>>>> sarah
 	data = malloc(sizeof(t_execute));
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);

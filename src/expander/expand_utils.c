@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 20:01:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 21:07:36 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	do_reds(t_parser *tmp, t_expand *str, t_env **env)
 				str->input = tmp->proc->redir[i];
 				tmp->proc->redir[i] = NULL;
 				str->expanded = NULL;
-				dollar(str, env);
+				dollar(tmp, str, env);
 				if (str->expanded)
 					tmp->proc->redir[i] = str->expanded;
 			}
@@ -84,7 +84,7 @@ void	do_hds(t_parser *tmp, t_expand *str, t_env **env)
 				str->input = tmp->proc->hd[i];
 				tmp->proc->hd[i] = NULL;
 				str->expanded = NULL;
-				dollar(str, env);
+				dollar(tmp, str, env);
 				if (str->expanded)
 					tmp->proc->hd[i] = str->expanded;
 			}
@@ -113,7 +113,7 @@ void	do_strs(t_parser *tmp, t_expand *str, t_env **env)
 					malloc_error(tmp, NULL, tmp->proc->str, 3);
 				free(tmp->proc->str[i]);
 				str->expanded = NULL;
-				dollar(str, env);
+				dollar(tmp, str, env);
 				if (str->expanded)
 					tmp->proc->str[i] = str->expanded;
 			}
@@ -139,7 +139,7 @@ void	do_cmd(t_parser *tmp, t_expand *str, t_env **env)
 				malloc_error(tmp, NULL, &tmp->proc->cmd, 3);
 			free(tmp->proc->cmd);
 			str->expanded = NULL;
-			dollar(str, env);
+			dollar(tmp, str, env);
 			if (str->expanded)
 				tmp->proc->cmd = str->expanded;
 			free(str->input);

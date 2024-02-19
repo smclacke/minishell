@@ -6,7 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
+<<<<<<< HEAD
 /*   Updated: 2024/02/19 19:06:22 by dreijans      ########   odam.nl         */
+=======
+/*   Updated: 2024/02/19 22:06:52 by smclacke      ########   odam.nl         */
+>>>>>>> sarah
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +97,11 @@ int	first_bit(t_expand *str, char *input)
 	return (i);
 }
 
+static	int	ft_isquest(int c)
+{
+	return (c == '?');
+}
+
 /**
  *	$something doesnt expand...
  * 	smclacke@f0r3s25:~$ export $something...
@@ -101,7 +110,7 @@ int	first_bit(t_expand *str, char *input)
  *	smclacke@f0r3s25:~$ export $USER!
  *	bash: export: `smclacke!': not a valid identifier
 */
-void	dollar(t_expand *str, t_env **env)
+void	dollar(t_parser *par, t_expand *str, t_env **env)
 {
 	int		i;
 
@@ -109,7 +118,15 @@ void	dollar(t_expand *str, t_env **env)
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
-			i = dollar_bit(str, str->input, env, (i + 1));
+		{
+			if (str->input[i + 1] && ft_isquest(str->input[i + 1]))
+			{
+				exit_exp(par, str);
+				i = save_extra_string(str, str->input, (i + 2));
+			}
+			else
+				i = dollar_bit(str, str->input, env, (i + 1));
+		}
 		if (ft_issquote(str->input[i]))
 		{
 			i = squote_bit(str, str->input, (i + 1));
@@ -135,7 +152,6 @@ void	expand_dollar(t_parser *lst, t_env **env)
 
 	tmp = lst;
 	i = 0;
-	// check_exit(tmp, &str, env);
 	do_cmd(tmp, &str, env);
 	do_strs(tmp, &str, env);
 	do_hds(tmp, &str, env);
