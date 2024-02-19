@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:46:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 20:02:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	prpr(t_parser *proc)
 	{
 		printf("\n[%i] cmd = %s\n", i, proc->proc->cmd);
 		printf("\n[%i] str_count = %i\n", i, proc->proc->str_count);
+		printf("\n[%i] hd_flag = %i\n", i, proc->hd_flag);
+		printf("\n[%i] index = %i\n", i, proc->proc->index);
 		j = 0;
 		if (proc->proc->str_count)
 		{
