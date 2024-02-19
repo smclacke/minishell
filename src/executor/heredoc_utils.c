@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 16:17:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 17:36:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
  *  so parent can read exitstatus child to see if exited 
  * with CTRL+C/SIGNAL
  * exit codes
+ * Norm it!
 */
-// static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 {
 	char	*read_line;
@@ -73,6 +73,12 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 	{
 		handle_signals(HERE_DOC);
 		file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		if (file == -1)
+		{
+			// dprintf(STDERR_FILENO, E_USAGE, lst);
+			// mini_error(E_USAGE, lst->proc->parser);
+			exit(E_USAGE);//for time being exit seperate
+		}
 		while (1)
 		{
 			read_line = readline("heredoc> ");
@@ -103,7 +109,6 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 	int			i;
 
 	i = 0;
-	// while (lst->hd[i])
 	while (i < lst->hd_count)
 	{
 		number = ft_itoa(i);

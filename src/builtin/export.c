@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 16:02:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 17:37:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void	ft_export(t_parser *node, t_env **env)
 		export_print(*env);
 		return ;
 	}
-	//parser needs to pass the expanded str a=test so export can do something
-	//now only get passed a :(
 	printf("parser passed str = [%s]\n", node->proc->str[i]);
 	while (i < node->proc->str_count)
 	{

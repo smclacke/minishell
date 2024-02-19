@@ -14,10 +14,7 @@
 
     export var=a
     export $var=test
-    echo $var $a
-    a test
-
-5) NORM here-doc
+ * @param lst node in linked list
 
 6) PARSER is this me?
     ..
