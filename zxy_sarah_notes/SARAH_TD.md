@@ -13,31 +13,6 @@
 
 1) $?
 
-2) var=a $var=test | echo $var $a = a test
-export var=a
-export $var=test
-
-var is a
-a is test
-
-echo $var $a
-a test
-
-**for $a, we don't have a head->value**
-$a
-dollar = a
-key = var
-dollar = a
-key = a
-value = (null)
-
-**for $var:** // there is a value so we don't just exit
-dollar = var
-key = var
-value = a
-env val = a
-a
-
 2) YAYY A LEAK - wait for djoy to fix non-executable cmd - needs to error, 
 	then check if still leaking
 minibleh:exoprt $var=test
