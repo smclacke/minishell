@@ -11,12 +11,9 @@
 **DO this**
 *right here, right now*
 
-1) $?
-
-3) 
-right now only reading upto an equal, dollar or quote, but i think only alnum and
-	underscore, so need to read only till those, but check examples to know for sure
-	what to skip/ how handle / what do
+1) $? 
+	- echo $USER$?something hangs
+	- norm
 
 ------------------------------
 ------------------------------

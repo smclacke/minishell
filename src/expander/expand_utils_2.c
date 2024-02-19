@@ -6,21 +6,18 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/07 19:21:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 20:53:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 21:55:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-void		exit_exp(t_expand *str)
+void		exit_exp(t_parser *par, t_expand *str)
 {
 	char	*tmp;
 	char	*exit_code;
-	int		exit = 0;
 
-
-	// exit_code = ft_itoa(str->exit->exit_code);
-	exit_code = ft_itoa(exit);
+	exit_code = ft_itoa(par->exit_code);
 	if (!exit_code)
 		malloc_error(NULL, NULL, NULL, 0);
 	if (str->expanded)

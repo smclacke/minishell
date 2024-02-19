@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 20:50:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 21:07:57 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static	int	ft_isquest(int c)
  *	smclacke@f0r3s25:~$ export $USER!
  *	bash: export: `smclacke!': not a valid identifier
 */
-void	dollar(t_expand *str, t_env **env)
+void	dollar(t_parser *par, t_expand *str, t_env **env)
 {
 	int		i;
 
@@ -117,7 +117,7 @@ void	dollar(t_expand *str, t_env **env)
 		{
 			if (ft_isquest(str->input[i + 1]))
 			{
-				exit_exp(str);
+				exit_exp(par, str);
 				i += 2;
 			}
 			else
