@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/07 19:21:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 19:03:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 19:13:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,16 @@
 // 	}
 // }
 
-int	is_equal(int c)
+static int	ft_isunder(int c)
 {
-	if (c == '=')
+	if (c == '_')
 		return (1);
 	return (0);
 }
 
-/**
- * @brief	specifically for checking the values after dollar sign
- * 			only alnum or underscore: used as delimiters, 
- * 			if '=' / quote / space / dollar
- * 			save rest and add to string, else error 
- * 			(e.g. $USER'!') = error:
- *			bash: export: `smclacke!': not a valid identifier
-*/
 int	ex_str(int c)
 {
-	if (!is_dollar_or_quote(c) && !ft_isspace(c) && !is_equal(c))
+	if (ft_isalnum(c) || ft_isunder(c))
 		return (1);
 	return (0);
 }
