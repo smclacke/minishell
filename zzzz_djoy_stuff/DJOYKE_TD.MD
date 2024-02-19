@@ -10,12 +10,6 @@
 3) 
     handle exit codes
 
-4) EXPORT OR EXPANDER
-
-    export var=a
-    export $var=test
- * @param lst node in linked list
-
 6) PARSER is this me?
     ..
     bash: ..: command not found
