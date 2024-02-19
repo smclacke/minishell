@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:47:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 18:28:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ static char	**fill_array(t_procs *lst, char **new_str)
 	new_str[0] = lst->cmd;
 	i++;
 	if (lst->str_count == 0)
-		return (new_str = NULL);
+	{
+		free(new_str);
+		return (NULL);
+	}
 	while (j < lst->str_count)
 	{
 		new_str[i] = lst->str[j];
@@ -89,9 +92,9 @@ char	**get_argv(t_parser *lst)
 	new_str = NULL;
 	i = lst->proc->str_count;
 	new_str = (char **)mini_malloc(sizeof (char *) * (i + 2));
-	if (new_str == NULL)
-		mini_error(E_MALLOC, lst);
 	new_str = fill_array(lst->proc, new_str);
+	if (new_str == NULL)
+		return (NULL);
 	return (new_str);
 }
 

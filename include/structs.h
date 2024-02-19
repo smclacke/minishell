@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 17:18:30 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 16:31:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define INFILE_ERROR "minishell: %s: No such file or directory\n"
 # define DIR_MESSAGE "minishell: %s: Is a directory\n"
 # define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"
+# define FAILED_HEREDOC "minishell: Failed to open heredoc\n"
 
 // EXITCODES
 typedef enum e_exit

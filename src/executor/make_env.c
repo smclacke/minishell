@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:37:39 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 14:09:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
  * @param value pointer to the address of a pointer 
  * containing a string substringed from str after = sign
  * @brief substrings key and value from str without the '=' sign
+ * @todo norm it!
 */
 int	get_key_value(char *str, char **key, char **value)
 {

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:53:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 18:53:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,17 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 
 	i = 0;
 	if (!node->proc->cmd)
-		return (node->proc->cmd); // necessary?
-	// printf("cmd = [%s]\n", node->proc->cmd);
+		return (node->proc->cmd);
 	if (!absolute_check(node) && parse_path(env, data, node))
 	{
 		while (data->path && data->path[i] != NULL)
 		{
-			command = ft_strjoin("/", node->proc->cmd);
-			if (command == NULL)
-				mini_error (E_MALLOC, node);
-			ok_path = ft_strjoin(data->path[i], command);
-			if (command == NULL)
-				mini_error (E_MALLOC, node);
+			command = mini_strjoin("/", node->proc->cmd);
+			// if (command == NULL)
+			// 	mini_error (E_MALLOC, node);//
+			ok_path = mini_strjoin(data->path[i], command);
+			// if (command == NULL)
+			// 	mini_error (E_MALLOC, node);//
 			free(command);
 			if (access(ok_path, F_OK) == 0)
 				return (ok_path);
@@ -90,6 +89,18 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @brief checks parser input for executable and executes with execve
  *  replace exit int with the existatus global we pass on
  * @todo added id !lst->cmd to stop segfault NORM IT
+	// dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
+	// argv = NULL;//need?
+	// executable = NULL;//need?
+	// if (access(executable, F_OK) == -1)
+	// {	
+	// 	put_execute_error(lst);//specified executable error message?
+	// 	exit (EXIT_FAILURE);
+		// ft_free_arr(argv);//need this?
+		// free(executable);//same
+		// ft_free_arr(data->env_array);//same
+	// cmd_type = 0;
+	// }
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -97,9 +108,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	char		**argv;
 	int			cmd_type;
 
-	cmd_type = 0;
-	argv = NULL;//need?
-	executable = NULL;//need?
 	init_pipes_child(data, lst);
 	redirect(lst, data);
 	if (data->error == false)
@@ -108,32 +116,29 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	if (cmd_type != 0)
 	{
 		do_builtin(lst, env, cmd_type);
-		exit (0);
+		exit (EXIT_SUCCESS);//exit success??
 	}
 	if (!lst->proc->cmd) // we do need this?
 		exit (0);
 	executable = check_access(*env, lst, data);
 	if (executable == NULL)
-		return ;
-	dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
-	if (data->error == false)
-		exit (0);
-	if (access(executable, F_OK) == -1)
 	{
 		put_execute_error(lst);
 		exit (0);
 	}
+	if (data->error == false)
+		exit (0);
 	if (access(executable, X_OK) == -1)
 	{
 		put_permission_error(lst);
-		exit (0);
+		exit (EXIT_FAILURE);
 	}
 	data->env_array = list_to_string(*env);
 	argv = get_argv(lst);
-	// if (execve(executable, get_argv(lst), data->env_array) == -1)
+	if (argv == NULL)
+		exit(0);
 	if (execve(executable, argv, data->env_array) == -1)
-		mini_error (E_GENERAL, lst);
-	exit (0);
+		exit(EXIT_FAILURE);
 }
 
 /**

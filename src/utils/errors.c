@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/14 17:11:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 18:49:29 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ void	no_such_file(char *str, t_parser *lst)
  * @brief provides correct error message and exits
  * @todo is this function okay? do I need to exit?
  * norm it
+ * - not just for error, for passing exit codes? meh
+	// exit(exit_enum);
 */
 void	mini_error(int exit_enum, t_parser *lst)
 {
 	lst->exit_code = exit_enum;
-	// write(STDERR_FILENO, "hello?\n", 7);
-	// exit(exit_enum);
 }
