@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 18:53:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 19:14:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks is command has access
  * @todo exit codes
+			// if (command == NULL)
+			// 	mini_error (E_MALLOC, node);//
+			// if (command == NULL)
+			// 	mini_error (E_MALLOC, node);//
 */
 static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
@@ -65,11 +69,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 		while (data->path && data->path[i] != NULL)
 		{
 			command = mini_strjoin("/", node->proc->cmd);
-			// if (command == NULL)
-			// 	mini_error (E_MALLOC, node);//
 			ok_path = mini_strjoin(data->path[i], command);
-			// if (command == NULL)
-			// 	mini_error (E_MALLOC, node);//
 			free(command);
 			if (access(ok_path, F_OK) == 0)
 				return (ok_path);
@@ -173,9 +173,6 @@ void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
 
-	(void) data;
-	(void) env;
-	(void) lst;
 	data = malloc(sizeof(t_execute));
 	if (data == NULL)
 		mini_error (E_GENERAL, lst);

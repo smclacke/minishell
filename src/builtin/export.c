@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 17:37:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 19:08:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ static bool key_value_check(t_parser *node, t_export ex_var, int i)
 			return (false);
 		}
 	}
-	printf("key = [%s]\n", ex_var.key);
-	printf("value = [%s]\n", ex_var.value);
 	return (true);
 }
 
@@ -103,20 +101,16 @@ void	ft_export(t_parser *node, t_env **env)
 		export_print(*env);
 		return ;
 	}
-	printf("parser passed str = [%s]\n", node->proc->str[i]);
 	while (i < node->proc->str_count)
 	{
 		ex_var.str = mini_strdup(node->proc->str[i]);
-		printf("ex_var.str = [%s]\n", ex_var.str);
 		while (ex_var.str[j] && ex_var.str[j] != '=')
 			j++;
 		ex_var.has_value = get_key_value(ex_var.str, &ex_var.key, &ex_var.value);
-		printf("key = [%s], value = [%s]\n", ex_var.key, ex_var.value);
 		if (key_value_check(node, ex_var, i) == false)
 			return ;
 		if (reassign_env(env, ex_var) == true && i == (node->proc->str_count - 1))
 			return ;
-		printf("key = [%s], value = [%s]\n", ex_var.key, ex_var.value);
 		make_node(env, ex_var);
 		node->exit_code = E_USAGE;
 		i++;
