@@ -7,13 +7,24 @@
 
 *right here, right now*
 
+minibleh:echo $USER$?something"hello"$USER'$LESS'$BRUH$USER$?
+
+smclacke5065somethinghellosmclacke$LESSsmclacke5065
 
 **DO this**
 *right here, right now*
 
 1) $? 
-	- echo $USER$?something hangs
 	- norm
+
+2) syntax errors
+	- don't exit minishell
+	- give exit_code (somehow....)
+	- return to get new input.. how? idk..
+
+3) check all errors for similar to above
+
+4) djoy - pwd on error is giving E_USAGE (0), but show error be 0?
 
 ------------------------------
 ------------------------------

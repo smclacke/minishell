@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 21:07:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/19 22:06:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,10 @@ void	dollar(t_parser *par, t_expand *str, t_env **env)
 	{
 		if (ft_dollar(str->input[i]))
 		{
-			if (ft_isquest(str->input[i + 1]))
+			if (str->input[i + 1] && ft_isquest(str->input[i + 1]))
 			{
 				exit_exp(par, str);
-				i += 2;
+				i = save_extra_string(str, str->input, (i + 2));
 			}
 			else
 				i = dollar_bit(str, str->input, env, (i + 1));
