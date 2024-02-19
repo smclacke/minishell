@@ -24,46 +24,15 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 
 3) check all errors for similar to above
 
-4) djoy - pwd on error is giving E_USAGE (0), but show error be 0?
+4) djoy: 
+	 - pwd on error is giving E_USAGE (0), but show error be 0?
+	 - cating heredoc show give the heredoc input but i dont get anything back
+
+5) signals, test them, check them, clean up file
 
 ------------------------------
 ------------------------------
 ------------------------------
-
-**MAIN TO DO**
-
-1) if hd does the thing, test these things:
-
-*1*
- ---->>>>  ?? why we exiting??
-EXAMPLE:
-minibleh:<< eof
-heredoc> hi
-heredoc> hello
-heredoc> exit
-heredoc> eof
-make: *** [Makefile:95: run] Error 1
-
-*2*
- ---->>>>> THIS LEAK... comes in here_doc and i think somewhere else too..
-Direct leak of 33 byte(s) in 4 object(s) allocated from:
-    #0 0x49a29d in malloc (/home/smclacke/Desktop/minishell/minishell+0x49a29d)
-    #1 0x7fba8cca3bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
-
-EXAMPLE:
-minibleh:cat << eof
-heredoc> $USER
-heredoc> hehe
-heredoc> $LESS$USER
-heredoc> "$USER"
-heredoc> '$USER'
-heredoc> eof
-
-*3*
-empty str delim
-
-2) signals, test them, check them, clean up file
-
 
 =================================================================
 =================================================================
