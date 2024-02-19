@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/12 16:44:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 21:07:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ bool	redirect_infile(t_procs *head, t_execute *data)
 {
 	if (mini_strcmp(head->redir[0], "<") == 0)
 	{
-		printf("hi\n");
 		if (access(head->redir[1], F_OK) != 0)
 		{
 			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, head->redir[1]);

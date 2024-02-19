@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 21:02:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/19 21:06:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
  * within that fd there's info about the position in the file 
  * until content ends.
  * file position.
- * hi within a file sets that to pos[3]. you start at pos[0], 
+ * within a file sets that to pos[3]. you start at pos[0], 
  * to read properly needs to be passed correctly
  * check these by using lseek(fd, 0, SEEK_CUR) before and 
  * after writing to the file.
