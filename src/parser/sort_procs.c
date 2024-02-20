@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 20:18:40 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 20:19:34 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	sort_each_proc(t_procs *proc, char **proc_arr)
 		proc->hd_last = FALSE;
 	if (sort_vars(proc, proc_arr) == E_STOP)
 		return (E_STOP);
-	printf("hd bool = %i\n", proc->hd_last);
 	return (0);
 }
 
