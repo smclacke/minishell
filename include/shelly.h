@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 16:08:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 21:05:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,14 +157,20 @@ int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);
+// void			handle_signals(int proc, t_parser *lst);
+
 
 				// ALL DJOYKE PROTOS //
 int				check_for_builtin(t_parser *node);
-void			redirect_outfile(t_procs *head, t_execute *data);
-bool			redirect_infile(t_procs *head, t_execute *data);
-void			redirect_append(t_procs *head, t_execute *data);
+// bool			redirect_outfile(t_procs *head, t_execute *data);
+// bool			redirect_infile(t_procs *head, t_execute *data);
+// bool			redirect_append(t_procs *head, t_execute *data);
+bool			redirect_outfile(char *str, t_execute *data);
+bool			redirect_infile(char *str, t_execute *data);
+bool			redirect_append(char *str, t_execute *data);
 void			init_heredoc(t_parser *lst, t_env **env);
-void			redirect(t_parser *lst, t_execute *data);
+// void			redirect(t_parser *lst, t_execute *data);
+bool			redirect(t_parser *lst, t_execute *data);
 void			redirect_heredoc(t_parser *lst);
 
 //----Environment----//

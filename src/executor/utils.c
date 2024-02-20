@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 18:28:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/20 18:46:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,19 @@ static char	**fill_array(t_procs *lst, char **new_str)
 	j = 0;
 	i = 0;
 	new_str[0] = lst->cmd;
+	// printf("filled at index 0 = [%s]\n", new_str[0]);
 	i++;
-	if (lst->str_count == 0)
+	// if (lst->str_count == 0)
+	if (lst->str_count == 0 && lst->hd_count == 0)
 	{
-		free(new_str);
-		return (NULL);
+		// free(new_str);
+		// return (NULL);
+		new_str[i] = NULL;
+		return (new_str);
+	}
+	if (lst->hd_count != 0)
+	{
+		//get line from file?
 	}
 	while (j < lst->str_count)
 	{

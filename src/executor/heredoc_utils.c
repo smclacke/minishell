@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 21:06:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/20 18:58:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 */
 void	redirect_heredoc(t_parser *lst)
 {
+	dprintf(2, "hellow\n");
 	if (dup2(lst->proc->hd_fd, STDIN_FILENO) == -1)
 		mini_error(E_GENERAL, lst);
 	if (close(lst->proc->hd_fd) == -1)
@@ -57,6 +58,7 @@ static void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
  * with CTRL+C/SIGNAL
  * exit codes
  * Norm it!
+ * it's not catting :(
 */
 static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 {
