@@ -26,6 +26,8 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 
 4) djoy: 
 	 - pwd on error is giving E_USAGE (0), but show error be 0?
+	 - cmd not found exit code is 0
+	 - if exit_codes are implimented everywhere, these should be checkable by 'echo $?' now :)
 	 - cating heredoc show give the heredoc input but i dont get anything back
 
 5) signals, test them, check them, clean up file
