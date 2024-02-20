@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 17:18:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 20:56:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,17 @@ static	int	handle_cmd(t_procs *proc, char *process)
 	return (0);
 }
 
-// norm
 int	get_strs(t_procs *proc, char **process)
 {
 	int		i;
 
 	i = 0;
-	proc->cmd_flag = 0;
 	while (process[i])
 	{
 		if (proc_redir(process[i]))
 		{
 			if (!process[i + 1])
-			{
-				syntax_error("syntax error near unexpected token 'newline'");
-				return (E_STOP);
-			}
+				return (syntax_error("near unexpected token 'newline'"));
 			i += 2;
 		}
 		if (process[i] && !proc_redir(process[i]) && proc->cmd_flag == 0)
@@ -121,8 +116,7 @@ int	get_strs(t_procs *proc, char **process)
 			handle_cmd(proc, process[i]);
 			i++;
 		}
-		while (process[i] && !proc_redir(process[i]) && 
-			proc->cmd_flag != 0 && shelly_strcmp(process[i], PIPE) != 0)
+		while (process[i] && get_strs_util(proc, process, i))
 		{
 			copy_strs(proc, process[i]);
 			i++;

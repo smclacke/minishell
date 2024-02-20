@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 16:08:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 20:54:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # include <limits.h>
 
 				// utils
+//---------- more_space ----------//
+int				get_strs_util(t_procs *proc, char **process, int i);
+
 //---------- parser_erros ----------//
 int				syntax_error(char *str);
 void			general_error(char *str);

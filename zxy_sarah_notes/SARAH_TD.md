@@ -15,8 +15,7 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 *right here, right now*
 
 1) MUST ONCE AGAIN 
-		- NORM
-		- LEAK
+		- NORM - get_procs, proc_utils, lexer, tokens
 
 4) djoy: 
 	 - pwd on error is giving E_USAGE (0), but show error be 0?
