@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 15:22:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 20:05:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,5 @@ void	ft_echo(t_parser *lst, t_env **env)
 	write_line(temp->proc, i);
 	if (is_flag == 0)
 		write(1, "\n", 1);
-	lst->exit_code = E_TEST3;
+	lst->exit_code = E_USAGE;
 }

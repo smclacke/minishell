@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 16:49:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 20:18:40 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,25 @@ static	int	sort_vars(t_procs *proc, char **process)
 	return (0);
 }
 
+static	bool	last_redir(char **proc_arr)
+{
+	int		i;
+
+	i = (ft_arrlen(proc_arr) - 1);
+	while (proc_arr[i])
+	{
+		if (proc_redir(proc_arr[i]))
+		{
+			if (proc_redir(proc_arr[i]) == 2)
+				return (TRUE);
+			else
+				return (FALSE);
+		}
+		i--;
+	}
+	return (FALSE);
+}
+
 int	sort_each_proc(t_procs *proc, char **proc_arr)
 {
 	ft_bzero(proc, sizeof(t_procs));
@@ -64,8 +83,13 @@ int	sort_each_proc(t_procs *proc, char **proc_arr)
 	proc->hd_count = count_hds(proc_arr);
 	if (proc->hd_count == E_STOP)
 		return (E_STOP);
+	if (last_redir(proc_arr) == TRUE)
+		proc->hd_last = TRUE;
+	else
+		proc->hd_last = FALSE;
 	if (sort_vars(proc, proc_arr) == E_STOP)
 		return (E_STOP);
+	printf("hd bool = %i\n", proc->hd_last);
 	return (0);
 }
 
