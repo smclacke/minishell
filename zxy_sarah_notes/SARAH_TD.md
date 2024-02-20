@@ -14,6 +14,13 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 **DO this**
 *right here, right now*
 
+0.1) annnndddd
+	we goota norm again
+
+1111) after working exiting etc
+		check all leaks again, now exiting without necessarily freeing
+			correctly...
+
 1) fun lil leaky poopoo
 minibleh:
 minibleh:
@@ -54,6 +61,7 @@ Direct leak of 4 byte(s) in 4 object(s) allocated from:
     #1 0x7fe02948bbac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
 
 SUMMARY: AddressSanitizer: 4 byte(s) leaked in 4 allocation(s).
+
 
 2) syntax errors
 	- don't exit minishell

@@ -6,13 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:11:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 16:04:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-static	void	sort_vars(t_procs *proc, char **process)
+// norm
+static	int	sort_vars(t_procs *proc, char **process)
 {
 	if (proc->cmd_flag == TRUE)
 	{
@@ -23,7 +24,8 @@ static	void	sort_vars(t_procs *proc, char **process)
 			if (!proc->str)
 				malloc_error(NULL, proc, NULL, 1);
 		}
-		get_strs(proc, process);
+		if (get_strs(proc, process) == E_STOP)
+			return (E_STOP);
 	}
 	else
 	{
@@ -31,23 +33,32 @@ static	void	sort_vars(t_procs *proc, char **process)
 		proc->str = NULL;
 	}
 	if (proc->red_count != 0)
-		get_reds(proc, process);
+	{
+		if (get_reds(proc, process) == E_STOP)
+			return (E_STOP);
+	}
 	else
 		proc->redir = NULL;
 	if (proc->hd_count != 0)
-		get_hds(proc, process);
+	{
+		if (get_hds(proc, process) == E_STOP)
+			return (E_STOP);
+	}
 	else
 		proc->hd = NULL;
+	return (0);
 }
 
-void	sort_each_proc(t_procs *proc, char **proc_arr)
+int	sort_each_proc(t_procs *proc, char **proc_arr)
 {
 	ft_bzero(proc, sizeof(t_procs));
 	proc->token_count = ft_arrlen(proc_arr);
 	proc->red_count = count_reds(proc_arr);
 	proc->str_count = count_strs(proc, proc_arr);
 	proc->hd_count = count_hds(proc_arr);
-	sort_vars(proc, proc_arr);
+	if (sort_vars(proc, proc_arr) == E_STOP)
+		return (E_STOP);
+	return (0);
 }
 
 static	void	token_while(t_parser *proc, char **str)

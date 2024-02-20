@@ -6,13 +6,14 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:18:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 16:04:59 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-void	get_reds(t_procs *proc, char **process)
+// norm
+int	get_reds(t_procs *proc, char **process)
 {
 	int		i;
 	int		j;
@@ -27,7 +28,10 @@ void	get_reds(t_procs *proc, char **process)
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
 		{
 			if (!process[i + 1])
+			{
 				syntax_error("syntax error near unexpected token 'newline'");
+				return (E_STOP);
+			}
 			proc->redir[j] = ft_strdup(process[i]);
 			if (!proc->redir[j])
 				malloc_error(NULL, NULL, NULL, 0);
@@ -39,9 +43,11 @@ void	get_reds(t_procs *proc, char **process)
 		}
 		i++;
 	}
+	return (0);
 }
 
-void	get_hds(t_procs *proc, char **process)
+// norm
+int	get_hds(t_procs *proc, char **process)
 {
 	int		i;
 	int		j;
@@ -56,7 +62,10 @@ void	get_hds(t_procs *proc, char **process)
 		if (proc_redir(process[i]) == 2)
 		{
 			if (!process[i + 1])
+			{
 				syntax_error("syntax error near unexpected token 'newline'");
+				return (E_STOP);
+			}
 			proc->hd[j] = ft_strdup(process[i + 1]);
 			if (!proc->hd[j])
 				malloc_error(NULL, NULL, NULL, 0);
@@ -65,6 +74,7 @@ void	get_hds(t_procs *proc, char **process)
 		}
 		i++;
 	}
+	return (0);
 }
 
 static	int	copy_strs(t_procs *proc, char *process)
@@ -88,7 +98,8 @@ static	int	handle_cmd(t_procs *proc, char *process)
 	return (0);
 }
 
-void	get_strs(t_procs *proc, char **process)
+// norm
+int	get_strs(t_procs *proc, char **process)
 {
 	int		i;
 
@@ -99,7 +110,10 @@ void	get_strs(t_procs *proc, char **process)
 		if (proc_redir(process[i]))
 		{
 			if (!process[i + 1])
+			{
 				syntax_error("syntax error near unexpected token 'newline'");
+				return (E_STOP);
+			}
 			i += 2;
 		}
 		if (process[i] && !proc_redir(process[i]) && proc->cmd_flag == 0)
@@ -113,4 +127,5 @@ void	get_strs(t_procs *proc, char **process)
 			i++;
 		}
 	}
+	return (0);
 }

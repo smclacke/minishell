@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:15:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 15:52:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	count_reds(char **process)
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
 		{
 			if (!process[i + 1] || !ft_spaced(process[i + 1]))
-				syntax_error("syntax error near unexpected token 'newline'");
+				syntax_error("syntax error near unexpected token 'newline'"); // 
 			count += 2;
 		}
 		i++;
@@ -44,7 +44,7 @@ int	count_strs(t_procs *proc, char **process)
 		if (proc_redir(process[i]))
 		{
 			if (!process[i + 1] || !ft_spaced(process[i + 1]))
-				syntax_error("syntax error near unexpected token 'newline'");
+				syntax_error("syntax error near unexpected token 'newline'"); //
 			i += 2;
 		}
 		else if (proc->cmd_flag != 1)
@@ -73,7 +73,7 @@ int	count_hds(char **process)
 		if (proc_redir(process[i]) == 2)
 		{
 			if (!(process[i + 1]) || !ft_spaced(process[i + 1]))
-				syntax_error("syntax error near unexpected token 'newline'");
+				syntax_error("syntax error near unexpected token 'newline'"); //
 			count += 1;
 		}
 		i++;
