@@ -34,6 +34,26 @@ Direct leak of 6 byte(s) in 6 object(s) allocated from:
 SUMMARY: AddressSanitizer: 6 byte(s) leaked in 6 allocation(s).
 make: *** [Makefile:96: run] Error 1
 
+1.1) eeeeeen nog eentje :)
+minibleh:pwd
+Current working directory: /home/smclacke/Desktop/shelly
+minibleh:echo $?
+98777
+minibleh:cd ..
+minibleh:echo $?
+999
+minibleh:cd minishell
+minishell: cd: minishell: No such file or directory
+minibleh:ls
+
+=================================================================
+==2456563==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 4 byte(s) in 4 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
+    #1 0x7fe02948bbac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+SUMMARY: AddressSanitizer: 4 byte(s) leaked in 4 allocation(s).
 
 2) syntax errors
 	- don't exit minishell

@@ -6,16 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 16:13:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 21:42:42 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 15:48:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-void	syntax_error(char *str)
+/**
+ * malloc or general error problems, just freeing and exiting
+ * if syntax error, return that error, continue in while loop
+ */
+int	syntax_error(char *str)
 {
 	printf("minishell: %s\n", str);
-	exit(E_SYNTAX);
+	return (E_SYNTAX);
 }
 
 void	general_error(char *str)

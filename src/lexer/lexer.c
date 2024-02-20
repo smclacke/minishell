@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 18:58:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 15:47:48 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	quote_input(char *input, int i)
 		if (ft_isquote(input[i]))
 		{
 			quote_type = which_quote(&input[i]);
+			if (next_quote(&input[i], *quote_type) == E_STOP)
+				return (E_STOP);
 			i += next_quote(&input[i], *quote_type);
 		}
 		i++;
@@ -48,6 +50,8 @@ static int	amount_tokens(char *input)
 		}
 		if (input[i] && !ft_isspace(input[i]))
 		{
+			if (quote_input(input, i) == E_STOP)
+				return (E_STOP);
 			i = quote_input(input, i);
 			count++;
 		}
@@ -68,6 +72,7 @@ static char	*split_tokens(char *input, int len)
 	return (token);
 }
 
+// norm
 static char	**lexer_split(char *input)
 {
 	char	**array;
@@ -79,6 +84,8 @@ static char	**lexer_split(char *input)
 	i = 0;
 	start = 0;
 	len = 0;
+	if (amount_tokens(input) == E_STOP)
+		return (NULL);
 	no_tokens = amount_tokens(input);
 	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
 	if (!array)
@@ -86,6 +93,8 @@ static char	**lexer_split(char *input)
 	while (i < no_tokens)
 	{
 		start = start_token(input, (start + len));
+		if (len_token(input, start) == E_STOP)
+			return (NULL);
 		len = len_token(input, start);
 		array[i] = split_tokens(&input[start], len);
 		i++;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   token_size.c                                       :+:    :+:            */
+/*   tokens.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/08 20:14:06 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 15:43:54 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	start_token(char *input, int old_start)
 	return (old_start);
 }
 
+// norm
 int	len_token(char *input, int len)
 {
 	int		tmp;
@@ -70,6 +71,8 @@ int	len_token(char *input, int len)
 		if (ft_isquote(input[len]))
 		{
 			quote_type = which_quote(&input[len]);
+			if (next_quote(&input[len], *quote_type) == E_STOP)
+				return (E_STOP);
 			len += next_quote(&input[len], *quote_type);
 		}
 		len++;

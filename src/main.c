@@ -6,12 +6,17 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 22:14:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 15:40:11 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
+/**
+ * is this the right logic?
+ * 	if parser succeeds exit code is 0, update parser exit code with previous
+ * 	otherwise error occurred, syntax exit given back to main
+ */
 int	run_minishell(t_env *env, char *input, int exit_c)
 {
 	t_parser	*procs;
@@ -19,9 +24,9 @@ int	run_minishell(t_env *env, char *input, int exit_c)
 	procs = NULL;
 	procs = parse_input(procs, input);
 	if (!procs)
-		return (42);
-	// prpr(procs); //
-	procs->exit_code = exit_c;
+		return (E_SYNTAX);
+	else
+		procs->exit_code = exit_c;
 	execute(&env, procs);
 	exit_c = procs->exit_code;
 	free_parser(procs);

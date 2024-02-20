@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 14:57:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 15:38:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ t_parser	*parse_input(t_parser *procs, char *input)
 		ft_free_process(procs);
 		return (procs);
 	}
-	general_error("error parsing input");
 	return (0);
 }

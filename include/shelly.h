@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 15:12:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 15:28:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 				// utils
 //---------- parser_erros ----------//
-void			syntax_error(char *str);
+int				syntax_error(char *str);
 void			general_error(char *str);
 void			malloc_error(t_parser *par, t_procs *proc,
 					char **str, int exit_code);
