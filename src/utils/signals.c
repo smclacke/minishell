@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 18:29:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/20 21:49:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	sig_hd(int signum)
 	// tmp = NULL;
 	if (signum == SIGINT)
 	{
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		// ft_putchar_fd('\n', STDOUT_FILENO);
 		// lst->exit_code = E_GENERAL;
 		exit(E_GENERAL);
 	}
