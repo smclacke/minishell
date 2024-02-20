@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 16:01:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 18:29:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,14 @@ static void	sig_hd(int signum)
 	if (signum == SIGINT)
 	{
 		ft_putchar_fd('\n', STDOUT_FILENO);
-		// tmp->exit_code = E_GENERAL;
-		exit(1);
+		// lst->exit_code = E_GENERAL;
+		exit(E_GENERAL);
 	}
 }
 
+/**
+ * @todo doenst show ^C after trying to get out of cat
+*/
 void	handle_signals(int proc)
 {
 	struct termios	term;

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 22:17:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 18:56:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @brief checks parser input for executable and executes with execve
  *  replace exit int with the existatus global we pass on
  * @todo added id !lst->cmd to stop segfault NORM IT
-	// dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
 	// argv = NULL;//need?
 	// executable = NULL;//need?
 	// if (access(executable, F_OK) == -1)
@@ -133,10 +132,19 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		put_permission_error(lst);
 		exit (EXIT_FAILURE);
 	}
+	// dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
 	data->env_array = list_to_string(*env);
 	argv = get_argv(lst);
 	if (argv == NULL)
 		exit(0);
+	// int i = 0;
+	// while (argv[i])
+	// {
+	// 	if (argv[i] == NULL)
+	// 		printf("NULL");
+	// 	printf("argv[i] = [%s]\n", argv[i]);
+	// 	i++;
+	// }
 	if (execve(executable, argv, data->env_array) == -1)
 		exit(EXIT_FAILURE);
 }

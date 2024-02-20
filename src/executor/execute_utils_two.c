@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 22:17:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 21:03:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,29 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
  * @note keeping hd_count check since func used much, i.e. mini_forks
  * 		- when used with multi procs, check hd stuff...
 */
-void	redirect(t_parser *lst, t_execute *data)
+// void	redirect(t_parser *lst, t_execute *data)
+bool	redirect(t_parser *lst, t_execute *data)
 {
-	if (lst->proc->red_count == 0)
-		return ;
-	if (!redirect_infile(lst->proc, data))//why again?
+	(void)data;
+	int i;
+
+	i = 0;
+	while (i < lst->proc->red_count) //is herdoc last or flag?
 	{
-		data->error = false;
-		return ;
+		dprintf(STDERR_FILENO, "redir[i] = [%s]\n", lst->proc->redir[i]);
+		if (ft_strncmp(lst->proc->redir[i], ">", 2) == 0)
+			if (redirect_outfile(lst->proc->redir[i + 1], data) == false)
+				return (true);
+		if (ft_strncmp(lst->proc->redir[i], "<", 2) == 0)
+			if (redirect_infile(lst->proc->redir[i + 1], data) == false)
+				return (true);
+		if (ft_strncmp(lst->proc->redir[i], ">>", 3) == 0)
+			if (redirect_append(lst->proc->redir[i + 1], data) == false)
+				return (true);
+		i += 2;
 	}
-	redirect_heredoc(lst);
-	redirect_outfile(lst->proc, data);
-	redirect_append(lst->proc, data);
+	i++;
+	// if (blbla-<hd_last)
+		redirect_heredoc(lst);//check if bool and return etc
+	return (true);
 }
