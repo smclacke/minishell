@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 20:19:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 20:39:19 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static	bool	last_redir(char **proc_arr)
 	int		i;
 
 	i = (ft_arrlen(proc_arr) - 1);
-	while (proc_arr[i])
+	while (i >= 0)
 	{
-		if (proc_redir(proc_arr[i]))
+		if (proc_arr[i] && proc_redir(proc_arr[i]))
 		{
 			if (proc_redir(proc_arr[i]) == 2)
 				return (TRUE);
