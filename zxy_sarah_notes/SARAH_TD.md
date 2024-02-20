@@ -17,6 +17,8 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 1) $? 
 	- norm
 
+	- triple check all mallo protection
+
 2) syntax errors
 	- don't exit minishell
 	- give exit_code (somehow....)

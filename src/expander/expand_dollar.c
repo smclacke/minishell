@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 22:16:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 14:58:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,14 @@ int	first_bit(t_expand *str, char *input)
 	return (i);
 }
 
+// move to libft
 static	int	ft_isquest(int c)
 {
 	return (c == '?');
 }
 
 /**
- *	$something doesnt expand...
- * 	smclacke@f0r3s25:~$ export $something...
- *	bash: export: `...': not a valid identifier
- *	$USER expands, then rest if just saved and then fails.
- *	smclacke@f0r3s25:~$ export $USER!
- *	bash: export: `smclacke!': not a valid identifier
+ *	norm
 */
 void	dollar(t_parser *par, t_expand *str, t_env **env)
 {

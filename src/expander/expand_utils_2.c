@@ -6,13 +6,13 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/07 19:21:07 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 21:55:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 14:58:45 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-void		exit_exp(t_parser *par, t_expand *str)
+void	exit_exp(t_parser *par, t_expand *str)
 {
 	char	*tmp;
 	char	*exit_code;

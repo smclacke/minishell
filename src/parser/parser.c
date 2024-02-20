@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/19 22:02:36 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 14:57:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static	t_parser	*init_parser(char **tokens)
 	ft_bzero(proc->process, (sizeof(t_procs *) * (proc->proc_count + 1)));
 	return (proc);
 }
-
 
 static t_parser	*parse_tokens(char **tokens)
 {
