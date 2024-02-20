@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 18:58:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/20 21:33:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 */
 void	redirect_heredoc(t_parser *lst)
 {
-	dprintf(2, "hellow\n");
 	if (dup2(lst->proc->hd_fd, STDIN_FILENO) == -1)
 		mini_error(E_GENERAL, lst);
 	if (close(lst->proc->hd_fd) == -1)
@@ -58,7 +57,7 @@ static void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
  * with CTRL+C/SIGNAL
  * exit codes
  * Norm it!
- * it's not catting :(
+// mini_error(E_USAGE, lst->proc->parser);
 */
 static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 {
@@ -74,10 +73,7 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 		handle_signals(HERE_DOC);
 		file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (file == -1)
-		{
-			// mini_error(E_USAGE, lst->proc->parser);
 			exit(E_USAGE);//for time being exit seperate
-		}
 		while (i < lst->hd_count)
 		{
 			read_line = readline("heredoc> ");
@@ -154,9 +150,7 @@ void	init_heredoc(t_parser *lst, t_env **env)
 		if (head->multi_proc_b)
 		{
 			for (int i = 0; i < head->proc_count; i++)
-			{
 				setup_heredoc(head->process[i], env, heredoc);
-			}
 		}
 		else
 			setup_heredoc(head->proc, env, heredoc);

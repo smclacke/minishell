@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:03:55 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/20 21:11:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
  * @note keeping hd_count check since func used much, i.e. mini_forks
  * 		- when used with multi procs, check hd stuff...
 */
-// void	redirect(t_parser *lst, t_execute *data)
 bool	redirect(t_parser *lst, t_execute *data)
 {
 	(void)data;
@@ -129,7 +128,6 @@ bool	redirect(t_parser *lst, t_execute *data)
 	i = 0;
 	while (i < lst->proc->red_count) //is herdoc last or flag?
 	{
-		dprintf(STDERR_FILENO, "redir[i] = [%s]\n", lst->proc->redir[i]);
 		if (ft_strncmp(lst->proc->redir[i], ">", 2) == 0)
 			if (redirect_outfile(lst->proc->redir[i + 1], data) == false)
 				return (true);
@@ -142,7 +140,7 @@ bool	redirect(t_parser *lst, t_execute *data)
 		i += 2;
 	}
 	i++;
-	// if (blbla-<hd_last)
+	if (lst->proc->hd_last)
 		redirect_heredoc(lst);//check if bool and return etc
 	return (true);
 }

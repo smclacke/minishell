@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 18:56:34 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/20 21:36:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks is command has access
  * @todo exit codes
-			// if (command == NULL)
-			// 	mini_error (E_MALLOC, node);//
-			// if (command == NULL)
-			// 	mini_error (E_MALLOC, node);//
 */
 static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 {
@@ -88,9 +84,9 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks parser input for executable and executes with execve
  *  replace exit int with the existatus global we pass on
- * @todo added id !lst->cmd to stop segfault NORM IT
-	// argv = NULL;//need?
-	// executable = NULL;//need?
+ * @todo
+ * exitstatus global needed 
+ * NORM IT
 	// if (access(executable, F_OK) == -1)
 	// {	
 	// 	put_execute_error(lst);//specified executable error message?
@@ -100,6 +96,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 		// ft_free_arr(data->env_array);//same
 	// cmd_type = 0;
 	// }
+	// dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -132,19 +129,10 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		put_permission_error(lst);
 		exit (EXIT_FAILURE);
 	}
-	// dprintf(STDERR_FILENO, "executable = [%s]\n", executable);
 	data->env_array = list_to_string(*env);
 	argv = get_argv(lst);
 	if (argv == NULL)
 		exit(0);
-	// int i = 0;
-	// while (argv[i])
-	// {
-	// 	if (argv[i] == NULL)
-	// 		printf("NULL");
-	// 	printf("argv[i] = [%s]\n", argv[i]);
-	// 	i++;
-	// }
 	if (execve(executable, argv, data->env_array) == -1)
 		exit(EXIT_FAILURE);
 }
