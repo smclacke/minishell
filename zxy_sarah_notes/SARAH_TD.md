@@ -14,10 +14,26 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 **DO this**
 *right here, right now*
 
-1) $? 
-	- norm
+1) fun lil leaky poopoo
+minibleh:
+minibleh:
+minibleh:
+minibleh:
+minibleh:
+minibleh:^C
+minibleh:
+minibleh:
 
-	- triple check all mallo protection
+=================================================================
+==2447113==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 6 byte(s) in 6 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
+    #1 0x7f8fd38e6bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
+
+SUMMARY: AddressSanitizer: 6 byte(s) leaked in 6 allocation(s).
+make: *** [Makefile:96: run] Error 1
+
 
 2) syntax errors
 	- don't exit minishell

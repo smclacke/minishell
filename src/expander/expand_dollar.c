@@ -6,45 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 14:58:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 15:15:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-/**
- * @param	env expander struct
- * @param	exp environmet linked list
- * @brief	checks environment value of string to be expanded
- * 			if there is no value it free's the comp_str and env_value.
- * @return	1 if there is no value, 0 if value is found and assigned
-*/
-int	get_check_value(t_expand *str, t_env **env)
-{
-	t_env	*head;
-	int		len;
-
-	head = *env;
-	str->env_val = NULL;
-	while (head)
-	{
-		if (shelly_strcmp(str->dollar, head->key) == 0)
-		{
-			if (!head->value)
-				return (1);
-			len = ft_strlen(head->value);
-			str->env_val = ft_substr(head->value, 0, len);
-			if (!str->env_val)
-			{
-				free(str->env_val);
-				malloc_error(NULL, NULL, NULL, 0);
-			}
-			return (0);
-		}
-		head = head->next;
-	}
-	return (1);
-}
 
 int	save_extra_string(t_expand *str, char *input, int i)
 {
@@ -77,7 +43,7 @@ int	save_extra_string(t_expand *str, char *input, int i)
 
 int	first_bit(t_expand *str, char *input)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (input[i] && !is_dollar_or_quote(input[i]))
@@ -93,32 +59,28 @@ int	first_bit(t_expand *str, char *input)
 	return (i);
 }
 
-// move to libft
-static	int	ft_isquest(int c)
+static int	handle_dollars(t_parser *par, t_expand *str, t_env **env, int i)
 {
-	return (c == '?');
+	if (str->input[i + 1] && ft_isquest(str->input[i + 1]))
+	{
+		exit_exp(par, str);
+		i = save_extra_string(str, str->input, (i + 2));
+		return (i);
+	}
+	else
+		i = dollar_bit(str, str->input, env, (i + 1));
+	return (i);
 }
 
-/**
- *	norm
-*/
 void	dollar(t_parser *par, t_expand *str, t_env **env)
 {
-	int		i;
+	int	i;
 
 	i = first_bit(str, str->input);
 	while (str->input[i])
 	{
 		if (ft_dollar(str->input[i]))
-		{
-			if (str->input[i + 1] && ft_isquest(str->input[i + 1]))
-			{
-				exit_exp(par, str);
-				i = save_extra_string(str, str->input, (i + 2));
-			}
-			else
-				i = dollar_bit(str, str->input, env, (i + 1));
-		}
+			i = handle_dollars(par, str, env, i);
 		if (ft_issquote(str->input[i]))
 		{
 			i = squote_bit(str, str->input, (i + 1));
