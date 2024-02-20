@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 16:19:49 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 17:23:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ static	t_parser	*handle_procs(t_parser *proc)
 		if (proc->proc_count > 1)
 		{	
 			if (sort_each_proc(proc->process[i], proc->proc_arrs[i]) == E_STOP)
-				return (NULL);
+				return (ft_free_process(proc), NULL);
 		}
 		else
 		{
 			if (sort_each_proc(proc->process[i], proc->tokens) == E_STOP)
-				return (NULL);
+				return (ft_free_process(proc), free(proc), NULL);
 		}
 		proc->process[i]->proc_count = proc->proc_count;
 		new_node = parser_listnew(proc->process[i]);
@@ -62,7 +62,7 @@ static	t_parser	*init_parser(char **tokens)
 	proc->tokens = tokens;
 	proc->proc_count = (count_procs(tokens) + 1);
 	if (!proc->proc_count)
-		return (NULL);
+		return (free_lots_stuff(proc), free_parser(proc), NULL);
 	proc->process = (t_procs **)malloc(sizeof(t_procs *)
 			* (proc->proc_count + 1));
 	if (!proc->process)
@@ -82,18 +82,16 @@ static t_parser	*parse_tokens(char **tokens)
 		return (NULL);
 	proc = init_parser(tokens);
 	if (!proc)
-		return (NULL);
+		return (ft_free_arr(tokens), NULL);
 	parser_list = NULL;
 	if (proc->proc_count > 1)
 	{
 		if (!get_procs(proc))
-			return (NULL);
+			return (free_lots_stuff(proc), ft_free_arr(tokens), free_parser(proc), NULL);
 	}
 	parser_list = handle_procs(proc);
 	if (parser_list == NULL)
-		return (NULL);
-	if (!parser_list)
-		return (free_parser(proc), NULL);
+		return (ft_free_arr(tokens), NULL);
 	ft_free_arr(tokens);
 	return (parser_list);
 }

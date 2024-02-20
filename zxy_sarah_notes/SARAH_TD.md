@@ -14,69 +14,15 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 **DO this**
 *right here, right now*
 
-0.1) annnndddd
-	we goota norm again
-
-1111) after working exiting etc
-		check all leaks again, now exiting without necessarily freeing
-			correctly...
-
-1) fun lil leaky poopoo
-minibleh:
-minibleh:
-minibleh:
-minibleh:
-minibleh:
-minibleh:^C
-minibleh:
-minibleh:
-
-=================================================================
-==2447113==ERROR: LeakSanitizer: detected memory leaks
-
-Direct leak of 6 byte(s) in 6 object(s) allocated from:
-    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
-    #1 0x7f8fd38e6bac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
-
-SUMMARY: AddressSanitizer: 6 byte(s) leaked in 6 allocation(s).
-make: *** [Makefile:96: run] Error 1
-
-1.1) eeeeeen nog eentje :)
-minibleh:pwd
-Current working directory: /home/smclacke/Desktop/shelly
-minibleh:echo $?
-98777
-minibleh:cd ..
-minibleh:echo $?
-999
-minibleh:cd minishell
-minishell: cd: minishell: No such file or directory
-minibleh:ls
-
-=================================================================
-==2456563==ERROR: LeakSanitizer: detected memory leaks
-
-Direct leak of 4 byte(s) in 4 object(s) allocated from:
-    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
-    #1 0x7fe02948bbac in xmalloc (/lib/x86_64-linux-gnu/libreadline.so.8+0x39bac)
-
-SUMMARY: AddressSanitizer: 4 byte(s) leaked in 4 allocation(s).
-
-
-2) syntax errors
-	- don't exit minishell
-	- give exit_code (somehow....)
-	- return to get new input.. how? idk..
-
-3) check all errors for similar to above
+1) MUST ONCE AGAIN 
+		- NORM
+		- LEAK
 
 4) djoy: 
 	 - pwd on error is giving E_USAGE (0), but show error be 0?
 	 - cmd not found exit code is 0
 	 - if exit_codes are implimented everywhere, these should be checkable by 'echo $?' now :)
 	 - cating heredoc show give the heredoc input but i dont get anything back
-
-5) signals, test them, check them, clean up file
 
 ------------------------------
 ------------------------------

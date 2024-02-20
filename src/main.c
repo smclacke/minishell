@@ -6,14 +6,14 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 15:40:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 16:49:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
 /**
- * is this the right logic?
+ *	is this the right logic?
  * 	if parser succeeds exit code is 0, update parser exit code with previous
  * 	otherwise error occurred, syntax exit given back to main
  */
@@ -23,6 +23,7 @@ int	run_minishell(t_env *env, char *input, int exit_c)
 
 	procs = NULL;
 	procs = parse_input(procs, input);
+	// prpr(procs);
 	if (!procs)
 		return (E_SYNTAX);
 	else

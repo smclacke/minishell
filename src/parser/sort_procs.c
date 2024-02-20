@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 16:04:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 16:49:51 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,17 @@ int	sort_each_proc(t_procs *proc, char **proc_arr)
 {
 	ft_bzero(proc, sizeof(t_procs));
 	proc->token_count = ft_arrlen(proc_arr);
+	if (proc->token_count == E_STOP)
+		return (E_STOP);
 	proc->red_count = count_reds(proc_arr);
+	if (proc->red_count == E_STOP)
+		return (E_STOP);
 	proc->str_count = count_strs(proc, proc_arr);
+	if (proc->str_count == E_STOP)
+		return (E_STOP);
 	proc->hd_count = count_hds(proc_arr);
+	if (proc->hd_count == E_STOP)
+		return (E_STOP);
 	if (sort_vars(proc, proc_arr) == E_STOP)
 		return (E_STOP);
 	return (0);

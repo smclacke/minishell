@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 16:04:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/20 17:18:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,14 @@ int	get_strs(t_procs *proc, char **process)
 			handle_cmd(proc, process[i]);
 			i++;
 		}
-		while (process[i] && !proc_redir(process[i]) && proc->cmd_flag != 0)
+		while (process[i] && !proc_redir(process[i]) && 
+			proc->cmd_flag != 0 && shelly_strcmp(process[i], PIPE) != 0)
 		{
 			copy_strs(proc, process[i]);
 			i++;
 		}
+		if (process[i] && ft_strcmp(process[i], PIPE) == 0)
+			i++;
 	}
 	return (0);
 }
