@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 22:34:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/20 17:08:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	arg_check(t_parser *lst)
 {
 	if (lst->proc->str_count > 1)
 	{
-		write(STDOUT_FILENO, TOO_MANY_ARG, sizeof(TOO_MANY_ARG));
+		write(STDERR_FILENO, TOO_MANY_ARG, sizeof(TOO_MANY_ARG));
 		exit(1);
 	}
 }
@@ -52,7 +52,7 @@ static void	arg_check(t_parser *lst)
 */
 void	exit_with_stat(int exit_status, int status)
 {
-	write(STDOUT_FILENO, "exit\n", 5);
+	write(STDERR_FILENO, "exit\n", 5);
 	if (WIFEXITED(status))
 		exit_status = WEXITSTATUS(status);
 	exit(exit_status);
@@ -62,7 +62,7 @@ void	exit_with_stat(int exit_status, int status)
  * @param lst parsed list
  * @brief exits the program and displays corresponding error number
  * @todo check for exitstatus line 68 if it's exit status from prev child process
- * memory leaks in parse tokens NORM IT!
+ * is it bad that exit always displays? even with exit > test.txt
 */
 void	ft_exit(t_parser *lst)
 {
@@ -84,6 +84,6 @@ void	ft_exit(t_parser *lst)
 		put_custom_error(lst, "exit");
 		exit(255);
 	}
-	write(STDOUT_FILENO, "exit\n", 5);
+	write(STDERR_FILENO, "exit", 5);
 	exit(error);
 }
