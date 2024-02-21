@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 20:57:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 19:18:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	int	sort_this_out(t_parser *proc, int i)
 	if (proc->proc_count > 1)
 	{
 		if (sort_each_proc(proc->process[i], proc->proc_arrs[i]) == E_STOP)
-			return (ft_free_process(proc), 0);
+			return (ft_free_process(proc), free(proc), 0);
 	}
 	else
 	{
@@ -98,7 +98,17 @@ static t_parser	*parse_tokens(char **tokens)
 	}
 	parser_list = handle_procs(proc);
 	if (parser_list == NULL)
-		return (ft_free_arr(tokens), NULL);
+	{
+		// free_lots_stuff(proc);
+		// free(proc->process);
+		ft_free_arr(tokens);
+		// free(proc);
+		free_parser(proc);
+		return (NULL);
+		// if (count_procs(tokens) >= 1)
+		// ???
+		// return (ft_free_arr(tokens), NULL);
+	}
 	ft_free_arr(tokens);
 	return (parser_list);
 }
