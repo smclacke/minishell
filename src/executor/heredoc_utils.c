@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 15:28:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:31:33 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,14 @@ void	init_heredoc(t_parser *lst, t_env **env)
 	{
 		if (head->multi_proc_b)
 		{
-			for (int i = 0; i < head->proc_count; i++)
+			// for (int i = 0; i < head->proc_count; i++)
+			// 	setup_heredoc(head->process[i], env, heredoc);
+			while (i < head->proc_count) 
+			{
 				setup_heredoc(head->process[i], env, heredoc);
+				i++;
+			}
+
 		}
 		else
 			setup_heredoc(head->proc, env, heredoc);

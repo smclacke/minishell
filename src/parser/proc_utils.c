@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 17:18:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:29:03 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,17 @@ int	proc_redir(char *input)
 	return (0);
 }
 
+/**
+ * @todo put back token size, djoykes mac didnt want to compile 
+ * because it was "unused??"
+ */
 int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 {
 	int		proc_j;
-	int		token_size;
+	// int		token_size;
 
 	proc_j = 0;
-	token_size = 0;
+	// token_size = 0;
 	while (proc_j < proc_size)
 	{
 		if (!proc->tokens[proc->start])
@@ -122,7 +126,7 @@ int	make_proc_arr(t_parser *proc, int proc_i, int proc_size)
 			free_parser(proc);
 			return (0);
 		}
-		token_size = ft_strlen(proc->tokens[proc->start]);
+		//token_size = ft_strlen(proc->tokens[proc->start]);
 		proc->proc_arrs[proc_i][proc_j] = ft_strdup(proc->tokens[proc->start]);
 		if (!proc->proc_arrs[proc_i][proc_j])
 		{

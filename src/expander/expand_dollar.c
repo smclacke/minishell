@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 15:15:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:29:17 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ void	expand_dollar(t_parser *lst, t_env **env)
 {
 	t_expand	str;
 	t_parser	*tmp;
-	int			i;
+	// int			i;
 
 	tmp = lst;
-	i = 0;
+	// i = 0;
 	do_cmd(tmp, &str, env);
 	do_strs(tmp, &str, env);
 	do_hds(tmp, &str, env);

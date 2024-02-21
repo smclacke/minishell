@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 15:37:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:37:54 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ void	old_pwd(char *str, t_env **env, t_parser *lst)
 	if (old_pwd == NULL)
 	{
 		printf("minishell: cd: OLDPWD not set\n");
-		// mini_error(E_GENERAL, lst);
-		lst->exit_code = E_GENERAL;
+		mini_error(E_GENERAL, lst);
+		exit (lst->exit_code);
+		// lst->exit_code = E_GENERAL;
 		return ;
 	}
 	str = old_pwd;

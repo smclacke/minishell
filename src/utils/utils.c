@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/02 21:38:52 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 17:23:11 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:26:13 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	free_parser(t_parser *procs)
 {
 	t_parser	*tmp;
 	int			count;
-	int			i;
+	// int			i;
 
 	count = procs->proc_count;
-	i = 0;
+	// i = 0;
 	while (procs)
 	{
 		tmp = procs->next;

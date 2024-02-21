@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 17:04:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:39:27 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	put_execute_error(t_parser *node)
 	ft_putstr_fd(node->proc->cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	mini_error(E_COMMAND_NOT_FOUND, node);
+	// exit(E_COMMAND_NOT_FOUND);
 	// node->exit_code = E_COMMAND_NOT_FOUND;
 }
 
@@ -72,9 +73,8 @@ void	put_permission_error(t_parser *node)
 void	no_such_file(char *str, t_parser *lst)
 {
 	dprintf(STDERR_FILENO, NO_SUCH_THING, str);
-	// mini_error(E_GENERAL, lst);
-	lst->exit_code = EXIT_FAILURE;
-	
+	mini_error(E_GENERAL, lst);
+	// lst->exit_code = EXIT_FAILURE;
 }
 
 /**

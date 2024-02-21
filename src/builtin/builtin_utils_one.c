@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 15:39:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:30:07 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 */
 bool	word_check(t_parser *lst, char *key)
 {
-	t_parser	*temp;
-	char		*cmd;
+	// t_parser	*temp;
+	// char		*cmd;
 
-	cmd = lst->proc->cmd;
-	temp = lst;
+	// cmd = lst->proc->cmd;
+	// temp = lst;
 	if (is_valid_key(lst, key, "export") == false)
 		return (true);
 
