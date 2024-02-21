@@ -14,17 +14,77 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 **DO this**
 *right here, right now*
 
-1) MUST ONCE AGAIN 
-		- NORM - get_procs, proc_utils, lexer, tokens
-
-2) syntax error func
-	for all calls, i already print "syntax error"
-
 4) djoy: 
 	 - pwd on error is giving E_USAGE (0), but show error be 0?
 	 - cmd not found exit code is 0
 	 - if exit_codes are implimented everywhere, these should be checkable by 'echo $?' now :)
 	 - cating heredoc show give the heredoc input but i dont get anything back
+
+5) 
+missing frees somewhere..
+
+minibleh:echo skhfasdf adsf| < >
+minishell: syntax error near unexpected token 'newline'
+minibleh:exit
+exit
+
+=================================================================
+==290875==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 80 byte(s) in 1 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
+    #1 0x4d1705 in parser_listnew /home/smclacke/Desktop/shelly/src/parser/parser_utils.c:74:20
+    #2 0x4d0f5e in handle_procs /home/smclacke/Desktop/shelly/src/parser/parser.c:48:14
+    #3 0x4d06db in parse_tokens /home/smclacke/Desktop/shelly/src/parser/parser.c:99:16
+    #4 0x4d056d in parse_input /home/smclacke/Desktop/shelly/src/parser/parser.c:118:11
+    #5 0x4cb400 in run_minishell /home/smclacke/Desktop/shelly/src/main.c:25:10
+    #6 0x4cb5f9 in main /home/smclacke/Desktop/shelly/src/main.c:58:12
+    #7 0x7f20495e5d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
+    #1 0x4d1ed7 in sort_vars /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:21:25
+    #2 0x4d1c69 in sort_each_proc /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:81:6
+    #3 0x4d1293 in sort_this_out /home/smclacke/Desktop/shelly/src/parser/parser.c:19:7
+    #4 0x4d0dcb in handle_procs /home/smclacke/Desktop/shelly/src/parser/parser.c:45:7
+    #5 0x4d06db in parse_tokens /home/smclacke/Desktop/shelly/src/parser/parser.c:99:16
+    #6 0x4d056d in parse_input /home/smclacke/Desktop/shelly/src/parser/parser.c:118:11
+    #7 0x4cb400 in run_minishell /home/smclacke/Desktop/shelly/src/main.c:25:10
+    #8 0x4cb5f9 in main /home/smclacke/Desktop/shelly/src/main.c:58:12
+    #9 0x7f20495e5d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Direct leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
+    #1 0x4e549a in ft_strdup (/home/smclacke/Desktop/shelly/minishell+0x4e549a)
+    #2 0x4d32dc in handle_cmd /home/smclacke/Desktop/shelly/src/parser/get_procs.c:80:14
+    #3 0x4d30e0 in get_strs /home/smclacke/Desktop/shelly/src/parser/get_procs.c:101:4
+    #4 0x4d1fab in sort_vars /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:27:7
+    #5 0x4d1c69 in sort_each_proc /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:81:6
+    #6 0x4d1293 in sort_this_out /home/smclacke/Desktop/shelly/src/parser/parser.c:19:7
+    #7 0x4d0dcb in handle_procs /home/smclacke/Desktop/shelly/src/parser/parser.c:45:7
+    #8 0x4d06db in parse_tokens /home/smclacke/Desktop/shelly/src/parser/parser.c:99:16
+    #9 0x4d056d in parse_input /home/smclacke/Desktop/shelly/src/parser/parser.c:118:11
+    #10 0x4cb400 in run_minishell /home/smclacke/Desktop/shelly/src/main.c:25:10
+    #11 0x4cb5f9 in main /home/smclacke/Desktop/shelly/src/main.c:58:12
+    #12 0x7f20495e5d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+Indirect leak of 14 byte(s) in 2 object(s) allocated from:
+    #0 0x49a28d in malloc (/home/smclacke/Desktop/shelly/minishell+0x49a28d)
+    #1 0x4e549a in ft_strdup (/home/smclacke/Desktop/shelly/minishell+0x4e549a)
+    #2 0x4cbd2b in copy_strs /home/smclacke/Desktop/shelly/src/utils/more_space.c:40:27
+    #3 0x4d31a2 in get_strs /home/smclacke/Desktop/shelly/src/parser/get_procs.c:106:4
+    #4 0x4d1fab in sort_vars /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:27:7
+    #5 0x4d1c69 in sort_each_proc /home/smclacke/Desktop/shelly/src/parser/sort_procs.c:81:6
+    #6 0x4d1293 in sort_this_out /home/smclacke/Desktop/shelly/src/parser/parser.c:19:7
+    #7 0x4d0dcb in handle_procs /home/smclacke/Desktop/shelly/src/parser/parser.c:45:7
+    #8 0x4d06db in parse_tokens /home/smclacke/Desktop/shelly/src/parser/parser.c:99:16
+    #9 0x4d056d in parse_input /home/smclacke/Desktop/shelly/src/parser/parser.c:118:11
+    #10 0x4cb400 in run_minishell /home/smclacke/Desktop/shelly/src/main.c:25:10
+    #11 0x4cb5f9 in main /home/smclacke/Desktop/shelly/src/main.c:58:12
+    #12 0x7f20495e5d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+
+SUMMARY: AddressSanitizer: 123 byte(s) leaked in 5 allocation(s).
+make: *** [Makefile:97: run] Error 1
 
 ------------------------------
 ------------------------------

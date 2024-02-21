@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:13:00 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:31:22 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	count_reds(char **process)
 	return (count);
 }
 
-// norm
 int	count_strs(t_procs *proc, char **process)
 {
 	int		i;
@@ -54,10 +53,7 @@ int	count_strs(t_procs *proc, char **process)
 			i += 2;
 		}
 		else if (proc->cmd_flag != 1)
-		{
-			proc->cmd_flag = 1;
-			i += 1;
-		}
+			i = set_flag(proc, i);
 		while (process[i] && count_str_util(proc, process, i))
 		{
 			count++;
