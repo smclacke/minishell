@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/17 16:20:41 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:31:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 19:37:31 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ int	count_reds(char **process)
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
 		{
 			if (!process[i + 1] || !ft_spaced(process[i + 1]))
-			{
-				syntax_error("near unexpected token 'newline'");
-				return (E_STOP);
-			}
+				return (syntax_error("near unexpected token 'newline'"));
 			count += 2;
 		}
 		i++;
