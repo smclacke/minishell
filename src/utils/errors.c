@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:39:27 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/21 18:58:01 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	put_custom_error(t_parser *node, char *cmd)
 		ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 		ft_putstr_fd(node->proc->str[0], STDERR_FILENO);
 		ft_putstr_fd("': not a valid identifier\n",STDERR_FILENO);
+		node->exit_code = EXIT_FAILURE;
 	}
 	else if (mini_strcmp(cmd, "exit") == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:37:54 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/21 18:46:38 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,5 @@ void	ft_cd(t_parser *lst, t_env **env)
 	update_env(env, cwd, "OLDPWD", lst);
 	getcwd(cwd, PATH_MAX);
 	update_env(env, cwd, "PWD", lst);
-	lst->exit_code = E_USAGE;
+	// lst->exit_code = E_USAGE;
 }

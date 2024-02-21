@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:36:50 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/21 20:04:46 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,6 @@ void	execute(t_env **env, t_parser *lst)
 	ft_expand(lst, env);
 	printf("exit code search 2[%d]\n", lst->exit_code);
 	build(lst, env, data);
-	printf("exit code search 9[%d]\n", lst->exit_code);
+	printf("exit code search 9[%d]\n", lst->exit_code);//exit code seems to get lost here
 	free (data);
 }
