@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 20:04:57 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 15:37:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,25 @@
  * @brief assigns full and new to their values and adds them to
  * an empty list.
  * @todo exit codes
+ * norm it
  * @note (for all error functions) passing parser list but want actual var to print..
+ * 
 */
 static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 {
 	char	*full;
 	t_env	*new;
 
-	full = ft_strjoin("OLDPWD=", cwd);
-	if (full == NULL)
-		mini_error(E_MALLOC, head);
+	full = mini_strjoin("OLDPWD=", cwd);
+	// if (full == NULL)
+	// 	mini_error(E_MALLOC, head);
 	new = env_lstnew("OLDPWD", cwd, full, true);
-	if (new == NULL)
-		mini_error(E_MALLOC, head);
+	// if (new == NULL)
+	// 	mini_error(E_MALLOC, head);
 	env_lstadd_back(env, new);
 	if (env == NULL)
-		mini_error(E_MALLOC, head);
+		head->exit_code = E_MALLOC;
+		// mini_error(E_MALLOC, head);
 }
 
 /**
@@ -64,6 +67,7 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
  * @param env environment in linked list
  * @brief stores home directory and changes to it
  * @todo do I need use no such file?
+ * change dprintf
 */
 void	home_dir(t_parser *lst, t_env **env)
 {
@@ -84,6 +88,7 @@ void	home_dir(t_parser *lst, t_env **env)
  * @param env environment in linked list
  * @brief stores old working dir and changes to it
  * @todo do I need use no such file?
+ * exit code
 */
 void	old_pwd(char *str, t_env **env, t_parser *lst)
 {
@@ -93,7 +98,8 @@ void	old_pwd(char *str, t_env **env, t_parser *lst)
 	if (old_pwd == NULL)
 	{
 		printf("minishell: cd: OLDPWD not set\n");
-		mini_error(E_GENERAL, lst);
+		// mini_error(E_GENERAL, lst);
+		lst->exit_code = E_GENERAL;
 		return ;
 	}
 	str = old_pwd;

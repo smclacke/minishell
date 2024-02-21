@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:33:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 15:28:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
  * @brief redirect heredoc in child process
  * @todo exit errors
  * @note change mini_error
+ * norm it
 */
 void	redirect_heredoc(t_parser *lst)
 {
 	if (dup2(lst->proc->hd_fd, STDIN_FILENO) == -1)
-		mini_error(E_GENERAL, lst);
+		lst->exit_code = E_GENERAL;
+		// mini_error(E_GENERAL, lst);
 	if (close(lst->proc->hd_fd) == -1)
-		mini_error(E_GENERAL, lst);
+		lst->exit_code = E_GENERAL;
+		// mini_error(E_GENERAL, lst);
 }
 
 /**
@@ -67,7 +70,8 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 
 	fork_pid = fork();
 	if (fork_pid == -1)
-		mini_error(E_GENERAL, lst->parser);
+		lst->parser->exit_code = E_GENERAL;
+		// mini_error(E_GENERAL, lst->parser);
 	if (fork_pid == 0)
 	{
 		handle_signals(HERE_DOC);
@@ -77,6 +81,8 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 		while (i < lst->hd_count)
 		{
 			read_line = readline("heredoc> ");
+			if (read_line == NULL)
+				exit (0);
 			if (mini_strcmp(lst->hd[i], read_line) == 0)
 			{
 				free(read_line);
@@ -88,7 +94,11 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 		free(read_line);
 	}
 	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 		waitpid(fork_pid, NULL, 0);
+	}
 }
 
 /**

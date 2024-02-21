@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:06:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 16:56:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@
  * 	if parser succeeds exit code is 0, update parser exit code with previous
  * 	otherwise error occurred, syntax exit given back to main
  */
+// void	run_minishell(t_env *env, char *input)
 int	run_minishell(t_env *env, char *input, int exit_c)
 {
 	t_parser	*procs;
+	// int exit_code = 0;
 
+	// (void)exit_c;
 	procs = NULL;
 	procs = parse_input(procs, input);
 	// prpr(procs);
@@ -34,6 +37,9 @@ int	run_minishell(t_env *env, char *input, int exit_c)
 	return (exit_c);
 }
 
+/**
+ * @todo norm it
+*/
 int	main(int argc, char **argv, char **envp)
 {
 	int			og_stdout;
@@ -54,10 +60,14 @@ int	main(int argc, char **argv, char **envp)
 		handle_signals(PARENT);
 		input = readline(PROMPT);
 		if (input == NULL)
+		{
+			write(STDOUT_FILENO, "exit\n", 6);
 			exit(EXIT_SUCCESS);
+		}
 		exit_c = run_minishell(env, input, exit_c);
+		printf("exit_c = [%i]\n", exit_c);
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
 	}
-	return (0);
+	return (exit_c);
 }

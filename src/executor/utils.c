@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 18:46:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 15:50:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_for_builtin(t_parser *node)
  * @note commented out bzero in init parser and iterate
  * with j in fill array. super weird it kinda works now but don't really
  * understand why
- * @todo norm
+ * @todo norm it
 */
 static char	**fill_array(t_procs *lst, char **new_str)
 {
@@ -58,10 +58,9 @@ static char	**fill_array(t_procs *lst, char **new_str)
 	int i;
 
 	j = 0;
-	i = 0;
+	i = 1;
 	new_str[0] = lst->cmd;
-	// printf("filled at index 0 = [%s]\n", new_str[0]);
-	i++;
+	// i++;
 	// if (lst->str_count == 0)
 	if (lst->str_count == 0 && lst->hd_count == 0)
 	{
@@ -69,10 +68,6 @@ static char	**fill_array(t_procs *lst, char **new_str)
 		// return (NULL);
 		new_str[i] = NULL;
 		return (new_str);
-	}
-	if (lst->hd_count != 0)
-	{
-		//get line from file?
 	}
 	while (j < lst->str_count)
 	{

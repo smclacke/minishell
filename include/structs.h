@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:05:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 16:14:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,18 @@
 # define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"
 # define FAILED_HEREDOC "minishell: Failed to open heredoc\n"
 
-// EXITCODES
+// // EXITCODES
+/**
+ * @todo check no permission
+*/
 typedef enum e_exit
 {
 	E_USAGE = 0,
-	E_MALLOC = -1,
+	E_MALLOC = 3,
 	E_GENERAL = 1,
 	E_SYNTAX = 2,
 	E_EXEC = 126,
+	E_NO_PERMISSION = 126, 
 	E_COMMAND_NOT_FOUND = 127,
 	E_EXIT_INVALID_ARG = 128,
 	E_FATAL_SIGNAL = 128,
@@ -80,6 +84,7 @@ typedef enum e_exit
 	E_TEST2 = 98777,
 	E_TEST3 = 1111
 }						t_exit;
+
 
 /**
  * @todo	check the count vars are correctly updated and saved per process
@@ -152,7 +157,8 @@ typedef struct s_parser
 	int						hd_flag;
 
 	char					*exit_str;
-	enum e_exit				exit_code;
+	// enum e_exit				exit_code;
+	unsigned int			exit_code;
 	int						exit_stat;
 
 	struct s_parser			*next;

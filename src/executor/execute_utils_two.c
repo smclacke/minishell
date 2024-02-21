@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:11:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 16:39:43 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 	data->fork_pid = fork();
 	handle_signals(CHILD);
 	if (data->fork_pid == -1)
-		mini_error(E_GENERAL, lst);
+		lst->exit_code = E_GENERAL;
+		// mini_error(E_GENERAL, lst);
+	printf("exit code search 11[%d]\n", lst->exit_code);
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
 }
@@ -101,6 +103,7 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 	count = lst->proc_count;
 	i = 0;
 	// while (i < lst->proc_count)
+	printf("exit code search 10[%d]\n", lst->exit_code);
 	while (lst)
 	{
 		init_pipe(i, count, data, lst);
@@ -126,7 +129,7 @@ bool	redirect(t_parser *lst, t_execute *data)
 	int i;
 
 	i = 0;
-	while (i < lst->proc->red_count) //is herdoc last or flag?
+	while (i < lst->proc->red_count)
 	{
 		if (ft_strncmp(lst->proc->redir[i], ">", 2) == 0)
 			if (redirect_outfile(lst->proc->redir[i + 1], data) == false)

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:45:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 15:31:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /**
  * @param node parsed list
  * @brief checks if content is a digit
- * @todo exit codes for the exit at line 30
+ * @todo exit num correct?
 */
 static void	digit_check(char *str)
 {
@@ -27,7 +27,7 @@ static void	digit_check(char *str)
 	if (str[i] != '\0')
 	{
 		dprintf(STDERR_FILENO, NON_NUM_ARG, str);
-		exit(2);
+		exit(1);
 	}
 }
 
@@ -61,8 +61,7 @@ void	exit_with_stat(int exit_status, int status)
 /**
  * @param lst parsed list
  * @brief exits the program and displays corresponding error number
- * @todo check for exitstatus line 68 if it's exit status from prev child process
- * is it bad that exit always displays? even with exit > test.txt
+ * @todo norm
 */
 void	ft_exit(t_parser *lst)
 {

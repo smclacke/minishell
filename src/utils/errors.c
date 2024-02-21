@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 16:34:03 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/21 17:04:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	put_custom_error(t_parser *node, char *cmd)
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(node->proc->str[0], STDERR_FILENO);
 		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
+		// mini_error(EXIT_FAILLURE, node);
+		node->exit_code = EXIT_FAILURE;
 	}
 }
 
@@ -47,6 +49,7 @@ void	put_execute_error(t_parser *node)
 	ft_putstr_fd(node->proc->cmd, STDERR_FILENO);
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	mini_error(E_COMMAND_NOT_FOUND, node);
+	// node->exit_code = E_COMMAND_NOT_FOUND;
 }
 
 /**
@@ -58,6 +61,8 @@ void	put_permission_error(t_parser *node)
 {
 	ft_putstr_fd(node->proc->cmd, STDERR_FILENO);
 	ft_putstr_fd(": permission denied\n", STDERR_FILENO);
+	// mini_error(E_NO_PERMISSION, node);
+	node->exit_code = E_NO_PERMISSION;
 }
 
 /**
@@ -67,7 +72,9 @@ void	put_permission_error(t_parser *node)
 void	no_such_file(char *str, t_parser *lst)
 {
 	dprintf(STDERR_FILENO, NO_SUCH_THING, str);
-	mini_error(E_GENERAL, lst);
+	// mini_error(E_GENERAL, lst);
+	lst->exit_code = EXIT_FAILURE;
+	
 }
 
 /**
@@ -77,8 +84,22 @@ void	no_such_file(char *str, t_parser *lst)
  * norm it
  * - not just for error, for passing exit codes? meh
 	// exit(exit_enum);
+	change the name to exit_status_hub
 */
-void	mini_error(int exit_enum, t_parser *lst)
+// void	mini_error(t_parser *lst)
+void	mini_error(int exit_num, t_parser *lst)
 {
-	lst->exit_code = exit_enum;
+		// else if (all->here_status == 256)
+		// g_exit_status = 1;
+	// int stat = 0;
+	
+	printf("SIG: %d\n", WTERMSIG(exit_num));
+	printf("EX: %d\n", WIFEXITED(exit_num));
+	printf("EXST: %d\n", WEXITSTATUS(exit_num));
+	if (WTERMSIG(exit_num) == 2 || WTERMSIG(exit_num) == 3)
+		lst->exit_code = WTERMSIG(exit_num) + 128;
+	else if (WIFEXITED(exit_num))
+		lst->exit_code = WEXITSTATUS(exit_num);
+	else
+		lst->exit_code = exit_num;
 }
