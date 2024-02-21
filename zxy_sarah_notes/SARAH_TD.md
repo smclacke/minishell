@@ -17,6 +17,9 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 1) MUST ONCE AGAIN 
 		- NORM - get_procs, proc_utils, lexer, tokens
 
+2) syntax error func
+	for all calls, i already print "syntax error"
+
 4) djoy: 
 	 - pwd on error is giving E_USAGE (0), but show error be 0?
 	 - cmd not found exit code is 0

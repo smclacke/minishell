@@ -6,13 +6,22 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/31 21:48:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 20:56:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:01:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// norm
+static	void	copy_over(t_procs *proc, char **process, int i, int j)
+{
+	proc->redir[j] = ft_strdup(process[i]);
+	if (!proc->redir[j])
+		malloc_error(NULL, NULL, NULL, 0);
+	proc->redir[j + 1] = ft_strdup(process[i + 1]);
+	if (!proc->redir[j + 1])
+		malloc_error(NULL, NULL, NULL, 0);
+}
+
 int	get_reds(t_procs *proc, char **process)
 {
 	int		i;
@@ -28,16 +37,8 @@ int	get_reds(t_procs *proc, char **process)
 		if (proc_redir(process[i]) && proc_redir(process[i]) != 2)
 		{
 			if (!process[i + 1])
-			{
-				syntax_error("syntax error near unexpected token 'newline'");
-				return (E_STOP);
-			}
-			proc->redir[j] = ft_strdup(process[i]);
-			if (!proc->redir[j])
-				malloc_error(NULL, NULL, NULL, 0);
-			proc->redir[j + 1] = ft_strdup(process[i + 1]);
-			if (!proc->redir[j + 1])
-				malloc_error(NULL, NULL, NULL, 0);
+				return (syntax_error("near unexpected token 'newline'"));
+			copy_over(proc, process, i, j);
 			j += 2;
 			i++;
 		}
@@ -46,7 +47,6 @@ int	get_reds(t_procs *proc, char **process)
 	return (0);
 }
 
-// norm
 int	get_hds(t_procs *proc, char **process)
 {
 	int		i;
@@ -62,10 +62,7 @@ int	get_hds(t_procs *proc, char **process)
 		if (proc_redir(process[i]) == 2)
 		{
 			if (!process[i + 1])
-			{
-				syntax_error("syntax error near unexpected token 'newline'");
-				return (E_STOP);
-			}
+				return (syntax_error("near unexpected token 'newline'"));
 			proc->hd[j] = ft_strdup(process[i + 1]);
 			if (!proc->hd[j])
 				malloc_error(NULL, NULL, NULL, 0);
@@ -74,18 +71,6 @@ int	get_hds(t_procs *proc, char **process)
 		}
 		i++;
 	}
-	return (0);
-}
-
-static	int	copy_strs(t_procs *proc, char *process)
-{
-	proc->str[proc->index] = ft_strdup(process);
-	if (!proc->str[proc->index])
-	{
-		free(process);
-		malloc_error(NULL, proc, NULL, 1);
-	}
-	proc->index++;
 	return (0);
 }
 
