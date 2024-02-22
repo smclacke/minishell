@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:20:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/22 21:11:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	mini_remove_env(char *str, t_env **env)
 	tmp = NULL;
 	while (current != NULL)
 	{
-		if (!ft_strncmp(current->key, str, ft_strlen(str)))
+		if (ft_strncmp(current->key, str, ft_strlen(str) + 1) == 0)
 		{
 			if (previous != NULL)
 				previous->next = current->next;
@@ -37,7 +37,7 @@ static void	mini_remove_env(char *str, t_env **env)
 				*env = current->next;
 			tmp = current;
 			current = current->next;
-			free_env(&tmp);
+			free_all(tmp);
 		}
 		else
 		{

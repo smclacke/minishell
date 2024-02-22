@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 20:04:46 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/22 19:23:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,16 +136,16 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	printf("exit code search 20[%d]\n", lst->exit_code);
 	if (data->error == false)
 	{
-		printf("exit code search 23[%d]\n", lst->exit_code);
+		printf("exit code search 21[%d]\n", lst->exit_code);
 		exit (lst->exit_code);
 	}
-	printf("exit code search 21[%d]\n", lst->exit_code);
+	printf("exit code search 22[%d]\n", lst->exit_code);
 	if (access(executable, X_OK) == -1)
 	{
 		put_permission_error(lst);
 		exit (EXIT_FAILURE);
 	}
-	printf("exit code search 22[%d]\n", lst->exit_code);
+	printf("exit code search 23[%d]\n", lst->exit_code);
 	data->env_array = list_to_string(*env);
 	argv = get_argv(lst);
 	if (argv == NULL)
@@ -168,9 +168,10 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
+	int status;
+
 	if (!lst)
 		lst->exit_code = E_GENERAL;
-		// mini_error (E_GENERAL, lst);
 	printf("exit code search 3[%d]\n", lst->exit_code);
 	init_heredoc(lst, env);
 	printf("exit code search 4[%d]\n", lst->exit_code);
@@ -181,10 +182,14 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	printf("exit code search 6[%d]\n", lst->exit_code);
 	close_all(data, lst);
 	printf("exit code search 7[%d]\n", lst->exit_code);
-	waitpid(data->fork_pid, NULL, 0);//insert lst->exit_code?
+	status = 0;
+	printf("status 1[%d]\n", status);
+	waitpid(data->fork_pid, &status, 0);//insert lst->exit_code?
+	// waitpid(data->fork_pid, NULL, 0);//insert lst->exit_code?
+	printf("exit code search 8[%d]\n", lst->exit_code);
 	while (wait(NULL) != -1)
 		(void)NULL;
-	printf("exit code search 8[%d]\n", lst->exit_code);
+	exit_status(lst);
 }
 
 /**
@@ -202,6 +207,6 @@ void	execute(t_env **env, t_parser *lst)
 	ft_expand(lst, env);
 	printf("exit code search 2[%d]\n", lst->exit_code);
 	build(lst, env, data);
-	printf("exit code search 9[%d]\n", lst->exit_code);//exit code seems to get lost here
+	printf("exit code search 9[%d]\n", lst->exit_code);
 	free (data);
 }

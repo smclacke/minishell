@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:25:58 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/22 17:51:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@
 # define HD_X 3
 # define RED_X 4
 
-// # define PATH_MAX 4096
-# define PATH_MAX 1024
+# define PATH_MAX 4096
+// # define PATH_MAX 1024 //for when djoyke is working on her macbook
 
 # define NOT_POSSIBLE "minishell: env: no such file or directory\n"
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"

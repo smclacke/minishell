@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:46:38 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/22 21:25:53 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,12 @@ static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 	t_env	*new;
 
 	full = mini_strjoin("OLDPWD=", cwd);
-	// if (full == NULL)
-	// 	mini_error(E_MALLOC, head);
 	new = env_lstnew("OLDPWD", cwd, full, true);
-	// if (new == NULL)
-	// 	mini_error(E_MALLOC, head);
+	if (new == NULL)
+		head->exit_code = E_MALLOC;
 	env_lstadd_back(env, new);
 	if (env == NULL)
 		head->exit_code = E_MALLOC;
-		// mini_error(E_MALLOC, head);
 }
 
 /**
@@ -46,13 +43,14 @@ static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
  * @param str string containing old working directory string
  * @brief loops through environment till OLDPWD is found
  * changes env->value to value of str
+ * @todo check line 53
 */
 static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
 {
 	t_env	*node;
 
-	node = env[0];
-	while (node && mini_strcmp(id, node->key) != 0)
+	node = *env;
+	while (node && ft_strncmp(id, node->key, ft_strlen(id) + 1) != 0)
 		node = node->next;
 	if (node == NULL)
 	{
@@ -77,6 +75,7 @@ void	home_dir(t_parser *lst, t_env **env)
 	if (home_dir == NULL)
 	{
 		dprintf(STDERR_FILENO, NO_HOME);
+		lst->exit_code = E_GENERAL;
 		return ;
 	}
 	if (chdir(home_dir) == -1)
@@ -90,6 +89,7 @@ void	home_dir(t_parser *lst, t_env **env)
  * @todo do I need use no such file?
  * exit code
 */
+// bool	old_pwd(char *str, t_env **env, t_parser *lst)
 void	old_pwd(char *str, t_env **env, t_parser *lst)
 {
 	char		*old_pwd;
@@ -98,9 +98,7 @@ void	old_pwd(char *str, t_env **env, t_parser *lst)
 	if (old_pwd == NULL)
 	{
 		printf("minishell: cd: OLDPWD not set\n");
-		mini_error(E_GENERAL, lst);
-		exit (lst->exit_code);
-		// lst->exit_code = E_GENERAL;
+		lst->exit_code = E_GENERAL;
 		return ;
 	}
 	str = old_pwd;
@@ -124,6 +122,8 @@ void	ft_cd(t_parser *lst, t_env **env)
 	if (too_many_args(lst) == true)
 		return ;
 	getcwd(cwd, PATH_MAX);
+		// if (cwd == NULL)
+		// 	return ;// discuss this
 	if (lst->proc->str_count == 0 || mini_strcmp(lst->proc->str[0], "~") == 0)
 		home_dir(lst, env);
 	else if (mini_strcmp(lst->proc->str[0], "-") == 0)
@@ -135,8 +135,10 @@ void	ft_cd(t_parser *lst, t_env **env)
 	}
 	else if (lst->proc->str[0] != NULL)
 		no_such_file(lst->proc->str[0], lst);
-	update_env(env, cwd, "OLDPWD", lst);
-	getcwd(cwd, PATH_MAX);
-	update_env(env, cwd, "PWD", lst);
-	// lst->exit_code = E_USAGE;
+	if (lst->exit_code == 0)
+	{
+		update_env(env, cwd, "OLDPWD", lst);
+		getcwd(cwd, PATH_MAX);
+		update_env(env, cwd, "PWD", lst);
+	}
 }

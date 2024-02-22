@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:05:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/22 21:10:11 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void			make_node(t_env **env, t_export ex_var);
 void			replace_node(t_env *lst, t_export ex_var);
 void			ft_unset(t_parser *lst, t_env **env);
 void			reassign_values(char *cwd, t_env *node, t_parser *head);
+void			free_all(t_env *env);
 
 //----Executor----//
 void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
@@ -232,5 +233,6 @@ void			*mini_malloc(int size);
 char			*mini_strjoin(char const *s1, char const *s2);
 char			*mini_strdup(const char *s1);
 char			*mini_substr(char const *s, unsigned int start, size_t len);
+void			exit_status(t_parser *lst);
 
 #endif

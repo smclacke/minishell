@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/21 14:23:52 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/22 18:54:34 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	sig_child_c(int signum)
 	if (signum == SIGINT)
 	{
 		ft_putchar_fd('\n', STDOUT_FILENO);
-		// tmp->exit_code = (signum + 128);
 	}
 }
 
