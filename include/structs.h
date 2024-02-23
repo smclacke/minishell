@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/22 17:51:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 19:59:12 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef enum e_exit
 	E_USAGE = 0,
 	E_MALLOC = 3,
 	E_GENERAL = 1,
+	E_CLOSE = -1;
 	E_SYNTAX = 2,
 	E_EXEC = 126,
 	E_NO_PERMISSION = 126, 

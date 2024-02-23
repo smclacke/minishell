@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/22 19:23:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/22 21:35:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,12 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
 			temp_path = mini_substr(env->value, 0, ft_strlen(env->value));
-			// if (temp_path == NULL)
-			// 	mini_error (E_MALLOC, node);
 			data->path = ft_split(temp_path, ':');
 			if (data->path == NULL)
 				node->exit_code = E_MALLOC;
-				// mini_error (E_MALLOC, node);// or just exit?
 			free (temp_path);
 			if (data->path == NULL)
 				node->exit_code = E_MALLOC;
-				// mini_error (E_MALLOC, node);
 			return (true);
 		}
 		env = env->next;
@@ -152,7 +148,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		exit(47);
 	if (execve(executable, argv, data->env_array) == -1)
 	{
-		// mini_error(99, lst);
 		lst->exit_code = EXIT_FAILURE;
 		exit(EXIT_FAILURE);
 	}

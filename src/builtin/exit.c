@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:55:03 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/23 19:46:22 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,5 @@ void	ft_exit(t_parser *lst)
 		exit(255);
 	}
 	write(STDERR_FILENO, "exit", 5);
-	// lst->exit_code = error; //doesnt work properly in passing code
 	exit(error);
 }

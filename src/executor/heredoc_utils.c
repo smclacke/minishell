@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:31:33 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/23 19:45:30 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	redirect_heredoc(t_parser *lst)
 {
 	if (dup2(lst->proc->hd_fd, STDIN_FILENO) == -1)
 		lst->exit_code = E_GENERAL;
-		// mini_error(E_GENERAL, lst);
 	if (close(lst->proc->hd_fd) == -1)
 		lst->exit_code = E_GENERAL;
-		// mini_error(E_GENERAL, lst);
 }
 
 /**
@@ -60,7 +58,6 @@ static void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
  * with CTRL+C/SIGNAL
  * exit codes
  * Norm it!
-// mini_error(E_USAGE, lst->proc->parser);
 */
 static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 {
@@ -71,7 +68,6 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 	fork_pid = fork();
 	if (fork_pid == -1)
 		lst->parser->exit_code = E_GENERAL;
-		// mini_error(E_GENERAL, lst->parser);
 	if (fork_pid == 0)
 	{
 		handle_signals(HERE_DOC);
@@ -159,14 +155,11 @@ void	init_heredoc(t_parser *lst, t_env **env)
 	{
 		if (head->multi_proc_b)
 		{
-			// for (int i = 0; i < head->proc_count; i++)
-			// 	setup_heredoc(head->process[i], env, heredoc);
 			while (i < head->proc_count) 
 			{
 				setup_heredoc(head->process[i], env, heredoc);
 				i++;
 			}
-
 		}
 		else
 			setup_heredoc(head->proc, env, heredoc);
