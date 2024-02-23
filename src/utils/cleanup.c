@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 17:27:40 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/18 16:52:09 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 22:56:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*mini_strjoin(char const *s1, char const *s2)
 */
 void	*mini_malloc(int size)
 {
-	void *data;
+	void	*data;
 
 	data = malloc(size);
 	if (!data)
