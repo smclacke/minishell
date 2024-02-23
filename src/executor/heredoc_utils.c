@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 22:30:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 22:46:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,18 @@ void	redirect_heredoc(t_parser *lst)
  * @param file int with file fd.
  * @brief writes to the heredoc until all delimiters are found
  * frees the read_line
+ * @todo norm it
+ * for time being exit seperate after file == -1
 */
 void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 {
-	char 	*read_line;
-	int 	file;
-	
+	char	*read_line;
+	int		file;
+
 	handle_signals(HERE_DOC);
 	file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (file == -1)
-		exit(E_USAGE);//for time being exit seperate
+		exit(E_USAGE);
 	while (i < lst->hd_count)
 	{
 		read_line = readline("heredoc> ");
@@ -53,7 +55,7 @@ void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 			exit (0);
 		}
 		else
-			write_to_file(lst->parser, read_line, env, file);	
+			write_to_file(lst->parser, read_line, env, file);
 	}
 	free(read_line);
 }
@@ -144,7 +146,7 @@ void	init_heredoc(t_parser *lst, t_env **env)
 	{
 		if (head->multi_proc_b)
 		{
-			while (i < head->proc_count) 
+			while (i < head->proc_count)
 			{
 				setup_heredoc(head->process[i], env, heredoc);
 				i++;

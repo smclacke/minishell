@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 22:43:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 22:44:01 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @todo 
  * norm it
 */
-static bool file_dup(t_parser *lst, t_execute *data, char *file)
+static bool	file_dup(t_parser *lst, t_execute *data, char *file)
 {
 	data->in = open(file, O_RDWR, 0644);
 	if (data->in == -1)

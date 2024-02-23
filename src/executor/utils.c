@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/22 21:28:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 22:48:57 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,8 @@ int	check_for_builtin(t_parser *node)
 */
 static char	**fill_array(t_procs *lst, char **new_str)
 {
-
-	int j;
-	int i;
+	int	j;
+	int	i;
 
 	j = 0;
 	i = 1;

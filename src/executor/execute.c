@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 20:43:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 22:51:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
 			free(ok_path);
 			i++;
 		}
-		put_execute_error(node);// here mini_error aangezet
+		put_execute_error(node);
 		data->error = false;
 	}
 	return (node->proc->cmd);
@@ -101,7 +101,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	char		**argv;
 	int			cmd_type;
 
-	printf("exit code search 12[%d]\n", lst->exit_code);
 	init_pipes_child(data, lst);
 	printf("exit code search 13[%d]\n", lst->exit_code);
 	if (redirect(lst, data) == false)
@@ -114,11 +113,11 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	{
 		do_builtin(lst, env, cmd_type);
 		printf("exit code search 15[%d]\n", lst->exit_code);
-		exit (lst->exit_code);//exit success??
+		exit (lst->exit_code);
 	}
 	printf("exit code search 16[%d]\n", lst->exit_code);
 	printf ("lst->proc->cmd = [%s]\n", lst->proc->cmd);
-	if (lst->proc->cmd == NULL) // we do need this?
+	if (lst->proc->cmd == NULL)
 		exit (127);
 	printf("exit code search 17[%d]\n", lst->exit_code);
 	executable = check_access(*env, lst, data);
@@ -159,11 +158,11 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief determines how many times needs to fork
  * pipes and makes child process
- * @todo exit codes WAIT IS NOT WORKING BECAUSE ITS NONSENSE
+ * @todo norm it!
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
-	int status;
+	int	status;
 
 	status = 0;
 	if (!lst)
@@ -178,7 +177,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	printf("exit code search 6[%d]\n", lst->exit_code);
 	close_all(data, lst);
 	printf("exit code search 7[%d]\n", lst->exit_code);
-	waitpid(data->fork_pid, &status, 0);//insert lst->exit_code?
+	waitpid(data->fork_pid, &status, 0);
 	printf("status 1[%d]\n", status);
 	printf("exit code search 8[%d]\n", lst->exit_code);
 	exit_status(status, lst);
@@ -195,6 +194,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 void	execute(t_env **env, t_parser *lst)
 {
 	t_execute	*data;
+
 	data = mini_malloc(sizeof(t_execute));
 	printf("exit code search 1[%d]\n", lst->exit_code);
 	init_execute_struct(data);
