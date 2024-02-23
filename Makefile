@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/18 16:43:30 by dreijans      ########   odam.nl          #
+#    Updated: 2024/02/23 21:27:01 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
 
 SRCS			= main.c								\
 					utils/errors.c						\
+					utils/errors2.c						\
 					utils/parser_errors.c				\
 					utils/free_procs.c					\
 					utils/print.c						\

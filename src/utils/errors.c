@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/22 21:20:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 21:35:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	put_custom_error(t_parser *node, char *cmd)
 		ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 		ft_putstr_fd(node->proc->str[0], STDERR_FILENO);
 		ft_putstr_fd("': not a valid identifier\n",STDERR_FILENO);
-		node->exit_code = EXIT_FAILURE;
+		node->exit_code = E_GENERAL;
 	}
 	else if (mini_strcmp(cmd, "exit") == 0)
 	{
@@ -34,7 +34,7 @@ void	put_custom_error(t_parser *node, char *cmd)
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(node->proc->str[0], STDERR_FILENO);
 		ft_putstr_fd(ERROR_MESSAGE, STDERR_FILENO);
-		node->exit_code = EXIT_FAILURE;
+		node->exit_code = E_GENERAL;
 	}
 }
 
@@ -58,6 +58,7 @@ void	put_execute_error(t_parser *node)
 */
 void	put_permission_error(t_parser *node)
 {
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(node->proc->cmd, STDERR_FILENO);
 	ft_putstr_fd(": permission denied\n", STDERR_FILENO);
 	node->exit_code = E_NO_PERMISSION;
@@ -69,30 +70,10 @@ void	put_permission_error(t_parser *node)
 */
 void	no_such_file(char *str, t_parser *lst)
 {
-	dprintf(STDERR_FILENO, NO_SUCH_THING, str);
-	lst->exit_code = EXIT_FAILURE;
-}
-
-/**
- * @param lst parser linked list
- * @brief provides correct error message after child process
- * @todo
- * too many functions in file
- * norm it
-	// printf("SIG: %d\n", WTERMSIG(exit_num));
-	// printf("EX: %d\n", WIFEXITED(exit_num));
-	// printf("EXST: %d\n", WEXITSTATUS(exit_num));
-*/
-void	exit_status(t_parser *lst)
-{
-	int status;
-	
-	status = 0;
-	
-	if (WIFEXITED(status)) 
-		lst->exit_code = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status)) 
-		lst->exit_code = 128 + WTERMSIG(status);
+	ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+	lst->exit_code = E_GENERAL;
 }
 
 /**

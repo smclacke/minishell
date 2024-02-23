@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/22 21:11:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 21:21:36 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	mini_remove_env(char *str, t_env **env)
 */
 void	ft_unset(t_parser *node, t_env **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (node->proc->proc_count != 1)

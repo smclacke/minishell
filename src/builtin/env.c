@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:16:24 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:50:36 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/23 21:17:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	ft_env(t_env *env, t_parser *lst)
 	head = env;
 	if (lst->proc->str_count != 0)
 	{
-		ft_putstr(NOT_POSSIBLE);
-		mini_error(E_COMMAND_NOT_FOUND, lst);
-		// lst->exit_code = E_COMMAND_NOT_FOUND;
-		// mini_error(E_COMMAND_NOT_FOUND, lst);
+		ft_putstr_fd(NOT_POSSIBLE, STDERR_FILENO);
+		lst->exit_code = E_COMMAND_NOT_FOUND;
 		return ;
 	}
 	while (head != NULL)
@@ -35,6 +33,4 @@ void	ft_env(t_env *env, t_parser *lst)
 			printf("%s=%s\n", head->key, head->value);
 		head = head->next;
 	}
-	mini_error(E_USAGE, lst);
-	// lst->exit_code = E_USAGE;
 }

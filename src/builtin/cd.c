@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/22 21:25:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 21:09:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
  * @param full NULL string to be filled with old_pwd=str
  * @brief assigns full and new to their values and adds them to
  * an empty list.
- * @todo exit codes
+ * @todo
  * norm it
- * @note (for all error functions) passing parser list but want actual var to print..
- * 
 */
 static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 {
@@ -43,7 +41,6 @@ static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
  * @param str string containing old working directory string
  * @brief loops through environment till OLDPWD is found
  * changes env->value to value of str
- * @todo check line 53
 */
 static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
 {
@@ -64,8 +61,6 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
  * @param lst parser linked list
  * @param env environment in linked list
  * @brief stores home directory and changes to it
- * @todo do I need use no such file?
- * change dprintf
 */
 void	home_dir(t_parser *lst, t_env **env)
 {
@@ -74,7 +69,7 @@ void	home_dir(t_parser *lst, t_env **env)
 	home_dir = ft_getenv(*env, "HOME");
 	if (home_dir == NULL)
 	{
-		dprintf(STDERR_FILENO, NO_HOME);
+		write(STDERR_FILENO, NO_HOME, 29);
 		lst->exit_code = E_GENERAL;
 		return ;
 	}
@@ -89,7 +84,6 @@ void	home_dir(t_parser *lst, t_env **env)
  * @todo do I need use no such file?
  * exit code
 */
-// bool	old_pwd(char *str, t_env **env, t_parser *lst)
 void	old_pwd(char *str, t_env **env, t_parser *lst)
 {
 	char		*old_pwd;
@@ -122,8 +116,6 @@ void	ft_cd(t_parser *lst, t_env **env)
 	if (too_many_args(lst) == true)
 		return ;
 	getcwd(cwd, PATH_MAX);
-		// if (cwd == NULL)
-		// 	return ;// discuss this
 	if (lst->proc->str_count == 0 || mini_strcmp(lst->proc->str[0], "~") == 0)
 		home_dir(lst, env);
 	else if (mini_strcmp(lst->proc->str[0], "-") == 0)

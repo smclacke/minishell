@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/22 21:35:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 20:43:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	printf("exit code search 12[%d]\n", lst->exit_code);
 	init_pipes_child(data, lst);
 	printf("exit code search 13[%d]\n", lst->exit_code);
-	redirect(lst, data);
+	if (redirect(lst, data) == false)
+		exit (lst->exit_code);
 	printf("exit code search 14[%d]\n", lst->exit_code);
 	if (data->error == false)
 		exit (43);
@@ -113,13 +114,12 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	{
 		do_builtin(lst, env, cmd_type);
 		printf("exit code search 15[%d]\n", lst->exit_code);
-		// lst->exit_code = EXIT_SUCCESS;//need this?
-		// mini_error(EXIT_SUCCESS, lst);
-		exit (EXIT_SUCCESS);//exit success??
+		exit (lst->exit_code);//exit success??
 	}
 	printf("exit code search 16[%d]\n", lst->exit_code);
-	if (!lst->proc->cmd) // we do need this?
-		exit (44);
+	printf ("lst->proc->cmd = [%s]\n", lst->proc->cmd);
+	if (lst->proc->cmd == NULL) // we do need this?
+		exit (127);
 	printf("exit code search 17[%d]\n", lst->exit_code);
 	executable = check_access(*env, lst, data);
 	printf("exit code search 18[%d]\n", lst->exit_code);
@@ -165,6 +165,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
 	int status;
 
+	status = 0;
 	if (!lst)
 		lst->exit_code = E_GENERAL;
 	printf("exit code search 3[%d]\n", lst->exit_code);
@@ -177,14 +178,12 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	printf("exit code search 6[%d]\n", lst->exit_code);
 	close_all(data, lst);
 	printf("exit code search 7[%d]\n", lst->exit_code);
-	status = 0;
-	printf("status 1[%d]\n", status);
 	waitpid(data->fork_pid, &status, 0);//insert lst->exit_code?
-	// waitpid(data->fork_pid, NULL, 0);//insert lst->exit_code?
+	printf("status 1[%d]\n", status);
 	printf("exit code search 8[%d]\n", lst->exit_code);
+	exit_status(status, lst);
 	while (wait(NULL) != -1)
 		(void)NULL;
-	exit_status(lst);
 }
 
 /**

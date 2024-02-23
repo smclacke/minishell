@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:36:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 22:43:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,51 @@
 /**
  * @param file file str
  * @param data struct containing fd's and 2d arrays needed for execution
- * @brief checks stats of the infile
+ * @param lst parser linked list
+ * @brief opens file and throws error if it doesnt exist
  * @todo 
- * replace dprintf 
  * norm it
 */
-bool	check_infile_stat(char *file, t_execute *data)
+static bool file_dup(t_parser *lst, t_execute *data, char *file)
+{
+	data->in = open(file, O_RDWR, 0644);
+	if (data->in == -1)
+	{
+		redir_file_error(file, lst);
+		return (false);
+	}
+	if (dup2(data->in, STDIN_FILENO) == 0)
+		close(data->in);
+	return (true);
+}
+
+/**
+ * @param file file str
+ * @param data struct containing fd's and 2d arrays needed for execution
+ * @param lst parser linked list
+ * @brief checks stats of the infile
+ * @todo 
+ * norm it
+*/
+static bool	check_infile_stat(char *file, t_execute *data, t_parser *lst)
 {
 	struct stat	file_stat;
-	
+
 	if (stat(file, &file_stat) == 0)
 	{
 		if (S_ISREG(file_stat.st_mode))
 		{
-			data->in = open(file, O_RDWR, 0644);
-			if (data->in == -1)
-			{
-				dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, file);
+			if (file_dup(lst, data, file) == false)
 				return (false);
-			}
-			if (dup2(data->in, STDIN_FILENO) == 0)
-				close(data->in);
 		}
 		if (S_ISDIR(file_stat.st_mode))
 		{
-			dprintf(STDERR_FILENO, DIR_MESSAGE, file);
+			dir_error(file, lst);
 			return (false);
 		}
 		else if (!S_ISDIR(file_stat.st_mode) && !S_ISREG(file_stat.st_mode))
 		{
-			dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, file);
+			redir_file_error(file, lst);
 			return (false);
 		}
 	}
@@ -57,14 +72,14 @@ bool	check_infile_stat(char *file, t_execute *data)
  * @brief checks for infile and opens it 
  * @todo replace dprintf
 */
-bool	redirect_infile(char *str, t_execute *data)
+bool	redirect_infile(char *str, t_execute *data, t_parser *lst)
 {
 	if (access(str, F_OK) != 0)
 	{
-		dprintf(STDERR_FILENO, DIR_FILE_MESSAGE, str);
+		redir_file_error(str, lst);
 		return (false);
 	}
-	if (check_infile_stat(str, data) == false)
+	if (check_infile_stat(str, data, lst) == false)
 		return (false);
 	else
 		return (true);
@@ -76,7 +91,7 @@ bool	redirect_infile(char *str, t_execute *data)
  * @brief creates and opens outfile
  * @todo replace dprintfs
 */
-bool	redirect_outfile(char *str, t_execute *data)
+bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
 {
 	struct stat	file_stat;
 
@@ -92,7 +107,7 @@ bool	redirect_outfile(char *str, t_execute *data)
 			data->out = open(str, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (S_ISDIR(file_stat.st_mode))
 		{
-			dprintf(STDERR_FILENO, DIR_MESSAGE, str);
+			dir_error(str, lst);
 			return (false);
 		}
 	}
@@ -112,20 +127,20 @@ bool	redirect_outfile(char *str, t_execute *data)
  * check the replace dprintf 
  * check returns
 */
-bool	redirect_append(char *str, t_execute *data)
+bool	redirect_append(char *str, t_execute *data, t_parser *lst)
 {
 	struct stat	file_stat;
 
 	if (access(str, F_OK) == 0 && access(str, W_OK) != 0)
 	{
-		dprintf(STDERR_FILENO, "%s no writing permissions\n", str);
+		write_permission_error(str, lst);
 		return (false);
 	}
 	if (stat(str, &file_stat) == 0)
 	{
 		if (S_ISDIR(file_stat.st_mode))
 		{
-			dprintf(STDERR_FILENO, "%s is a directory\n", str);
+			dir_error(str, lst);
 			return (false);
 		}
 	}

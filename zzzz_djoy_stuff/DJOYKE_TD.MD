@@ -2,13 +2,7 @@
 
 1) change dprintfs
 
-2) handle exit codes
-    //in wait for child proces get the exit codes there..
-
-3) ERRORS TO STANDARD ERROR!
-
-4) met t_execute struct pointer maar t_export en t_env maken zodat ik clean functie kan.
-
+2) ERRORS TO STANDARD ERROR!
 
 !!*we are not:*!!
 - SHLVL

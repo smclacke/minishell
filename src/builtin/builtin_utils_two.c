@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/22 21:23:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 20:50:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ bool	too_many_args(t_parser *lst)
  * @todo check return / need exit code? free it
  * need free_env?
 */
-void	make_node(t_env **env, t_export ex_var)
+void	make_node(t_env **env, t_export var)
 {
 	t_env	*new_node;
 
-	new_node = env_lstnew(ex_var.key, ex_var.value, ex_var.str, ex_var.has_value);
+	new_node = env_lstnew(var.key, var.value, var.str, var.has_value);
 	if (!new_node)
 	{
 		free_env(env);

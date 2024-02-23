@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/22 21:10:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 22:28:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,14 +162,10 @@ void			handle_signals(int proc);
 
 				// ALL DJOYKE PROTOS //
 int				check_for_builtin(t_parser *node);
-// bool			redirect_outfile(t_procs *head, t_execute *data);
-// bool			redirect_infile(t_procs *head, t_execute *data);
-// bool			redirect_append(t_procs *head, t_execute *data);
-bool			redirect_outfile(char *str, t_execute *data);
-bool			redirect_infile(char *str, t_execute *data);
-bool			redirect_append(char *str, t_execute *data);
+bool			redirect_outfile(char *str, t_execute *data, t_parser *lst);
+bool			redirect_infile(char *str, t_execute *data, t_parser *lst);
+bool			redirect_append(char *str, t_execute *data, t_parser *lst);
 void			init_heredoc(t_parser *lst, t_env **env);
-// void			redirect(t_parser *lst, t_execute *data);
 bool			redirect(t_parser *lst, t_execute *data);
 void			redirect_heredoc(t_parser *lst);
 
@@ -199,8 +195,8 @@ void			ft_env(t_env *env, t_parser *lst);
 void			ft_exit(t_parser *lst);
 void			ft_pwd(t_parser *head);
 void			ft_export(t_parser *lst, t_env **env);
-void			make_node(t_env **env, t_export ex_var);
-void			replace_node(t_env *lst, t_export ex_var);
+void			make_node(t_env **env, t_export var);
+void			replace_node(t_env *lst, t_export var);
 void			ft_unset(t_parser *lst, t_env **env);
 void			reassign_values(char *cwd, t_env *node, t_parser *head);
 void			free_all(t_env *env);
@@ -233,6 +229,10 @@ void			*mini_malloc(int size);
 char			*mini_strjoin(char const *s1, char const *s2);
 char			*mini_strdup(const char *s1);
 char			*mini_substr(char const *s, unsigned int start, size_t len);
-void			exit_status(t_parser *lst);
+void			exit_status(int status, t_parser *lst);
+void			redir_file_error(char *str, t_parser *lst);
+void			write_permission_error(char *str, t_parser *lst);
+void			dir_error(char *str, t_parser *lst);
+void			write_to_file(t_parser *lst, char *readline, t_env **env, int file);
 
 #endif
