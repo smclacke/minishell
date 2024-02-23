@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/23 20:39:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 23:09:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * 	if parser succeeds exit code is 0, update parser exit code with previous
  * 	otherwise error occurred, syntax exit given back to main
  */
-// void	run_minishell(t_env *env, char *input)
 int	run_minishell(t_env *env, char *input, int exit_c)
 {
 	t_parser	*procs;

@@ -1,8 +1,10 @@
 ------------------------------TO DO----------------------------
 
-1) change dprintfs
+1) change dprintfs and remove printf's
 
 2) ERRORS TO STANDARD ERROR!
+
+3) check to-do's
 
 !!*we are not:*!!
 - SHLVL
