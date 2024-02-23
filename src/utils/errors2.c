@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 23:08:24 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 23:12:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ void	exit_status(int status, t_parser *lst)
  * @param file file fd
  * @brief writes to the heredoc frees the read_line
 */
-void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
+void	write_to_file(t_parser *lst, char *rl, t_env **env, int file)
 {
 	if (lst && lst->hd_flag == 0)
 	{
-		if (ft_isdollar(readline))
-			readline = hd_expand(env, readline);
+		if (ft_isdollar(rl))
+			rl = hd_expand(env, rl);
 	}
-	if (readline)
+	if (rl)
 	{
-		write(file, readline, ft_strlen(readline));
-		free(readline);
+		write(file, rl, ft_strlen(rl));
+		free(rl);
 	}
 	write(file, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/23 21:40:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 23:13:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef enum e_exit
 	E_CLOSE = -1,
 	E_SYNTAX = 2,
 	E_EXEC = 126,
-	E_NO_PERMISSION = 126, 
+	E_NO_PERMISSION = 126,
 	E_COMMAND_NOT_FOUND = 127,
 	E_EXIT_INVALID_ARG = 128,
 	E_FATAL_SIGNAL = 128,
@@ -86,7 +86,6 @@ typedef enum e_exit
 	E_TEST2 = 98777,
 	E_TEST3 = 1111
 }						t_exit;
-
 
 /**
  * @todo	check the count vars are correctly updated and saved per process
@@ -243,8 +242,6 @@ typedef struct s_execute
 	int					out;
 	int					count;
 	bool				error;
-	// t_export			*export; //s_execute meegeven ipv env zodat ik alles kan cleanen
-	// t_env				*env;
 }							t_execute;
 
 #endif

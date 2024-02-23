@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/23 22:28:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/23 23:12:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void			do_strs(t_parser *tmp, t_expand *str, t_env **env);
 void			do_cmd(t_parser *tmp, t_expand *str, t_env **env);
 
 //------------------ expand_utils_2 ------------------//
-int 			get_check_value(t_expand *str, t_env **env);
+int				get_check_value(t_expand *str, t_env **env);
 void			exit_exp(t_parser *par, t_expand *str);
 int				ex_str(int c);
 int				is_dollar_or_quote(int c);
@@ -158,7 +158,6 @@ int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
 //------------------ signals ------------------//
 void			handle_signals(int proc);
 // void			handle_signals(int proc, t_parser *lst);
-
 
 				// ALL DJOYKE PROTOS //
 int				check_for_builtin(t_parser *node);
@@ -233,6 +232,6 @@ void			exit_status(int status, t_parser *lst);
 void			redir_file_error(char *str, t_parser *lst);
 void			write_permission_error(char *str, t_parser *lst);
 void			dir_error(char *str, t_parser *lst);
-void			write_to_file(t_parser *lst, char *readline, t_env **env, int file);
+void			write_to_file(t_parser *lst, char *rl, t_env **env, int file);
 
 #endif
