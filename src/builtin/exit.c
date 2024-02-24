@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 17:57:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:49:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_exit(t_parser *lst)
 	error = ft_atoi(lst->proc->str[0]);
 	if (error > 255)
 	{
-		put_custom_error(lst, "exit\n");
+		put_custom_error(lst, lst->proc->str[0], "exit");
 		exit(255);
 	}
 	write(STDERR_FILENO, "exit\n", 6);

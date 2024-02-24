@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 21:09:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:09:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
  * @param full NULL string to be filled with old_pwd=str
  * @brief assigns full and new to their values and adds them to
  * an empty list.
- * @todo
- * norm it
 */
 static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 {
@@ -81,8 +79,6 @@ void	home_dir(t_parser *lst, t_env **env)
  * @param lst parser linked list
  * @param env environment in linked list
  * @brief stores old working dir and changes to it
- * @todo do I need use no such file?
- * exit code
 */
 void	old_pwd(char *str, t_env **env, t_parser *lst)
 {
@@ -107,7 +103,6 @@ void	old_pwd(char *str, t_env **env, t_parser *lst)
  * checks access of lst->str, changes directory
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
- * @todo  NORM IT!??
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/24 18:04:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:08:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@
 # define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
 # define FAILED_HEREDOC "minishell: Failed to open heredoc\n"
 
-// // EXITCODES
 /**
- * @todo check no permission
+ * @brief exit codes;
 */
 typedef enum e_exit
 {

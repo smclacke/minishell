@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 21:21:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:51:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	ft_export(t_parser *node, t_env **env)
 	}
 	while (i < node->proc->str_count)
 	{
+		j = 0;
 		var.str = mini_strdup(node->proc->str[i]);
 		while (var.str[j] && var.str[j] != '=')
 			j++;

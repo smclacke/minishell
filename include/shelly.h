@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/23 23:12:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:50:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ bool			word_check(t_parser *lst, char *key);
 void			ft_cd(t_parser *lst, t_env **env);
 bool			too_many_args(t_parser *lst);
 void			no_such_file(char *str, t_parser *lst);
-void			put_custom_error(t_parser *node, char *cmd);
+void			put_custom_error(t_parser *node, char *str, char *cmd);
 void			ft_echo(t_parser *lst, t_env **env);
 void			ft_env(t_env *env, t_parser *lst);
 void			ft_exit(t_parser *lst);

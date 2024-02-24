@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 21:25:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:54:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	free_all(t_env *env)
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins:
  * echo, cd, pwd, export, unset, env and exit
- * @todo exit codes
 */
 void	do_builtin(t_parser *node, t_env **env, int cmd_type)
 {
@@ -55,8 +54,6 @@ void	do_builtin(t_parser *node, t_env **env, int cmd_type)
  * @param cmd string containing command
  * @brief checks if key and value are alphanumeric
  * @return true if not alphanumeric, false is alphanumeric
- * @todo
- * norm it
 */
 static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 {
@@ -64,7 +61,7 @@ static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 
 	if ((ft_isalpha(key[0]) == 0) && key[0] != '_')
 	{
-		put_custom_error(temp, cmd);
+		put_custom_error(temp, key, cmd);
 		return (false);
 	}
 	i = 1;
@@ -72,7 +69,7 @@ static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 	{
 		if (key[i] != '_' && ft_isalnum(key[i]) == 0)
 		{
-			put_custom_error(temp, cmd);
+			put_custom_error(temp, key, cmd);
 			return (false);
 		}
 		i++;
@@ -112,7 +109,6 @@ bool	word_check(t_parser *lst, char *key)
  * @param str string passed from parser
  * @param value string to contain new value value
  * @brief reassigns lines in the environment
- * @todo norm it
 */
 void	replace_node(t_env *lst, t_export var)
 {

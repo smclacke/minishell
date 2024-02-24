@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 14:09:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:53:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ int	get_key_value(char *str, char **key, char **value)
 		i++;
 	if (str[i] == '=')
 	{
+		if (ft_strlen(str) == 1)
+		{
+			*key = str;
+			value = NULL;
+			return (has_value = FALSE);
+		}
 		*key = mini_substr(str, 0, i);
 		*value = mini_substr(str, i + 1, (ft_strlen(str) - i));
 		has_value = TRUE;

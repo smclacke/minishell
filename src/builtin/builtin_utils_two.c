@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 18:02:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:09:25 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * @param str old working directory string
  * @param env environment in linked list
  * @brief replaces the value of set key in the environment
- * @todo exit codes norm it!
 */
 void	reassign_values(char *cwd, t_env *node, t_parser *head)
 {
