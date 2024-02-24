@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 18:54:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:56:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,6 @@ static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
  * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
  * @return true if wrong found with the words
- * @todo
- * export var=a
- * export $var=test
- * echo $var $a
 */
 bool	word_check(t_parser *lst, char *key)
 {

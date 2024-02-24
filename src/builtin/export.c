@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 18:51:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 19:02:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * @param env environment stored in linked list
  * @brief prints linked list containing env key or value
  * with declare in front
+ * @todo do I need to print this on the STDERR_FILENO?
 */
 static void	export_print(t_env *env)
 {
@@ -34,7 +35,6 @@ static void	export_print(t_env *env)
  * @param var export struct
  * @brief reassigns lines in the environment when export arguments is
  * 		  is an already excisting key.
- * @todo leak check and norm it
 */
 static bool	reassign_env(t_env **env, t_export var)
 {
@@ -59,8 +59,6 @@ static bool	reassign_env(t_env **env, t_export var)
  * @param i iterator
  * @brief checks if key and value are valid strings
  * @return true if valid false if invalid
- * @todo 
- * what about expansions
 */
 static bool	key_value_check(t_parser *node, t_export var, int i)
 {
@@ -80,13 +78,9 @@ static bool	key_value_check(t_parser *node, t_export var, int i)
 /**
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
- * @brief export with no options, learned that double free 
- * with freeing in an unrelated spot 
+ * @brief export with no options, 
+ * @note double free with freeing in an unrelated spot 
  * might be overwriting a pointer and not allocating a new string.
- * @todo 
- * what about expansions
- * exit codes
- * norm it!
 */
 void	ft_export(t_parser *node, t_env **env)
 {
