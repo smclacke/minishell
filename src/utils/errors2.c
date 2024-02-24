@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 18:06:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 20:52:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,14 @@
 */
 void	exit_status(int status, t_parser *lst)
 {
+	printf("status = [%i]\n", status);
 	if (WIFEXITED(status))
 		lst->exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		lst->exit_code = 128 + WTERMSIG(status);
 	else
-		return ;
-}
-
-/**
- * @param read_line string containing line read.
- * @param file int with file fd.
- * @param env environment linked list
- * @param file file fd
- * @brief writes to the heredoc frees the read_line
-*/
-void	write_to_file(t_parser *lst, char *rl, t_env **env, int file)
-{
-	if (lst && lst->hd_flag == 0)
-	{
-		if (ft_isdollar(rl))
-			rl = hd_expand(env, rl);
-	}
-	if (rl)
-	{
-		write(file, rl, ft_strlen(rl));
-		free(rl);
-	}
-	write(file, "\n", 1);
+		lst->exit_code = 0;
+	return ;
 }
 
 /**

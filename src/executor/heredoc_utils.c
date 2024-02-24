@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 22:46:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 20:34:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 	handle_signals(HERE_DOC);
 	file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (file == -1)
-		exit(E_USAGE);
+		exit(E_GENERAL);
 	while (i < lst->hd_count)
 	{
 		read_line = readline("heredoc> ");
@@ -70,11 +70,14 @@ void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
  * waits for it to finish and exits. 
  * @todo
  * exit codes 127 when << eof << haha << hi
+ * added status but that doesnt work
 */
 static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 {
 	pid_t	fork_pid;
+	int		status;
 
+	status = 0;
 	fork_pid = fork();
 	if (fork_pid == -1)
 		lst->parser->exit_code = E_GENERAL;
@@ -84,8 +87,9 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
-		waitpid(fork_pid, NULL, 0);
+		// waitpid(fork_pid, NULL, 0);
 	}
+	waitpid(fork_pid, &status, 0);
 }
 
 /**
@@ -95,7 +99,6 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
  * @brief makes name for heredoc by adding number of heredoc
  * to the name. unlinks, frees the string and the number.
  * @todo NORM IT
- * << eof << haha << hi returns 127? why?
 */
 static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 {
