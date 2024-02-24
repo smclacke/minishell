@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 20:49:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 21:48:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @brief determines how many times needs to fork
  * pipes and makes child process
  * @todo norm it!
- * << eof returns 127 when completed without failure? status is 32512
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -130,14 +129,19 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	status = 0;
 	if (!lst)
 		lst->exit_code = E_GENERAL;
+	// printf("exit code search 3[%d]\n", lst->exit_code);
 	init_heredoc(lst, env);
+	// printf("exit code search 4[%d]\n", lst->exit_code);
 	if (single_builtin_cmd(lst, env, data) == true)
 		return ;
+	// printf("exit code search 5[%d]\n", lst->exit_code);
 	pipeline(lst, env, data);
+	// printf("exit code search 6[%d]\n", lst->exit_code);
 	close_all(data, lst);
-	printf("exit code search 7[%d]\n", lst->exit_code);
+	// printf("exit code search 7[%d]\n", lst->exit_code);
 	waitpid(data->fork_pid, &status, 0);
-	printf("exit code search 8[%d]\n", lst->exit_code);
+	// printf("status 1[%d]\n", status);
+	// printf("exit code search 8[%d]\n", lst->exit_code);
 	exit_status(status, lst);
 	while (wait(NULL) != -1)
 		(void)NULL;
@@ -154,9 +158,11 @@ void	execute(t_env **env, t_parser *lst)
 	t_execute	*data;
 
 	data = mini_malloc(sizeof(t_execute));
+	// printf("exit code search 1[%d]\n", lst->exit_code);
 	init_execute_struct(data);
 	ft_expand(lst, env);
+	// printf("exit code search 2[%d]\n", lst->exit_code);
 	build(lst, env, data);
-	printf("exit code search 9[%d]\n", lst->exit_code);
+	// printf("exit code search 9[%d]\n", lst->exit_code);
 	free (data);
 }

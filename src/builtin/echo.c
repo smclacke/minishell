@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:48:40 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/24 21:11:50 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,12 @@ static bool	input_check(t_procs *lst)
  * @brief writes node after command on standart output followed by /n char
  * -n that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
- * @todo error code
+ * @todo EDGE CASES
+ * echo -n -n -nnnn -nnnnm displays the entire string
+ * should only display -nnnnm without \n
+ * echo -n -nnn hello -n
+ * should only display hello -n without \n
+ * echo ~ works but everything afterwards segfaults?
 */
 void	ft_echo(t_parser *lst, t_env **env)
 {

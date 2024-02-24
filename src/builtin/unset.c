@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:51 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 21:21:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 21:21:52 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	mini_remove_env(char *str, t_env **env)
  * @brief unset values by deleting nodes in env linked list
  * @note if path is unset cant do env in bash
  * @todo make it work
+ * "unset =" segfaults?
+ * test if var = test doesnt put = in export
 */
 void	ft_unset(t_parser *node, t_env **env)
 {

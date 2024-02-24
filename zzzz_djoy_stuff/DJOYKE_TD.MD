@@ -6,6 +6,38 @@
 
 3) check to-do's
 
+4) 
+	minibleh:./fdsfdsf
+	minishell: ./fdsfdsf: command not found
+	dreijans@f0r3s13:~$ ./haha
+	bash: ./haha: No such file or directory
+
+5) 
+	cat | cat | ls
+	will execute ls
+	pressing enter twice will bring you back the shell prompt
+
+	however minishell:
+
+	➜  minishell git:(djoyke) ✗ make run
+	minibleh:cat | cat | ls
+	include    out        zxy_sarah_notes
+	Makefile   README.md  zzzz_djoy_stuff
+	minishell  src
+	obj        sup.supp
+	^M^M^M^M^M^M^M^M
+
+	minibleh:./minishell cat | cat | ls
+
+	is very buggy laggy 
+
+6) 
+
+	cat | cat1 | ls
+	doesnt work either
+
+7) get leak in malloc when ls | exit done twice
+
 !!*we are not:*!!
 - SHLVL
 - export ls="ls -l"

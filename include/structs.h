@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/24 20:27:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 21:17:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@
 # define PATH_MAX 4096
 // # define PATH_MAX 1024 //for when djoyke is working on her macbook
 
-# define NOT_POSSIBLE "minishell: env: no such file or directory\n"
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
 # define NO_HOME "minishell: cd: HOME not set\n"
 # define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
