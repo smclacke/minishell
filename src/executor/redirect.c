@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 22:44:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:02:39 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static bool	check_infile_stat(char *file, t_execute *data, t_parser *lst)
  * @param str redir str
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks for infile and opens it 
- * @todo replace dprintf
 */
 bool	redirect_infile(char *str, t_execute *data, t_parser *lst)
 {
@@ -89,7 +88,6 @@ bool	redirect_infile(char *str, t_execute *data, t_parser *lst)
  * @param str redir str
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief creates and opens outfile
- * @todo replace dprintfs
 */
 bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
 {
@@ -123,8 +121,7 @@ bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
  * if file does not exist, it will be created. 
  * if it does exist, the output of command is appended 
  * to the end of the file, preserving the existing content.
- * @todo 
- * check the replace dprintf 
+ * @todo
  * check returns
 */
 bool	redirect_append(char *str, t_execute *data, t_parser *lst)

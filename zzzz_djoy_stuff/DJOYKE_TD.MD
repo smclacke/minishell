@@ -1,6 +1,6 @@
 ------------------------------TO DO----------------------------
 
-1) change dprintfs and remove printf's
+1) remove printf's
 
 2) ERRORS TO STANDARD ERROR!
 

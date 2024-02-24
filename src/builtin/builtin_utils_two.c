@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 20:50:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:02:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,15 @@ int	list_iter(t_parser *lst)
  * @param lst parser linked list
  * @brief checks if arguments are more than one
  * throws error message if true.
- * @todo change dprintf
 */
 bool	too_many_args(t_parser *lst)
 {
 	if (lst->proc->str_count > 1)
 	{
-		dprintf(STDERR_FILENO, ARG_ERROR, lst->proc->cmd);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(lst->proc->cmd, STDERR_FILENO);
+		ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
+		lst->exit_code = E_GENERAL;
 		return (true);
 	}
 	return (false);

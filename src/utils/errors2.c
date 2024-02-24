@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 23:12:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:06:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /**
  * @param lst parser linked list
  * @brief provides correct error message after child process
- * @todo
- * norm it
 */
 void	exit_status(int status, t_parser *lst)
 {
