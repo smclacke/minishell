@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:05 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 19:46:22 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 17:57:58 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,37 @@
 /**
  * @param node parsed list
  * @brief checks if content is a digit
- * @todo exit num correct?
 */
-static void	digit_check(char *str)
+static void	digit_check(char *str, t_parser *lst)
 {
 	int	i;
 
 	i = 0;
+	if (str[i] == '-' && str[i + 1] != '\0')
+		i++;
 	while (str[i] && ft_isdigit(str[i]) != 0)
 		i++;
 	if (str[i] != '\0')
 	{
-		dprintf(STDERR_FILENO, NON_NUM_ARG, str);
-		exit(1);
+		ft_putstr_fd("exit\n", STDERR_FILENO);
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
+		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		lst->exit_code = 255;
+		exit (lst->exit_code);
 	}
 }
 
 /**
  * @param node parsed list
  * @brief checks if argument count is more than 1
- * @todo does it need to be exit(1)?
 */
 static void	arg_check(t_parser *lst)
 {
 	if (lst->proc->str_count > 1)
 	{
 		write(STDERR_FILENO, TOO_MANY_ARG, sizeof(TOO_MANY_ARG));
-		exit(1);
+		lst->exit_code = E_GENERAL;
 	}
 }
 
@@ -61,8 +65,6 @@ void	exit_with_stat(int exit_status, int status)
 /**
  * @param lst parsed list
  * @brief exits the program and displays corresponding error number
- * @todo norm
- * exit status doesnt work
 */
 void	ft_exit(t_parser *lst)
 {
@@ -76,14 +78,16 @@ void	ft_exit(t_parser *lst)
 		return ;
 	if (lst->proc->str_count == 0)
 		exit_with_stat(exit_status, status);
+	digit_check(lst->proc->str[0], lst);
 	arg_check(lst);
-	digit_check(lst->proc->str[0]);
+	if (lst->exit_code != 0)
+		return ;
 	error = ft_atoi(lst->proc->str[0]);
 	if (error > 255)
 	{
-		put_custom_error(lst, "exit");
+		put_custom_error(lst, "exit\n");
 		exit(255);
 	}
-	write(STDERR_FILENO, "exit", 5);
+	write(STDERR_FILENO, "exit\n", 6);
 	exit(error);
 }
