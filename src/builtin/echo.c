@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 21:11:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 22:46:31 by djoyke        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,16 @@ static bool	is_all_n(char *str)
  * @param temp t_parser linked list
  * @brief writes string and space to the terminal
 */
-static void	write_line(t_procs *temp, int i)
+static void	write_line(t_procs *temp, int i, int is_flag)
 {
+	int count;
+
+	count = temp->str_count;
+	if (is_flag != 0)
+	{
+		write(1, temp->str[count - 1], ft_strlen(temp->str[count -1]));
+		return ;
+	}
 	while (i < temp->str_count)
 	{
 		if (temp->str[i])
@@ -85,12 +93,6 @@ static bool	input_check(t_procs *lst)
  * @brief writes node after command on standart output followed by /n char
  * -n that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
- * @todo EDGE CASES
- * echo -n -n -nnnn -nnnnm displays the entire string
- * should only display -nnnnm without \n
- * echo -n -nnn hello -n
- * should only display hello -n without \n
- * echo ~ works but everything afterwards segfaults?
 */
 void	ft_echo(t_parser *lst, t_env **env)
 {
@@ -114,7 +116,7 @@ void	ft_echo(t_parser *lst, t_env **env)
 		lst->exit_code = E_USAGE;
 		return ;
 	}
-	write_line(temp->proc, i);
+	write_line(temp->proc, i, is_flag);
 	if (is_flag == 0)
 		write(1, "\n", 1);
 	lst->exit_code = E_USAGE;
