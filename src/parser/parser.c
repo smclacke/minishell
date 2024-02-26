@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 20:26:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 23:31:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	int	sort_this_out(t_parser *proc, int i)
 	if (proc->proc_count > 1)
 	{
 		if (sort_each_proc(proc->process[i], proc->proc_arrs[i]) == E_STOP)
-			return (ft_free_process(proc), 0);
+			return (0);
 	}
 	else
 	{
