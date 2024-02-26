@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 12:58:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:39:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ typedef struct s_parser
 	int						hd_flag;
 
 	char					*exit_str;
-	// enum e_exit				exit_code;
-	unsigned int			exit_code;
+	enum e_exit				exit_code;
+	// unsigned int			exit_code;
 	int						exit_stat;
 
 	struct s_parser			*next;

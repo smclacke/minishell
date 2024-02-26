@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:03:20 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:41:19 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 /**
  * @param lst parser linked list
  * @brief provides correct error message after child process
- * @todo remove printf statement
 */
 void	exit_status(int status, t_parser *lst)
 {
-	printf("status = [%i]\n", status);
 	if (WIFEXITED(status))
 		lst->exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
