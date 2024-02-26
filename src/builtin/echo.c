@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 19:06:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 23:50:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ static bool	input_check(t_procs *lst)
 /**
  * @param lst t_parser linked list
  * @brief writes node after command on standart output followed by /n char
- * -n that eliminates the endline char in output 
- * @return The echo utility exits 0 on success, and > 0 if an error occurs.
+ * -n that eliminates the endline char in output
 */
 void	ft_echo(t_parser *lst, t_env **env)
 {
@@ -111,13 +110,9 @@ void	ft_echo(t_parser *lst, t_env **env)
 		i++;
 		is_flag++;
 	}
-	if (is_flag != 0 && temp->proc->str_count == 0)
-	{
-		// lst->exit_code = E_USAGE;
+	if (is_flag != 0 && temp->proc->str_count == 1)
 		return ;
-	}
 	write_line(temp->proc, i, is_flag);
 	if (is_flag == 0)
 		write(1, "\n", 1);
-	lst->exit_code = E_USAGE;
 }

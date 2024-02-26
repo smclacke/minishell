@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 15:03:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 22:56:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	exit_status(int status, t_parser *lst)
 		lst->exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		lst->exit_code = 128 + WTERMSIG(status);
-	// else
-	// 	lst->exit_code = 0;
 	return ;
 }
 
