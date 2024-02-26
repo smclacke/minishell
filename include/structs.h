@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 21:43:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 23:09:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,12 @@
 # define RED_X 4
 
 # define PATH_MAX 4096
-// # define PATH_MAX 1024 //for when djoyke is working on her macbook
 
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
 # define NO_HOME "minishell: cd: HOME not set\n"
 # define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
 # define FAILED_HEREDOC "minishell: Failed to open heredoc\n"
 
-// /**
-//  * @brief global keeping exit status
-//  */
-// extern int	global_exit_stat;
-
-/**
- * @brief exit codes;
-*/
 typedef enum e_exit
 {
 	E_USAGE = 0,
