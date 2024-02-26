@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:39:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 14:21:27 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@
 # define NO_HOME "minishell: cd: HOME not set\n"
 # define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
 # define FAILED_HEREDOC "minishell: Failed to open heredoc\n"
+
+/**
+ * @brief global keeping exit status
+ */
+extern int	global_exit_stat;
 
 /**
  * @brief exit codes;
