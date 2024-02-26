@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/28 21:38:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 18:50:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:11:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void	no_such_file(char *str, t_parser *lst)
 /**
  * @param error int errno given to exit
  * @brief provides correct error message and exits
- * @todo is this function okay? do I need to exit?
- * norm it
 */
 void	mini_error(int exit_enum, t_parser *lst)
 {

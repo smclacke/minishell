@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 22:48:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:10:49 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	check_for_builtin(t_parser *node)
  * @note commented out bzero in init parser and iterate
  * with j in fill array. super weird it kinda works now but don't really
  * understand why
- * @todo norm it
 */
 static char	**fill_array(t_procs *lst, char **new_str)
 {
@@ -78,8 +77,6 @@ static char	**fill_array(t_procs *lst, char **new_str)
  * @param lst parser linked list
  * @brief set's linked list from cmd to next cmd to 2d array
  * cmd at 0, plus args at 1 , 2 etc.
- * @todo error code NORM IT if malloc already exits 
- * I dont need the NULL check?
  * @note this needs to put the commands and the strs in an array
 */
 char	**get_argv(t_parser *lst)

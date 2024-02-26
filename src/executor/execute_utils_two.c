@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/23 21:43:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:09:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param data execute struct
  * @brief checks for single builtin command and if there are redirects
  * executes the builtin and redirect function
- * @todo norm it
+ * @todo
  * after redirect? line 39
  * if (data->error == false)
  * return (true);
@@ -50,7 +50,6 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param env  environment linked list
  * @param data execute struct
  * @brief forks, checks if it didnt fail, enters child process
- * @todo exit code NORM
 */
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -90,7 +89,7 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
- * @todo norm it
+ * @todo
  * while (i < lst->proc_count)
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
@@ -115,7 +114,6 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
  * @param lst parser linked list
  * @param execute execute struct
  * @brief checks for redirects and enters redirect in or outfile function
- * @todo remove printf statement
  * @note keeping hd_count check since func used much, i.e. mini_forks
  * 		- when used with multi procs, check hd stuff...
  * redirect_heredoc: check if bool and return etc

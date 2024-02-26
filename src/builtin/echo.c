@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 22:46:31 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/26 13:12:31 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static bool	is_all_n(char *str)
 */
 static void	write_line(t_procs *temp, int i, int is_flag)
 {
-	int count;
+	int	count;
 
 	count = temp->str_count;
 	if (is_flag != 0)

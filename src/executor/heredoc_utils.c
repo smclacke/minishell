@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 20:34:38 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:01:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,8 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
-		// waitpid(fork_pid, NULL, 0);
+		waitpid(fork_pid, &status, 0);
 	}
-	waitpid(fork_pid, &status, 0);
 }
 
 /**
