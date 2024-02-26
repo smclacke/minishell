@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 21:07:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 22:24:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,15 @@ static char	*readline_check(char *input)
 //  * @brief catches all exit codes
 //  * @todo do we actually need this function with the global?
 // */
-// void	call_exit_code(int exit)
+// static void	call_exit_code(int exit)
 // {
-// 	if (WIFEXITED(exit))
-// 		global_exit_stat = WEXITSTATUS(exit);
-// 	else if (WIFSIGNALED(exit))
-// 		global_exit_stat = 128 + WTERMSIG(exit);
+// 	int status;
+
+// 	status = 0;
+// 	if (WIFEXITED(status))
+// 		exit = WEXITSTATUS(status);
+// 	else if (WIFSIGNALED(status))
+// 		exit = 128 + WTERMSIG(status);
 // 	return ;
 // }
 

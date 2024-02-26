@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/26 21:05:19 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/26 22:41:29 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ HEADER			= $(addprefix $(HEADER_DIR)/, $(HEADERS))
 
 SRCS			= main.c								\
 					utils/errors.c						\
-					utils/more_space.c					\
 					utils/errors2.c						\
 					utils/execute_utils.c				\
 					utils/parser_errors.c				\
@@ -40,7 +39,6 @@ SRCS			= main.c								\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
 					lexer/tokens.c						\
-					lexer/meta_check.c					\
 					parser/parser.c						\
 					parser/parser_utils.c				\
 					parser/sort_procs.c					\
@@ -96,6 +94,7 @@ $(NAME)			:	$(OBJ)
 
 run:	$(NAME)
 	@ ./$(NAME)
+# @ valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup.supp ./$(NAME)
 
 norm:
 	@ norminette $(SRC_DIR) $(HEADER_DIR)

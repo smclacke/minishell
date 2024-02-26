@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 20:51:29 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 20:43:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 22:38:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ void	executable_check(t_parser *lst, t_execute *data, char *exec)
 	if (exec == NULL)
 	{
 		if (lst->proc->cmd != NULL)
+		{
 			put_execute_error(lst);
-		exit (EXIT_FAILURE);
+			exit (EXIT_FAILURE);
+		}
+		exit (EXIT_SUCCESS);
 	}
 	if (data->error == false)
 		exit (lst->exit_code);

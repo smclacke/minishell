@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 20:45:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 22:36:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	if (redirect(lst, data) == false)
 		exit (lst->exit_code);
 	if (data->error == false)
-		exit (43);
+		exit (EXIT_FAILURE);
 	cmd_type = check_for_builtin(lst);
 	if (cmd_type != 0)
 	{
@@ -102,8 +102,8 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	executable_check(lst, data, executable);
 	data->env_array = list_to_string(*env);
 	argv = get_argv(lst);
-	if (argv == NULL)
-		exit(47);
+	// if (argv == NULL)
+	// 	exit();
 	if (execve(executable, argv, data->env_array) == -1)
 		exit(EXIT_FAILURE);
 }

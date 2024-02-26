@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:09:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 21:28:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,6 @@ bool	redirect(t_parser *lst, t_execute *data)
 	i++;
 	if (lst->proc->hd_last)
 		redirect_heredoc(lst);
+	// printf(" exit code in singke builtin [%d]\n", lst->exit_code);
 	return (true);
 }
