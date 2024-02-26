@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/26 20:09:10 by smclacke      ########   odam.nl          #
+#    Updated: 2024/02/26 21:05:19 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRCS			= main.c								\
 					utils/execute_utils.c				\
 					utils/parser_errors.c				\
 					utils/free_procs.c					\
-					utils/print.c						\
 					utils/signals.c						\
 					utils/utils.c						\
 					utils/cleanup.c						\
@@ -97,7 +96,6 @@ $(NAME)			:	$(OBJ)
 
 run:	$(NAME)
 	@ ./$(NAME)
-# @ valgrind --leak-check=full --show-leak-kinds=all --suppressions=sup.supp ./$(NAME)
 
 norm:
 	@ norminette $(SRC_DIR) $(HEADER_DIR)

@@ -6,15 +6,24 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 18:52:13 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:07:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 21:05:01 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
 /**
- * @todo	comment out all // delete for final push
-*/
+ * 
+				// print
+void			print_token_arr(char **token);
+void			print_expand_vals(t_expand *str);
+void			print_proc_arrs(t_parser *parser);
+void			print_procs(t_procs *proc);
+void			prpr(t_parser *proc);
+void			print_parser(t_parser *proc);
+ * 
+ */
+
 void	print_token_arr(char **token)
 {
 	int	i;
