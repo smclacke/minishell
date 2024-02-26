@@ -15,15 +15,7 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 *right here, right now*
 
 4) djoy: 
-	 - pwd on error is giving E_USAGE (0), but show error be 0?
-	 - cmd not found exit code is 0
-	 - if exit_codes are implimented everywhere, these should be checkable by 'echo $?' now :)
 	 - cating heredoc show give the heredoc input but i dont get anything back
-
-33) this isn't right..
-minibleh:echo sdkjfs  |<
-minishell: syntax error nothing after pipe
-sdkjfs
 
 5) 
 missing frees somewhere.. using this test:
