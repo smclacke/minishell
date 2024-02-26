@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 21:07:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 21:43:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	run_minishell(t_env *env, char *input, int exit_c)
 		return (E_SYNTAX);
 	else
 		procs->exit_code = exit_c;
-	// prpr(procs);
 	execute(&env, procs);
 	exit_c = procs->exit_code;
 	free_parser(procs);
