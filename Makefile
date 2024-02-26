@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/24 20:54:03 by dreijans      ########   odam.nl          #
+#    Updated: 2024/02/26 14:03:48 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,6 @@ SRCS			= main.c								\
 					executor/execute_utils_two.c		\
 					executor/heredoc_utils.c			\
 					executor/redirect.c					\
-					executor/print_utils.c				\
 
 
 SRC_DIR		= src

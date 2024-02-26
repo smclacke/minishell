@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:38:25 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 14:10:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,15 +172,9 @@ void			redirect_heredoc(t_parser *lst);
 t_env			*env_list(char **envp, t_env *env);
 t_env			*env_lstnew(void *key, void *value, char *full, int h_v);
 int				get_key_value(char *str, char **key, char **value);
-t_env			*env_lstlast(t_env *lst);
 void			env_lstadd_back(t_env **lst, t_env *new);
-void			print_list(t_env *env);
-void			print_list_key(t_env *env);
-void			print_list_value(t_env *env);
-// char			**list_to_string(t_env *env, t_parser *lst);
 char			**list_to_string(t_env *env);
 void			free_env(t_env **lst);
-char			*get_full(char *str);
 
 //---- Built-in ----//
 void			do_builtin(t_parser *node, t_env **env, int cmd_type);
@@ -205,7 +199,6 @@ void			mini_forks(t_parser *lst, t_env **env, t_execute *data);
 bool			absolute_check(t_parser *node);
 void			execute(t_env **env, t_parser *list);
 void			init_execute_struct(t_execute *data);
-void			free_data(t_execute *data);
 void			close_all(t_execute *data, t_parser *lst);
 void			close_between(t_execute *data, t_parser *lst);
 void			init_pipe(int i, int count, t_execute *data, t_parser *lst);
@@ -223,7 +216,6 @@ void			mini_error(int exit_enum, t_parser *lst);
 int				mini_strcmp(char *s1, char *s2);
 int				mini_lstsize(t_env *lst);
 char			*ft_getenv(t_env *env, char *str);
-int				list_iter(t_parser *lst);
 void			*mini_malloc(int size);
 char			*mini_strjoin(char const *s1, char const *s2);
 char			*mini_strdup(const char *s1);

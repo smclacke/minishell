@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:10:11 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 14:03:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	get_key_value(char *str, char **key, char **value)
  * containing line from envp.
  * @brief substrings string from envp[i].
 */
-char	*get_full(char *str)
+static char	*get_full(char *str)
 {
 	char	*new_str;
 
@@ -121,7 +121,6 @@ t_env	*env_list(char **envp, t_env *env)
  * @param env linked list containing environment
  * @brief turns environment linked list into 2d array
 */
-// char	**list_to_string(t_env *env, t_parser *lst)
 char	**list_to_string(t_env *env)
 {
 	char	**env_array;

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/09 19:27:49 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:07:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 14:09:24 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,6 @@ char	*ft_getenv(t_env *env, char *str)
 		env = env->next;
 	}
 	return (NULL);
-}
-
-/**
- * @param lst parser linked list
- * @brief returns list size
-*/
-int	list_iter(t_parser *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst != NULL)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
 }
 
 /**
