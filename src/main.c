@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 18:34:17 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 19:00:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,18 @@ int	global_exit_stat = 0;
  * @param input string containing prompt input
  * @param exit_c int containing exit code
  * @brief function that runs minishell
- * @todo
- *	is this the right logic?
- * 	if parser succeeds exit code is 0, update parser exit code with previous
- * 	otherwise error occurred, syntax exit given back to main
  * @note to see what the parser is passing add prpr(procs);
  */
 static int	run_minishell(t_env *env, char *input, int exit_c)
 {
 	t_parser	*procs;
 
-	exit_c = 0;
 	procs = NULL;
 	procs = parse_input(procs, input);
 	if (!procs)
 		return (E_SYNTAX);
 	else
 		procs->exit_code = exit_c;
-	prpr(procs);
 	execute(&env, procs);
 	exit_c = procs->exit_code;
 	free_parser(procs);
@@ -71,10 +65,6 @@ void	call_exit_code(int exit)
 	return ;
 }
 
-/**
- * @brief main
- * @todo remove printf statement
-*/
 int	main(int argc, char **argv, char **envp)
 {
 	int			og_stdout;
@@ -96,10 +86,9 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		readline_check(input);
 		exit_c = run_minishell(env, input, exit_c);
-		printf("exit_c = [%i]\n", exit_c);
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
-		// call_exit_code(exit_c);
+		call_exit_code(exit_c);
 	}
 	return (exit_c);
 }
