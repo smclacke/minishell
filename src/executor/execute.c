@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 18:54:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 20:45:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 		do_builtin(lst, env, cmd_type);
 		exit (lst->exit_code);
 	}
-	if (lst->proc->cmd == NULL)
-		exit (127);
 	executable = check_access(*env, lst, data);
 	executable_check(lst, data, executable);
 	data->env_array = list_to_string(*env);
@@ -124,18 +122,13 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	status = 0;
 	if (!lst)
 		lst->exit_code = E_GENERAL;
-	if (lst->proc->hd_count != 0)
-	{
-		init_heredoc(lst, env);
-		return ;
-	}
+	init_heredoc(lst, env);
 	if (single_builtin_cmd(lst, env, data) == true)
 		return ;
 	pipeline(lst, env, data);
 	close_all(data, lst);
 	waitpid(data->fork_pid, &status, 0);
 	exit_status(status, lst);
-	// exit_status(lst);
 	while (wait(NULL) != -1)
 		(void)NULL;
 }
