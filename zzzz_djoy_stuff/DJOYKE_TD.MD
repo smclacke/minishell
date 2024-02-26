@@ -12,8 +12,6 @@
 	dreijans@f0r3s13:~$ ./haha
 	bash: ./haha: No such file or directory
 
-5) get leak in malloc when ls | exit done twice
-
 !!*we are not:*!!
 - SHLVL
 - export ls="ls -l"

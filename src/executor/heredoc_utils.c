@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:17:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:34:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
  * @param i int index
  * @brief opens a child proces where heredoc process is called
  * and exits with correct signals from the process 
- * waits for it to finish and exits. 
- * @todo
- * exit codes 127 when << eof << haha << hi
- * added status but that doesnt work
+ * waits for it to finish and exits.
 */
 static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 {
