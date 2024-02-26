@@ -6,25 +6,30 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/24 20:55:50 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:52:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
 /**
+ * @param env environment linked list
+ * @param input string containing prompt input
+ * @param exit_c int containing exit code
+ * @brief function that runs minishell
+ * @todo
  *	is this the right logic?
  * 	if parser succeeds exit code is 0, update parser exit code with previous
  * 	otherwise error occurred, syntax exit given back to main
+ * @note to see what the parser is passing add prpr(procs);
  */
-int	run_minishell(t_env *env, char *input, int exit_c)
+static int	run_minishell(t_env *env, char *input, int exit_c)
 {
 	t_parser	*procs;
 
 	exit_c = 0;
 	procs = NULL;
 	procs = parse_input(procs, input);
-	// prpr(procs);
 	if (!procs)
 		return (E_SYNTAX);
 	else
@@ -36,7 +41,23 @@ int	run_minishell(t_env *env, char *input, int exit_c)
 }
 
 /**
- * @todo norm it
+ * @param input prompt string
+ * @brief checks if readline doesn't return NULL
+ * if returns NULL exits accordingly
+*/
+static char	*readline_check(char *input)
+{
+	if (input == NULL)
+	{
+		write(STDOUT_FILENO, "exit\n", 6);
+		exit(EXIT_SUCCESS);
+	}
+	return (input);
+}
+
+/**
+ * @brief main
+ * @todo remove printf statement
 */
 int	main(int argc, char **argv, char **envp)
 {
@@ -49,19 +70,15 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	env = NULL;
-	exit_c = 0;
 	og_stdout = dup(STDOUT_FILENO);
 	og_stdin = dup(STDIN_FILENO);
 	env = env_list(envp, env);
+	exit_c = 0;
 	while (1)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
-		if (input == NULL)
-		{
-			write(STDOUT_FILENO, "exit\n", 6);
-			exit(EXIT_SUCCESS);
-		}
+		readline_check(input);
 		exit_c = run_minishell(env, input, exit_c);
 		printf("exit_c = [%i]\n", exit_c);
 		dup2(og_stdout, STDOUT_FILENO);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:10:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:52:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ char	**get_argv(t_parser *lst)
  * @param s1 string or char to compare with
  * @brief compares 2 strings replace by the libft version without -n
  * @return difference if different or 0
- * @todo check if this works everywhere
 */
 int	mini_strcmp(char *s1, char *s2)
 {
