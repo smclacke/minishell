@@ -6,13 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 20:50:18 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 20:55:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
 
-int	global_exit_stat = 0;
+// int	global_exit_stat = 0;
 
 /**
  * @param env environment linked list
@@ -53,18 +53,18 @@ static char	*readline_check(char *input)
 	return (input);
 }
 
-/**
- * @brief catches all exit codes
- * @todo do we actually need this function with the global?
-*/
-void	call_exit_code(int exit)
-{
-	if (WIFEXITED(exit))
-		global_exit_stat = WEXITSTATUS(exit);
-	else if (WIFSIGNALED(exit))
-		global_exit_stat = 128 + WTERMSIG(exit);
-	return ;
-}
+// /**
+//  * @brief catches all exit codes
+//  * @todo do we actually need this function with the global?
+// */
+// void	call_exit_code(int exit)
+// {
+// 	if (WIFEXITED(exit))
+// 		global_exit_stat = WEXITSTATUS(exit);
+// 	else if (WIFSIGNALED(exit))
+// 		global_exit_stat = 128 + WTERMSIG(exit);
+// 	return ;
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -89,7 +89,7 @@ int	main(int argc, char **argv, char **envp)
 		exit_c = run_minishell(env, input, exit_c);
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
-		call_exit_code(exit_c);
+		// call_exit_code(exit_c);
 	}
 	return (exit_c);
 }

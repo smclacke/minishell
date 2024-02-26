@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 20:10:04 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 20:55:55 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,6 @@ char			*mini_strjoin(char const *s1, char const *s2);
 char			*mini_strdup(const char *s1);
 char			*mini_substr(char const *s, unsigned int start, size_t len);
 void			exit_status(int status, t_parser *lst);
-// void			exit_status(t_parser *lst);
 void			redir_file_error(char *str, t_parser *lst);
 void			write_permission_error(char *str, t_parser *lst);
 void			dir_error(char *str, t_parser *lst);
