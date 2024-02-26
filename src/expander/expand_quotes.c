@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:02:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 23:51:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static	void	handle_reds(t_parser *list)
 	i = 0;
 	while (i < list->proc->red_count)
 	{
-		if (check_qs(list->proc->redir[i]) 
+		if (check_qs(list->proc->redir[i])
 			&& (!ft_isdollar(list->proc->redir[i])))
-				remove_quotes(list->proc->redir[i]);
+			remove_quotes(list->proc->redir[i]);
 		i++;
 	}
 }
@@ -42,6 +42,7 @@ static	void	handle_hd(t_parser *list)
 	}
 }
 
+// "$?" - yeah................ need to remove quotes in this siutation hehehhe
 static	void	handle_str(t_parser *list)
 {
 	int		i;
