@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 19:06:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 23:45:51 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ static bool	is_all_n(char *str)
 /**
  * @param temp t_parser linked list
  * @brief writes string and space to the terminal
+ * @todo echo -n still prints the -n
 */
 static void	write_line(t_procs *temp, int i, int is_flag)
 {
 	int	count;
 
+	printf("flag = [%d]\n", is_flag);
 	count = temp->str_count;
 	if (is_flag != 0)
 	{
@@ -112,12 +114,8 @@ void	ft_echo(t_parser *lst, t_env **env)
 		is_flag++;
 	}
 	if (is_flag != 0 && temp->proc->str_count == 0)
-	{
-		// lst->exit_code = E_USAGE;
 		return ;
-	}
 	write_line(temp->proc, i, is_flag);
 	if (is_flag == 0)
 		write(1, "\n", 1);
-	lst->exit_code = E_USAGE;
 }

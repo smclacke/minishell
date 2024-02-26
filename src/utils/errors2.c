@@ -6,13 +6,11 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 22:32:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 22:56:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-// int	global_exit_stat = 0;
 
 /**
  * @param lst parser linked list
@@ -21,21 +19,10 @@
 */
 void	exit_status(int status, t_parser *lst)
 {
-	printf("status = [%d]\n", status);
-	printf("lst->exit_code [%d]\n", lst->exit_code);
 	if (WIFEXITED(status))
-	{
 		lst->exit_code = WEXITSTATUS(status);
-		printf("Normal termination, exit code = %d\n", lst->exit_code);
-	}
 	else if (WIFSIGNALED(status))
-	{
-		
 		lst->exit_code = 128 + WTERMSIG(status);
-		printf("Terminated by signal %d\n", WTERMSIG(status));
-	}
-	printf("status = [%d]\n", status);
-	printf("lst->exit_code [%d]\n", lst->exit_code);
 	return ;
 }
 
