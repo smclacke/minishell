@@ -4,6 +4,8 @@
 
 2) ERRORS TO STANDARD ERROR!
 
+appen cat >> eof weird
+
 3) check to-do's
 
 4) 
