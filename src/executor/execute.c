@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:33:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 14:36:07 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	close_all(data, lst);
 	waitpid(data->fork_pid, &status, 0);
 	exit_status(status, lst);
+	// exit_status(lst);
 	while (wait(NULL) != -1)
 		(void)NULL;
 }

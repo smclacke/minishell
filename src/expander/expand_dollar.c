@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:29:17 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/26 15:00:54 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,18 @@ int	first_bit(t_expand *str, char *input)
 	return (i);
 }
 
+/**
+ * @todo echo $? prints 0 everytime for me
+*/
 static int	handle_dollars(t_parser *par, t_expand *str, t_env **env, int i)
 {
+	printf("input in handle_dollars str = [%s]\n", str->input);
 	if (str->input[i + 1] && ft_isquest(str->input[i + 1]))
 	{
 		exit_exp(par, str);
 		i = save_extra_string(str, str->input, (i + 2));
+		printf("input str in handle_dollars = [%s]\n", str->input);
+		printf("expanded str in handle_dollars = [%s]\n", str->expanded);
 		return (i);
 	}
 	else

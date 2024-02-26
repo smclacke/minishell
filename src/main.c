@@ -6,11 +6,13 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:52:07 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 15:04:33 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/shelly.h"
+
+int	global_exit_stat = 0;
 
 /**
  * @param env environment linked list
@@ -34,6 +36,7 @@ static int	run_minishell(t_env *env, char *input, int exit_c)
 		return (E_SYNTAX);
 	else
 		procs->exit_code = exit_c;
+	prpr(procs);
 	execute(&env, procs);
 	exit_c = procs->exit_code;
 	free_parser(procs);
@@ -53,6 +56,19 @@ static char	*readline_check(char *input)
 		exit(EXIT_SUCCESS);
 	}
 	return (input);
+}
+
+/**
+ * @brief catches all exit codes
+ * @todo do we actually need this function with the global?
+*/
+void	call_exit_code(int exit)
+{
+	if (WIFEXITED(exit))
+		global_exit_stat = WEXITSTATUS(exit);
+	else if (WIFSIGNALED(exit))
+		global_exit_stat = 128 + WTERMSIG(exit);
+	return ;
 }
 
 /**
@@ -83,6 +99,7 @@ int	main(int argc, char **argv, char **envp)
 		printf("exit_c = [%i]\n", exit_c);
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
+		call_exit_code(exit_c);
 	}
 	return (exit_c);
 }

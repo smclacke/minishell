@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:41:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 15:03:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /**
  * @param lst parser linked list
  * @brief provides correct error message after child process
+ * @todo do we need the else statement?
 */
 void	exit_status(int status, t_parser *lst)
 {
@@ -22,8 +23,8 @@ void	exit_status(int status, t_parser *lst)
 		lst->exit_code = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
 		lst->exit_code = 128 + WTERMSIG(status);
-	else
-		lst->exit_code = 0;
+	// else
+	// 	lst->exit_code = 0;
 	return ;
 }
 
