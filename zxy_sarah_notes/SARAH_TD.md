@@ -14,6 +14,9 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 **DO this**
 *right here, right now*
 
+3) seggyy
+	echo sdkfskdjhsdf | cd  .. ||
+
 4) djoy: 
 	 - cating heredoc show give the heredoc input but i dont get anything back
 

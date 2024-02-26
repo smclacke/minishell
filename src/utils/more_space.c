@@ -6,28 +6,11 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/20 20:51:27 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/21 19:09:27 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 20:05:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
-
-// void	more_free(t_parser *proc)
-// {
-// 	t_parser	*tmp;
-
-// 	tmp = proc;
-// 	if (tmp)
-// 	{
-// 		while (tmp)
-// 		{
-// 			if (tmp->proc)
-// 				free_procs(tmp->proc);
-// 			tmp = tmp->next;
-// 		}
-// 		free(tmp);
-// 	}
-// }
 
 int	set_flag(t_procs *proc, int i)
 {

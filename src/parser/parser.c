@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 19:05:12 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 20:25:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,12 @@ static	t_parser	*init_parser(char **tokens)
 	return (proc);
 }
 
+// NORMMMMM
 static t_parser	*parse_tokens(char **tokens)
 {
 	t_parser	*proc;
 	t_parser	*parser_list;
-	// int			i;
 
-	// i = 0;
 	if (!tokens)
 		return (NULL);
 	proc = init_parser(tokens);
@@ -99,16 +98,10 @@ static t_parser	*parse_tokens(char **tokens)
 	parser_list = handle_procs(proc);
 	if (parser_list == NULL)
 	{
-		if (count_procs(tokens) >= 1)
-			free_parser(proc);
-		// free_lots_stuff(proc);
-		// free(proc->process);
-		ft_free_arr(tokens);
-		// free(proc);
-		// free_parser(proc);
+		// if (count_procs(tokens) >= 1)
+		// 	free_parser(proc);
+		// ft_free_arr(tokens);
 		return (NULL);
-		// ???
-		// return (ft_free_arr(tokens), NULL);
 	}
 	ft_free_arr(tokens);
 	return (parser_list);
