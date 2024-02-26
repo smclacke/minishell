@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/25 15:47:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 14:11:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 18:56:46 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	free_all(t_env *env)
  * @param env string or char to compare with
  * @brief checks arguments to find built-ins:
  * echo, cd, pwd, export, unset, env and exit
- * @todo exit codes
 */
 void	do_builtin(t_parser *node, t_env **env, int cmd_type)
 {
@@ -54,35 +53,28 @@ void	do_builtin(t_parser *node, t_env **env, int cmd_type)
  * @param words 2D array with seperate words key and value
  * @param cmd string containing command
  * @brief checks if key and value are alphanumeric
- * @return 1 if not alphanumeric, 0 is alphanumeric
- * @todo export var=a
- * expoty $var=test (is a=test)
- * echo $var $a gives a and test
+ * @return true if not alphanumeric, false is alphanumeric
 */
 static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
 {
 	int	i;
-	
-	//if key is empty return
-	// if (mini_strcmp(key, "") == 0)//need this?
-	// 	return (false);//need this?
-	// if ((ft_isalpha(key[0]) == 0) && key[0] != '_' && key[0] != '$')
+
 	if ((ft_isalpha(key[0]) == 0) && key[0] != '_')
 	{
-		put_custom_error(temp, cmd);
-		return false;
+		put_custom_error(temp, key, cmd);
+		return (false);
 	}
 	i = 1;
 	while (key[i])
 	{
 		if (key[i] != '_' && ft_isalnum(key[i]) == 0)
 		{
-			put_custom_error(temp, cmd);
-			return false;
+			put_custom_error(temp, key, cmd);
+			return (false);
 		}
 		i++;
 	}
-	return true;
+	return (true);
 }
 
 /**
@@ -100,21 +92,11 @@ static bool	is_valid_key(t_parser *temp, char *key, char *cmd)
  * minishell: export: `d@@=haha': not a valid identifier
  * same for unset
  * @return true if wrong found with the words
- * @todo
- * export var=a
- * export $var=test
- * echo $var $a
 */
 bool	word_check(t_parser *lst, char *key)
 {
-	t_parser	*temp;
-	char		*cmd;
-
-	cmd = lst->proc->cmd;
-	temp = lst;
 	if (is_valid_key(lst, key, "export") == false)
 		return (true);
-
 	return (false);
 }
 
@@ -123,21 +105,20 @@ bool	word_check(t_parser *lst, char *key)
  * @param str string passed from parser
  * @param value string to contain new value value
  * @brief reassigns lines in the environment
- * @todo changed to char *str in this function
 */
-void	replace_node(t_env *lst, t_export ex_var)
+void	replace_node(t_env *lst, t_export var)
 {
 	char	*temp;
 
 	temp = lst->full;
-	lst->full = ex_var.str;
+	lst->full = var.str;
 	free(temp);
 	temp = lst->key;
-	lst->key = ex_var.key;
+	lst->key = var.key;
 	free(temp);
 	temp = lst->value;
-	lst->value = ex_var.value;
-	ex_var.has_value = TRUE;
-	lst->has_value = ex_var.has_value;
+	lst->value = var.value;
+	var.has_value = TRUE;
+	lst->has_value = var.has_value;
 	free(temp);
 }

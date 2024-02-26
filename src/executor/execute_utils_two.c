@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:11:47 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:09:04 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@
  * @param data execute struct
  * @brief checks for single builtin command and if there are redirects
  * executes the builtin and redirect function
- * @todo norm it
+ * @todo
+ * after redirect? line 39
+ * if (data->error == false)
+ * return (true);
 */
 bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -33,11 +36,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 		if (cmd_type != 0)
 		{
 			if (lst->proc->red_count != 0)
-			{
 				redirect(lst, data);
-				// if (data->error == false)
-				// 	return (true);
-			}
 			do_builtin(lst, env, cmd_type);
 			return (true);
 		}
@@ -51,14 +50,13 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
  * @param env  environment linked list
  * @param data execute struct
  * @brief forks, checks if it didnt fail, enters child process
- * @todo exit code NORM
 */
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
 	data->fork_pid = fork();
 	handle_signals(CHILD);
 	if (data->fork_pid == -1)
-		mini_error(E_GENERAL, lst);
+		lst->exit_code = E_GENERAL;
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
 }
@@ -91,7 +89,8 @@ bool	absolute_check(t_parser *node)
  * @param data execute struct
  * @brief child execution process, calls init_pipes
  * init_forks and close_between in a while loop
- * @todo norm it
+ * @todo
+ * while (i < lst->proc_count)
 */
 void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -100,7 +99,6 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
 
 	count = lst->proc_count;
 	i = 0;
-	// while (i < lst->proc_count)
 	while (lst)
 	{
 		init_pipe(i, count, data, lst);
@@ -116,31 +114,30 @@ void	pipeline(t_parser *lst, t_env **env, t_execute *data)
  * @param lst parser linked list
  * @param execute execute struct
  * @brief checks for redirects and enters redirect in or outfile function
- * @todo remove printf statement
  * @note keeping hd_count check since func used much, i.e. mini_forks
  * 		- when used with multi procs, check hd stuff...
+ * redirect_heredoc: check if bool and return etc
 */
 bool	redirect(t_parser *lst, t_execute *data)
 {
-	(void)data;
-	int i;
+	int	i;
 
 	i = 0;
-	while (i < lst->proc->red_count) //is herdoc last or flag?
+	while (i < lst->proc->red_count)
 	{
 		if (ft_strncmp(lst->proc->redir[i], ">", 2) == 0)
-			if (redirect_outfile(lst->proc->redir[i + 1], data) == false)
-				return (true);
+			if (redirect_outfile(lst->proc->redir[i + 1], data, lst) == false)
+				return (false);
 		if (ft_strncmp(lst->proc->redir[i], "<", 2) == 0)
-			if (redirect_infile(lst->proc->redir[i + 1], data) == false)
-				return (true);
+			if (redirect_infile(lst->proc->redir[i + 1], data, lst) == false)
+				return (false);
 		if (ft_strncmp(lst->proc->redir[i], ">>", 3) == 0)
-			if (redirect_append(lst->proc->redir[i + 1], data) == false)
-				return (true);
+			if (redirect_append(lst->proc->redir[i + 1], data, lst) == false)
+				return (false);
 		i += 2;
 	}
 	i++;
 	if (lst->proc->hd_last)
-		redirect_heredoc(lst);//check if bool and return etc
+		redirect_heredoc(lst);
 	return (true);
 }

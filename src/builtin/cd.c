@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:41 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/21 17:49:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 19:04:24 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,19 @@
  * @param full NULL string to be filled with old_pwd=str
  * @brief assigns full and new to their values and adds them to
  * an empty list.
- * @todo exit codes
- * @note (for all error functions) passing parser list but want actual var to print..
 */
 static void	reassign_old_pwd(t_env **env, char *cwd, t_parser *head)
 {
 	char	*full;
 	t_env	*new;
 
-	full = ft_strjoin("OLDPWD=", cwd);
-	if (full == NULL)
-		mini_error(E_MALLOC, head);
+	full = mini_strjoin("OLDPWD=", cwd);
 	new = env_lstnew("OLDPWD", cwd, full, true);
 	if (new == NULL)
-		mini_error(E_MALLOC, head);
+		head->exit_code = E_MALLOC;
 	env_lstadd_back(env, new);
 	if (env == NULL)
-		mini_error(E_MALLOC, head);
+		head->exit_code = E_MALLOC;
 }
 
 /**
@@ -48,8 +44,8 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
 {
 	t_env	*node;
 
-	node = env[0];
-	while (node && mini_strcmp(id, node->key) != 0)
+	node = *env;
+	while (node && ft_strncmp(id, node->key, ft_strlen(id) + 1) != 0)
 		node = node->next;
 	if (node == NULL)
 	{
@@ -63,7 +59,6 @@ static void	update_env(t_env **env, char *cwd, char *id, t_parser *head)
  * @param lst parser linked list
  * @param env environment in linked list
  * @brief stores home directory and changes to it
- * @todo do I need use no such file?
 */
 void	home_dir(t_parser *lst, t_env **env)
 {
@@ -72,7 +67,8 @@ void	home_dir(t_parser *lst, t_env **env)
 	home_dir = ft_getenv(*env, "HOME");
 	if (home_dir == NULL)
 	{
-		dprintf(STDERR_FILENO, NO_HOME);
+		write(STDERR_FILENO, NO_HOME, 29);
+		lst->exit_code = E_GENERAL;
 		return ;
 	}
 	if (chdir(home_dir) == -1)
@@ -83,7 +79,6 @@ void	home_dir(t_parser *lst, t_env **env)
  * @param lst parser linked list
  * @param env environment in linked list
  * @brief stores old working dir and changes to it
- * @todo do I need use no such file?
 */
 void	old_pwd(char *str, t_env **env, t_parser *lst)
 {
@@ -92,8 +87,8 @@ void	old_pwd(char *str, t_env **env, t_parser *lst)
 	old_pwd = ft_getenv(*env, "OLDPWD");
 	if (old_pwd == NULL)
 	{
-		printf("minishell: cd: OLDPWD not set\n");
-		mini_error(E_GENERAL, lst);
+		write(STDERR_FILENO, "minishell: cd: OLDPWD not set\n", 31);
+		lst->exit_code = E_GENERAL;
 		return ;
 	}
 	str = old_pwd;
@@ -108,7 +103,6 @@ void	old_pwd(char *str, t_env **env, t_parser *lst)
  * checks access of lst->str, changes directory
  * changes enviroment PWD and OLDPWD.
  * gives custom error if access not found
- * @todo  NORM IT!??
 */
 void	ft_cd(t_parser *lst, t_env **env)
 {
@@ -128,8 +122,10 @@ void	ft_cd(t_parser *lst, t_env **env)
 	}
 	else if (lst->proc->str[0] != NULL)
 		no_such_file(lst->proc->str[0], lst);
-	update_env(env, cwd, "OLDPWD", lst);
-	getcwd(cwd, PATH_MAX);
-	update_env(env, cwd, "PWD", lst);
-	lst->exit_code = E_USAGE;
+	if (lst->exit_code == 0)
+	{
+		update_env(env, cwd, "OLDPWD", lst);
+		getcwd(cwd, PATH_MAX);
+		update_env(env, cwd, "PWD", lst);
+	}
 }

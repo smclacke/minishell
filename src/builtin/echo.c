@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 18:51:45 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 19:06:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,16 @@ static bool	is_all_n(char *str)
  * @param temp t_parser linked list
  * @brief writes string and space to the terminal
 */
-static void	write_line(t_procs *temp, int i)
+static void	write_line(t_procs *temp, int i, int is_flag)
 {
+	int	count;
+
+	count = temp->str_count;
+	if (is_flag != 0)
+	{
+		write(1, temp->str[count - 1], ft_strlen(temp->str[count -1]));
+		return ;
+	}
 	while (i < temp->str_count)
 	{
 		if (temp->str[i])
@@ -85,7 +93,6 @@ static bool	input_check(t_procs *lst)
  * @brief writes node after command on standart output followed by /n char
  * -n that eliminates the endline char in output 
  * @return The echo utility exits 0 on success, and > 0 if an error occurs.
- * @todo error code
 */
 void	ft_echo(t_parser *lst, t_env **env)
 {
@@ -109,8 +116,8 @@ void	ft_echo(t_parser *lst, t_env **env)
 		// lst->exit_code = E_USAGE;
 		return ;
 	}
-	write_line(temp->proc, i);
+	write_line(temp->proc, i, is_flag);
 	if (is_flag == 0)
 		write(1, "\n", 1);
-	lst->exit_code = E_TEST;
+	lst->exit_code = E_USAGE;
 }

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:00 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 14:09:15 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 14:03:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * @param value data passed from environment after = sign
  * @brief malloc's and init node for linked list containing: 
  * key, value and next
- * @todo NORM IT
  * @return node made
  * @note make sure to bzero same amount as malloc, or use calloc
 */
@@ -41,7 +40,6 @@ t_env	*env_lstnew(void *key, void *value, char *full, int has_value)
  * @param value pointer to the address of a pointer 
  * containing a string substringed from str after = sign
  * @brief substrings key and value from str without the '=' sign
- * @todo norm it!
 */
 int	get_key_value(char *str, char **key, char **value)
 {
@@ -53,6 +51,12 @@ int	get_key_value(char *str, char **key, char **value)
 		i++;
 	if (str[i] == '=')
 	{
+		if (ft_strlen(str) == 1)
+		{
+			*key = str;
+			value = NULL;
+			return (has_value = FALSE);
+		}
 		*key = mini_substr(str, 0, i);
 		*value = mini_substr(str, i + 1, (ft_strlen(str) - i));
 		has_value = TRUE;
@@ -71,7 +75,7 @@ int	get_key_value(char *str, char **key, char **value)
  * containing line from envp.
  * @brief substrings string from envp[i].
 */
-char	*get_full(char *str)
+static char	*get_full(char *str)
 {
 	char	*new_str;
 
@@ -88,7 +92,6 @@ char	*get_full(char *str)
  * @param env linked list containing key and env
  * @brief putting the envp content into a linked list seperated by key and value
  * @return linked list
-* @todo return line 105 NORM IT
 */
 t_env	*env_list(char **envp, t_env *env)
 {
@@ -117,10 +120,7 @@ t_env	*env_list(char **envp, t_env *env)
 /**
  * @param env linked list containing environment
  * @brief turns environment linked list into 2d array
- * @todo do we need to free full?
- * @todo error code NORM IT
 */
-// char	**list_to_string(t_env *env, t_parser *lst)
 char	**list_to_string(t_env *env)
 {
 	char	**env_array;

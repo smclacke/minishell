@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/17 14:48:44 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/16 20:06:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 14:18:15 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @param lst linked list to loop through
  * @brief loops to list to go to last position
 */
-t_env	*env_lstlast(t_env *lst)
+static t_env	*env_lstlast(t_env *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -51,7 +51,7 @@ void	env_lstadd_back(t_env **lst, t_env *new)
 int	mini_lstsize(t_env *lst)
 {
 	size_t	i;
-	t_env *temp;
+	t_env	*temp;
 
 	i = 0;
 	temp = lst;
@@ -81,15 +81,4 @@ void	free_env(t_env **lst)
 		(*lst) = temp;
 	}
 	free (*lst);
-}
-
-/**
- * @param data execute struct
- * @brief frees content of execute struct plus struct
-*/
-void	free_data(t_execute *data)
-{
-	ft_free_arr(data->env_array);
-	free(data->path);
-	free (data);
 }

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 15:44:12 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/16 19:32:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 19:09:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ static int	add_single_quote(t_expand *str, char *c)
 static int	handle_double(t_expand *str, char *input, t_env **env)
 {
 	int		i;
-	int		start;
 
 	i = first_str_bit(str, input);
-	start = 0;
 	while (input[i])
 	{
 		if (ft_dollar(input[i]))

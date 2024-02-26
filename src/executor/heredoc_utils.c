@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:33:53 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:34:20 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,89 +15,80 @@
 /**
  * @param lst parser linked list
  * @brief redirect heredoc in child process
- * @todo exit errors
- * @note change mini_error
 */
 void	redirect_heredoc(t_parser *lst)
 {
 	if (dup2(lst->proc->hd_fd, STDIN_FILENO) == -1)
-		mini_error(E_GENERAL, lst);
+		lst->exit_code = E_GENERAL;
 	if (close(lst->proc->hd_fd) == -1)
-		mini_error(E_GENERAL, lst);
+		lst->exit_code = E_GENERAL;
 }
 
 /**
  * @param read_line string containing line read.
  * @param file int with file fd.
- * @brief writes to the heredoc frees the read_line
+ * @brief writes to the heredoc until all delimiters are found
+ * frees the read_line
 */
-static void	write_to_file(t_parser *lst, char *readline, t_env **env, int file)
+void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 {
-	if (lst && lst->hd_flag == 0) 
+	char	*read_line;
+	int		file;
+
+	handle_signals(HERE_DOC);
+	file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (file == -1)
+		exit(E_GENERAL);
+	while (i < lst->hd_count)
 	{
-		if (ft_isdollar(readline))
-			readline = hd_expand(env, readline);
+		read_line = readline("heredoc> ");
+		if (read_line == NULL)
+			exit (EXIT_FAILURE);
+		if (mini_strcmp(lst->hd[i], read_line) == 0)
+		{
+			free(read_line);
+			exit (EXIT_SUCCESS);
+		}
+		else
+			write_to_file(lst->parser, read_line, env, file);
 	}
-	if (readline)
-	{
-		write(file, readline, ft_strlen(readline));
-		free(readline);
-	}
-	write(file, "\n", 1);
+	free(read_line);
 }
 
 /**
  * @param lst parser linked list
- * @brief opens a child proces where it writes to open heredoc
- * until all the delimiter are found 
+ * @param env environment linked list
+ * @param file_name string containing file name
+ * @param i int index
+ * @brief opens a child proces where heredoc process is called
+ * and exits with correct signals from the process 
  * waits for it to finish and exits.
- * with signals easier if we put this in child process
- * so parent can read exitstatus child to see if exited 
- * @todo
- * with CTRL+C/SIGNAL
- * exit codes
- * Norm it!
-// mini_error(E_USAGE, lst->proc->parser);
 */
 static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
 {
-	char	*read_line;
 	pid_t	fork_pid;
-	int		file;
+	int		status;
 
+	status = 0;
 	fork_pid = fork();
 	if (fork_pid == -1)
-		mini_error(E_GENERAL, lst->parser);
+		lst->parser->exit_code = E_GENERAL;
 	if (fork_pid == 0)
-	{
-		handle_signals(HERE_DOC);
-		file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		if (file == -1)
-			exit(E_USAGE);//for time being exit seperate
-		while (i < lst->hd_count)
-		{
-			read_line = readline("heredoc> ");
-			if (mini_strcmp(lst->hd[i], read_line) == 0)
-			{
-				free(read_line);
-				exit (0);
-			}
-			else
-				write_to_file(lst->parser, read_line, env, file);	
-		}
-		free(read_line);
-	}
+		heredoc_proc(lst, env, file_name, i);
 	else
-		waitpid(fork_pid, NULL, 0);
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+		waitpid(fork_pid, &status, 0);
+	}
 }
 
 /**
  * @param lst parser linked list
  * @param str character string for name heredoc
- * @param i int containing number of heredoc
+ * @param env environment linked list
  * @brief makes name for heredoc by adding number of heredoc
  * to the name. unlinks, frees the string and the number.
- * @todo NORM IT
 */
 static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 {
@@ -121,9 +112,8 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 
 /**
  * @param lst parser linked list
+ * @param env environment linked list
  * @brief 
- * If there are multiple processes, iterate through proc_arrs
- * If there's only one process, handle its heredocs
  * initializes one or multiple heredoc in parent process
  * INODE (files)
  * when opening file and writing to it it changes te position.
@@ -134,7 +124,6 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
  * to read properly needs to be passed correctly
  * check these by using lseek(fd, 0, SEEK_CUR) before and 
  * after writing to the file.
- * @todo norm it
 */
 void	init_heredoc(t_parser *lst, t_env **env)
 {
@@ -149,8 +138,11 @@ void	init_heredoc(t_parser *lst, t_env **env)
 	{
 		if (head->multi_proc_b)
 		{
-			for (int i = 0; i < head->proc_count; i++)
+			while (i < head->proc_count)
+			{
 				setup_heredoc(head->process[i], env, heredoc);
+				i++;
+			}
 		}
 		else
 			setup_heredoc(head->proc, env, heredoc);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:02:18 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/20 18:46:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 14:18:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,19 @@ int	check_for_builtin(t_parser *node)
  * @note commented out bzero in init parser and iterate
  * with j in fill array. super weird it kinda works now but don't really
  * understand why
- * @todo norm
 */
 static char	**fill_array(t_procs *lst, char **new_str)
 {
-
-	int j;
-	int i;
+	int	j;
+	int	i;
 
 	j = 0;
-	i = 0;
+	i = 1;
 	new_str[0] = lst->cmd;
-	// printf("filled at index 0 = [%s]\n", new_str[0]);
-	i++;
-	// if (lst->str_count == 0)
 	if (lst->str_count == 0 && lst->hd_count == 0)
 	{
-		// free(new_str);
-		// return (NULL);
 		new_str[i] = NULL;
 		return (new_str);
-	}
-	if (lst->hd_count != 0)
-	{
-		//get line from file?
 	}
 	while (j < lst->str_count)
 	{
@@ -88,8 +77,6 @@ static char	**fill_array(t_procs *lst, char **new_str)
  * @param lst parser linked list
  * @brief set's linked list from cmd to next cmd to 2d array
  * cmd at 0, plus args at 1 , 2 etc.
- * @todo error code NORM IT if malloc already exits 
- * I dont need the NULL check?
  * @note this needs to put the commands and the strs in an array
 */
 char	**get_argv(t_parser *lst)
@@ -111,22 +98,17 @@ char	**get_argv(t_parser *lst)
  * @param s1 string or char to compare with
  * @brief compares 2 strings replace by the libft version without -n
  * @return difference if different or 0
- * old function:
 */
 int	mini_strcmp(char *s1, char *s2)
 {
 	size_t	i;
 
 	i = 0;
-	if (!s1 || !s2)
+	if (s1 == NULL || s2 == NULL)
 		return (1);
-	while (s1[i] || s2[i])
-	{
-		if ((unsigned char)(s1)[i] != (unsigned char)(s2)[i])
-			return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
+	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
 		i++;
-	}
-	return (0);
+	return ((unsigned char)(s1)[i] - (unsigned char)(s2)[i]);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 21:05:54 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 19:06:49 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,37 +48,36 @@
 # define RED_X 4
 
 # define PATH_MAX 4096
+// # define PATH_MAX 1024 //for when djoyke is working on her macbook
 
-# define NOT_POSSIBLE "minishell: env: no such file or directory\n"
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
-# define NO_SUCH_THING "minishell: cd: %s: No such file or directory\n"
 # define NO_HOME "minishell: cd: HOME not set\n"
-# define ARG_ERROR "minishell: %s: too many arguments\n"
 # define TOO_MANY_ARG "exit\nminishell: exit: too many arguments\n"
-# define NON_NUM_ARG "exit\nminishell: exit: %s: numeric argument required\n"
-# define INFILE_ERROR "minishell: %s: No such file or directory\n"
-# define DIR_MESSAGE "minishell: %s: Is a directory\n"
-# define DIR_FILE_MESSAGE "minishell: %s: No such file or directory\n"
 # define FAILED_HEREDOC "minishell: Failed to open heredoc\n"
 
-// EXITCODES
+/**
+ * @brief global keeping exit status
+ */
+extern int	global_exit_stat;
+
+/**
+ * @brief exit codes;
+*/
 typedef enum e_exit
 {
 	E_USAGE = 0,
-	E_MALLOC = -1,
+	E_MALLOC = 3,
 	E_GENERAL = 1,
+	E_CLOSE = -1,
 	E_SYNTAX = 2,
 	E_EXEC = 126,
+	E_NO_PERMISSION = 126,
 	E_COMMAND_NOT_FOUND = 127,
 	E_EXIT_INVALID_ARG = 128,
 	E_FATAL_SIGNAL = 128,
 	E_CTRL_C = 130,
 	E_UNKNOWN = 225,
-	E_STOP = 888,
-	E_TEST = 4565,
-	E_TEST1 = 999,
-	E_TEST2 = 98777,
-	E_TEST3 = 1111
+	E_STOP = 888
 }						t_exit;
 
 /**
@@ -153,6 +152,7 @@ typedef struct s_parser
 
 	char					*exit_str;
 	enum e_exit				exit_code;
+	// unsigned int			exit_code;
 	int						exit_stat;
 
 	struct s_parser			*next;
@@ -235,8 +235,6 @@ typedef struct s_execute
 	int					out;
 	int					count;
 	bool				error;
-	// t_export			*export; //s_execute meegeven ipv env zodat ik alles kan cleanen
-	// t_env				*env;
 }							t_execute;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/19 19:08:04 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/24 19:02:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
  * @param env environment stored in linked list
  * @brief prints linked list containing env key or value
  * with declare in front
+ * @todo do I need to print this on the STDERR_FILENO?
 */
 static void	export_print(t_env *env)
 {
@@ -31,21 +32,20 @@ static void	export_print(t_env *env)
 
 /**
  * @param env double pointer to environmet list
- * @param ex_var export struct
+ * @param var export struct
  * @brief reassigns lines in the environment when export arguments is
  * 		  is an already excisting key.
- * @todo leak check and norm it
 */
-static bool	reassign_env(t_env **env, t_export ex_var)
+static bool	reassign_env(t_env **env, t_export var)
 {
 	t_env	*lst;
 
 	lst = *env;
 	while (lst)
 	{
-		if (mini_strcmp(ex_var.key, lst->key) == 0)
+		if (mini_strcmp(var.key, lst->key) == 0)
 		{
-			replace_node(lst, ex_var);
+			replace_node(lst, var);
 			return (true);
 		}
 		lst = lst->next;
@@ -59,18 +59,16 @@ static bool	reassign_env(t_env **env, t_export ex_var)
  * @param i iterator
  * @brief checks if key and value are valid strings
  * @return true if valid false if invalid
- * @todo 
- * what about expansions
 */
-static bool key_value_check(t_parser *node, t_export ex_var, int i)
+static bool	key_value_check(t_parser *node, t_export var, int i)
 {
-	if (word_check(node, ex_var.key) == true)
+	if (word_check(node, var.key) == true)
 	{
 		if (i == (node->proc->str_count - 1))
 		{
-			free(ex_var.key);
-			free(ex_var.value);
-			free(ex_var.str);
+			free(var.key);
+			free(var.value);
+			free(var.str);
 			return (false);
 		}
 	}
@@ -80,19 +78,15 @@ static bool key_value_check(t_parser *node, t_export ex_var, int i)
 /**
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
- * @brief export with no options, learned that double free 
- * with freeing in an unrelated spot 
+ * @brief export with no options, 
+ * @note double free with freeing in an unrelated spot 
  * might be overwriting a pointer and not allocating a new string.
- * @todo 
- * what about expansions
- * exit codes
- * norm it!
 */
 void	ft_export(t_parser *node, t_env **env)
 {
-	int		i;
-	int		j;
-	t_export ex_var;
+	int			i;
+	int			j;
+	t_export	var;
 
 	i = 0;
 	j = 0;
@@ -103,16 +97,16 @@ void	ft_export(t_parser *node, t_env **env)
 	}
 	while (i < node->proc->str_count)
 	{
-		ex_var.str = mini_strdup(node->proc->str[i]);
-		while (ex_var.str[j] && ex_var.str[j] != '=')
+		j = 0;
+		var.str = mini_strdup(node->proc->str[i]);
+		while (var.str[j] && var.str[j] != '=')
 			j++;
-		ex_var.has_value = get_key_value(ex_var.str, &ex_var.key, &ex_var.value);
-		if (key_value_check(node, ex_var, i) == false)
+		var.has_value = get_key_value(var.str, &var.key, &var.value);
+		if (key_value_check(node, var, i) == false)
 			return ;
-		if (reassign_env(env, ex_var) == true && i == (node->proc->str_count - 1))
+		if (reassign_env(env, var) == true && i == (node->proc->str_count - 1))
 			return ;
-		make_node(env, ex_var);
-		node->exit_code = E_USAGE;
+		make_node(env, var);
 		i++;
 	}
 }
