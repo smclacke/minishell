@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:45:51 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 23:50:28 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ static bool	is_all_n(char *str)
 /**
  * @param temp t_parser linked list
  * @brief writes string and space to the terminal
- * @todo echo -n still prints the -n
 */
 static void	write_line(t_procs *temp, int i, int is_flag)
 {
 	int	count;
 
-	printf("flag = [%d]\n", is_flag);
 	count = temp->str_count;
 	if (is_flag != 0)
 	{
@@ -93,8 +91,7 @@ static bool	input_check(t_procs *lst)
 /**
  * @param lst t_parser linked list
  * @brief writes node after command on standart output followed by /n char
- * -n that eliminates the endline char in output 
- * @return The echo utility exits 0 on success, and > 0 if an error occurs.
+ * -n that eliminates the endline char in output
 */
 void	ft_echo(t_parser *lst, t_env **env)
 {
@@ -113,7 +110,7 @@ void	ft_echo(t_parser *lst, t_env **env)
 		i++;
 		is_flag++;
 	}
-	if (is_flag != 0 && temp->proc->str_count == 0)
+	if (is_flag != 0 && temp->proc->str_count == 1)
 		return ;
 	write_line(temp->proc, i, is_flag);
 	if (is_flag == 0)
