@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 13:01:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 13:16:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 /**
  * @param lst parser linked list
  * @brief redirect heredoc in child process
- * @todo exit errors
- * @note change mini_error
- * norm it
 */
 void	redirect_heredoc(t_parser *lst)
 {
@@ -32,8 +29,6 @@ void	redirect_heredoc(t_parser *lst)
  * @param file int with file fd.
  * @brief writes to the heredoc until all delimiters are found
  * frees the read_line
- * @todo norm it
- * for time being exit seperate after file == -1
 */
 void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 {
@@ -97,7 +92,6 @@ static void	write_to_heredoc(t_procs *lst, t_env **env, char *file_name, int i)
  * @param env environment linked list
  * @brief makes name for heredoc by adding number of heredoc
  * to the name. unlinks, frees the string and the number.
- * @todo NORM IT
 */
 static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 {
@@ -133,7 +127,6 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
  * to read properly needs to be passed correctly
  * check these by using lseek(fd, 0, SEEK_CUR) before and 
  * after writing to the file.
- * @todo norm it
 */
 void	init_heredoc(t_parser *lst, t_env **env)
 {
