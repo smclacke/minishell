@@ -14,18 +14,15 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 **DO this**
 *right here, right now*
 
-3) seggyy
-	echo sdkfskdjhsdf | cd  .. ||
+1) ''|>""
+	leaks
 
-4) djoy: 
-	 - cating heredoc show give the heredoc input but i dont get anything back
+2) problem
 
-5) 
-missing frees somewhere.. using this test:
- if syntax error in second proc, leakkkkksssss
-
-echo something |  < >
-
+minibleh:> ""
+minibleh:>> ''
+minibleh:> ''
+minibleh:>> ""
 ------------------------------
 ------------------------------
 ------------------------------

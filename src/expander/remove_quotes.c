@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/08 21:11:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 19:08:59 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 23:08:10 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ void	remove_quotes(char *str)
 	}
 	new[j] = '\0';
 	str = ft_strcpy(str, new);
+	if (!new)
+		str = NULL;
 	free(new);
 }
