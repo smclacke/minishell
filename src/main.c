@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/21 23:00:20 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 18:52:44 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	run_minishell(t_env *env, char *input, int exit_c)
 	else
 		procs->exit_code = exit_c;
 	execute(&env, procs);
+	printf("this exit = %i\n", procs->exit_code);
 	exit_c = procs->exit_code;
 	free_parser(procs);
 	return (exit_c);
