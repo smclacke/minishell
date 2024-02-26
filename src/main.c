@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 15:04:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 18:58:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	run_minishell(t_env *env, char *input, int exit_c)
 {
 	t_parser	*procs;
 
-	exit_c = 0;
 	procs = NULL;
 	procs = parse_input(procs, input);
 	if (!procs)
@@ -96,7 +95,6 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		readline_check(input);
 		exit_c = run_minishell(env, input, exit_c);
-		printf("exit_c = [%i]\n", exit_c);
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
 		call_exit_code(exit_c);
