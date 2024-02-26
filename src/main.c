@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 15:04:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 18:34:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int argc, char **argv, char **envp)
 		printf("exit_c = [%i]\n", exit_c);
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
-		call_exit_code(exit_c);
+		// call_exit_code(exit_c);
 	}
 	return (exit_c);
 }
