@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 20:48:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 20:50:18 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ int	global_exit_stat = 0;
  * @param input string containing prompt input
  * @param exit_c int containing exit code
  * @brief function that runs minishell
- * @todo
- *	is this the right logic?
- * 	if parser succeeds exit code is 0, update parser exit code with previous
- * 	otherwise error occurred, syntax exit given back to main
  * @note to see what the parser is passing add prpr(procs);
  */
 static int	run_minishell(t_env *env, char *input, int exit_c)
@@ -70,10 +66,6 @@ void	call_exit_code(int exit)
 	return ;
 }
 
-/**
- * @brief main
- * @todo remove printf statement
-*/
 int	main(int argc, char **argv, char **envp)
 {
 	int			og_stdout;

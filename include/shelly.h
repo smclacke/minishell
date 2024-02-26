@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 14:36:49 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 20:10:04 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@
 # include <limits.h>
 
 				// utils
+//---------- more_space ----------//
+int				set_flag(t_procs *proc, int i);
+int				count_str_util(t_procs *proc, char **process, int i);
+int				get_strs_util(t_procs *proc, char **process, int i);
+int				copy_strs(t_procs *proc, char *process);
+
 //---------- parser_erros ----------//
 int				syntax_error(char *str);
 void			general_error(char *str);
@@ -80,6 +86,9 @@ bool			is_space(char *input);
 int				shelly_strcmp(char *s1, char *s2);
 int				start_token(char *input, int old_start);
 int				len_token(char *input, int len);
+
+//-------- meta_check --------//
+int				meta_check(char *input);
 
 				// parser
 //-------- parser --------//

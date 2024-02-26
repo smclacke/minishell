@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/16 16:13:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 15:48:22 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:08:28 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
  */
 int	syntax_error(char *str)
 {
-	printf("minishell: %s\n", str);
-	return (E_SYNTAX);
+	printf("minishell: syntax error %s\n", str);
+	return (E_STOP);
 }
 
 void	general_error(char *str)

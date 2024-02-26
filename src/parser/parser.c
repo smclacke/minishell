@@ -6,15 +6,27 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/21 18:26:20 by djoyke        ########   odam.nl         */
+/*   Updated: 2024/02/26 20:26:12 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// sort func util
+static	int	sort_this_out(t_parser *proc, int i)
+{
+	if (proc->proc_count > 1)
+	{
+		if (sort_each_proc(proc->process[i], proc->proc_arrs[i]) == E_STOP)
+			return (ft_free_process(proc), 0);
+	}
+	else
+	{
+		if (sort_each_proc(proc->process[i], proc->tokens) == E_STOP)
+			return (ft_free_process(proc), free(proc), 0);
+	}
+	return (1);
+}
 
-// norm
 static	t_parser	*handle_procs(t_parser *proc)
 {
 	t_parser	*parser_list;
@@ -30,17 +42,8 @@ static	t_parser	*handle_procs(t_parser *proc)
 		if (!proc->process[i])
 			malloc_error(NULL, proc->process[i], NULL, 0);
 		ft_bzero(proc->process[i], sizeof(t_procs));
-		// sort shit
-		if (proc->proc_count > 1)
-		{	
-			if (sort_each_proc(proc->process[i], proc->proc_arrs[i]) == E_STOP)
-				return (ft_free_process(proc), NULL);
-		}
-		else
-		{
-			if (sort_each_proc(proc->process[i], proc->tokens) == E_STOP)
-				return (ft_free_process(proc), free(proc), NULL);
-		}
+		if (sort_this_out(proc, i) == 0)
+			return (NULL);
 		proc->process[i]->proc_count = proc->proc_count;
 		new_node = parser_listnew(proc->process[i]);
 		parser_listadd_back(&parser_list, new_node);
@@ -75,9 +78,7 @@ static t_parser	*parse_tokens(char **tokens)
 {
 	t_parser	*proc;
 	t_parser	*parser_list;
-	// int			i;
 
-	// i = 0;
 	if (!tokens)
 		return (NULL);
 	proc = init_parser(tokens);
@@ -87,11 +88,15 @@ static t_parser	*parse_tokens(char **tokens)
 	if (proc->proc_count > 1)
 	{
 		if (!get_procs(proc))
-			return (free_lots_stuff(proc), ft_free_arr(tokens), free_parser(proc), NULL);
+		{
+			free_lots_stuff(proc);
+			ft_free_arr(tokens);
+			return (free_parser(proc), NULL);
+		}
 	}
 	parser_list = handle_procs(proc);
 	if (parser_list == NULL)
-		return (ft_free_arr(tokens), NULL);
+		return (NULL);
 	ft_free_arr(tokens);
 	return (parser_list);
 }

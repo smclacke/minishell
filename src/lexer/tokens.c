@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:03:30 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 15:43:54 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 19:57:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,13 @@ int	start_token(char *input, int old_start)
 	return (old_start);
 }
 
-// norm
+static	int	meta_found(char *input, int len, int tmp)
+{
+	len += is_meta(&input[len]);
+	len = len - tmp;
+	return (len);
+}
+
 int	len_token(char *input, int len)
 {
 	int		tmp;
@@ -61,11 +67,7 @@ int	len_token(char *input, int len)
 		len++;
 	tmp = len;
 	if (ft_ismeta(input[len]))
-	{
-		len += is_meta(&input[len]);
-		len = len - tmp;
-		return (len);
-	}
+		return (meta_found(input, len, tmp));
 	while (input[len] && !space_or_meta(input[len]))
 	{
 		if (ft_isquote(input[len]))

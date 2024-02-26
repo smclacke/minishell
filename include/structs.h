@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 14:21:27 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/26 19:17:58 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ typedef enum e_exit
 	E_FATAL_SIGNAL = 128,
 	E_CTRL_C = 130,
 	E_UNKNOWN = 225,
-	E_STOP = 888,
-	E_TEST = 4565,
-	E_TEST1 = 999,
-	E_TEST2 = 98777,
-	E_TEST3 = 1111
+	E_STOP = 888
 }						t_exit;
 
 /**
@@ -156,7 +152,6 @@ typedef struct s_parser
 
 	char					*exit_str;
 	enum e_exit				exit_code;
-	// unsigned int			exit_code;
 	int						exit_stat;
 
 	struct s_parser			*next;

@@ -6,13 +6,12 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/01/14 16:47:00 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 20:39:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/21 18:08:43 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
 
-// norm
 static	int	sort_vars(t_procs *proc, char **process)
 {
 	if (proc->cmd_flag == TRUE)
@@ -24,28 +23,20 @@ static	int	sort_vars(t_procs *proc, char **process)
 			if (!proc->str)
 				malloc_error(NULL, proc, NULL, 1);
 		}
+		proc->cmd_flag = 0;
 		if (get_strs(proc, process) == E_STOP)
 			return (E_STOP);
-	}
-	else
-	{
-		proc->cmd = NULL;
-		proc->str = NULL;
 	}
 	if (proc->red_count != 0)
 	{
 		if (get_reds(proc, process) == E_STOP)
 			return (E_STOP);
 	}
-	else
-		proc->redir = NULL;
 	if (proc->hd_count != 0)
 	{
 		if (get_hds(proc, process) == E_STOP)
 			return (E_STOP);
 	}
-	else
-		proc->hd = NULL;
 	return (0);
 }
 

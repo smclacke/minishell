@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/20 15:47:48 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/26 20:21:18 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,15 @@ static char	*split_tokens(char *input, int len)
 	return (token);
 }
 
-// norm
-static char	**lexer_split(char *input)
+static char	**lexer_split(char **array, char *input, int no_tokens)
 {
-	char	**array;
 	int		i;
 	int		start;
 	int		len;
-	int		no_tokens;
 
 	i = 0;
 	start = 0;
 	len = 0;
-	if (amount_tokens(input) == E_STOP)
-		return (NULL);
-	no_tokens = amount_tokens(input);
-	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
-	if (!array)
-		malloc_error(NULL, NULL, NULL, 0);
 	while (i < no_tokens)
 	{
 		start = start_token(input, (start + len));
@@ -106,10 +97,19 @@ static char	**lexer_split(char *input)
 char	**lexer(char *input)
 {
 	char	**array;
+	int		no_tokens;
 
 	if (!input)
 		return (NULL);
-	array = lexer_split(input);
+	if (meta_check(input) == E_STOP)
+		return (NULL);
+	if (amount_tokens(input) == E_STOP)
+		return (NULL);
+	no_tokens = amount_tokens(input);
+	array = (char **)malloc(sizeof(char *) * (no_tokens + 1));
+	if (!array)
+		malloc_error(NULL, NULL, NULL, 0);
+	array = lexer_split(array, input, no_tokens);
 	if (!array)
 		return (NULL);
 	return (array);
