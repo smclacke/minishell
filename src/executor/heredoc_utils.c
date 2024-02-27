@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 21:32:14 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 22:44:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 	while (i < lst->hd_count)
 	{
 		read_line = readline("heredoc> ");
+		// if (read_line == NULL)
+		// {	
+		// 	if (close(file) == -1)
+		// 		lst->parser->exit_code = E_CLOSE;
+		// 	free(read_line);	
+		// 	exit (EXIT_SUCCESS);
+		// }
 		if (mini_strcmp(lst->hd[i], read_line) == 0 || read_line == NULL)
 		{
 			if (close(file) == -1)

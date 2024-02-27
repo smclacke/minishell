@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 21:32:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 22:52:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 			if (lst->proc->red_count != 0)
 				redirect(lst, data);
 			do_builtin(lst, env, cmd_type);
+			lst->exit_code = E_USAGE;
 			return (true);
 		}
 		return (false);
