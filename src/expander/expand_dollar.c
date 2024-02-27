@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/31 15:43:02 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 14:17:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 14:59:27 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	first_bit(t_expand *str, char *input)
 	return (i);
 }
 
-static int	handle_dollars(t_parser *par, t_expand *str, t_env **env, int i)
+int	handle_dollars(t_parser *par, t_expand *str, t_env **env, int i)
 {
 	if (str->input[i + 1] && ft_isquest(str->input[i + 1]))
 	{
@@ -89,7 +89,7 @@ void	dollar(t_parser *par, t_expand *str, t_env **env)
 		}
 		if (ft_isdquote(str->input[i]))
 		{
-			i = dquote_bit(str, str->input, env, (i + 1));
+			i = dquote_bit(par, str, env, (i + 1));
 			if (str->input[i] && !is_dollar_or_quote(str->input[i]))
 				i = save_extra_string(str, str->input, i);
 		}
