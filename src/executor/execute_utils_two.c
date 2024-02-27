@@ -6,9 +6,10 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 22:42:24 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 22:54:10 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/shelly.h"
 
@@ -36,6 +37,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 			if (lst->proc->red_count != 0)
 				redirect(lst, data);
 			do_builtin(lst, env, cmd_type);
+			lst->exit_code = E_USAGE;
 			return (true);
 		}
 		return (false);
