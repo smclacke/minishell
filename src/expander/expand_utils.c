@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/24 16:59:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:49:32 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 15:14:50 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void	do_strs(t_parser *tmp, t_expand *str, t_env **env)
 	{
 		while (i < tmp->proc->str_count)
 		{
-			// printf("str = %s\n", tmp->proc->str[i]);
 			len = ft_strlen(tmp->proc->str[i]);
 			if (ft_strnstr(tmp->proc->str[i], "$", len))
 			{

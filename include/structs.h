@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 14:54:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 15:16:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ typedef struct s_expand
 	char					*h_d;
 	int						sign;
 	int						pos;
-	int 					e_code;
 }							t_expand;
 
 /**
