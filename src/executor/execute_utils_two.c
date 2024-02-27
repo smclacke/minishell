@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 17:19:56 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 18:42:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 		lst->exit_code = E_GENERAL;
 	if (data->fork_pid == 0)
 		mini_forks(lst, env, data);
+	else
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);	
+	}
 }
 
 /**

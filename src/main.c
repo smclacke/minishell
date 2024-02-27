@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 17:01:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 18:36:45 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ static char	*readline_check(char *input)
 	return (input);
 }
 
+/**
+ * proctect dup and dup2 in main
+ * signal minishell in minishell
+ * dup2?
+*/
 int	main(int argc, char **argv, char **envp)
 {
 	int			og_stdout;
