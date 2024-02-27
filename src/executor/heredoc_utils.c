@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 21:17:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 21:32:14 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	redirect_heredoc(t_parser *lst)
 	if (dup2(lst->proc->hd_fd, STDIN_FILENO) == -1)
 		lst->exit_code = E_GENERAL;
 	if (close(lst->proc->hd_fd) == -1)
-		lst->exit_code = E_GENERAL;
+		lst->exit_code = E_CLOSE;
 }
 
 /**
@@ -42,10 +42,10 @@ void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 	while (i < lst->hd_count)
 	{
 		read_line = readline("heredoc> ");
-		if (read_line == NULL)
-			exit (EXIT_SUCCESS);
-		if (mini_strcmp(lst->hd[i], read_line) == 0)
+		if (mini_strcmp(lst->hd[i], read_line) == 0 || read_line == NULL)
 		{
+			if (close(file) == -1)
+				lst->parser->exit_code = E_CLOSE;
 			free(read_line);
 			exit (EXIT_SUCCESS);
 		}
@@ -99,9 +99,13 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 	while (i < lst->hd_count)
 	{
 		number = ft_itoa(i);
+		if (number == NULL)
+			exit(E_MALLOC);
 		str = mini_strjoin("heredoc", number);
 		write_to_heredoc(lst, env, str, i);
 		lst->hd_fd = open(str, O_RDONLY);
+		if (lst->hd_fd == -1)
+			lst->parser->exit_code = E_GENERAL;
 		unlink(str);
 		free(str);
 		free(number);
