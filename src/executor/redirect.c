@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 22:39:33 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 15:36:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
 
 	if (access(str, F_OK) != 0)
 	{
+		if (shelly_strcmp(str, "") == 0)
+			return (redir_file_error(str, lst), false);
 		data->out = open(str, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		if (data->out == -1)
 			return (false);
@@ -122,6 +124,8 @@ bool	redirect_append(char *str, t_execute *data, t_parser *lst)
 {
 	struct stat	file_stat;
 
+	if (shelly_strcmp(str, "") == 0)
+		return (redir_file_error(str, lst), false);
 	if (access(str, F_OK) == 0 && access(str, W_OK) != 0)
 	{
 		write_permission_error(str, lst);
