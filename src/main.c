@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 21:32:44 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 23:07:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,15 @@ int	main(int argc, char **argv, char **envp)
 	og_stdout = 0;
 	og_stdin = 0;
 	exit_c = 0;
-	open_fds(og_stdin, og_stdout, exit_c);
 	env = env_list(envp, env);
 	while (1)
 	{
+		open_fds(og_stdin, og_stdout, exit_c);
 		handle_signals(PARENT);
 		input = readline(PROMPT);
 		readline_check(input);
 		exit_c = run_minishell(env, input, exit_c);
+		close_fds(og_stdin, og_stdout, exit_c);
 	}
-	close_fds(og_stdin, og_stdout, exit_c);
 	return (exit_c);
 }
