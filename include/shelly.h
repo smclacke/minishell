@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 15:16:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 15:20:52 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ int				dollar_bit(t_expand *str, char *input, t_env **env, int i);
 
 //------------------ signals ------------------//
 void			handle_signals(int proc);
-// void			handle_signals(int proc, t_parser *lst);
 
 				// ALL DJOYKE PROTOS //
 int				check_for_builtin(t_parser *node);

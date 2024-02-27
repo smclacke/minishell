@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 15:16:25 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 15:20:16 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,6 @@ typedef struct s_parser
 	struct s_parser			*next;
 }							t_parser;
 
-/**
- *  @todo	check what needs to be done with exit codes in expander
- *	@brief	simply a struct used to store and organise while expanding variables
-*/
 typedef struct s_expand
 {
 	char					*input;

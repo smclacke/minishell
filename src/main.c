@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:52:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 15:21:02 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * @param input string containing prompt input
  * @param exit_c int containing exit code
  * @brief function that runs minishell
- * @note to see what the parser is passing add prpr(procs);
  */
 static int	run_minishell(t_env *env, char *input, int exit_c)
 {
