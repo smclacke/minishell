@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 20:51:29 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:40:16 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 17:20:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * @param data execute struct
  * @param exec executable
  * @brief checks executable
- * @todo check return error
 */
 void	executable_check(t_parser *lst, t_execute *data, char *exec)
 {

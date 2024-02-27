@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:14:01 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 17:19:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@
  * @param data execute struct
  * @brief checks for single builtin command and if there are redirects
  * executes the builtin and redirect function
- * @todo
- * after redirect? line 39
- * if (data->error == false)
- * return (true);
 */
 bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {

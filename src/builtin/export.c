@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 19:02:00 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 17:19:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @param env environment stored in linked list
  * @brief prints linked list containing env key or value
  * with declare in front
- * @todo do I need to print this on the STDERR_FILENO?
+ *  do I need to print this on the STDERR_FILENO?
 */
 static void	export_print(t_env *env)
 {

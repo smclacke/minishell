@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 22:56:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 17:20:02 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /**
  * @param lst parser linked list
  * @brief provides correct error message after child process
- * @todo do we need the else statement?
 */
 void	exit_status(int status, t_parser *lst)
 {
