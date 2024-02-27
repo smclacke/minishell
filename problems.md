@@ -1,6 +1,6 @@
 
+**1) echo not updated exit code**
 
-1) echo not updated exit code
 shitey shelly:$LESS$VAR
 minishell: -R: command not found
 shitey shelly:$
@@ -17,7 +17,15 @@ $
 shitey shelly:echo $?
 0
 
-2) hanging
+
+
+**2) hanging**
+
 echo blahblah >test
 
 cd .. > test.txt
+
+
+
+**3) "" OR ''** --- fixed
+ should command not found
