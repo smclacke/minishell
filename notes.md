@@ -1,24 +1,14 @@
 
+**1) heredoc ^C** 
 
-**1) hanging**
+shitey shelly:<< eof << hi << ha
+heredoc> ^C
+heredoc> ^C
+heredoc> ^C
 
-echo blahblah >test
+should do
 
-cd .. > test.txt
+shitey shelly:<< eof << hi << ha
+heredoc> ^C
 
-**2) command not found -> 127, also a little messy**
-
-shitey shelly:""|""|''|''|''
-minishell: : command not found
-minishell: : command not found
-minishell: minishell: : command not found
-: command not found
-minishell: : command not found
-shitey shelly:echo $?
-1
-
-		-> too many..?
-
-shitey shelly:""
-minishell: : command not found
-minishell: : command not found
+**2) check todo's**
