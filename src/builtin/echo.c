@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 21:23:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 22:07:21 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static bool	is_all_n(char *str)
 			return (false);
 		j++;
 	}
-	return (true); 
+	return (true);
 }
 
 /**
