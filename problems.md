@@ -25,7 +25,3 @@ echo blahblah >test
 
 cd .. > test.txt
 
-
-
-**3) "" OR ''** --- fixed
- should command not found
