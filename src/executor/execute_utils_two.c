@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 18:42:42 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 21:32:58 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 	else
 	{
 		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);	
+		signal(SIGQUIT, SIG_IGN);
 	}
 }
 

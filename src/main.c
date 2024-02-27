@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 18:36:45 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 21:32:44 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,38 @@ static int	run_minishell(t_env *env, char *input, int exit_c)
 }
 
 /**
+ * @param og_stdin int fd 
+ * @param og_stdout int fd
+ * @param exit_c int exit code
+ * @brief open's fd's
+*/
+static void	open_fds(int og_stdin, int og_stdout, int exit_c)
+{
+	if (dup2(STDOUT_FILENO, og_stdout) == -1)
+		exit_c = E_GENERAL;
+	if (dup2(STDIN_FILENO, og_stdin) == -1)
+		exit_c = E_GENERAL;
+}
+
+/**
+ * @param og_stdin int fd 
+ * @param og_stdout int fd
+ * @param exit_c int exit code
+ * @brief closes fd's
+*/
+static void	close_fds(int og_stdin, int og_stdout, int exit_c)
+{
+	if (dup2(og_stdout, STDOUT_FILENO) == -1)
+		exit_c = E_GENERAL;
+	if (dup2(og_stdin, STDIN_FILENO) == -1)
+		exit_c = E_GENERAL;
+	if (og_stdout != -1 && close(og_stdout) == -1)
+		exit_c = E_CLOSE;
+	if (og_stdin != -1 && close(og_stdin) == -1)
+		exit_c = E_CLOSE;
+}
+
+/**
  * @param input prompt string
  * @brief checks if readline doesn't return NULL
  * if returns NULL exits accordingly
@@ -49,11 +81,6 @@ static char	*readline_check(char *input)
 	return (input);
 }
 
-/**
- * proctect dup and dup2 in main
- * signal minishell in minishell
- * dup2?
-*/
 int	main(int argc, char **argv, char **envp)
 {
 	int			og_stdout;
@@ -65,18 +92,18 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	env = NULL;
-	og_stdout = dup(STDOUT_FILENO);
-	og_stdin = dup(STDIN_FILENO);
-	env = env_list(envp, env);
+	og_stdout = 0;
+	og_stdin = 0;
 	exit_c = 0;
+	open_fds(og_stdin, og_stdout, exit_c);
+	env = env_list(envp, env);
 	while (1)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
 		readline_check(input);
 		exit_c = run_minishell(env, input, exit_c);
-		dup2(og_stdout, STDOUT_FILENO);
-		dup2(og_stdin, STDIN_FILENO);
 	}
+	close_fds(og_stdin, og_stdout, exit_c);
 	return (exit_c);
 }
