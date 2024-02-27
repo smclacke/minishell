@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:51:50 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 14:04:23 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static	void	handle_hd(t_parser *list)
 	}
 }
 
-// "$?" - yeah................ need to remove quotes in this siutation hehehhe
 static	void	handle_str(t_parser *list)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/26 20:05:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:33:14 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 14:05:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	meta_help(int c)
 	return (0);
 }
 
+
+// || (ft_strnstr(input, "|>""", 3))
 int	meta_check(char *input)
 {
 	int	i;
@@ -38,8 +40,7 @@ int	meta_check(char *input)
 		}
 		if (meta_help(input[i]) == 3)
 		{
-			if (!input[i + 1] || (input[i + 1] && meta_help(input[i + 1] == 3))
-				|| (ft_strnstr(input, "|>""", 3)))
+			if (!input[i + 1] || (input[i + 1] && meta_help(input[i + 1] == 3)))
 				return (syntax_error("near unexpected token 'newline'"));
 		}
 		i++;
