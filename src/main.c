@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 16:41:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 16:53:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ static int	run_minishell(t_env *env, char *input, int exit_c)
  * @brief checks if readline doesn't return NULL
  * if returns NULL exits accordingly
 */
-static char	*readline_check(char *input, t_env *env)
+static char	*readline_check(char *input)
 {
 	if (input == NULL)
 	{
-		free(env);
 		write(STDOUT_FILENO, "exit\n", 6);
-		free(input);
 		exit(EXIT_SUCCESS);
 	}
 	return (input);
@@ -70,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		handle_signals(PARENT);
 		input = readline(PROMPT);
-		readline_check(input, env);
+		readline_check(input);
 		exit_c = run_minishell(env, input, exit_c);
 		dup2(og_stdout, STDOUT_FILENO);
 		dup2(og_stdin, STDIN_FILENO);
