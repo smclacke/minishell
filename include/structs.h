@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 15:20:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 16:56:37 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef enum e_exit
 }						t_exit;
 
 /**
- * @todo	check the count vars are correctly updated and saved per process
  * @brief	specifies the different variable types from the
  * 			lexer that are organised via the parser, then given to the 
  * 			executor in the form of a parser list, each node being
@@ -111,8 +110,6 @@ typedef struct s_procs
 }			t_procs;
 
 /**
- * @todo	check proc_size is correct while iterating through processes
- * @todo	exit stuff, what need to happen here?
  * @param	i, j and q are all quote removing utils, don't use anywhere else
  * @param	multi_proc_b: specifies whether there is only one process or multiple
  * @param	tokens: if only one process, can just use the token array

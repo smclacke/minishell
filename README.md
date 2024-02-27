@@ -1,3 +1,0 @@
-# minishell
-
-Work in progress

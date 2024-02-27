@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/26 22:43:04 by dreijans      ########   odam.nl          #
+#    Updated: 2024/02/27 16:53:34 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME			= minishell
 
 MAKEFLAGS		= --no-print-directory
 CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
-# -valgrind --leak-check=yes
 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
@@ -77,12 +76,11 @@ SRCS			= main.c								\
 
 
 SRC_DIR		= src
-SRC		= ($(addprefix $(SRC_DIR)/, $(SRCS)))
+SRC			= ($(addprefix $(SRC_DIR)/, $(SRCS)))
 
 
-OBJ_DIR	= obj
-OBJ		= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
-
+OBJ_DIR		= obj
+OBJ			= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 
 all				: libft $(NAME)
 
