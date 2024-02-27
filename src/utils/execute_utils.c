@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 20:51:29 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 17:20:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 23:12:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	executable_check(t_parser *lst, t_execute *data, char *exec)
 		exit(lst->exit_code);
 	}
 	if (data->error == false)
-		exit (lst->exit_code);
+		exit(lst->exit_code);
 	if (access(exec, X_OK) == -1)
 	{
 		put_permission_error(lst);

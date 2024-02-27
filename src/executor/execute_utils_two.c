@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 23:00:12 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 23:15:08 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 	cmd_type = 0;
 	if (count == 1)
 	{
-		if (shelly_strcmp(lst->proc->cmd, "") == 0)
-			put_execute_error(lst);
 		cmd_type = check_for_builtin(lst);
 		if (cmd_type != 0)
 		{

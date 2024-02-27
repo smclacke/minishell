@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 22:44:08 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/27 23:13:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	if (data->error == false)
 		exit (EXIT_FAILURE);
 	if (shelly_strcmp(lst->proc->cmd, "") == 0)
+	{
 		put_execute_error(lst);
+		exit(127);
+	}
 	cmd_type = check_for_builtin(lst);
 	if (cmd_type != 0)
 	{
