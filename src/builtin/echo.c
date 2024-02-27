@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/26 23:50:28 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 21:23:08 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static bool	is_all_n(char *str)
 			return (false);
 		j++;
 	}
-	return (true);
+	return (true); 
 }
 
 /**
@@ -45,7 +45,13 @@ static void	write_line(t_procs *temp, int i, int is_flag)
 	count = temp->str_count;
 	if (is_flag != 0)
 	{
-		write(1, temp->str[count - 1], ft_strlen(temp->str[count -1]));
+		while (is_flag < temp->str_count)
+		{
+			write(1, temp->str[is_flag], ft_strlen(temp->str[is_flag]));
+			if (is_flag < (temp->str_count -1))
+				write(1, " ", 1);
+			is_flag++;
+		}
 		return ;
 	}
 	while (i < temp->str_count)
@@ -70,6 +76,7 @@ static void	home_check(t_procs *lst, t_env **env)
 	if (mini_strcmp(lst->str[0], "~") == 0)
 	{
 		new_str = ft_getenv(*env, "HOME");
+		free(lst->str[0]);
 		lst->str[0] = new_str;
 	}
 }
@@ -95,24 +102,29 @@ static bool	input_check(t_procs *lst)
 */
 void	ft_echo(t_parser *lst, t_env **env)
 {
-	t_parser	*temp;
 	int			is_flag;
 	int			i;
 
-	temp = lst;
 	is_flag = 0;
 	i = 0;
-	if (input_check(temp->proc) == false)
+	if (input_check(lst->proc) == false)
 		return ;
-	home_check(temp->proc, env);
-	if (is_all_n(temp->proc->str[0]))
+	home_check(lst->proc, env);
+	if (is_all_n(lst->proc->str[0]))
 	{
-		i++;
 		is_flag++;
+		i++;
+		while (i < lst->proc->str_count)
+		{
+			if (!is_all_n(lst->proc->str[i]))
+				break ;
+			i++;
+			is_flag++;
+		}
 	}
-	if (is_flag != 0 && temp->proc->str_count == 1)
+	if (is_flag != 0 && lst->proc->str_count == 1)
 		return ;
-	write_line(temp->proc, i, is_flag);
+	write_line(lst->proc, i, is_flag);
 	if (is_flag == 0)
 		write(1, "\n", 1);
 }
