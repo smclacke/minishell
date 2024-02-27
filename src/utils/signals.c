@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/05 17:40:06 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 18:34:57 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 22:14:06 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ static void	sig_parent(int signum)
 static void	sig_child_c(int signum)
 {
 	if (signum == SIGINT)
+	{
+		rl_replace_line("", 0);
 		ft_putchar_fd('\n', STDOUT_FILENO);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 /**
