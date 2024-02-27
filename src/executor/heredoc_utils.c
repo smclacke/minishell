@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 22:44:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/27 23:29:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	redirect_heredoc(t_parser *lst)
  * @param file int with file fd.
  * @brief writes to the heredoc until all delimiters are found
  * frees the read_line
+ * @todo norm it
 */
 void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 {
