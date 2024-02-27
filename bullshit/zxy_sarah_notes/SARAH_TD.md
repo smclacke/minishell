@@ -14,10 +14,6 @@ smclacke5065somethinghellosmclacke$LESSsmclacke5065
 **DO this**
 *right here, right now*
 
-1) $? :( --- fix "$?", then check.... cause it broken
-minibleh:echo "something'$USER'$USER"$USER"$?hehehehehe"
-something'smclacke'smclackesmclacke?hehehehehe
-
 2) problem
 
 minibleh:> ""
