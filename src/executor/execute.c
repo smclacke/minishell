@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/28 16:04:10 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/28 16:43:47 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static char	*check_access(t_env *env, t_parser *node, t_execute *data)
  * @param env linked list containing environment
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief checks parser input for executable and executes with execve
- * replace exit int with the existatus global we pass on
 */
 void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 {

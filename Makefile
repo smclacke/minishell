@@ -6,14 +6,14 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/02/27 20:56:29 by dreijans      ########   odam.nl          #
+#    Updated: 2024/02/28 16:40:01 by smclacke      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
 MAKEFLAGS		= --no-print-directory
-CFLAGS			= -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g -fsanitize=address
 
 LFLAGS			= -L$(HOME)/.brew/Cellar/readline/8.2.1/lib -lreadline
 CC				= cc
@@ -91,9 +91,6 @@ libft			:
 $(NAME)			:	$(OBJ)
 	@ $(CC) $^ $(CFLAGS) $(LFLAGS) $(IFLAGS) $(INCLUDES) include/libft/libft.a -o $(NAME)
 	@ echo "${PURPLE} ---> Made!${RESET}"
-
-run:	$(NAME)
-	@ ./$(NAME)
 
 norm:
 	@ norminette $(SRC_DIR) $(HEADER_DIR)
