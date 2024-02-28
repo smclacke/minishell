@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 20:51:29 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 23:12:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/28 15:08:26 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,18 @@ void	write_to_file(t_parser *lst, char *rl, t_env **env, int file)
 		free(rl);
 	}
 	write(file, "\n", 1);
+}
+
+/**
+ * @param node node in linked list
+ * @param cmd either unset or export
+ * @brief puts custom error message on STDERR_FILENO
+*/
+void	put_exit_error(t_parser *node)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(node->proc->cmd, STDERR_FILENO);
+	ft_putstr_fd(": command not found\n", STDERR_FILENO);
+	node->exit_code = E_COMMAND_NOT_FOUND;
+	exit(node->exit_code);
 }
