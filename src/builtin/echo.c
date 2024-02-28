@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 22:07:21 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/28 17:56:14 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ static void	home_check(t_procs *lst, t_env **env)
 	{
 		new_str = ft_getenv(*env, "HOME");
 		free(lst->str[0]);
-		lst->str[0] = new_str;
+		lst->str[0] = ft_strdup(new_str);
+		if (!lst->str[0])
+			malloc_error(NULL, lst, NULL, E_MALLOC);
 	}
 }
 
