@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/07/10 16:40:40 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 15:20:39 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/28 17:20:17 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 
 // # define PROMPT "minibleh:"
 
-# define PROMPT "shitey shelly:"
+// # define PROMPT "shitey shelly:"
+
+# define PROMPT "minishell:"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 20:51:29 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/28 15:08:26 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/28 17:09:35 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,17 @@ void	put_exit_error(t_parser *node)
 	ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	node->exit_code = E_COMMAND_NOT_FOUND;
 	exit(node->exit_code);
+}
+
+/**
+ * @param node node in linked list
+ * @param cmd either unset or export
+ * @brief puts custom error message on STDERR_FILENO
+*/
+void	infile_permission_error(t_parser *node, char *str)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(": permission denied\n", STDERR_FILENO);
+	node->exit_code = E_NO_PERMISSION;
 }

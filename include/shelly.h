@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/28 15:11:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/28 17:10:13 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,5 +226,6 @@ void			dir_error(char *str, t_parser *lst);
 void			write_to_file(t_parser *lst, char *rl, t_env **env, int file);
 void			executable_check(t_parser *lst, t_execute *data, char *exec);
 void			put_exit_error(t_parser *node);
+void			infile_permission_error(t_parser *node, char *str);
 
 #endif

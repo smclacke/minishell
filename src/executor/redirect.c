@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 20:11:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/28 17:09:53 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ bool	redirect_infile(char *str, t_execute *data, t_parser *lst)
 	if (access(str, F_OK) != 0)
 	{
 		redir_file_error(str, lst);
+		return (false);
+	}
+	if (access(str, X_OK) != 0)
+	{
+		infile_permission_error(lst, str);
 		return (false);
 	}
 	if (check_infile_stat(str, data, lst) == false)
