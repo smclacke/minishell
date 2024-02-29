@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/29 21:37:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/29 23:13:35 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ void	ft_export(t_parser *node, t_env **env)
 			i++;
 			continue ;
 		}
-			// return ;
-		if (reassign_env(env, var) == true && i == (node->proc->str_count - 1))
+		if (reassign_env(env, var) == true)
 			return ;
 		make_node(env, var);
 		i++;

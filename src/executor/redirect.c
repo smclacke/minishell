@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/29 22:34:06 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/29 23:26:38 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
  * if it does exist, the output of command is appended 
  * to the end of the file, preserving the existing content.
  * @todo norm it
+ * @todo remove unused error message files
 */
 bool	redirect_append(char *str, t_execute *data, t_parser *lst)
 {

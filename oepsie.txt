@@ -183,7 +183,14 @@ Indirect leak of 2 byte(s) in 2 object(s) allocated from:
 SUMMARY: AddressSanitizer: 484 byte(s) leaked in 45 allocation(s).
 
 
-3)
+
+
+
+
+
+
+!!!!!!!!!!!!!!!!!!looks like it's fixed but want to test again after I think we're done!!!!!!!!!!!!
+
 SUMMARY: AddressSanitizer: bad-free (/home/dreijans/Documents/rank3/shellely/minishell+0x49a002) in free
 ==852536==ABORTING
 
@@ -367,23 +374,8 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
   Shadow gap:              cc
 ==856710==ABORTING
 
+--------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-looks like it's fixed but want to test again after I think we're done:
 ➜  shellely git:(djoyke) ✗ ./minishell
 minishell:cd
 minishell:unset OLDPWD
