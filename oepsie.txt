@@ -182,62 +182,10 @@ Indirect leak of 2 byte(s) in 2 object(s) allocated from:
 
 SUMMARY: AddressSanitizer: 484 byte(s) leaked in 45 allocation(s).
 
-3) 
 
-minishell:echo - asd
-asdminishell:
-exit
-
-4) 
-
-➜  shellely git:(djoyke) ✗ ./minishell
-minishell:cd
-minishell:unset OLDPWD
-minishell:cd -
-minishell: cd: OLDPWD not set
-minishell:cd Desktop/
-minishell:cd -
-=================================================================
-==852536==ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x7fff48c10e40 in thread T0
-    #0 0x49a002 in free (/home/dreijans/Documents/rank3/shellely/minishell+0x49a002)
-    #1 0x4ddca5 in reassign_values /home/dreijans/Documents/rank3/shellely/src/builtin/builtin_utils_two.c:27:2
-    #2 0x4db7ce in update_env /home/dreijans/Documents/rank3/shellely/src/builtin/cd.c:55:2
-    #3 0x4db5f3 in ft_cd /home/dreijans/Documents/rank3/shellely/src/builtin/cd.c:127:3
-    #4 0x4dd421 in do_builtin /home/dreijans/Documents/rank3/shellely/src/builtin/builtin_utils_one.c:38:3
-    #5 0x4e2591 in single_builtin_cmd /home/dreijans/Documents/rank3/shellely/src/executor/execute_utils_two.c:36:4
-    #6 0x4df450 in build /home/dreijans/Documents/rank3/shellely/src/executor/execute.c:125:6
-    #7 0x4df2a4 in execute /home/dreijans/Documents/rank3/shellely/src/executor/execute.c:147:2
-    #8 0x4cb5c4 in run_minishell /home/dreijans/Documents/rank3/shellely/src/main.c:31:2
-    #9 0x4cb350 in main /home/dreijans/Documents/rank3/shellely/src/main.c:105:12
-    #10 0x7f4fc579cd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
-    #11 0x7f4fc579ce3f in __libc_start_main csu/../csu/libc-start.c:392:3
-    #12 0x41f3a4 in _start (/home/dreijans/Documents/rank3/shellely/minishell+0x41f3a4)
-
-Address 0x7fff48c10e40 is located in stack of thread T0 at offset 32 in frame
-    #0 0x4dae8f in ft_cd /home/dreijans/Documents/rank3/shellely/src/builtin/cd.c:108
-
-  This frame has 1 object(s):
-    [32, 4128) 'cwd' (line 109) <== Memory access at offset 32 is inside this variable
-HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
-      (longjmp and C+8) oepsie 8
-
-minishell:cd ~
-minishell:pwd
-/home/dreijans
-minishell:unset HOME
-minishell:cd ~
-minishell: cd: HOME not set
-minishell:echo $?
-0
-minishell:cd ~
-minishell: cd: HOME not set
-minishell:cd
-minishell: cd: HOME not set+ exceptions *are* supported)
+3)
 SUMMARY: AddressSanitizer: bad-free (/home/dreijans/Documents/rank3/shellely/minishell+0x49a002) in free
 ==852536==ABORTING
-
-
-5)
 
 declare -x asd="==================================asd"
 declare -x asd="==================================asd"
@@ -420,3 +368,26 @@ Shadow byte legend (one shadow byte represents 8 application bytes):
 ==856710==ABORTING
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+looks like it's fixed but want to test again after I think we're done:
+➜  shellely git:(djoyke) ✗ ./minishell
+minishell:cd
+minishell:unset OLDPWD
+minishell:cd -
+minishell: cd: OLDPWD not set
+minishell:cd Desktop/
+minishell:cd -
