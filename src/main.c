@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 23:10:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/29 21:59:32 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ static void	close_fds(int og_stdin, int og_stdout, int exit_c)
  * @brief checks if readline doesn't return NULL
  * if returns NULL exits accordingly
 */
-static char	*readline_check(char *input)
+static char	*readline_check(char *input, int exit_c)
 {
 	if (input == NULL)
 	{
 		write(STDOUT_FILENO, "exit\n", 6);
-		exit(EXIT_SUCCESS);
+		exit(exit_c);
 	}
 	return (input);
 }
@@ -101,7 +101,7 @@ int	main(int argc, char **argv, char **envp)
 		open_fds(og_stdin, og_stdout, exit_c);
 		handle_signals(PARENT);
 		input = readline(PROMPT);
-		readline_check(input);
+		readline_check(input, exit_c);
 		exit_c = run_minishell(env, input, exit_c);
 		close_fds(og_stdin, og_stdout, exit_c);
 	}

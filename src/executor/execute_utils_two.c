@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/28 16:03:48 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/29 22:37:24 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
  * @param data execute struct
  * @brief checks for single builtin command and if there are redirects
  * executes the builtin and redirect function
+ * https://mariadb.com/kb/en/operating-system-error-codes/
 */
 bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 {
@@ -32,9 +33,11 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 		if (cmd_type != 0)
 		{
 			if (lst->proc->red_count != 0)
-				redirect(lst, data);
+			{
+				if (redirect(lst, data) == false)
+					return (true);
+			}
 			do_builtin(lst, env, cmd_type);
-			lst->exit_code = E_USAGE;
 			return (true);
 		}
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 17:19:41 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/02/29 21:37:40 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static bool	key_value_check(t_parser *node, t_export var, int i)
 {
 	if (word_check(node, var.key) == true)
 	{
-		if (i == (node->proc->str_count - 1))
+		if (i < node->proc->str_count)
 		{
 			free(var.key);
 			free(var.value);
@@ -81,6 +81,8 @@ static bool	key_value_check(t_parser *node, t_export var, int i)
  * @brief export with no options, 
  * @note double free with freeing in an unrelated spot 
  * might be overwriting a pointer and not allocating a new string.
+ * When no arguments are given, the results are unspecified. man export!!
+ * @todo norm it!
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -103,7 +105,11 @@ void	ft_export(t_parser *node, t_env **env)
 			j++;
 		var.has_value = get_key_value(var.str, &var.key, &var.value);
 		if (key_value_check(node, var, i) == false)
-			return ;
+		{
+			i++;
+			continue ;
+		}
+			// return ;
 		if (reassign_env(env, var) == true && i == (node->proc->str_count - 1))
 			return ;
 		make_node(env, var);

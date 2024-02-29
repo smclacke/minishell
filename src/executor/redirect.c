@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/28 17:09:53 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/02/29 22:34:06 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
  * @param data struct containing fd's and 2d arrays needed for execution
  * @param lst parser linked list
  * @brief opens file and throws error if it doesnt exist
+ * @note errno exit codes beacause it's a file
 */
 static bool	file_dup(t_parser *lst, t_execute *data, char *file)
 {
-	data->in = open(file, O_RDWR, 0644);
+	data->in = open(file, O_RDONLY, 0644);
 	if (data->in == -1)
 	{
-		redir_file_error(file, lst);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		perror(file);
+		lst->exit_code = errno;
 		return (false);
 	}
 	if (dup2(data->in, STDIN_FILENO) == 0)
@@ -72,12 +75,9 @@ bool	redirect_infile(char *str, t_execute *data, t_parser *lst)
 {
 	if (access(str, F_OK) != 0)
 	{
-		redir_file_error(str, lst);
-		return (false);
-	}
-	if (access(str, X_OK) != 0)
-	{
-		infile_permission_error(lst, str);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		perror(str);
+		lst->exit_code = errno;
 		return (false);
 	}
 	if (check_infile_stat(str, data, lst) == false)
@@ -90,23 +90,36 @@ bool	redirect_infile(char *str, t_execute *data, t_parser *lst)
  * @param str redir str
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief creates and opens outfile
+ * @todo norm it
 */
 bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
 {
 	struct stat	file_stat;
-
+	
 	if (access(str, F_OK) != 0)
 	{
 		if (shelly_strcmp(str, "") == 0)
 			return (redir_file_error(str, lst), false);
-		data->out = open(str, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		data->out = open(str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (data->out == -1)
+		{
+			ft_putstr_fd("minishell: ", STDERR_FILENO);// make function and reuse 
+			perror(str);
+			lst->exit_code = errno;
 			return (false);
+		}
 	}
 	if (stat(str, &file_stat) == 0)
 	{
 		if (S_ISREG(file_stat.st_mode))
-			data->out = open(str, O_CREAT | O_RDWR | O_TRUNC, 0644);
+			data->out = open(str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (data->out == -1)
+		{
+			ft_putstr_fd("minishell: ", STDERR_FILENO);
+			perror(str);
+			lst->exit_code = errno;
+			return (false);
+		}
 		if (S_ISDIR(file_stat.st_mode))
 		{
 			dir_error(str, lst);
@@ -126,6 +139,7 @@ bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
  * if file does not exist, it will be created. 
  * if it does exist, the output of command is appended 
  * to the end of the file, preserving the existing content.
+ * @todo norm it
 */
 bool	redirect_append(char *str, t_execute *data, t_parser *lst)
 {
@@ -146,9 +160,14 @@ bool	redirect_append(char *str, t_execute *data, t_parser *lst)
 			return (false);
 		}
 	}
-	data->out = open(str, O_CREAT | O_RDWR | O_APPEND, 0644);
+	data->out = open(str, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (data->out == -1)
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		perror(str);
+		lst->exit_code = errno;
 		return (false);
+	}
 	if (dup2(data->out, STDOUT_FILENO) == 0)
 		if (close(data->out) == -1)
 			lst->exit_code = E_CLOSE;
