@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/24 20:51:29 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/28 17:09:35 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 16:58:16 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	put_exit_error(t_parser *node)
 
 /**
  * @param node node in linked list
- * @param cmd either unset or export
+ * @param str either unset or export
  * @brief puts custom error message on STDERR_FILENO
 */
 void	infile_permission_error(t_parser *node, char *str)
@@ -85,4 +85,18 @@ void	infile_permission_error(t_parser *node, char *str)
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(": permission denied\n", STDERR_FILENO);
 	node->exit_code = E_NO_PERMISSION;
+}
+
+/**
+ * @param node node in linked list
+ * @param str either unset or export
+ * @brief puts custom error message on STDERR_FILENO
+*/
+void	no_valid_command(t_parser *node, char *str)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(": not a valid command\n", STDERR_FILENO);
+	node->exit_code = E_GENERAL;
+	exit(node->exit_code);
 }
