@@ -6,11 +6,20 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/20 20:51:27 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 15:15:31 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 19:36:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/shelly.h"
+
+int		input_redir(char *input)
+{
+	if (ft_strcmp(input, LESSLESS) == 0)
+		return (1);
+	else if (ft_strcmp(input, LESS) == 0)
+		return (2);
+	return (0);
+}
 
 int	set_flag(t_procs *proc, int i)
 {

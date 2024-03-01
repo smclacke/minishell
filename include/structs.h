@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 16:56:37 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 18:59:26 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ typedef enum e_exit
 	E_FATAL_SIGNAL = 128,
 	E_CTRL_C = 130,
 	E_UNKNOWN = 225,
-	E_STOP = 888
+	E_STOP = 888,
+	E_NO_INPUT = 999
 }						t_exit;
 
 /**
