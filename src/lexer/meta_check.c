@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/26 20:05:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 15:23:55 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 16:53:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ static	int	check_metas(char *input, int i)
 				&& (input[i + 1] && meta_help(input[i + 1]) != 0))
 			|| !input[i + 1])
 			return (syntax_error("near unexpected token 'newline'"));
-		if (meta_help(input[i + 1]) != 0 && meta_help(input[i + 2]))
+		if (meta_help(input[i + 1]) != 0 && meta_help(input[i + 2]) != 0)
 			return (syntax_error("near unexpected token 'newline'"));
 		while (input[i] && ft_isspace(input[i]))
+		{
 			i++;
-		if (meta_help(input[i]) == 1 || meta_help(input[i]) == 2)
-			return (syntax_error("near unexpected token 'newline'"));
+			if (meta_help(input[i]) == 1 || meta_help(input[i]) == 2)
+				return (syntax_error("near unexpected token 'newline'"));
+		}
 	}
 	return (i);
 }
