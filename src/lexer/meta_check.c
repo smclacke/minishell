@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/26 20:05:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 14:51:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 15:23:55 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,31 @@ static int	meta_help(int c)
 	return (0);
 }
 
+static	int	check_metas(char *input, int i)
+{
+	if (!input[i] || (input[i]
+			&& meta_help(input[i]) == 3))
+		return (syntax_error("near unexpected token 'newline'"));
+	else
+	{
+		if ((input[i] && ft_isspace(input[i])
+				&& (input[i + 1] && meta_help(input[i + 1]) != 0))
+			|| !input[i + 1])
+			return (syntax_error("near unexpected token 'newline'"));
+		if (meta_help(input[i + 1]) != 0 && meta_help(input[i + 2]))
+			return (syntax_error("near unexpected token 'newline'"));
+		while (input[i] && ft_isspace(input[i]))
+			i++;
+		if (meta_help(input[i]) == 1 || meta_help(input[i]) == 2)
+			return (syntax_error("near unexpected token 'newline'"));
+	}
+	return (i);
+}
+
 static	int	check_pipe(char *input, int i)
 {
-	if (!input[i + 1] || (input[i + 1]
-			&& meta_help(input[i + 1] == 3)))
+	if (!input[i] || (input[i]
+			&& meta_help(input[i] == 3)))
 		return (syntax_error("near unexpected token 'newline'"));
 	else
 	{
@@ -47,30 +68,15 @@ int	meta_check(char *input)
 	{
 		if (meta_help(input[i]) == 1 || meta_help(input[i]) == 2)
 		{
-			if (!input[i + 1] || (input[i + 1]
-					&& meta_help(input[i + 1]) == 3))
-				return (syntax_error("near unexpected token 'newline'"));
-			else
-			{
-				while (input[i] && ft_isspace(input[i]))
-					i++;
-				if (meta_help(input[i]) != 0 || !input[i])
-					return (syntax_error("near unexpected token 'newline'"));
-			}
+			i = check_metas(input, (i + 1));
+			if (i == E_STOP)
+				return (E_STOP);
 		}
 		if (meta_help(input[i]) == 3)
 		{
-			i = check_pipe(input, i);
-			// if (!input[i + 1] || (input[i + 1]
-			// 		&& meta_help(input[i + 1] == 3)))
-			// 	return (syntax_error("near unexpected token 'newline'"));
-			// else
-			// {
-			// 	while (input[i] && ft_isspace(input[i]))
-			// 		i++;
-			// 	if (meta_help(input[i]) == 3 || !input[i])
-			// 		return (syntax_error("near unexpected token 'newline'"));
-			// }
+			i = check_pipe(input, (i + 1));
+			if (i == E_STOP)
+				return (E_STOP);
 		}
 		i++;
 	}
