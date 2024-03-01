@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/29 21:59:32 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 17:24:30 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	run_minishell(t_env *env, char *input, int exit_c)
 	t_parser	*procs;
 
 	procs = NULL;
+	if (!input || shelly_strcmp(input, "") == 0)
+		return (exit_c);
 	procs = parse_input(procs, input);
 	if (!procs)
 		return (E_SYNTAX);
