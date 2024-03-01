@@ -26,7 +26,7 @@ after 2x syntax error or syntax error followed  up by another command
 minishell:>>>> 
 minishell: syntax error near unexpected token 'newline'
 minishell:>>>>
-minishell: syntax error near unexpected token 'newline'
+minishell: syntax error near unexpected token 'n ewline'
 minishell:
 exit
 
