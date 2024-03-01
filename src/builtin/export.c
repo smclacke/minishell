@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:23:21 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/29 23:13:35 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 21:38:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,16 @@ static bool	key_value_check(t_parser *node, t_export var, int i)
 	return (true);
 }
 
+static bool	str_count_check(t_parser *node, t_env **env)
+{
+	if (node->proc->str_count == 0)
+	{
+		export_print(*env);
+		return (false);
+	}
+	return (true);
+}
+
 /**
  * @param node pointer to node in list given in the form of a string
  * @param env pointer to linked list
@@ -82,7 +92,6 @@ static bool	key_value_check(t_parser *node, t_export var, int i)
  * @note double free with freeing in an unrelated spot 
  * might be overwriting a pointer and not allocating a new string.
  * When no arguments are given, the results are unspecified. man export!!
- * @todo norm it!
 */
 void	ft_export(t_parser *node, t_env **env)
 {
@@ -92,11 +101,8 @@ void	ft_export(t_parser *node, t_env **env)
 
 	i = 0;
 	j = 0;
-	if (node->proc->str_count == 0)
-	{
-		export_print(*env);
+	if (str_count_check(node, env) == false)
 		return ;
-	}
 	while (i < node->proc->str_count)
 	{
 		j = 0;

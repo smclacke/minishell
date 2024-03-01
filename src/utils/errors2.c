@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 19:44:08 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 21:51:09 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ void	redir_file_error(char *str, t_parser *lst)
  * @param lst node in linked list
  * @brief puts custom error message on STDERR_FILENO
 */
-void	dir_error(char *str, t_parser *lst)
+bool	dir_error(char *str, t_parser *lst)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
 	lst->exit_code = E_GENERAL;
+	return (false);
 }
 
 /**
@@ -59,4 +60,12 @@ void	write_permission_error(char *str, t_parser *lst)
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(": No writing permissions\n", STDERR_FILENO);
 	lst->exit_code = E_GENERAL;
+}
+
+bool	redir_error(t_parser *lst, char *str)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	perror(str);
+	lst->exit_code = errno;
+	return (false);
 }

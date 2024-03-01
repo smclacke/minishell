@@ -6,7 +6,7 @@
 #    By: smclacke <smclacke@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/06/24 19:33:54 by smclacke      #+#    #+#                  #
-#    Updated: 2024/03/01 18:51:55 by smclacke      ########   odam.nl          #
+#    Updated: 2024/03/01 22:00:43 by dreijans      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS			= main.c								\
 					utils/signals.c						\
 					utils/utils.c						\
 					utils/cleanup.c						\
+					utils/hd_fd_utils.c					\
 					lexer/lexer.c						\
 					lexer/lexer_utils.c					\
 					lexer/tokens.c						\

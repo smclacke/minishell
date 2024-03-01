@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 19:43:58 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 21:50:59 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,41 +90,27 @@ bool	redirect_infile(char *str, t_execute *data, t_parser *lst)
  * @param str redir str
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief creates and opens outfile
- * @todo norm it
 */
 bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
 {
 	struct stat	file_stat;
-	
+
 	if (access(str, F_OK) != 0)
 	{
 		if (shelly_strcmp(str, "") == 0)
 			return (redir_file_error(str, lst), false);
 		data->out = open(str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (data->out == -1)
-		{
-			ft_putstr_fd("minishell: ", STDERR_FILENO);// make function and reuse 
-			perror(str);
-			lst->exit_code = errno;
-			return (false);
-		}
+			return (redir_error(lst, str));
 	}
 	if (stat(str, &file_stat) == 0)
 	{
 		if (S_ISREG(file_stat.st_mode))
 			data->out = open(str, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (data->out == -1)
-		{
-			ft_putstr_fd("minishell: ", STDERR_FILENO);
-			perror(str);
-			lst->exit_code = errno;
-			return (false);
-		}
+			return (redir_error(lst, str));
 		if (S_ISDIR(file_stat.st_mode))
-		{
-			dir_error(str, lst);
-			return (false);
-		}
+			return (dir_error(str, lst));
 	}
 	if (dup2(data->out, STDOUT_FILENO) != -1)
 		if (close(data->out) == -1)
@@ -139,8 +125,6 @@ bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
  * if file does not exist, it will be created. 
  * if it does exist, the output of command is appended 
  * to the end of the file, preserving the existing content.
- * @todo norm it
- * @todo remove unused error message files
 */
 bool	redirect_append(char *str, t_execute *data, t_parser *lst)
 {
@@ -156,19 +140,11 @@ bool	redirect_append(char *str, t_execute *data, t_parser *lst)
 	if (stat(str, &file_stat) == 0)
 	{
 		if (S_ISDIR(file_stat.st_mode))
-		{
-			dir_error(str, lst);
-			return (false);
-		}
+			return (dir_error(str, lst));
 	}
 	data->out = open(str, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (data->out == -1)
-	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		perror(str);
-		lst->exit_code = errno;
-		return (false);
-	}
+		redir_error(lst, str);
 	if (dup2(data->out, STDOUT_FILENO) != -1)
 		if (close(data->out) == -1)
 			lst->exit_code = E_CLOSE;

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 20:49:23 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 21:58:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 	{
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
+			if (env->value == NULL)
+				return (false);
 			temp_path = mini_substr(env->value, 0, ft_strlen(env->value));
 			data->path = ft_split(temp_path, ':');
 			if (data->path == NULL)
@@ -118,12 +120,8 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
 	int		status;
-	char 	*str;
-	char	*number;
-	int		i;
 
 	status = 0;
-	i = 0;
 	if (!lst)
 		lst->exit_code = E_GENERAL;
 	init_heredoc(lst, env);
@@ -135,27 +133,8 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	exit_status(status, lst);
 	while (wait(NULL) != -1)
 		(void)NULL;
-	// printf("%d i : %d\n", lst->proc_count, i);
-	int count = lst->proc_count;
-	while (i < count)
-	{
-		// printf("HUUUUH%d i : %d \n", lst->proc->hd_fd, i);
-		close(lst->proc->hd_fd);
-		if (lst->next != NULL)
-			lst = lst->next;
-		i++;
-	}
-	// printf("after %d proc_count %d\n", i, lst->proc_count);
-	i = 0;
-	while (i < lst->proc->hd_count)
-	{
-		number = ft_itoa(i);
-		str = mini_strjoin("heredoc", number);
-		unlink(str);
-		free(str);
-		free(number);
-		i++;
-	}
+	close_hd_fd(lst);
+	unlink_heredoc(lst);
 }
 
 /**
