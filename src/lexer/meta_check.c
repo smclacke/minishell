@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/26 20:05:11 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 20:47:56 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 21:00:39 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,8 @@ static	int	check_pipe(char *input, int i)
 	return (i);
 }
 
-int	meta_check(char *input)
+int	meta_check(char *input, char *q, int i)
 {
-	int		i;
-	char	*q;
-
-	i = 0;
-	q = NULL;
 	while (input[i])
 	{
 		if (ft_isquote(input[i]))
