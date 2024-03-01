@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 18:01:59 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 19:13:52 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 19:43:58 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static bool	file_dup(t_parser *lst, t_execute *data, char *file)
 		lst->exit_code = errno;
 		return (false);
 	}
-	if (dup2(data->in, STDIN_FILENO) == 0)
+	if (dup2(data->in, STDIN_FILENO) != -1)
 		if (close(data->in) == -1)
 			lst->exit_code = E_CLOSE;
 	return (true);
@@ -126,7 +126,7 @@ bool	redirect_outfile(char *str, t_execute *data, t_parser *lst)
 			return (false);
 		}
 	}
-	if (dup2(data->out, STDOUT_FILENO) == 0)
+	if (dup2(data->out, STDOUT_FILENO) != -1)
 		if (close(data->out) == -1)
 			lst->exit_code = E_CLOSE;
 	return (true);
@@ -169,7 +169,7 @@ bool	redirect_append(char *str, t_execute *data, t_parser *lst)
 		lst->exit_code = errno;
 		return (false);
 	}
-	if (dup2(data->out, STDOUT_FILENO) == 0)
+	if (dup2(data->out, STDOUT_FILENO) != -1)
 		if (close(data->out) == -1)
 			lst->exit_code = E_CLOSE;
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 19:14:03 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 19:44:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int	main(int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	env = NULL;
-	og_stdout = 0;
-	og_stdin = 0;
+	og_stdout = 3;
+	og_stdin = 4;
 	exit_c = 0;
 	env = env_list(envp, env);
 	while (1)
