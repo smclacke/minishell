@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/02/23 21:24:07 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/27 17:20:02 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 17:09:00 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	dir_error(char *str, t_parser *lst)
 */
 void	write_permission_error(char *str, t_parser *lst)
 {
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd(" no writing permissions\n", STDERR_FILENO);
+	ft_putstr_fd(": No writing permissions\n", STDERR_FILENO);
 	lst->exit_code = E_GENERAL;
 }
