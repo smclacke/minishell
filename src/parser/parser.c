@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/12/12 18:01:03 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 18:32:19 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 19:01:25 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_parser	*parse_input(t_parser *procs, char *input)
 {
 	char	**tokens;
 
-	if (!input[0])
+	if (input == NULL)
 		return (NULL);
 	if (!is_space(input))
 		add_history(input);

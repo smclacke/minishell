@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 17:24:30 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 19:00:33 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ static int	run_minishell(t_env *env, char *input, int exit_c)
 	t_parser	*procs;
 
 	procs = NULL;
-	if (!input || shelly_strcmp(input, "") == 0)
-		return (exit_c);
+	if (input[0] == '\0')
+	{
+		free(input);
+		return (E_NO_INPUT);
+	}
 	procs = parse_input(procs, input);
 	if (!procs)
 		return (E_SYNTAX);
@@ -105,6 +108,8 @@ int	main(int argc, char **argv, char **envp)
 		input = readline(PROMPT);
 		readline_check(input, exit_c);
 		exit_c = run_minishell(env, input, exit_c);
+		if (exit_c == E_NO_INPUT)
+			continue ;
 		close_fds(og_stdin, og_stdout, exit_c);
 	}
 	return (exit_c);
