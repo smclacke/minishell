@@ -2,3 +2,27 @@
 2) norm code
 3) check for unused functions
 4) check some of the solved oepsies again
+
+minishell:<<bla cat >> eof
+heredoc> dfhsjdf
+heredoc> cat
+heredoc> bla
+
+
+
+minishell:<<bla cat
+heredoc> asd
+heredoc> sad
+heredoc> bla
+hd_last = 1, 0
+asd
+sad
+minishell:>> of cat << bla
+heredoc> sa
+heredoc> dsad
+heredoc> sad
+heredoc> bla
+minishell:>> of cat << bla > out
+heredoc> asd
+heredoc> sad
+heredoc> bla

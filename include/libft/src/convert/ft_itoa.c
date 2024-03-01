@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/19 16:28:48 by smclacke      #+#    #+#                 */
-/*   Updated: 2023/07/06 12:17:51 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 19:26:56 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ static void	ft_fill(char *str, int len, long n)
 	}
 }
 
+static void	*mini_malloc(int size)
+{
+	void	*data;
+
+	data = malloc(size);
+	if (!data)
+		exit(EXIT_FAILURE);
+	return (data);
+}
+
 char	*ft_itoa(int n)
 {
 	char		*str;
@@ -53,7 +63,7 @@ char	*ft_itoa(int n)
 	if (n == 0)
 		return (ft_strdup("0"));
 	len = ft_count(n);
-	str = (char *)malloc(len + 1);
+	str = (char *)mini_malloc(len + 1);
 	if (!str)
 		return (0);
 	str[len] = '\0';

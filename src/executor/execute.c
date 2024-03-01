@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 18:47:40 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 19:32:05 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,13 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
-	int	status;
+	int		status;
+	// char 	*str;
+	// char	*number;
+	int		i;
 
 	status = 0;
+	i = 0;
 	if (!lst)
 		lst->exit_code = E_GENERAL;
 	init_heredoc(lst, env);
@@ -130,6 +134,15 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	exit_status(status, lst);
 	while (wait(NULL) != -1)
 		(void)NULL;
+	// while (i < lst->proc->hd_count)
+	// {
+	// 	number = ft_itoa(i);
+	// 	str = mini_strjoin("heredoc", number);
+	// 	unlink(str);
+	// 	free(str);
+	// 	free(number);
+	// 	i++;
+	// }
 }
 
 /**

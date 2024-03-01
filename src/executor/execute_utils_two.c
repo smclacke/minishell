@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 16:51:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 19:31:48 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ bool	redirect(t_parser *lst, t_execute *data)
 		i += 2;
 	}
 	i++;
+	printf("hd_last = %d, %d\n", lst->proc->hd_last, false);
 	if (lst->proc->hd_last)
 		redirect_heredoc(lst);
 	return (true);
