@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:16:24 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/24 21:17:19 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 16:37:41 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,7 @@ void	ft_env(t_env *env, t_parser *lst)
 
 	head = env;
 	if (lst->proc->str_count != 0)
-	{
-		ft_putstr_fd("env: ", STDERR_FILENO);
-		ft_putstr_fd(*lst->proc->str, STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		lst->exit_code = E_COMMAND_NOT_FOUND;
 		return ;
-	}
 	while (head != NULL)
 	{
 		if (head->has_value)

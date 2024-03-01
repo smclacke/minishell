@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/28 16:43:47 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/01 17:02:21 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
 	data->env_array = list_to_string(*env);
 	argv = get_argv(lst);
 	if (execve(executable, argv, data->env_array) == -1)
-		exit(EXIT_FAILURE);
+		no_valid_command(lst, executable);
 }
 
 /**
