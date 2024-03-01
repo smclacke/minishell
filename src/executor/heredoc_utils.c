@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 19:28:13 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 21:13:47 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,11 @@ static void	setup_heredoc(t_procs *lst, t_env **env, char *str)
 			exit(E_MALLOC);
 		str = mini_strjoin("heredoc", number);
 		write_to_heredoc(lst, env, str, i);
+		if (lst->hd_fd != -1)
+			close(lst->hd_fd);
 		lst->hd_fd = open(str, O_RDONLY);
 		if (lst->hd_fd == -1)
-			lst->parser->exit_code = E_GENERAL;
-		// unlink(str);
+			exit(EXIT_FAILURE);
 		free(str);
 		free(number);
 		i++;
