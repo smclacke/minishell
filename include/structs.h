@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/17 16:42:25 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 18:59:26 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/02 15:50:44 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define HD_X 3
 # define RED_X 4
 
-# define PATH_MAX 4096
+// # define PATH_MAX 4096
 
 # define ERROR_MESSAGE ": positive numeric argument 255 or below required\n"
 # define NO_HOME "minishell: cd: HOME not set\n"

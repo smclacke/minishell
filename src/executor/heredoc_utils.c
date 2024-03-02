@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/30 16:33:38 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/02/28 16:02:31 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/02 15:55:44 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	heredoc_proc(t_procs *lst, t_env **env, char *file_name, int i)
 	char	*read_line;
 	int		file;
 
-	handle_signals(HERE_DOC);
+	// handle_signals(HERE_DOC);
 	file = open(file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (file == -1)
 		exit(E_GENERAL);

@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/25 17:34:44 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 19:00:33 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/02 15:55:14 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ static int	run_minishell(t_env *env, char *input, int exit_c)
  * @param exit_c int exit code
  * @brief open's fd's
 */
-static void	open_fds(int og_stdin, int og_stdout, int exit_c)
+static int	open_fds(int og_stdin, int og_stdout, int exit_c)
 {
 	if (dup2(STDOUT_FILENO, og_stdout) == -1)
 		exit_c = E_GENERAL;
 	if (dup2(STDIN_FILENO, og_stdin) == -1)
 		exit_c = E_GENERAL;
+	return (exit_c);
 }
 
 /**
@@ -59,7 +60,7 @@ static void	open_fds(int og_stdin, int og_stdout, int exit_c)
  * @param exit_c int exit code
  * @brief closes fd's
 */
-static void	close_fds(int og_stdin, int og_stdout, int exit_c)
+static int	close_fds(int og_stdin, int og_stdout, int exit_c)
 {
 	if (dup2(og_stdout, STDOUT_FILENO) == -1)
 		exit_c = E_GENERAL;
@@ -69,6 +70,7 @@ static void	close_fds(int og_stdin, int og_stdout, int exit_c)
 		exit_c = E_CLOSE;
 	if (og_stdin != -1 && close(og_stdin) == -1)
 		exit_c = E_CLOSE;
+	return (exit_c);
 }
 
 /**
@@ -103,14 +105,14 @@ int	main(int argc, char **argv, char **envp)
 	env = env_list(envp, env);
 	while (1)
 	{
-		open_fds(og_stdin, og_stdout, exit_c);
-		handle_signals(PARENT);
+		exit_c = open_fds(og_stdin, og_stdout, exit_c);
+		// handle_signals(PARENT);
 		input = readline(PROMPT);
 		readline_check(input, exit_c);
 		exit_c = run_minishell(env, input, exit_c);
 		if (exit_c == E_NO_INPUT)
 			continue ;
-		close_fds(og_stdin, og_stdout, exit_c);
+		exit_c = close_fds(og_stdin, og_stdout, exit_c);
 	}
 	return (exit_c);
 }

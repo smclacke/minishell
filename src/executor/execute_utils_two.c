@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 20:59:12 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 16:51:59 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/02 15:55:39 by SarahLouise   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	single_builtin_cmd(t_parser *lst, t_env **env, t_execute *data)
 void	init_fork(t_parser *lst, t_env **env, t_execute *data)
 {
 	data->fork_pid = fork();
-	handle_signals(CHILD);
+	// handle_signals(CHILD);
 	if (data->fork_pid == -1)
 		lst->exit_code = E_GENERAL;
 	if (data->fork_pid == 0)
