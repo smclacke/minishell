@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 17:02:21 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 21:58:37 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static bool	parse_path(t_env *env, t_execute *data, t_parser *node)
 	{
 		if (ft_strncmp(env->key, "PATH", 5) == 0)
 		{
+			if (env->value == NULL)
+				return (false);
 			temp_path = mini_substr(env->value, 0, ft_strlen(env->value));
 			data->path = ft_split(temp_path, ':');
 			if (data->path == NULL)
@@ -113,10 +115,11 @@ void	mini_forks(t_parser *lst, t_env **env, t_execute *data)
  * @param data struct containing fd's and 2d arrays needed for execution
  * @brief determines how many times needs to fork
  * pipes and makes child process
+ * @todo norm it
  */
 static void	build(t_parser *lst, t_env **env, t_execute *data)
 {
-	int	status;
+	int		status;
 
 	status = 0;
 	if (!lst)
@@ -130,6 +133,8 @@ static void	build(t_parser *lst, t_env **env, t_execute *data)
 	exit_status(status, lst);
 	while (wait(NULL) != -1)
 		(void)NULL;
+	close_hd_fd(lst);
+	unlink_heredoc(lst);
 }
 
 /**

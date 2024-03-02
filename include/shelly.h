@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/07 14:31:31 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 16:58:36 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/01 21:59:42 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 				// utils
 //---------- more_space ----------//
+int				input_redir(char *input);
 int				set_flag(t_procs *proc, int i);
 int				count_str_util(t_procs *proc, char **process, int i);
 int				get_strs_util(t_procs *proc, char **process, int i);
@@ -77,7 +78,7 @@ int				start_token(char *input, int old_start);
 int				len_token(char *input, int len);
 
 //-------- meta_check --------//
-int				meta_check(char *input);
+int				meta_check(char *input, char *q, int i);
 
 				// parser
 //-------- parser --------//
@@ -222,11 +223,14 @@ char			*mini_substr(char const *s, unsigned int start, size_t len);
 void			exit_status(int status, t_parser *lst);
 void			redir_file_error(char *str, t_parser *lst);
 void			write_permission_error(char *str, t_parser *lst);
-void			dir_error(char *str, t_parser *lst);
+bool			dir_error(char *str, t_parser *lst);
 void			write_to_file(t_parser *lst, char *rl, t_env **env, int file);
 void			executable_check(t_parser *lst, t_execute *data, char *exec);
 void			put_exit_error(t_parser *node);
 void			infile_permission_error(t_parser *node, char *str);
 void			no_valid_command(t_parser *node, char *str);
+bool			redir_error(t_parser *lst, char *str);
+void			close_hd_fd(t_parser *lst);
+void			unlink_heredoc(t_parser *lst);
 
 #endif

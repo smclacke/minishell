@@ -1,4 +1,0 @@
-1) check all todo's and fix them
-2) norm code
-3) check for unused functions
-4) check some of the solved oepsies again
