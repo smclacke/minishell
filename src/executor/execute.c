@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/02 13:56:26 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 21:58:37 by dreijans      ########   odam.nl         */
+/*   Updated: 2024/03/04 17:51:13 by dreijans      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void	execute(t_env **env, t_parser *lst)
 	data = mini_malloc(sizeof(t_execute));
 	init_execute_struct(data);
 	ft_expand(lst, env);
+	lst->exit_code = 0;
 	build(lst, env, data);
 	free(data);
 }
