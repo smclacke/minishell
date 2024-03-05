@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 17:39:28 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/03/01 21:00:34 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/05 13:40:41 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	**lexer(char *input)
 	q = NULL;
 	if (!input)
 		return (NULL);
-	if (meta_check(input, q, 0) == E_STOP)
+	if (meta_check(input, q, 0, 0) == E_STOP)
 		return (NULL);
 	if (amount_tokens(input) == E_STOP)
 		return (NULL);
