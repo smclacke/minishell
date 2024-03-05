@@ -6,7 +6,7 @@
 /*   By: dreijans <dreijans@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/19 21:15:58 by dreijans      #+#    #+#                 */
-/*   Updated: 2024/03/01 18:44:16 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/05 14:23:03 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static void	home_check(t_procs *lst, t_env **env)
 {
 	char		*new_str;
 
+	if (lst->tilde == TRUE)
+		return ;
 	if (mini_strcmp(lst->str[0], "~") == 0)
 	{
 		new_str = ft_getenv(*env, "HOME");

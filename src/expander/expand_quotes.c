@@ -6,7 +6,7 @@
 /*   By: smclacke <smclacke@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/27 17:55:29 by smclacke      #+#    #+#                 */
-/*   Updated: 2024/02/27 14:04:23 by smclacke      ########   odam.nl         */
+/*   Updated: 2024/03/05 14:23:32 by smclacke      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static	void	handle_str(t_parser *list)
 	i = 0;
 	while (i < list->proc->str_count)
 	{
+		if (ft_strnstr(list->proc->str[i], "'~'", 3))
+			list->proc->tilde = TRUE;
 		if (check_qs(list->proc->str[i]) && (!ft_isdollar(list->proc->str[i])))
 			remove_quotes(list->proc->str[i]);
 		i++;
