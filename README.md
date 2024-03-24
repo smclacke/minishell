@@ -13,13 +13,15 @@ This is a basic shell created using Bash as a reference.
 
 Built in commands include:
 
- - echo (-n)
- - cd (relative or absolute path)
- - pwd
- - export
- - unset
- - env
- - exit
+  - echo (-n)
+  - cd (relative or absolute path)
+  - pwd
+  - export
+  - unset
+  - env
+  - exit
+
+Minishell includes:
 
 - Unclosed quotes are not handled
 - Single quotes prevent the shell from interpreting the meta-characters
@@ -28,4 +30,4 @@ Built in commands include:
 - Environment variables can be expanded to there values including $? giving the most recent exit status
 - Pipes (|) output each command in the pipeline, connecting to the input of the next command via pipe
 - Redirections include infile (<) outfile (>) here_doc delimiter (<<) output in append mode (>>)
-- 
+
