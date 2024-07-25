@@ -28,7 +28,7 @@ Minishell includes:
 - Double quotes prevent the shell from interpreting meta-characters except for dollar ($)
 - (Unclosed quotes are not handled)
 - Signals include ctrl -C ctrl -D ctrl -\
-- Environment variables can be expanded to there values including $? giving the most recent exit status
+- Environment variables can be expanded to their values including $? giving the most recent exit status
 - Pipes (|) output each command in the pipeline, connecting to the input of the next command via pipe
 - Redirections include infile (<) outfile (>) here_doc delimiter (<<) output in append mode (>>)
 
