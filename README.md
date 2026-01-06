@@ -1,8 +1,3 @@
-
-![shelly'](https://github.com/smclacke/minishell/assets/115113929/dd8ced59-ea7f-4502-a716-2b6bb1e52671)
-
-Image: https://www.caseashells.com/
-
 # Minishell
 
 *As beautiful as a shell*
